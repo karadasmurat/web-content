@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§3 Classes — OO with Java</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Toggle navigation">
+  <span></span><span></span><span></span>
+</button>
+
+<nav id="sidebar" aria-label="Tutorial navigation">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-label">Tutorial</div>
+    <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a></li>
+      <li><a href="variables.html"><span class="nav-num">§1</span>Variables</a></li>
+      <li><a href="primitives.html"><span class="nav-num">§2</span>Primitives</a></li>
+      <li><a href="classes.html" class="active"><span class="nav-num">§3</span>Classes</a></li>
+      <li><a href="objects.html"><span class="nav-num">§4</span>Objects</a></li>
+      <li><a href="assignment.html"><span class="nav-num">§5</span>Assignment</a></li>
+      <li><a href="methods.html"><span class="nav-num">§6</span>Methods</a></li>
+    </ul>
+  </nav>
+</nav>
+
+<main id="content">
+  <header class="page-header">
+    <div class="page-chapter">Chapter 3</div>
+    <h1>Classes</h1>
+    <p class="page-lead">A class is a blueprint — a description of what fields every object of that kind will have. The class itself is not an object; it describes objects.</p>
+  </header>
+
+  <article>
+
+    <p>So far, every variable we've seen holds a single primitive value: a number, a boolean. Most interesting data is made of several things grouped together. A rectangle has a width and a height. A point has an x and a y. A <span class="term">class</span> lets you define that grouping.</p>
+
+    <p>A class is a description of a kind of object: it names the fields that every object of that kind will have. Think of it as a blueprint. The blueprint is not a building — it describes buildings.</p>
+
+    <h3>Defining a class</h3>
+
+    <p>Our first class uses only primitive fields — deliberately:</p>
+
+    <pre><code class="language-java">class Rectangle {
+    int width;
+    int height;
+}</code></pre>
+
+    <p>This declares that every Rectangle will have two slots: <code>width</code> (an <code>int</code>) and <code>height</code> (an <code>int</code>). The class definition itself occupies no heap memory. It is a template.</p>
+
+    <p>The field declarations inside the class look exactly like the variable declarations from §1 — because they are. They're just variables that belong to an object rather than to a method call. Once objects exist (§4.1), each one will have its own independent <code>width</code> and <code>height</code> slots.</p>
+
+    <h3>Multiple instances, independent slots</h3>
+
+    <p>The power of a class is that you can create many objects from the same blueprint, each with its own field values:</p>
+
+    <pre><code class="language-java">// Two separate Rectangle objects — each has its own width and height
+// (creating objects requires 'new', covered in §4.1)
+Rectangle r1 = new Rectangle();
+Rectangle r2 = new Rectangle();
+
+r1.width = 10;
+r2.width = 50;  // r1.width is still 10 — r1 and r2 are independent objects</code></pre>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Deliberate constraint</div>
+      <p>Both fields are primitives. We are specifically not adding any field whose type is a class — no field that would hold an address. That constraint is intentional. We will lift it in §4.3, once reference variables are understood. The moment reference fields appear will be clearly marked.</p>
+    </div>
+
+    <div class="callout callout-mem">
+      <div class="callout-lbl">Memory model</div>
+      <p>The class definition lives in the program's type information — it takes up no heap memory. When you create an object with <code>new</code> (§4.1), Java allocates a chunk of heap memory whose layout is determined by the class: one slot for each field, sized according to field types.</p>
+    </div>
+
+  </article>
+
+  <nav class="page-nav" aria-label="Chapter navigation">
+    <a href="primitives.html" class="page-nav-prev">
+      <span class="page-nav-label">← Previous</span>
+      <span class="page-nav-title">§2 — Primitives</span>
+    </a>
+    <a href="objects.html" class="page-nav-next">
+      <span class="page-nav-label">Next →</span>
+      <span class="page-nav-title">§4 — Objects</span>
+    </a>
+  </nav>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  hljs.highlightAll();
+  const btn  = document.getElementById('menu-btn');
+  const side = document.getElementById('sidebar');
+  btn.addEventListener('click', () => side.classList.toggle('open'));
+  document.querySelectorAll('#sidebar a').forEach(a => {
+    a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
+  });
+});
+</script>
+</body>
+</html>

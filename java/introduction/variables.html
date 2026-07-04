@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§1 Variables — OO with Java</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Toggle navigation">
+  <span></span><span></span><span></span>
+</button>
+
+<nav id="sidebar" aria-label="Tutorial navigation">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-label">Tutorial</div>
+    <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a></li>
+      <li><a href="variables.html" class="active"><span class="nav-num">§1</span>Variables</a></li>
+      <li><a href="primitives.html"><span class="nav-num">§2</span>Primitives</a></li>
+      <li><a href="classes.html"><span class="nav-num">§3</span>Classes</a></li>
+      <li><a href="objects.html"><span class="nav-num">§4</span>Objects</a></li>
+      <li><a href="assignment.html"><span class="nav-num">§5</span>Assignment</a></li>
+      <li><a href="methods.html"><span class="nav-num">§6</span>Methods</a></li>
+    </ul>
+  </nav>
+</nav>
+
+<main id="content">
+  <header class="page-header">
+    <div class="page-chapter">Chapter 1</div>
+    <h1>Variables</h1>
+    <p class="page-lead">A variable is a named slot in memory. Every variable in Java holds exactly one of two things — and that distinction drives everything that follows.</p>
+  </header>
+
+  <article>
+
+    <p>Your program runs in a computer that has memory: a vast array of numbered slots, each holding a small piece of data. A <span class="term">variable</span> is your way of naming one of those slots so you can refer to it by name rather than by its raw address.</p>
+
+    <p>You declare a variable by giving it a type and a name:</p>
+
+    <pre><code class="language-java">int count;
+boolean active;</code></pre>
+
+    <p>This reserves named slots in memory. The type tells Java two things: how large each slot should be, and what kind of data it will hold.</p>
+
+    <p>Every variable in Java holds exactly one of two things:</p>
+
+    <ul>
+      <li><strong>A value</strong> — the data itself, stored directly in the slot. This is what primitives do (§2).</li>
+      <li><strong>An address</strong> — the location of some data stored elsewhere in memory. This is what reference variables do (§4.2).</li>
+    </ul>
+
+    <p>You can also assign an initial value at the point of declaration:</p>
+
+    <pre><code class="language-java">int count   = 0;
+boolean active = true;</code></pre>
+
+    <div class="callout callout-mem">
+      <div class="callout-lbl">Memory model</div>
+      <p>Think of a variable as a labeled slot. The label is the variable name. The slot has a fixed size determined by the type. For now, the content of the slot is either a value (§2) or an address (§4.2).</p>
+    </div>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Scope of this chapter</div>
+      <p>We're not yet talking about what types are available or what operations exist. Just the fundamental idea: a variable is a named slot, and that slot holds either a value or an address. That distinction is the thread running through the entire tutorial.</p>
+    </div>
+
+  </article>
+
+  <nav class="page-nav" aria-label="Chapter navigation">
+    <a href="index.html" class="page-nav-prev">
+      <span class="page-nav-label">← Previous</span>
+      <span class="page-nav-title">§0 — Java at a Glance</span>
+    </a>
+    <a href="primitives.html" class="page-nav-next">
+      <span class="page-nav-label">Next →</span>
+      <span class="page-nav-title">§2 — Primitives</span>
+    </a>
+  </nav>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  hljs.highlightAll();
+  const btn  = document.getElementById('menu-btn');
+  const side = document.getElementById('sidebar');
+  btn.addEventListener('click', () => side.classList.toggle('open'));
+  document.querySelectorAll('#sidebar a').forEach(a => {
+    a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
+  });
+});
+</script>
+</body>
+</html>

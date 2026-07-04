@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§2 Primitives — OO with Java</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Toggle navigation">
+  <span></span><span></span><span></span>
+</button>
+
+<nav id="sidebar" aria-label="Tutorial navigation">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-label">Tutorial</div>
+    <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a></li>
+      <li><a href="variables.html"><span class="nav-num">§1</span>Variables</a></li>
+      <li><a href="primitives.html" class="active"><span class="nav-num">§2</span>Primitives</a></li>
+      <li><a href="classes.html"><span class="nav-num">§3</span>Classes</a></li>
+      <li><a href="objects.html"><span class="nav-num">§4</span>Objects</a></li>
+      <li><a href="assignment.html"><span class="nav-num">§5</span>Assignment</a></li>
+      <li><a href="methods.html"><span class="nav-num">§6</span>Methods</a></li>
+    </ul>
+  </nav>
+</nav>
+
+<main id="content">
+  <header class="page-header">
+    <div class="page-chapter">Chapter 2</div>
+    <h1>Primitives</h1>
+    <p class="page-lead">The simplest kind of variable: the slot directly contains the value. No indirection, no heap, no addresses. Just the data itself.</p>
+  </header>
+
+  <article>
+
+    <p>Java has eight primitive types. Three are enough to ground the concept: <code>int</code>, <code>double</code>, and <code>boolean</code>.</p>
+
+    <p>When a variable is of a primitive type, the slot <em>is</em> the value. There is no indirection.</p>
+
+    <pre><code class="language-java">int     width  = 10;    // slot named 'width'  contains 10
+double  price  = 3.99;  // slot named 'price'  contains 3.99
+boolean active = true;  // slot named 'active' contains true</code></pre>
+
+    <p>The three primitives used in this tutorial:</p>
+    <ul>
+      <li><code>int</code> — a whole number: <code>0</code>, <code>10</code>, <code>-42</code>, <code>1000000</code>.</li>
+      <li><code>double</code> — a number with a decimal point: <code>3.14</code>, <code>-0.5</code>, <code>2.0</code>.</li>
+      <li><code>boolean</code> — exactly one of two values: <code>true</code> or <code>false</code>.</li>
+    </ul>
+
+    <h3>Copying a primitive copies the value</h3>
+
+    <p>Assigning one primitive variable to another copies the contents of the slot — you end up with two independent slots, each holding the same value.</p>
+
+    <pre><code class="language-java">int a = 10;
+int b = a;    // b gets its own slot; contents copied from a
+
+b = 99;       // changes b's slot only
+
+System.out.println(a); // 10 — a is unaffected
+System.out.println(b); // 99</code></pre>
+
+    <div class="callout callout-mem">
+      <div class="callout-lbl">Memory model</div>
+      <p>After <code>int b = a</code>: two slots, two labels, both containing <code>10</code>. They share no connection. Changing one has no effect on the other.</p>
+    </div>
+
+    <h3>Basic arithmetic and operations</h3>
+
+    <pre><code class="language-java">int width  = 10;
+int height = 20;
+int area   = width * height;      // 200
+int perim  = 2 * (width + height); // 60
+
+double half = perim / 2.0;         // 30.0
+boolean big = area > 100;          // true</code></pre>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Why this matters now</div>
+      <p>The word "value" appears constantly from this point on. When we say a primitive variable holds a value, we mean the data lives directly in the slot — no indirection. That's all. Hold this contrast in mind; it becomes important when reference variables arrive in §4.2.</p>
+    </div>
+
+  </article>
+
+  <nav class="page-nav" aria-label="Chapter navigation">
+    <a href="variables.html" class="page-nav-prev">
+      <span class="page-nav-label">← Previous</span>
+      <span class="page-nav-title">§1 — Variables</span>
+    </a>
+    <a href="classes.html" class="page-nav-next">
+      <span class="page-nav-label">Next →</span>
+      <span class="page-nav-title">§3 — Classes</span>
+    </a>
+  </nav>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  hljs.highlightAll();
+  const btn  = document.getElementById('menu-btn');
+  const side = document.getElementById('sidebar');
+  btn.addEventListener('click', () => side.classList.toggle('open'));
+  document.querySelectorAll('#sidebar a').forEach(a => {
+    a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
+  });
+});
+</script>
+</body>
+</html>

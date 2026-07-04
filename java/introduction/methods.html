@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§6 Methods — OO with Java</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Toggle navigation">
+  <span></span><span></span><span></span>
+</button>
+
+<nav id="sidebar" aria-label="Tutorial navigation">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-label">Tutorial</div>
+    <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a></li>
+      <li><a href="variables.html"><span class="nav-num">§1</span>Variables</a></li>
+      <li><a href="primitives.html"><span class="nav-num">§2</span>Primitives</a></li>
+      <li><a href="classes.html"><span class="nav-num">§3</span>Classes</a></li>
+      <li><a href="objects.html"><span class="nav-num">§4</span>Objects</a></li>
+      <li><a href="assignment.html"><span class="nav-num">§5</span>Assignment</a></li>
+      <li>
+        <a href="methods.html" class="active"><span class="nav-num">§6</span>Methods</a>
+        <ul class="sub-nav">
+          <li><a href="#s61"><span class="nav-num">§6.1</span>Static Methods</a></li>
+          <li><a href="#s62"><span class="nav-num">§6.2</span>Reference Parameters</a></li>
+          <li><a href="#s63"><span class="nav-num">§6.3</span>Dot Operator Revisited</a></li>
+          <li><a href="#s64"><span class="nav-num">§6.4</span>Instance Methods</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</nav>
+
+<main id="content">
+  <header class="page-header">
+    <div class="page-chapter">Chapter 6</div>
+    <h1>Methods</h1>
+    <p class="page-lead">From a plain function to an instance method — a single idea transformed step by step through four calling conventions.</p>
+  </header>
+
+  <article>
+
+    <p>A method call performs two implicit assignments: the argument is assigned to the parameter when the method is called, and the return value is assigned to the receiving variable when it returns. The rules are exactly those from §5 — primitive assignments copy the value; reference assignments copy the address. Nothing new is needed. This chapter introduces four forms of method, each building on the previous one.</p>
+
+    <!-- §6.1 -->
+    <section id="s61">
+      <div class="section-head">
+        <span class="sec-num">§6.1</span>
+        <h2>Static Methods <em>— a function with a namespace</em></h2>
+      </div>
+
+      <div class="callout callout-note">
+        <div class="callout-lbl">Why we start here <a href="index.html" class="backref">← §0</a></div>
+        <p>Java has no freestanding functions — every method must live inside a class. <code>static</code> is the way to say "this is a function; the class is just its namespace." We start here because a static method is exactly that: a plain function, no objects involved, no OO machinery. You don't create a <code>ShapeUtils</code> object to call it.</p>
+      </div>
+
+      <p>A <span class="term">static method</span> belongs to the class. For now, simply think of it as a plain function that lives in the namespace of the class.</p>
+
+      <pre><code class="language-java">class ShapeUtils {
+    static int calculatePerimeter(int width, int height) {
+        return 2 * (width + height);
+    }
+}</code></pre>
+
+      <p>You call it with the class name as a namespace qualifier:</p>
+
+      <pre><code class="language-java">int p = ShapeUtils.calculatePerimeter(10, 20);
+// p = 60</code></pre>
+
+      <p>The dot here is a <em>namespace separator</em>, not a dereference. <code>ShapeUtils</code> is not an object — no heap allocation occurred, no object exists. The class is simply a container for the function.</p>
+
+      <p>The call performs two primitive assignments — one per argument — and one for the return value:</p>
+
+      <pre><code class="language-java">// ShapeUtils.calculatePerimeter(10, 20) implicitly does:
+//   width  = 10   ← primitive assignment
+//   height = 20   ← primitive assignment
+// then returns 60, and:
+//   p = 60        ← primitive assignment</code></pre>
+    </section>
+
+    <!-- §6.2 -->
+    <section id="s62">
+      <div class="section-head">
+        <span class="sec-num">§6.2</span>
+        <h2>Static Method with a Reference Parameter <em>— the address is assigned to the parameter</em></h2>
+      </div>
+
+      <p>Instead of two loose integers, we can pass the Rectangle that already holds them:</p>
+
+      <pre><code class="language-java">class ShapeUtils {
+    static int calculatePerimeter(Rectangle rect) {
+        return 2 * (rect.width + rect.height);
+    }
+}</code></pre>
+
+      <pre><code class="language-java">Rectangle r = new Rectangle(10, 20);
+int p = ShapeUtils.calculatePerimeter(r);
+// p = 60</code></pre>
+
+      <p>The call performs a reference assignment from the argument to the parameter — the same rule from §5: the address in <code>r</code> is copied into <code>rect</code>. No Rectangle is copied. Both <code>r</code> and <code>rect</code> now hold the same address and point to the same object.</p>
+
+      <div class="callout callout-mem">
+        <div class="callout-lbl">Memory model <a href="assignment.html" class="backref">← §5</a></div>
+        <p>Calling <code>calculatePerimeter(r)</code>: the address from <code>r</code> is copied into the parameter slot <code>rect</code>. No Rectangle is copied. Inside the method, <code>rect.width</code> dereferences that address and reads from the same object <code>r</code> points to.</p>
+      </div>
+
+      <p>The method can read and modify the object's fields through <code>rect</code> because they share the same address. But it cannot make <code>r</code> point to a different object — it only has a copy of the address, not the variable <code>r</code> itself.</p>
+    </section>
+
+    <!-- §6.3 -->
+    <section id="s63">
+      <div class="section-head">
+        <span class="sec-num">§6.3</span>
+        <h2>The Dot Operator Revisited <em>— still a dereference</em></h2>
+      </div>
+
+      <p>Look at the body of <code>calculatePerimeter</code>:</p>
+
+      <pre><code class="language-java">static int calculatePerimeter(Rectangle rect) {
+    return 2 * (rect.width + rect.height);
+            //  ^^^^^^^^^^  dereference
+}</code></pre>
+
+      <p><code>rect.width</code> executes in three steps:</p>
+      <ol>
+        <li>Read the address stored in <code>rect</code>.</li>
+        <li>Go to that address on the heap.</li>
+        <li>Read the <code>width</code> slot.</li>
+      </ol>
+
+      <p>This is the same operation described in §4.2 when we first introduced the dot operator. The fact that <code>rect</code> arrived as a parameter rather than being declared locally changes nothing. A reference variable is a reference variable regardless of how it was obtained.</p>
+
+      <div class="callout callout-conn">
+        <div class="callout-lbl">Connection <a href="objects.html#s42" class="backref">← §4.2</a></div>
+        <p>In §4.2: <code>r.width = 10</code> — dereference <code>r</code>, write to its <code>width</code> slot. Here: <code>rect.width</code> — dereference <code>rect</code>, read its <code>width</code> slot. Same mechanism, different variable name, different direction (write vs. read). The dot always means: follow the address, then access the member.</p>
+      </div>
+
+      <p>This consistency is worth pausing on. The dot operator has one meaning throughout Java — dereference — whether the variable is a local, a parameter, a field, or part of a chain like <code>r.origin.x</code>.</p>
+    </section>
+
+    <!-- §6.4 -->
+    <section id="s64">
+      <div class="section-head">
+        <span class="sec-num">§6.4</span>
+        <h2>Instance Methods <em>— the object receives the call</em></h2>
+      </div>
+
+      <p>So far, <code>calculatePerimeter</code> lived in <code>ShapeUtils</code> and received the rectangle as an explicit argument. An <span class="term">instance method</span> is a method defined inside the class it operates on. Instead of being passed as an argument, the object is placed to the left of the dot at the call site.</p>
+
+      <p>Here is <code>calculatePerimeter</code> defined as an instance method on Rectangle:</p>
+
+      <pre><code class="language-java">class Rectangle {
+    int width;
+    int height;
+
+    int calculatePerimeter() {
+        return 2 * (this.width + this.height);
+    }
+}</code></pre>
+
+      <p>And the call:</p>
+
+      <pre><code class="language-java">Rectangle r = new Rectangle(10, 20);
+int p = r.calculatePerimeter();
+// p = 60</code></pre>
+
+      <p>The object to the left of the dot — <code>r</code> — is not just a target. Its address is assigned to an implicit reference parameter called <code>this</code>, available inside the method body. <code>this.width</code> dereferences <code>this</code> to read the <code>width</code> slot — exactly as a regular reference variable would.</p>
+
+      <div class="callout callout-mem">
+        <div class="callout-lbl">Assignment <a href="assignment.html" class="backref">← §5</a></div>
+        <p>Calling <code>r.calculatePerimeter()</code> performs a reference assignment: <code>r</code>'s address is copied into <code>this</code>. The same rule as any other reference assignment — <code>this</code> and <code>r</code> point to the same object.</p>
+      </div>
+
+      <p>Now that instance methods are introduced, the relationship to §6.2 becomes clear:</p>
+
+      <div class="code-compare">
+        <div>
+          <div class="cc-label">Static call (§6.2)</div>
+          <pre><code class="language-java">ShapeUtils
+  .calculatePerimeter(rect);</code></pre>
+        </div>
+        <div>
+          <div class="cc-label">Instance call</div>
+          <pre><code class="language-java">rect
+  .calculatePerimeter();</code></pre>
+        </div>
+      </div>
+
+      <p>Same computation, different calling convention. <code>rect</code> moves from the argument list to the left of the dot, and is renamed <code>this</code> inside the method. Nothing else changes.</p>
+
+      <div class="callout callout-conn">
+        <div class="callout-lbl">The full progression <a href="#s61" class="backref">← §6.1</a> <a href="#s62" class="backref">← §6.2</a></div>
+        <p>
+          §6.1: <code>calculatePerimeter(width, height)</code> — two primitives, no object.<br>
+          §6.2: <code>calculatePerimeter(rect)</code> — one reference; the object carries the data.<br>
+          §6.4: <code>rect.calculatePerimeter()</code> — same reference, moved left of the dot, renamed <code>this</code>.<br>
+          Same computation. Evolving calling convention.
+        </p>
+      </div>
+
+      <div class="callout callout-mem">
+        <div class="callout-lbl">Summary — the mechanical picture</div>
+        <p>A variable holds a value or an address. Primitives hold values. Reference variables hold addresses. Assignment copies what the variable holds. The dot dereferences. <code>new</code> allocates, initializes, and returns an address. Static methods are functions in a class namespace. Instance methods are functions where one reference argument — <code>this</code> — is passed via the dot notation rather than the argument list. That is the mechanical foundation of object-oriented Java.</p>
+      </div>
+    </section>
+
+  </article>
+
+  <nav class="page-nav" aria-label="Chapter navigation">
+    <a href="assignment.html" class="page-nav-prev">
+      <span class="page-nav-label">← Previous</span>
+      <span class="page-nav-title">§5 — Assignment</span>
+    </a>
+    <div class="page-nav-spacer"></div>
+  </nav>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  hljs.highlightAll();
+
+  const sections = document.querySelectorAll('section[id]');
+  const subLinks = document.querySelectorAll('.sub-nav a[href^="#"]');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = '#' + entry.target.id;
+        subLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+      }
+    });
+  }, { rootMargin: '-8% 0px -78% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+
+  const btn  = document.getElementById('menu-btn');
+  const side = document.getElementById('sidebar');
+  btn.addEventListener('click', () => side.classList.toggle('open'));
+  document.querySelectorAll('#sidebar a').forEach(a => {
+    a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
+  });
+});
+</script>
+</body>
+</html>

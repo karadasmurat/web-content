@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§5 Assignment — OO with Java</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Toggle navigation">
+  <span></span><span></span><span></span>
+</button>
+
+<nav id="sidebar" aria-label="Tutorial navigation">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-label">Tutorial</div>
+    <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a></li>
+      <li><a href="variables.html"><span class="nav-num">§1</span>Variables</a></li>
+      <li><a href="primitives.html"><span class="nav-num">§2</span>Primitives</a></li>
+      <li><a href="classes.html"><span class="nav-num">§3</span>Classes</a></li>
+      <li><a href="objects.html"><span class="nav-num">§4</span>Objects</a></li>
+      <li><a href="assignment.html" class="active"><span class="nav-num">§5</span>Assignment</a></li>
+      <li><a href="methods.html"><span class="nav-num">§6</span>Methods</a></li>
+    </ul>
+  </nav>
+</nav>
+
+<main id="content">
+  <header class="page-header">
+    <div class="page-chapter">Chapter 5</div>
+    <h1>Assignment</h1>
+    <p class="page-lead">Assignment always copies what the variable holds. That one rule — applied to primitives and references — explains everything about how values move through a Java program.</p>
+  </header>
+
+  <article>
+
+    <p>We have seen assignment twice already: once for primitive variables in §2, and once for reference variables in §4.2. This chapter names the pattern explicitly, because it will matter in §6 when method calls are introduced.</p>
+
+    <h3>Primitive assignment — copies the value</h3>
+
+    <p>When you assign one primitive variable to another, the value in the slot is copied. You end up with two independent slots, each holding the same value.</p>
+
+    <pre><code class="language-java">int a = 10;
+int b = a;   // b gets its own slot; the value 10 is copied into it
+
+b = 99;      // modifies b's slot only
+
+System.out.println(a); // 10 — unchanged
+System.out.println(b); // 99</code></pre>
+
+    <div class="callout callout-mem">
+      <div class="callout-lbl">Memory model</div>
+      <p>Before: one slot named <code>a</code> containing <code>10</code>. After <code>int b = a</code>: two slots, <code>a</code> and <code>b</code>, each independently containing <code>10</code>. They share no connection — changing one has no effect on the other.</p>
+    </div>
+
+    <h3>Reference assignment — copies the address</h3>
+
+    <p>When you assign one reference variable to another, the address in the slot is copied. You end up with two variables holding the same address — two names for the same object.</p>
+
+    <pre><code class="language-java">Rectangle r1 = new Rectangle();
+r1.width = 10;
+
+Rectangle r2 = r1;  // r2 gets its own slot; the address in r1 is copied into it</code></pre>
+
+    <div class="callout callout-mem">
+      <div class="callout-lbl">Memory model</div>
+      <p>Before: <code>r1</code> holds address <code>0x4a2f</code>. After <code>Rectangle r2 = r1</code>: two slots, <code>r1</code> and <code>r2</code>, both containing <code>0x4a2f</code>. One object on the heap. Two variables pointing at it.</p>
+    </div>
+
+    <h3>Consequence: modifications are visible through both variables</h3>
+
+    <p>Because both variables point to the same object, modifying the object through one variable is immediately visible through the other.</p>
+
+    <pre><code class="language-java">r2.width = 99;      // dereferences r2, modifies the object
+
+System.out.println(r1.width); // 99 — r1 sees the change too
+System.out.println(r2.width); // 99</code></pre>
+
+    <p>This is not a quirk or a bug — it follows directly from the fact that assignment copied the address. There is one object. Both variables hold its address. Whoever writes to it, the other sees the result.</p>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Contrast with primitives</div>
+      <p>With primitives, assignment copies the value — two independent slots, no connection. With references, assignment copies the address — one object, two names. The behavior after assignment is completely different depending on which kind of variable you're working with.</p>
+    </div>
+
+    <h3>The rule</h3>
+
+    <p>Assignment always copies what the variable holds:</p>
+    <ul>
+      <li>Primitive variable → copies the <strong>value</strong>. Two independent slots.</li>
+      <li>Reference variable → copies the <strong>address</strong>. Two names for one object.</li>
+    </ul>
+
+    <p>There is no third case. Every assignment in Java — whether it appears as a declaration, a standalone statement, or inside a more complex expression — follows one of these two forms.</p>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Looking ahead to §6</div>
+      <p>When a method is called, the argument is assigned to the parameter. When the method returns, the return value is assigned to the receiving variable. These are ordinary assignments — the same two rules apply. Knowing this now makes method calls in §6 straightforward rather than surprising.</p>
+    </div>
+
+  </article>
+
+  <nav class="page-nav" aria-label="Chapter navigation">
+    <a href="objects.html" class="page-nav-prev">
+      <span class="page-nav-label">← Previous</span>
+      <span class="page-nav-title">§4 — Objects</span>
+    </a>
+    <a href="methods.html" class="page-nav-next">
+      <span class="page-nav-label">Next →</span>
+      <span class="page-nav-title">§6 — Methods</span>
+    </a>
+  </nav>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  hljs.highlightAll();
+  const btn  = document.getElementById('menu-btn');
+  const side = document.getElementById('sidebar');
+  btn.addEventListener('click', () => side.classList.toggle('open'));
+  document.querySelectorAll('#sidebar a').forEach(a => {
+    a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
+  });
+});
+</script>
+</body>
+</html>

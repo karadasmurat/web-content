@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§4 Objects — OO with Java</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Toggle navigation">
+  <span></span><span></span><span></span>
+</button>
+
+<nav id="sidebar" aria-label="Tutorial navigation">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-label">Tutorial</div>
+    <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a></li>
+      <li><a href="variables.html"><span class="nav-num">§1</span>Variables</a></li>
+      <li><a href="primitives.html"><span class="nav-num">§2</span>Primitives</a></li>
+      <li><a href="classes.html"><span class="nav-num">§3</span>Classes</a></li>
+      <li>
+        <a href="objects.html" class="active"><span class="nav-num">§4</span>Objects</a>
+        <ul class="sub-nav">
+          <li><a href="#s41"><span class="nav-num">§4.1</span>Instantiation</a></li>
+          <li><a href="#s42"><span class="nav-num">§4.2</span>Reference Variables</a></li>
+          <li><a href="#s43"><span class="nav-num">§4.3</span>Reference Fields</a></li>
+          <li><a href="#s44"><span class="nav-num">§4.4</span>Constructors</a></li>
+        </ul>
+      </li>
+      <li><a href="assignment.html"><span class="nav-num">§5</span>Assignment</a></li>
+      <li><a href="methods.html"><span class="nav-num">§6</span>Methods</a></li>
+    </ul>
+  </nav>
+</nav>
+
+<main id="content">
+  <header class="page-header">
+    <div class="page-chapter">Chapter 4</div>
+    <h1>Objects</h1>
+    <p class="page-lead">Creating objects, reaching them through references, pointing objects at other objects, and giving them their initial state — the four mechanics that make OO work.</p>
+  </header>
+
+  <article>
+
+    <!-- §4.1 -->
+    <section id="s41">
+      <div class="section-head">
+        <span class="sec-num">§4.1</span>
+        <h2>Instantiation <em>— what <code>new</code> does</em></h2>
+      </div>
+
+      <p>The class is the blueprint. An <span class="term">object</span> is an instance of that blueprint — a concrete chunk of memory laid out according to the class's field declarations. You create one with <code>new</code>:</p>
+
+      <pre><code class="language-java">new Rectangle();</code></pre>
+
+      <p><code>new</code> does three things in sequence:</p>
+      <ol>
+        <li><strong>Allocates</strong> a chunk of memory on the <span class="term">heap</span> — a region of memory managed separately from local variables, designed to hold data whose lifetime isn't tied to any single method call.</li>
+        <li><strong>Zeroes</strong> all fields. For our Rectangle: <code>width = 0</code>, <code>height = 0</code>.</li>
+        <li><strong>Returns the address</strong> of the newly allocated chunk.</li>
+      </ol>
+
+      <p>The object now exists on the heap. But the address returned by <code>new</code> hasn't been stored anywhere — so we have no way to reach it. We need a variable that can hold an address. That's §4.2.</p>
+
+      <div class="callout callout-mem">
+        <div class="callout-lbl">Memory model</div>
+        <p>The <span class="term">heap</span> is a pool of memory that persists independently of any method call. Objects live there. Local variables live on the stack, which grows and shrinks as methods are called and return. An object on the heap survives as long as at least one reference variable points to it; when none do, the garbage collector reclaims it.</p>
+      </div>
+    </section>
+
+    <!-- §4.2 -->
+    <section id="s42">
+      <div class="section-head">
+        <span class="sec-num">§4.2</span>
+        <h2>Reference Variables <em>— a variable that holds an address</em></h2>
+      </div>
+
+      <p>In §1 we said a variable holds either a value or an address. Now we need the second kind. A <span class="term">reference variable</span> holds an address — the location of an object on the heap.</p>
+
+      <pre><code class="language-java">Rectangle r = new Rectangle();</code></pre>
+
+      <p>Read this as: allocate a Rectangle on the heap, and store its address in the reference variable <code>r</code>. The variable <code>r</code> does not contain a Rectangle. It contains a number — the memory address where that Rectangle lives.</p>
+
+      <div class="callout callout-mem">
+        <div class="callout-lbl">Memory model</div>
+        <p><code>r</code> is a slot that holds an address, say <code>0x4a2f</code>. At address <code>0x4a2f</code> on the heap: a Rectangle object with its own <code>width</code> and <code>height</code> slots (both zero for now).</p>
+      </div>
+
+      <p>To access the object's fields, you use the <span class="term">dot operator</span>. The dot means: <em>go to the address stored in the variable on my left, then access the member named on my right</em>.</p>
+
+      <pre><code class="language-java">Rectangle r = new Rectangle();
+r.width  = 10;  // go to the object r points to; set its width slot to 10
+r.height = 20;  // go to the object r points to; set its height slot to 20
+
+System.out.println(r.width); // dereference r, read its width slot → 10</code></pre>
+
+      <p>Every use of the dot operator is a <span class="term">dereference</span>: follow the address, then act on what's there.</p>
+
+      <h3>Aliasing</h3>
+
+      <p>When you assign one reference variable to another, you copy the address — not the object.</p>
+
+      <pre><code class="language-java">Rectangle r  = new Rectangle();
+r.width = 10;
+
+Rectangle r2 = r;   // r2 now holds the same address as r
+
+r2.width = 99;      // dereferences r2, modifies the same object
+
+System.out.println(r.width); // 99 — r and r2 point to the same object</code></pre>
+
+      <p>Both <code>r</code> and <code>r2</code> hold the same address. They are two names for one object. This is called <span class="term">aliasing</span>.</p>
+
+      <div class="callout callout-note">
+        <div class="callout-lbl">Contrast with primitives <a href="primitives.html" class="backref">← §2</a></div>
+        <p><code>int b = a</code> copies the value — two independent slots. <code>Rectangle r2 = r</code> copies the address — two names for the same object. The difference flows directly from value vs. address (§1).</p>
+      </div>
+    </section>
+
+    <!-- §4.3 -->
+    <section id="s43">
+      <div class="section-head">
+        <span class="sec-num">§4.3</span>
+        <h2>Reference Fields <em>— objects pointing to objects</em></h2>
+      </div>
+
+      <p>In §3 we constrained Rectangle to primitive fields only. Now that reference variables are understood, we can lift that constraint.</p>
+
+      <p>A field can be of any type — including a class. A field of class type is a <span class="term">reference field</span>: a slot inside the object that holds an address (or <code>null</code>).</p>
+
+      <p>A rectangle naturally has two things beyond its dimensions: a position (where its top-left corner sits) and a border (how its edge is drawn). Both are structured values — each made of several primitives — so each becomes its own class:</p>
+
+      <pre><code class="language-java">class Point {
+    int x;
+    int y;
+}
+
+class Border {
+    int     thickness;
+    boolean visible;
+}</code></pre>
+
+      <p>Now Rectangle can hold references to both:</p>
+
+      <pre><code class="language-java">class Rectangle {
+    int    width;
+    int    height;
+    Point  origin;  // reference field — holds an address, not a Point itself
+    Border border;  // reference field — holds an address, not a Border itself
+}</code></pre>
+
+      <p>When a Rectangle is created, both reference fields are initialized to <code>null</code> — the slots exist but point to nothing yet.</p>
+
+      <pre><code class="language-java">Rectangle r = new Rectangle();
+r.width  = 10;
+r.height = 20;
+// r.origin is null, r.border is null
+
+Point p = new Point();
+p.x = 5;
+p.y = 8;
+r.origin = p;    // copy p's address into r's origin slot
+
+Border b = new Border();
+b.thickness = 2;
+b.visible   = true;
+r.border = b;    // copy b's address into r's border slot</code></pre>
+
+      <div class="callout callout-mem">
+        <div class="callout-lbl">Memory model</div>
+        <p>On the heap: a Rectangle with <code>width=10</code>, <code>height=20</code>, <code>origin=0x4a2f</code>, <code>border=0x7c10</code>. At <code>0x4a2f</code>: a Point with <code>x=5</code>, <code>y=8</code>. At <code>0x7c10</code>: a Border with <code>thickness=2</code>, <code>visible=true</code>. The Rectangle does not <em>contain</em> the Point or the Border — it contains their <em>addresses</em>.</p>
+      </div>
+
+      <p>The dot operator chains naturally across reference fields. Each dot is one dereference:</p>
+
+      <pre><code class="language-java">System.out.println(r.origin.x);      // follow r → Rectangle; follow origin → Point;  read x         → 5
+System.out.println(r.border.visible); // follow r → Rectangle; follow border → Border; read visible   → true</code></pre>
+
+      <div class="callout callout-conn">
+        <div class="callout-lbl">Connection <a href="#s42" class="backref">← §4.2</a></div>
+        <p><code>origin</code> and <code>border</code> are reference variables that happen to live inside an object rather than in a method. The rules are identical: each holds an address, the dot dereferences it, and aliasing applies. If you write <code>Border b2 = r.border</code>, both <code>b2</code> and <code>r.border</code> point to the same Border object.</p>
+      </div>
+    </section>
+
+    <!-- §4.4 -->
+    <section id="s44">
+      <div class="section-head">
+        <span class="sec-num">§4.4</span>
+        <h2>Constructors <em>— initialization before the reference is returned</em></h2>
+      </div>
+
+      <p>After <code>new Rectangle()</code>, all fields are zeroed. That's rarely what you want. A <span class="term">constructor</span> is initialization code that <code>new</code> runs after allocation, before the address is returned to the caller.</p>
+
+      <pre><code class="language-java">class Rectangle {
+    int width;
+    int height;
+
+    Rectangle(int w, int h) {   // constructor: same name as class, no return type
+        width  = w;
+        height = h;
+    }
+}</code></pre>
+
+      <p>Now you pass initial values directly to <code>new</code>:</p>
+
+      <pre><code class="language-java">Rectangle r = new Rectangle(10, 20);
+// r.width  is 10
+// r.height is 20</code></pre>
+
+      <p>The sequence <code>new Rectangle(10, 20)</code> executes as:</p>
+      <ol>
+        <li>Allocate a Rectangle on the heap; zero its fields.</li>
+        <li>Run the constructor body with <code>w=10</code>, <code>h=20</code>.</li>
+        <li>Return the address.</li>
+      </ol>
+
+      <p>By the time <code>r</code> receives the address, the object is already initialized. The caller never sees the zeroed state.</p>
+
+      <div class="callout callout-note">
+        <div class="callout-lbl">Scope for now</div>
+        <p>One constructor, no chaining, no inheritance — just the core idea. The essential point: <code>new</code> = allocate + initialize + return address.</p>
+      </div>
+
+      <p>If you define no constructor, Java provides one automatically — it takes no arguments and leaves all fields at their zero values. The moment you define your own, the automatic one goes away.</p>
+    </section>
+
+  </article>
+
+  <nav class="page-nav" aria-label="Chapter navigation">
+    <a href="classes.html" class="page-nav-prev">
+      <span class="page-nav-label">← Previous</span>
+      <span class="page-nav-title">§3 — Classes</span>
+    </a>
+    <a href="assignment.html" class="page-nav-next">
+      <span class="page-nav-label">Next →</span>
+      <span class="page-nav-title">§5 — Assignment</span>
+    </a>
+  </nav>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  hljs.highlightAll();
+
+  // Scroll spy for sub-sections
+  const sections = document.querySelectorAll('section[id]');
+  const subLinks = document.querySelectorAll('.sub-nav a[href^="#"]');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = '#' + entry.target.id;
+        subLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+      }
+    });
+  }, { rootMargin: '-8% 0px -78% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+
+  // Mobile toggle
+  const btn  = document.getElementById('menu-btn');
+  const side = document.getElementById('sidebar');
+  btn.addEventListener('click', () => side.classList.toggle('open'));
+  document.querySelectorAll('#sidebar a').forEach(a => {
+    a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
+  });
+});
+</script>
+</body>
+</html>
