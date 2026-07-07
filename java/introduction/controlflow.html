@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>§3 Classes — OO with Java</title>
+<title>§10 Control Flow — OO with Java</title>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" id="hljs-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
 <link rel="stylesheet" id="hljs-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
@@ -39,7 +39,7 @@
       <li><a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a></li>
       <li><a href="variables.html"><span class="nav-num">§1</span>Variables</a></li>
       <li><a href="primitives.html"><span class="nav-num">§2</span>Primitives</a></li>
-      <li><a href="classes.html" class="active"><span class="nav-num">§3</span>Classes</a></li>
+      <li><a href="classes.html"><span class="nav-num">§3</span>Classes</a></li>
       <li><a href="objects.html"><span class="nav-num">§4</span>Objects</a></li>
       <li><a href="assignment.html"><span class="nav-num">§5</span>Assignment</a></li>
       <li><a href="methods.html"><span class="nav-num">§6</span>Methods</a></li>
@@ -57,7 +57,7 @@
         </ul>
       </li>
       <li><a href="operators.html"><span class="nav-num">§9</span>Operators</a></li>
-      <li><a href="controlflow.html"><span class="nav-num">§10</span>Control Flow</a></li>
+      <li><a href="controlflow.html" class="active"><span class="nav-num">§10</span>Control Flow</a></li>
       <li>
         <a href="inheritance.html"><span class="nav-num">§11</span>Inheritance</a>
         <ul class="sub-nav">
@@ -157,40 +157,112 @@
 
 <main id="content">
   <header class="page-header">
-    <div class="page-chapter">Chapter 3</div>
-    <h1>Classes</h1>
-    <p class="page-lead">A class is a blueprint. The class itself is not an object; it describes objects.</p>
+    <div class="page-chapter">Chapter 10</div>
+    <h1>Control Flow</h1>
+    <p class="page-lead">Every program so far has run top to bottom, once, every line. Control flow is how you make a <code>boolean</code> (§9) decide whether a line runs at all, or how many times it repeats.</p>
   </header>
 
   <article>
 
-    <p>So far, every variable we've seen holds a single primitive value: a number, a boolean. Most interesting data is made of several things grouped together — the way a real-world kind of thing is described by its attributes. A rectangle has a width and a height. A point has an x and a y. A person has a name and an age. A <span class="term">class</span> lets you define that grouping: the set of attributes that together describe one kind of thing.</p>
+    <h3>if / else — conditional execution</h3>
 
-    <p>A class is a description of a kind of object: it names the fields that every object of that kind will have. Think of it as a blueprint — the way an architect draws up a detailed technical drawing describing a house: its dimensions, the number of rooms, where the doors go. The blueprint itself is not a house; you can't live in it. But it's precise enough that a builder can follow it, and many separate houses can be built from that same one blueprint. Each has the same rooms in the same layout — but one is painted blue, another has hardwood floors, another has three bedrooms filled and one empty. Same structure, different values in each house. A class works the same way for objects.</p>
+    <p>An <code>if</code> runs a block only when its condition is <code>true</code>. The condition is any expression that produces a <code>boolean</code> — exactly the comparison and logical operators from §9:</p>
 
-    <h3>Defining a class</h3>
+    <pre><code class="language-java">int width = 10;
 
-    <p>Our first class uses only primitive fields:</p>
-
-    <pre><code class="language-java">class Rectangle {
-    int width;
-    int height;
+if (width &gt; 5) {
+    System.out.println("wide");
 }</code></pre>
 
-    <p>This declares that every Rectangle will have two slots: <code>width</code> (an <code>int</code>) and <code>height</code> (an <code>int</code>). The class definition itself is a template — no Rectangle object exists yet, just the description of what one will look like.</p>
+    <p><code>else</code> runs instead, when the condition is <code>false</code>. <code>else if</code> chains additional conditions, checked in order, top to bottom — the first one that's <code>true</code> runs, and the rest are skipped:</p>
 
-    <p>The field declarations inside the class look exactly like the variable declarations from §1 — because they are. They're just variables that belong to an object rather than to a method call. Once objects exist (§4.1), each one will have its own independent <code>width</code> and <code>height</code> slots.</p>
+    <pre><code class="language-java">int width = 10;
+
+if (width &gt; 20) {
+    System.out.println("wide");
+} else if (width &gt; 5) {
+    System.out.println("medium");
+} else {
+    System.out.println("narrow");
+}
+// medium</code></pre>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Only a boolean</div>
+      <p>Java requires the condition to be a genuine <code>boolean</code> — not an <code>int</code> standing in for one, the way some languages allow. <code>if (width)</code> is a compile error unless <code>width</code> is itself declared <code>boolean</code>. If you mean "not zero," you write <code>if (width != 0)</code>.</p>
+    </div>
+
+    <h3>while — repeat while a condition holds</h3>
+
+    <p>A <code>while</code> loop re-checks its condition before every run of its block, and stops the moment that condition is <code>false</code>:</p>
+
+    <pre><code class="language-java">int i = 0;
+while (i &lt; 5) {
+    System.out.println(i);
+    i++;
+}
+// 0 1 2 3 4</code></pre>
+
+    <p>Three moving parts make this work, and all three are things you already know: <code>i</code> starts at a known value, the condition (§9's <code>&lt;</code>) is checked before each iteration, and <code>i++</code> (§9) changes the value the condition depends on. Leave that last part out, and the condition never becomes <code>false</code> — the loop runs forever.</p>
+
+    <h3>for — the loop with its bookkeeping up front</h3>
+
+    <p>A <code>for</code> loop is a <code>while</code> loop with its three moving parts gathered into one line: initialize, then condition, then update.</p>
+
+    <pre><code class="language-java">for (int i = 0; i &lt; 5; i++) {
+    System.out.println(i);
+}
+// 0 1 2 3 4</code></pre>
+
+    <p>Read the parentheses as three statements separated by <code>;</code>: <code>int i = 0</code> runs once, before anything else. <code>i &lt; 5</code> is checked before every iteration, exactly like <code>while</code>. <code>i++</code> runs after every iteration, before the condition is checked again. This is precisely the previous example, rearranged — nothing new is executing, it's just harder to forget the update when it lives next to the condition.</p>
+
+    <p>Now the array chapter's opening example can finally be written the way it was always heading:</p>
+
+    <pre><code class="language-java">int[] temperatures = {68, 71, 69, 73, 75, 70, 66};
+
+int total = 0;
+for (int i = 0; i &lt; temperatures.length; i++) {
+    total += temperatures[i];
+}
+double average = total / (double) temperatures.length;
+System.out.println(average); // 70.28571428571429</code></pre>
+
+    <div class="callout callout-conn">
+      <div class="callout-lbl">Same idea as day1 + day2 + ... <a href="arrays.html" class="backref">← §7</a></div>
+      <p>§7 opened by hand-writing <code>day1 + day2 + ... + day7</code> — one variable per value, and a sum that has to name every one of them. <code>temperatures[i]</code>, with <code>i</code> counting <code>0</code> through <code>temperatures.length - 1</code>, reaches every element the same way that hand-written sum did, without a fixed number of terms baked into the code. Ask for thirty temperatures instead of seven, and this loop doesn't change at all.</p>
+    </div>
+
+    <h3>for-each — when you don't need the index</h3>
+
+    <p>Most of the time, a loop over an array wants every element, in order, and never actually uses <code>i</code> for anything except <code>temperatures[i]</code>. The <span class="term">for-each</span> loop drops the index entirely:</p>
+
+    <pre><code class="language-java">int total = 0;
+for (int temp : temperatures) {
+    total += temp;
+}</code></pre>
+
+    <p>Read <code>for (int temp : temperatures)</code> as: "for each <code>int</code> in <code>temperatures</code>, call it <code>temp</code>." Every iteration, <code>temp</code> holds the next element's value — copied out, exactly like any other primitive assignment. There's no <code>i</code> to initialize, check, or increment, because there's no index at all.</p>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">When you still need the classic <code>for</code></div>
+      <p>For-each can't skip elements, go backwards, or change which element it's looking at — it always visits every element, front to back, once. It also can't tell you the index of the element it's holding. Need any of that — or need to modify the array itself through the loop variable — and the classic <code>for (int i = 0; ...)</code> is still the right tool.</p>
+    </div>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Scope of this chapter</div>
+      <p><code>switch</code>, <code>do</code>-<code>while</code>, and the <code>break</code>/<code>continue</code> statements that fine-tune a loop mid-run all build on exactly the ideas here — a <code>boolean</code> condition, and a block that runs some number of times — and are left for later.</p>
+    </div>
 
   </article>
 
   <nav class="page-nav" aria-label="Chapter navigation">
-    <a href="primitives.html" class="page-nav-prev">
+    <a href="operators.html" class="page-nav-prev">
       <span class="page-nav-label">← Previous</span>
-      <span class="page-nav-title">§2 — Primitives</span>
+      <span class="page-nav-title">§9 — Operators</span>
     </a>
-    <a href="objects.html" class="page-nav-next">
+    <a href="inheritance.html" class="page-nav-next">
       <span class="page-nav-label">Next →</span>
-      <span class="page-nav-title">§4 — Objects</span>
+      <span class="page-nav-title">§11 — Inheritance</span>
     </a>
   </nav>
 </main>

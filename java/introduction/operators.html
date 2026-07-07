@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§9 Operators — OO with Java</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" id="hljs-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" id="hljs-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
+<script>
+(function () {
+  if ((localStorage.getItem('code-theme') || 'light') === 'dark') {
+    document.getElementById('hljs-light-theme').disabled = true;
+    document.getElementById('hljs-dark-theme').disabled = false;
+    document.documentElement.classList.add('code-dark');
+  }
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Toggle navigation">
+  <span></span><span></span><span></span>
+</button>
+
+<button id="code-theme-toggle" class="code-theme-toggle" aria-label="Toggle code color scheme">
+  <span class="icon">🌙</span><span class="code-theme-label">Dark code</span>
+</button>
+
+<nav id="sidebar" aria-label="Tutorial navigation">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-label">Tutorial</div>
+    <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a></li>
+      <li><a href="variables.html"><span class="nav-num">§1</span>Variables</a></li>
+      <li><a href="primitives.html"><span class="nav-num">§2</span>Primitives</a></li>
+      <li><a href="classes.html"><span class="nav-num">§3</span>Classes</a></li>
+      <li><a href="objects.html"><span class="nav-num">§4</span>Objects</a></li>
+      <li><a href="assignment.html"><span class="nav-num">§5</span>Assignment</a></li>
+      <li><a href="methods.html"><span class="nav-num">§6</span>Methods</a></li>
+      <li><a href="arrays.html"><span class="nav-num">§7</span>Arrays</a></li>
+      <li>
+        <a href="strings.html"><span class="nav-num">§8</span>Strings</a>
+        <ul class="sub-nav">
+          <li><a href="strings.html#s8-1"><span class="nav-num">§8.1</span>Writing Systems &amp; Unicode</a></li>
+          <li><a href="strings.html#s8-2"><span class="nav-num">§8.2</span><code>char</code></a></li>
+          <li><a href="strings.html#s8-3"><span class="nav-num">§8.3</span><code>Character</code></a></li>
+          <li><a href="strings.html#s8-4"><span class="nav-num">§8.4</span>Indexing</a></li>
+          <li><a href="strings.html#s8-5"><span class="nav-num">§8.5</span>Immutability</a></li>
+          <li><a href="strings.html#s8-6"><span class="nav-num">§8.6</span><code>==</code> vs <code>.equals()</code></a></li>
+          <li><a href="strings.html#s8-7"><span class="nav-num">§8.7</span>Concatenation</a></li>
+        </ul>
+      </li>
+      <li><a href="operators.html" class="active"><span class="nav-num">§9</span>Operators</a></li>
+      <li><a href="controlflow.html"><span class="nav-num">§10</span>Control Flow</a></li>
+      <li>
+        <a href="inheritance.html"><span class="nav-num">§11</span>Inheritance</a>
+        <ul class="sub-nav">
+          <li><a href="inheritance.html#s10-1"><span class="nav-num">§11.1</span>Taxonomy</a></li>
+          <li><a href="inheritance.html#s10-2"><span class="nav-num">§11.2</span>The Problem</a></li>
+          <li><a href="inheritance.html#s10-3"><span class="nav-num">§11.3</span><code>extends</code></a></li>
+          <li><a href="inheritance.html#s10-4"><span class="nav-num">§11.4</span><code>super(...)</code></a></li>
+          <li><a href="inheritance.html#s10-5"><span class="nav-num">§11.5</span>Polymorphism</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="accessmodifiers.html"><span class="nav-num">§12</span>Packages & Access Modifiers</a>
+        <ul class="sub-nav">
+          <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§12.1</span>Packages</a></li>
+          <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§12.2</span>Why Restrict Access</a></li>
+          <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§12.3</span><code>private</code></a></li>
+          <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§12.4</span>Encapsulation</a></li>
+          <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§12.5</span><code>public</code></a></li>
+          <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§12.6</span>Package-Private</a></li>
+          <li><a href="accessmodifiers.html#s11-7"><span class="nav-num">§12.7</span><code>protected</code></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="immutability.html"><span class="nav-num">§13</span>Immutability</a>
+        <ul class="sub-nav">
+          <li><a href="immutability.html#s13-1"><span class="nav-num">§13.1</span>Identity &amp; State</a></li>
+          <li><a href="immutability.html#s13-2"><span class="nav-num">§13.2</span>A Question of Time</a></li>
+          <li><a href="immutability.html#s13-3"><span class="nav-num">§13.3</span>Building One</a></li>
+          <li><a href="immutability.html#s13-4"><span class="nav-num">§13.4</span><code>final</code> Isn't Deep</a></li>
+          <li><a href="immutability.html#s13-5"><span class="nav-num">§13.5</span>Why It Matters</a></li>
+          <li><a href="immutability.html#s13-6"><span class="nav-num">§13.6</span><code>StringBuilder</code></a></li>
+          <li><a href="immutability.html#s13-7"><span class="nav-num">§13.7</span>Core Pillars</a></li>
+          <li><a href="immutability.html#s13-8"><span class="nav-num">§13.8</span>Putting It Together</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="abstractclasses.html"><span class="nav-num">§14</span>Abstract Classes</a>
+        <ul class="sub-nav">
+          <li><a href="abstractclasses.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
+          <li><a href="abstractclasses.html#s14-2"><span class="nav-num">§14.2</span><code>abstract</code> Classes</a></li>
+          <li><a href="abstractclasses.html#s14-3"><span class="nav-num">§14.3</span><code>abstract</code> Methods</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="interfaces.html"><span class="nav-num">§15</span>Interfaces</a>
+        <ul class="sub-nav">
+          <li><a href="interfaces.html#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
+          <li><a href="interfaces.html#s15-2"><span class="nav-num">§15.2</span>Interface vs. Abstract Class</a></li>
+          <li><a href="interfaces.html#s15-3"><span class="nav-num">§15.3</span>Declaring &amp; Implementing</a></li>
+          <li><a href="interfaces.html#s15-4"><span class="nav-num">§15.4</span>Override vs. Overload</a></li>
+          <li><a href="interfaces.html#s15-5"><span class="nav-num">§15.5</span>Multiple Interfaces</a></li>
+          <li><a href="interfaces.html#s15-6"><span class="nav-num">§15.6</span>Interface-Typed Params</a></li>
+          <li><a href="interfaces.html#s15-7"><span class="nav-num">§15.7</span>Anonymous Classes</a></li>
+          <li><a href="interfaces.html#s15-8"><span class="nav-num">§15.8</span>Default Methods</a></li>
+          <li><a href="interfaces.html#s15-9"><span class="nav-num">§15.9</span>Default Method Collisions</a></li>
+          <li><a href="interfaces.html#s15-10"><span class="nav-num">§15.10</span>Static Methods</a></li>
+          <li><a href="interfaces.html#s15-11"><span class="nav-num">§15.11</span>Interface Inheritance</a></li>
+          <li><a href="interfaces.html#s15-12"><span class="nav-num">§15.12</span>Strategy Pattern</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="generics.html"><span class="nav-num">§16</span>Generics</a>
+        <ul class="sub-nav">
+          <li><a href="generics.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
+          <li><a href="generics.html#s16-2"><span class="nav-num">§16.2</span>Type Parameters</a></li>
+          <li><a href="generics.html#s16-3"><span class="nav-num">§16.3</span>Generic Methods</a></li>
+          <li><a href="generics.html#s16-4"><span class="nav-num">§16.4</span>Bounded Types</a></li>
+          <li><a href="generics.html#s16-5"><span class="nav-num">§16.5</span>Compile Time Only</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="records.html"><span class="nav-num">§17</span>Records</a>
+        <ul class="sub-nav">
+          <li><a href="records.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
+          <li><a href="records.html#s17-2"><span class="nav-num">§17.2</span><code>record</code></a></li>
+          <li><a href="records.html#s17-3"><span class="nav-num">§17.3</span>Implicitly Final</a></li>
+          <li><a href="records.html#s17-4"><span class="nav-num">§17.4</span>Shallow Immutability</a></li>
+          <li><a href="records.html#s17-5"><span class="nav-num">§17.5</span>Compact Constructors</a></li>
+          <li><a href="records.html#s17-6"><span class="nav-num">§17.6</span>Records Can Do More</a></li>
+          <li><a href="records.html#s17-7"><span class="nav-num">§17.7</span>When to Reach for One</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="collections.html"><span class="nav-num">§18</span>Collections Framework</a>
+        <ul class="sub-nav">
+          <li><a href="collections.html#s18-1"><span class="nav-num">§18.1</span>The Problem</a></li>
+          <li><a href="collections.html#s18-2"><span class="nav-num">§18.2</span>The Big Picture</a></li>
+          <li><a href="collections.html#s18-3"><span class="nav-num">§18.3</span><code>List</code></a></li>
+          <li><a href="collections.html#s18-4"><span class="nav-num">§18.4</span><code>Queue</code></a></li>
+          <li><a href="collections.html#s18-5"><span class="nav-num">§18.5</span><code>Set</code></a></li>
+          <li><a href="collections.html#s18-6"><span class="nav-num">§18.6</span><code>Map</code></a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</nav>
+
+<main id="content">
+  <header class="page-header">
+    <div class="page-chapter">Chapter 9</div>
+    <h1>Operators</h1>
+    <p class="page-lead">Operators compute new values from existing ones. You've been reading them silently since §2 — <code>width * height</code>, <code>i &lt; numbers.length</code> — this chapter names them properly, and adds the ones that produce <code>true</code>/<code>false</code> instead of numbers.</p>
+  </header>
+
+  <article>
+
+    <h3>Arithmetic operators</h3>
+
+    <p><code>+</code> <code>-</code> <code>*</code> <code>/</code> <code>%</code> — addition, subtraction, multiplication, division, and remainder. All five already appeared in earlier chapters without being named:</p>
+
+    <pre><code class="language-java">int width  = 10;
+int height = 5;
+
+int area   = width * height;  // 50
+int perim  = 2 * (width + height); // 30
+int diff   = width - height;  // 5</code></pre>
+
+    <p><code>%</code> (remainder) is the newest-looking one: <code>7 % 3</code> is <code>1</code> — what's left over after dividing 7 by 3 as many whole times as it goes. It's how you test "is this number even" (<code>n % 2 == 0</code>) without a division at all.</p>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Integer division truncates</div>
+      <p><code>7 / 2</code> is <code>3</code>, not <code>3.5</code> — when both operands are <code>int</code>, <code>/</code> performs whole-number division and discards the remainder entirely (that's what <code>%</code> recovers). Make either operand a <code>double</code> — <code>7 / 2.0</code> — and you get <code>3.5</code>. This is exactly the primitive-type distinction from §2: the <em>operator</em> doesn't decide the answer's type, the <em>operands'</em> types do.</p>
+    </div>
+
+    <h3>Type promotion: which type wins</h3>
+
+    <p>This is entirely a question about <span class="term">values</span> — primitives hold their data directly (§2). The value <code>1</code> is the same value whether it's sitting in an <code>int</code>, a <code>long</code>, or a <code>double</code> — those are just differently-sized containers for it. So when an arithmetic operator's two operands are different primitive types, Java doesn't error out over the mismatch; it simply moves the value in the <em>smaller</em> container into a same-sized container as the other, so the operation ends up happening between two values of one shared type. The short version: <strong>the type with more storage room wins</strong>, and that's the type the result comes out as.</p>
+
+    <pre><code class="language-java">var res0 = 1 - 1;     // 0,   int
+var res1 = 1L - 1;    // 0,   long
+var res2 = 1L - 1L;   // 0,   long
+var res3 = 1L - 1.0;  // 0.0, double
+var res4 = 1 - 1.0;   // 0.0, double</code></pre>
+
+    <p><code>res1</code>: <code>long</code> vs. <code>int</code> — <code>long</code> has more room, so the <code>int</code> becomes a <code>long</code> and the result is <code>long</code>. <code>res3</code>: <code>long</code> vs. <code>double</code> — <code>double</code> has more room than <code>long</code>, so this time the <code>long</code> is the one that gets promoted, all the way to <code>double</code>.</p>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Reading the literals</div>
+      <p>The <code>L</code> suffix on <code>1L</code> makes that specific literal a <code>long</code> instead of the default <code>int</code> — with no suffix, <code>1</code> is always <code>int</code>. A decimal point, as in <code>1.0</code>, already makes a literal a <code>double</code> by default (a trailing <code>D</code>, as in <code>1.0D</code>, says the same thing explicitly, but is rarely needed). <code>var</code> — from §7 — just means each <code>resN</code>'s type is inferred from whatever type comes out of its own expression; the comments show what that inferred type actually is for each line.</p>
+    </div>
+
+    <h3>Comparison operators</h3>
+
+    <p><code>==</code> <code>!=</code> <code>&lt;</code> <code>&gt;</code> <code>&lt;=</code> <code>&gt;=</code> — these don't compute a number. They compute a <code>boolean</code>: <code>true</code> or <code>false</code>, one of §2's three primitives.</p>
+
+    <pre><code class="language-java">int a = 10;
+int b = 20;
+
+System.out.println(a == b); // false
+System.out.println(a &lt; b);  // true
+System.out.println(a != b); // true</code></pre>
+
+    <p><code>==</code> always compares <span class="term">values</span> — it never looks any deeper than what's sitting directly in the two variables' own slots. What counts as "the value" depends entirely on what kind of variable it is (§1):</p>
+
+    <ol>
+      <li><strong>Primitive variables:</strong> the value is the primitive value itself, held directly. <code>==</code> compares that value.</li>
+      <li><strong>Reference variables:</strong> the value is an address (§4.2). <code>==</code> compares whether two reference variables hold the exact same address — whether they point to the exact same object in memory.</li>
+    </ol>
+
+    <p>On primitives, that means <code>==</code> is exactly what it sounds like: same value. On reference variables, it means something more specific — and this is where §4.2 and §5 pay off.</p>
+
+    <pre><code class="language-java">Rectangle r1 = new Rectangle(10, 20);
+Rectangle r2 = new Rectangle(10, 20);
+Rectangle r3 = r1;
+
+System.out.println(r1 == r2); // false
+System.out.println(r1 == r3); // true</code></pre>
+
+    <div class="mem-fanout">
+      <div class="mem-region">
+        <div class="mem-col-label">Stack</div>
+        <div class="mem-rect-wrap" style="margin-right: 0;">
+          <div class="mem-slot" style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center;">
+            <div class="mem-slot-code">r1 = <span class="mem-addr">0x9000</span></div>
+          </div>
+          <svg class="mem-precise-arrow" width="70" height="22" style="top: 22px;" viewBox="0 0 70 22" fill="none">
+            <line x1="0" y1="2" x2="62" y2="20" stroke="currentColor" stroke-width="1.5"/>
+            <g transform="translate(62,20) rotate(13)">
+              <path d="M -7 -5 L 0 0 L -7 5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+          </svg>
+        </div>
+        <div class="mem-rect-wrap" style="margin-right: 0;">
+          <div class="mem-slot" style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center;">
+            <div class="mem-slot-code">r3 = <span class="mem-addr">0x9000</span></div>
+          </div>
+          <svg class="mem-precise-arrow" width="70" height="34" style="top: -12px;" viewBox="0 0 70 34" fill="none">
+            <line x1="0" y1="32" x2="62" y2="4" stroke="currentColor" stroke-width="1.5"/>
+            <g transform="translate(62,4) rotate(-25)">
+              <path d="M -7 -5 L 0 0 L -7 5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+          </svg>
+        </div>
+        <div class="mem-rect-wrap" style="margin-right: 0;">
+          <div class="mem-slot" style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center;">
+            <div class="mem-slot-code">r2 = <span class="mem-addr">0x9100</span></div>
+          </div>
+          <svg class="mem-precise-arrow" width="70" height="10" style="top: 22px;" viewBox="0 0 70 10" fill="none">
+            <line x1="0" y1="2" x2="62" y2="8" stroke="currentColor" stroke-width="1.5"/>
+            <g transform="translate(62,8) rotate(5)">
+              <path d="M -7 -5 L 0 0 L -7 5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="mem-region" style="margin-left: 24px;">
+        <div class="mem-col-label">Heap</div>
+        <div class="mem-object">
+          <div class="mem-object-header">Rectangle @ <span class="mem-addr">0x9000</span></div>
+          <div class="mem-object-body">
+            <div class="mem-object-field"><span class="fname">width</span><span class="fval">10</span></div>
+            <div class="mem-object-field"><span class="fname">height</span><span class="fval">20</span></div>
+          </div>
+        </div>
+        <div class="mem-object" style="margin-top: 12px;">
+          <div class="mem-object-header">Rectangle @ <span class="mem-addr">0x9100</span></div>
+          <div class="mem-object-body">
+            <div class="mem-object-field"><span class="fname">width</span><span class="fval">10</span></div>
+            <div class="mem-object-field"><span class="fname">height</span><span class="fval">20</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>Two separate Rectangle objects, identical field values, at two different addresses — <code>r1</code> and <code>r3</code> both hold <code>0x9000</code> and point to the same one; <code>r2</code> holds <code>0x9100</code>, a different object entirely. <code>==</code> only ever looks at what's in the variable's own slot. (The Stack column above is ordered <code>r1</code>, <code>r3</code>, <code>r2</code> rather than declaration order, purely so the two arrows sharing a target don't have to cross the one that doesn't.)</p>
+
+    <div class="callout callout-conn">
+      <div class="callout-lbl">Same value, different address <a href="objects.html#s42" class="backref">← §4.2</a></div>
+      <p>A reference variable holds an address, not an object. <code>==</code> on two reference variables compares those addresses — nothing about the objects' fields is inspected. <code>r1</code> and <code>r2</code> are two separate Rectangles that happen to hold identical <code>width</code>/<code>height</code> values, at two different heap addresses — <code>r1 == r2</code> is <code>false</code>. <code>r3 = r1</code> copied <code>r1</code>'s address <a href="assignment.html" class="backref">← §5</a>, so <code>r1</code> and <code>r3</code> hold the exact same address — <code>r1 == r3</code> is <code>true</code>.</p>
+    </div>
+
+    <div class="callout callout-conn">
+      <div class="callout-lbl">This was already the story with String <a href="strings.html#s8-5" class="backref">← §8</a></div>
+      <p>§8 covered this exact split for <code>String</code>: <code>==</code> compares addresses, always; <code>.equals(...)</code> is a method a class can replace with its own version, to compare content instead. Rectangle hasn't replaced its inherited <code>equals</code>, so <code>r1.equals(r2)</code> is <code>false</code> right now, for the same reason <code>r1 == r2</code> is. The mechanism for replacing an inherited method belongs to a later chapter (§11); the operator itself, here and always, only ever compares addresses.</p>
+    </div>
+
+    <h3>Logical operators</h3>
+
+    <p><code>&amp;&amp;</code> <code>||</code> <code>!</code> — AND, OR, and NOT. They combine or invert <code>boolean</code> values, and only ever operate on <code>boolean</code>s:</p>
+
+    <pre><code class="language-java">int width  = 10;
+int height = 20;
+
+boolean isWide  = width &gt; height;
+boolean isSquare = width == height;
+
+System.out.println(isWide || isSquare); // false
+System.out.println(!isWide);            // true</code></pre>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Short-circuit evaluation</div>
+      <p><code>&amp;&amp;</code> and <code>||</code> don't always evaluate both sides. <code>a &amp;&amp; b</code> skips <code>b</code> entirely if <code>a</code> is already <code>false</code> — the whole expression can't become <code>true</code> no matter what <code>b</code> is. <code>a || b</code> skips <code>b</code> if <code>a</code> is already <code>true</code>, for the same reason in reverse. This isn't just an optimization: it's what makes a pattern like <code>rect != null &amp;&amp; rect.width &gt; 0</code> safe. If <code>rect</code> is <code>null</code>, the left side is <code>false</code>, <code>&amp;&amp;</code> short-circuits, and <code>rect.width</code> — which would throw the <code>NullPointerException</code> from §4.2 — never runs.</p>
+    </div>
+
+    <h3>Compound assignment and increment</h3>
+
+    <p>Updating a variable based on its own current value is common enough to have shorthand:</p>
+
+    <pre><code class="language-java">int total = 0;
+total += 10;   // same as: total = total + 10;   → 10
+total -= 3;    // same as: total = total - 3;    → 7
+total *= 2;    // same as: total = total * 2;    → 14
+
+int i = 0;
+i++;           // same as: i = i + 1;            → 1
+i--;           // same as: i = i - 1;            → 0</code></pre>
+
+    <p>Every one of these is still just an assignment — §5's rule applies unchanged, it copies a (newly computed) value into the variable's slot. Nothing new is happening underneath; it's purely shorter to write. <code>i++</code> will show up constantly in §10's loops — it's the standard way to move a counter forward by one.</p>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Scope of this chapter</div>
+      <p>The operators here are the ones the rest of this tutorial needs. Bitwise operators (<code>&amp;</code>, <code>|</code>, <code>^</code>, <code>&lt;&lt;</code>, <code>&gt;&gt;</code>), the ternary operator (<code>?:</code>), and the fine print of operator precedence are left for later.</p>
+    </div>
+
+  </article>
+
+  <nav class="page-nav" aria-label="Chapter navigation">
+    <a href="strings.html" class="page-nav-prev">
+      <span class="page-nav-label">← Previous</span>
+      <span class="page-nav-title">§8 — Strings</span>
+    </a>
+    <a href="controlflow.html" class="page-nav-next">
+      <span class="page-nav-label">Next →</span>
+      <span class="page-nav-title">§10 — Control Flow</span>
+    </a>
+  </nav>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  hljs.highlightAll();
+
+  // Flag error-annotation comments in code blocks
+  document.querySelectorAll('.hljs-comment').forEach(el => {
+    if (/\b(compile|compiler|runtime) error\b/i.test(el.textContent)) {
+      el.classList.add('hljs-comment-error');
+    }
+  });
+
+  // Code theme toggle
+  const codeThemeBtn = document.getElementById('code-theme-toggle');
+  const lightTheme = document.getElementById('hljs-light-theme');
+  const darkTheme = document.getElementById('hljs-dark-theme');
+  const themeLabel = codeThemeBtn.querySelector('.code-theme-label');
+  const themeIcon = codeThemeBtn.querySelector('.icon');
+
+  function applyCodeTheme(theme) {
+    const dark = theme === 'dark';
+    lightTheme.disabled = dark;
+    darkTheme.disabled = !dark;
+    document.documentElement.classList.toggle('code-dark', dark);
+    themeLabel.textContent = dark ? 'Light code' : 'Dark code';
+    themeIcon.textContent = dark ? '☀️' : '🌙';
+  }
+
+  applyCodeTheme(localStorage.getItem('code-theme') || 'light');
+
+  codeThemeBtn.addEventListener('click', () => {
+    const next = darkTheme.disabled ? 'dark' : 'light';
+    localStorage.setItem('code-theme', next);
+    applyCodeTheme(next);
+  });
+  const btn  = document.getElementById('menu-btn');
+  const side = document.getElementById('sidebar');
+  btn.addEventListener('click', () => side.classList.toggle('open'));
+  document.querySelectorAll('#sidebar a').forEach(a => {
+    a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§11 Inheritance — OO with Java</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" id="hljs-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" id="hljs-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
+<script>
+(function () {
+  if ((localStorage.getItem('code-theme') || 'light') === 'dark') {
+    document.getElementById('hljs-light-theme').disabled = true;
+    document.getElementById('hljs-dark-theme').disabled = false;
+    document.documentElement.classList.add('code-dark');
+  }
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Toggle navigation">
+  <span></span><span></span><span></span>
+</button>
+
+<button id="code-theme-toggle" class="code-theme-toggle" aria-label="Toggle code color scheme">
+  <span class="icon">🌙</span><span class="code-theme-label">Dark code</span>
+</button>
+
+<nav id="sidebar" aria-label="Tutorial navigation">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-label">Tutorial</div>
+    <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a></li>
+      <li><a href="variables.html"><span class="nav-num">§1</span>Variables</a></li>
+      <li><a href="primitives.html"><span class="nav-num">§2</span>Primitives</a></li>
+      <li><a href="classes.html"><span class="nav-num">§3</span>Classes</a></li>
+      <li><a href="objects.html"><span class="nav-num">§4</span>Objects</a></li>
+      <li><a href="assignment.html"><span class="nav-num">§5</span>Assignment</a></li>
+      <li><a href="methods.html"><span class="nav-num">§6</span>Methods</a></li>
+      <li><a href="arrays.html"><span class="nav-num">§7</span>Arrays</a></li>
+      <li>
+        <a href="strings.html"><span class="nav-num">§8</span>Strings</a>
+        <ul class="sub-nav">
+          <li><a href="strings.html#s8-1"><span class="nav-num">§8.1</span>Writing Systems &amp; Unicode</a></li>
+          <li><a href="strings.html#s8-2"><span class="nav-num">§8.2</span><code>char</code></a></li>
+          <li><a href="strings.html#s8-3"><span class="nav-num">§8.3</span><code>Character</code></a></li>
+          <li><a href="strings.html#s8-4"><span class="nav-num">§8.4</span>Indexing</a></li>
+          <li><a href="strings.html#s8-5"><span class="nav-num">§8.5</span>Immutability</a></li>
+          <li><a href="strings.html#s8-6"><span class="nav-num">§8.6</span><code>==</code> vs <code>.equals()</code></a></li>
+          <li><a href="strings.html#s8-7"><span class="nav-num">§8.7</span>Concatenation</a></li>
+        </ul>
+      </li>
+      <li><a href="operators.html"><span class="nav-num">§9</span>Operators</a></li>
+      <li><a href="controlflow.html"><span class="nav-num">§10</span>Control Flow</a></li>
+      <li>
+        <a href="inheritance.html" class="active"><span class="nav-num">§11</span>Inheritance</a>
+        <ul class="sub-nav">
+          <li><a href="#s10-1"><span class="nav-num">§11.1</span>Taxonomy</a></li>
+          <li><a href="#s10-2"><span class="nav-num">§11.2</span>The Problem</a></li>
+          <li><a href="#s10-3"><span class="nav-num">§11.3</span><code>extends</code></a></li>
+          <li><a href="#s10-4"><span class="nav-num">§11.4</span><code>super(...)</code></a></li>
+          <li><a href="#s10-5"><span class="nav-num">§11.5</span>Polymorphism</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="accessmodifiers.html"><span class="nav-num">§12</span>Packages & Access Modifiers</a>
+        <ul class="sub-nav">
+          <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§12.1</span>Packages</a></li>
+          <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§12.2</span>Why Restrict Access</a></li>
+          <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§12.3</span><code>private</code></a></li>
+          <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§12.4</span>Encapsulation</a></li>
+          <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§12.5</span><code>public</code></a></li>
+          <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§12.6</span>Package-Private</a></li>
+          <li><a href="accessmodifiers.html#s11-7"><span class="nav-num">§12.7</span><code>protected</code></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="immutability.html"><span class="nav-num">§13</span>Immutability</a>
+        <ul class="sub-nav">
+          <li><a href="immutability.html#s13-1"><span class="nav-num">§13.1</span>Identity &amp; State</a></li>
+          <li><a href="immutability.html#s13-2"><span class="nav-num">§13.2</span>A Question of Time</a></li>
+          <li><a href="immutability.html#s13-3"><span class="nav-num">§13.3</span>Building One</a></li>
+          <li><a href="immutability.html#s13-4"><span class="nav-num">§13.4</span><code>final</code> Isn't Deep</a></li>
+          <li><a href="immutability.html#s13-5"><span class="nav-num">§13.5</span>Why It Matters</a></li>
+          <li><a href="immutability.html#s13-6"><span class="nav-num">§13.6</span><code>StringBuilder</code></a></li>
+          <li><a href="immutability.html#s13-7"><span class="nav-num">§13.7</span>Core Pillars</a></li>
+          <li><a href="immutability.html#s13-8"><span class="nav-num">§13.8</span>Putting It Together</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="abstractclasses.html"><span class="nav-num">§14</span>Abstract Classes</a>
+        <ul class="sub-nav">
+          <li><a href="abstractclasses.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
+          <li><a href="abstractclasses.html#s14-2"><span class="nav-num">§14.2</span><code>abstract</code> Classes</a></li>
+          <li><a href="abstractclasses.html#s14-3"><span class="nav-num">§14.3</span><code>abstract</code> Methods</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="interfaces.html"><span class="nav-num">§15</span>Interfaces</a>
+        <ul class="sub-nav">
+          <li><a href="interfaces.html#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
+          <li><a href="interfaces.html#s15-2"><span class="nav-num">§15.2</span>Interface vs. Abstract Class</a></li>
+          <li><a href="interfaces.html#s15-3"><span class="nav-num">§15.3</span>Declaring &amp; Implementing</a></li>
+          <li><a href="interfaces.html#s15-4"><span class="nav-num">§15.4</span>Override vs. Overload</a></li>
+          <li><a href="interfaces.html#s15-5"><span class="nav-num">§15.5</span>Multiple Interfaces</a></li>
+          <li><a href="interfaces.html#s15-6"><span class="nav-num">§15.6</span>Interface-Typed Params</a></li>
+          <li><a href="interfaces.html#s15-7"><span class="nav-num">§15.7</span>Anonymous Classes</a></li>
+          <li><a href="interfaces.html#s15-8"><span class="nav-num">§15.8</span>Default Methods</a></li>
+          <li><a href="interfaces.html#s15-9"><span class="nav-num">§15.9</span>Default Method Collisions</a></li>
+          <li><a href="interfaces.html#s15-10"><span class="nav-num">§15.10</span>Static Methods</a></li>
+          <li><a href="interfaces.html#s15-11"><span class="nav-num">§15.11</span>Interface Inheritance</a></li>
+          <li><a href="interfaces.html#s15-12"><span class="nav-num">§15.12</span>Strategy Pattern</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="generics.html"><span class="nav-num">§16</span>Generics</a>
+        <ul class="sub-nav">
+          <li><a href="generics.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
+          <li><a href="generics.html#s16-2"><span class="nav-num">§16.2</span>Type Parameters</a></li>
+          <li><a href="generics.html#s16-3"><span class="nav-num">§16.3</span>Generic Methods</a></li>
+          <li><a href="generics.html#s16-4"><span class="nav-num">§16.4</span>Bounded Types</a></li>
+          <li><a href="generics.html#s16-5"><span class="nav-num">§16.5</span>Compile Time Only</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="records.html"><span class="nav-num">§17</span>Records</a>
+        <ul class="sub-nav">
+          <li><a href="records.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
+          <li><a href="records.html#s17-2"><span class="nav-num">§17.2</span><code>record</code></a></li>
+          <li><a href="records.html#s17-3"><span class="nav-num">§17.3</span>Implicitly Final</a></li>
+          <li><a href="records.html#s17-4"><span class="nav-num">§17.4</span>Shallow Immutability</a></li>
+          <li><a href="records.html#s17-5"><span class="nav-num">§17.5</span>Compact Constructors</a></li>
+          <li><a href="records.html#s17-6"><span class="nav-num">§17.6</span>Records Can Do More</a></li>
+          <li><a href="records.html#s17-7"><span class="nav-num">§17.7</span>When to Reach for One</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="collections.html"><span class="nav-num">§18</span>Collections Framework</a>
+        <ul class="sub-nav">
+          <li><a href="collections.html#s18-1"><span class="nav-num">§18.1</span>The Problem</a></li>
+          <li><a href="collections.html#s18-2"><span class="nav-num">§18.2</span>The Big Picture</a></li>
+          <li><a href="collections.html#s18-3"><span class="nav-num">§18.3</span><code>List</code></a></li>
+          <li><a href="collections.html#s18-4"><span class="nav-num">§18.4</span><code>Queue</code></a></li>
+          <li><a href="collections.html#s18-5"><span class="nav-num">§18.5</span><code>Set</code></a></li>
+          <li><a href="collections.html#s18-6"><span class="nav-num">§18.6</span><code>Map</code></a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</nav>
+
+<main id="content">
+  <header class="page-header">
+    <div class="page-chapter">Chapter 11</div>
+    <h1>Inheritance</h1>
+    <p class="page-lead">Some classes are more specific versions of other classes. They have all of that other class's fields and methods, plus more.</p>
+  </header>
+
+  <article>
+
+    <!-- §11.1 -->
+    <section id="s10-1">
+      <div class="section-head">
+        <span class="sec-num">§11.1</span>
+        <h2>Taxonomy <em>— general at the top, specific below</em></h2>
+      </div>
+
+    <p>A poodle is a dog. A dog is a mammal. A mammal is an animal — but a mammal is just as much a cat, or a human, and an animal is just as much a bird or a reptile. Every level branches into several more specific categories below it, and every one of those still has everything the broader category requires, plus something of its own:</p>
+
+    <div class="tree-diagram">
+      <ul>
+        <li>
+          <div class="tree-node tree-root">Animal</div>
+          <ul>
+            <li>
+              <div class="tree-node">Mammal</div>
+              <ul>
+                <li>
+                  <div class="tree-node">Dog</div>
+                  <ul>
+                    <li><div class="tree-node tree-leaf">Poodle</div></li>
+                  </ul>
+                </li>
+                <li><div class="tree-node tree-leaf">Cat</div></li>
+                <li><div class="tree-node tree-leaf">Human</div></li>
+              </ul>
+            </li>
+            <li><div class="tree-node tree-leaf">Bird</div></li>
+            <li><div class="tree-node tree-leaf">Reptile</div></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <p>Nothing is lost moving down a branch — only added. Every animal needs energy from somewhere; every mammal does too, plus it has hair and feeds its young milk; every dog does all of that, plus it barks and has a breed. This kind of hierarchy is a <span class="term">taxonomy</span>: categories arranged by what they have in common. The most general traits — the ones true of everything — sit at the top, stated exactly once. Move down any branch, and it narrows while still satisfying everything above it. Move up, and you're asking "what do all of these actually share?"</p>
+
+    <p>Classes can be organized the same way. A car is a vehicle. A truck is a vehicle. Both have everything a vehicle has — plus something of their own.</p>
+    </section>
+
+    <!-- §11.2 -->
+    <section id="s10-2">
+      <div class="section-head">
+        <span class="sec-num">§11.2</span>
+        <h2>The Problem <em>— repeated structure</em></h2>
+      </div>
+
+    <p>Suppose the program needs both cars and trucks. Both have a make, a model, and a year — and both need a way to describe themselves:</p>
+
+    <pre><code class="language-java">class Car {
+    String make;
+    String model;
+    int    year;
+
+    String describe() {
+        return year + " " + make + " " + model;
+    }
+}
+
+class Truck {
+    String make;
+    String model;
+    int    year;
+
+    String describe() {
+        return year + " " + make + " " + model;
+    }
+}</code></pre>
+
+    <p>Every field and every line of <code>describe()</code> is duplicated, word for word. Add a third kind of vehicle, and it happens again. Fix a bug in <code>describe()</code>, and it needs fixing in every copy. <span class="term">Inheritance</span> is Java's way of writing that shared structure exactly once.</p>
+    </section>
+
+    <!-- §11.3 -->
+    <section id="s10-3">
+      <div class="section-head">
+        <span class="sec-num">§11.3</span>
+        <h2><code>extends</code> <em>— inheriting fields and methods</em></h2>
+      </div>
+
+    <p>Pull the shared part into its own class, and have the specific ones declare that they're a kind of it:</p>
+
+    <pre><code class="language-java">class Vehicle {
+    String make;
+    String model;
+    int    year;
+
+    String describe() {
+        return year + " " + make + " " + model;
+    }
+}
+
+class Car extends Vehicle {
+    int doors;
+}</code></pre>
+
+    <p><code>Car extends Vehicle</code> means exactly what it says: a Car <em>is a</em> Vehicle, plus whatever <code>Car</code> adds on top. <code>Vehicle</code> is the <span class="term">superclass</span>; <code>Car</code> is the <span class="term">subclass</span>. Nothing in <code>Car</code>'s own body re-declares <code>make</code>, <code>model</code>, <code>year</code>, or <code>describe()</code> — but every Car object has all four anyway, inherited from Vehicle:</p>
+
+    <pre><code class="language-java">Car c = new Car();
+c.make  = "Toyota";
+c.model = "Corolla";
+c.year  = 2022;
+c.doors = 4;
+
+System.out.println(c.describe()); // 2022 Toyota Corolla</code></pre>
+
+    <div class="mem-fanout">
+      <div class="mem-region">
+        <div class="mem-col-label">Stack</div>
+        <div class="mem-slot">
+          <div class="mem-slot-code">c = <span class="mem-addr">0x9000</span></div>
+        </div>
+      </div>
+      <div class="mem-arrow-col">
+        <svg width="40" height="16" viewBox="0 0 40 16" fill="none">
+          <line x1="0" y1="8" x2="32" y2="8" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M32 2L38 8L32 14" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="mem-region">
+        <div class="mem-col-label">Heap</div>
+        <div class="mem-object">
+          <div class="mem-object-header">Car @ <span class="mem-addr">0x9000</span></div>
+          <div class="mem-object-body">
+            <div class="mem-object-field"><span class="fname">make</span><span class="fval">"Toyota"</span></div>
+            <div class="mem-object-field"><span class="fname">model</span><span class="fval">"Corolla"</span></div>
+            <div class="mem-object-field"><span class="fname">year</span><span class="fval">2022</span></div>
+            <div class="mem-object-field" style="border-top: 1px solid var(--border); color: var(--text-muted); font-style: italic; justify-content: center;">own to Car</div>
+            <div class="mem-object-field"><span class="fname">doors</span><span class="fval">4</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>There is exactly one Car object on the heap. It doesn't contain a separate Vehicle object inside it — <code>make</code>, <code>model</code>, and <code>year</code> are slots in the <em>same</em> object as <code>doors</code>, laid out there because <code>Car</code> extends <code>Vehicle</code>. Inheritance adds fields to the layout; it doesn't nest one object inside another the way a reference field does (§4.3).</p>
+
+    <div class="callout callout-conn">
+      <div class="callout-lbl">You've been extending a class all along <a href="objects.html#s41" class="backref">← §4.1</a></div>
+      <p>Every class in this tutorial — Rectangle, Point, Border, Vehicle — has had an unwritten <code>extends Object</code> at the top the whole time. <code>Object</code> is the one class every other class inherits from, directly or indirectly, whether it says so or not. That's where the default, address-comparing <code>equals(Object)</code> from §8 actually comes from: it's a method defined on <code>Object</code>, and every class inherits it unless it overrides it.</p>
+    </div>
+    </section>
+
+    <!-- §11.4 -->
+    <section id="s10-4">
+      <div class="section-head">
+        <span class="sec-num">§11.4</span>
+        <h2>Constructors <em>— the superclass runs first, via <code>super(...)</code></em></h2>
+      </div>
+
+    <p>A Car's constructor needs to initialize the Vehicle part of itself too — and it does that by calling the Vehicle constructor explicitly, as the very first line:</p>
+
+    <pre><code class="language-java">class Vehicle {
+    String make;
+    String model;
+    int    year;
+
+    Vehicle(String make, String model, int year) {
+        this.make  = make;
+        this.model = model;
+        this.year  = year;
+    }
+
+    String describe() {
+        return year + " " + make + " " + model;
+    }
+}
+
+class Car extends Vehicle {
+    int doors;
+
+    Car(String make, String model, int year, int doors) {
+        super(make, model, year);  // runs Vehicle's constructor first
+        this.doors = doors;
+    }
+}</code></pre>
+
+    <pre><code class="language-java">Car c = new Car("Toyota", "Corolla", 2022, 4);
+System.out.println(c.describe()); // 2022 Toyota Corolla</code></pre>
+
+    <p><code>super(make, model, year)</code> is a call to <code>Vehicle</code>'s constructor, using <code>Car</code>'s own parameters as its arguments. It must be the first statement in <code>Car</code>'s constructor — the inherited part of the object is built before the part <code>Car</code> adds. This is the exact same allocate-then-initialize sequence from §4.4, just with the initializing done in two stages: the superclass's constructor first, then the subclass's own.</p>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Left out, not left off</div>
+      <p>If a subclass constructor doesn't write <code>super(...)</code> itself, Java inserts a call to the superclass's no-argument constructor automatically, as the first line. That only works if the superclass <em>has</em> a no-argument constructor. <code>Vehicle</code> above doesn't — its only constructor takes three arguments — so <code>Car</code> is required to call <code>super(...)</code> explicitly, with matching arguments.</p>
+    </div>
+    </section>
+
+    <!-- §11.5 -->
+    <section id="s10-5">
+      <div class="section-head">
+        <span class="sec-num">§11.5</span>
+        <h2>Polymorphism <em>— one supertype, many behaviors underneath</em></h2>
+      </div>
+
+    <p><span class="term">Polymorphism</span> — "many forms" — is the name for what the last two sections set up: a single supertype reference can refer to objects of many different subtypes, and the behavior that actually runs depends on which one is really there. Three mechanics make this work together, in the order they matter: a subtype reference can <em>substitute</em> for a supertype one, code can <em>ask</em>, at runtime, which subtype it actually received, and a subclass can <em>replace</em> inherited behavior — the practical payoff of substituting in the first place.</p>
+
+    <h3>Substitutability <em>— a subclass reference fits where the superclass is expected</em></h3>
+
+    <p>Because a Car <em>is</em> a Vehicle, a variable declared as <code>Vehicle</code> can hold the address of a Car object — no cast, no conversion, nothing special:</p>
+
+    <pre><code class="language-java">Vehicle v = new Car("Toyota", "Corolla", 2022, 4);
+System.out.println(v.describe()); // 2022 Toyota Corolla</code></pre>
+
+    <p><code>v</code> holds the exact same kind of thing every reference variable holds — an address (§4.2) — and a Car's address is a perfectly good value for a Vehicle-typed variable to hold, because everything a <code>Vehicle</code> reference is allowed to do (read <code>make</code>, call <code>describe()</code>) is something the Car object can actually do. What <code>v</code> cannot do is reach <code>doors</code> — as far as <code>v</code>'s declared type is concerned, it's a Vehicle, and <code>doors</code> isn't part of Vehicle. The object is still fully a Car underneath; the variable's type just limits what you can reach through it.</p>
+
+    <p>Nothing stops the same address from living in two variables of two different declared types at once — it's just an ordinary reference assignment, the same rule from §5:</p>
+
+    <pre><code class="language-java">Car myCar = new Car("Kia", "Sportage", 2007, 4);
+Vehicle vc = myCar;   // reference assignment — vc's slot gets a copy of myCar's address</code></pre>
+
+    <div class="mem-fanout">
+      <div class="mem-region">
+        <div class="mem-col-label">Stack</div>
+        <div class="mem-rect-wrap" style="margin-right: 0;">
+          <div class="mem-slot" style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center;">
+            <div class="mem-slot-code">myCar = <span class="mem-addr">0x9500</span></div>
+          </div>
+          <svg class="mem-precise-arrow" width="70" height="52" style="top: 22px;" viewBox="0 0 70 52" fill="none">
+            <line x1="0" y1="2" x2="62" y2="50" stroke="currentColor" stroke-width="1.5"/>
+            <g transform="translate(62,50) rotate(38)">
+              <path d="M -7 -5 L 0 0 L -7 5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+          </svg>
+        </div>
+        <div class="mem-rect-wrap" style="margin-right: 0;">
+          <div class="mem-slot" style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center;">
+            <div class="mem-slot-code">vc = <span class="mem-addr">0x9500</span></div>
+          </div>
+          <svg class="mem-precise-arrow" width="70" height="4" style="top: 18px;" viewBox="0 0 70 4" fill="none">
+            <line x1="0" y1="4" x2="62" y2="0" stroke="currentColor" stroke-width="1.5"/>
+            <g transform="translate(62,0) rotate(-4)">
+              <path d="M -7 -5 L 0 0 L -7 5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="mem-region">
+        <div class="mem-col-label">Heap</div>
+        <div class="mem-object">
+          <div class="mem-object-header">Car @ <span class="mem-addr">0x9500</span></div>
+          <div class="mem-object-body">
+            <div class="mem-object-field"><span class="fname">make</span><span class="fval">"Kia"</span></div>
+            <div class="mem-object-field"><span class="fname">model</span><span class="fval">"Sportage"</span></div>
+            <div class="mem-object-field"><span class="fname">year</span><span class="fval">2007</span></div>
+            <div class="mem-object-field"><span class="fname">doors</span><span class="fval">4</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>One Car object on the heap. Two variables holding its address — <code>myCar</code>, declared <code>Car</code>, and <code>vc</code>, declared <code>Vehicle</code>. Through <code>myCar</code>, every field is reachable. Through <code>vc</code>, only what <code>Vehicle</code> declares is — <code>vc.doors</code> won't compile, <code>myCar.doors</code> will. Same object, same address, two different views of what's allowed, depending entirely on which variable you go through.</p>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Two types, one object</div>
+      <p>Every object now has two types in play. Its <span class="term">declared type</span> is whatever type the variable holding it was declared as — a compile-time fact, fixed in the source code, and the only thing the compiler consults when deciding what you're allowed to write. Its <span class="term">runtime type</span> is the type it was actually constructed with — fixed the moment <code>new</code> ran, and never changing afterward. <code>vc</code>'s declared type is <code>Vehicle</code>; its runtime type is <code>Car</code>. Both are true at once, and the next part is about telling them apart.</p>
+    </div>
+
+    <h3><code>instanceof</code> <em>— checking the runtime type</em></h3>
+
+    <p>Give Car a method Vehicle doesn't have:</p>
+
+    <pre><code class="language-java">class Car extends Vehicle {
+    int doors;
+
+    Car(String make, String model, int year, int doors) {
+        super(make, model, year);
+        this.doors = doors;
+    }
+
+    void openTrunk() {
+        System.out.println("Trunk open.");
+    }
+}</code></pre>
+
+    <p>Substitutability showed that a Car's address fits in a Vehicle-typed variable. But that variable's declared type still limits what you can write:</p>
+
+    <pre><code class="language-java">Vehicle v = new Car("Toyota", "Corolla", 2022, 4);
+v.openTrunk(); // compile error — Vehicle has no openTrunk()</code></pre>
+
+    <p>This doesn't compile, even though the object <code>v</code> points to is, underneath, fully capable of it. The compiler never looks at what's actually on the heap — it only ever checks the <em>declared</em> type, and as far as it's concerned, <code>v</code> is a <code>Vehicle</code>, full stop.</p>
+
+    <p>The <span class="term"><code>instanceof</code></span> operator asks the question the compiler won't: is the object actually a Car? Its syntax puts the reference on the left, the type on the right:</p>
+
+    <pre><code class="language-java">System.out.println(v instanceof Vehicle); // true — every Car is a Vehicle
+System.out.println(v instanceof Car);     // true — its runtime type really is Car
+System.out.println(v instanceof Truck);   // false — it isn't one</code></pre>
+
+    <div class="callout callout-mem">
+      <div class="callout-lbl">Why it has to dereference</div>
+      <p><code>==</code> on references (§9) never looks past the address — it only compares what's sitting in the two variables' own slots. <code>instanceof</code> can't get its answer that way: the variable only knows its <em>declared</em> type, and that's not what's being asked. So <code>instanceof</code> follows the address to the object on the heap and checks the type it was actually constructed with — its runtime type — against the type on the right.</p>
+    </div>
+
+    <p>Knowing <code>v</code>'s object is a Car still doesn't let you call <code>openTrunk()</code> through <code>v</code> — its declared type hasn't changed. Reaching Car-specific members requires a <span class="term">downcast</span>: telling the compiler, explicitly, to treat the reference as the more specific type.</p>
+
+    <pre><code class="language-java">Car c = (Car) v;   // explicit downcast
+c.openTrunk();     // Trunk open.</code></pre>
+
+    <p>An unchecked downcast is a promise to the compiler — and the compiler can't verify it. If the object underneath isn't actually a Car, the promise is broken at run time:</p>
+
+    <pre><code class="language-java">Vehicle v2 = new Truck("Ford", "F-150", 2023, 6.5);
+Car bad = (Car) v2; // compiles fine — throws ClassCastException at runtime</code></pre>
+
+    <p>Checking with <code>instanceof</code> first makes the cast safe:</p>
+
+    <pre><code class="language-java">if (v instanceof Car) {
+    Car c = (Car) v;
+    c.openTrunk();
+}</code></pre>
+
+    <p>Java lets you fold the check and the cast into one step — the variable <code>c</code> is only declared, and only in scope, inside the branch where the check already succeeded:</p>
+
+    <pre><code class="language-java">if (v instanceof Car c) {
+    c.openTrunk(); // c is already a Car here — no separate cast needed
+}</code></pre>
+
+    <p>This is the most common shape the operator takes in real code: a method can declare a parameter of some broad type, like <code>Vehicle</code>, and be called with a subtype's object instead — Car, Truck, or any other Vehicle — by the exact substitutability described above. <code>instanceof</code> is how the method checks, once inside, whether the object it actually received is more specific than its parameter's type lets on.</p>
+
+    <h3>Overriding <em>— replacing an inherited method</em></h3>
+
+    <p>Sometimes the inherited behavior isn't quite right for the subclass. A Truck's description should probably mention its bed length. A subclass can <span class="term">override</span> an inherited method — provide its own body with the same name and parameters — and that new body replaces the inherited one, for objects of that subclass:</p>
+
+    <pre><code class="language-java">class Truck extends Vehicle {
+    double bedLength;
+
+    Truck(String make, String model, int year, double bedLength) {
+        super(make, model, year);
+        this.bedLength = bedLength;
+    }
+
+    @Override
+    String describe() {
+        return super.describe() + ", " + bedLength + "ft bed";
+    }
+}</code></pre>
+
+    <pre><code class="language-java">Vehicle v3 = new Truck("Ford", "F-150", 2023, 6.5);
+System.out.println(v3.describe()); // 2023 Ford F-150, 6.5ft bed</code></pre>
+
+    <p><code>@Override</code> tells the compiler "this is meant to replace an inherited method" — it's not required, but it catches typos (a misspelled method name would otherwise silently define a brand new method instead of overriding anything). <code>super.describe()</code> inside the override calls <code>Vehicle</code>'s original version explicitly, so Truck's version can build on it rather than duplicate it.</p>
+
+    <p>Notice <code>v3</code> is declared <code>Vehicle</code> — exactly the substitutability from earlier in this section — but <code>v3.describe()</code> runs <em>Truck's</em> version, not Vehicle's. Java always runs the override that belongs to the object's actual type on the heap, regardless of the variable's declared type. This is <span class="term">dynamic dispatch</span>, and it's the payoff of everything else in this section: substitutability lets any subtype's object arrive through a supertype reference, and overriding is what lets each subtype answer the same call, like <code>describe()</code>, in its own way — automatically, with no <code>instanceof</code> check needed, because Java picks the right version by itself.</p>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Scope of this chapter</div>
+      <p>This is single-level, single-parent inheritance — the essential mechanics. Multiple levels of subclassing, <code>abstract</code> classes and methods, interfaces, and the <code>protected</code> access level all build on exactly this foundation, and are left for later. So is writing an actual <code>equals(Object)</code> override — §8 deferred it, and this chapter now has all the pieces (inheritance, <code>Object</code>, overriding) to explain how one works, but the method itself has a few extra rules of its own that deserve their own space. <code>instanceof</code>'s pattern-matching form, combined with <code>switch</code>, is a much larger feature in modern Java than shown here — this chapter only needed the single-branch case.</p>
+    </div>
+    </section>
+
+  </article>
+
+  <nav class="page-nav" aria-label="Chapter navigation">
+    <a href="controlflow.html" class="page-nav-prev">
+      <span class="page-nav-label">← Previous</span>
+      <span class="page-nav-title">§10 — Control Flow</span>
+    </a>
+    <a href="accessmodifiers.html" class="page-nav-next">
+      <span class="page-nav-label">Next →</span>
+      <span class="page-nav-title">§12 — Packages &amp; Access Modifiers</span>
+    </a>
+  </nav>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  hljs.highlightAll();
+
+  // Flag error-annotation comments in code blocks
+  document.querySelectorAll('.hljs-comment').forEach(el => {
+    if (/\b(compile|compiler|runtime) error\b/i.test(el.textContent)) {
+      el.classList.add('hljs-comment-error');
+    }
+  });
+
+  // Code theme toggle
+  const codeThemeBtn = document.getElementById('code-theme-toggle');
+  const lightTheme = document.getElementById('hljs-light-theme');
+  const darkTheme = document.getElementById('hljs-dark-theme');
+  const themeLabel = codeThemeBtn.querySelector('.code-theme-label');
+  const themeIcon = codeThemeBtn.querySelector('.icon');
+
+  function applyCodeTheme(theme) {
+    const dark = theme === 'dark';
+    lightTheme.disabled = dark;
+    darkTheme.disabled = !dark;
+    document.documentElement.classList.toggle('code-dark', dark);
+    themeLabel.textContent = dark ? 'Light code' : 'Dark code';
+    themeIcon.textContent = dark ? '☀️' : '🌙';
+  }
+
+  applyCodeTheme(localStorage.getItem('code-theme') || 'light');
+
+  codeThemeBtn.addEventListener('click', () => {
+    const next = darkTheme.disabled ? 'dark' : 'light';
+    localStorage.setItem('code-theme', next);
+    applyCodeTheme(next);
+  });
+
+  // Scroll spy for sub-sections
+  const sections = document.querySelectorAll('section[id]');
+  const subLinks = document.querySelectorAll('.sub-nav a[href^="#"]');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = '#' + entry.target.id;
+        subLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+      }
+    });
+  }, { rootMargin: '-8% 0px -78% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+
+  const btn  = document.getElementById('menu-btn');
+  const side = document.getElementById('sidebar');
+  btn.addEventListener('click', () => side.classList.toggle('open'));
+  document.querySelectorAll('#sidebar a').forEach(a => {
+    a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
+  });
+});
+</script>
+</body>
+</html>

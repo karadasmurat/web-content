@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§17 Records — OO with Java</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" id="hljs-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" id="hljs-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
+<script>
+(function () {
+  if ((localStorage.getItem('code-theme') || 'light') === 'dark') {
+    document.getElementById('hljs-light-theme').disabled = true;
+    document.getElementById('hljs-dark-theme').disabled = false;
+    document.documentElement.classList.add('code-dark');
+  }
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Toggle navigation">
+  <span></span><span></span><span></span>
+</button>
+
+<button id="code-theme-toggle" class="code-theme-toggle" aria-label="Toggle code color scheme">
+  <span class="icon">🌙</span><span class="code-theme-label">Dark code</span>
+</button>
+
+<nav id="sidebar" aria-label="Tutorial navigation">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-label">Tutorial</div>
+    <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a></li>
+      <li><a href="variables.html"><span class="nav-num">§1</span>Variables</a></li>
+      <li><a href="primitives.html"><span class="nav-num">§2</span>Primitives</a></li>
+      <li><a href="classes.html"><span class="nav-num">§3</span>Classes</a></li>
+      <li><a href="objects.html"><span class="nav-num">§4</span>Objects</a></li>
+      <li><a href="assignment.html"><span class="nav-num">§5</span>Assignment</a></li>
+      <li><a href="methods.html"><span class="nav-num">§6</span>Methods</a></li>
+      <li><a href="arrays.html"><span class="nav-num">§7</span>Arrays</a></li>
+      <li>
+        <a href="strings.html"><span class="nav-num">§8</span>Strings</a>
+        <ul class="sub-nav">
+          <li><a href="strings.html#s8-1"><span class="nav-num">§8.1</span>Writing Systems &amp; Unicode</a></li>
+          <li><a href="strings.html#s8-2"><span class="nav-num">§8.2</span><code>char</code></a></li>
+          <li><a href="strings.html#s8-3"><span class="nav-num">§8.3</span><code>Character</code></a></li>
+          <li><a href="strings.html#s8-4"><span class="nav-num">§8.4</span>Indexing</a></li>
+          <li><a href="strings.html#s8-5"><span class="nav-num">§8.5</span>Immutability</a></li>
+          <li><a href="strings.html#s8-6"><span class="nav-num">§8.6</span><code>==</code> vs <code>.equals()</code></a></li>
+          <li><a href="strings.html#s8-7"><span class="nav-num">§8.7</span>Concatenation</a></li>
+        </ul>
+      </li>
+      <li><a href="operators.html"><span class="nav-num">§9</span>Operators</a></li>
+      <li><a href="controlflow.html"><span class="nav-num">§10</span>Control Flow</a></li>
+      <li>
+        <a href="inheritance.html"><span class="nav-num">§11</span>Inheritance</a>
+        <ul class="sub-nav">
+          <li><a href="inheritance.html#s10-1"><span class="nav-num">§11.1</span>Taxonomy</a></li>
+          <li><a href="inheritance.html#s10-2"><span class="nav-num">§11.2</span>The Problem</a></li>
+          <li><a href="inheritance.html#s10-3"><span class="nav-num">§11.3</span><code>extends</code></a></li>
+          <li><a href="inheritance.html#s10-4"><span class="nav-num">§11.4</span><code>super(...)</code></a></li>
+          <li><a href="inheritance.html#s10-5"><span class="nav-num">§11.5</span>Polymorphism</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="accessmodifiers.html"><span class="nav-num">§12</span>Packages &amp; Access Modifiers</a>
+        <ul class="sub-nav">
+          <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§12.1</span>Packages</a></li>
+          <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§12.2</span>Why Restrict Access</a></li>
+          <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§12.3</span><code>private</code></a></li>
+          <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§12.4</span>Encapsulation</a></li>
+          <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§12.5</span><code>public</code></a></li>
+          <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§12.6</span>Package-Private</a></li>
+          <li><a href="accessmodifiers.html#s11-7"><span class="nav-num">§12.7</span><code>protected</code></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="immutability.html"><span class="nav-num">§13</span>Immutability</a>
+        <ul class="sub-nav">
+          <li><a href="immutability.html#s13-1"><span class="nav-num">§13.1</span>Identity &amp; State</a></li>
+          <li><a href="immutability.html#s13-2"><span class="nav-num">§13.2</span>A Question of Time</a></li>
+          <li><a href="immutability.html#s13-3"><span class="nav-num">§13.3</span>Building One</a></li>
+          <li><a href="immutability.html#s13-4"><span class="nav-num">§13.4</span><code>final</code> Isn't Deep</a></li>
+          <li><a href="immutability.html#s13-5"><span class="nav-num">§13.5</span>Why It Matters</a></li>
+          <li><a href="immutability.html#s13-6"><span class="nav-num">§13.6</span><code>StringBuilder</code></a></li>
+          <li><a href="immutability.html#s13-7"><span class="nav-num">§13.7</span>Core Pillars</a></li>
+          <li><a href="immutability.html#s13-8"><span class="nav-num">§13.8</span>Putting It Together</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="abstractclasses.html"><span class="nav-num">§14</span>Abstract Classes</a>
+        <ul class="sub-nav">
+          <li><a href="abstractclasses.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
+          <li><a href="abstractclasses.html#s14-2"><span class="nav-num">§14.2</span><code>abstract</code> Classes</a></li>
+          <li><a href="abstractclasses.html#s14-3"><span class="nav-num">§14.3</span><code>abstract</code> Methods</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="interfaces.html"><span class="nav-num">§15</span>Interfaces</a>
+        <ul class="sub-nav">
+          <li><a href="interfaces.html#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
+          <li><a href="interfaces.html#s15-2"><span class="nav-num">§15.2</span>Interface vs. Abstract Class</a></li>
+          <li><a href="interfaces.html#s15-3"><span class="nav-num">§15.3</span>Declaring &amp; Implementing</a></li>
+          <li><a href="interfaces.html#s15-4"><span class="nav-num">§15.4</span>Override vs. Overload</a></li>
+          <li><a href="interfaces.html#s15-5"><span class="nav-num">§15.5</span>Multiple Interfaces</a></li>
+          <li><a href="interfaces.html#s15-6"><span class="nav-num">§15.6</span>Interface-Typed Params</a></li>
+          <li><a href="interfaces.html#s15-7"><span class="nav-num">§15.7</span>Anonymous Classes</a></li>
+          <li><a href="interfaces.html#s15-8"><span class="nav-num">§15.8</span>Default Methods</a></li>
+          <li><a href="interfaces.html#s15-9"><span class="nav-num">§15.9</span>Default Method Collisions</a></li>
+          <li><a href="interfaces.html#s15-10"><span class="nav-num">§15.10</span>Static Methods</a></li>
+          <li><a href="interfaces.html#s15-11"><span class="nav-num">§15.11</span>Interface Inheritance</a></li>
+          <li><a href="interfaces.html#s15-12"><span class="nav-num">§15.12</span>Strategy Pattern</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="generics.html"><span class="nav-num">§16</span>Generics</a>
+        <ul class="sub-nav">
+          <li><a href="generics.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
+          <li><a href="generics.html#s16-2"><span class="nav-num">§16.2</span>Type Parameters</a></li>
+          <li><a href="generics.html#s16-3"><span class="nav-num">§16.3</span>Generic Methods</a></li>
+          <li><a href="generics.html#s16-4"><span class="nav-num">§16.4</span>Bounded Types</a></li>
+          <li><a href="generics.html#s16-5"><span class="nav-num">§16.5</span>Compile Time Only</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="records.html" class="active"><span class="nav-num">§17</span>Records</a>
+        <ul class="sub-nav">
+          <li><a href="#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
+          <li><a href="#s17-2"><span class="nav-num">§17.2</span><code>record</code></a></li>
+          <li><a href="#s17-3"><span class="nav-num">§17.3</span>Implicitly Final</a></li>
+          <li><a href="#s17-4"><span class="nav-num">§17.4</span>Shallow Immutability</a></li>
+          <li><a href="#s17-5"><span class="nav-num">§17.5</span>Compact Constructors</a></li>
+          <li><a href="#s17-6"><span class="nav-num">§17.6</span>Records Can Do More</a></li>
+          <li><a href="#s17-7"><span class="nav-num">§17.7</span>When to Reach for One</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="collections.html"><span class="nav-num">§18</span>Collections Framework</a>
+        <ul class="sub-nav">
+          <li><a href="collections.html#s18-1"><span class="nav-num">§18.1</span>The Problem</a></li>
+          <li><a href="collections.html#s18-2"><span class="nav-num">§18.2</span>The Big Picture</a></li>
+          <li><a href="collections.html#s18-3"><span class="nav-num">§18.3</span><code>List</code></a></li>
+          <li><a href="collections.html#s18-4"><span class="nav-num">§18.4</span><code>Queue</code></a></li>
+          <li><a href="collections.html#s18-5"><span class="nav-num">§18.5</span><code>Set</code></a></li>
+          <li><a href="collections.html#s18-6"><span class="nav-num">§18.6</span><code>Map</code></a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</nav>
+
+<main id="content">
+  <header class="page-header">
+    <div class="page-chapter">Chapter 17</div>
+    <h1>Records</h1>
+    <p class="page-lead">§13 built a data carrier by hand — fields, constructor, getters — and that was already the leanest version. This chapter shows what was still missing, and the one-line declaration that supplies all of it at once.</p>
+  </header>
+
+  <article>
+
+    <!-- §17.1 -->
+    <section id="s17-1">
+      <div class="section-head">
+        <span class="sec-num">§17.1</span>
+        <h2>The Problem <em>— the boilerplate a data carrier still needs</em></h2>
+      </div>
+
+    <p>A class built to hold onto a couple of related values — a point's <code>x</code> and <code>y</code>, say — keeps its fields <code>private</code> (§12.3) and exposes them through accessor methods, a getter per field. That's already the ordinary shape any class takes: private state, plus a way to read it from outside. But a class meant to represent a plain value like this has to answer a few more questions correctly before it's actually safe to use, and none of those answers come for free.</p>
+
+    <p>Every class inherits an <code>equals(Object)</code> method whose default behavior is to compare addresses — the same rule <code>==</code> follows (§8.6 already established exactly this for <code>String</code>, before it overrides the default). Left alone, two separately-constructed points with identical coordinates would compare unequal, because they're two different objects, at two different addresses, even though the values they represent are the same. Fixing that means overriding <code>equals</code> — and once <code>equals</code> is overridden, <code>hashCode</code> has to be overridden too, with logic that agrees with it, or the object silently misbehaves the moment it's placed in a hash-based collection. And printing an object without its own <code>toString</code> prints whatever <code>Object</code>'s default produces — a class name and a hash, not the coordinates anyone actually wants to see.</p>
+
+    <pre><code class="language-java">class Point {
+    private final int x;
+    private final int y;
+
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getX() { return x; }
+    public int getY() { return y; }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Point)) return false;
+        Point other = (Point) obj;
+        return x == other.x && y == other.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
+
+    @Override
+    public String toString() {
+        return "Point[x=" + x + ", y=" + y + "]";
+    }
+}</code></pre>
+
+    <p>Every line added here is entirely predictable from the two fields alone — nothing about <code>equals</code>, <code>hashCode</code>, or <code>toString</code> for a simple coordinate pair requires a human decision. And yet Java requires all of it spelled out by hand, for every class shaped like this one, with real, silent consequences for getting it wrong: forget <code>hashCode</code> after overriding <code>equals</code>, and a <code>HashSet</code> of points quietly stops finding duplicates it should have caught.</p>
+    </section>
+
+    <!-- §17.2 -->
+    <section id="s17-2">
+      <div class="section-head">
+        <span class="sec-num">§17.2</span>
+        <h2><code>record</code> <em>— one declaration, everything generated</em></h2>
+      </div>
+
+    <p>A <span class="term">record</span> declares its fields once, as part of the type's own header, and the compiler generates everything §17.1 had to write by hand:</p>
+
+    <pre><code class="language-java">record Point(int x, int y) { }</code></pre>
+
+    <p><code>x</code> and <code>y</code>, declared right there in the header, are called the record's <span class="term">components</span> — the vocabulary used for this chapter's rest. This single line produces a class with: a <code>private final</code> field for each component; a constructor taking all of them and assigning them, in order; public accessor methods; and working <code>equals</code>, <code>hashCode</code>, and <code>toString</code> implementations, matching the ones written by hand in §17.1 exactly.</p>
+
+    <pre><code class="language-java">Point p1 = new Point(3, 4);
+Point p2 = new Point(3, 4);
+
+System.out.println(p1.x());        // 3
+System.out.println(p1 == p2);      // false — different addresses, same as any two objects
+System.out.println(p1.equals(p2)); // true — same coordinates
+System.out.println(p1);            // Point[x=3, y=4]</code></pre>
+
+    <div class="callout callout-rule">
+      <div class="callout-lbl">The accessor is named <code>x()</code>, not <code>getX()</code></div>
+      <p>A record's generated accessors take the field's own name directly, with no <code>get</code> prefix — <code>x()</code> and <code>y()</code>, not <code>getX()</code> and <code>getY()</code>. This is a deliberate, different convention from the hand-written getters in §13.3 and §17.1, not an inconsistency to work around.</p>
+    </div>
+
+    <p>An ordinary class (§12.3) can keep a <code>private</code> field entirely to itself — state that exists inside the object, used by its own methods, but never exposed to any caller at all. A record cannot do this. <code>record Point(int x, int y)</code> declares <em>everything</em> there is to know about the type, right there in the header — every field is listed, and the compiler generates a public accessor for every single one. There is no way to add a field to a record that isn't in the header, and so no way to give it a field the outside world can't see.</p>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">A record is transparent</div>
+      <p>Looking at <code>record Point(int x, int y)</code> tells you the complete state of any <code>Point</code> that will ever exist — nothing is hidden, because nothing <em>can</em> be hidden. This is a real trade-off, not a free upgrade over an ordinary class: it's exactly right for a pure, transparent bundle of values, and exactly wrong the moment a type needs internal state that isn't part of its public identity.</p>
+    </div>
+    </section>
+
+    <!-- §17.3 -->
+    <section id="s17-3">
+      <div class="section-head">
+        <span class="sec-num">§17.3</span>
+        <h2>Implicitly Final <em>— nothing left to add, nothing left to override</em></h2>
+      </div>
+
+    <p>A record is implicitly <code>final</code> — a keyword on a <em>class</em> that blocks it from ever being <code>extend</code>ed, the mirror image of <code>abstract</code> (§14.2): where <code>abstract</code> forces a class to be extended before it can produce an object, <code>final</code> forbids extending it at all. <code>Point</code> is exactly this kind of dead end, whether written as a record or not — there is no meaningful subclass of "a pair of coordinates," and a record makes that guarantee automatic rather than a matter of discipline.</p>
+
+    <p>The generated fields are implicitly <code>private</code> and <code>final</code> as well, exactly matching §13.3's two ingredients for immutability — except now neither one can be forgotten. There is no way to declare a setter that actually reassigns <code>x</code> or <code>y</code>, because nothing outside the generated constructor is ever allowed to touch those fields at all. Everything §13 achieved through careful, disciplined class design, a record achieves by construction.</p>
+    </section>
+
+    <!-- §17.4 -->
+    <section id="s17-4">
+      <div class="section-head">
+        <span class="sec-num">§17.4</span>
+        <h2>Shallow Immutability <em>— <code>final</code> protects the reference, not what it points to</em></h2>
+      </div>
+
+    <p>§13.4 already showed the gap this creates for an ordinary hand-written immutable class: <code>final</code> only locks a field's own slot — the address it holds — never what that address points to. A record's generated fields are just <code>final</code> fields (§17.3), so they inherit the exact same gap:</p>
+
+    <pre><code class="language-java">record Person(String name, List&lt;String&gt; hobbies) { }</code></pre>
+
+    <pre><code class="language-java">Person p = new Person("Alice", new ArrayList&lt;&gt;(List.of("reading")));
+p.hobbies().add("gaming"); // compiles and runs fine</code></pre>
+
+    <p>The <code>hobbies</code> field is <code>final</code> in exactly the sense §17.3 described: it can never be reassigned to point at a different <code>List</code>. But the generated accessor, <code>p.hobbies()</code>, hands back that exact same <code>List</code> object — the live one, not a defensive copy — so anything holding <code>p</code> can call <code>p.hobbies()</code> and mutate it directly, entirely through the public accessor itself, no reflection or workaround required. <code>hobbies</code> the field is never reassigned by that <code>.add(...)</code> call; the one <code>ArrayList</code> it has always pointed to is just modified in place, through a reference that <code>final</code> was never protecting from writes to begin with.</p>
+
+    <div class="callout callout-rule">
+      <div class="callout-lbl">A record is not "an immutable data container"</div>
+      <p>The accurate description is narrower: a record is a transparently <em>shallow</em>-immutable data container — every component reference is guaranteed <code>final</code>, but whether the object each one points to is itself immutable depends entirely on that component's own type. <code>Person</code> above is only genuinely, fully immutable if <code>List&lt;String&gt;</code> itself never changes after construction — which an ordinary <code>ArrayList</code> does not guarantee at all.</p>
+    </div>
+
+    <p>Java could have required every record component to be an immutable type, but that would rule out <code>List</code>, <code>Map</code>, and a long list of other everyday types as record components, making records far less useful in practice. Instead, Java enforces only what §17.3 already promised — the reference itself can't be reassigned — and leaves deep immutability to the programmer: passing in an already-immutable collection (<code>List.copyOf(...)</code>, say) is what actually closes this gap, not the <code>record</code> keyword by itself.</p>
+    </section>
+
+    <!-- §17.5 -->
+    <section id="s17-5">
+      <div class="section-head">
+        <span class="sec-num">§17.5</span>
+        <h2>Compact Constructors <em>— validation without repeating the parameter list</em></h2>
+      </div>
+
+    <p>Sometimes a value needs validating before it's accepted — a negative coordinate might be nonsense for whatever <code>Point</code> represents in a given program. An ordinary constructor would restate the full parameter list and assign every field by hand, exactly like §17.1's hand-written version did. A record instead allows a <span class="term">compact constructor</span>: the validation only, with no parameter list and no assignment statements at all.</p>
+
+    <pre><code class="language-java">record Point(int x, int y) {
+    Point {
+        if (x < 0 || y < 0) {
+            throw new IllegalArgumentException("Coordinates cannot be negative");
+        }
+    }
+}</code></pre>
+
+    <pre><code class="language-java">Point p = new Point(-1, 4); // throws IllegalArgumentException</code></pre>
+
+    <p>The compact constructor's body runs first, given <code>x</code> and <code>y</code> exactly as passed to <code>new Point(...)</code> — and once it finishes without throwing, the compiler still performs the ordinary field assignments automatically, the same assignments §17.2's plain <code>record Point(int x, int y) { }</code> always generated. Nothing about declaring a compact constructor removes that generated behavior; it only inserts a checkpoint in front of it.</p>
+    </section>
+
+    <!-- §17.6 -->
+    <section id="s17-6">
+      <div class="section-head">
+        <span class="sec-num">§17.6</span>
+        <h2>Records Can Do More <em>— additional methods, implemented interfaces</em></h2>
+      </div>
+
+    <p>A record's body isn't limited to a compact constructor — it can declare ordinary methods too, exactly like any class:</p>
+
+    <pre><code class="language-java">record Point(int x, int y) {
+    double distanceFromOrigin() {
+        return Math.sqrt(x * x + y * y);
+    }
+}</code></pre>
+
+    <pre><code class="language-java">Point p = new Point(3, 4);
+System.out.println(p.distanceFromOrigin()); // 5.0</code></pre>
+
+    <p><code>distanceFromOrigin()</code> is a method written the ordinary way, with full access to <code>x</code> and <code>y</code> — a record only automates the constructor, the accessors, and <code>equals</code>/<code>hashCode</code>/<code>toString</code>; everything else about writing a class still applies. A record can also <code>implement</code> an interface (§15.3), exactly the way any class does — the generated pieces and any interface's required methods coexist without conflict.</p>
+    </section>
+
+    <!-- §17.7 -->
+    <section id="s17-7">
+      <div class="section-head">
+        <span class="sec-num">§17.7</span>
+        <h2>When to Reach for One <em>— a record is a shape, not a replacement</em></h2>
+      </div>
+
+    <p>A record fits exactly the shape §13 was already building toward: a fixed bundle of values, set once at construction, never reassigned, compared by content rather than address. The moment a type needs mutable state, a meaningful subclass, or fields beyond what the constructor receives, it no longer fits that shape — and an ordinary class, written out in full, is still the right tool.</p>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Scope of this chapter</div>
+      <p>Generic records, records used with <code>switch</code> and pattern matching, and manually overriding a single generated accessor while keeping the rest are all left for later. The core shape carries over unchanged: a record is the data carrier §13 already described — transparent, shallow-immutable by construction (§17.4), with the boilerplate written for you.</p>
+    </div>
+    </section>
+
+  </article>
+
+  <nav class="page-nav" aria-label="Chapter navigation">
+    <a href="generics.html" class="page-nav-prev">
+      <span class="page-nav-label">← Previous</span>
+      <span class="page-nav-title">§16 — Generics</span>
+    </a>
+    <a href="collections.html" class="page-nav-next">
+      <span class="page-nav-label">Next →</span>
+      <span class="page-nav-title">§18 — Collections Framework</span>
+    </a>
+  </nav>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  hljs.highlightAll();
+
+  // Flag error-annotation comments in code blocks
+  document.querySelectorAll('.hljs-comment').forEach(el => {
+    if (/\b(compile|compiler|runtime) error\b/i.test(el.textContent)) {
+      el.classList.add('hljs-comment-error');
+    }
+  });
+
+  // Code theme toggle
+  const codeThemeBtn = document.getElementById('code-theme-toggle');
+  const lightTheme = document.getElementById('hljs-light-theme');
+  const darkTheme = document.getElementById('hljs-dark-theme');
+  const themeLabel = codeThemeBtn.querySelector('.code-theme-label');
+  const themeIcon = codeThemeBtn.querySelector('.icon');
+
+  function applyCodeTheme(theme) {
+    const dark = theme === 'dark';
+    lightTheme.disabled = dark;
+    darkTheme.disabled = !dark;
+    document.documentElement.classList.toggle('code-dark', dark);
+    themeLabel.textContent = dark ? 'Light code' : 'Dark code';
+    themeIcon.textContent = dark ? '☀️' : '🌙';
+  }
+
+  applyCodeTheme(localStorage.getItem('code-theme') || 'light');
+
+  codeThemeBtn.addEventListener('click', () => {
+    const next = darkTheme.disabled ? 'dark' : 'light';
+    localStorage.setItem('code-theme', next);
+    applyCodeTheme(next);
+  });
+
+  // Scroll spy for sub-sections
+  const sections = document.querySelectorAll('section[id]');
+  const subLinks = document.querySelectorAll('.sub-nav a[href^="#"]');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = '#' + entry.target.id;
+        subLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+      }
+    });
+  }, { rootMargin: '-8% 0px -78% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+
+  const btn  = document.getElementById('menu-btn');
+  const side = document.getElementById('sidebar');
+  btn.addEventListener('click', () => side.classList.toggle('open'));
+  document.querySelectorAll('#sidebar a').forEach(a => {
+    a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§18 Collections Framework — OO with Java</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" id="hljs-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" id="hljs-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
+<script>
+(function () {
+  if ((localStorage.getItem('code-theme') || 'light') === 'dark') {
+    document.getElementById('hljs-light-theme').disabled = true;
+    document.getElementById('hljs-dark-theme').disabled = false;
+    document.documentElement.classList.add('code-dark');
+  }
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Toggle navigation">
+  <span></span><span></span><span></span>
+</button>
+
+<button id="code-theme-toggle" class="code-theme-toggle" aria-label="Toggle code color scheme">
+  <span class="icon">🌙</span><span class="code-theme-label">Dark code</span>
+</button>
+
+<nav id="sidebar" aria-label="Tutorial navigation">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-label">Tutorial</div>
+    <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a></li>
+      <li><a href="variables.html"><span class="nav-num">§1</span>Variables</a></li>
+      <li><a href="primitives.html"><span class="nav-num">§2</span>Primitives</a></li>
+      <li><a href="classes.html"><span class="nav-num">§3</span>Classes</a></li>
+      <li><a href="objects.html"><span class="nav-num">§4</span>Objects</a></li>
+      <li><a href="assignment.html"><span class="nav-num">§5</span>Assignment</a></li>
+      <li><a href="methods.html"><span class="nav-num">§6</span>Methods</a></li>
+      <li><a href="arrays.html"><span class="nav-num">§7</span>Arrays</a></li>
+      <li>
+        <a href="strings.html"><span class="nav-num">§8</span>Strings</a>
+        <ul class="sub-nav">
+          <li><a href="strings.html#s8-1"><span class="nav-num">§8.1</span>Writing Systems &amp; Unicode</a></li>
+          <li><a href="strings.html#s8-2"><span class="nav-num">§8.2</span><code>char</code></a></li>
+          <li><a href="strings.html#s8-3"><span class="nav-num">§8.3</span><code>Character</code></a></li>
+          <li><a href="strings.html#s8-4"><span class="nav-num">§8.4</span>Indexing</a></li>
+          <li><a href="strings.html#s8-5"><span class="nav-num">§8.5</span>Immutability</a></li>
+          <li><a href="strings.html#s8-6"><span class="nav-num">§8.6</span><code>==</code> vs <code>.equals()</code></a></li>
+          <li><a href="strings.html#s8-7"><span class="nav-num">§8.7</span>Concatenation</a></li>
+        </ul>
+      </li>
+      <li><a href="operators.html"><span class="nav-num">§9</span>Operators</a></li>
+      <li><a href="controlflow.html"><span class="nav-num">§10</span>Control Flow</a></li>
+      <li>
+        <a href="inheritance.html"><span class="nav-num">§11</span>Inheritance</a>
+        <ul class="sub-nav">
+          <li><a href="inheritance.html#s10-1"><span class="nav-num">§11.1</span>Taxonomy</a></li>
+          <li><a href="inheritance.html#s10-2"><span class="nav-num">§11.2</span>The Problem</a></li>
+          <li><a href="inheritance.html#s10-3"><span class="nav-num">§11.3</span><code>extends</code></a></li>
+          <li><a href="inheritance.html#s10-4"><span class="nav-num">§11.4</span><code>super(...)</code></a></li>
+          <li><a href="inheritance.html#s10-5"><span class="nav-num">§11.5</span>Polymorphism</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="accessmodifiers.html"><span class="nav-num">§12</span>Packages &amp; Access Modifiers</a>
+        <ul class="sub-nav">
+          <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§12.1</span>Packages</a></li>
+          <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§12.2</span>Why Restrict Access</a></li>
+          <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§12.3</span><code>private</code></a></li>
+          <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§12.4</span>Encapsulation</a></li>
+          <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§12.5</span><code>public</code></a></li>
+          <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§12.6</span>Package-Private</a></li>
+          <li><a href="accessmodifiers.html#s11-7"><span class="nav-num">§12.7</span><code>protected</code></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="immutability.html"><span class="nav-num">§13</span>Immutability</a>
+        <ul class="sub-nav">
+          <li><a href="immutability.html#s13-1"><span class="nav-num">§13.1</span>Identity &amp; State</a></li>
+          <li><a href="immutability.html#s13-2"><span class="nav-num">§13.2</span>A Question of Time</a></li>
+          <li><a href="immutability.html#s13-3"><span class="nav-num">§13.3</span>Building One</a></li>
+          <li><a href="immutability.html#s13-4"><span class="nav-num">§13.4</span><code>final</code> Isn't Deep</a></li>
+          <li><a href="immutability.html#s13-5"><span class="nav-num">§13.5</span>Why It Matters</a></li>
+          <li><a href="immutability.html#s13-6"><span class="nav-num">§13.6</span><code>StringBuilder</code></a></li>
+          <li><a href="immutability.html#s13-7"><span class="nav-num">§13.7</span>Core Pillars</a></li>
+          <li><a href="immutability.html#s13-8"><span class="nav-num">§13.8</span>Putting It Together</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="abstractclasses.html"><span class="nav-num">§14</span>Abstract Classes</a>
+        <ul class="sub-nav">
+          <li><a href="abstractclasses.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
+          <li><a href="abstractclasses.html#s14-2"><span class="nav-num">§14.2</span><code>abstract</code> Classes</a></li>
+          <li><a href="abstractclasses.html#s14-3"><span class="nav-num">§14.3</span><code>abstract</code> Methods</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="interfaces.html"><span class="nav-num">§15</span>Interfaces</a>
+        <ul class="sub-nav">
+          <li><a href="interfaces.html#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
+          <li><a href="interfaces.html#s15-2"><span class="nav-num">§15.2</span>Interface vs. Abstract Class</a></li>
+          <li><a href="interfaces.html#s15-3"><span class="nav-num">§15.3</span>Declaring &amp; Implementing</a></li>
+          <li><a href="interfaces.html#s15-4"><span class="nav-num">§15.4</span>Override vs. Overload</a></li>
+          <li><a href="interfaces.html#s15-5"><span class="nav-num">§15.5</span>Multiple Interfaces</a></li>
+          <li><a href="interfaces.html#s15-6"><span class="nav-num">§15.6</span>Interface-Typed Params</a></li>
+          <li><a href="interfaces.html#s15-7"><span class="nav-num">§15.7</span>Anonymous Classes</a></li>
+          <li><a href="interfaces.html#s15-8"><span class="nav-num">§15.8</span>Default Methods</a></li>
+          <li><a href="interfaces.html#s15-9"><span class="nav-num">§15.9</span>Default Method Collisions</a></li>
+          <li><a href="interfaces.html#s15-10"><span class="nav-num">§15.10</span>Static Methods</a></li>
+          <li><a href="interfaces.html#s15-11"><span class="nav-num">§15.11</span>Interface Inheritance</a></li>
+          <li><a href="interfaces.html#s15-12"><span class="nav-num">§15.12</span>Strategy Pattern</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="generics.html"><span class="nav-num">§16</span>Generics</a>
+        <ul class="sub-nav">
+          <li><a href="generics.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
+          <li><a href="generics.html#s16-2"><span class="nav-num">§16.2</span>Type Parameters</a></li>
+          <li><a href="generics.html#s16-3"><span class="nav-num">§16.3</span>Generic Methods</a></li>
+          <li><a href="generics.html#s16-4"><span class="nav-num">§16.4</span>Bounded Types</a></li>
+          <li><a href="generics.html#s16-5"><span class="nav-num">§16.5</span>Compile Time Only</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="records.html"><span class="nav-num">§17</span>Records</a>
+        <ul class="sub-nav">
+          <li><a href="records.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
+          <li><a href="records.html#s17-2"><span class="nav-num">§17.2</span><code>record</code></a></li>
+          <li><a href="records.html#s17-3"><span class="nav-num">§17.3</span>Implicitly Final</a></li>
+          <li><a href="records.html#s17-4"><span class="nav-num">§17.4</span>Shallow Immutability</a></li>
+          <li><a href="records.html#s17-5"><span class="nav-num">§17.5</span>Compact Constructors</a></li>
+          <li><a href="records.html#s17-6"><span class="nav-num">§17.6</span>Records Can Do More</a></li>
+          <li><a href="records.html#s17-7"><span class="nav-num">§17.7</span>When to Reach for One</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="collections.html" class="active"><span class="nav-num">§18</span>Collections Framework</a>
+        <ul class="sub-nav">
+          <li><a href="#s18-1"><span class="nav-num">§18.1</span>The Problem</a></li>
+          <li><a href="#s18-2"><span class="nav-num">§18.2</span>The Big Picture</a></li>
+          <li><a href="#s18-3"><span class="nav-num">§18.3</span><code>List</code></a></li>
+          <li><a href="#s18-4"><span class="nav-num">§18.4</span><code>Queue</code></a></li>
+          <li><a href="#s18-5"><span class="nav-num">§18.5</span><code>Set</code></a></li>
+          <li><a href="#s18-6"><span class="nav-num">§18.6</span><code>Map</code></a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</nav>
+
+<main id="content">
+  <header class="page-header">
+    <div class="page-chapter">Chapter 18</div>
+    <h1>Collections Framework</h1>
+    <p class="page-lead">An array (§7) is a group of values — but a fixed-size one, decided the moment it's created. This chapter is about a group that can grow and shrink as the program runs, and about the family of interfaces built on top of that one simple idea, each naming a different rule for how the group behaves.</p>
+  </header>
+
+  <article>
+
+    <!-- §18.1 -->
+    <section id="s18-1">
+      <div class="section-head">
+        <span class="sec-num">§18.1</span>
+        <h2>The Problem <em>— what an array doesn't give you</em></h2>
+      </div>
+
+<h3>What an array actually gives you</h3>
+
+<p>§7 already covered arrays; let's be precise about exactly what that gives you, because everything in this section is really about where that precision runs out.</p>
+
+<p>An array is a <strong>fixed-size, contiguous</strong> block of memory, indexed by position, giving you constant-time access to any element — instant, regardless of how large the array is — as long as you know its index. If it's an array of a reference type, every slot holds a reference to an object (or <code>null</code>); if it's a primitive array, the values themselves sit inline in that contiguous block.</p>
+
+<p>That's the entire contract. Notice what is <em>not</em> part of it:</p>
+
+<ul>
+  <li>No notion of "how many elements are actually in use" versus how many slots exist. <code>array.length</code> tells you the capacity, not the count of meaningful elements. You track that yourself, usually with a separate <code>int size</code> variable.</li>
+  <li>No insertion or removal operation. If you want to "insert" in the middle, you are manually shifting every subsequent element over by hand.</li>
+  <li>No search operation beyond a linear scan you write yourself.</li>
+  <li>No concept of a key. Position <em>is</em> the only handle you have on an element.</li>
+</ul>
+
+<p>None of this is a flaw — an array is doing exactly one job, and doing it well: giving you raw, fixed, indexed storage. The friction shows up when your <em>problem</em> asks for something the array's contract was never designed to answer.</p>
+
+<h3>Five stories that strain five different properties</h3>
+
+<p>Abstract descriptions don't stick the way a concrete story does, so let's walk through five small stories. Each one strains a <em>different</em> property of the array — not the same complaint five times.</p>
+
+<p><strong>Scenario A — sign-ups for an event.</strong><br>
+You're building the guest list for a meetup. You declare an array sized for 5 people. Four guests arrive and take their seats, one after another. One slot remains, at index 4. Then a fifth guest arrives — but she's brought her daughter along, unannounced. That's two people showing up together, and there's only one slot left. There's no way to fit two people into one slot, so neither of them gets added — they leave without entering. If you tried to force it anyway, writing a second name in once the mother had taken the last slot, you'd hit an out-of-bounds exception — that next index was never created in the first place. The array's size was a decision made the moment it was created, and it simply cannot be revisited — there is no "add one more slot" operation, only "build an entirely new, larger array and copy everything over."</p>
+
+<figure class="diagram-figure">
+<svg width="100%" viewBox="0 0 680 390" role="img">
+<title>A fixed-size array can't fit two people into one remaining slot</title>
+<desc>Step 1: a size-5 array has one slot left, at index 4. Step 2: a guest arrives with her daughter, two people for one slot, and since the pair can't be split, they leave without entering — the array is unchanged.</desc>
+<defs>
+<marker id="mk-away" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#6a6a6a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+
+<rect x="20" y="20" width="640" height="128" rx="12" fill="none" stroke="#ddd8cc" stroke-width="1"/>
+<text class="step-title" x="340" y="44" text-anchor="middle">Step 1: one slot is left</text>
+<g class="box-gray"><rect x="46" y="74" width="88" height="44" rx="8"/><text class="t" x="90" y="96" text-anchor="middle" dominant-baseline="central">Priya</text></g>
+<g class="box-gray"><rect x="146" y="74" width="88" height="44" rx="8"/><text class="t" x="190" y="96" text-anchor="middle" dominant-baseline="central">Tom</text></g>
+<g class="box-gray"><rect x="246" y="74" width="88" height="44" rx="8"/><text class="t" x="290" y="96" text-anchor="middle" dominant-baseline="central">Ana</text></g>
+<g class="box-gray"><rect x="346" y="74" width="88" height="44" rx="8"/><text class="t" x="390" y="96" text-anchor="middle" dominant-baseline="central">Leo</text></g>
+<g class="box-dashed"><rect x="446" y="74" width="88" height="44" rx="8"/><text class="ts" x="490" y="96" text-anchor="middle" dominant-baseline="central">empty</text></g>
+<text class="ts" x="90" y="132" text-anchor="middle">0</text>
+<text class="ts" x="190" y="132" text-anchor="middle">1</text>
+<text class="ts" x="290" y="132" text-anchor="middle">2</text>
+<text class="ts" x="390" y="132" text-anchor="middle">3</text>
+<text class="ts" x="490" y="132" text-anchor="middle">4</text>
+
+<rect x="20" y="168" width="640" height="164" rx="12" fill="none" stroke="#ddd8cc" stroke-width="1"/>
+<text class="step-title" x="340" y="192" text-anchor="middle">Step 2: two people arrive for one slot — they leave without entering</text>
+<g class="box-dashed"><rect x="410" y="222" width="68" height="26" rx="13"/><text class="ts" x="444" y="235" text-anchor="middle" dominant-baseline="central">Guest</text></g>
+<g class="box-dashed"><rect x="486" y="222" width="68" height="26" rx="13"/><text class="ts" x="520" y="235" text-anchor="middle" dominant-baseline="central">Daughter</text></g>
+<line x1="560" y1="235" x2="576" y2="235" stroke="#6a6a6a" stroke-width="1.5" marker-end="url(#mk-away)"/>
+<text class="ts" x="582" y="239" text-anchor="start">leaves</text>
+<g class="box-gray"><rect x="46" y="258" width="88" height="44" rx="8"/><text class="t" x="90" y="280" text-anchor="middle" dominant-baseline="central">Priya</text></g>
+<g class="box-gray"><rect x="146" y="258" width="88" height="44" rx="8"/><text class="t" x="190" y="280" text-anchor="middle" dominant-baseline="central">Tom</text></g>
+<g class="box-gray"><rect x="246" y="258" width="88" height="44" rx="8"/><text class="t" x="290" y="280" text-anchor="middle" dominant-baseline="central">Ana</text></g>
+<g class="box-gray"><rect x="346" y="258" width="88" height="44" rx="8"/><text class="t" x="390" y="280" text-anchor="middle" dominant-baseline="central">Leo</text></g>
+<g class="box-dashed"><rect x="446" y="258" width="88" height="44" rx="8"/><text class="ts" x="490" y="280" text-anchor="middle" dominant-baseline="central">empty</text></g>
+<text class="ts" x="90" y="316" text-anchor="middle">0</text>
+<text class="ts" x="190" y="316" text-anchor="middle">1</text>
+<text class="ts" x="290" y="316" text-anchor="middle">2</text>
+<text class="ts" x="390" y="316" text-anchor="middle">3</text>
+<text class="ts" x="490" y="316" text-anchor="middle">4</text>
+
+<g class="box-gray"><rect x="140" y="356" width="14" height="14" rx="3"/></g>
+<text class="ts" x="160" y="367">Filled slot</text>
+<g class="box-dashed"><rect x="340" y="356" width="14" height="14" rx="3"/></g>
+<text class="ts" x="360" y="367">Empty slot</text>
+</svg>
+<figcaption>A fixed-size array can't be topped up by one slot to fit a pair, even when only one slot is missing.</figcaption>
+</figure>
+
+<pre><code class="language-java">String[] guests = new String[5];
+
+guests[0] = "Priya";
+guests[1] = "Tom";
+guests[2] = "Ana";
+guests[3] = "Leo";
+// one slot left, at index 4
+
+// a guest arrives with her daughter — two people, one slot:
+// guests[4] = "mother";    // she could take the last slot...
+// guests[5] = "daughter";  // ...but the daughter has nowhere to go
+
+// ArrayIndexOutOfBoundsException: Index 5 out of bounds for length 5</code></pre>
+
+<p>Now picture the opposite guess for a different meetup: the same size is declared, but this time only 3 people actually show up. The remaining two slots hold nothing — allocated the moment the array was created, whether or not they're ever filled. The array doesn't know how many guests actually arrived; it only knows how big it was told to be, and it will report that size forever, regardless of how many slots are genuinely in use. That's the friction, from both directions: <strong>the array's size is a one-time guess, made before you know the real count, and it's wrong exactly as often as your guess is</strong> — too small, and you overflow; too large, and you waste space that's allocated but never used.</p>
+
+<figure class="diagram-figure">
+<svg width="100%" viewBox="0 0 680 200" role="img">
+<title>A fixed-size array can just as easily leave room to spare</title>
+<desc>A separate size-5 array, guessed too large. Only 3 guests show up, so indices 3 and 4 sit allocated but permanently unused.</desc>
+
+<rect x="20" y="20" width="640" height="128" rx="12" fill="none" stroke="#ddd8cc" stroke-width="1"/>
+<text class="step-title" x="340" y="44" text-anchor="middle">Opposite guess: too large — 2 slots go unused</text>
+<g class="box-gray"><rect x="46" y="74" width="88" height="44" rx="8"/><text class="t" x="90" y="96" text-anchor="middle" dominant-baseline="central">Priya</text></g>
+<g class="box-gray"><rect x="146" y="74" width="88" height="44" rx="8"/><text class="t" x="190" y="96" text-anchor="middle" dominant-baseline="central">Tom</text></g>
+<g class="box-gray"><rect x="246" y="74" width="88" height="44" rx="8"/><text class="t" x="290" y="96" text-anchor="middle" dominant-baseline="central">Ana</text></g>
+<g class="box-dashed"><rect x="346" y="74" width="88" height="44" rx="8"/><text class="ts" x="390" y="96" text-anchor="middle" dominant-baseline="central">unused</text></g>
+<g class="box-dashed"><rect x="446" y="74" width="88" height="44" rx="8"/><text class="ts" x="490" y="96" text-anchor="middle" dominant-baseline="central">unused</text></g>
+<text class="ts" x="90" y="132" text-anchor="middle">0</text>
+<text class="ts" x="190" y="132" text-anchor="middle">1</text>
+<text class="ts" x="290" y="132" text-anchor="middle">2</text>
+<text class="ts" x="390" y="132" text-anchor="middle">3</text>
+<text class="ts" x="490" y="132" text-anchor="middle">4</text>
+
+<g class="box-gray"><rect x="180" y="166" width="14" height="14" rx="3"/></g>
+<text class="ts" x="200" y="177">Filled slot</text>
+<g class="box-dashed"><rect x="380" y="166" width="14" height="14" rx="3"/></g>
+<text class="ts" x="400" y="177">Unused (wasted)</text>
+</svg>
+<figcaption>Same fixed-size guess, opposite mistake: this time the array never fills up.</figcaption>
+</figure>
+
+<pre><code class="language-java">String[] guests = new String[5];
+
+guests[0] = "Priya";
+guests[1] = "Tom";
+guests[2] = "Ana";
+// only 3 guests show up — guests[3] and guests[4] stay null
+
+System.out.println(guests.length); // 5 — reports the size, not the count</code></pre>
+
+<p><strong>Scenario A, continued — learning the actual size.</strong><br>
+This raises a natural question: how do you even find out how many guests actually showed up? The array's length will always tell you the same number — the declared capacity, not how many of its slots are genuinely holding a guest. If you want the real count, you have to track it yourself: typically a separate <code>int</code> variable, incremented every time a guest is added, that has to be kept perfectly in sync with the array by hand, for as long as the array is in use. The array holds the data; knowing how much of it is actually meaningful is entirely your responsibility.</p>
+
+<figure class="diagram-figure">
+<svg width="100%" viewBox="0 0 680 240" role="img">
+<title>Array length reports capacity, not how many slots are actually in use</title>
+<desc>The same size-5 array with 3 real guests and 2 unused slots. guests.length always reports 5, the declared capacity. The actual count of 3 exists nowhere in the array itself — it has to be tracked separately, by hand.</desc>
+
+<rect x="20" y="20" width="640" height="200" rx="12" fill="none" stroke="#ddd8cc" stroke-width="1"/>
+<text class="step-title" x="340" y="44" text-anchor="middle">The array only knows its capacity, never its real count</text>
+<g class="box-gray"><rect x="46" y="74" width="88" height="44" rx="8"/><text class="t" x="90" y="96" text-anchor="middle" dominant-baseline="central">Priya</text></g>
+<g class="box-gray"><rect x="146" y="74" width="88" height="44" rx="8"/><text class="t" x="190" y="96" text-anchor="middle" dominant-baseline="central">Tom</text></g>
+<g class="box-gray"><rect x="246" y="74" width="88" height="44" rx="8"/><text class="t" x="290" y="96" text-anchor="middle" dominant-baseline="central">Ana</text></g>
+<g class="box-dashed"><rect x="346" y="74" width="88" height="44" rx="8"/><text class="ts" x="390" y="96" text-anchor="middle" dominant-baseline="central">unused</text></g>
+<g class="box-dashed"><rect x="446" y="74" width="88" height="44" rx="8"/><text class="ts" x="490" y="96" text-anchor="middle" dominant-baseline="central">unused</text></g>
+<text class="ts" x="90" y="132" text-anchor="middle">0</text>
+<text class="ts" x="190" y="132" text-anchor="middle">1</text>
+<text class="ts" x="290" y="132" text-anchor="middle">2</text>
+<text class="ts" x="390" y="132" text-anchor="middle">3</text>
+<text class="ts" x="490" y="132" text-anchor="middle">4</text>
+<line x1="60" y1="150" x2="620" y2="150" stroke="#ddd8cc" stroke-width="1"/>
+<text x="340" y="176" text-anchor="middle" style="font:700 14px inherit; fill:var(--text);">guests.length → 5 (the declared capacity, always)</text>
+<text x="340" y="202" text-anchor="middle" style="font:700 14px inherit; fill:var(--accent);">actual guests seated → 3 (tracked separately, by hand)</text>
+</svg>
+<figcaption>The array reports one number, forever. The number you actually care about lives somewhere else.</figcaption>
+</figure>
+
+<pre><code class="language-java">String[] guests = new String[5];
+int guestCount = 0;
+
+guests[guestCount++] = "Priya";
+guests[guestCount++] = "Tom";
+guests[guestCount++] = "Ana";
+
+System.out.println(guests.length); // 5 — always the declared capacity
+System.out.println(guestCount);    // 3 — the real count, tracked by hand</code></pre>
+
+<p><strong>Scenario B — a club membership list, and Bob leaves.</strong><br>
+You're keeping a club membership list, sized for 5. Mike joins first, then Bob, then Alice. Bob quits the club. You want him gone. But there is no <code>remove</code> operation on an array — it doesn't exist. The nearest thing you can do is overwrite his slot with <code>null</code>, which doesn't shrink anything: the array's length is exactly the same before and after. All that's changed is what index 1 holds — it went from his name to <code>null</code>. The count of slots is exactly the same; one of them is just empty now. The array itself has no concept of "one fewer member" — only "this slot's value changed." That's the friction: <strong>no true removal, only overwrite</strong>.</p>
+
+<figure class="diagram-figure">
+<svg width="100%" viewBox="0 0 680 330" role="img">
+<title>Removing from an array is really an overwrite — the slot count never changes</title>
+<desc>Step 1: Bob is a member at index 1. Step 2: setting index 1 to null removes his name but leaves the slot in place, still counted in the array's length. The number of slots is unchanged; one is simply empty now.</desc>
+
+<rect x="20" y="20" width="640" height="128" rx="12" fill="none" stroke="#ddd8cc" stroke-width="1"/>
+<text class="step-title" x="340" y="44" text-anchor="middle">Step 1: Bob is a member, at index 1</text>
+<g class="box-gray"><rect x="46" y="74" width="88" height="44" rx="8"/><text class="t" x="90" y="96" text-anchor="middle" dominant-baseline="central">Mike</text></g>
+<g class="box-gray"><rect x="146" y="74" width="88" height="44" rx="8"/><text class="t" x="190" y="96" text-anchor="middle" dominant-baseline="central">Bob</text></g>
+<g class="box-gray"><rect x="246" y="74" width="88" height="44" rx="8"/><text class="t" x="290" y="96" text-anchor="middle" dominant-baseline="central">Alice</text></g>
+<g class="box-dashed"><rect x="346" y="74" width="88" height="44" rx="8"/><text class="ts" x="390" y="96" text-anchor="middle" dominant-baseline="central">unused</text></g>
+<g class="box-dashed"><rect x="446" y="74" width="88" height="44" rx="8"/><text class="ts" x="490" y="96" text-anchor="middle" dominant-baseline="central">unused</text></g>
+<text class="ts" x="90" y="132" text-anchor="middle">0</text>
+<text class="ts" x="190" y="132" text-anchor="middle">1</text>
+<text class="ts" x="290" y="132" text-anchor="middle">2</text>
+<text class="ts" x="390" y="132" text-anchor="middle">3</text>
+<text class="ts" x="490" y="132" text-anchor="middle">4</text>
+
+<rect x="20" y="168" width="640" height="128" rx="12" fill="none" stroke="#ddd8cc" stroke-width="1"/>
+<text class="step-title" x="340" y="192" text-anchor="middle">Step 2: members[1] = null — same 5 slots, one now empty</text>
+<g class="box-gray"><rect x="46" y="222" width="88" height="44" rx="8"/><text class="t" x="90" y="244" text-anchor="middle" dominant-baseline="central">Mike</text></g>
+<g class="box-dashed"><rect x="146" y="222" width="88" height="44" rx="8"/><text class="ts" x="190" y="244" text-anchor="middle" dominant-baseline="central">null</text></g>
+<g class="box-gray"><rect x="246" y="222" width="88" height="44" rx="8"/><text class="t" x="290" y="244" text-anchor="middle" dominant-baseline="central">Alice</text></g>
+<g class="box-dashed"><rect x="346" y="222" width="88" height="44" rx="8"/><text class="ts" x="390" y="244" text-anchor="middle" dominant-baseline="central">unused</text></g>
+<g class="box-dashed"><rect x="446" y="222" width="88" height="44" rx="8"/><text class="ts" x="490" y="244" text-anchor="middle" dominant-baseline="central">unused</text></g>
+<text class="ts" x="90" y="280" text-anchor="middle">0</text>
+<text class="ts" x="190" y="280" text-anchor="middle">1</text>
+<text class="ts" x="290" y="280" text-anchor="middle">2</text>
+<text class="ts" x="390" y="280" text-anchor="middle">3</text>
+<text class="ts" x="490" y="280" text-anchor="middle">4</text>
+
+<g class="box-gray"><rect x="220" y="306" width="14" height="14" rx="3"/></g>
+<text class="ts" x="240" y="317">Filled slot</text>
+<g class="box-dashed"><rect x="400" y="306" width="14" height="14" rx="3"/></g>
+<text class="ts" x="420" y="317">Empty / null / unused</text>
+</svg>
+<figcaption>5 slots before, 5 slots after — overwriting with null never changes the count, it only changes what one slot holds.</figcaption>
+</figure>
+
+<pre><code class="language-java">String[] members = new String[5];
+
+members[0] = "Mike";
+members[1] = "Bob";
+members[2] = "Alice";
+
+// Bob quits — there's no remove():
+members[1] = null;
+
+System.out.println(members.length); // 5, unchanged</code></pre>
+
+<p><strong>Scenario C — the same club, and every member is unique.</strong><br>
+Same setup: Mike joins first, inserted at index 0. Bob joins next, index 1. Alice joins, index 2. Now Mike tries to join <em>again</em>. The actual requirement here is simple to say out loud: <strong>you can't be a member of this club twice.</strong> The array itself has no idea what "already a member" means — it's not that the check is impossible, it's that the array doesn't do it <em>for</em> you. It will happily let a second copy of his name land at index 3, and now he occupies two different positions, as if he were two different people, because nothing about the array's contract includes enforcing "already a member." The programmer can absolutely know the rule and check for it — but that check has to be written by hand, every time, before every insertion: look through every existing slot, compare it against the new name, and only then decide whether it's allowed in. The requirement is "you can only be a member once"; the array offers no help with it at all — the entire burden of enforcing it sits on the code you write around the array, not on the array itself.</p>
+
+<pre><code class="language-java">String[] members = new String[5];
+
+members[0] = "Mike";
+members[1] = "Bob";
+members[2] = "Alice";
+
+// Mike tries to join again — the array won't stop him:
+members[3] = "Mike";  // now "Mike" sits at both index 0 and index 3
+
+// enforcing uniqueness is on you, not the array:
+boolean alreadyMember = false;
+for (String member : members) {
+    if ("Mike".equals(member)) {
+        alreadyMember = true;
+        break;
+    }
+}</code></pre>
+
+<p><strong>Scenario D — finding a member by name, not by seat.</strong><br>
+An array is perfectly happy answering questions about position: who's sitting in the first slot, whose name is in the third. That's direct and instant, because position is what the array was built to answer. But now someone asks a <em>different</em> kind of question: is Bob still an active member? That's not a question about a slot at all — it's a question about a name. With an array, you have no way to ask that directly — position is the <em>only</em> handle you have on an element, and a name isn't a position. Going from Bob's slot to his name is immediate; going the other way — from "Bob" to "which slot is he in?" — isn't something the array can do on its own. You'd have to scan through every slot yourself, comparing each one against the name you're looking for, just to answer a question that feels like it should be instant. That's the friction: <strong>the array only ever answers "who's at this position," never "at which position is this person."</strong></p>
+
+<pre><code class="language-java">String[] members = new String[5];
+members[0] = "Mike";
+members[1] = "Bob";
+members[2] = "Alice";
+
+// position -> name is instant:
+System.out.println(members[1]); // "Bob"
+
+// name -> position takes a manual scan:
+int index = -1;
+for (int i = 0; i < members.length; i++) {
+    if ("Bob".equals(members[i])) {
+        index = i;
+        break;
+    }
+}</code></pre>
+
+<p><strong>Scenario E — a new member has to go in at a specific spot (with room to spare).</strong><br>
+Say the club keeps its register in the order people joined, and for whatever reason — seniority, a numbered badge, whatever the club's rule is — a new member named Sam has to be inserted at index 2, not just tacked on at the end. The register currently holds four members, and the array was sized for 5, so index 4 is already sitting there, empty and ready.</p>
+
+<p>There is no "insert at index 2" operation on an array. To make Sam actually land at index 2 and push everyone from there onward one step back, you have to do it by hand, working from the <em>end</em> backward so you don't overwrite anything before you've copied it. It works cleanly here because the slot at the far end — index 4 — already existed. The shifting is manual, but there was always somewhere to shift <em>into</em>.</p>
+
+<figure class="diagram-figure">
+<svg width="100%" viewBox="0 0 680 490" role="img">
+<title>Inserting at a target index when the array already has room to spare</title>
+<desc>Step 1: Sam is waiting to join at index 2, and one slot is already free at index 4. Step 2: Priya and Alice each shift one slot to the right, into that free space, to open index 2. Step 3: Sam is written into the freed slot.</desc>
+<defs>
+<marker id="arrowhead-e1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#6a6a6a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+
+<rect x="20" y="20" width="640" height="148" rx="12" fill="none" stroke="#ddd8cc" stroke-width="1"/>
+<text class="step-title" x="340" y="44" text-anchor="middle">Step 1: Sam is waiting to join at index 2</text>
+<g class="box-pending"><rect x="306" y="58" width="68" height="26" rx="13"/><text class="ts" x="340" y="71" text-anchor="middle" dominant-baseline="central">Sam</text></g>
+<g class="box-gray"><rect x="96" y="94" width="88" height="44" rx="8"/><text class="t" x="140" y="116" text-anchor="middle" dominant-baseline="central">Mike</text></g>
+<g class="box-gray"><rect x="196" y="94" width="88" height="44" rx="8"/><text class="t" x="240" y="116" text-anchor="middle" dominant-baseline="central">Bob</text></g>
+<g class="box-gray"><rect x="296" y="94" width="88" height="44" rx="8"/><text class="t" x="340" y="116" text-anchor="middle" dominant-baseline="central">Alice</text></g>
+<g class="box-gray"><rect x="396" y="94" width="88" height="44" rx="8"/><text class="t" x="440" y="116" text-anchor="middle" dominant-baseline="central">Priya</text></g>
+<g class="box-dashed"><rect x="496" y="94" width="88" height="44" rx="8"/><text class="ts" x="540" y="116" text-anchor="middle" dominant-baseline="central">empty</text></g>
+<text class="ts" x="140" y="152" text-anchor="middle">0</text>
+<text class="ts" x="240" y="152" text-anchor="middle">1</text>
+<text class="ts" x="340" y="152" text-anchor="middle">2</text>
+<text class="ts" x="440" y="152" text-anchor="middle">3</text>
+<text class="ts" x="540" y="152" text-anchor="middle">4</text>
+
+<rect x="20" y="188" width="640" height="164" rx="12" fill="none" stroke="#ddd8cc" stroke-width="1"/>
+<text class="step-title" x="340" y="212" text-anchor="middle">Step 2: shift Priya and Alice into the free space</text>
+<path fill="none" stroke="#6a6a6a" stroke-width="1.5" d="M340 250 Q390 226 440 250" marker-end="url(#arrowhead-e1)"/>
+<path fill="none" stroke="#6a6a6a" stroke-width="1.5" d="M440 250 Q490 226 540 250" marker-end="url(#arrowhead-e1)"/>
+<g class="box-gray"><rect x="96" y="254" width="88" height="44" rx="8"/><text class="t" x="140" y="276" text-anchor="middle" dominant-baseline="central">Mike</text></g>
+<g class="box-gray"><rect x="196" y="254" width="88" height="44" rx="8"/><text class="t" x="240" y="276" text-anchor="middle" dominant-baseline="central">Bob</text></g>
+<g class="box-dashed"><rect x="296" y="254" width="88" height="44" rx="8"/><text class="ts" x="340" y="276" text-anchor="middle" dominant-baseline="central">target</text></g>
+<g class="box-gray"><rect x="396" y="254" width="88" height="44" rx="8"/><text class="t" x="440" y="276" text-anchor="middle" dominant-baseline="central">Alice</text></g>
+<g class="box-gray"><rect x="496" y="254" width="88" height="44" rx="8"/><text class="t" x="540" y="276" text-anchor="middle" dominant-baseline="central">Priya</text></g>
+<text class="ts" x="140" y="312" text-anchor="middle">0</text>
+<text class="ts" x="240" y="312" text-anchor="middle">1</text>
+<text class="ts" x="340" y="312" text-anchor="middle">2</text>
+<text class="ts" x="440" y="312" text-anchor="middle">3</text>
+<text class="ts" x="540" y="312" text-anchor="middle">4</text>
+
+<rect x="20" y="372" width="640" height="98" rx="12" fill="none" stroke="#ddd8cc" stroke-width="1"/>
+<text class="step-title" x="340" y="396" text-anchor="middle">Step 3: insert Sam at index 2 — done</text>
+<g class="box-gray"><rect x="96" y="426" width="88" height="44" rx="8"/><text class="t" x="140" y="448" text-anchor="middle" dominant-baseline="central">Mike</text></g>
+<g class="box-gray"><rect x="196" y="426" width="88" height="44" rx="8"/><text class="t" x="240" y="448" text-anchor="middle" dominant-baseline="central">Bob</text></g>
+<g class="box-amber"><rect x="296" y="426" width="88" height="44" rx="8"/><text class="th" x="340" y="448" text-anchor="middle" dominant-baseline="central">Sam</text></g>
+<g class="box-gray"><rect x="396" y="426" width="88" height="44" rx="8"/><text class="t" x="440" y="448" text-anchor="middle" dominant-baseline="central">Alice</text></g>
+<g class="box-gray"><rect x="496" y="426" width="88" height="44" rx="8"/><text class="t" x="540" y="448" text-anchor="middle" dominant-baseline="central">Priya</text></g>
+</svg>
+<figcaption>The shift is still manual, but there was already somewhere to shift into.</figcaption>
+</figure>
+
+<pre><code class="language-java">String[] members = new String[5];
+members[0] = "Mike";
+members[1] = "Bob";
+members[2] = "Alice";
+members[3] = "Priya";
+// index 4 is already free
+
+// shift from the end backward, then insert:
+members[4] = members[3]; // Priya -> index 4
+members[3] = members[2]; // Alice -> index 3
+members[2] = "Sam";      // Sam lands at index 2</code></pre>
+
+<p><strong>Scenario E, continued — the same story, but no space to spare.</strong><br>
+Now suppose the register had been sized exactly for however many members had joined so far, with no index 4 at all. Insert Sam at index 2 again, and the same shifting logic applies, but it hits a wall immediately: the last member can't move one slot further, because that slot doesn't exist. The whole insertion is impossible until you first build a bigger array and copy everyone into it. That's the extra step this version of the story adds: <strong>growing the array is a separate, necessary step before any shifting can happen at all</strong> — the manual shift from Scenario E only works when there's already a slot to shift into, and here, there isn't one yet.</p>
+
+<figure class="diagram-figure">
+<svg width="100%" viewBox="0 0 680 700" role="img">
+<title>Four steps to insert a new member at a target index when the array has no room to spare</title>
+<desc>Step 1: the size-4 register is full. Step 2: a new size-5 array is created and every element is copied over from the old array, leaving one empty slot. Step 3: Priya and Alice each shift one slot to the right to open index 2. Step 4: Sam is written into the freed slot.</desc>
+<defs>
+<marker id="arrowhead-e" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#6a6a6a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+
+<rect x="20" y="20" width="640" height="128" rx="12" fill="none" stroke="#ddd8cc" stroke-width="1"/>
+<text class="step-title" x="340" y="44" text-anchor="middle">Step 1: register is full — no room to insert</text>
+<g class="box-gray"><rect x="96" y="74" width="88" height="44" rx="8"/><text class="t" x="140" y="96" text-anchor="middle" dominant-baseline="central">Mike</text></g>
+<g class="box-gray"><rect x="196" y="74" width="88" height="44" rx="8"/><text class="t" x="240" y="96" text-anchor="middle" dominant-baseline="central">Bob</text></g>
+<g class="box-gray"><rect x="296" y="74" width="88" height="44" rx="8"/><text class="t" x="340" y="96" text-anchor="middle" dominant-baseline="central">Alice</text></g>
+<g class="box-gray"><rect x="396" y="74" width="88" height="44" rx="8"/><text class="t" x="440" y="96" text-anchor="middle" dominant-baseline="central">Priya</text></g>
+<text class="ts" x="140" y="132" text-anchor="middle">0</text>
+<text class="ts" x="240" y="132" text-anchor="middle">1</text>
+<text class="ts" x="340" y="132" text-anchor="middle">2</text>
+<text class="ts" x="440" y="132" text-anchor="middle">3</text>
+
+<rect x="20" y="168" width="640" height="184" rx="12" fill="none" stroke="#ddd8cc" stroke-width="1"/>
+<text class="step-title" x="340" y="192" text-anchor="middle">Step 2: grow — copy into a new, larger array</text>
+<text class="ts" x="40" y="236" text-anchor="start">Old</text>
+<g class="box-gray"><rect x="96" y="214" width="88" height="44" rx="8"/><text class="t" x="140" y="236" text-anchor="middle" dominant-baseline="central">Mike</text></g>
+<g class="box-gray"><rect x="196" y="214" width="88" height="44" rx="8"/><text class="t" x="240" y="236" text-anchor="middle" dominant-baseline="central">Bob</text></g>
+<g class="box-gray"><rect x="296" y="214" width="88" height="44" rx="8"/><text class="t" x="340" y="236" text-anchor="middle" dominant-baseline="central">Alice</text></g>
+<g class="box-gray"><rect x="396" y="214" width="88" height="44" rx="8"/><text class="t" x="440" y="236" text-anchor="middle" dominant-baseline="central">Priya</text></g>
+<line x1="140" y1="258" x2="140" y2="288" stroke="#6a6a6a" stroke-width="1.5" marker-end="url(#arrowhead-e)"/>
+<line x1="240" y1="258" x2="240" y2="288" stroke="#6a6a6a" stroke-width="1.5" marker-end="url(#arrowhead-e)"/>
+<line x1="340" y1="258" x2="340" y2="288" stroke="#6a6a6a" stroke-width="1.5" marker-end="url(#arrowhead-e)"/>
+<line x1="440" y1="258" x2="440" y2="288" stroke="#6a6a6a" stroke-width="1.5" marker-end="url(#arrowhead-e)"/>
+<text class="ts" x="40" y="310" text-anchor="start">New</text>
+<g class="box-gray"><rect x="96" y="288" width="88" height="44" rx="8"/><text class="t" x="140" y="310" text-anchor="middle" dominant-baseline="central">Mike</text></g>
+<g class="box-gray"><rect x="196" y="288" width="88" height="44" rx="8"/><text class="t" x="240" y="310" text-anchor="middle" dominant-baseline="central">Bob</text></g>
+<g class="box-gray"><rect x="296" y="288" width="88" height="44" rx="8"/><text class="t" x="340" y="310" text-anchor="middle" dominant-baseline="central">Alice</text></g>
+<g class="box-gray"><rect x="396" y="288" width="88" height="44" rx="8"/><text class="t" x="440" y="310" text-anchor="middle" dominant-baseline="central">Priya</text></g>
+<g class="box-dashed"><rect x="496" y="288" width="88" height="44" rx="8"/><text class="ts" x="540" y="310" text-anchor="middle" dominant-baseline="central">empty</text></g>
+<text class="ts" x="140" y="346" text-anchor="middle">0</text>
+<text class="ts" x="240" y="346" text-anchor="middle">1</text>
+<text class="ts" x="340" y="346" text-anchor="middle">2</text>
+<text class="ts" x="440" y="346" text-anchor="middle">3</text>
+<text class="ts" x="540" y="346" text-anchor="middle">4</text>
+
+<rect x="20" y="372" width="640" height="164" rx="12" fill="none" stroke="#ddd8cc" stroke-width="1"/>
+<text class="step-title" x="340" y="396" text-anchor="middle">Step 3: shift Priya and Alice one slot right</text>
+<path fill="none" stroke="#6a6a6a" stroke-width="1.5" d="M340 434 Q390 410 440 434" marker-end="url(#arrowhead-e)"/>
+<path fill="none" stroke="#6a6a6a" stroke-width="1.5" d="M440 434 Q490 410 540 434" marker-end="url(#arrowhead-e)"/>
+<g class="box-gray"><rect x="96" y="438" width="88" height="44" rx="8"/><text class="t" x="140" y="460" text-anchor="middle" dominant-baseline="central">Mike</text></g>
+<g class="box-gray"><rect x="196" y="438" width="88" height="44" rx="8"/><text class="t" x="240" y="460" text-anchor="middle" dominant-baseline="central">Bob</text></g>
+<g class="box-dashed"><rect x="296" y="438" width="88" height="44" rx="8"/><text class="ts" x="340" y="460" text-anchor="middle" dominant-baseline="central">target</text></g>
+<g class="box-gray"><rect x="396" y="438" width="88" height="44" rx="8"/><text class="t" x="440" y="460" text-anchor="middle" dominant-baseline="central">Alice</text></g>
+<g class="box-gray"><rect x="496" y="438" width="88" height="44" rx="8"/><text class="t" x="540" y="460" text-anchor="middle" dominant-baseline="central">Priya</text></g>
+<text class="ts" x="140" y="496" text-anchor="middle">0</text>
+<text class="ts" x="240" y="496" text-anchor="middle">1</text>
+<text class="ts" x="340" y="496" text-anchor="middle">2</text>
+<text class="ts" x="440" y="496" text-anchor="middle">3</text>
+<text class="ts" x="540" y="496" text-anchor="middle">4</text>
+
+<rect x="20" y="556" width="640" height="128" rx="12" fill="none" stroke="#ddd8cc" stroke-width="1"/>
+<text class="step-title" x="340" y="580" text-anchor="middle">Step 4: insert Sam at index 2 — done</text>
+<g class="box-gray"><rect x="96" y="610" width="88" height="44" rx="8"/><text class="t" x="140" y="632" text-anchor="middle" dominant-baseline="central">Mike</text></g>
+<g class="box-gray"><rect x="196" y="610" width="88" height="44" rx="8"/><text class="t" x="240" y="632" text-anchor="middle" dominant-baseline="central">Bob</text></g>
+<g class="box-amber"><rect x="296" y="610" width="88" height="44" rx="8"/><text class="th" x="340" y="632" text-anchor="middle" dominant-baseline="central">Sam</text></g>
+<g class="box-gray"><rect x="396" y="610" width="88" height="44" rx="8"/><text class="t" x="440" y="632" text-anchor="middle" dominant-baseline="central">Alice</text></g>
+<g class="box-gray"><rect x="496" y="610" width="88" height="44" rx="8"/><text class="t" x="540" y="632" text-anchor="middle" dominant-baseline="central">Priya</text></g>
+<text class="ts" x="140" y="668" text-anchor="middle">0</text>
+<text class="ts" x="240" y="668" text-anchor="middle">1</text>
+<text class="ts" x="340" y="668" text-anchor="middle">2</text>
+<text class="ts" x="440" y="668" text-anchor="middle">3</text>
+<text class="ts" x="540" y="668" text-anchor="middle">4</text>
+
+<g class="box-gray"><rect x="180" y="684" width="14" height="14" rx="3"/></g>
+<text class="ts" x="200" y="695">Existing member</text>
+<g class="box-amber"><rect x="360" y="684" width="14" height="14" rx="3"/></g>
+<text class="ts" x="380" y="695">Newly inserted</text>
+</svg>
+<figcaption>Growing the array and shifting elements are two separate steps, both required before Sam can land at index 2.</figcaption>
+</figure>
+
+<pre><code class="language-java">String[] members = new String[4];
+members[0] = "Mike";
+members[1] = "Bob";
+members[2] = "Alice";
+members[3] = "Priya";
+// full — no room to insert Sam at index 2
+
+// grow into a new, larger array first:
+String[] bigger = new String[5];
+System.arraycopy(members, 0, bigger, 0, members.length);
+members = bigger;
+
+// now shift from the end backward, then insert:
+members[4] = members[3]; // Priya -> index 4
+members[3] = members[2]; // Alice -> index 3
+members[2] = "Sam";      // Sam lands at index 2</code></pre>
+
+<p>Five different stories, five genuinely different gaps — resizing, gap-closing, uniqueness, keyed lookup, insertion at a target position. None of them are the same problem in different clothes.</p>
+    </section>
+
+    <!-- §18.2 -->
+    <section id="s18-2">
+      <div class="section-head">
+        <span class="sec-num">§18.2</span>
+        <h2>The Big Picture <em>— requirement axes and natural families</em></h2>
+      </div>
+
+<h3>Generalizing the pain into requirement axes</h3>
+
+<p>Each scenario above was really asking a <em>question</em> about the domain — not about Java. If you strip the Java away entirely, any problem involving "a group of things" forces you to answer some subset of these questions, regardless of what language you're in:</p>
+
+<ul>
+  <li><strong>Does order matter, or only membership?</strong> A shopping cart cares about order (you scroll through items top to bottom); a set of unique tags on a blog post usually doesn't.</li>
+  <li><strong>Are duplicates meaningful, or should they collapse?</strong> A list of exam scores keeps every duplicate (two students can both score 87); a collection of "unique visitor IDs today" should never have the same ID twice.</li>
+  <li><strong>Do you need positional access, or only iteration?</strong> "Give me the 3rd element" is a different requirement from "let me walk through all of them, I don't care in what order I get access."</li>
+  <li><strong>Do you need to associate a value with a key, rather than a position?</strong> "Get me the student with ID 4471" is fundamentally different from "get me the element at index 4471" — one is content-addressed, the other is position-addressed.</li>
+  <li><strong>Do you need automatic ordering — sorted, or insertion-order — or no ordering guarantee at all?</strong> Sometimes you want elements to come back out in the order you put them in; sometimes you want them always sorted; sometimes you genuinely don't care, and that indifference is itself useful information because it lets an implementation optimize for something else instead.</li>
+  <li><strong>What operation dominates?</strong> Insert/remove at the ends? Insert/remove in the middle? Random access by position? Containment checks? This is the question that ultimately decides which performance tradeoffs are acceptable, because no single data structure is fastest at everything simultaneously.</li>
+</ul>
+
+<p>None of these questions mention Java. They're domain questions — the same ones a designer in any language, or even someone designing a physical filing system, has to answer. That's the ground worth standing on <em>before</em> looking at any API: <strong>every collection type is really just a settled answer to a particular combination of these questions.</strong></p>
+
+<h3>The axes cluster into natural families</h3>
+
+<p>Here's the payoff for having done that groundwork: once you have the axes, the standard collection categories aren't a list to memorize — they fall out as natural clusters of answers.</p>
+
+<ul>
+  <li><strong>Care about order, allow duplicates, want positional access</strong> → this is a <strong>List</strong>. It's the closest conceptual descendant of an array: still ordered and index-addressable, but now with insertion, removal, and automatic resizing handled for you.</li>
+  <li><strong>Care about uniqueness, don't care about position</strong> → this is a <strong>Set</strong>. It answers scenario C directly: Mike can't join the club twice, because the collection itself rejects him the second time — "you can only be a member once" stops being something you enforce by hand on every insertion.</li>
+  <li><strong>Care about <em>processing</em> order — first-in-first-out, or last-in-first-out — rather than positional access</strong> → this is a <strong>Queue</strong> or <strong>Deque</strong>. You're not asking "give me element 4," you're asking "give me the next one to process."</li>
+  <li><strong>Care about lookup by key rather than by position or identity</strong> → this is a <strong>Map</strong>. It answers scenario D: you ask for <code>"Bob"</code> and get back whether he's a member directly — content-addressed retrieval, keyed rather than indexed.</li>
+</ul>
+
+<p>One important precision point here: a <strong>Map is not a Collection</strong>, in the strict Java type-hierarchy sense — it doesn't extend the <code>Collection</code> interface at all, because holding key–value pairs is a different contract from holding a simple group of elements. It's conceptually part of the same <em>family</em> — the same "answer one of these domain questions" exercise — but the type hierarchy keeps it structurally separate. Worth being precise about that distinction now, so it doesn't need correcting later.</p>
+
+<h3>The Java Collections Framework as a systematic answer</h3>
+
+<p>With that groundwork in place, the Java Collections Framework (JCF) itself needs surprisingly little introduction — you can now name what it <em>is</em> rather than list what it <em>contains</em>:</p>
+
+<blockquote>The JCF is an interface hierarchy that codifies these behavioral contracts, paired with a set of implementations that satisfy each contract using different internal data structures, each with its own performance tradeoffs.</blockquote>
+
+<p>That's a familiar shape if you think back to OO design generally: separating <em>what</em> something does (the interface — the contract) from <em>how</em> it does it (the implementation — the internal data structure). <code>List</code> is a contract: ordered, duplicates allowed, positional access. <code>ArrayList</code> and <code>LinkedList</code> are two different implementations of that same contract, making different tradeoffs — one is backed by a resizable array (fast random access, slower middle insertion), the other by a doubly linked list (fast insertion/removal at known positions, slower random access). Same contract, different internal machinery, different performance profile.</p>
+
+<p>That "contract vs. implementation" separation is the single most important architectural idea in this whole framework — everything else is detail layered on top of it.</p>
+
+<h3>Why this design pays off</h3>
+
+<p>One brief, practical point worth previewing here, even though the full picture comes later: because algorithms and APIs are typically written against the <em>interface</em> rather than a specific implementation, code you write against <code>List&lt;Student&gt;</code> works unchanged whether the underlying object is an <code>ArrayList</code> or a <code>LinkedList</code>. <code>Collections.sort(someList)</code> doesn't care which one it received. This is precisely why "which collection should I use here?" is really shorthand for "which of the requirement axes above dominates in this particular case?" — and that question is exactly what the rest of this chapter answers, implementation by implementation.</p>
+
+    <p>Those four intentions — order, processing order, membership, pairing — map onto three interfaces branching directly from <code>Collection</code>, plus <code>Map</code> sitting apart from it entirely:</p>
+
+    <figure class="diagram-figure">
+      <div class="tree-legend">
+        <span class="tnode iface">Interface</span>
+        <span class="tnode cls">Class</span>
+      </div>
+      <ul class="hierarchy-tree">
+        <li><span class="tnode iface">Iterable</span>
+          <ul>
+            <li><span class="tnode iface">Collection&lt;E&gt;</span>
+              <ul>
+                <li><span class="tnode iface">Set</span>
+                  <ul>
+                    <li><span class="tnode cls">HashSet</span></li>
+                    <li><span class="tnode iface">SequencedSet</span>
+                      <ul>
+                        <li><span class="tnode cls">LinkedHashSet</span></li>
+                        <li><span class="tnode iface">SortedSet</span>
+                          <ul>
+                            <li><span class="tnode iface">NavigableSet</span>
+                              <ul>
+                                <li><span class="tnode cls">TreeSet</span></li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><span class="tnode iface">SequencedCollection</span>
+                  <ul>
+                    <li><span class="tnode iface">List</span>
+                      <ul>
+                        <li><span class="tnode cls">Vector</span></li>
+                        <li><span class="tnode cls">ArrayList</span></li>
+                        <li><span class="tnode cls">LinkedList</span></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><span class="tnode iface">Queue</span>
+                  <ul>
+                    <li><span class="tnode iface">Deque</span>
+                      <ul>
+                        <li><span class="tnode cls">ArrayDeque</span></li>
+                      </ul>
+                    </li>
+                    <li><span class="tnode iface">BlockingQueue</span>
+                      <ul>
+                        <li><span class="tnode cls">ArrayBlockingQueue</span></li>
+                        <li><span class="tnode cls">LinkedBlockingQueue</span></li>
+                      </ul>
+                    </li>
+                    <li><span class="tnode cls">PriorityQueue</span></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <span class="tnode-note">† <code>Deque</code> also extends <code>SequencedCollection</code> directly (§18.4) — shown once here to keep the tree simple. <code>LinkedList</code> implements <code>Deque</code> too, alongside <code>List</code>.</span>
+      <figcaption>The <code>Collection</code> hierarchy — interfaces (outlined) above their concrete implementations (filled)</figcaption>
+    </figure>
+
+    <p>Everything in the rest of this chapter is one of these three intentions, or a refinement of one.</p>
+    </section>
+
+    <!-- §18.3 -->
+    <section id="s18-3">
+      <div class="section-head">
+        <span class="sec-num">§18.3</span>
+        <h2><code>List</code> <em>— positional order, open access</em></h2>
+      </div>
+
+    <p>Every element in a <code>List</code> has an index, just like an array (§7) — <code>0</code>, <code>1</code>, <code>2</code>, ... — and that index is what defines a <code>List</code>'s order. Think of a row of numbered mailboxes: any box is reachable directly, by its number, with no need to check the boxes in front of it first.</p>
+
+    <pre><code class="language-java">list.get(0); // first box
+list.get(4); // fifth box — directly, no traversal</code></pre>
+
+    <p>Duplicates are allowed, because nothing about having an index cares whether two elements happen to be equal — two different positions can hold identical values without conflict, the same way two mailboxes could both contain the same letter.</p>
+
+    <h3>Concrete Implementations</h3>
+
+    <p>Three classes implement <code>List</code>, and the choice between the two modern ones comes down entirely to what each is actually built from underneath:</p>
+
+    <table class="content-table">
+      <tr>
+        <th>Class</th>
+        <th>Built on</th>
+        <th>Fast at</th>
+        <th>Slow at</th>
+      </tr>
+      <tr>
+        <td><code>ArrayList</code></td>
+        <td>a resizable array</td>
+        <td>reading any index directly — <code>get(i)</code> — and adding or removing at the <em>end</em></td>
+        <td>inserting or removing anywhere else — everything after has to shift</td>
+      </tr>
+      <tr>
+        <td><code>LinkedList</code></td>
+        <td>a doubly-linked chain of nodes</td>
+        <td>inserting or removing at either end</td>
+        <td>reading an arbitrary index — has to walk the chain from one end</td>
+      </tr>
+      <tr>
+        <td><code>Vector</code></td>
+        <td>a resizable array, like <code>ArrayList</code></td>
+        <td>—</td>
+        <td>everything, due to synchronization overhead most programs never need — legacy; §18.4 covers why</td>
+      </tr>
+    </table>
+
+    <p>Adding at the end is fast for a subtler reason than reading is: the backing array usually has spare room already, so appending is just writing into the next empty slot — no shifting needed. Occasionally that spare room runs out, and <code>ArrayList</code> has to allocate a bigger array and copy everything into it, an expensive step — but that only happens occasionally, and averaged out over many additions, appending still works out to fast, constant-time behavior overall (what's usually called <em>amortized</em> O(1)). Inserting or removing anywhere else has no such shortcut: every element after the change has to shift, every single time, without exception.</p>
+
+    <figure class="diagram-figure">
+      <div class="array-stage">
+        <div class="array-stage-code">fruits.add("apple");</div>
+        <div class="array-row">
+          <div class="array-cell new-cell"><div class="idx">0</div><div class="val">apple</div></div>
+        </div>
+      </div>
+      <div class="array-stage">
+        <div class="array-stage-code">fruits.add("banana"); // appends at the end</div>
+        <div class="array-row">
+          <div class="array-cell"><div class="idx">0</div><div class="val">apple</div></div>
+          <div class="array-cell new-cell"><div class="idx">1</div><div class="val">banana</div></div>
+        </div>
+      </div>
+      <div class="array-stage">
+        <div class="array-stage-code">fruits.add("cherry"); // appends at the end</div>
+        <div class="array-row">
+          <div class="array-cell"><div class="idx">0</div><div class="val">apple</div></div>
+          <div class="array-cell"><div class="idx">1</div><div class="val">banana</div></div>
+          <div class="array-cell new-cell"><div class="idx">2</div><div class="val">cherry</div></div>
+        </div>
+        <p class="array-caption">Three appends so far — each one just writes into the next empty slot. Nothing before it ever moves.</p>
+      </div>
+      <div class="array-stage">
+        <div class="array-stage-code">fruits.add(1, "kiwi"); // inserts in the middle</div>
+        <div class="array-row">
+          <div class="array-cell"><div class="idx">0</div><div class="val">apple</div></div>
+          <div class="array-cell new-cell"><div class="idx">1</div><div class="val">kiwi</div></div>
+          <div class="array-cell shifted-cell"><div class="idx">2</div><div class="val">banana</div></div>
+          <div class="array-cell shifted-cell"><div class="idx">3</div><div class="val">cherry</div></div>
+        </div>
+        <p class="array-caption">This time, <code>banana</code> and <code>cherry</code> both shift one position to the right to make room at index 1 — every element after the insertion point moves, every time, unlike any of the three appends above.</p>
+      </div>
+      <figcaption>Building a <code>List</code> step by step — appending at the end vs. inserting in the middle</figcaption>
+    </figure>
+
+    <p>Every <code>List</code>, regardless of which class backs it, shares the same basic vocabulary:</p>
+
+    <pre><code class="language-java">List&lt;String&gt; fruits = new ArrayList&lt;&gt;();
+
+fruits.add("apple");
+fruits.add("banana");
+fruits.add("cherry");
+
+fruits.get(1);              // "banana" — read by index
+fruits.set(1, "blueberry"); // replaces "banana" at index 1
+fruits.add(1, "kiwi");      // inserts at index 1, shifting "blueberry" and "cherry" right
+
+fruits.contains("kiwi");    // true
+fruits.indexOf("kiwi");     // 1
+fruits.size();              // 4
+
+fruits.remove(0);           // removes by index — "apple" is gone
+fruits.remove("cherry");    // removes by value — a different, overloaded method
+
+for (String fruit : fruits) {
+    System.out.println(fruit);
+}</code></pre>
+
+    <div class="callout callout-rule">
+      <div class="callout-lbl">A real gotcha with <code>List&lt;Integer&gt;</code></div>
+      <p><code>remove(int)</code> and <code>remove(Object)</code> are two different, overloaded methods (§15.3) — one removes by index, the other by value. For a <code>List&lt;String&gt;</code> there's no ambiguity, since a <code>String</code> can never match the <code>int</code> overload:</p>
+
+      <pre><code class="language-java">List&lt;String&gt; fruits = new ArrayList&lt;&gt;(List.of("apple", "banana", "cherry"));
+fruits.remove("banana"); // only remove(Object) could ever match — unambiguous
+System.out.println(fruits); // [apple, cherry]</code></pre>
+
+      <p>For a <code>List&lt;Integer&gt;</code>, it's a genuine trap — both overloads are now callable, and Java always prefers the more specific one, <code>int</code>, whenever the argument fits:</p>
+
+      <pre><code class="language-java">List&lt;Integer&gt; numbers = new ArrayList&lt;&gt;(List.of(10, 20, 30));
+numbers.remove(1);           // calls remove(int) — removes the element AT index 1
+System.out.println(numbers); // [10, 30] — 20 is gone, not "1"
+
+numbers.remove(Integer.valueOf(1)); // forces remove(Object) — removes the value 1, if present
+System.out.println(numbers);        // [10, 30] — unchanged, since 1 was never in the list</code></pre>
+
+      <p><code>numbers.remove(1)</code> never removes the value <code>1</code> — it removes whatever sits at index 1, every time, because <code>int</code> is the more specific overload and Java always picks it when the argument is a plain <code>int</code>. Removing the integer value specifically requires forcing the other overload with <code>Integer.valueOf(1)</code>, wrapping it so it can no longer match <code>remove(int)</code>.</p>
+    </div>
+    </section>
+
+    <!-- §18.4 -->
+    <section id="s18-4">
+      <div class="section-head">
+        <span class="sec-num">§18.4</span>
+        <h2><code>Queue</code> <em>— order, not position</em></h2>
+      </div>
+
+    <p>A <code>Queue</code> asks a completely different question than a <code>List</code> does. It isn't "can I reach the third element" — it's "what's next." A queue is a collection that holds items temporarily and releases them in an order determined by a policy, built around three concerns: how items <strong>enter</strong> (which end, and whether the queue reorders on insert), how they <strong>wait</strong>, and how they <strong>leave</strong> (who gets out next, and under what condition).</p>
+
+    <p>Reduced to what a caller actually does with one, a <code>Queue</code> offers exactly two kinds of operation: submit work (<code>add</code>, <code>offer</code>) and request the next item (<code>remove</code>, <code>poll</code>). What "next" actually means is answered differently by different implementations:</p>
+
+    <table class="content-table">
+      <tr>
+        <th>Structure</th>
+        <th>What does "next" mean?</th>
+      </tr>
+      <tr>
+        <td>FIFO queue</td>
+        <td>The first item added</td>
+      </tr>
+      <tr>
+        <td>Stack (LIFO)</td>
+        <td>The last item added</td>
+      </tr>
+      <tr>
+        <td>Priority queue</td>
+        <td>The highest- (or lowest-) priority item present, by a supplied comparator or natural ordering — insertion order plays no role at all</td>
+      </tr>
+    </table>
+
+    <h3>FIFO and LIFO as Abstract Data Types</h3>
+
+    <p><span class="term">FIFO</span> (first in, first out) and <span class="term">LIFO</span> (last in, first out) are abstract concepts — pure access discipline, with no implementation detail attached. They're mathematical abstractions: nothing about either one says anything about arrays, linked lists, or any concrete structure at all.</p>
+
+    <p>In computer science theory, <em>queue</em> and <em>stack</em> are <span class="term">abstract data types</span> (ADTs): a name, a set of operations, and a contract. An ADT defines <em>what</em> operations are available and <em>what</em> behavior is guaranteed — never <em>how</em>. Nothing about gates, ends, heads, or tails; that's an implementation concern, entirely separate from the contract itself.</p>
+
+    <table class="content-table">
+      <tr>
+        <th>ADT</th>
+        <th>Discipline</th>
+        <th>Operations</th>
+      </tr>
+      <tr>
+        <td>stack</td>
+        <td>LIFO — strictly</td>
+        <td><code>push</code>, <code>pop</code>, <code>peek</code></td>
+      </tr>
+      <tr>
+        <td>queue</td>
+        <td>FIFO — strictly</td>
+        <td><code>enqueue</code>, <code>dequeue</code>, <code>peek</code></td>
+      </tr>
+    </table>
+
+    <p>"Strictly" is doing real work in that table: the theoretical stack and queue never allow anything except their one discipline. Java's actual types, as the next table shows, are considerably looser.</p>
+
+    <h3>Where Java Falls Short of the Theory</h3>
+
+    <p>Java's named types don't always enforce the discipline their name promises:</p>
+
+    <table class="content-table">
+      <tr>
+        <th>Java type</th>
+        <th>Extends</th>
+        <th>Enforces its discipline?</th>
+      </tr>
+      <tr>
+        <td><code>Stack</code></td>
+        <td><code>Vector</code></td>
+        <td>No — index methods leak through</td>
+      </tr>
+      <tr>
+        <td><code>Queue</code></td>
+        <td><code>Collection</code></td>
+        <td>No — FIFO isn't guaranteed (<code>PriorityQueue</code> is a counterexample)</td>
+      </tr>
+      <tr>
+        <td><code>PriorityQueue</code></td>
+        <td><code>Queue</code></td>
+        <td>No — not FIFO, despite being a <code>Queue</code></td>
+      </tr>
+    </table>
+
+    <p>The <code>Queue</code> row needs unpacking, because the mismatch there is easy to miss. In CS theory, "queue" on its own always means FIFO — that's not a convention, it's the definition. A priority queue is a genuinely <em>different</em> abstract data type: its defining operations are "insert" and "give me the best one," not "insert" and "give me the oldest one." Theory keeps these as two separate, unrelated ideas that simply happen to share a word in their name.</p>
+
+    <p>Java doesn't keep them separate. <code>Queue</code> in Java is one interface covering both disciplines at once, and <code>PriorityQueue</code> is a full, legitimate implementer of it. That means a variable declared as <code>Queue&lt;E&gt;</code> gives no guarantee at all about which discipline is underneath — FIFO, or priority-based — despite "queue" in theory always meaning the former.</p>
+
+    <p><code>Stack</code> is the clearest case of the other kind of mismatch. It was introduced in Java's very first version, and it <code>extends Vector</code> — a synchronized, resizable array, exactly like <code>ArrayList</code>. §11.3 already established what <code>extends</code> actually means: a subclass inherits <em>every</em> public method its superclass has, not just the ones that happen to fit. <code>Stack</code> inherits all of <code>Vector</code>'s index-based methods along with it, which means the discipline "only ever touch the top" is not enforced at all — anyone holding a <code>Stack</code> can reach into the middle:</p>
+
+    <pre><code class="language-java">Stack&lt;Integer&gt; stack = new Stack&lt;&gt;();
+stack.push(1);
+stack.push(2);
+
+stack.add(0, 99); // legal — Stack IS-A Vector, and Vector allows this
+stack.get(1);      // legal — direct access to any index
+stack.remove(0);   // legal — remove from any index, not just the top</code></pre>
+
+    <p><code>Stack</code>'s name makes a semantic claim — "I enforce LIFO discipline" — that its own <code>extends</code> clause breaks. This is a real, permanent design mistake, not a subtle edge case: reusing <code>Vector</code>'s storage through inheritance (§11.3) came bundled with reusing <em>all</em> of its behavior, whether that behavior fit the abstraction being built or not.</p>
+
+    <div class="callout callout-rule">
+      <div class="callout-lbl">A lesson already available from §14 and §15</div>
+      <p><code>Stack</code>'s mistake was reaching for <code>extends</code> — an <em>is-a</em> claim (§11.1) — to reuse <code>Vector</code>'s storage, when what it actually needed was to expose only the methods that belong to "stack," and hide the rest. An interface (§15.3) does exactly that: it names a capability without dragging along an unrelated implementation's full public surface. The next part shows the type Java eventually introduced to fix this properly.</p>
+    </div>
+
+    <h3><code>Deque</code> — Symmetric Access, Both Ends</h3>
+
+    <p>A <code>Queue</code> gives <em>asymmetric</em> access: insert at the tail, inspect and remove at the head. A <code>Deque</code> ("deck," double-ended queue) gives <em>symmetric</em> access instead — two independent ends, each supporting both insertion and removal:</p>
+
+    <ul>
+      <li><code>addFirst</code> / <code>removeFirst</code> at the head</li>
+      <li><code>addLast</code> / <code>removeLast</code> at the tail</li>
+    </ul>
+
+    <p><code>Deque&lt;E&gt;</code> extends both <code>Queue&lt;E&gt;</code> and <code>SequencedCollection&lt;E&gt;</code> — an interface extending more than one other interface at once, exactly as §15.11 already covered. A <code>Deque</code> <em>is-a</em> <code>Queue</code>, and can do everything a <code>Queue</code> does, but it's a strictly more general structure sitting on top.</p>
+
+    <p>That generality means a <code>Deque</code> can serve either role the earlier table described. As a FIFO queue, the idiomatic route is simply <code>Queue</code>'s own inherited methods:</p>
+
+    <pre><code class="language-java">Deque&lt;Integer&gt; queue = new ArrayDeque&lt;&gt;();
+queue.add(1);     // enters at the tail
+queue.add(2);
+queue.remove();   // 1 — leaves from the head, FIFO</code></pre>
+
+    <p>As a LIFO stack, <code>push</code>/<code>pop</code> treat the head as the "top":</p>
+
+    <pre><code class="language-java">Deque&lt;Integer&gt; stack = new ArrayDeque&lt;&gt;();
+stack.push(1); // addFirst()
+stack.push(2);
+
+stack.pop();   // 2 — removeFirst(), LIFO
+stack.peek();  // 1</code></pre>
+
+    <p>The exact same discipline works equally well from the tail instead, using <code>Deque</code>'s own two-ended vocabulary directly:</p>
+
+    <pre><code class="language-java">stack.offerLast(1);
+stack.offerLast(2);
+
+stack.pollLast(); // 2 — LIFO, from the tail this time
+stack.peekLast(); // 1</code></pre>
+
+    <div class="callout callout-rule">
+      <div class="callout-lbl">Discipline enforced by usage, not by the type</div>
+      <p><code>Deque</code> never claims to be a stack or a queue specifically — it offers both vocabularies side by side, honestly, as a general double-ended structure. Which discipline actually holds in a given piece of code depends entirely on which methods the caller chooses to use, consistently. This is precisely what fixes <code>Stack</code>'s problem, described earlier: nothing is hidden through an inheritance trick that silently leaks unrelated methods; the caller's own consistent method choice <em>is</em> the discipline.</p>
+    </div>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Concrete implementations</div>
+      <p><code>ArrayDeque</code> and <code>LinkedList</code> both implement <code>Deque</code>. <code>PriorityQueue</code> is a <code>Queue</code>, but notably not a <code>Deque</code> — its ordering is entirely priority-driven, and a structure that reorders on insert has no fixed "other end" to expose.</p>
+    </div>
+    </section>
+
+    <!-- §18.5 -->
+    <section id="s18-8">
+      <div class="section-head">
+        <span class="sec-num">§18.5</span>
+        <h2><code>Set</code> <em>— membership, not position</em></h2>
+      </div>
+
+    <p>A <code>Set</code> contains no duplicate elements — formally, no pair of elements <code>e1</code> and <code>e2</code> such that <code>e1.equals(e2)</code>, and at most one <code>null</code>. It models the mathematical <em>set</em> abstraction directly, and it answers a question neither <code>List</code> nor <code>Queue</code> is built around: <strong>"is this present?"</strong>, answered quickly, without checking every element in turn. Positional access, the whole point of a <code>List</code> (§18.3), simply isn't part of that promise — not forbidden, just never guaranteed, regardless of what a particular <code>Set</code> implementation happens to do internally.</p>
+
+    <div class="callout callout-rule">
+      <div class="callout-lbl">Mutating an object already inside a Set</div>
+      <p>A <code>Set</code> relies on <code>hashCode</code> and <code>equals</code> to manage uniqueness — §17.1 already showed one way this goes wrong, when a class overrides <code>equals</code> without a matching <code>hashCode</code>. There's a second, subtler hazard even when both are written correctly: an object's hash bucket is computed once, at the moment it's inserted. If a field that <code>hashCode</code> or <code>equals</code> depends on changes <em>afterward</em>, the object doesn't move to match — it silently becomes unfindable through <code>contains(...)</code>, while still physically sitting in the <code>Set</code>. §13 already gave one reason immutability matters — safe sharing (§13.5) — and this is a second, very concrete one: a <code>Set</code>'s correctness depends on its elements never changing in any way that affects <code>equals</code> or <code>hashCode</code> after insertion.</p>
+    </div>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Concrete implementations</div>
+      <p><code>HashSet</code>, <code>LinkedHashSet</code>, and <code>TreeSet</code> all implement <code>Set</code> — no order guarantee, insertion order, and sorted order, respectively.</p>
+    </div>
+    </section>
+
+    <!-- §18.6 -->
+    <section id="s18-9">
+      <div class="section-head">
+        <span class="sec-num">§18.6</span>
+        <h2><code>Map</code> <em>— key-value pairs, outside the Collection family</em></h2>
+      </div>
+
+    <p>A <code>Map&lt;K,V&gt;</code> is an object that maps keys to values — no duplicate keys allowed; each key maps to at most one value. It takes <em>two</em> type parameters (§16.2), not one, because it isn't holding single elements at all — it's holding pairs.</p>
+
+    <p>That difference in shape is exactly why <code>Map&lt;K,V&gt;</code> does <strong>not</strong> extend <code>Collection&lt;E&gt;</code> — a fact worth stating plainly, since it's easy to assume otherwise. <code>Map</code> is still considered part of the Java Collections Framework, just not a <code>Collection</code> itself. What it offers instead are three <span class="term">collection views</span>, each one handing back a genuine <code>Collection</code>-shaped piece of the map's contents:</p>
+
+    <figure class="diagram-figure">
+      <div class="tree-legend">
+        <span class="tnode iface">Interface</span>
+        <span class="tnode cls">Class</span>
+      </div>
+      <ul class="hierarchy-tree">
+        <li><span class="tnode iface">Map&lt;K,V&gt;</span>
+          <ul>
+            <li><span class="tnode cls">Hashtable</span></li>
+            <li><span class="tnode cls">HashMap</span></li>
+            <li><span class="tnode iface">SequencedMap</span>
+              <ul>
+                <li><span class="tnode cls">LinkedHashMap</span></li>
+                <li><span class="tnode iface">SortedMap</span>
+                  <ul>
+                    <li><span class="tnode iface">NavigableMap</span>
+                      <ul>
+                        <li><span class="tnode cls">TreeMap</span></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <figcaption>The <code>Map</code> hierarchy — separate from <code>Collection</code>, but still part of the framework</figcaption>
+    </figure>
+
+    <ul>
+      <li><code>keySet()</code> — a <code>Set</code> of keys (no duplicates possible, matching §18.5 exactly);</li>
+      <li><code>values()</code> — a plain <code>Collection</code> of values (duplicates allowed — two different keys can map to the same value); and</li>
+      <li><code>entrySet()</code> — a <code>Set</code> of key-value pairs.</li>
+    </ul>
+
+    <p>The order a map's views iterate in depends entirely on the implementation, mirroring §18.5's own <code>Set</code> trio exactly: <code>HashMap</code> makes no order guarantee, <code>LinkedHashMap</code> preserves insertion order, and <code>TreeMap</code> guarantees sorted order.</p>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Scope of this chapter</div>
+      <p>Concurrent collections (<code>BlockingQueue</code> and its relatives), the <code>Collections</code> utility class, writing custom <code>Comparator</code>s for sorted order, and the rules around modifying a collection while iterating over it are all left for later. The core shape carries over unchanged: every collection in this framework picks one discipline — ordered, unique, or "whatever's next" — and every type's name is a claim about which one, a claim §18.4 already showed isn't always kept.</p>
+    </div>
+    </section>
+
+  </article>
+
+  <nav class="page-nav" aria-label="Chapter navigation">
+    <a href="records.html" class="page-nav-prev">
+      <span class="page-nav-label">← Previous</span>
+      <span class="page-nav-title">§17 — Records</span>
+    </a>
+    <div class="page-nav-spacer"></div>
+  </nav>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  hljs.highlightAll();
+
+  // Flag error-annotation comments in code blocks
+  document.querySelectorAll('.hljs-comment').forEach(el => {
+    if (/\b(compile|compiler|runtime) error\b/i.test(el.textContent)) {
+      el.classList.add('hljs-comment-error');
+    }
+  });
+
+  // Code theme toggle
+  const codeThemeBtn = document.getElementById('code-theme-toggle');
+  const lightTheme = document.getElementById('hljs-light-theme');
+  const darkTheme = document.getElementById('hljs-dark-theme');
+  const themeLabel = codeThemeBtn.querySelector('.code-theme-label');
+  const themeIcon = codeThemeBtn.querySelector('.icon');
+
+  function applyCodeTheme(theme) {
+    const dark = theme === 'dark';
+    lightTheme.disabled = dark;
+    darkTheme.disabled = !dark;
+    document.documentElement.classList.toggle('code-dark', dark);
+    themeLabel.textContent = dark ? 'Light code' : 'Dark code';
+    themeIcon.textContent = dark ? '☀️' : '🌙';
+  }
+
+  applyCodeTheme(localStorage.getItem('code-theme') || 'light');
+
+  codeThemeBtn.addEventListener('click', () => {
+    const next = darkTheme.disabled ? 'dark' : 'light';
+    localStorage.setItem('code-theme', next);
+    applyCodeTheme(next);
+  });
+
+  // Scroll spy for sub-sections
+  const sections = document.querySelectorAll('section[id]');
+  const subLinks = document.querySelectorAll('.sub-nav a[href^="#"]');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = '#' + entry.target.id;
+        subLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+      }
+    });
+  }, { rootMargin: '-8% 0px -78% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+
+  const btn  = document.getElementById('menu-btn');
+  const side = document.getElementById('sidebar');
+  btn.addEventListener('click', () => side.classList.toggle('open'));
+  document.querySelectorAll('#sidebar a').forEach(a => {
+    a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
+  });
+});
+</script>
+</body>
+</html>

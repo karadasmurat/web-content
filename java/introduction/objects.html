@@ -5,7 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>§4 Objects — OO with Java</title>
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" id="hljs-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" id="hljs-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
+<script>
+(function () {
+  if ((localStorage.getItem('code-theme') || 'light') === 'dark') {
+    document.getElementById('hljs-light-theme').disabled = true;
+    document.getElementById('hljs-dark-theme').disabled = false;
+    document.documentElement.classList.add('code-dark');
+  }
+})();
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
 </head>
@@ -13,6 +23,10 @@
 
 <button id="menu-btn" aria-label="Toggle navigation">
   <span></span><span></span><span></span>
+</button>
+
+<button id="code-theme-toggle" class="code-theme-toggle" aria-label="Toggle code color scheme">
+  <span class="icon">🌙</span><span class="code-theme-label">Dark code</span>
 </button>
 
 <nav id="sidebar" aria-label="Tutorial navigation">
@@ -33,10 +47,119 @@
           <li><a href="#s42"><span class="nav-num">§4.2</span>Reference Variables</a></li>
           <li><a href="#s43"><span class="nav-num">§4.3</span>Reference Fields</a></li>
           <li><a href="#s44"><span class="nav-num">§4.4</span>Constructors</a></li>
+          <li><a href="#s45"><span class="nav-num">§4.5</span>Static Fields</a></li>
         </ul>
       </li>
       <li><a href="assignment.html"><span class="nav-num">§5</span>Assignment</a></li>
       <li><a href="methods.html"><span class="nav-num">§6</span>Methods</a></li>
+      <li><a href="arrays.html"><span class="nav-num">§7</span>Arrays</a></li>
+      <li>
+        <a href="strings.html"><span class="nav-num">§8</span>Strings</a>
+        <ul class="sub-nav">
+          <li><a href="strings.html#s8-1"><span class="nav-num">§8.1</span>Writing Systems &amp; Unicode</a></li>
+          <li><a href="strings.html#s8-2"><span class="nav-num">§8.2</span><code>char</code></a></li>
+          <li><a href="strings.html#s8-3"><span class="nav-num">§8.3</span><code>Character</code></a></li>
+          <li><a href="strings.html#s8-4"><span class="nav-num">§8.4</span>Indexing</a></li>
+          <li><a href="strings.html#s8-5"><span class="nav-num">§8.5</span>Immutability</a></li>
+          <li><a href="strings.html#s8-6"><span class="nav-num">§8.6</span><code>==</code> vs <code>.equals()</code></a></li>
+          <li><a href="strings.html#s8-7"><span class="nav-num">§8.7</span>Concatenation</a></li>
+        </ul>
+      </li>
+      <li><a href="operators.html"><span class="nav-num">§9</span>Operators</a></li>
+      <li><a href="controlflow.html"><span class="nav-num">§10</span>Control Flow</a></li>
+      <li>
+        <a href="inheritance.html"><span class="nav-num">§11</span>Inheritance</a>
+        <ul class="sub-nav">
+          <li><a href="inheritance.html#s10-1"><span class="nav-num">§11.1</span>Taxonomy</a></li>
+          <li><a href="inheritance.html#s10-2"><span class="nav-num">§11.2</span>The Problem</a></li>
+          <li><a href="inheritance.html#s10-3"><span class="nav-num">§11.3</span><code>extends</code></a></li>
+          <li><a href="inheritance.html#s10-4"><span class="nav-num">§11.4</span><code>super(...)</code></a></li>
+          <li><a href="inheritance.html#s10-5"><span class="nav-num">§11.5</span>Polymorphism</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="accessmodifiers.html"><span class="nav-num">§12</span>Packages & Access Modifiers</a>
+        <ul class="sub-nav">
+          <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§12.1</span>Packages</a></li>
+          <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§12.2</span>Why Restrict Access</a></li>
+          <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§12.3</span><code>private</code></a></li>
+          <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§12.4</span>Encapsulation</a></li>
+          <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§12.5</span><code>public</code></a></li>
+          <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§12.6</span>Package-Private</a></li>
+          <li><a href="accessmodifiers.html#s11-7"><span class="nav-num">§12.7</span><code>protected</code></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="immutability.html"><span class="nav-num">§13</span>Immutability</a>
+        <ul class="sub-nav">
+          <li><a href="immutability.html#s13-1"><span class="nav-num">§13.1</span>Identity &amp; State</a></li>
+          <li><a href="immutability.html#s13-2"><span class="nav-num">§13.2</span>A Question of Time</a></li>
+          <li><a href="immutability.html#s13-3"><span class="nav-num">§13.3</span>Building One</a></li>
+          <li><a href="immutability.html#s13-4"><span class="nav-num">§13.4</span><code>final</code> Isn't Deep</a></li>
+          <li><a href="immutability.html#s13-5"><span class="nav-num">§13.5</span>Why It Matters</a></li>
+          <li><a href="immutability.html#s13-6"><span class="nav-num">§13.6</span><code>StringBuilder</code></a></li>
+          <li><a href="immutability.html#s13-7"><span class="nav-num">§13.7</span>Core Pillars</a></li>
+          <li><a href="immutability.html#s13-8"><span class="nav-num">§13.8</span>Putting It Together</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="abstractclasses.html"><span class="nav-num">§14</span>Abstract Classes</a>
+        <ul class="sub-nav">
+          <li><a href="abstractclasses.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
+          <li><a href="abstractclasses.html#s14-2"><span class="nav-num">§14.2</span><code>abstract</code> Classes</a></li>
+          <li><a href="abstractclasses.html#s14-3"><span class="nav-num">§14.3</span><code>abstract</code> Methods</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="interfaces.html"><span class="nav-num">§15</span>Interfaces</a>
+        <ul class="sub-nav">
+          <li><a href="interfaces.html#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
+          <li><a href="interfaces.html#s15-2"><span class="nav-num">§15.2</span>Interface vs. Abstract Class</a></li>
+          <li><a href="interfaces.html#s15-3"><span class="nav-num">§15.3</span>Declaring &amp; Implementing</a></li>
+          <li><a href="interfaces.html#s15-4"><span class="nav-num">§15.4</span>Override vs. Overload</a></li>
+          <li><a href="interfaces.html#s15-5"><span class="nav-num">§15.5</span>Multiple Interfaces</a></li>
+          <li><a href="interfaces.html#s15-6"><span class="nav-num">§15.6</span>Interface-Typed Params</a></li>
+          <li><a href="interfaces.html#s15-7"><span class="nav-num">§15.7</span>Anonymous Classes</a></li>
+          <li><a href="interfaces.html#s15-8"><span class="nav-num">§15.8</span>Default Methods</a></li>
+          <li><a href="interfaces.html#s15-9"><span class="nav-num">§15.9</span>Default Method Collisions</a></li>
+          <li><a href="interfaces.html#s15-10"><span class="nav-num">§15.10</span>Static Methods</a></li>
+          <li><a href="interfaces.html#s15-11"><span class="nav-num">§15.11</span>Interface Inheritance</a></li>
+          <li><a href="interfaces.html#s15-12"><span class="nav-num">§15.12</span>Strategy Pattern</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="generics.html"><span class="nav-num">§16</span>Generics</a>
+        <ul class="sub-nav">
+          <li><a href="generics.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
+          <li><a href="generics.html#s16-2"><span class="nav-num">§16.2</span>Type Parameters</a></li>
+          <li><a href="generics.html#s16-3"><span class="nav-num">§16.3</span>Generic Methods</a></li>
+          <li><a href="generics.html#s16-4"><span class="nav-num">§16.4</span>Bounded Types</a></li>
+          <li><a href="generics.html#s16-5"><span class="nav-num">§16.5</span>Compile Time Only</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="records.html"><span class="nav-num">§17</span>Records</a>
+        <ul class="sub-nav">
+          <li><a href="records.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
+          <li><a href="records.html#s17-2"><span class="nav-num">§17.2</span><code>record</code></a></li>
+          <li><a href="records.html#s17-3"><span class="nav-num">§17.3</span>Implicitly Final</a></li>
+          <li><a href="records.html#s17-4"><span class="nav-num">§17.4</span>Shallow Immutability</a></li>
+          <li><a href="records.html#s17-5"><span class="nav-num">§17.5</span>Compact Constructors</a></li>
+          <li><a href="records.html#s17-6"><span class="nav-num">§17.6</span>Records Can Do More</a></li>
+          <li><a href="records.html#s17-7"><span class="nav-num">§17.7</span>When to Reach for One</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="collections.html"><span class="nav-num">§18</span>Collections Framework</a>
+        <ul class="sub-nav">
+          <li><a href="collections.html#s18-1"><span class="nav-num">§18.1</span>The Problem</a></li>
+          <li><a href="collections.html#s18-2"><span class="nav-num">§18.2</span>The Big Picture</a></li>
+          <li><a href="collections.html#s18-3"><span class="nav-num">§18.3</span><code>List</code></a></li>
+          <li><a href="collections.html#s18-4"><span class="nav-num">§18.4</span><code>Queue</code></a></li>
+          <li><a href="collections.html#s18-5"><span class="nav-num">§18.5</span><code>Set</code></a></li>
+          <li><a href="collections.html#s18-6"><span class="nav-num">§18.6</span><code>Map</code></a></li>
+        </ul>
+      </li>
     </ul>
   </nav>
 </nav>
@@ -45,7 +168,7 @@
   <header class="page-header">
     <div class="page-chapter">Chapter 4</div>
     <h1>Objects</h1>
-    <p class="page-lead">Creating objects, reaching them through references, pointing objects at other objects, and giving them their initial state — the four mechanics that make OO work.</p>
+    <p class="page-lead">Creating objects, reaching them through references, pointing objects at other objects, giving them their initial state, and the one exception where state belongs to the class instead of any object — five mechanics that make OO work.</p>
   </header>
 
   <article>
@@ -70,9 +193,11 @@
 
       <p>The object now exists on the heap. But the address returned by <code>new</code> hasn't been stored anywhere — so we have no way to reach it. We need a variable that can hold an address. That's §4.2.</p>
 
+      <p>Each object created this way is independent — its own chunk, its own copy of every field. Not all state has to work this way, though — §4.5 covers the exception: fields that belong to the class itself, shared by every object instead of duplicated per object.</p>
+
       <div class="callout callout-mem">
         <div class="callout-lbl">Memory model</div>
-        <p>The <span class="term">heap</span> is a pool of memory that persists independently of any method call. Objects live there. Local variables live on the stack, which grows and shrinks as methods are called and return. An object on the heap survives as long as at least one reference variable points to it; when none do, the garbage collector reclaims it.</p>
+        <p>Objects live on the <span class="term">heap</span>, carrying their state with them — one slot per field, sized according to that field's type. That state is what makes each object distinct from every other object of the same class.</p>
       </div>
     </section>
 
@@ -94,6 +219,33 @@
         <p><code>r</code> is a slot that holds an address, say <code>0x4a2f</code>. At address <code>0x4a2f</code> on the heap: a Rectangle object with its own <code>width</code> and <code>height</code> slots (both zero for now).</p>
       </div>
 
+      <div class="mem-diagram">
+        <div class="mem-col">
+          <div class="mem-col-label">Stack</div>
+          <div class="mem-slot">
+            <div class="mem-slot-code">r = <span class="mem-addr">0x4a2f</span></div>
+            <small>0x4a2f is a memory address</small>
+          </div>
+        </div>
+        <div class="mem-arrow-col">
+          <svg width="40" height="16" viewBox="0 0 40 16" fill="none">
+            <line x1="0" y1="8" x2="32" y2="8" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M32 2L38 8L32 14" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <small>points to</small>
+        </div>
+        <div class="mem-col">
+          <div class="mem-col-label">Heap</div>
+          <div class="mem-object">
+            <div class="mem-object-header">Rectangle @ <span class="mem-addr">0x4a2f</span></div>
+            <div class="mem-object-body">
+              <div class="mem-object-field"><span class="fname">width</span><span class="fval">0</span></div>
+              <div class="mem-object-field"><span class="fname">height</span><span class="fval">0</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <p>To access the object's fields, you use the <span class="term">dot operator</span>. The dot means: <em>go to the address stored in the variable on my left, then access the member named on my right</em>.</p>
 
       <pre><code class="language-java">Rectangle r = new Rectangle();
@@ -103,6 +255,86 @@ r.height = 20;  // go to the object r points to; set its height slot to 20
 System.out.println(r.width); // dereference r, read its width slot → 10</code></pre>
 
       <p>Every use of the dot operator is a <span class="term">dereference</span>: follow the address, then act on what's there.</p>
+
+      <h3>A reference variable that points to nothing</h3>
+
+      <p>A reference variable can hold a special non-address value: <span class="term">null</span>. It means exactly what it sounds like — this variable points to nothing at all.</p>
+
+      <pre><code class="language-java">Rectangle r2 = null;   // r2 holds no address — there is no object to go to</code></pre>
+
+      <p>Dereferencing is impossible without an address to follow. Trying it anyway — <code>r2.width</code> when <code>r2</code> is <code>null</code> — doesn't read a leftover value or fail silently; Java throws a <code>NullPointerException</code> at runtime.</p>
+
+      <div class="callout callout-note">
+        <div class="callout-lbl">What "throws an exception" means</div>
+        <p>An <span class="term">exception</span> is Java's way of reporting that something went wrong while the program was running — not a compile error caught ahead of time, but a problem discovered mid-execution, with no sensible value to produce. When code <em>throws</em> one, normal execution stops right there: the current statement doesn't complete, and control jumps out looking for something to handle the problem. Left unhandled, the program stops and prints a description of what went wrong. A <code>NullPointerException</code> is one specific exception, thrown whenever code tries to dereference <code>null</code>. It won't be the last exception this tutorial mentions — for now, just recognize the shape: a name ending in <code>Exception</code> means the program hit a specific problem at runtime and stopped.</p>
+      </div>
+
+      <h3>Multiple Objects, Independent State</h3>
+
+      <p>Each call to <code>new</code> allocates a fresh chunk of heap memory. Two variables created this way hold different addresses, so they point to two separate objects — each with its own fields:</p>
+
+      <pre><code class="language-java">Rectangle r1 = new Rectangle();
+Rectangle r2 = new Rectangle();
+
+r1.width = 10;
+r2.width = 50;  // r1.width is still 10 — r1 and r2 are independent objects</code></pre>
+
+      <div class="callout callout-mem">
+        <div class="callout-lbl">Memory model</div>
+        <p>Two separate heap allocations, two separate Rectangle objects, two separate <code>width</code>/<code>height</code> slot pairs. <code>r1</code> and <code>r2</code> hold different addresses, so dereferencing one never touches the other.</p>
+      </div>
+
+      <div class="mem-diagram-multi">
+        <div class="mem-part mem-part-first mem-col-label">Stack</div>
+        <div></div>
+        <div class="mem-part mem-part-first mem-col-label">Heap</div>
+
+        <div class="mem-part mem-part-mid">
+          <div class="mem-slot">
+            <div class="mem-slot-code">r1 = <span class="mem-addr">0x7f10</span></div>
+          </div>
+        </div>
+        <div class="mem-arrow-cell">
+          <svg width="40" height="16" viewBox="0 0 40 16" fill="none">
+            <line x1="0" y1="8" x2="32" y2="8" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M32 2L38 8L32 14" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="mem-part mem-part-mid">
+          <div class="mem-object">
+            <div class="mem-object-header">Rectangle @ <span class="mem-addr">0x7f10</span></div>
+            <div class="mem-object-body">
+              <div class="mem-object-field"><span class="fname">width</span><span class="fval">10</span></div>
+              <div class="mem-object-field"><span class="fname">height</span><span class="fval">0</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mem-part mem-part-last">
+          <div class="mem-slot">
+            <div class="mem-slot-code">r2 = <span class="mem-addr">0x7f88</span></div>
+          </div>
+        </div>
+        <div class="mem-arrow-cell">
+          <svg width="40" height="16" viewBox="0 0 40 16" fill="none">
+            <line x1="0" y1="8" x2="32" y2="8" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M32 2L38 8L32 14" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="mem-part mem-part-last">
+          <div class="mem-object">
+            <div class="mem-object-header">Rectangle @ <span class="mem-addr">0x7f88</span></div>
+            <div class="mem-object-body">
+              <div class="mem-object-field"><span class="fname">width</span><span class="fval">50</span></div>
+              <div class="mem-object-field"><span class="fname">height</span><span class="fval">0</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p>Two different addresses in <code>r1</code> and <code>r2</code>, two distinct boxes on the heap — that's why writing through one never shows up in the other.</p>
+
+      <p>That's the normal case: a new object per <code>new</code>. Assignment is where it gets more interesting — assign one existing reference variable to another, instead of calling <code>new</code> again, and something different happens:</p>
 
       <h3>Aliasing</h3>
 
@@ -132,7 +364,7 @@ System.out.println(r.width); // 99 — r and r2 point to the same object</code><
         <h2>Reference Fields <em>— objects pointing to objects</em></h2>
       </div>
 
-      <p>In §3 we constrained Rectangle to primitive fields only. Now that reference variables are understood, we can lift that constraint.</p>
+      <p>Up to now, we've only used primitives as fields, like Rectangle's <code>width</code> and <code>height</code>. Now that we've seen how reference variables work, let's move on to fields that hold references too.</p>
 
       <p>A field can be of any type — including a class. A field of class type is a <span class="term">reference field</span>: a slot inside the object that holds an address (or <code>null</code>).</p>
 
@@ -157,7 +389,7 @@ class Border {
     Border border;  // reference field — holds an address, not a Border itself
 }</code></pre>
 
-      <p>When a Rectangle is created, both reference fields are initialized to <code>null</code> — the slots exist but point to nothing yet.</p>
+      <p>When a Rectangle is created, both reference fields are initialized to <code>null</code> <a href="#s42" class="backref">← §4.2</a> — the slots exist but point to nothing yet.</p>
 
       <pre><code class="language-java">Rectangle r = new Rectangle();
 r.width  = 10;
@@ -176,7 +408,70 @@ r.border = b;    // copy b's address into r's border slot</code></pre>
 
       <div class="callout callout-mem">
         <div class="callout-lbl">Memory model</div>
-        <p>On the heap: a Rectangle with <code>width=10</code>, <code>height=20</code>, <code>origin=0x4a2f</code>, <code>border=0x7c10</code>. At <code>0x4a2f</code>: a Point with <code>x=5</code>, <code>y=8</code>. At <code>0x7c10</code>: a Border with <code>thickness=2</code>, <code>visible=true</code>. The Rectangle does not <em>contain</em> the Point or the Border — it contains their <em>addresses</em>.</p>
+        <p>Point and Border are separate objects on the heap, each at their own address. Rectangle doesn't <em>contain</em> either one — it just keeps their addresses, in its <code>origin</code> and <code>border</code> reference fields.</p>
+      </div>
+
+      <p><code>origin</code> and <code>border</code> are themselves addresses, so the Rectangle object's own fields point further into the heap, to two more objects:</p>
+
+      <div class="mem-fanout">
+        <div class="mem-region">
+          <div class="mem-col-label">Stack</div>
+          <div class="mem-slot">
+            <div class="mem-slot-code">r = <span class="mem-addr">0x9000</span></div>
+          </div>
+        </div>
+
+        <div class="mem-arrow-col" style="margin-top:54px;">
+          <svg width="28" height="16" viewBox="0 0 28 16" fill="none">
+            <line x1="0" y1="8" x2="20" y2="8" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M20 2L26 8L20 14" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <div class="mem-region">
+          <div class="mem-col-label">Heap</div>
+          <div class="mem-heap-body">
+            <div class="mem-rect-wrap">
+              <div class="mem-object">
+                <div class="mem-object-header">Rectangle @ <span class="mem-addr">0x9000</span></div>
+                <div class="mem-object-body">
+                  <div class="mem-object-field"><span class="fname">width</span><span class="fval">10</span></div>
+                  <div class="mem-object-field"><span class="fname">height</span><span class="fval">20</span></div>
+                  <div class="mem-object-field"><span class="fname">origin</span><span class="fval mem-addr">0x4a2f</span></div>
+                  <div class="mem-object-field"><span class="fname">border</span><span class="fval mem-addr">0x7c10</span></div>
+                </div>
+              </div>
+              <svg class="mem-precise-arrow" width="36" height="59" style="top:44px;" viewBox="0 0 36 59">
+                <line x1="2" y1="57" x2="27" y2="7" stroke="currentColor" stroke-width="1.5"/>
+                <g transform="translate(27,7) rotate(-62)">
+                  <path d="M -7 -5 L 0 0 L -7 5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+              </svg>
+              <svg class="mem-precise-arrow" width="36" height="15" style="top:133px;" viewBox="0 0 36 15">
+                <line x1="2" y1="2" x2="27" y2="12" stroke="currentColor" stroke-width="1.5"/>
+                <g transform="translate(27,12) rotate(21)">
+                  <path d="M -7 -5 L 0 0 L -7 5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+              </svg>
+            </div>
+            <div class="mem-branch-col">
+              <div class="mem-object">
+                <div class="mem-object-header">Point @ <span class="mem-addr">0x4a2f</span></div>
+                <div class="mem-object-body">
+                  <div class="mem-object-field"><span class="fname">x</span><span class="fval">5</span></div>
+                  <div class="mem-object-field"><span class="fname">y</span><span class="fval">8</span></div>
+                </div>
+              </div>
+              <div class="mem-object">
+                <div class="mem-object-header">Border @ <span class="mem-addr">0x7c10</span></div>
+                <div class="mem-object-body">
+                  <div class="mem-object-field"><span class="fname">thickness</span><span class="fval">2</span></div>
+                  <div class="mem-object-field"><span class="fname">visible</span><span class="fval">true</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <p>The dot operator chains naturally across reference fields. Each dot is one dereference:</p>
@@ -197,13 +492,35 @@ System.out.println(r.border.visible); // follow r → Rectangle; follow border �
         <h2>Constructors <em>— initialization before the reference is returned</em></h2>
       </div>
 
-      <p>After <code>new Rectangle()</code>, all fields are zeroed. That's rarely what you want. A <span class="term">constructor</span> is initialization code that <code>new</code> runs after allocation, before the address is returned to the caller.</p>
+      <p>We call a class's <span class="term">constructor</span> whenever we instantiate it — that's what's actually running underneath the familiar <code>new</code> syntax:</p>
+
+      <pre><code class="language-java">Rectangle r = new Rectangle(); // this calls Rectangle's constructor</code></pre>
+
+      <p>§4.1 already showed what this particular call does — allocate memory, set every field to its default value, return the address — just without naming it. That behavior <em>is</em> a constructor: the <span class="term">default constructor</span>, supplied automatically because <code>Rectangle</code> hasn't written one of its own.</p>
+
+      <p>A constructor, in general, is initialization code that <code>new</code> runs after allocation, before the address is returned to the caller. <code>new</code> always calls one — there's no version of <code>new</code> that skips this step. The only question is which constructor runs: an <span class="term">implicit</span> one Java writes for you, or an <span class="term">explicit</span> one you write yourself. The default constructor above is the implicit case — taking no arguments, its entire job being to leave every field exactly at its default:</p>
+
+      <pre><code class="language-java">class Rectangle {
+    int width;
+    int height;
+}</code></pre>
+
+      <pre><code class="language-java">Rectangle r = new Rectangle(); // the default constructor runs — no arguments to give it
+// r.width  is 0
+// r.height is 0</code></pre>
+
+      <p>Defaults are rarely what you actually want, though. Most of the time, a new object should start out holding some specific state, not just zeros — a Rectangle with a real width and height, decided at the moment it's created. Writing a constructor of your own replaces the default one entirely:</p>
+
+      <div class="callout callout-rule">
+        <div class="callout-lbl">How a constructor is written</div>
+        <p>A constructor declaration looks just like a method declaration — except it uses the class's own name in place of a method name, and has no return type at all, not even <code>void</code>. Both differences are non-negotiable: this exact shape is how Java recognizes a constructor as a constructor, rather than as an ordinary method.</p>
+      </div>
 
       <pre><code class="language-java">class Rectangle {
     int width;
     int height;
 
-    Rectangle(int w, int h) {   // constructor: same name as class, no return type
+    Rectangle(int w, int h) {   // the class's own name, no return type
         width  = w;
         height = h;
     }
@@ -224,12 +541,127 @@ System.out.println(r.border.visible); // follow r → Rectangle; follow border �
 
       <p>By the time <code>r</code> receives the address, the object is already initialized. The caller never sees the zeroed state.</p>
 
-      <div class="callout callout-note">
-        <div class="callout-lbl">Scope for now</div>
-        <p>One constructor, no chaining, no inheritance — just the core idea. The essential point: <code>new</code> = allocate + initialize + return address.</p>
+      <p>A field can also be given a value directly at its declaration, without waiting for the constructor to run:</p>
+
+      <pre><code class="language-java">class Rectangle {
+    int width;
+    int height;
+    String unit  = "px";
+    String label = "Rectangle (" + unit + ")";
+
+    Rectangle(int w, int h) {
+        width  = w;
+        height = h;
+    }
+}</code></pre>
+
+      <p><code>unit</code> and <code>label</code> never appear inside the constructor's own body, yet every Rectangle object still ends up with both set. That's because a <span class="term">field initializer</span> — the <code>= "px"</code> part of a declaration — isn't really separate from the constructor at all.</p>
+
+      <div class="callout callout-mem">
+        <div class="callout-lbl">Field initializers are syntactic sugar</div>
+        <p>The compiler lifts every field initializer into the constructor body itself, inserting each one at the top, in declaration order, before any code you actually wrote. The class above compiles as though it had been written:</p>
+        <pre><code class="language-java">Rectangle(int w, int h) {
+    this.unit  = "px";                        // ← from the field initializer, declared first
+    this.label = "Rectangle (" + unit + ")";  // ← from the field initializer, declared second
+    width  = w;                                // your code, unchanged
+    height = h;                                // your code, unchanged
+}</code></pre>
+        <p>Declaration order is exactly why <code>label</code>'s initializer is allowed to read <code>unit</code>: by the time it runs, <code>unit</code>'s own initializer has already executed, one step earlier in that same lifted sequence. Swap the two field declarations, and <code>label</code> would be built from <code>unit</code>'s zero-value default instead of <code>"px"</code> — a real bug, and one field initializers can introduce just as easily as any other ordering mistake.</p>
       </div>
 
-      <p>If you define no constructor, Java provides one automatically — it takes no arguments and leaves all fields at their zero values. The moment you define your own, the automatic one goes away.</p>
+      <div class="callout callout-note">
+        <div class="callout-lbl">Scope for now</div>
+        <p>One constructor, no chaining, no inheritance — just the core idea. The essential point: <code>new</code> = allocate + initialize + return address. And the moment a class defines a constructor of its own, the automatic default one goes away — a class only ever gets it for free when it defines no constructor at all.</p>
+      </div>
+    </section>
+
+    <!-- §4.5 -->
+    <section id="s45">
+      <div class="section-head">
+        <span class="sec-num">§4.5</span>
+        <h2>Static Fields <em>— state that belongs to the class, not the object</em></h2>
+      </div>
+
+      <p>Back in §3, a class was an architect's drawing: not a house, but a real, precise thing in its own right — dimensions, room count, door placement, sitting on paper somewhere, distinct from any house built from it. The same is true here. <code>Rectangle</code> the class is itself a real thing, loaded once, the first time it's needed — before any Rectangle object exists. Think of it as building a mothership, once, before any of the individual ships (the objects from §4.1–§4.4) exist. A <span class="term">static field</span> is state that lives on the drawing itself — on the class — instead of on any one house built from it. Every object shares the exact same one.</p>
+
+      <pre><code class="language-java">class Rectangle {
+    static int count = 0;   // lives with the class itself, not repeated on each Rectangle object
+
+    int width;               // one slot per instance
+    int height;              // one slot per instance
+
+    Rectangle(int w, int h) {
+        width  = w;
+        height = h;
+        count++;             // every Rectangle updates the one shared slot
+    }
+}</code></pre>
+
+      <p>Here's one Rectangle being created:</p>
+
+      <pre><code class="language-java">Rectangle r1 = new Rectangle(10, 20);</code></pre>
+
+      <div class="mem-fanout">
+        <div class="mem-region" style="padding-right: 8px;">
+          <div class="mem-col-label">Stack</div>
+          <div class="mem-slot">
+            <div class="mem-slot-code">r1 = <span class="mem-addr">0x9000</span></div>
+          </div>
+        </div>
+        <div class="mem-arrow-col" style="margin-top: 54px;">
+          <svg width="40" height="16" viewBox="0 0 40 16" fill="none">
+            <line x1="0" y1="8" x2="32" y2="8" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M32 2L38 8L32 14" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="mem-region">
+          <div class="mem-col-label">Heap</div>
+          <div class="mem-heap-body" style="gap: 24px;">
+            <div class="mem-object">
+              <div class="mem-object-header">Rectangle @ <span class="mem-addr">0x9000</span></div>
+              <div class="mem-object-body">
+                <div class="mem-object-field"><span class="fname">width</span><span class="fval">10</span></div>
+                <div class="mem-object-field"><span class="fname">height</span><span class="fval">20</span></div>
+              </div>
+            </div>
+            <div class="mem-arrow-cell" style="margin-top: 14px;">
+              <svg width="28" height="16" viewBox="0 0 28 16" fill="none">
+                <line x1="0" y1="8" x2="20" y2="8" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M20 2L26 8L20 14" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="mem-object">
+              <div class="mem-object-header">Class Rectangle</div>
+              <div class="mem-object-body">
+                <div class="mem-object-field"><span class="fname">count</span><span class="fval">1</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p>Notice the second arrow is different in kind from the first. <code>r1</code>'s arrow is an address: dereference it, and you're standing inside <code>r1</code>'s own object, reading <code>width</code> and <code>height</code> directly. The arrow from the Rectangle object to <code>Class Rectangle</code> isn't an address stored anywhere — no field holds it, nothing was assigned. It just shows that every Rectangle is an instance <em>of</em> the class, and so can reach the one shared <code>count</code> that lives there. <code>count</code> is read and written by name (<code>Rectangle.count</code>), not reached through <code>r1</code> at all — the same one slot, whether zero Rectangles exist or a thousand do.</p>
+
+      <p>Create a few more, and watch <code>count</code> track all of them, not just one:</p>
+
+      <pre><code class="language-java">Rectangle r2 = new Rectangle(5, 5);
+Rectangle r3 = new Rectangle(2, 8);
+
+System.out.println(Rectangle.count); // 3</code></pre>
+
+      <p>Notice the access: <code>Rectangle.count</code>, through the class name. <code>count</code> doesn't belong to <code>r1</code>, <code>r2</code>, or <code>r3</code> — it belongs to <code>Rectangle</code> itself. Any object's constructor can change it, but there is exactly one of it, not one per object.</p>
+
+      <div class="callout callout-conn">
+        <div class="callout-lbl">The exception to §4.2 <a href="#s42" class="backref">← §4.2</a></div>
+        <p>§4.2 established that every object gets its own independent copy of its fields — that's what "Multiple Objects, Independent State" means. <code>static</code> is the deliberate exception: mark a field <code>static</code>, and every object shares that one slot instead of getting its own. <code>width</code> and <code>height</code> are per-object; <code>count</code> is per-class.</p>
+      </div>
+
+      <div class="callout callout-mem">
+        <div class="callout-lbl">Memory model</div>
+        <p><code>count</code> lives with the class itself, not on the heap alongside any Rectangle object. Creating a Rectangle allocates a new chunk for <code>width</code> and <code>height</code> — but there is nowhere in that chunk for <code>count</code> to live, because it was never part of any object's layout. All three Rectangles read and write the exact same slot, the one that's lived on the class since it was loaded.</p>
+      </div>
+
+      <p>The same keyword works on methods, for the same reason: belongs to the class, not to any instance. That's §6.1.</p>
     </section>
 
   </article>
@@ -249,6 +681,37 @@ System.out.println(r.border.visible); // follow r → Rectangle; follow border �
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   hljs.highlightAll();
+
+  // Flag error-annotation comments in code blocks
+  document.querySelectorAll('.hljs-comment').forEach(el => {
+    if (/\b(compile|compiler|runtime) error\b/i.test(el.textContent)) {
+      el.classList.add('hljs-comment-error');
+    }
+  });
+
+  // Code theme toggle
+  const codeThemeBtn = document.getElementById('code-theme-toggle');
+  const lightTheme = document.getElementById('hljs-light-theme');
+  const darkTheme = document.getElementById('hljs-dark-theme');
+  const themeLabel = codeThemeBtn.querySelector('.code-theme-label');
+  const themeIcon = codeThemeBtn.querySelector('.icon');
+
+  function applyCodeTheme(theme) {
+    const dark = theme === 'dark';
+    lightTheme.disabled = dark;
+    darkTheme.disabled = !dark;
+    document.documentElement.classList.toggle('code-dark', dark);
+    themeLabel.textContent = dark ? 'Light code' : 'Dark code';
+    themeIcon.textContent = dark ? '☀️' : '🌙';
+  }
+
+  applyCodeTheme(localStorage.getItem('code-theme') || 'light');
+
+  codeThemeBtn.addEventListener('click', () => {
+    const next = darkTheme.disabled ? 'dark' : 'light';
+    localStorage.setItem('code-theme', next);
+    applyCodeTheme(next);
+  });
 
   // Scroll spy for sub-sections
   const sections = document.querySelectorAll('section[id]');

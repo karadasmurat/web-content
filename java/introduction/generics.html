@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>§3 Classes — OO with Java</title>
+<title>§16 Generics — OO with Java</title>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" id="hljs-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
 <link rel="stylesheet" id="hljs-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
@@ -39,7 +39,7 @@
       <li><a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a></li>
       <li><a href="variables.html"><span class="nav-num">§1</span>Variables</a></li>
       <li><a href="primitives.html"><span class="nav-num">§2</span>Primitives</a></li>
-      <li><a href="classes.html" class="active"><span class="nav-num">§3</span>Classes</a></li>
+      <li><a href="classes.html"><span class="nav-num">§3</span>Classes</a></li>
       <li><a href="objects.html"><span class="nav-num">§4</span>Objects</a></li>
       <li><a href="assignment.html"><span class="nav-num">§5</span>Assignment</a></li>
       <li><a href="methods.html"><span class="nav-num">§6</span>Methods</a></li>
@@ -69,7 +69,7 @@
         </ul>
       </li>
       <li>
-        <a href="accessmodifiers.html"><span class="nav-num">§12</span>Packages & Access Modifiers</a>
+        <a href="accessmodifiers.html"><span class="nav-num">§12</span>Packages &amp; Access Modifiers</a>
         <ul class="sub-nav">
           <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§12.1</span>Packages</a></li>
           <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§12.2</span>Why Restrict Access</a></li>
@@ -119,13 +119,13 @@
         </ul>
       </li>
       <li>
-        <a href="generics.html"><span class="nav-num">§16</span>Generics</a>
+        <a href="generics.html" class="active"><span class="nav-num">§16</span>Generics</a>
         <ul class="sub-nav">
-          <li><a href="generics.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
-          <li><a href="generics.html#s16-2"><span class="nav-num">§16.2</span>Type Parameters</a></li>
-          <li><a href="generics.html#s16-3"><span class="nav-num">§16.3</span>Generic Methods</a></li>
-          <li><a href="generics.html#s16-4"><span class="nav-num">§16.4</span>Bounded Types</a></li>
-          <li><a href="generics.html#s16-5"><span class="nav-num">§16.5</span>Compile Time Only</a></li>
+          <li><a href="#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
+          <li><a href="#s16-2"><span class="nav-num">§16.2</span>Type Parameters</a></li>
+          <li><a href="#s16-3"><span class="nav-num">§16.3</span>Generic Methods</a></li>
+          <li><a href="#s16-4"><span class="nav-num">§16.4</span>Bounded Types</a></li>
+          <li><a href="#s16-5"><span class="nav-num">§16.5</span>Compile Time Only</a></li>
         </ul>
       </li>
       <li>
@@ -157,40 +157,140 @@
 
 <main id="content">
   <header class="page-header">
-    <div class="page-chapter">Chapter 3</div>
-    <h1>Classes</h1>
-    <p class="page-lead">A class is a blueprint. The class itself is not an object; it describes objects.</p>
+    <div class="page-chapter">Chapter 16</div>
+    <h1>Generics</h1>
+    <p class="page-lead">A container built around <code>Object</code> can hold anything — which is exactly the problem. This chapter is about telling the compiler what a container actually holds, so it can catch the mistake you'd otherwise only discover at runtime.</p>
   </header>
 
   <article>
 
-    <p>So far, every variable we've seen holds a single primitive value: a number, a boolean. Most interesting data is made of several things grouped together — the way a real-world kind of thing is described by its attributes. A rectangle has a width and a height. A point has an x and a y. A person has a name and an age. A <span class="term">class</span> lets you define that grouping: the set of attributes that together describe one kind of thing.</p>
+    <!-- §16.1 -->
+    <section id="s16-1">
+      <div class="section-head">
+        <span class="sec-num">§16.1</span>
+        <h2>The Problem <em>— a container that forgets what it holds</em></h2>
+      </div>
 
-    <p>A class is a description of a kind of object: it names the fields that every object of that kind will have. Think of it as a blueprint — the way an architect draws up a detailed technical drawing describing a house: its dimensions, the number of rooms, where the doors go. The blueprint itself is not a house; you can't live in it. But it's precise enough that a builder can follow it, and many separate houses can be built from that same one blueprint. Each has the same rooms in the same layout — but one is painted blue, another has hardwood floors, another has three bedrooms filled and one empty. Same structure, different values in each house. A class works the same way for objects.</p>
+    <p>A class meant to hold "anything" reaches, naturally enough, for <code>Object</code> — every type is some kind of <code>Object</code> (§11.3's unwritten <code>extends Object</code>), so a field of that type accepts anything at all:</p>
 
-    <h3>Defining a class</h3>
+    <pre><code class="language-java">class Box {
+    private Object content;
 
-    <p>Our first class uses only primitive fields:</p>
-
-    <pre><code class="language-java">class Rectangle {
-    int width;
-    int height;
+    public void set(Object content) { this.content = content; }
+    public Object get()              { return content; }
 }</code></pre>
 
-    <p>This declares that every Rectangle will have two slots: <code>width</code> (an <code>int</code>) and <code>height</code> (an <code>int</code>). The class definition itself is a template — no Rectangle object exists yet, just the description of what one will look like.</p>
+    <pre><code class="language-java">Box box = new Box();
+box.set("hello");
+String s = (String) box.get(); // must cast — get() only promises an Object</code></pre>
 
-    <p>The field declarations inside the class look exactly like the variable declarations from §1 — because they are. They're just variables that belong to an object rather than to a method call. Once objects exist (§4.1), each one will have its own independent <code>width</code> and <code>height</code> slots.</p>
+    <p><code>get()</code> only ever promises an <code>Object</code> — the compiler has no way to know a <code>String</code> is what's actually inside, so reaching for a <code>String</code> specifically requires an explicit downcast (§11.7), every single time. And nothing stops the mistake this whole class exists to prevent:</p>
+
+    <pre><code class="language-java">box.set(42);                     // compiles fine — 42 is an Object too
+String oops = (String) box.get(); // compiles fine — throws ClassCastException at runtime</code></pre>
+
+    <p>The cast on the last line is a promise to the compiler that turns out to be false — and like every unchecked downcast (§11.7), the compiler has no way to catch it. The mistake was made the moment <code>box.set(42)</code> ran; it just doesn't announce itself until some much later line tries to use the result as a <code>String</code>.</p>
+    </section>
+
+    <!-- §16.2 -->
+    <section id="s16-2">
+      <div class="section-head">
+        <span class="sec-num">§16.2</span>
+        <h2>Type Parameters <em>— <code>&lt;T&gt;</code></em></h2>
+      </div>
+
+    <p>A <span class="term">generic</span> class declares a placeholder for a type, filled in later, at the point it's actually used:</p>
+
+    <pre><code class="language-java">class Box<T> {
+    private T content;
+
+    public void set(T content) { this.content = content; }
+    public T get()              { return content; }
+}</code></pre>
+
+    <p><code>T</code> is a <span class="term">type parameter</span> — read <code>Box&lt;T&gt;</code> as "a Box of some type <code>T</code>, decided by whoever creates one." Creating a Box now names that type explicitly:</p>
+
+    <pre><code class="language-java">Box<String> box = new Box<>();
+box.set("hello");
+String s = box.get(); // no cast — box was declared to hold String, specifically</code></pre>
+
+    <p>Every <code>T</code> in the class body becomes <code>String</code> for this particular <code>box</code> — <code>set</code> only accepts a <code>String</code>, and <code>get</code> returns one directly, no cast required. The mistake from §16.1 is no longer a runtime surprise; it's a compile error, at the exact line that caused it:</p>
+
+    <pre><code class="language-java">box.set(42); // compile error — box is a Box&lt;String&gt;, 42 is not a String</code></pre>
+
+    <div class="callout callout-rule">
+      <div class="callout-lbl">The empty <code>&lt;&gt;</code> is inference, not omission</div>
+      <p><code>new Box&lt;&gt;()</code> doesn't mean "no type parameter" — the compiler already knows the type from the left side of the assignment, <code>Box&lt;String&gt;</code>, and fills in <code>&lt;String&gt;</code> on the right automatically. This is the <span class="term">diamond operator</span>: shorthand for <code>new Box&lt;String&gt;()</code>, not a different, looser kind of Box.</p>
+    </div>
+    </section>
+
+    <!-- §16.3 -->
+    <section id="s16-3">
+      <div class="section-head">
+        <span class="sec-num">§16.3</span>
+        <h2>Generic Methods <em>— a type parameter on a single method</em></h2>
+      </div>
+
+    <p>A type parameter doesn't require a generic class around it — a single method can declare its own, scoped only to that method, written just before the return type:</p>
+
+    <pre><code class="language-java">static <T> T firstNonNull(T a, T b) {
+    return a != null ? a : b;
+}</code></pre>
+
+    <pre><code class="language-java">String name = firstNonNull(null, "default");     // T is inferred as String
+Integer count = firstNonNull(null, 5);             // T is inferred as Integer</code></pre>
+
+    <p><code>firstNonNull</code> isn't written for <code>String</code>, or for <code>Integer</code>, or for any one type — <code>T</code> is decided fresh at each call, inferred from whatever arguments actually show up. One method body, used at as many types as callers need, each call fully type-checked on its own terms.</p>
+    </section>
+
+    <!-- §16.4 -->
+    <section id="s16-4">
+      <div class="section-head">
+        <span class="sec-num">§16.4</span>
+        <h2>Bounded Types <em>— <code>&lt;T extends ...&gt;</code></em></h2>
+      </div>
+
+    <p>Plain <code>T</code> promises nothing except "some type" — not even <code>Object</code>'s methods are assumed beyond what every type already has. Calling anything more specific on a value of type <code>T</code> requires telling the compiler what <code>T</code> is guaranteed to be. A <span class="term">bounded type parameter</span> does exactly that:</p>
+
+    <pre><code class="language-java">static <T extends Renewable> void renewAll(T[] items) {
+    for (T item : items) {
+        item.renew();
+    }
+}</code></pre>
+
+    <pre><code class="language-java">Subscription[] subs = { new Subscription(), new Subscription() };
+renewAll(subs); // fine — Subscription implements Renewable</code></pre>
+
+    <p><code>T extends Renewable</code> restricts what <code>T</code> is allowed to be to types that implement <code>Renewable</code> (§15.2) — despite the keyword, this works identically whether <code>Renewable</code> is a class being extended or, as here, an interface being implemented. That restriction is precisely what makes <code>item.renew()</code> legal inside the method: the compiler knows, for any type that could ever fill in <code>T</code> here, that <code>renew()</code> is guaranteed to exist.</p>
+    </section>
+
+    <!-- §16.5 -->
+    <section id="s16-5">
+      <div class="section-head">
+        <span class="sec-num">§16.5</span>
+        <h2>Compile Time Only <em>— what generics don't do</em></h2>
+      </div>
+
+    <p>Every guarantee generics make is a <em>compile-time</em> one. Once the code compiles, the type parameter itself is gone — Java's generics work by checking everything up front, then discarding the type information, a design called <span class="term">type erasure</span>. A <code>Box&lt;String&gt;</code> and a <code>Box&lt;Integer&gt;</code> are, underneath, running the exact same class at runtime; nothing about <code>T</code> survives to be inspected later.</p>
+
+    <p>This is not a loophole to work around — it's the actual scope of what generics promise. They don't add a new runtime check; they move a whole category of mistake (§16.1's <code>ClassCastException</code>) to a place it can be caught immediately, at compile time, instead of a much later, harder-to-trace line where the bad value finally gets used.</p>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Scope of this chapter</div>
+      <p>Wildcards (<code>List&lt;? extends T&gt;</code>), multiple bounds, generic interfaces, and the finer rules around type erasure and raw types are all left for later. The core idea carries over unchanged: a type parameter lets a class or method make a promise about what type it's working with, checked once, at compile time, everywhere it's used.</p>
+    </div>
+    </section>
 
   </article>
 
   <nav class="page-nav" aria-label="Chapter navigation">
-    <a href="primitives.html" class="page-nav-prev">
+    <a href="interfaces.html" class="page-nav-prev">
       <span class="page-nav-label">← Previous</span>
-      <span class="page-nav-title">§2 — Primitives</span>
+      <span class="page-nav-title">§15 — Interfaces</span>
     </a>
-    <a href="objects.html" class="page-nav-next">
+    <a href="records.html" class="page-nav-next">
       <span class="page-nav-label">Next →</span>
-      <span class="page-nav-title">§4 — Objects</span>
+      <span class="page-nav-title">§17 — Records</span>
     </a>
   </nav>
 </main>
@@ -229,6 +329,22 @@ document.addEventListener('DOMContentLoaded', function () {
     localStorage.setItem('code-theme', next);
     applyCodeTheme(next);
   });
+
+  // Scroll spy for sub-sections
+  const sections = document.querySelectorAll('section[id]');
+  const subLinks = document.querySelectorAll('.sub-nav a[href^="#"]');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = '#' + entry.target.id;
+        subLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+      }
+    });
+  }, { rootMargin: '-8% 0px -78% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+
   const btn  = document.getElementById('menu-btn');
   const side = document.getElementById('sidebar');
   btn.addEventListener('click', () => side.classList.toggle('open'));

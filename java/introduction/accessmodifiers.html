@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§12 Packages & Access Modifiers — OO with Java</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" id="hljs-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" id="hljs-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
+<script>
+(function () {
+  if ((localStorage.getItem('code-theme') || 'light') === 'dark') {
+    document.getElementById('hljs-light-theme').disabled = true;
+    document.getElementById('hljs-dark-theme').disabled = false;
+    document.documentElement.classList.add('code-dark');
+  }
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Toggle navigation">
+  <span></span><span></span><span></span>
+</button>
+
+<button id="code-theme-toggle" class="code-theme-toggle" aria-label="Toggle code color scheme">
+  <span class="icon">🌙</span><span class="code-theme-label">Dark code</span>
+</button>
+
+<nav id="sidebar" aria-label="Tutorial navigation">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-label">Tutorial</div>
+    <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a></li>
+      <li><a href="variables.html"><span class="nav-num">§1</span>Variables</a></li>
+      <li><a href="primitives.html"><span class="nav-num">§2</span>Primitives</a></li>
+      <li><a href="classes.html"><span class="nav-num">§3</span>Classes</a></li>
+      <li><a href="objects.html"><span class="nav-num">§4</span>Objects</a></li>
+      <li><a href="assignment.html"><span class="nav-num">§5</span>Assignment</a></li>
+      <li><a href="methods.html"><span class="nav-num">§6</span>Methods</a></li>
+      <li><a href="arrays.html"><span class="nav-num">§7</span>Arrays</a></li>
+      <li>
+        <a href="strings.html"><span class="nav-num">§8</span>Strings</a>
+        <ul class="sub-nav">
+          <li><a href="strings.html#s8-1"><span class="nav-num">§8.1</span>Writing Systems &amp; Unicode</a></li>
+          <li><a href="strings.html#s8-2"><span class="nav-num">§8.2</span><code>char</code></a></li>
+          <li><a href="strings.html#s8-3"><span class="nav-num">§8.3</span><code>Character</code></a></li>
+          <li><a href="strings.html#s8-4"><span class="nav-num">§8.4</span>Indexing</a></li>
+          <li><a href="strings.html#s8-5"><span class="nav-num">§8.5</span>Immutability</a></li>
+          <li><a href="strings.html#s8-6"><span class="nav-num">§8.6</span><code>==</code> vs <code>.equals()</code></a></li>
+          <li><a href="strings.html#s8-7"><span class="nav-num">§8.7</span>Concatenation</a></li>
+        </ul>
+      </li>
+      <li><a href="operators.html"><span class="nav-num">§9</span>Operators</a></li>
+      <li><a href="controlflow.html"><span class="nav-num">§10</span>Control Flow</a></li>
+      <li>
+        <a href="inheritance.html"><span class="nav-num">§11</span>Inheritance</a>
+        <ul class="sub-nav">
+          <li><a href="inheritance.html#s10-1"><span class="nav-num">§11.1</span>Taxonomy</a></li>
+          <li><a href="inheritance.html#s10-2"><span class="nav-num">§11.2</span>The Problem</a></li>
+          <li><a href="inheritance.html#s10-3"><span class="nav-num">§11.3</span><code>extends</code></a></li>
+          <li><a href="inheritance.html#s10-4"><span class="nav-num">§11.4</span><code>super(...)</code></a></li>
+          <li><a href="inheritance.html#s10-5"><span class="nav-num">§11.5</span>Polymorphism</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="accessmodifiers.html" class="active"><span class="nav-num">§12</span>Packages &amp; Access Modifiers</a>
+        <ul class="sub-nav">
+          <li><a href="#s11-1"><span class="nav-num">§12.1</span>Packages</a></li>
+          <li><a href="#s11-2"><span class="nav-num">§12.2</span>Why Restrict Access</a></li>
+          <li><a href="#s11-3"><span class="nav-num">§12.3</span><code>private</code></a></li>
+          <li><a href="#s11-4"><span class="nav-num">§12.4</span>Encapsulation</a></li>
+          <li><a href="#s11-5"><span class="nav-num">§12.5</span><code>public</code></a></li>
+          <li><a href="#s11-6"><span class="nav-num">§12.6</span>Package-Private</a></li>
+          <li><a href="#s11-7"><span class="nav-num">§12.7</span><code>protected</code></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="immutability.html"><span class="nav-num">§13</span>Immutability</a>
+        <ul class="sub-nav">
+          <li><a href="immutability.html#s13-1"><span class="nav-num">§13.1</span>Identity &amp; State</a></li>
+          <li><a href="immutability.html#s13-2"><span class="nav-num">§13.2</span>A Question of Time</a></li>
+          <li><a href="immutability.html#s13-3"><span class="nav-num">§13.3</span>Building One</a></li>
+          <li><a href="immutability.html#s13-4"><span class="nav-num">§13.4</span><code>final</code> Isn't Deep</a></li>
+          <li><a href="immutability.html#s13-5"><span class="nav-num">§13.5</span>Why It Matters</a></li>
+          <li><a href="immutability.html#s13-6"><span class="nav-num">§13.6</span><code>StringBuilder</code></a></li>
+          <li><a href="immutability.html#s13-7"><span class="nav-num">§13.7</span>Core Pillars</a></li>
+          <li><a href="immutability.html#s13-8"><span class="nav-num">§13.8</span>Putting It Together</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="abstractclasses.html"><span class="nav-num">§14</span>Abstract Classes</a>
+        <ul class="sub-nav">
+          <li><a href="abstractclasses.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
+          <li><a href="abstractclasses.html#s14-2"><span class="nav-num">§14.2</span><code>abstract</code> Classes</a></li>
+          <li><a href="abstractclasses.html#s14-3"><span class="nav-num">§14.3</span><code>abstract</code> Methods</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="interfaces.html"><span class="nav-num">§15</span>Interfaces</a>
+        <ul class="sub-nav">
+          <li><a href="interfaces.html#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
+          <li><a href="interfaces.html#s15-2"><span class="nav-num">§15.2</span>Interface vs. Abstract Class</a></li>
+          <li><a href="interfaces.html#s15-3"><span class="nav-num">§15.3</span>Declaring &amp; Implementing</a></li>
+          <li><a href="interfaces.html#s15-4"><span class="nav-num">§15.4</span>Override vs. Overload</a></li>
+          <li><a href="interfaces.html#s15-5"><span class="nav-num">§15.5</span>Multiple Interfaces</a></li>
+          <li><a href="interfaces.html#s15-6"><span class="nav-num">§15.6</span>Interface-Typed Params</a></li>
+          <li><a href="interfaces.html#s15-7"><span class="nav-num">§15.7</span>Anonymous Classes</a></li>
+          <li><a href="interfaces.html#s15-8"><span class="nav-num">§15.8</span>Default Methods</a></li>
+          <li><a href="interfaces.html#s15-9"><span class="nav-num">§15.9</span>Default Method Collisions</a></li>
+          <li><a href="interfaces.html#s15-10"><span class="nav-num">§15.10</span>Static Methods</a></li>
+          <li><a href="interfaces.html#s15-11"><span class="nav-num">§15.11</span>Interface Inheritance</a></li>
+          <li><a href="interfaces.html#s15-12"><span class="nav-num">§15.12</span>Strategy Pattern</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="generics.html"><span class="nav-num">§16</span>Generics</a>
+        <ul class="sub-nav">
+          <li><a href="generics.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
+          <li><a href="generics.html#s16-2"><span class="nav-num">§16.2</span>Type Parameters</a></li>
+          <li><a href="generics.html#s16-3"><span class="nav-num">§16.3</span>Generic Methods</a></li>
+          <li><a href="generics.html#s16-4"><span class="nav-num">§16.4</span>Bounded Types</a></li>
+          <li><a href="generics.html#s16-5"><span class="nav-num">§16.5</span>Compile Time Only</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="records.html"><span class="nav-num">§17</span>Records</a>
+        <ul class="sub-nav">
+          <li><a href="records.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
+          <li><a href="records.html#s17-2"><span class="nav-num">§17.2</span><code>record</code></a></li>
+          <li><a href="records.html#s17-3"><span class="nav-num">§17.3</span>Implicitly Final</a></li>
+          <li><a href="records.html#s17-4"><span class="nav-num">§17.4</span>Shallow Immutability</a></li>
+          <li><a href="records.html#s17-5"><span class="nav-num">§17.5</span>Compact Constructors</a></li>
+          <li><a href="records.html#s17-6"><span class="nav-num">§17.6</span>Records Can Do More</a></li>
+          <li><a href="records.html#s17-7"><span class="nav-num">§17.7</span>When to Reach for One</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="collections.html"><span class="nav-num">§18</span>Collections Framework</a>
+        <ul class="sub-nav">
+          <li><a href="collections.html#s18-1"><span class="nav-num">§18.1</span>The Problem</a></li>
+          <li><a href="collections.html#s18-2"><span class="nav-num">§18.2</span>The Big Picture</a></li>
+          <li><a href="collections.html#s18-3"><span class="nav-num">§18.3</span><code>List</code></a></li>
+          <li><a href="collections.html#s18-4"><span class="nav-num">§18.4</span><code>Queue</code></a></li>
+          <li><a href="collections.html#s18-5"><span class="nav-num">§18.5</span><code>Set</code></a></li>
+          <li><a href="collections.html#s18-6"><span class="nav-num">§18.6</span><code>Map</code></a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</nav>
+
+<main id="content">
+  <header class="page-header">
+    <div class="page-chapter">Chapter 12</div>
+    <h1>Packages &amp; Access Modifiers</h1>
+    <p class="page-lead">Every class so far has quietly lived in the same unnamed place, and every field and method has been reachable from anywhere in the program, the moment you have a reference. This chapter names both: the packages classes are organized into, and the access modifiers that use them to control who's allowed to reach in.</p>
+  </header>
+
+  <article>
+
+    <!-- §12.1 -->
+    <section id="s11-1">
+      <div class="section-head">
+        <span class="sec-num">§12.1</span>
+        <h2>Packages <em>— organizing code into named groups</em></h2>
+      </div>
+
+    <p>A <span class="term">package</span> is a named group of related classes — Java's way of organizing a codebase into folders instead of one flat pile of files, and of keeping two unrelated classes from colliding if they ever happen to share a name. A class declares which package it belongs to with a <code>package</code> statement, as the very first line of the file, above even its imports:</p>
+
+    <pre><code class="language-java">package com.example.shapes;
+
+class Rectangle {
+    ...
+}</code></pre>
+
+    <p>Every class in this tutorial has omitted that line. Omitting it doesn't mean "no package" — it places the class in Java's single, unnamed <span class="term">default package</span>. Every class shown so far has quietly shared that one package with every other class. Reaching a class declared in a <em>different</em>, named package requires an <code>import</code> statement naming it — a detail this tutorial hasn't needed, precisely because everything so far has lived in the same one.</p>
+
+    <div class="callout callout-conn">
+      <div class="callout-lbl">Why this chapter starts here</div>
+      <p>Packages matter to <em>this</em> chapter specifically because two of Java's four access levels are defined directly in terms of them: package-private (§12.6) means "same package," and <code>protected</code> (§12.7) means "same package, plus subclasses anywhere." Neither rule means anything without already knowing what a package is.</p>
+    </div>
+    </section>
+
+    <!-- §12.2 -->
+    <section id="s11-2">
+      <div class="section-head">
+        <span class="sec-num">§12.2</span>
+        <h2>Why Restrict Access <em>— a class with no way to say no</em></h2>
+      </div>
+
+    <p>Every field declared so far — <code>width</code>, <code>height</code>, <code>make</code>, <code>doors</code> — has been directly <span class="term">accessible</span> from outside its class, with nothing in between. <em>Accessible</em> covers both directions at once: any code holding a reference can <em>read</em> the field's current value, and can just as freely <em>write</em> a new one:</p>
+
+    <pre><code class="language-java">Rectangle r = new Rectangle(10, 20);
+System.out.println(r.width); // read — anyone can see it
+r.width = -5;                // write — compiles fine, nothing stops this either</code></pre>
+
+    <p>Nothing about <code>Rectangle</code>'s definition says outside code shouldn't be able to see <code>width</code>, or that a width can't be negative — the field is just an <code>int</code> slot, and any code holding a reference to the object can dereference it, in either direction, and do exactly that. The class has no way to say "outsiders shouldn't be allowed to do that," because every field has been, by default, exactly as accessible as a field can be — visible to read, and open to write. <span class="term">Access modifiers</span> are Java's way of giving a class control over both.</p>
+    </section>
+
+    <!-- §12.3 -->
+    <section id="s11-3">
+      <div class="section-head">
+        <span class="sec-num">§12.3</span>
+        <h2><code>private</code> <em>— visible only inside the declaring class</em></h2>
+      </div>
+
+    <p>Marking a field <code>private</code> restricts it to code written inside that field's own class — not other classes, not even a subclass:</p>
+
+    <pre><code class="language-java">class Rectangle {
+    private int width;
+    private int height;
+}</code></pre>
+
+    <pre><code class="language-java">Rectangle r = new Rectangle(10, 20);
+System.out.println(r.width); // compile error — width has private access in Rectangle
+r.width = -5;                // compile error — same reason, either direction</code></pre>
+
+    <p>The field still exists — every Rectangle object still has a <code>width</code> slot, laid out exactly as before (§3). <code>private</code> doesn't change the memory layout at all; it changes what the <em>compiler</em> lets other code write. Code inside <code>Rectangle</code>'s own class body — its constructors, its methods — can still read and write <code>width</code> freely. Everyone else is locked out.</p>
+    </section>
+
+    <!-- §12.4 -->
+    <section id="s11-4">
+      <div class="section-head">
+        <span class="sec-num">§12.4</span>
+        <h2>Encapsulation <em>— exposing behavior instead of state</em></h2>
+      </div>
+
+    <p>Locking a field with <code>private</code> is only useful if there's still some way to reach it — otherwise no code, including <code>Rectangle</code>'s own users, could ever set a width at all. The standard idiom is a pair of methods: a <span class="term">getter</span> to read the field, and a <span class="term">setter</span> to write it — with the setter free to enforce rules the field alone never could:</p>
+
+    <pre><code class="language-java">class Rectangle {
+    private int width;
+    private int height;
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        if (width < 0) {
+            throw new IllegalArgumentException("width cannot be negative");
+        }
+        this.width = width;
+    }
+}</code></pre>
+
+    <pre><code class="language-java">Rectangle r = new Rectangle(10, 20);
+r.setWidth(15);  // fine
+r.setWidth(-5);  // throws IllegalArgumentException</code></pre>
+
+    <p><code>setWidth</code> is an ordinary method — the same shape as every method since §6 — with one detail worth noticing: <code>this.width = width;</code> only runs when the check above it passes. There is no longer any way to give a Rectangle a negative width, because the <em>only</em> door into <code>width</code> is a method that refuses to let one through.</p>
+
+    <div class="callout callout-conn">
+      <div class="callout-lbl">Throwing one yourself <a href="objects.html#s42" class="backref">← §4.2</a></div>
+      <p>§4.2 introduced exceptions the way you first meet them: happening <em>to</em> your code, automatically, when Java hits a problem it discovers on its own — dereferencing <code>null</code> raises a <code>NullPointerException</code> without you ever writing the word <code>throw</code>. <code>throw</code> is the statement that raises one <em>deliberately</em>: <code>throw</code>, followed by an expression that produces an exception object, ends the statement there. <code>new IllegalArgumentException("width cannot be negative")</code> constructs that object exactly the way <code>new Rectangle(...)</code> constructs any other (§4.1) — it's <code>throw</code> that then hands it off, instead of an ordinary assignment. Once thrown, execution stops at that line and jumps out looking for a handler, same as any exception. <code>IllegalArgumentException</code> itself is just a different name for the same kind of thing <code>NullPointerException</code> is — Java ships many exception types; this one specifically means "an argument was unacceptable."</p>
+    </div>
+
+    <p>Bundling data (<code>width</code>) together with the code that guards it (<code>setWidth</code>) — so the only way in or out is through methods the class itself controls — is called <span class="term">encapsulation</span>. It's the reason <code>private</code> fields with <code>public</code> getters and setters are the default shape of a Java class, rather than the plain public fields this tutorial started with.</p>
+    </section>
+
+    <!-- §12.5 -->
+    <section id="s11-5">
+      <div class="section-head">
+        <span class="sec-num">§12.5</span>
+        <h2><code>public</code> <em>— visible everywhere</em></h2>
+      </div>
+
+    <p><code>public</code> is the opposite end from <code>private</code>: no restriction at all — any code, anywhere, holding a reference to the object, can call it. It's why <code>getWidth</code> and <code>setWidth</code> are declared <code>public</code> above: they're the class's deliberate, controlled doorway, so they need to be reachable from outside. Constructors are almost always <code>public</code> for the same reason — nothing else can create the object otherwise:</p>
+
+    <pre><code class="language-java">public Rectangle(int width, int height) {
+    setWidth(width);
+    this.height = height;
+}</code></pre>
+
+    <p>Notice the constructor can call <code>setWidth</code> instead of assigning <code>width</code> directly — the validation rule lives in exactly one place, and even Rectangle's own constructor goes through it.</p>
+    </section>
+
+    <!-- §12.6 -->
+    <section id="s11-6">
+      <div class="section-head">
+        <span class="sec-num">§12.6</span>
+        <h2>Package-Private <em>— the default, when no modifier is written</em></h2>
+      </div>
+
+    <p>§12.1 covered what a package is; this section names what happens when a field or method is declared with <em>no</em> access modifier at all. It isn't unrestricted — it's a fourth, distinct level, usually called <span class="term">package-private</span>: visible to every class in the same package, and invisible to everything outside it.</p>
+
+    <pre><code class="language-java">class Rectangle {
+    int width; // no modifier — package-private
+}</code></pre>
+
+    <p>This is stricter than <code>public</code> (outside code can't reach it) but looser than <code>private</code> (other classes in the same package still can). Every earlier chapter's field declarations, before this one, were package-private by default — reachable from anywhere in this tutorial's examples because every class happened to share one package (§12.1), which is exactly what made the unrestricted access in §12.2 possible in the first place.</p>
+    </section>
+
+    <!-- §12.7 -->
+    <section id="s11-7">
+      <div class="section-head">
+        <span class="sec-num">§12.7</span>
+        <h2><code>protected</code> <em>— visible to subclasses too</em></h2>
+      </div>
+
+    <p><code>protected</code> sits between package-private and <code>public</code>: visible within the same package, exactly like package-private, <em>plus</em> visible to subclasses even outside the package.</p>
+
+    <p>Here's a case <code>public</code> genuinely can't handle. <code>Vehicle</code> only exists to be extended — nobody should ever write <code>new Vehicle(...)</code> directly, only <code>new Car(...)</code> or <code>new Truck(...)</code>. A <code>public</code> constructor can't prevent that; a <code>private</code> one would block subclasses too, since <code>Car</code>'s constructor needs to call <code>super(...)</code>. <code>protected</code> is the one modifier that says both things at once — closed to arbitrary outside code, open to the family:</p>
+
+    <pre><code class="language-java">class Vehicle {
+    String make;
+    String model;
+    int    year;
+
+    protected Vehicle(String make, String model, int year) {
+        this.make  = make;
+        this.model = model;
+        this.year  = year;
+    }
+}
+
+class Car extends Vehicle {
+    int doors;
+
+    Car(String make, String model, int year, int doors) {
+        super(make, model, year); // fine — Car is a subclass, protected is reachable
+        this.doors = doors;
+    }
+}</code></pre>
+
+    <pre><code class="language-java">Vehicle v = new Vehicle("Generic", "Model", 2019); // compile error — constructor is protected
+Car c = new Car("Toyota", "Corolla", 2022, 4);      // fine — Car's own constructor is public</code></pre>
+
+    <p>The restriction lands exactly where it's wanted: unrelated code can no longer create a bare <code>Vehicle</code>, but every subclass still can, through <code>super(...)</code>, because that call happens from inside a subclass — precisely the case <code>protected</code> exists to allow.</p>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Fields can use the same idea</div>
+      <p>A field can be <code>protected</code> for the same reason a constructor can: a subclass sometimes needs to reach or adjust inherited state directly, as part of its own logic, in a way a public getter/setter would have to open to everyone, not just the family. Marking <code>year</code> <code>protected</code> instead of package-private, for instance, would let a subclass in a completely different package still adjust it directly — something package-private alone could never do.</p>
+    </div>
+
+    <p>The intuition behind all of this: <code>protected</code> is a class designer saying <em>"this isn't part of the public API for everyone, but subclasses may need it to extend or customize what I built."</em> Subclasses get to cooperate with the internals; arbitrary outside code still doesn't. That's what makes <code>protected</code> the modifier of choice for framework and library code specifically — code meant to be extended by callers the author will never meet, without handing those callers free rein over everything inside.</p>
+
+    <div class="callout callout-mem">
+      <div class="callout-lbl">The real payoff is cross-package</div>
+      <p><code>protected</code> only becomes truly interesting once the subclass lives in a <em>different</em> package. Inside the same package, it barely adds anything — package-private already grants every class there direct access to non-private members, so a same-package subclass would have reached <code>year</code> anyway, protected or not. The behavior <code>protected</code> uniquely adds is <em>cross-package</em> subclass access: a subclass in another package, another module, even another library entirely, can still reach in and extend the internals, while unrelated classes in that same foreign package still can't. That's precisely the shape of a real framework: its classes and the code extending them are almost never in the same package, so <code>protected</code>'s cross-package reach is the part actually doing the work — not the same-package case, which package-private already covered.</p>
+    </div>
+
+    <h3>A real design that leans on <code>protected</code>: the Template Method pattern</h3>
+
+    <p>Methods can be <code>protected</code> for exactly the same reason constructors and fields can — and one particular shape of this shows up constantly in real Java code. <code>Vehicle</code> can fix the overall structure of <code>describe()</code> once, while leaving one specific piece for each subclass to fill in:</p>
+
+    <pre><code class="language-java">class Vehicle {
+    String make;
+    String model;
+    int    year;
+
+    public String describe() {
+        return year + " " + make + " " + model + extraInfo();
+    }
+
+    protected String extraInfo() {
+        return ""; // nothing extra, by default
+    }
+}</code></pre>
+
+    <pre><code class="language-java">class Car extends Vehicle {
+    int doors;
+
+    @Override
+    protected String extraInfo() {
+        return ", " + doors + " doors";
+    }
+}</code></pre>
+
+    <pre><code class="language-java">Vehicle v = new Car("Toyota", "Corolla", 2022, 4);
+System.out.println(v.describe()); // 2022 Toyota Corolla, 4 doors</code></pre>
+
+    <p><code>describe()</code> is the <span class="term">template</span>: the fixed shape every Vehicle's description follows, written once, meant to be called from outside — so it's <code>public</code>. <code>extraInfo()</code> is the <span class="term">hook</span>: the one piece of that shape each subclass is expected to customize — but never meant to be called by outside code on its own; <code>", 4 doors"</code> in isolation, with no year or make in front of it, isn't a sensible thing for anyone to ask for. <code>protected</code> is what enforces that distinction: <code>Car</code> and any other subclass can override <code>extraInfo()</code> to plug their own piece into the template, while code outside the family can only ever call the template itself, never the hook directly.</p>
+
+    <h3>Summary: The Hierarchy of Trust</h3>
+
+    <p>Java's access levels can be viewed as layers of a concentric circle. At each level, we share with more external actors, starting with nobody and ending with everyone:</p>
+
+    <table class="content-table">
+      <tr>
+        <th>Modifier</th>
+        <th>Trusts</th>
+        <th>Meaning</th>
+      </tr>
+      <tr>
+        <td><code>private</code></td>
+        <td><strong>Nobody</strong></td>
+        <td>Trust only myself. No one else. No exceptions.</td>
+      </tr>
+      <tr>
+        <td><em>package-private</em></td>
+        <td><strong>My trusted neighborhood</strong></td>
+        <td>Trust my coworkers (classes in the same package). If no access modifier is explicitly written, this is the default. Remove <code>private</code> — write nothing — and sharing begins, first with package mates; opening it up further, to classes outside the package too, needs <code>protected</code> or <code>public</code>.</td>
+      </tr>
+      <tr>
+        <td><code>protected</code></td>
+        <td><strong>Neighborhood + descendants</strong></td>
+        <td>Trust my coworkers (the classes in this package), <em>plus</em> my descendants (subclasses, wherever they live). Key nuance: <code>protected</code> does not mean "subclasses only" — it also lets any class in the same package reach in. Java has no subclass-only modifier.</td>
+      </tr>
+      <tr>
+        <td><code>public</code></td>
+        <td><strong>Everyone</strong></td>
+        <td>Trust everyone.</td>
+      </tr>
+    </table>
+
+    <p><strong>Why the "coworker" wins over the "child."</strong> A subclass in a <em>different</em> package cannot see a package-private member, but a class in the <em>same</em> package can — even one completely unrelated by inheritance. If a subclass lives in a different package, it's an external entity as far as that member is concerned: it may inherit everything else about the parent, but it lives in a different neighborhood. If Java let subclasses in other packages see package-private members just by extending the class, package-private would stop meaning anything — anyone could gain access to code meant to stay internal simply by writing <code>class Hack extends YourClass</code> in their own project, in their own package. Restricting the default to "same package" is what keeps "internal" actually internal.</p>
+
+    <p>The short version: classes in the same package already have a high degree of visibility into each other, reaching anything declared <code>public</code>, <code>protected</code>, or package-private (whether that member was declared directly, or inherited from a superclass). <code>private</code> is the only level that visibility never crosses.</p>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Scope of this chapter</div>
+      <p>Interfaces, records, and nested classes each add their own wrinkles to access control, and are left for later — this chapter only needed ordinary top-level and member declarations. The general engineering principle behind all of this — expose as little as a class can get away with, called the <span class="term">principle of least privilege</span> — is worth remembering even before every rule above is second nature.</p>
+    </div>
+    </section>
+
+  </article>
+
+  <nav class="page-nav" aria-label="Chapter navigation">
+    <a href="inheritance.html" class="page-nav-prev">
+      <span class="page-nav-label">← Previous</span>
+      <span class="page-nav-title">§11 — Inheritance</span>
+    </a>
+    <a href="immutability.html" class="page-nav-next">
+      <span class="page-nav-label">Next →</span>
+      <span class="page-nav-title">§13 — Immutability</span>
+    </a>
+  </nav>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  hljs.highlightAll();
+
+  // Flag error-annotation comments in code blocks
+  document.querySelectorAll('.hljs-comment').forEach(el => {
+    if (/\b(compile|compiler|runtime) error\b/i.test(el.textContent)) {
+      el.classList.add('hljs-comment-error');
+    }
+  });
+
+  // Code theme toggle
+  const codeThemeBtn = document.getElementById('code-theme-toggle');
+  const lightTheme = document.getElementById('hljs-light-theme');
+  const darkTheme = document.getElementById('hljs-dark-theme');
+  const themeLabel = codeThemeBtn.querySelector('.code-theme-label');
+  const themeIcon = codeThemeBtn.querySelector('.icon');
+
+  function applyCodeTheme(theme) {
+    const dark = theme === 'dark';
+    lightTheme.disabled = dark;
+    darkTheme.disabled = !dark;
+    document.documentElement.classList.toggle('code-dark', dark);
+    themeLabel.textContent = dark ? 'Light code' : 'Dark code';
+    themeIcon.textContent = dark ? '☀️' : '🌙';
+  }
+
+  applyCodeTheme(localStorage.getItem('code-theme') || 'light');
+
+  codeThemeBtn.addEventListener('click', () => {
+    const next = darkTheme.disabled ? 'dark' : 'light';
+    localStorage.setItem('code-theme', next);
+    applyCodeTheme(next);
+  });
+
+  // Scroll spy for sub-sections
+  const sections = document.querySelectorAll('section[id]');
+  const subLinks = document.querySelectorAll('.sub-nav a[href^="#"]');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = '#' + entry.target.id;
+        subLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+      }
+    });
+  }, { rootMargin: '-8% 0px -78% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+
+  const btn  = document.getElementById('menu-btn');
+  const side = document.getElementById('sidebar');
+  btn.addEventListener('click', () => side.classList.toggle('open'));
+  document.querySelectorAll('#sidebar a').forEach(a => {
+    a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§8 Strings — OO with Java</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" id="hljs-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" id="hljs-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
+<script>
+(function () {
+  if ((localStorage.getItem('code-theme') || 'light') === 'dark') {
+    document.getElementById('hljs-light-theme').disabled = true;
+    document.getElementById('hljs-dark-theme').disabled = false;
+    document.documentElement.classList.add('code-dark');
+  }
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Toggle navigation">
+  <span></span><span></span><span></span>
+</button>
+
+<button id="code-theme-toggle" class="code-theme-toggle" aria-label="Toggle code color scheme">
+  <span class="icon">🌙</span><span class="code-theme-label">Dark code</span>
+</button>
+
+<nav id="sidebar" aria-label="Tutorial navigation">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-label">Tutorial</div>
+    <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a></li>
+      <li><a href="variables.html"><span class="nav-num">§1</span>Variables</a></li>
+      <li><a href="primitives.html"><span class="nav-num">§2</span>Primitives</a></li>
+      <li><a href="classes.html"><span class="nav-num">§3</span>Classes</a></li>
+      <li><a href="objects.html"><span class="nav-num">§4</span>Objects</a></li>
+      <li><a href="assignment.html"><span class="nav-num">§5</span>Assignment</a></li>
+      <li><a href="methods.html"><span class="nav-num">§6</span>Methods</a></li>
+      <li><a href="arrays.html"><span class="nav-num">§7</span>Arrays</a></li>
+      <li>
+        <a href="strings.html" class="active"><span class="nav-num">§8</span>Strings</a>
+        <ul class="sub-nav">
+          <li><a href="#s8-1"><span class="nav-num">§8.1</span>Writing Systems &amp; Unicode</a></li>
+          <li><a href="#s8-2"><span class="nav-num">§8.2</span><code>char</code></a></li>
+          <li><a href="#s8-3"><span class="nav-num">§8.3</span><code>Character</code></a></li>
+          <li><a href="#s8-4"><span class="nav-num">§8.4</span>Indexing</a></li>
+          <li><a href="#s8-5"><span class="nav-num">§8.5</span>Immutability</a></li>
+          <li><a href="#s8-6"><span class="nav-num">§8.6</span><code>==</code> vs <code>.equals()</code></a></li>
+          <li><a href="#s8-7"><span class="nav-num">§8.7</span>Concatenation</a></li>
+        </ul>
+      </li>
+      <li><a href="operators.html"><span class="nav-num">§9</span>Operators</a></li>
+      <li><a href="controlflow.html"><span class="nav-num">§10</span>Control Flow</a></li>
+      <li>
+        <a href="inheritance.html"><span class="nav-num">§11</span>Inheritance</a>
+        <ul class="sub-nav">
+          <li><a href="inheritance.html#s10-1"><span class="nav-num">§11.1</span>Taxonomy</a></li>
+          <li><a href="inheritance.html#s10-2"><span class="nav-num">§11.2</span>The Problem</a></li>
+          <li><a href="inheritance.html#s10-3"><span class="nav-num">§11.3</span><code>extends</code></a></li>
+          <li><a href="inheritance.html#s10-4"><span class="nav-num">§11.4</span><code>super(...)</code></a></li>
+          <li><a href="inheritance.html#s10-5"><span class="nav-num">§11.5</span>Polymorphism</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="accessmodifiers.html"><span class="nav-num">§12</span>Packages &amp; Access Modifiers</a>
+        <ul class="sub-nav">
+          <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§12.1</span>Packages</a></li>
+          <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§12.2</span>Why Restrict Access</a></li>
+          <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§12.3</span><code>private</code></a></li>
+          <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§12.4</span>Encapsulation</a></li>
+          <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§12.5</span><code>public</code></a></li>
+          <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§12.6</span>Package-Private</a></li>
+          <li><a href="accessmodifiers.html#s11-7"><span class="nav-num">§12.7</span><code>protected</code></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="immutability.html"><span class="nav-num">§13</span>Immutability</a>
+        <ul class="sub-nav">
+          <li><a href="immutability.html#s13-1"><span class="nav-num">§13.1</span>Identity &amp; State</a></li>
+          <li><a href="immutability.html#s13-2"><span class="nav-num">§13.2</span>A Question of Time</a></li>
+          <li><a href="immutability.html#s13-3"><span class="nav-num">§13.3</span>Building One</a></li>
+          <li><a href="immutability.html#s13-4"><span class="nav-num">§13.4</span><code>final</code> Isn't Deep</a></li>
+          <li><a href="immutability.html#s13-5"><span class="nav-num">§13.5</span>Why It Matters</a></li>
+          <li><a href="immutability.html#s13-6"><span class="nav-num">§13.6</span><code>StringBuilder</code></a></li>
+          <li><a href="immutability.html#s13-7"><span class="nav-num">§13.7</span>Core Pillars</a></li>
+          <li><a href="immutability.html#s13-8"><span class="nav-num">§13.8</span>Putting It Together</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="abstractclasses.html"><span class="nav-num">§14</span>Abstract Classes</a>
+        <ul class="sub-nav">
+          <li><a href="abstractclasses.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
+          <li><a href="abstractclasses.html#s14-2"><span class="nav-num">§14.2</span><code>abstract</code> Classes</a></li>
+          <li><a href="abstractclasses.html#s14-3"><span class="nav-num">§14.3</span><code>abstract</code> Methods</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="interfaces.html"><span class="nav-num">§15</span>Interfaces</a>
+        <ul class="sub-nav">
+          <li><a href="interfaces.html#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
+          <li><a href="interfaces.html#s15-2"><span class="nav-num">§15.2</span>Interface vs. Abstract Class</a></li>
+          <li><a href="interfaces.html#s15-3"><span class="nav-num">§15.3</span>Declaring &amp; Implementing</a></li>
+          <li><a href="interfaces.html#s15-4"><span class="nav-num">§15.4</span>Override vs. Overload</a></li>
+          <li><a href="interfaces.html#s15-5"><span class="nav-num">§15.5</span>Multiple Interfaces</a></li>
+          <li><a href="interfaces.html#s15-6"><span class="nav-num">§15.6</span>Interface-Typed Params</a></li>
+          <li><a href="interfaces.html#s15-7"><span class="nav-num">§15.7</span>Anonymous Classes</a></li>
+          <li><a href="interfaces.html#s15-8"><span class="nav-num">§15.8</span>Default Methods</a></li>
+          <li><a href="interfaces.html#s15-9"><span class="nav-num">§15.9</span>Default Method Collisions</a></li>
+          <li><a href="interfaces.html#s15-10"><span class="nav-num">§15.10</span>Static Methods</a></li>
+          <li><a href="interfaces.html#s15-11"><span class="nav-num">§15.11</span>Interface Inheritance</a></li>
+          <li><a href="interfaces.html#s15-12"><span class="nav-num">§15.12</span>Strategy Pattern</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="generics.html"><span class="nav-num">§16</span>Generics</a>
+        <ul class="sub-nav">
+          <li><a href="generics.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
+          <li><a href="generics.html#s16-2"><span class="nav-num">§16.2</span>Type Parameters</a></li>
+          <li><a href="generics.html#s16-3"><span class="nav-num">§16.3</span>Generic Methods</a></li>
+          <li><a href="generics.html#s16-4"><span class="nav-num">§16.4</span>Bounded Types</a></li>
+          <li><a href="generics.html#s16-5"><span class="nav-num">§16.5</span>Compile Time Only</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="records.html"><span class="nav-num">§17</span>Records</a>
+        <ul class="sub-nav">
+          <li><a href="records.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
+          <li><a href="records.html#s17-2"><span class="nav-num">§17.2</span><code>record</code></a></li>
+          <li><a href="records.html#s17-3"><span class="nav-num">§17.3</span>Implicitly Final</a></li>
+          <li><a href="records.html#s17-4"><span class="nav-num">§17.4</span>Shallow Immutability</a></li>
+          <li><a href="records.html#s17-5"><span class="nav-num">§17.5</span>Compact Constructors</a></li>
+          <li><a href="records.html#s17-6"><span class="nav-num">§17.6</span>Records Can Do More</a></li>
+          <li><a href="records.html#s17-7"><span class="nav-num">§17.7</span>When to Reach for One</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="collections.html"><span class="nav-num">§18</span>Collections Framework</a>
+        <ul class="sub-nav">
+          <li><a href="collections.html#s18-1"><span class="nav-num">§18.1</span>The Problem</a></li>
+          <li><a href="collections.html#s18-2"><span class="nav-num">§18.2</span>The Big Picture</a></li>
+          <li><a href="collections.html#s18-3"><span class="nav-num">§18.3</span><code>List</code></a></li>
+          <li><a href="collections.html#s18-4"><span class="nav-num">§18.4</span><code>Queue</code></a></li>
+          <li><a href="collections.html#s18-5"><span class="nav-num">§18.5</span><code>Set</code></a></li>
+          <li><a href="collections.html#s18-6"><span class="nav-num">§18.6</span><code>Map</code></a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</nav>
+
+<main id="content">
+  <header class="page-header">
+    <div class="page-chapter">Chapter 8</div>
+    <h1>Strings</h1>
+    <p class="page-lead">Text has been sitting in plain sight since §2 — <code>char</code>, and every String literal since. This chapter reopens both: what a <code>char</code> actually can and can't hold, and what a <code>String</code> really is once you know that.</p>
+  </header>
+
+  <article>
+
+    <!-- §8.1 -->
+    <section id="s8-1">
+      <div class="section-head">
+        <span class="sec-num">§8.1</span>
+        <h2>Writing Systems and Unicode <em>— a universal catalogue</em></h2>
+      </div>
+
+    <p>One word of caution before this chapter properly begins: "character" here means something more general than either of Java's own terms for it, <code>char</code> and <code>Character</code>, both still a section away. Used on its own, a <span class="term">character</span> just means a symbol belonging to some writing system — a letter, a digit, a punctuation mark, an emoji — independent of any programming language, or any notion of how it might be stored in memory.</p>
+
+    <p><span class="term">Unicode</span> assigns a unique number — called a <span class="term">code point</span> — to every character, in that general sense, in every writing system in the world. The letter <code>A</code>, for instance, is code point <code>65</code>.</p>
+
+    <p>Unicode conventionally writes these numbers in hexadecimal rather than decimal, prefixed with <code>U+</code> — hex represents large numbers more compactly, and code points run well past a million, so the saving is worth it. <code>65</code> in hex is <code>41</code>, so <code>'A'</code> is written <code>U+0041</code>:</p>
+
+    <ul>
+      <li>The letter <code>A</code> is code point <code>65</code> — <code>U+0041</code> in hex.</li>
+      <li>The character <code>€</code> is code point <code>8,364</code> — <code>U+20AC</code> in hex.</li>
+      <li>The emoji 😀 is code point <code>128,512</code> — <code>U+1F600</code> in hex.</li>
+    </ul>
+
+    <p>That's all Unicode does: define a universal catalogue of characters, and give each one a number. Nothing about that catalogue says how many bits it takes to store one of those numbers, or how a programming language ought to represent one in memory — that's a separate question entirely, and exactly where <code>char</code> comes in, next.</p>
+    </section>
+
+    <!-- §8.2 -->
+    <section id="s8-2">
+      <div class="section-head">
+        <span class="sec-num">§8.2</span>
+        <h2><code>char</code> <em>— Java's representation of a code point</em></h2>
+      </div>
+
+    <p>§2 defined <code>char</code> in one line: a single 16-bit Unicode character. The 16-bit part is not incidental — recall §2's rule: a slot built from <em>N</em> bits holds exactly 2<sup>N</sup> distinct patterns, no more. 16 bits give 65,536 of them. When Java was designed, in the mid-1990s, Unicode itself was believed to top out at roughly that many characters — every writing system in existence, once and for all, fitting inside one <code>char</code>. Sizing <code>char</code> at 16 bits wasn't a guess; it was believed to be the entire, final answer.</p>
+
+    <p>It wasn't. Unicode has since grown past 1.1 million possible <span class="term">code points</span> — the actual number the standard assigns to a character (<code>'A'</code> is code point <code>U+0041</code>). Historic scripts, thousands of emoji, rare CJK ideographs have all been added since. 65,536 values — what a single <code>char</code> can hold — covers only the <span class="term">Basic Multilingual Plane</span>, a subset of modern Unicode, not the whole thing.</p>
+
+    <pre><code class="language-java">char c = 'A';       // fine — always 2 bytes, code point U+0041, well inside the BMP
+char emoji = '🙂';  // compile error — code point U+1F642 exceeds a single char's capacity</code></pre>
+
+    <p><code>'A'</code> fits with room to spare — <code>U+0041</code> is a small number, one of 65,536 a <code>char</code> can hold. <code>'🙂'</code>'s code point, <code>U+1F642</code>, is well over a million past that ceiling — there is no single <code>char</code> value that means it. The compiler doesn't approximate or truncate; it simply refuses.</p>
+
+    <p>Java's fix: a code point outside that 16-bit range is represented as a <span class="term">surrogate pair</span> — two <code>char</code> values together, standing in for the one code point neither could hold alone.</p>
+
+    <pre><code class="language-java">String emoji = "😀";
+System.out.println(emoji.length()); // 2</code></pre>
+
+    <p>One visible character. Two <code>char</code>s. That's not a bug — 😀's code point is <code>U+1F600</code>, far outside the 16-bit range, so it takes a surrogate pair to represent.</p>
+
+    <div class="callout callout-rule">
+      <div class="callout-lbl">A char isn't always a character</div>
+      <p>The name is a historical relic. A <code>char</code> is really a single UTF-16 <em>code unit</em> — one 16-bit storage slot — not a guarantee of one visible, user-perceived character. Most everyday text (Latin letters, digits, common punctuation) needs only one <code>char</code> per character, which is why the distinction stayed invisible for so long. It stops being invisible the moment text includes anything outside the Basic Multilingual Plane.</p>
+    </div>
+    </section>
+
+    <!-- §8.3 -->
+    <section id="s8-3">
+      <div class="section-head">
+        <span class="sec-num">§8.3</span>
+        <h2><code>Character</code> <em>— the wrapper class for <code>char</code></em></h2>
+      </div>
+
+    <p>A primitive slot has no methods — no indirection, nothing to call (§2). Java pairs every primitive type with a <span class="term">wrapper class</span>: an ordinary class that boxes the primitive value inside an object and gives it a toolkit of methods to go with it. <code>char</code>'s is <code>Character</code>; <code>int</code>'s is <code>Integer</code>; <code>double</code>'s is <code>Double</code>; <code>boolean</code>'s is <code>Boolean</code>. This chapter only needs <code>Character</code> — the others follow the same idea.</p>
+
+    <p><code>Character</code>'s everyday methods classify or transform a single <code>char</code>, one at a time — no loop required yet to use them:</p>
+
+    <pre><code class="language-java">String username = "player1";
+char first = username.charAt(0);
+
+System.out.println(Character.isLetter(first)); // true
+System.out.println(Character.isDigit(first));   // false
+System.out.println(Character.toUpperCase(first)); // 'P'</code></pre>
+
+    <p>These are <code>static</code> methods (§6.1) — called on the class itself, <code>Character.isLetter(...)</code>, not on an object.</p>
+
+    <p><code>Character</code> also has methods built specifically for the code-point problem §8.2 just raised — this is the payoff:</p>
+
+    <pre><code class="language-java">int codePoint = 0x1F600; // 😀's actual Unicode code point
+
+System.out.println(Character.isSupplementaryCodePoint(codePoint)); // true — outside the BMP
+System.out.println(Character.charCount(codePoint));                // 2 — needs a surrogate pair
+
+char[] pair = Character.toChars(codePoint);
+System.out.println(pair.length); // 2</code></pre>
+
+    <p><code>Character.charCount(0x1F600)</code> returning <code>2</code> is exactly why <code>"😀".length()</code> was <code>2</code> back in §8.2 — the same fact, confirmed directly from the code point itself, rather than just observed on a String.</p>
+    </section>
+
+    <!-- §8.4 -->
+    <section id="s8-4">
+      <div class="section-head">
+        <span class="sec-num">§8.4</span>
+        <h2>Strings Are Sequences of <code>char</code> <em>— indexing and length</em></h2>
+      </div>
+
+    <p>A <code>String</code> is a sequence of characters — but the methods it exposes work specifically in terms of <code>char</code> code units (§8.2), which is exactly why <code>.length()</code> counts UTF-16 units, not "characters" in the everyday sense. Reaching a specific one uses <code>charAt</code>, not brackets:</p>
+
+    <pre><code class="language-java">String make = "Toyota";
+
+System.out.println(make.length());   // 6
+System.out.println(make.charAt(0));  // 'T'
+System.out.println(make.charAt(5));  // 'a'</code></pre>
+
+    <div class="callout callout-conn">
+      <div class="callout-lbl">A method, not a field <a href="arrays.html" class="backref">← §7</a></div>
+      <p>§7's arrays exposed their size as a field — <code>temperatures.length</code>, no parentheses. A String's size is a <em>method</em> — <code>make.length()</code>, with parentheses — and a specific character comes from <code>charAt(i)</code>, a method call, not <code>make[i]</code>, a bracket. A String is a reference type holding a sequence, much like an array, but it is not an array, and the two don't share syntax.</p>
+    </div>
+    </section>
+
+    <!-- §8.5 -->
+    <section id="s8-5">
+      <div class="section-head">
+        <span class="sec-num">§8.5</span>
+        <h2>Immutability <em>— every "change" is a new String</em></h2>
+      </div>
+
+    <p>An array's slots can be overwritten in place (§7). A Rectangle's fields can be reassigned (§5). A <code>String</code> cannot — once created, its characters never change. Every method that looks like it modifies a String actually builds and returns a brand new one, leaving the original untouched:</p>
+
+    <pre><code class="language-java">String model = "corolla";
+String upper = model.toUpperCase();
+
+System.out.println(model); // corolla — unchanged
+System.out.println(upper); // COROLLA — a new String, a new address</code></pre>
+
+    <p><code>model</code> still holds the address of the original, all-lowercase String after this runs. <code>toUpperCase()</code> didn't reach in and rewrite it — it allocated a new String object, uppercased, and returned its address, which <code>upper</code> then holds. Forgetting this is a common mistake: <code>model.toUpperCase();</code> alone, with no assignment, computes a new String and immediately discards it — <code>model</code> itself never changes, no matter how many methods you call on it.</p>
+    </section>
+
+    <!-- §8.6 -->
+    <section id="s8-6">
+      <div class="section-head">
+        <span class="sec-num">§8.6</span>
+        <h2><code>==</code> vs <code>.equals()</code> <em>— address vs content</em></h2>
+      </div>
+
+    <p>A <code>String</code> variable holds an address, exactly like any reference variable (§4.2). <code>==</code> never looks past that address — it compares only what's sitting in the two variables' own slots, for any reference type, Strings included. <code>new</code> forces two genuinely separate objects, even with identical content:</p>
+
+    <pre><code class="language-java">String a = new String("Toyota");
+String b = new String("Toyota");
+
+System.out.println(a == b);      // false — two separate objects
+System.out.println(a.equals(b)); // true — same characters</code></pre>
+
+    <p><code>a</code> and <code>b</code> hold two different addresses — <code>new</code> allocated a separate object each time (§4.1) — so <code>a == b</code> is <code>false</code>, the same rule that applies to any two independently-constructed objects. <code>.equals(...)</code> asks a different question entirely: not "same address," but "same characters, in the same order." <code>String</code> answers that question by actually comparing content, character by character — which is precisely why it gives the opposite answer here.</p>
+
+    <div class="callout callout-mem">
+      <div class="callout-lbl">Why <code>String</code> can answer that question</div>
+      <p><code>String</code> is a class like any other (§3) — and like any class, it can define its own version of a method it inherits, replacing the inherited behavior with its own. Every class inherits an <code>equals(Object)</code> method whose default behavior is to compare addresses, same as <code>==</code>. <code>String</code> replaces that default with one that compares characters instead. The mechanics of how a class does that — and the word for it — belong to a later chapter (§11); for now, the important fact is simply that <code>String</code> has already done it, which is why <code>.equals(...)</code> means "same content" specifically for Strings, not address, the way the default would otherwise give you.</p>
+    </div>
+
+    <div class="callout callout-rule">
+      <div class="callout-lbl">Always <code>.equals()</code>, never <code>==</code>, for String content</div>
+      <p>String literals are handled specially by Java — identical literals are frequently, though not always reliably, the exact same object underneath, which can make <code>==</code> <em>appear</em> to work by accident. It is not a rule you can depend on. Comparing String content always means <code>.equals(...)</code>; <code>==</code> on Strings should be read as a deliberate address comparison, not a shortcut for it.</p>
+    </div>
+    </section>
+
+    <!-- §8.7 -->
+    <section id="s8-7">
+      <div class="section-head">
+        <span class="sec-num">§8.7</span>
+        <h2>Concatenation <em>with <code>+</code></em></h2>
+      </div>
+
+    <p><code>+</code> has appeared on Strings informally since early examples. Formally: <code>+</code> between two Strings joins them into a new one; <code>+</code> between a String and anything else converts the other side to its String form first, then joins:</p>
+
+    <pre><code class="language-java">String greeting = "Hello, " + "world" + "!";
+System.out.println(greeting); // Hello, world!
+
+String withNumber = "Count: " + 5;
+System.out.println(withNumber); // Count: 5</code></pre>
+
+    <p>Like every other String "modification," concatenation builds a brand-new String (§8.5) — <code>greeting</code> is a fresh object, never one of the three literals mutated in place. This is also why the same <code>+</code> symbol means something so different here than it did for <code>int</code>s and <code>double</code>s in §2 — the operator itself isn't doing arithmetic at all when a String is on either side; it's building and returning a new sequence of characters.</p>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Scope of this chapter</div>
+      <p><code>split</code>, <code>String.format</code>, text blocks, and regular expressions all build on what's here, and are left for later. So is the mechanism behind <code>String</code>'s own <code>equals()</code> override — §11 covers overriding in general, and is worth revisiting with this chapter in mind. <code>StringBuilder</code> — building a String across many steps without discarding one candidate per step — gets its own explanation in §13.6, once immutability itself has a name.</p>
+    </div>
+    </section>
+
+  </article>
+
+  <nav class="page-nav" aria-label="Chapter navigation">
+    <a href="arrays.html" class="page-nav-prev">
+      <span class="page-nav-label">← Previous</span>
+      <span class="page-nav-title">§7 — Arrays</span>
+    </a>
+    <a href="operators.html" class="page-nav-next">
+      <span class="page-nav-label">Next →</span>
+      <span class="page-nav-title">§9 — Operators</span>
+    </a>
+  </nav>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  hljs.highlightAll();
+
+  // Flag error-annotation comments in code blocks
+  document.querySelectorAll('.hljs-comment').forEach(el => {
+    if (/\b(compile|compiler|runtime) error\b/i.test(el.textContent)) {
+      el.classList.add('hljs-comment-error');
+    }
+  });
+
+  // Code theme toggle
+  const codeThemeBtn = document.getElementById('code-theme-toggle');
+  const lightTheme = document.getElementById('hljs-light-theme');
+  const darkTheme = document.getElementById('hljs-dark-theme');
+  const themeLabel = codeThemeBtn.querySelector('.code-theme-label');
+  const themeIcon = codeThemeBtn.querySelector('.icon');
+
+  function applyCodeTheme(theme) {
+    const dark = theme === 'dark';
+    lightTheme.disabled = dark;
+    darkTheme.disabled = !dark;
+    document.documentElement.classList.toggle('code-dark', dark);
+    themeLabel.textContent = dark ? 'Light code' : 'Dark code';
+    themeIcon.textContent = dark ? '☀️' : '🌙';
+  }
+
+  applyCodeTheme(localStorage.getItem('code-theme') || 'light');
+
+  codeThemeBtn.addEventListener('click', () => {
+    const next = darkTheme.disabled ? 'dark' : 'light';
+    localStorage.setItem('code-theme', next);
+    applyCodeTheme(next);
+  });
+
+  // Scroll spy for sub-sections
+  const sections = document.querySelectorAll('section[id]');
+  const subLinks = document.querySelectorAll('.sub-nav a[href^="#"]');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = '#' + entry.target.id;
+        subLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+      }
+    });
+  }, { rootMargin: '-8% 0px -78% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+
+  const btn  = document.getElementById('menu-btn');
+  const side = document.getElementById('sidebar');
+  btn.addEventListener('click', () => side.classList.toggle('open'));
+  document.querySelectorAll('#sidebar a').forEach(a => {
+    a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
+  });
+});
+</script>
+</body>
+</html>

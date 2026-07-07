@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>§3 Classes — OO with Java</title>
+<title>§14 Abstract Classes — OO with Java</title>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" id="hljs-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
 <link rel="stylesheet" id="hljs-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
@@ -39,7 +39,7 @@
       <li><a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a></li>
       <li><a href="variables.html"><span class="nav-num">§1</span>Variables</a></li>
       <li><a href="primitives.html"><span class="nav-num">§2</span>Primitives</a></li>
-      <li><a href="classes.html" class="active"><span class="nav-num">§3</span>Classes</a></li>
+      <li><a href="classes.html"><span class="nav-num">§3</span>Classes</a></li>
       <li><a href="objects.html"><span class="nav-num">§4</span>Objects</a></li>
       <li><a href="assignment.html"><span class="nav-num">§5</span>Assignment</a></li>
       <li><a href="methods.html"><span class="nav-num">§6</span>Methods</a></li>
@@ -69,7 +69,7 @@
         </ul>
       </li>
       <li>
-        <a href="accessmodifiers.html"><span class="nav-num">§12</span>Packages & Access Modifiers</a>
+        <a href="accessmodifiers.html"><span class="nav-num">§12</span>Packages &amp; Access Modifiers</a>
         <ul class="sub-nav">
           <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§12.1</span>Packages</a></li>
           <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§12.2</span>Why Restrict Access</a></li>
@@ -94,11 +94,11 @@
         </ul>
       </li>
       <li>
-        <a href="abstractclasses.html"><span class="nav-num">§14</span>Abstract Classes</a>
+        <a href="abstractclasses.html" class="active"><span class="nav-num">§14</span>Abstract Classes</a>
         <ul class="sub-nav">
-          <li><a href="abstractclasses.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
-          <li><a href="abstractclasses.html#s14-2"><span class="nav-num">§14.2</span><code>abstract</code> Classes</a></li>
-          <li><a href="abstractclasses.html#s14-3"><span class="nav-num">§14.3</span><code>abstract</code> Methods</a></li>
+          <li><a href="#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
+          <li><a href="#s14-2"><span class="nav-num">§14.2</span><code>abstract</code> Classes</a></li>
+          <li><a href="#s14-3"><span class="nav-num">§14.3</span><code>abstract</code> Methods</a></li>
         </ul>
       </li>
       <li>
@@ -157,40 +157,139 @@
 
 <main id="content">
   <header class="page-header">
-    <div class="page-chapter">Chapter 3</div>
-    <h1>Classes</h1>
-    <p class="page-lead">A class is a blueprint. The class itself is not an object; it describes objects.</p>
+    <div class="page-chapter">Chapter 14</div>
+    <h1>Abstract Classes</h1>
+    <p class="page-lead">§11's <code>protected</code> constructor trick narrowed who could instantiate a class, but couldn't close the gap entirely — same-package code could still do it. This chapter gives "a class that only exists to be extended" its own keyword, one that closes that gap completely — and lets a method itself be a promise instead of an implementation.</p>
   </header>
 
   <article>
 
-    <p>So far, every variable we've seen holds a single primitive value: a number, a boolean. Most interesting data is made of several things grouped together — the way a real-world kind of thing is described by its attributes. A rectangle has a width and a height. A point has an x and a y. A person has a name and an age. A <span class="term">class</span> lets you define that grouping: the set of attributes that together describe one kind of thing.</p>
+    <!-- §14.1 -->
+    <section id="s14-1">
+      <div class="section-head">
+        <span class="sec-num">§14.1</span>
+        <h2>The Problem <em>— two different gaps, one shared shape</em></h2>
+      </div>
 
-    <p>A class is a description of a kind of object: it names the fields that every object of that kind will have. Think of it as a blueprint — the way an architect draws up a detailed technical drawing describing a house: its dimensions, the number of rooms, where the doors go. The blueprint itself is not a house; you can't live in it. But it's precise enough that a builder can follow it, and many separate houses can be built from that same one blueprint. Each has the same rooms in the same layout — but one is painted blue, another has hardwood floors, another has three bedrooms filled and one empty. Same structure, different values in each house. A class works the same way for objects.</p>
+    <p><strong>No reason to exist alone.</strong> §11.6 used a <code>protected</code> constructor to keep <code>new Vehicle("Generic", "Model", 2019)</code> from being written outside <code>Vehicle</code>'s own package — a real restriction, but not a complete one: <code>protected</code> still means "same package, plus subclasses anywhere" (§12.7), so any other class sharing that package could still call it directly. What's actually true about <code>Vehicle</code> is stronger than "most callers can't construct this": <code>Vehicle</code> was never meant to be a complete, standalone thing at all, for <em>any</em> caller, anywhere. Every real vehicle is <em>some kind</em> of vehicle — a Car, a Truck, something more specific — and <code>Vehicle</code> on its own is just the shared shape they all happen to have.</p>
 
-    <h3>Defining a class</h3>
+    <p><strong>No sensible default.</strong> A separate problem shows up the moment <code>Vehicle</code> needs a <code>startEngine()</code> method. <code>describe()</code> has always had a real implementation — every vehicle has a make, a model, a year, so one shared sentence works for all of them (§11.3). Starting an engine has no such shared sentence: a Car's starts with a push-button, a Truck's diesel engine needs its glow plugs to warm up first. No default <code>Vehicle.startEngine()</code> exists that isn't either wrong for someone or an outright lie, a body written just to satisfy the compiler.</p>
 
-    <p>Our first class uses only primitive fields:</p>
+    <p>Two different gaps — one in the class itself, one in a single method — but Java closes both with the same word, applied at two levels: <code>abstract</code> on the class says it can never be instantiated on its own, only extended; <code>abstract</code> on a method says it has no body at all, only a signature, binding every concrete subclass to supply one.</p>
+    </section>
 
-    <pre><code class="language-java">class Rectangle {
-    int width;
-    int height;
+    <!-- §14.2 -->
+    <section id="s14-2">
+      <div class="section-head">
+        <span class="sec-num">§14.2</span>
+        <h2><code>abstract</code> Classes <em>— a shape that can't stand on its own</em></h2>
+      </div>
+
+    <p>Marking a class <code>abstract</code> makes instantiating it, directly, a compile error — not a convention, not a note in a comment, an actual rule the compiler enforces:</p>
+
+    <pre><code class="language-java">abstract class Vehicle {
+    String make;
+    String model;
+    int    year;
+
+    Vehicle(String make, String model, int year) {
+        this.make  = make;
+        this.model = model;
+        this.year  = year;
+    }
+
+    String describe() {
+        return year + " " + make + " " + model;
+    }
 }</code></pre>
 
-    <p>This declares that every Rectangle will have two slots: <code>width</code> (an <code>int</code>) and <code>height</code> (an <code>int</code>). The class definition itself is a template — no Rectangle object exists yet, just the description of what one will look like.</p>
+    <pre><code class="language-java">Vehicle v = new Vehicle("Generic", "Model", 2019); // compile error — Vehicle is abstract</code></pre>
 
-    <p>The field declarations inside the class look exactly like the variable declarations from §1 — because they are. They're just variables that belong to an object rather than to a method call. Once objects exist (§4.1), each one will have its own independent <code>width</code> and <code>height</code> slots.</p>
+    <p>Subclasses are untouched by any of this. <code>Car extends Vehicle</code> and <code>Truck extends Vehicle</code> can still be instantiated exactly as before (§11.3) — <code>abstract</code> only blocks <code>new</code> on the class it's written on, not on its concrete subclasses.</p>
+
+    <div class="callout callout-rule">
+      <div class="callout-lbl">This replaces the <code>protected</code> constructor</div>
+      <p>§11.6 used a <code>protected</code> constructor to keep most unrelated code from writing <code>new Vehicle(...)</code>, while still letting <code>Car</code> and <code>Truck</code> call it through <code>super(...)</code> — but same-package callers were always an open gap in that scheme. An <code>abstract</code> class doesn't have that gap — instantiation is blocked outright, for every caller, everywhere, regardless of what access level the constructor itself declares or what package the caller is in. <code>Vehicle</code>'s constructor above is package-private and that's fine: <code>abstract</code> is doing the actual work now.</p>
+    </div>
+    </section>
+
+    <!-- §14.3 -->
+    <section id="s14-3">
+      <div class="section-head">
+        <span class="sec-num">§14.3</span>
+        <h2><code>abstract</code> Methods <em>— a signature with no body</em></h2>
+      </div>
+
+    <p>An <code>abstract</code> method takes the same idea one level deeper: no body at all, just a signature ending directly in a semicolon.</p>
+
+    <pre><code class="language-java">abstract class Vehicle {
+    String make;
+    String model;
+    int    year;
+
+    Vehicle(String make, String model, int year) {
+        this.make  = make;
+        this.model = model;
+        this.year  = year;
+    }
+
+    String describe() {
+        return year + " " + make + " " + model;
+    }
+
+    abstract String startEngine();
+}</code></pre>
+
+    <p>Every concrete (non-abstract) subclass is now required to provide a real <code>startEngine()</code> — the compiler checks this the same way it checks that every abstract method gets answered, somewhere, before an object of that type can ever exist:</p>
+
+    <pre><code class="language-java">class Car extends Vehicle {
+    Car(String make, String model, int year) {
+        super(make, model, year);
+    }
+
+    @Override
+    String startEngine() {
+        return "Push-button start.";
+    }
+}
+
+class Truck extends Vehicle {
+    Truck(String make, String model, int year) {
+        super(make, model, year);
+    }
+
+    @Override
+    String startEngine() {
+        return "Turn key — glow plugs warming up first.";
+    }
+}</code></pre>
+
+    <pre><code class="language-java">Vehicle v = new Car("Toyota", "Corolla", 2022);
+System.out.println(v.startEngine()); // Push-button start.</code></pre>
+
+    <p>Leave <code>startEngine()</code> unimplemented in a subclass, and that subclass simply inherits the same obligation <code>Vehicle</code> had — it becomes abstract too, whether or not the word is written on it, and it can't be instantiated either, for exactly the same reason. The only way to end the chain is to actually write the method.</p>
+
+    <div class="callout callout-conn">
+      <div class="callout-lbl">Dynamic dispatch, still <a href="inheritance.html#s10-5" class="backref">← §11.5</a></div>
+      <p><code>v.startEngine()</code> above runs <em>Car's</em> version, chosen at runtime by the object's actual type, exactly the way overriding <code>describe()</code> worked in §11.5. Nothing new is happening mechanically — an abstract method is simply one with no inherited default to fall back on, so every concrete class in the hierarchy is forced to supply its own version rather than optionally overriding one.</p>
+    </div>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Scope of this chapter</div>
+      <p>A class can mix abstract and concrete methods freely, as <code>Vehicle</code> does above (<code>describe()</code> concrete, <code>startEngine()</code> abstract) — there's no rule requiring all-or-nothing. Multiple levels of abstract subclassing, and how abstract classes interact with the next chapter's interfaces, are left for §15 to build on.</p>
+    </div>
+    </section>
 
   </article>
 
   <nav class="page-nav" aria-label="Chapter navigation">
-    <a href="primitives.html" class="page-nav-prev">
+    <a href="immutability.html" class="page-nav-prev">
       <span class="page-nav-label">← Previous</span>
-      <span class="page-nav-title">§2 — Primitives</span>
+      <span class="page-nav-title">§13 — Immutability</span>
     </a>
-    <a href="objects.html" class="page-nav-next">
+    <a href="interfaces.html" class="page-nav-next">
       <span class="page-nav-label">Next →</span>
-      <span class="page-nav-title">§4 — Objects</span>
+      <span class="page-nav-title">§15 — Interfaces</span>
     </a>
   </nav>
 </main>
@@ -229,6 +328,22 @@ document.addEventListener('DOMContentLoaded', function () {
     localStorage.setItem('code-theme', next);
     applyCodeTheme(next);
   });
+
+  // Scroll spy for sub-sections
+  const sections = document.querySelectorAll('section[id]');
+  const subLinks = document.querySelectorAll('.sub-nav a[href^="#"]');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = '#' + entry.target.id;
+        subLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+      }
+    });
+  }, { rootMargin: '-8% 0px -78% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+
   const btn  = document.getElementById('menu-btn');
   const side = document.getElementById('sidebar');
   btn.addEventListener('click', () => side.classList.toggle('open'));

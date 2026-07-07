@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§7 Arrays — OO with Java</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" id="hljs-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" id="hljs-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
+<script>
+(function () {
+  if ((localStorage.getItem('code-theme') || 'light') === 'dark') {
+    document.getElementById('hljs-light-theme').disabled = true;
+    document.getElementById('hljs-dark-theme').disabled = false;
+    document.documentElement.classList.add('code-dark');
+  }
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Toggle navigation">
+  <span></span><span></span><span></span>
+</button>
+
+<button id="code-theme-toggle" class="code-theme-toggle" aria-label="Toggle code color scheme">
+  <span class="icon">🌙</span><span class="code-theme-label">Dark code</span>
+</button>
+
+<nav id="sidebar" aria-label="Tutorial navigation">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-label">Tutorial</div>
+    <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a></li>
+      <li><a href="variables.html"><span class="nav-num">§1</span>Variables</a></li>
+      <li><a href="primitives.html"><span class="nav-num">§2</span>Primitives</a></li>
+      <li><a href="classes.html"><span class="nav-num">§3</span>Classes</a></li>
+      <li><a href="objects.html"><span class="nav-num">§4</span>Objects</a></li>
+      <li><a href="assignment.html"><span class="nav-num">§5</span>Assignment</a></li>
+      <li><a href="methods.html"><span class="nav-num">§6</span>Methods</a></li>
+      <li><a href="arrays.html" class="active"><span class="nav-num">§7</span>Arrays</a></li>
+      <li>
+        <a href="strings.html"><span class="nav-num">§8</span>Strings</a>
+        <ul class="sub-nav">
+          <li><a href="strings.html#s8-1"><span class="nav-num">§8.1</span>Writing Systems &amp; Unicode</a></li>
+          <li><a href="strings.html#s8-2"><span class="nav-num">§8.2</span><code>char</code></a></li>
+          <li><a href="strings.html#s8-3"><span class="nav-num">§8.3</span><code>Character</code></a></li>
+          <li><a href="strings.html#s8-4"><span class="nav-num">§8.4</span>Indexing</a></li>
+          <li><a href="strings.html#s8-5"><span class="nav-num">§8.5</span>Immutability</a></li>
+          <li><a href="strings.html#s8-6"><span class="nav-num">§8.6</span><code>==</code> vs <code>.equals()</code></a></li>
+          <li><a href="strings.html#s8-7"><span class="nav-num">§8.7</span>Concatenation</a></li>
+        </ul>
+      </li>
+      <li><a href="operators.html"><span class="nav-num">§9</span>Operators</a></li>
+      <li><a href="controlflow.html"><span class="nav-num">§10</span>Control Flow</a></li>
+      <li>
+        <a href="inheritance.html"><span class="nav-num">§11</span>Inheritance</a>
+        <ul class="sub-nav">
+          <li><a href="inheritance.html#s10-1"><span class="nav-num">§11.1</span>Taxonomy</a></li>
+          <li><a href="inheritance.html#s10-2"><span class="nav-num">§11.2</span>The Problem</a></li>
+          <li><a href="inheritance.html#s10-3"><span class="nav-num">§11.3</span><code>extends</code></a></li>
+          <li><a href="inheritance.html#s10-4"><span class="nav-num">§11.4</span><code>super(...)</code></a></li>
+          <li><a href="inheritance.html#s10-5"><span class="nav-num">§11.5</span>Polymorphism</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="accessmodifiers.html"><span class="nav-num">§12</span>Packages & Access Modifiers</a>
+        <ul class="sub-nav">
+          <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§12.1</span>Packages</a></li>
+          <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§12.2</span>Why Restrict Access</a></li>
+          <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§12.3</span><code>private</code></a></li>
+          <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§12.4</span>Encapsulation</a></li>
+          <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§12.5</span><code>public</code></a></li>
+          <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§12.6</span>Package-Private</a></li>
+          <li><a href="accessmodifiers.html#s11-7"><span class="nav-num">§12.7</span><code>protected</code></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="immutability.html"><span class="nav-num">§13</span>Immutability</a>
+        <ul class="sub-nav">
+          <li><a href="immutability.html#s13-1"><span class="nav-num">§13.1</span>Identity &amp; State</a></li>
+          <li><a href="immutability.html#s13-2"><span class="nav-num">§13.2</span>A Question of Time</a></li>
+          <li><a href="immutability.html#s13-3"><span class="nav-num">§13.3</span>Building One</a></li>
+          <li><a href="immutability.html#s13-4"><span class="nav-num">§13.4</span><code>final</code> Isn't Deep</a></li>
+          <li><a href="immutability.html#s13-5"><span class="nav-num">§13.5</span>Why It Matters</a></li>
+          <li><a href="immutability.html#s13-6"><span class="nav-num">§13.6</span><code>StringBuilder</code></a></li>
+          <li><a href="immutability.html#s13-7"><span class="nav-num">§13.7</span>Core Pillars</a></li>
+          <li><a href="immutability.html#s13-8"><span class="nav-num">§13.8</span>Putting It Together</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="abstractclasses.html"><span class="nav-num">§14</span>Abstract Classes</a>
+        <ul class="sub-nav">
+          <li><a href="abstractclasses.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
+          <li><a href="abstractclasses.html#s14-2"><span class="nav-num">§14.2</span><code>abstract</code> Classes</a></li>
+          <li><a href="abstractclasses.html#s14-3"><span class="nav-num">§14.3</span><code>abstract</code> Methods</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="interfaces.html"><span class="nav-num">§15</span>Interfaces</a>
+        <ul class="sub-nav">
+          <li><a href="interfaces.html#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
+          <li><a href="interfaces.html#s15-2"><span class="nav-num">§15.2</span>Interface vs. Abstract Class</a></li>
+          <li><a href="interfaces.html#s15-3"><span class="nav-num">§15.3</span>Declaring &amp; Implementing</a></li>
+          <li><a href="interfaces.html#s15-4"><span class="nav-num">§15.4</span>Override vs. Overload</a></li>
+          <li><a href="interfaces.html#s15-5"><span class="nav-num">§15.5</span>Multiple Interfaces</a></li>
+          <li><a href="interfaces.html#s15-6"><span class="nav-num">§15.6</span>Interface-Typed Params</a></li>
+          <li><a href="interfaces.html#s15-7"><span class="nav-num">§15.7</span>Anonymous Classes</a></li>
+          <li><a href="interfaces.html#s15-8"><span class="nav-num">§15.8</span>Default Methods</a></li>
+          <li><a href="interfaces.html#s15-9"><span class="nav-num">§15.9</span>Default Method Collisions</a></li>
+          <li><a href="interfaces.html#s15-10"><span class="nav-num">§15.10</span>Static Methods</a></li>
+          <li><a href="interfaces.html#s15-11"><span class="nav-num">§15.11</span>Interface Inheritance</a></li>
+          <li><a href="interfaces.html#s15-12"><span class="nav-num">§15.12</span>Strategy Pattern</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="generics.html"><span class="nav-num">§16</span>Generics</a>
+        <ul class="sub-nav">
+          <li><a href="generics.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
+          <li><a href="generics.html#s16-2"><span class="nav-num">§16.2</span>Type Parameters</a></li>
+          <li><a href="generics.html#s16-3"><span class="nav-num">§16.3</span>Generic Methods</a></li>
+          <li><a href="generics.html#s16-4"><span class="nav-num">§16.4</span>Bounded Types</a></li>
+          <li><a href="generics.html#s16-5"><span class="nav-num">§16.5</span>Compile Time Only</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="records.html"><span class="nav-num">§17</span>Records</a>
+        <ul class="sub-nav">
+          <li><a href="records.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
+          <li><a href="records.html#s17-2"><span class="nav-num">§17.2</span><code>record</code></a></li>
+          <li><a href="records.html#s17-3"><span class="nav-num">§17.3</span>Implicitly Final</a></li>
+          <li><a href="records.html#s17-4"><span class="nav-num">§17.4</span>Shallow Immutability</a></li>
+          <li><a href="records.html#s17-5"><span class="nav-num">§17.5</span>Compact Constructors</a></li>
+          <li><a href="records.html#s17-6"><span class="nav-num">§17.6</span>Records Can Do More</a></li>
+          <li><a href="records.html#s17-7"><span class="nav-num">§17.7</span>When to Reach for One</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="collections.html"><span class="nav-num">§18</span>Collections Framework</a>
+        <ul class="sub-nav">
+          <li><a href="collections.html#s18-1"><span class="nav-num">§18.1</span>The Problem</a></li>
+          <li><a href="collections.html#s18-2"><span class="nav-num">§18.2</span>The Big Picture</a></li>
+          <li><a href="collections.html#s18-3"><span class="nav-num">§18.3</span><code>List</code></a></li>
+          <li><a href="collections.html#s18-4"><span class="nav-num">§18.4</span><code>Queue</code></a></li>
+          <li><a href="collections.html#s18-5"><span class="nav-num">§18.5</span><code>Set</code></a></li>
+          <li><a href="collections.html#s18-6"><span class="nav-num">§18.6</span><code>Map</code></a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</nav>
+
+<main id="content">
+  <header class="page-header">
+    <div class="page-chapter">Chapter 7</div>
+    <h1>Arrays</h1>
+    <p class="page-lead">An array variable holds an address, exactly like a reference to any other object. What it points to is new: not a single object, but a fixed-size row of slots, all the same type, reached by position instead of by name.</p>
+  </header>
+
+  <article>
+
+    <p>Suppose you're recording the high temperature for every day of the week. Seven related values, all the same type. Nothing stops you from declaring seven separate variables:</p>
+
+    <pre><code class="language-java">int day1 = 68;
+int day2 = 71;
+int day3 = 69;
+int day4 = 73;
+int day5 = 75;
+int day6 = 70;
+int day7 = 66;
+
+int total = day1 + day2 + day3 + day4 + day5 + day6 + day7;
+double average = total / 7.0;</code></pre>
+
+    <p>It works, but look at what it costs: seven names to invent, a sum that has to spell out every single one of them, and no way to write "do this for every day" — only "do this for <code>day1</code>, then separately for <code>day2</code>, then..." Ask for a month of temperatures instead of a week, and this approach falls apart entirely; nobody wants to write out thirty variable names, let alone a sum with thirty terms. An <span class="term">array</span> solves this: one variable, many slots of the same type, each reached by a number instead of a name.</p>
+
+    <h3>Declaring and creating an array</h3>
+
+    <p>An array type is written with square brackets after the element type. Creating one uses <code>new</code>, just like creating an object — because that's exactly what's happening — though the syntax looks a little different: instead of parentheses holding constructor arguments, square brackets hold the size, on the right of the type:</p>
+
+    <pre><code class="language-java">int[] temperatures = new int[7];</code></pre>
+
+    <p>Read this the same way you read <code>new Rectangle()</code> in §4.1: <code>new</code> allocates memory on the heap — here, room for seven <code>int</code> slots in a row — sets each slot to its default value, and returns the address. <code>temperatures</code> is a reference variable; it holds that address, not the seven values themselves.</p>
+
+    <div class="mem-diagram">
+      <div class="mem-col">
+        <div class="mem-col-label">Stack</div>
+        <div class="mem-slot">
+          <div class="mem-slot-code">temperatures = <span class="mem-addr">0x5100</span></div>
+        </div>
+      </div>
+      <div class="mem-arrow-col">
+        <svg width="40" height="16" viewBox="0 0 40 16" fill="none">
+          <line x1="0" y1="8" x2="32" y2="8" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M32 2L38 8L32 14" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="mem-col">
+        <div class="mem-col-label">Heap</div>
+        <div class="mem-object">
+          <div class="mem-object-header">int[7] @ <span class="mem-addr">0x5100</span></div>
+          <div class="mem-object-body">
+            <div class="mem-object-field"><span class="fname">[0]</span><span class="fval">0</span></div>
+            <div class="mem-object-field"><span class="fname">[1]</span><span class="fval">0</span></div>
+            <div class="mem-object-field"><span class="fname">[2]</span><span class="fval">0</span></div>
+            <div class="mem-object-field"><span class="fname">[3]</span><span class="fval">0</span></div>
+            <div class="mem-object-field"><span class="fname">[4]</span><span class="fval">0</span></div>
+            <div class="mem-object-field"><span class="fname">[5]</span><span class="fval">0</span></div>
+            <div class="mem-object-field"><span class="fname">[6]</span><span class="fval">0</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-conn">
+      <div class="callout-lbl">Instantiation, again <a href="objects.html#s41" class="backref">← §4.1</a></div>
+      <p>An array is an object. <code>new int[7]</code> does the same three things <code>new Rectangle()</code> does:</p>
+      <ol>
+        <li><strong>Allocates</strong> a chunk of memory on the heap — here, room for seven <code>int</code> slots in a row instead of one slot per named field.</li>
+        <li><strong>Sets default values</strong> for every slot. For our <code>int[7]</code>: all seven slots start at <code>0</code>.</li>
+        <li><strong>Returns the address</strong> of the newly allocated chunk.</li>
+      </ol>
+    </div>
+
+    <h3>Reading and writing elements</h3>
+
+    <p>Square brackets are how you reach a slot, given its position. Positions start at <span class="term">0</span>, not 1 — the first element is <code>temperatures[0]</code>, and the last of seven is <code>temperatures[6]</code>.</p>
+
+    <pre><code class="language-java">temperatures[0] = 68;
+temperatures[1] = 71;
+
+System.out.println(temperatures[0]); // 68
+System.out.println(temperatures[1]); // 71
+System.out.println(temperatures[2]); // 0 — still its default value, never assigned</code></pre>
+
+    <p><code>temperatures[0]</code> works the same way <code>r.width</code> does: follow the address in <code>temperatures</code>, then reach a specific slot inside what it points to. The dot uses a field's name; the bracket uses a slot's position. Both are ways of dereferencing.</p>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Out of bounds</div>
+      <p><code>temperatures[7]</code> does not silently return zero or wrap around. There is no eighth slot — the array was created with exactly seven. Java checks this at runtime and throws an <code>ArrayIndexOutOfBoundsException</code> <a href="objects.html#s42" class="backref">← §4.2</a> — the same idea as the <code>NullPointerException</code> from dereferencing <code>null</code>, just a different problem being reported. The size you pass to <code>new</code> is final; an array cannot grow or shrink after creation.</p>
+    </div>
+
+    <h3>How many slots: <code>.length</code></h3>
+
+    <p>Every array object carries its own size in a field named <code>length</code>, set once when the array is created and never changed after. Since it's a field, you reach it the same way you reach any other field — with the dot:</p>
+
+    <pre><code class="language-java">System.out.println(temperatures.length); // 7</code></pre>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">No parentheses</div>
+      <p><code>temperatures.length</code>, not <code>temperatures.length()</code>. There's no method being called here, only a field being read — the exact same concept as reading <code>rect.width</code>. Same dot, same dereference, just landing on a different object's field.</p>
+    </div>
+
+    <h3>Filling in the week</h3>
+
+    <p>Here is the temperature-week example from the start of this chapter, rewritten with an array — one slot assigned at a time:</p>
+
+    <pre><code class="language-java">int[] temperatures = new int[7];
+temperatures[0] = 68;
+temperatures[1] = 71;
+temperatures[2] = 69;
+temperatures[3] = 73;
+temperatures[4] = 75;
+temperatures[5] = 70;
+temperatures[6] = 66;</code></pre>
+
+    <p>When you already know all the values up front, as here, Java offers an even shorter way to write exactly this: an <span class="term">array initializer</span>.</p>
+
+    <pre><code class="language-java">int[] temperatures = {68, 71, 69, 73, 75, 70, 66};</code></pre>
+
+    <p>This single line does the same three things §4.1's <code>new</code> always does — allocate, set values, return the address — plus the seven assignments above, all at once. The size isn't written anywhere; Java counts the values between the braces and allocates exactly that many slots. <code>temperatures.length</code> is still <code>7</code>.</p>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Only at declaration</div>
+      <p>The <code>{...}</code> form is shorthand available only at the point where you declare the variable. You cannot write <code>temperatures = {68, 71, 69, 73, 75, 70, 66};</code> on its own line later to replace the contents — by then, <code>new int[] {...}</code> is required. The short form is convenience for one specific moment: creating the array and supplying its values together.</p>
+    </div>
+
+    <h3>Assignment still copies the address</h3>
+
+    <p>An array variable is a reference variable. Every rule from §5 applies without modification:</p>
+
+    <pre><code class="language-java">int[] a = new int[3];
+a[0] = 1;
+
+int[] b = a;   // copies the address — not the slots
+
+b[0] = 99;
+System.out.println(a[0]); // 99 — a and b point to the same array</code></pre>
+
+    <div class="callout callout-mem">
+      <div class="callout-lbl">Memory model <a href="assignment.html" class="backref">← §5</a></div>
+      <p><code>int[] b = a</code> copies the address in <code>a</code> into <code>b</code>. One array on the heap, two variables holding its address — exactly the aliasing from §4.2's Rectangle example, just with an array instead of a Rectangle.</p>
+    </div>
+
+    <h3>Arrays of objects</h3>
+
+    <p>Every array so far has held <code>int</code>s — primitives, stored directly in their slots. An array's element type can just as easily be a class:</p>
+
+    <pre><code class="language-java">Rectangle[] rectangles = new Rectangle[3];</code></pre>
+
+    <p>Read this exactly as before: <code>new</code> allocates room for three slots and returns the address. The difference is what a slot holds. An <code>int[]</code> slot holds a value directly. A <code>Rectangle[]</code> slot holds a reference — an address, or <a href="objects.html#s42" class="backref">← §4.2</a> <code>null</code> if there's no address yet. Since no Rectangle has been created for any of the three slots, each one starts out <span class="term">null</span>.</p>
+
+    <pre><code class="language-java">System.out.println(rectangles[0]); // null — no object at this slot yet
+
+rectangles[0] = new Rectangle(10, 5);  // now the slot holds an address
+
+System.out.println(rectangles[0].width); // 10</code></pre>
+
+    <p>Creating the array and creating a Rectangle are two separate <code>new</code> calls, allocating two separate chunks of heap memory. <code>rectangles[0]</code> doesn't contain a Rectangle — it contains the address of one, sitting elsewhere on the heap, exactly like the <code>origin</code> and <code>border</code> fields did in §4.3. <code>rectangles[0].width</code> chains two dereferences: the bracket follows <code>rectangles</code> to the array, and reads the address out of slot <code>0</code>; the dot follows that address to the Rectangle, and reads <code>width</code>.</p>
+
+    <p>Fill in the other two slots the same way, and the full picture looks like this:</p>
+
+    <pre><code class="language-java">Rectangle[] rectangles = new Rectangle[3];
+rectangles[0] = new Rectangle(10, 5);
+rectangles[1] = new Rectangle(4, 4);
+rectangles[2] = new Rectangle(7, 2);</code></pre>
+
+    <div class="mem-fanout">
+      <div class="mem-region" style="padding-right: 8px;">
+        <div class="mem-col-label">Stack</div>
+        <div class="mem-slot">
+          <div class="mem-slot-code">rectangles = <span class="mem-addr">0x6200</span></div>
+        </div>
+      </div>
+
+      <div class="mem-arrow-col" style="margin-top: 54px;">
+        <svg width="28" height="16" viewBox="0 0 28 16" fill="none">
+          <line x1="0" y1="8" x2="20" y2="8" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M20 2L26 8L20 14" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="mem-region">
+        <div class="mem-col-label">Heap</div>
+        <div class="mem-heap-body">
+          <div class="mem-rect-wrap">
+            <div class="mem-object">
+              <div class="mem-object-header">Rectangle[3] @ <span class="mem-addr">0x6200</span></div>
+              <div class="mem-object-body">
+                <div class="mem-object-field"><span class="fname">[0]</span><span class="fval mem-addr">0x9000</span></div>
+                <div class="mem-object-field"><span class="fname">[1]</span><span class="fval mem-addr">0x9100</span></div>
+                <div class="mem-object-field"><span class="fname">[2]</span><span class="fval mem-addr">0x9200</span></div>
+              </div>
+            </div>
+            <svg class="mem-precise-arrow" width="36" height="16" style="top:35px;" viewBox="0 0 36 16">
+              <line x1="2" y1="8" x2="30" y2="8" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M30 2L36 8L30 14" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg class="mem-precise-arrow" width="36" height="75" style="top:73px;" viewBox="0 0 36 75">
+              <line x1="2" y1="2" x2="28" y2="73" stroke="currentColor" stroke-width="1.5"/>
+              <g transform="translate(28,73) rotate(70)">
+                <path d="M -7 -5 L 0 0 L -7 5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+            <svg class="mem-precise-arrow" width="36" height="149" style="top:103px;" viewBox="0 0 36 149">
+              <line x1="2" y1="2" x2="28" y2="147" stroke="currentColor" stroke-width="1.5"/>
+              <g transform="translate(28,147) rotate(80)">
+                <path d="M -7 -5 L 0 0 L -7 5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+          </div>
+          <div class="mem-branch-col">
+            <div class="mem-object">
+              <div class="mem-object-header">Rectangle @ <span class="mem-addr">0x9000</span></div>
+              <div class="mem-object-body">
+                <div class="mem-object-field"><span class="fname">width</span><span class="fval">10</span></div>
+                <div class="mem-object-field"><span class="fname">height</span><span class="fval">5</span></div>
+              </div>
+            </div>
+            <div class="mem-object">
+              <div class="mem-object-header">Rectangle @ <span class="mem-addr">0x9100</span></div>
+              <div class="mem-object-body">
+                <div class="mem-object-field"><span class="fname">width</span><span class="fval">4</span></div>
+                <div class="mem-object-field"><span class="fname">height</span><span class="fval">4</span></div>
+              </div>
+            </div>
+            <div class="mem-object">
+              <div class="mem-object-header">Rectangle @ <span class="mem-addr">0x9200</span></div>
+              <div class="mem-object-body">
+                <div class="mem-object-field"><span class="fname">width</span><span class="fval">7</span></div>
+                <div class="mem-object-field"><span class="fname">height</span><span class="fval">2</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>One array object on the heap, three reference slots inside it — and three separate Rectangle objects elsewhere on the heap, one per slot. The array doesn't contain the Rectangles, the same way <code>Rectangle</code> didn't contain its Point and Border in §4.3. It just holds three addresses, one per slot, each pointing somewhere else.</p>
+
+    <h3>Storing an existing object in a slot</h3>
+
+    <p>The Rectangles in the last example were created directly inside the array's own slots. That's not required — a slot can just as easily receive the address of an object that already exists, created somewhere else entirely:</p>
+
+    <pre><code class="language-java">Rectangle[] rectangles = new Rectangle[3];  // [null, null, null]
+
+Rectangle myRect = new Rectangle(10, 5);    // a Rectangle, created on its own
+
+rectangles[0] = myRect;                     // myRect's address, copied into slot 0</code></pre>
+
+    <p><code>rectangles[0] = myRect</code> is an ordinary reference assignment <a href="assignment.html" class="backref">← §5</a> — nothing about arrays changes the rule. The address in <code>myRect</code> is copied into slot <code>0</code>; no Rectangle is copied, no new object is created. <code>rectangles[0]</code> and <code>myRect</code> now hold the same address and point to the same object, exactly like <code>r2 = r1</code> did back in §5.</p>
+
+    <div class="mem-diagram-multi">
+      <div class="mem-part mem-part-first mem-col-label">Stack</div>
+      <div></div>
+      <div class="mem-part mem-part-first mem-col-label">Heap</div>
+
+      <div class="mem-part mem-part-mid">
+        <div class="mem-slot">
+          <div class="mem-slot-code">myRect = <span class="mem-addr">0x9000</span></div>
+        </div>
+      </div>
+      <div class="mem-arrow-cell">
+        <svg width="40" height="16" viewBox="0 0 40 16" fill="none">
+          <line x1="0" y1="8" x2="32" y2="8" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M32 2L38 8L32 14" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="mem-part mem-part-mid">
+        <div class="mem-object">
+          <div class="mem-object-header">Rectangle @ <span class="mem-addr">0x9000</span></div>
+          <div class="mem-object-body">
+            <div class="mem-object-field"><span class="fname">width</span><span class="fval">10</span></div>
+            <div class="mem-object-field"><span class="fname">height</span><span class="fval">5</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mem-part mem-part-last">
+        <div class="mem-slot">
+          <div class="mem-slot-code">rectangles = <span class="mem-addr">0x6200</span></div>
+        </div>
+      </div>
+      <div class="mem-arrow-cell">
+        <svg width="40" height="16" viewBox="0 0 40 16" fill="none">
+          <line x1="0" y1="8" x2="32" y2="8" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M32 2L38 8L32 14" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="mem-part mem-part-last" style="position: relative; z-index: 3;">
+        <div class="mem-object">
+          <div class="mem-object-header">Rectangle[3] @ <span class="mem-addr">0x6200</span></div>
+          <div class="mem-object-body">
+            <div class="mem-object-field"><span class="fname">[0]</span><span class="fval mem-addr">0x9000</span></div>
+            <div class="mem-object-field"><span class="fname">[1]</span><span class="fval">null</span></div>
+            <div class="mem-object-field"><span class="fname">[2]</span><span class="fval">null</span></div>
+          </div>
+        </div>
+        <svg width="34" height="90" viewBox="0 0 34 90" fill="none" style="position: absolute; right: 6px; top: -78px; color: #c9c2b3; overflow: visible; z-index: 5;">
+          <path d="M30 84 C 30 55, 30 25, 8 12" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <path d="M13 8 L 6 11 L 10 17" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <p>Notice the third arrow, curling from slot <code>[0]</code> back up to the Rectangle object <code>myRect</code> already points to — not to a second, separate Rectangle. Slot <code>[0]</code> holds <code>0x9000</code>, the exact same address <code>myRect</code> holds. There is only one Rectangle object here. <code>myRect</code> and <code>rectangles[0]</code> are two separate names for its one address, the same way <code>r1</code> and <code>r2</code> were in §4.2's aliasing example — one of them just happens to live inside an array slot instead of a local variable.</p>
+
+    <div class="callout callout-mem">
+      <div class="callout-lbl">Memory model <a href="assignment.html" class="backref">← §5</a></div>
+      <p>An array slot doesn't know or care where the address it holds came from — a brand-new object, or one that's been sitting on the heap for a while, referenced by some other variable the whole time. A slot is just a place to put an address, the same size and shape no matter which object that address happens to point to.</p>
+    </div>
+
+    <h3>Passing arrays to methods</h3>
+
+    <p>An array is a reference type, so passing one to a method is nothing new: it's the exact case from §6.2, where a Rectangle was passed to <code>calculatePerimeter</code>. The parameter receives a copy of the address, not a copy of the array.</p>
+
+    <pre><code class="language-java">public static void modifyArray(int[] arr) {
+    arr[0] = 100;  // dereferences arr, writes into the array arr points to
+}</code></pre>
+
+    <pre><code class="language-java">int[] elements = {1, 2, 3};
+
+System.out.println(elements[0]); // 1
+
+modifyArray(elements);
+
+System.out.println(elements[0]); // 100 — changed, through arr, inside the method</code></pre>
+
+    <p>Calling <code>modifyArray(elements)</code> copies the address in <code>elements</code> into the parameter <code>arr</code> — a plain reference assignment, the same as any other. No array is copied; <code>arr</code> and <code>elements</code> spend the call pointing at the one array on the heap. <code>arr[0] = 100</code> dereferences that shared address and writes into it, so the change is still there once the method returns and <code>arr</code> itself is gone.</p>
+
+    <div class="callout callout-conn">
+      <div class="callout-lbl">Nothing new <a href="methods.html#s62" class="backref">← §6.2</a></div>
+      <p>§6.2 made this exact point with a Rectangle: the method can modify the object through the parameter, because parameter and argument share an address, but it can never make the caller's variable point somewhere else — it only has a copy of the address, not the variable itself. Arrays follow the identical rule. There's no special "pass array by reference" mechanism in Java; it's the same reference-parameter behavior every object has.</p>
+    </div>
+
+    <h3>Variable-arity parameters: <code>...</code></h3>
+
+    <p>Every method so far has taken a fixed number of parameters. Sometimes the number of values a caller wants to pass genuinely varies — zero, one, several — and building an array just to call the method feels like overhead the caller shouldn't have to think about. A <span class="term">variable-arity parameter</span> (informally, <span class="term">varargs</span>) lets the caller pass any number of values directly, with no array in sight at the call site:</p>
+
+    <pre><code class="language-java">static int count(int... numbers) {
+    return numbers.length;
+}</code></pre>
+
+    <p>The <code>...</code> after the type is the only new syntax. Everything else about <code>count</code> is a method you already know how to write. It can be called with any number of <code>int</code> arguments, including zero:</p>
+
+    <pre><code class="language-java">count();           // 0
+count(5);          // 1
+count(5, 10);      // 2
+count(5, 10, 15);  // 3</code></pre>
+
+    <div class="callout callout-conn">
+      <div class="callout-lbl">There is no new mechanism here</div>
+      <p><code>int... numbers</code> compiles to exactly <code>int[] numbers</code>.</p>
+      <ul>
+        <li><strong>Varargs is a shorthand for the caller.</strong> The compiler collects however many arguments the caller passed into a real array and hands that array to the method:
+          <ul>
+            <li>Zero arguments becomes an array of length <code>0</code> — not <code>null</code>, not an error, a real (empty) array.</li>
+            <li>Same as if the caller had built it and passed it explicitly.</li>
+          </ul>
+        </li>
+        <li><strong>Inside the method body, <code>numbers</code> is an array:</strong> <code>numbers.length</code>, <code>numbers[0]</code>, all of it works exactly as this whole chapter has described.</li>
+      </ul>
+      <p>Varargs changes nothing for the method body. It's sugar for the caller alone.</p>
+    </div>
+
+    <p>An ordinary array parameter gets none of that sugar — the caller must supply an array, every time, even an empty one:</p>
+
+    <pre><code class="language-java">public class Main {
+    public static void processArray(int[] items) {
+        System.out.println(items.length);
+    }
+
+    public static void processVarargs(int... items) {
+        System.out.println(items.length);
+    }
+
+    public static void main(String[] args) {
+        processArray();           // compile error — processArray(int[]) requires an argument
+        processVarargs();         // 0 — the compiler built an empty array
+        processVarargs(null);     // NullPointerException — see below
+    }
+}</code></pre>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Passing <code>null</code> is not the same as passing nothing</div>
+      <p>Because a variable-arity parameter really is just an array parameter, you can pass an array directly instead of individual values — and <code>null</code> is a valid value for any reference type, arrays included <a href="objects.html#s42" class="backref">← §4.2</a>. Write <code>processVarargs(null)</code>, and there's no ellipsis sugar to apply: you've supplied the array argument yourself, and what you supplied is <code>null</code>. Inside the method, <code>items</code> is <code>null</code>, and <code>items.length</code> dereferences it — the exact <code>NullPointerException</code> from §4.2, not a Java quirk. <code>processVarargs()</code> and <code>processVarargs(null)</code> reach the method through the same syntax, but they are not the same call: one builds an empty array, the other hands over no array at all.</p>
+    </div>
+
+    <p>Because a variable-arity parameter is really just an array parameter, passing an actual array works too, unchanged:</p>
+
+    <pre><code class="language-java">int[] values = {5, 10, 15};
+count(values);  // 3 — an array argument, same as always</code></pre>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Only the last parameter</div>
+      <p>A variable-arity parameter must be the last parameter in the list, and there can only be one — otherwise the compiler couldn't tell where the variable-length part ends. <code>void f(String label, int... values)</code> is fine; a second <code>...</code> parameter, or one before <code>label</code>, is not.</p>
+    </div>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Array initializers still need a target type</div>
+      <p>The <code>{...}</code> shorthand from earlier in this chapter leans on the declared type to know what kind of array to build. <code>var</code> — a keyword that asks Java to infer a variable's type from what's assigned to it — has nothing to infer from with a bare initializer:</p>
+      <pre><code class="language-java">var numbers = {1, 2, 3};       // compile error — no target type to infer from
+int[] numbers = {1, 2, 3};     // fine — int[] is right there to build against</code></pre>
+      <p>This is the same "only at declaration, and only with a known type" restriction from earlier, seen from another angle.</p>
+    </div>
+
+    <div class="callout callout-note">
+      <div class="callout-lbl">Scope of this chapter</div>
+      <p>This is deliberately the small part of arrays: one dimension, with both primitive and object element types introduced at their simplest. Arrays of arrays, and the utility methods in <code>java.util.Arrays</code>, build on exactly this foundation — a reference variable pointing to a fixed number of same-typed slots — and are left for later.</p>
+    </div>
+
+  </article>
+
+  <nav class="page-nav" aria-label="Chapter navigation">
+    <a href="methods.html" class="page-nav-prev">
+      <span class="page-nav-label">← Previous</span>
+      <span class="page-nav-title">§6 — Methods</span>
+    </a>
+    <a href="strings.html" class="page-nav-next">
+      <span class="page-nav-label">Next →</span>
+      <span class="page-nav-title">§8 — Strings</span>
+    </a>
+  </nav>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  hljs.highlightAll();
+
+  // Flag error-annotation comments in code blocks
+  document.querySelectorAll('.hljs-comment').forEach(el => {
+    if (/\b(compile|compiler|runtime) error\b/i.test(el.textContent)) {
+      el.classList.add('hljs-comment-error');
+    }
+  });
+
+  // Code theme toggle
+  const codeThemeBtn = document.getElementById('code-theme-toggle');
+  const lightTheme = document.getElementById('hljs-light-theme');
+  const darkTheme = document.getElementById('hljs-dark-theme');
+  const themeLabel = codeThemeBtn.querySelector('.code-theme-label');
+  const themeIcon = codeThemeBtn.querySelector('.icon');
+
+  function applyCodeTheme(theme) {
+    const dark = theme === 'dark';
+    lightTheme.disabled = dark;
+    darkTheme.disabled = !dark;
+    document.documentElement.classList.toggle('code-dark', dark);
+    themeLabel.textContent = dark ? 'Light code' : 'Dark code';
+    themeIcon.textContent = dark ? '☀️' : '🌙';
+  }
+
+  applyCodeTheme(localStorage.getItem('code-theme') || 'light');
+
+  codeThemeBtn.addEventListener('click', () => {
+    const next = darkTheme.disabled ? 'dark' : 'light';
+    localStorage.setItem('code-theme', next);
+    applyCodeTheme(next);
+  });
+  const btn  = document.getElementById('menu-btn');
+  const side = document.getElementById('sidebar');
+  btn.addEventListener('click', () => side.classList.toggle('open'));
+  document.querySelectorAll('#sidebar a').forEach(a => {
+    a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
+  });
+});
+</script>
+</body>
+</html>
