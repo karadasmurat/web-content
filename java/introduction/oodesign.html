@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§21 Object-Oriented Design — OO with Java</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" id="hljs-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" id="hljs-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
+<script>
+(function () {
+  if ((localStorage.getItem('code-theme') || 'light') === 'dark') {
+    document.getElementById('hljs-light-theme').disabled = true;
+    document.getElementById('hljs-dark-theme').disabled = false;
+    document.documentElement.classList.add('code-dark');
+  }
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Toggle navigation">
+  <span></span><span></span><span></span>
+</button>
+
+<button id="code-theme-toggle" class="code-theme-toggle" aria-label="Toggle code color scheme">
+  <span class="icon">🌙</span><span class="code-theme-label">Dark code</span>
+</button>
+
+<nav id="sidebar" aria-label="Tutorial navigation">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-label">Tutorial</div>
+    <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
+  </div>
+  <nav>
+    <ul>
+      <li>
+        <a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a>
+        <ul class="sub-nav">
+          <li><a href="index.html#s0-1"><span class="nav-num">§0.1</span>What Is Java?</a></li>
+          <li><a href="index.html#s0-2"><span class="nav-num">§0.2</span>Where Is Java Used?</a></li>
+          <li><a href="index.html#s0-3"><span class="nav-num">§0.3</span>Why Java?</a></li>
+          <li><a href="index.html#s0-4"><span class="nav-num">§0.4</span>The Java Ecosystem</a></li>
+          <li><a href="index.html#s0-5"><span class="nav-num">§0.5</span>Java Versions</a></li>
+          <li><a href="index.html#s0-6"><span class="nav-num">§0.6</span>Your First Program</a></li>
+          <li><a href="index.html#s0-7"><span class="nav-num">§0.7</span>Key Features</a></li>
+          <li><a href="index.html#s0-8"><span class="nav-num">§0.8</span>Key Takeaways</a></li>
+          <li><a href="index.html#s0-9"><span class="nav-num">§0.9</span>Appendix: Write Once, Run Anywhere</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="variables.html"><span class="nav-num">§1</span>Variables</a>
+        <ul class="sub-nav">
+          <li><a href="variables.html#s1-1"><span class="nav-num">§1.1</span>Values</a></li>
+          <li><a href="variables.html#s1-2"><span class="nav-num">§1.2</span>Giving Values Names</a></li>
+          <li><a href="variables.html#s1-3"><span class="nav-num">§1.3</span>Variables in Java</a></li>
+          <li><a href="variables.html#s1-4"><span class="nav-num">§1.4</span>Naming Variables</a></li>
+          <li><a href="variables.html#s1-5"><span class="nav-num">§1.5</span>What a Variable Holds</a></li>
+          <li><a href="variables.html#s1-6"><span class="nav-num">§1.6</span>Changing a Value</a></li>
+          <li><a href="variables.html#s1-7"><span class="nav-num">§1.7</span><code>var</code></a></li>
+          <li><a href="variables.html#s1-8"><span class="nav-num">§1.8</span>Common Mistakes</a></li>
+          <li><a href="variables.html#s1-9"><span class="nav-num">§1.9</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li><a href="primitives.html"><span class="nav-num">§2</span>Primitives</a></li>
+      <li><a href="classes.html"><span class="nav-num">§3</span>Classes</a></li>
+      <li>
+        <a href="objects.html"><span class="nav-num">§4</span>Objects</a>
+        <ul class="sub-nav">
+          <li><a href="objects.html#s41"><span class="nav-num">§4.1</span>Instantiation</a></li>
+          <li><a href="objects.html#s42"><span class="nav-num">§4.2</span>Reference Variables</a></li>
+          <li><a href="objects.html#s43"><span class="nav-num">§4.3</span>Reference Fields</a></li>
+          <li><a href="objects.html#s44"><span class="nav-num">§4.4</span>Constructors</a></li>
+          <li><a href="objects.html#s45"><span class="nav-num">§4.5</span>Static Fields</a></li>
+        </ul>
+      </li>
+      <li><a href="assignment.html"><span class="nav-num">§5</span>Assignment</a></li>
+      <li>
+        <a href="methods.html"><span class="nav-num">§6</span>Methods</a>
+        <ul class="sub-nav">
+          <li><a href="methods.html#s6-intro"><span class="nav-num">§6.1</span>What Is a Method?</a></li>
+          <li><a href="methods.html#s62"><span class="nav-num">§6.2</span>Static Methods</a></li>
+          <li><a href="methods.html#s63"><span class="nav-num">§6.3</span>Reference Parameters</a></li>
+          <li><a href="methods.html#s64"><span class="nav-num">§6.4</span>Dot Operator Revisited</a></li>
+          <li><a href="methods.html#s65"><span class="nav-num">§6.5</span>Instance Methods</a></li>
+          <li><a href="methods.html#s66"><span class="nav-num">§6.6</span>Functions to Objects</a></li>
+          <li><a href="methods.html#s67"><span class="nav-num">§6.7</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li><a href="operators.html"><span class="nav-num">§7</span>Operators</a></li>
+      <li><a href="controlflow.html"><span class="nav-num">§8</span>Control Flow</a></li>
+      <li><a href="arrays.html"><span class="nav-num">§9</span>Arrays</a></li>
+      <li>
+        <a href="strings.html"><span class="nav-num">§10</span>Strings</a>
+        <ul class="sub-nav">
+          <li><a href="strings.html#s10-1"><span class="nav-num">§10.1</span>Writing Systems &amp; Unicode</a></li>
+          <li><a href="strings.html#s10-2"><span class="nav-num">§10.2</span><code>char</code></a></li>
+          <li><a href="strings.html#s10-3"><span class="nav-num">§10.3</span><code>Character</code></a></li>
+          <li><a href="strings.html#s10-4"><span class="nav-num">§10.4</span>Indexing</a></li>
+          <li><a href="strings.html#s10-5"><span class="nav-num">§10.5</span>Immutability</a></li>
+          <li><a href="strings.html#s10-6"><span class="nav-num">§10.6</span><code>==</code> vs <code>.equals()</code></a></li>
+          <li><a href="strings.html#s10-7"><span class="nav-num">§10.7</span>Concatenation</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="inheritance.html"><span class="nav-num">§11</span>Inheritance</a>
+        <ul class="sub-nav">
+          <li><a href="inheritance.html#s10-1"><span class="nav-num">§11.1</span>Taxonomy</a></li>
+          <li><a href="inheritance.html#s10-2"><span class="nav-num">§11.2</span>The Problem</a></li>
+          <li><a href="inheritance.html#s10-3"><span class="nav-num">§11.3</span><code>extends</code></a></li>
+          <li><a href="inheritance.html#s10-4"><span class="nav-num">§11.4</span><code>super(...)</code></a></li>
+          <li><a href="inheritance.html#s10-5"><span class="nav-num">§11.5</span>Polymorphism</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="accessmodifiers.html"><span class="nav-num">§12</span>Packages & Access Modifiers</a>
+        <ul class="sub-nav">
+          <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§12.1</span>Packages</a></li>
+          <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§12.2</span>Why Restrict Access</a></li>
+          <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§12.3</span><code>private</code></a></li>
+          <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§12.4</span>Encapsulation</a></li>
+          <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§12.5</span><code>public</code></a></li>
+          <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§12.6</span>Package-Private</a></li>
+          <li><a href="accessmodifiers.html#s11-7"><span class="nav-num">§12.7</span><code>protected</code></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="immutability.html"><span class="nav-num">§13</span>Immutability</a>
+        <ul class="sub-nav">
+          <li><a href="immutability.html#s13-1"><span class="nav-num">§13.1</span>Identity &amp; State</a></li>
+          <li><a href="immutability.html#s13-2"><span class="nav-num">§13.2</span>A Question of Time</a></li>
+          <li><a href="immutability.html#s13-3"><span class="nav-num">§13.3</span>Building an Immutable Class</a></li>
+          <li><a href="immutability.html#s13-4"><span class="nav-num">§13.4</span><code>final</code> Isn't Deep</a></li>
+          <li><a href="immutability.html#s13-5"><span class="nav-num">§13.5</span>Why It Matters</a></li>
+          <li><a href="immutability.html#s13-6"><span class="nav-num">§13.6</span><code>StringBuilder</code></a></li>
+          <li><a href="immutability.html#s13-7"><span class="nav-num">§13.7</span>Core Pillars</a></li>
+          <li><a href="immutability.html#s13-8"><span class="nav-num">§13.8</span>Putting It Together</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="abstractclasses.html"><span class="nav-num">§14</span>Abstract Classes</a>
+        <ul class="sub-nav">
+          <li><a href="abstractclasses.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
+          <li><a href="abstractclasses.html#s14-2"><span class="nav-num">§14.2</span><code>abstract</code> Classes</a></li>
+          <li><a href="abstractclasses.html#s14-3"><span class="nav-num">§14.3</span><code>abstract</code> Methods</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="interfaces.html"><span class="nav-num">§15</span>Interfaces</a>
+        <ul class="sub-nav">
+          <li><a href="interfaces.html#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
+          <li><a href="interfaces.html#s15-2"><span class="nav-num">§15.2</span>Interface vs. Abstract Class</a></li>
+          <li><a href="interfaces.html#s15-3"><span class="nav-num">§15.3</span>Declaring &amp; Implementing</a></li>
+          <li><a href="interfaces.html#s15-4"><span class="nav-num">§15.4</span>Override vs. Overload</a></li>
+          <li><a href="interfaces.html#s15-5"><span class="nav-num">§15.5</span>Multiple Interfaces</a></li>
+          <li><a href="interfaces.html#s15-6"><span class="nav-num">§15.6</span>Interface-Typed Params</a></li>
+          <li><a href="interfaces.html#s15-7"><span class="nav-num">§15.7</span>Anonymous Classes</a></li>
+          <li><a href="interfaces.html#s15-8"><span class="nav-num">§15.8</span>Default Methods</a></li>
+          <li><a href="interfaces.html#s15-9"><span class="nav-num">§15.9</span>Default Method Collisions</a></li>
+          <li><a href="interfaces.html#s15-10"><span class="nav-num">§15.10</span>Static Methods</a></li>
+          <li><a href="interfaces.html#s15-11"><span class="nav-num">§15.11</span>Interface Inheritance</a></li>
+          <li><a href="interfaces.html#s15-12"><span class="nav-num">§15.12</span>Strategy Pattern</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="generics.html"><span class="nav-num">§16</span>Generics</a>
+        <ul class="sub-nav">
+          <li><a href="generics.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
+          <li><a href="generics.html#s16-2"><span class="nav-num">§16.2</span>Type Parameters</a></li>
+          <li><a href="generics.html#s16-3"><span class="nav-num">§16.3</span>Generic Methods</a></li>
+          <li><a href="generics.html#s16-4"><span class="nav-num">§16.4</span>Bounded Types</a></li>
+          <li><a href="generics.html#s16-5"><span class="nav-num">§16.5</span>Compile Time Only</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="records.html"><span class="nav-num">§17</span>Records</a>
+        <ul class="sub-nav">
+          <li><a href="records.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
+          <li><a href="records.html#s17-2"><span class="nav-num">§17.2</span><code>record</code></a></li>
+          <li><a href="records.html#s17-3"><span class="nav-num">§17.3</span>Implicitly Final</a></li>
+          <li><a href="records.html#s17-4"><span class="nav-num">§17.4</span>Shallow Immutability</a></li>
+          <li><a href="records.html#s17-5"><span class="nav-num">§17.5</span>Compact Constructors</a></li>
+          <li><a href="records.html#s17-6"><span class="nav-num">§17.6</span>Records Can Do More</a></li>
+          <li><a href="records.html#s17-7"><span class="nav-num">§17.7</span>When to Reach for One</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="collections.html"><span class="nav-num">§18</span>Collections Framework</a>
+        <ul class="sub-nav">
+          <li><a href="collections.html#s18-1"><span class="nav-num">§18.1</span>The Problem</a></li>
+          <li><a href="collections.html#s18-2"><span class="nav-num">§18.2</span>The Big Picture</a></li>
+          <li><a href="collections.html#s18-3"><span class="nav-num">§18.3</span><code>List</code></a></li>
+          <li><a href="collections.html#s18-4"><span class="nav-num">§18.4</span><code>Queue</code></a></li>
+          <li><a href="collections.html#s18-5"><span class="nav-num">§18.5</span><code>Set</code></a></li>
+          <li><a href="collections.html#s18-6"><span class="nav-num">§18.6</span><code>Map</code></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="lambdas.html"><span class="nav-num">§19</span>Functional Programming</a>
+        <ul class="sub-nav">
+          <li><a href="lambdas.html#s19-1"><span class="nav-num">§19.1</span>Functions as First-Class Citizens</a></li>
+          <li><a href="lambdas.html#s19-2"><span class="nav-num">§19.2</span>Why Java "Simulates" First-Class Functions</a></li>
+          <li><a href="lambdas.html#s19-3"><span class="nav-num">§19.3</span>The Problem</a></li>
+          <li><a href="lambdas.html#s19-4"><span class="nav-num">§19.4</span>Another Anonymous Class</a></li>
+          <li><a href="lambdas.html#s19-5"><span class="nav-num">§19.5</span>Functional Interfaces</a></li>
+          <li><a href="lambdas.html#s19-6"><span class="nav-num">§19.6</span>Lambda Expressions</a></li>
+          <li><a href="lambdas.html#s19-7"><span class="nav-num">§19.7</span>Method References</a></li>
+          <li><a href="lambdas.html#s19-8"><span class="nav-num">§19.8</span><code>java.util.function</code></a></li>
+          <li><a href="lambdas.html#s19-9"><span class="nav-num">§19.9</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="enums.html"><span class="nav-num">§20</span>Enums</a>
+        <ul class="sub-nav">
+          <li><a href="enums.html#s20-1"><span class="nav-num">§20.1</span>The Problem</a></li>
+          <li><a href="enums.html#s20-2"><span class="nav-num">§20.2</span>Declaring an Enum</a></li>
+          <li><a href="enums.html#s20-3"><span class="nav-num">§20.3</span>Objects, Not Constants</a></li>
+          <li><a href="enums.html#s20-4"><span class="nav-num">§20.4</span>Comparing Enum Values</a></li>
+          <li><a href="enums.html#s20-5"><span class="nav-num">§20.5</span>Type Characteristics</a></li>
+          <li><a href="enums.html#s20-6"><span class="nav-num">§20.6</span>Fields, Constructors, Methods</a></li>
+          <li><a href="enums.html#s20-7"><span class="nav-num">§20.7</span>Enums vs. Magic Numbers</a></li>
+          <li><a href="enums.html#s20-8"><span class="nav-num">§20.8</span>Closed Sets vs. Evolving Reality</a></li>
+          <li><a href="enums.html#s20-9"><span class="nav-num">§20.9</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="oodesign.html" class="active"><span class="nav-num">§21</span>Object-Oriented Design</a>
+        <ul class="sub-nav">
+          <li><a href="#s19-1"><span class="nav-num">§21.1</span>The Problem</a></li>
+          <li><a href="#s19-2"><span class="nav-num">§21.2</span>Cohesion</a></li>
+          <li><a href="#s19-3"><span class="nav-num">§21.3</span>Composition, or "Has-A"</a></li>
+          <li><a href="#s19-4"><span class="nav-num">§21.4</span>Tell, Don't Ask</a></li>
+          <li><a href="#s19-5"><span class="nav-num">§21.5</span>Composition over Inheritance</a></li>
+          <li><a href="#s19-6"><span class="nav-num">§21.6</span>Program to an Interface</a></li>
+          <li><a href="#s19-7"><span class="nav-num">§21.7</span>Putting It Together</a></li>
+          <li><a href="#s19-8"><span class="nav-num">§21.8</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</nav>
+
+<main id="content">
+  <header class="page-header">
+    <div class="page-chapter">Chapter 21</div>
+    <h1>Object-Oriented Design</h1>
+    <p class="page-lead">Every mechanism up to this point — classes, references, inheritance, interfaces, generics, collections — is a tool. This chapter is about judgment: how to decide what a class should be responsible for, how objects should relate to one another, and why some technically-correct designs still turn into a mess six months later. One running example, a small library catalog, carries the whole chapter.</p>
+  </header>
+
+  <article>
+
+    <!-- §21.1 -->
+    <section id="s19-1">
+      <div class="section-head">
+        <span class="sec-num">§21.1</span>
+        <h2>The Problem <em>— a class that knows too much</em></h2>
+      </div>
+
+      <p>Say we're modeling books for a small library system. A first, entirely reasonable-looking attempt:</p>
+
+      <pre><code class="language-java">class Book {
+    String title;
+    String author;
+    String isbn;
+    int    pageCount;
+    String format;      // "Hardcover", "Paperback", "E-book"
+}</code></pre>
+
+      <p>This compiles, and for a single book it works fine. The trouble shows up the moment reality does what it actually does: the same book — same title, same author, same content — routinely exists as more than one physical or digital product. <em>Clean Code</em> by Robert C. Martin is a hardcover, a paperback, <em>and</em> an e-book, each with its own ISBN and its own page count, but there's still only one title and one author to speak of.</p>
+
+      <p>Model that with the class above, and each edition needs its own <code>Book</code> object:</p>
+
+      <pre><code class="language-java">Book hardcover = new Book();
+hardcover.title = "Clean Code";
+hardcover.author = "Robert C. Martin";
+hardcover.isbn = "978-0132350884";
+hardcover.pageCount = 464;
+hardcover.format = "Hardcover";
+
+Book ebook = new Book();
+ebook.title = "Clean Code";       // typed again
+ebook.author = "Robert C. Martin"; // typed again
+ebook.isbn = "978-0132766789";
+ebook.pageCount = 464;
+ebook.format = "E-book";</code></pre>
+
+      <p><code>title</code> and <code>author</code> are copied by hand into every edition. Nothing in the compiler enforces that both copies agree — a typo in one, a correction applied to the other, and the two "same" books silently disagree about their own title. This isn't a syntax problem or a bug in any single method. It's a shape problem: one class is carrying two different ideas — <em>a book, the work</em>, and <em>an edition, one particular printing of it</em> — squeezed into a single set of fields with no way to say which is which.</p>
+
+      <div class="callout callout-note">
+        <div class="callout-lbl">Design vs. mechanics</div>
+        <p>Everything so far in this tutorial has asked "how do I make Java do this?" This chapter asks a different question: "given that Java can do several things, which one should this class actually be?" That's <span class="term">object-oriented design</span> (OOD) — the practice of deciding what classes exist, what each one owns, and how they refer to each other, independent of any single language feature.</p>
+      </div>
+    </section>
+
+    <!-- §21.2 -->
+    <section id="s19-2">
+      <div class="section-head">
+        <span class="sec-num">§21.2</span>
+        <h2>Cohesion <em>— one reason to change</em></h2>
+      </div>
+
+      <p><code>Book</code>, as first written, has at least two separate reasons someone might need to edit it: something about the underlying work changed (the author's name was printed wrong), or something about one particular printing changed (a paperback edition was released with a new ISBN). Those are unrelated changes, arriving from unrelated sources, both landing on the same class.</p>
+
+      <p>A class with a single, clear reason to change is <span class="term">cohesive</span>. A class carrying several unrelated reasons to change is doing more than one job — and the more jobs it does, the more often <em>some</em> change touches it, and the harder it gets to reason about what any one field actually means. Cohesion isn't a Java feature; it's a property of the design, and it's the first thing worth checking whenever a class's field list starts feeling like a grab bag.</p>
+
+      <p>The fix is to split the two ideas into two classes — one for the work itself, one for a specific printing of it:</p>
+
+      <pre><code class="language-java">class Book {
+    private final String title;
+    private final String author;
+
+    Book(String title, String author) {
+        this.title  = title;
+        this.author = author;
+    }
+
+    String title()  { return title; }
+    String author() { return author; }
+}</code></pre>
+
+      <p><code>Book</code> now has exactly one reason to change: the work's own identity — its title, its author. Nothing about ISBNs, page counts, or formats belongs here at all.</p>
+
+      <div class="callout callout-conn">
+        <div class="callout-lbl">Connection <a href="immutability.html#s13-3" class="backref">← §13.3</a></div>
+        <p><code>Book</code> is built the way §13 built <code>Point</code>: <code>private final</code> fields, set once in the constructor, read through accessor methods, no setters. A book's title and author aren't the kind of state that should ever silently change out from under whoever's holding a reference to it — immutability isn't just a nice-to-have here, it's what makes <code>Book</code> safe to share across every edition that refers to it, which is exactly what §21.3 does next.</p>
+      </div>
+    </section>
+
+    <!-- §21.3 -->
+    <section id="s19-3">
+      <div class="section-head">
+        <span class="sec-num">§21.3</span>
+        <h2>Composition, or "Has-A" <em>— building BookEdition out of Book</em></h2>
+      </div>
+
+      <p>The second idea — one specific printing — becomes its own class, <code>BookEdition</code>. It doesn't repeat <code>title</code> and <code>author</code>; instead, it holds a reference to the <code>Book</code> it's an edition <em>of</em>:</p>
+
+      <pre><code class="language-java">class BookEdition {
+    private final Book   book;
+    private final String isbn;
+    private final int    pageCount;
+    private final String format;
+
+    BookEdition(Book book, String isbn, int pageCount, String format) {
+        this.book      = book;
+        this.isbn      = isbn;
+        this.pageCount = pageCount;
+        this.format    = format;
+    }
+
+    Book   book()      { return book; }
+    String isbn()      { return isbn; }
+    int    pageCount() { return pageCount; }
+    String format()    { return format; }
+}</code></pre>
+
+      <p>Now the three editions of <em>Clean Code</em> share one <code>Book</code>, instead of each carrying its own disconnected copy of the title and author:</p>
+
+      <pre><code class="language-java">Book cleanCode = new Book("Clean Code", "Robert C. Martin");
+
+BookEdition hardcover = new BookEdition(cleanCode, "978-0132350884", 464, "Hardcover");
+BookEdition paperback = new BookEdition(cleanCode, "978-0132760800", 464, "Paperback");
+BookEdition ebook      = new BookEdition(cleanCode, "978-0132766789", 464, "E-book");
+
+System.out.println(hardcover.book() == ebook.book()); // true — the very same Book object</code></pre>
+
+      <p>Three <code>BookEdition</code> objects, three distinct ISBNs — and exactly one <code>Book</code> underneath all of them. Correct the title once, on the one shared <code>Book</code>, and every edition reflects it, because every edition was never holding its own copy in the first place — just a reference to the one that exists.</p>
+
+      <div class="callout callout-conn">
+        <div class="callout-lbl">Connection <a href="objects.html#s43" class="backref">← §4.3</a></div>
+        <p>This is nothing more than a reference field, the same mechanism §4.3 introduced with <code>Rectangle</code>'s <code>origin</code> and <code>border</code>. <code>BookEdition</code> doesn't <em>contain</em> a <code>Book</code> — it holds an address pointing at one, on the heap, possibly shared with other objects that hold the same address. Naming that relationship is what's new here: whenever one class holds a reference to another as a field, that's <span class="term">composition</span> — a <em>"has-a"</em> relationship, as opposed to the <em>"is-a"</em> relationship inheritance models (§11). A <code>BookEdition</code> <em>has a</em> <code>Book</code>; it is not, itself, a kind of <code>Book</code>.</p>
+      </div>
+
+      <p>Composition is also how coupling gets managed deliberately. <code>BookEdition</code> depends on <code>Book</code> — it has to, to do its job — but the dependency runs in one direction only. <code>Book</code> has no field, no method, no import that mentions <code>BookEdition</code> at all; it has no idea editions exist. That asymmetry matters: <code>Book</code> can be reused, tested, or changed on its own terms, entirely unaware of anything built on top of it.</p>
+    </section>
+
+    <!-- §21.4 -->
+    <section id="s19-4">
+      <div class="section-head">
+        <span class="sec-num">§21.4</span>
+        <h2>Tell, Don't Ask <em>— encapsulation, revisited</em></h2>
+      </div>
+
+      <p>With <code>book()</code> exposed, it's tempting to reach straight through a <code>BookEdition</code> to assemble a description from the outside:</p>
+
+      <pre><code class="language-java">// works, but every caller has to know BookEdition's internal shape
+String description = edition.book().title() + " by " + edition.book().author()
+        + " (" + edition.format() + ", " + edition.pageCount() + " pages, ISBN "
+        + edition.isbn() + ")";</code></pre>
+
+      <p>Every piece of code that ever wants a description now needs to know that a <code>BookEdition</code> holds a <code>Book</code>, that a <code>Book</code> exposes <code>title()</code> and <code>author()</code>, and the exact order and punctuation the description is assembled in. Change any of that internal shape — say, <code>Book</code> gains a separate publisher field that should appear in the description — and every one of those call sites needs to change with it.</p>
+
+      <p>The fix is to ask the object to do the work, instead of asking it for its parts and doing the work yourself — a habit compact enough to have its own name, <span class="term">Tell, Don't Ask</span>:</p>
+
+      <pre><code class="language-java">class BookEdition {
+    // ...fields and constructor as before...
+
+    String describe() {
+        return "%s by %s (%s, %d pages, ISBN %s)"
+                .formatted(book.title(), book.author(), format, pageCount, isbn);
+    }
+}</code></pre>
+
+      <pre><code class="language-java">System.out.println(edition.describe());
+// Clean Code by Robert C. Martin (Hardcover, 464 pages, ISBN 978-0132350884)</code></pre>
+
+      <p>Now there's exactly one place that knows how a description is built, and it's the one class actually holding the data. Every caller just says <em>describe yourself</em> — a single method call, unaffected by whatever <code>BookEdition</code>'s fields look like internally, today or after the next change.</p>
+
+      <div class="callout callout-conn">
+        <div class="callout-lbl">Connection <a href="accessmodifiers.html#s11-4" class="backref">← §12.4</a></div>
+        <p>§12 framed encapsulation as hiding a field behind <code>private</code> so its invariants can't be broken from outside. Tell, Don't Ask is the same idea applied one level up: hide not just the <em>data</em>, but the <em>logic that uses it</em>, behind a method that does the whole job. A getter that just hands back a field is sometimes unavoidable — <code>book()</code> still exists above — but reaching for one by default, everywhere, is exactly the reflex this section pushes back on.</p>
+      </div>
+    </section>
+
+    <!-- §21.5 -->
+    <section id="s19-5">
+      <div class="section-head">
+        <span class="sec-num">§21.5</span>
+        <h2>Composition over Inheritance <em>— why BookEdition doesn't extend Book</em></h2>
+      </div>
+
+      <p>Inheritance (§11) was the tutorial's first tool for reusing another class's fields and methods, so it's worth confronting directly: why not simply write <code>class BookEdition extends Book</code>, and inherit <code>title</code> and <code>author</code> for free?</p>
+
+      <pre><code class="language-java">// tempting, but wrong here
+class BookEdition extends Book {
+    private final String isbn;
+    private final int    pageCount;
+    private final String format;
+
+    BookEdition(String title, String author, String isbn, int pageCount, String format) {
+        super(title, author);
+        this.isbn      = isbn;
+        this.pageCount = pageCount;
+        this.format    = format;
+    }
+}</code></pre>
+
+      <p>Two problems, and neither is about syntax:</p>
+
+      <p><strong>The "is-a" test fails.</strong> §11.1 grounded inheritance in a taxonomy — <code>extends</code> should read as "a more specific kind of." A hardcover <em>is</em> a kind of physical object, sure, but is it a more specific kind of <em>Book</em>, the way a <code>Dog</code> is a more specific kind of <code>Animal</code>? Not really — a hardcover isn't a specialized book, it's a printing <em>of</em> a book. The relationship is "belongs to," not "is a kind of," and §21.3 already gave that relationship its correct name: composition.</p>
+
+      <p><strong>The original problem comes right back.</strong> Each <code>BookEdition</code> subclass instance still carries its <em>own</em> inherited copy of <code>title</code> and <code>author</code> — inheritance doesn't create sharing, it copies the parent's field layout into every subclass object. Constructing a hardcover and an e-book "edition" of the same work still means passing <code>"Clean Code"</code> and <code>"Robert C. Martin"</code> into two separate constructor calls, with no single shared <code>Book</code> object underneath either one. Exactly the duplication §21.1 identified — inheritance just hides it behind <code>extends</code> instead of fixing it.</p>
+
+      <div class="callout callout-rule">
+        <div class="callout-lbl">A rule of thumb</div>
+        <p>When one object needs the data or behavior of another, composition — a reference field — should be the default choice. Reach for inheritance only when the relationship genuinely is "is-a-more-specific-kind-of," <em>and</em> the two classes are meant to share one common notion of identity, substitutable for each other wherever the parent type is expected (§11.5's polymorphism). "I want to reuse some fields" is not, by itself, a reason to inherit — composition reuses the exact same fields without committing to a taxonomy that doesn't actually hold.</p>
+      </div>
+    </section>
+
+    <!-- §21.6 -->
+    <section id="s19-6">
+      <div class="section-head">
+        <span class="sec-num">§21.6</span>
+        <h2>Program to an Interface, Not an Implementation</h2>
+      </div>
+
+      <p>The library catalog will eventually hold more than books — perhaps magazines, or audiobooks, later. Every one of those needs to be described, the same way a <code>BookEdition</code> does. Rather than writing catalog code that only understands <code>BookEdition</code> specifically, name the capability itself as an interface (§15):</p>
+
+      <pre><code class="language-java">interface Describable {
+    String describe();
+}
+
+class BookEdition implements Describable {
+    // ...fields and constructor as before...
+
+    @Override
+    public String describe() {
+        return "%s by %s (%s, %d pages, ISBN %s)"
+                .formatted(book.title(), book.author(), format, pageCount, isbn);
+    }
+}</code></pre>
+
+      <p>Nothing about <code>describe()</code>'s body changed — only its declaration now carries <code>@Override</code>, satisfying a contract named <code>Describable</code> instead of just happening to have a method with that name.</p>
+
+      <div class="callout callout-conn">
+        <div class="callout-lbl">Connection <a href="interfaces.html#s15-6" class="backref">← §15.6</a>, <a href="collections.html#s18-3" class="backref">← §18.3</a></div>
+        <p>This is interface-typed programming exactly as §15.6 described it, now paired with the collections framework from §18: a variable, parameter, or — as below — a <code>List</code>, declared in terms of what an object <em>can do</em> (<code>Describable</code>) rather than what it concretely <em>is</em> (<code>BookEdition</code>). The catalog that follows never needs to change when a new kind of describable item shows up; it only ever asks for <code>describe()</code>.</p>
+      </div>
+    </section>
+
+    <!-- §21.7 -->
+    <section id="s19-7">
+      <div class="section-head">
+        <span class="sec-num">§21.7</span>
+        <h2>Putting It Together <em>— a small Library</em></h2>
+      </div>
+
+      <p>Every idea from this chapter lands in one small class. A <code>Library</code> holds a growing collection of anything describable, without knowing or caring what concrete types those things are:</p>
+
+      <pre><code class="language-java">import java.util.ArrayList;
+import java.util.List;
+
+class Library {
+    private final List&lt;Describable&gt; holdings = new ArrayList&lt;&gt;();
+
+    void add(Describable item) {
+        holdings.add(item);
+    }
+
+    void printCatalog() {
+        for (Describable item : holdings) {
+            System.out.println(item.describe());
+        }
+    }
+}</code></pre>
+
+      <pre><code class="language-java">Book cleanCode = new Book("Clean Code", "Robert C. Martin");
+Book effectiveJava = new Book("Effective Java", "Joshua Bloch");
+
+Library library = new Library();
+library.add(new BookEdition(cleanCode, "978-0132350884", 464, "Hardcover"));
+library.add(new BookEdition(cleanCode, "978-0132766789", 464, "E-book"));
+library.add(new BookEdition(effectiveJava, "978-0134685991", 412, "Paperback"));
+
+library.printCatalog();
+// Clean Code by Robert C. Martin (Hardcover, 464 pages, ISBN 978-0132350884)
+// Clean Code by Robert C. Martin (E-book, 464 pages, ISBN 978-0132766789)
+// Effective Java by Joshua Bloch (Paperback, 412 pages, ISBN 978-0134685991)</code></pre>
+
+      <p>Trace what each class is actually responsible for: <code>Book</code> owns a work's identity and nothing else — cohesive, immutable, and entirely unaware anything called <code>BookEdition</code> exists. <code>BookEdition</code> owns everything specific to one printing, reaches into its <code>Book</code> only through its own <code>describe()</code> method, and exposes that capability through <code>Describable</code> rather than its own concrete name. <code>Library</code> depends on nothing but that one interface, so it works unchanged the day a <code>MagazineIssue</code> or an <code>AudiobookEdition</code> starts implementing <code>Describable</code> too. Four small, single-purpose classes, wired together by composition and an interface, do what one overloaded <code>Book</code> class couldn't.</p>
+    </section>
+
+    <!-- §21.8 -->
+    <section id="s19-8">
+      <div class="section-head">
+        <span class="sec-num">§21.8</span>
+        <h2>Key Takeaways</h2>
+      </div>
+
+      <ul>
+        <li>A class should have one reason to change (<span class="term">cohesion</span>). If a class's fields split naturally into unrelated groups, that's usually two classes wearing one name.</li>
+        <li><span class="term">Composition</span> — one class holding a reference to another — models "has-a" relationships without duplicating state, and keeps the dependency running in one direction only.</li>
+        <li><span class="term">Tell, Don't Ask</span>: give an object a method that does the whole job, instead of pulling its parts out and doing the job yourself from the outside.</li>
+        <li>Prefer composition to inheritance by default. Reach for <code>extends</code> only when the relationship is genuinely "is-a-more-specific-kind-of" and the subtype should be usable anywhere the supertype is expected.</li>
+        <li>Program to an interface, not a concrete class, wherever code needs to work with a capability rather than one specific implementation of it — it's what let <code>Library</code> stay unchanged as new describable types show up.</li>
+        <li>None of this is Java-specific. Every idea in this chapter — cohesion, composition, encapsulation, favoring composition over inheritance, coding to an interface — applies in any object-oriented language; Java's classes, interfaces, and references are simply the vocabulary this tutorial used to build them.</li>
+      </ul>
+    </section>
+
+  </article>
+
+  <nav class="page-nav" aria-label="Chapter navigation">
+    <a href="enums.html" class="page-nav-prev">
+      <span class="page-nav-label">← Previous</span>
+      <span class="page-nav-title">§20 — Enums</span>
+    </a>
+    <div class="page-nav-spacer"></div>
+  </nav>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  hljs.highlightAll();
+
+  // Flag error-annotation comments in code blocks
+  document.querySelectorAll('.hljs-comment').forEach(el => {
+    if (/\b(compile|compiler|runtime) error\b/i.test(el.textContent)) {
+      el.classList.add('hljs-comment-error');
+    }
+  });
+
+  // Code theme toggle
+  const codeThemeBtn = document.getElementById('code-theme-toggle');
+  const lightTheme = document.getElementById('hljs-light-theme');
+  const darkTheme = document.getElementById('hljs-dark-theme');
+  const themeLabel = codeThemeBtn.querySelector('.code-theme-label');
+  const themeIcon = codeThemeBtn.querySelector('.icon');
+
+  function applyCodeTheme(theme) {
+    const dark = theme === 'dark';
+    lightTheme.disabled = dark;
+    darkTheme.disabled = !dark;
+    document.documentElement.classList.toggle('code-dark', dark);
+    themeLabel.textContent = dark ? 'Light code' : 'Dark code';
+    themeIcon.textContent = dark ? '☀️' : '🌙';
+  }
+
+  applyCodeTheme(localStorage.getItem('code-theme') || 'light');
+
+  codeThemeBtn.addEventListener('click', () => {
+    const next = darkTheme.disabled ? 'dark' : 'light';
+    localStorage.setItem('code-theme', next);
+    applyCodeTheme(next);
+  });
+
+  // Scroll spy for sub-sections
+  const sections = document.querySelectorAll('section[id]');
+  const subLinks = document.querySelectorAll('.sub-nav a[href^="#"]');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = '#' + entry.target.id;
+        subLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+      }
+    });
+  }, { rootMargin: '-8% 0px -78% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+
+  // Mobile toggle
+  const btn  = document.getElementById('menu-btn');
+  const side = document.getElementById('sidebar');
+  btn.addEventListener('click', () => side.classList.toggle('open'));
+  document.querySelectorAll('#sidebar a').forEach(a => {
+    a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
+  });
+});
+</script>
+</body>
+</html>

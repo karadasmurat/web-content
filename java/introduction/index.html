@@ -1,369 +1,720 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>§0 Java at a Glance — OO with Java</title>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" id="hljs-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
-<link rel="stylesheet" id="hljs-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
-<script>
-(function () {
-  if ((localStorage.getItem('code-theme') || 'light') === 'dark') {
-    document.getElementById('hljs-light-theme').disabled = true;
-    document.getElementById('hljs-dark-theme').disabled = false;
-    document.documentElement.classList.add('code-dark');
-  }
-})();
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>§0 Java at a Glance — OO with Java</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" id="hljs-light-theme"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+  <link rel="stylesheet" id="hljs-dark-theme"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
+  <script>
+    (function () {
+      if ((localStorage.getItem('code-theme') || 'light') === 'dark') {
+        document.getElementById('hljs-light-theme').disabled = true;
+        document.getElementById('hljs-dark-theme').disabled = false;
+        document.documentElement.classList.add('code-dark');
+      }
+    })();
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
 </head>
+
 <body>
 
-<button id="menu-btn" aria-label="Toggle navigation">
-  <span></span><span></span><span></span>
-</button>
+  <button id="menu-btn" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
 
-<button id="code-theme-toggle" class="code-theme-toggle" aria-label="Toggle code color scheme">
-  <span class="icon">🌙</span><span class="code-theme-label">Dark code</span>
-</button>
+  <button id="code-theme-toggle" class="code-theme-toggle" aria-label="Toggle code color scheme">
+    <span class="icon">🌙</span><span class="code-theme-label">Dark code</span>
+  </button>
 
-<nav id="sidebar" aria-label="Tutorial navigation">
-  <div class="sidebar-brand">
-    <div class="sidebar-brand-label">Tutorial</div>
-    <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
-  </div>
-  <nav>
-    <ul>
-      <li><a href="index.html" class="active"><span class="nav-num">§0</span>Java at a Glance</a></li>
-      <li><a href="variables.html"><span class="nav-num">§1</span>Variables</a></li>
-      <li><a href="primitives.html"><span class="nav-num">§2</span>Primitives</a></li>
-      <li><a href="classes.html"><span class="nav-num">§3</span>Classes</a></li>
-      <li><a href="objects.html"><span class="nav-num">§4</span>Objects</a></li>
-      <li><a href="assignment.html"><span class="nav-num">§5</span>Assignment</a></li>
-      <li><a href="methods.html"><span class="nav-num">§6</span>Methods</a></li>
-      <li><a href="arrays.html"><span class="nav-num">§7</span>Arrays</a></li>
-      <li>
-        <a href="strings.html"><span class="nav-num">§8</span>Strings</a>
+  <nav id="sidebar" aria-label="Tutorial navigation">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-label">Tutorial</div>
+      <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
+    </div>
+    <nav>
+      <ul>
+        <li>
+          <a href="index.html" class="active"><span class="nav-num">§0</span>Java at a Glance</a>
+          <ul class="sub-nav">
+            <li><a href="#s0-1"><span class="nav-num">§0.1</span>What Is Java?</a></li>
+            <li><a href="#s0-2"><span class="nav-num">§0.2</span>Where Is Java Used?</a></li>
+            <li><a href="#s0-3"><span class="nav-num">§0.3</span>Why Java?</a></li>
+            <li><a href="#s0-4"><span class="nav-num">§0.4</span>The Java Ecosystem</a></li>
+            <li><a href="#s0-5"><span class="nav-num">§0.5</span>Java Versions</a></li>
+            <li><a href="#s0-6"><span class="nav-num">§0.6</span>Your First Program</a></li>
+            <li><a href="#s0-7"><span class="nav-num">§0.7</span>Key Features</a></li>
+            <li><a href="#s0-8"><span class="nav-num">§0.8</span>Key Takeaways</a></li>
+            <li><a href="#s0-9"><span class="nav-num">§0.9</span>Appendix: Write Once, Run Anywhere</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="variables.html"><span class="nav-num">§1</span>Variables</a>
+          <ul class="sub-nav">
+            <li><a href="variables.html#s1-1"><span class="nav-num">§1.1</span>Values</a></li>
+            <li><a href="variables.html#s1-2"><span class="nav-num">§1.2</span>Giving Values Names</a></li>
+            <li><a href="variables.html#s1-3"><span class="nav-num">§1.3</span>Variables in Java</a></li>
+            <li><a href="variables.html#s1-4"><span class="nav-num">§1.4</span>Naming Variables</a></li>
+            <li><a href="variables.html#s1-5"><span class="nav-num">§1.5</span>What a Variable Holds</a></li>
+            <li><a href="variables.html#s1-6"><span class="nav-num">§1.6</span>Changing a Value</a></li>
+            <li><a href="variables.html#s1-7"><span class="nav-num">§1.7</span><code>var</code></a></li>
+            <li><a href="variables.html#s1-8"><span class="nav-num">§1.8</span>Common Mistakes</a></li>
+            <li><a href="variables.html#s1-9"><span class="nav-num">§1.9</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li><a href="primitives.html"><span class="nav-num">§2</span>Primitives</a></li>
+        <li><a href="classes.html"><span class="nav-num">§3</span>Classes</a></li>
+        <li><a href="objects.html"><span class="nav-num">§4</span>Objects</a></li>
+        <li><a href="assignment.html"><span class="nav-num">§5</span>Assignment</a></li>
+        <li>
+          <a href="methods.html"><span class="nav-num">§6</span>Methods</a>
+          <ul class="sub-nav">
+            <li><a href="methods.html#s6-intro"><span class="nav-num">§6.1</span>What Is a Method?</a></li>
+            <li><a href="methods.html#s62"><span class="nav-num">§6.2</span>Static Methods</a></li>
+            <li><a href="methods.html#s63"><span class="nav-num">§6.3</span>Reference Parameters</a></li>
+            <li><a href="methods.html#s64"><span class="nav-num">§6.4</span>Dot Operator Revisited</a></li>
+            <li><a href="methods.html#s65"><span class="nav-num">§6.5</span>Instance Methods</a></li>
+            <li><a href="methods.html#s66"><span class="nav-num">§6.6</span>Functions to Objects</a></li>
+            <li><a href="methods.html#s67"><span class="nav-num">§6.7</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li><a href="operators.html"><span class="nav-num">§7</span>Operators</a></li>
+        <li><a href="controlflow.html"><span class="nav-num">§8</span>Control Flow</a></li>
+        <li><a href="arrays.html"><span class="nav-num">§9</span>Arrays</a></li>
+        <li>
+          <a href="strings.html"><span class="nav-num">§10</span>Strings</a>
+          <ul class="sub-nav">
+            <li><a href="strings.html#s10-1"><span class="nav-num">§10.1</span>Writing Systems &amp; Unicode</a></li>
+            <li><a href="strings.html#s10-2"><span class="nav-num">§10.2</span><code>char</code></a></li>
+            <li><a href="strings.html#s10-3"><span class="nav-num">§10.3</span><code>Character</code></a></li>
+            <li><a href="strings.html#s10-4"><span class="nav-num">§10.4</span>Indexing</a></li>
+            <li><a href="strings.html#s10-5"><span class="nav-num">§10.5</span>Immutability</a></li>
+            <li><a href="strings.html#s10-6"><span class="nav-num">§10.6</span><code>==</code> vs
+                <code>.equals()</code></a></li>
+            <li><a href="strings.html#s10-7"><span class="nav-num">§10.7</span>Concatenation</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="inheritance.html"><span class="nav-num">§11</span>Inheritance</a>
+          <ul class="sub-nav">
+            <li><a href="inheritance.html#s10-1"><span class="nav-num">§11.1</span>Taxonomy</a></li>
+            <li><a href="inheritance.html#s10-2"><span class="nav-num">§11.2</span>The Problem</a></li>
+            <li><a href="inheritance.html#s10-3"><span class="nav-num">§11.3</span><code>extends</code></a></li>
+            <li><a href="inheritance.html#s10-4"><span class="nav-num">§11.4</span><code>super(...)</code></a></li>
+            <li><a href="inheritance.html#s10-5"><span class="nav-num">§11.5</span>Polymorphism</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="accessmodifiers.html"><span class="nav-num">§12</span>Packages & Access Modifiers</a>
+          <ul class="sub-nav">
+            <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§12.1</span>Packages</a></li>
+            <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§12.2</span>Why Restrict Access</a></li>
+            <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§12.3</span><code>private</code></a></li>
+            <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§12.4</span>Encapsulation</a></li>
+            <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§12.5</span><code>public</code></a></li>
+            <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§12.6</span>Package-Private</a></li>
+            <li><a href="accessmodifiers.html#s11-7"><span class="nav-num">§12.7</span><code>protected</code></a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="immutability.html"><span class="nav-num">§13</span>Immutability</a>
+          <ul class="sub-nav">
+            <li><a href="immutability.html#s13-1"><span class="nav-num">§13.1</span>Identity &amp; State</a></li>
+            <li><a href="immutability.html#s13-2"><span class="nav-num">§13.2</span>A Question of Time</a></li>
+            <li><a href="immutability.html#s13-3"><span class="nav-num">§13.3</span>Building an Immutable Class</a></li>
+            <li><a href="immutability.html#s13-4"><span class="nav-num">§13.4</span><code>final</code> Isn't Deep</a>
+            </li>
+            <li><a href="immutability.html#s13-5"><span class="nav-num">§13.5</span>Why It Matters</a></li>
+            <li><a href="immutability.html#s13-6"><span class="nav-num">§13.6</span><code>StringBuilder</code></a></li>
+            <li><a href="immutability.html#s13-7"><span class="nav-num">§13.7</span>Core Pillars</a></li>
+            <li><a href="immutability.html#s13-8"><span class="nav-num">§13.8</span>Putting It Together</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="abstractclasses.html"><span class="nav-num">§14</span>Abstract Classes</a>
+          <ul class="sub-nav">
+            <li><a href="abstractclasses.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
+            <li><a href="abstractclasses.html#s14-2"><span class="nav-num">§14.2</span><code>abstract</code> Classes</a>
+            </li>
+            <li><a href="abstractclasses.html#s14-3"><span class="nav-num">§14.3</span><code>abstract</code> Methods</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="interfaces.html"><span class="nav-num">§15</span>Interfaces</a>
+          <ul class="sub-nav">
+            <li><a href="interfaces.html#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
+            <li><a href="interfaces.html#s15-2"><span class="nav-num">§15.2</span>Interface vs. Abstract Class</a></li>
+            <li><a href="interfaces.html#s15-3"><span class="nav-num">§15.3</span>Declaring &amp; Implementing</a></li>
+            <li><a href="interfaces.html#s15-4"><span class="nav-num">§15.4</span>Override vs. Overload</a></li>
+            <li><a href="interfaces.html#s15-5"><span class="nav-num">§15.5</span>Multiple Interfaces</a></li>
+            <li><a href="interfaces.html#s15-6"><span class="nav-num">§15.6</span>Interface-Typed Params</a></li>
+            <li><a href="interfaces.html#s15-7"><span class="nav-num">§15.7</span>Anonymous Classes</a></li>
+            <li><a href="interfaces.html#s15-8"><span class="nav-num">§15.8</span>Default Methods</a></li>
+            <li><a href="interfaces.html#s15-9"><span class="nav-num">§15.9</span>Default Method Collisions</a></li>
+            <li><a href="interfaces.html#s15-10"><span class="nav-num">§15.10</span>Static Methods</a></li>
+            <li><a href="interfaces.html#s15-11"><span class="nav-num">§15.11</span>Interface Inheritance</a></li>
+            <li><a href="interfaces.html#s15-12"><span class="nav-num">§15.12</span>Strategy Pattern</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="generics.html"><span class="nav-num">§16</span>Generics</a>
+          <ul class="sub-nav">
+            <li><a href="generics.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
+            <li><a href="generics.html#s16-2"><span class="nav-num">§16.2</span>Type Parameters</a></li>
+            <li><a href="generics.html#s16-3"><span class="nav-num">§16.3</span>Generic Methods</a></li>
+            <li><a href="generics.html#s16-4"><span class="nav-num">§16.4</span>Bounded Types</a></li>
+            <li><a href="generics.html#s16-5"><span class="nav-num">§16.5</span>Compile Time Only</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="records.html"><span class="nav-num">§17</span>Records</a>
+          <ul class="sub-nav">
+            <li><a href="records.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
+            <li><a href="records.html#s17-2"><span class="nav-num">§17.2</span><code>record</code></a></li>
+            <li><a href="records.html#s17-3"><span class="nav-num">§17.3</span>Implicitly Final</a></li>
+            <li><a href="records.html#s17-4"><span class="nav-num">§17.4</span>Shallow Immutability</a></li>
+            <li><a href="records.html#s17-5"><span class="nav-num">§17.5</span>Compact Constructors</a></li>
+            <li><a href="records.html#s17-6"><span class="nav-num">§17.6</span>Records Can Do More</a></li>
+            <li><a href="records.html#s17-7"><span class="nav-num">§17.7</span>When to Reach for One</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="collections.html"><span class="nav-num">§18</span>Collections Framework</a>
+          <ul class="sub-nav">
+            <li><a href="collections.html#s18-1"><span class="nav-num">§18.1</span>The Problem</a></li>
+            <li><a href="collections.html#s18-2"><span class="nav-num">§18.2</span>The Big Picture</a></li>
+            <li><a href="collections.html#s18-3"><span class="nav-num">§18.3</span><code>List</code></a></li>
+            <li><a href="collections.html#s18-4"><span class="nav-num">§18.4</span><code>Queue</code></a></li>
+            <li><a href="collections.html#s18-5"><span class="nav-num">§18.5</span><code>Set</code></a></li>
+            <li><a href="collections.html#s18-6"><span class="nav-num">§18.6</span><code>Map</code></a></li>
+          </ul>
+        </li>
+        <li>
+        <a href="lambdas.html"><span class="nav-num">§19</span>Functional Programming</a>
         <ul class="sub-nav">
-          <li><a href="strings.html#s8-1"><span class="nav-num">§8.1</span>Writing Systems &amp; Unicode</a></li>
-          <li><a href="strings.html#s8-2"><span class="nav-num">§8.2</span><code>char</code></a></li>
-          <li><a href="strings.html#s8-3"><span class="nav-num">§8.3</span><code>Character</code></a></li>
-          <li><a href="strings.html#s8-4"><span class="nav-num">§8.4</span>Indexing</a></li>
-          <li><a href="strings.html#s8-5"><span class="nav-num">§8.5</span>Immutability</a></li>
-          <li><a href="strings.html#s8-6"><span class="nav-num">§8.6</span><code>==</code> vs <code>.equals()</code></a></li>
-          <li><a href="strings.html#s8-7"><span class="nav-num">§8.7</span>Concatenation</a></li>
+          <li><a href="lambdas.html#s19-1"><span class="nav-num">§19.1</span>Functions as First-Class Citizens</a></li>
+          <li><a href="lambdas.html#s19-2"><span class="nav-num">§19.2</span>Why Java "Simulates" First-Class Functions</a></li>
+          <li><a href="lambdas.html#s19-3"><span class="nav-num">§19.3</span>The Problem</a></li>
+          <li><a href="lambdas.html#s19-4"><span class="nav-num">§19.4</span>Another Anonymous Class</a></li>
+          <li><a href="lambdas.html#s19-5"><span class="nav-num">§19.5</span>Functional Interfaces</a></li>
+          <li><a href="lambdas.html#s19-6"><span class="nav-num">§19.6</span>Lambda Expressions</a></li>
+          <li><a href="lambdas.html#s19-7"><span class="nav-num">§19.7</span>Method References</a></li>
+          <li><a href="lambdas.html#s19-8"><span class="nav-num">§19.8</span><code>java.util.function</code></a></li>
+          <li><a href="lambdas.html#s19-9"><span class="nav-num">§19.9</span>Key Takeaways</a></li>
         </ul>
       </li>
-      <li><a href="operators.html"><span class="nav-num">§9</span>Operators</a></li>
-      <li><a href="controlflow.html"><span class="nav-num">§10</span>Control Flow</a></li>
-      <li>
-        <a href="inheritance.html"><span class="nav-num">§11</span>Inheritance</a>
+        <li>
+        <a href="enums.html"><span class="nav-num">§20</span>Enums</a>
         <ul class="sub-nav">
-          <li><a href="inheritance.html#s10-1"><span class="nav-num">§11.1</span>Taxonomy</a></li>
-          <li><a href="inheritance.html#s10-2"><span class="nav-num">§11.2</span>The Problem</a></li>
-          <li><a href="inheritance.html#s10-3"><span class="nav-num">§11.3</span><code>extends</code></a></li>
-          <li><a href="inheritance.html#s10-4"><span class="nav-num">§11.4</span><code>super(...)</code></a></li>
-          <li><a href="inheritance.html#s10-5"><span class="nav-num">§11.5</span>Polymorphism</a></li>
+          <li><a href="enums.html#s20-1"><span class="nav-num">§20.1</span>The Problem</a></li>
+          <li><a href="enums.html#s20-2"><span class="nav-num">§20.2</span>Declaring an Enum</a></li>
+          <li><a href="enums.html#s20-3"><span class="nav-num">§20.3</span>Objects, Not Constants</a></li>
+          <li><a href="enums.html#s20-4"><span class="nav-num">§20.4</span>Comparing Enum Values</a></li>
+          <li><a href="enums.html#s20-5"><span class="nav-num">§20.5</span>Type Characteristics</a></li>
+          <li><a href="enums.html#s20-6"><span class="nav-num">§20.6</span>Fields, Constructors, Methods</a></li>
+          <li><a href="enums.html#s20-7"><span class="nav-num">§20.7</span>Enums vs. Magic Numbers</a></li>
+          <li><a href="enums.html#s20-8"><span class="nav-num">§20.8</span>Closed Sets vs. Evolving Reality</a></li>
+          <li><a href="enums.html#s20-9"><span class="nav-num">§20.9</span>Key Takeaways</a></li>
         </ul>
       </li>
-      <li>
-        <a href="accessmodifiers.html"><span class="nav-num">§12</span>Packages & Access Modifiers</a>
-        <ul class="sub-nav">
-          <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§12.1</span>Packages</a></li>
-          <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§12.2</span>Why Restrict Access</a></li>
-          <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§12.3</span><code>private</code></a></li>
-          <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§12.4</span>Encapsulation</a></li>
-          <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§12.5</span><code>public</code></a></li>
-          <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§12.6</span>Package-Private</a></li>
-          <li><a href="accessmodifiers.html#s11-7"><span class="nav-num">§12.7</span><code>protected</code></a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="immutability.html"><span class="nav-num">§13</span>Immutability</a>
-        <ul class="sub-nav">
-          <li><a href="immutability.html#s13-1"><span class="nav-num">§13.1</span>Identity &amp; State</a></li>
-          <li><a href="immutability.html#s13-2"><span class="nav-num">§13.2</span>A Question of Time</a></li>
-          <li><a href="immutability.html#s13-3"><span class="nav-num">§13.3</span>Building One</a></li>
-          <li><a href="immutability.html#s13-4"><span class="nav-num">§13.4</span><code>final</code> Isn't Deep</a></li>
-          <li><a href="immutability.html#s13-5"><span class="nav-num">§13.5</span>Why It Matters</a></li>
-          <li><a href="immutability.html#s13-6"><span class="nav-num">§13.6</span><code>StringBuilder</code></a></li>
-          <li><a href="immutability.html#s13-7"><span class="nav-num">§13.7</span>Core Pillars</a></li>
-          <li><a href="immutability.html#s13-8"><span class="nav-num">§13.8</span>Putting It Together</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="abstractclasses.html"><span class="nav-num">§14</span>Abstract Classes</a>
-        <ul class="sub-nav">
-          <li><a href="abstractclasses.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
-          <li><a href="abstractclasses.html#s14-2"><span class="nav-num">§14.2</span><code>abstract</code> Classes</a></li>
-          <li><a href="abstractclasses.html#s14-3"><span class="nav-num">§14.3</span><code>abstract</code> Methods</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="interfaces.html"><span class="nav-num">§15</span>Interfaces</a>
-        <ul class="sub-nav">
-          <li><a href="interfaces.html#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
-          <li><a href="interfaces.html#s15-2"><span class="nav-num">§15.2</span>Interface vs. Abstract Class</a></li>
-          <li><a href="interfaces.html#s15-3"><span class="nav-num">§15.3</span>Declaring &amp; Implementing</a></li>
-          <li><a href="interfaces.html#s15-4"><span class="nav-num">§15.4</span>Override vs. Overload</a></li>
-          <li><a href="interfaces.html#s15-5"><span class="nav-num">§15.5</span>Multiple Interfaces</a></li>
-          <li><a href="interfaces.html#s15-6"><span class="nav-num">§15.6</span>Interface-Typed Params</a></li>
-          <li><a href="interfaces.html#s15-7"><span class="nav-num">§15.7</span>Anonymous Classes</a></li>
-          <li><a href="interfaces.html#s15-8"><span class="nav-num">§15.8</span>Default Methods</a></li>
-          <li><a href="interfaces.html#s15-9"><span class="nav-num">§15.9</span>Default Method Collisions</a></li>
-          <li><a href="interfaces.html#s15-10"><span class="nav-num">§15.10</span>Static Methods</a></li>
-          <li><a href="interfaces.html#s15-11"><span class="nav-num">§15.11</span>Interface Inheritance</a></li>
-          <li><a href="interfaces.html#s15-12"><span class="nav-num">§15.12</span>Strategy Pattern</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="generics.html"><span class="nav-num">§16</span>Generics</a>
-        <ul class="sub-nav">
-          <li><a href="generics.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
-          <li><a href="generics.html#s16-2"><span class="nav-num">§16.2</span>Type Parameters</a></li>
-          <li><a href="generics.html#s16-3"><span class="nav-num">§16.3</span>Generic Methods</a></li>
-          <li><a href="generics.html#s16-4"><span class="nav-num">§16.4</span>Bounded Types</a></li>
-          <li><a href="generics.html#s16-5"><span class="nav-num">§16.5</span>Compile Time Only</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="records.html"><span class="nav-num">§17</span>Records</a>
-        <ul class="sub-nav">
-          <li><a href="records.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
-          <li><a href="records.html#s17-2"><span class="nav-num">§17.2</span><code>record</code></a></li>
-          <li><a href="records.html#s17-3"><span class="nav-num">§17.3</span>Implicitly Final</a></li>
-          <li><a href="records.html#s17-4"><span class="nav-num">§17.4</span>Shallow Immutability</a></li>
-          <li><a href="records.html#s17-5"><span class="nav-num">§17.5</span>Compact Constructors</a></li>
-          <li><a href="records.html#s17-6"><span class="nav-num">§17.6</span>Records Can Do More</a></li>
-          <li><a href="records.html#s17-7"><span class="nav-num">§17.7</span>When to Reach for One</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="collections.html"><span class="nav-num">§18</span>Collections Framework</a>
-        <ul class="sub-nav">
-          <li><a href="collections.html#s18-1"><span class="nav-num">§18.1</span>The Problem</a></li>
-          <li><a href="collections.html#s18-2"><span class="nav-num">§18.2</span>The Big Picture</a></li>
-          <li><a href="collections.html#s18-3"><span class="nav-num">§18.3</span><code>List</code></a></li>
-          <li><a href="collections.html#s18-4"><span class="nav-num">§18.4</span><code>Queue</code></a></li>
-          <li><a href="collections.html#s18-5"><span class="nav-num">§18.5</span><code>Set</code></a></li>
-          <li><a href="collections.html#s18-6"><span class="nav-num">§18.6</span><code>Map</code></a></li>
-        </ul>
-      </li>
-    </ul>
+      <li><a href="oodesign.html"><span class="nav-num">§21</span>Object-Oriented Design</a></li>
+      </ul>
+    </nav>
   </nav>
-</nav>
 
-<main id="content">
-  <header class="page-header">
-    <div class="page-chapter">Chapter 0</div>
-    <h1>Java at a Glance</h1>
-    <p class="page-lead">What Java is, how it works, and the two or three mechanical facts that everything else in this tutorial depends on.</p>
-  </header>
+  <main id="content">
+    <header class="page-header">
+      <div class="page-chapter">Chapter 0</div>
+      <h1>Java at a Glance</h1>
+      <p class="page-lead">What Java is, why it's still worth learning, how it works, and the two or three mechanical
+        facts that everything else in this tutorial depends on.</p>
+    </header>
 
-  <article>
+    <article>
 
-    <h3>What is Java?</h3>
+      <!-- §0.1 -->
+      <section id="s0-1">
+        <div class="section-head">
+          <span class="sec-num">§0.1</span>
+          <h2>What Is Java?</h2>
+        </div>
 
-    <p>Java is a <span class="term">compiled, statically typed, object-oriented</span> programming language designed to run on any machine without modification. You write source code in <code>.java</code> files. The Java compiler (<code>javac</code>) translates that source into <span class="term">bytecode</span> — a compact, platform-neutral instruction set stored in <code>.class</code> files. The <span class="term">Java Virtual Machine</span> (JVM) then loads and executes the bytecode.</p>
+        <p>Java is a general-purpose programming language, used to build everything from small command-line tools to
+          large-scale systems serving millions of users.
+        </p>
 
-    <p>The JVM is available on Windows, macOS, Linux, and more, and the same <code>.class</code> file runs on all of them. This is Java's central guarantee — <span class="term">write once, run anywhere</span> — and it's worth unpacking exactly what makes it possible.</p>
+        <div class="callout callout-note">
+          <div class="callout-lbl">Language and platform</div>
+          <p>Java is both a programming language and a platform. The <em>language</em> is what you write. The
+            <em>platform</em> — the JVM, the standard library, the tooling — is what provides everything needed to
+            run what you wrote.
+          </p>
+        </div>
+      </section>
 
-    <h3>Write Once, Run Anywhere</h3>
+      <!-- §0.2 -->
+      <section id="s0-2">
+        <div class="section-head">
+          <span class="sec-num">§0.2</span>
+          <h2>Where Is Java Used?</h2>
+        </div>
 
-    <h4>The Java Workflow, End to End</h4>
+        <p>Java powers software across a wide range of industries and environments — often invisibly, from the
+          perspective of the people using it:</p>
 
-    <p>That word "compiled" is worth pausing on first. A CPU only understands <span class="term">machine instructions</span> — numbers meaningful to that specific processor — and nobody writes programs that way. You write <span class="term">source code</span>: text in a language designed for humans to read and reason about. <span class="term">Compilation</span> is the development-time step that bridges the two — a compiler reads your source, rejects anything that doesn't parse or type-check, and translates whatever survives into an executable form. That step is the first of three distinct stages a Java application moves through, and they don't have to happen on the same machine:</p>
+        <table class="content-table">
+          <tr>
+            <th>Area</th>
+            <th>Examples</th>
+          </tr>
+          <tr>
+            <td>Backend services</td>
+            <td>Web APIs, business applications, cloud services</td>
+          </tr>
+          <tr>
+            <td>Banking &amp; finance</td>
+            <td>Transaction processing systems, trading platforms</td>
+          </tr>
+          <tr>
+            <td>E-commerce</td>
+            <td>Online stores, payment processing systems</td>
+          </tr>
+          <tr>
+            <td>Big data</td>
+            <td>Apache Hadoop, Apache Kafka, and their ecosystems</td>
+          </tr>
+          <tr>
+            <td>Android development</td>
+            <td>Historically one of Android's primary languages</td>
+          </tr>
+          <tr>
+            <td>Desktop applications</td>
+            <td>Cross-platform desktop software</td>
+          </tr>
+        </table>
 
-    <ol>
-      <li><strong>Development.</strong> You write Java source code and compile it with a Java compiler (<code>javac</code>) on your development machine. This produces <code>.class</code> files containing bytecode.</li>
-      <li><strong>Distribution.</strong> You package the <code>.class</code> files, along with any resources they need, into a distributable format — typically a <code>.jar</code> file.</li>
-      <li><strong>Execution.</strong> The user on the target platform needs a compatible JVM installed. They run your application, and their JVM executes the bytecode — no recompilation, regardless of what platform built it.</li>
-    </ol>
+        <p>Even when users never realize it, many of the applications and services they interact with every day are
+          running on Java behind the scenes.</p>
+      </section>
 
-    <p>Compilation happens once, on the developer's machine; execution happens anywhere a JVM is installed, unmodified. That separation — compile once, distribute the bytecode, run on any JVM — is what "write once, run anywhere" actually refers to. The next section looks at the mechanics that make the separation possible.</p>
+      <!-- §0.3 -->
+      <section id="s0-3">
+        <div class="section-head">
+          <span class="sec-num">§0.3</span>
+          <h2>Why Java?</h2>
+        </div>
 
-    <p>"A compatible JVM installed" means installing a <span class="term">JDK</span> — the <span class="term">Java Development Kit</span>. It bundles <code>javac</code>, the <code>java</code> launcher (which starts the JVM and runs your bytecode), the standard library, and the rest of the developer tooling in one package. You'll sometimes see the term <span class="term">JRE</span> (Java Runtime Environment) in older material — it referred to a separate, smaller download containing just the JVM and libraries needed to run a compiled program, with none of the development tools. Oracle stopped distributing a standalone JRE starting with Java 11: today there's just the JDK, and both the developer compiling the code and the end user running it install the same thing.</p>
+        <p>Why invest time learning a language whose first version shipped in 1996? A few reasons hold up well:</p>
 
-    <h4>Compiling to Native Code vs. Compiling to Bytecode</h4>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-card-title"><span class="dot"></span>Portable</div>
+            <p>The same compiled bytecode runs unmodified on any platform with a JVM installed — the mechanics are
+              §0.9's subject in full.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card-title"><span class="dot"></span>Reliable</div>
+            <p>A strong type system, automatic memory management, and a mature standard library help developers write
+              software that's easier to maintain and less prone to common errors.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card-title"><span class="dot"></span>High Performance</div>
+            <p>Early Java was criticized for interpreting bytecode slowly. Modern JVMs use Just-In-Time (JIT)
+              compilation and runtime profiling to turn frequently executed code into highly optimized machine code
+              while the program runs — fast enough for large-scale backend and financial systems today.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card-title"><span class="dot"></span>Rich Ecosystem</div>
+            <p>An extensive standard library, backed by thousands of open-source libraries, frameworks, and
+              development tools.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card-title"><span class="dot"></span>Built for Concurrency</div>
+            <p>Comprehensive support for multithreading and concurrent programming, suited to today's multi-core
+              processors.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card-title"><span class="dot"></span>Mature &amp; Backward-Compatible</div>
+            <p>Nearly thirty years of continuous development, with a strong emphasis on compatibility — applications
+              written years ago commonly still run on modern Java releases with little or no modification.</p>
+          </div>
+        </div>
 
-    <p>To see why that guarantee holds, it helps to compare Java's pipeline to a language like <span class="term">C</span>, which compiles straight to native machine code.</p>
+        <div class="callout callout-note">
+          <div class="callout-lbl">Throughout this tutorial</div>
+          <p>You'll see how these design principles influence the language itself. Features that seem restrictive at
+            first often exist because they help software stay understandable and maintainable as a project grows from
+            a few hundred lines to millions.</p>
+        </div>
+      </section>
 
-    <p>A C compiler (<code>gcc</code>, <code>clang</code>, MSVC) translates <code>hello.c</code> directly into instructions for one specific CPU and operating system. Target five different machines, and you compile the same source five separate times — once per machine, on that machine — and get five incompatible binaries out:</p>
+      <!-- §0.4 -->
+      <section id="s0-4">
+        <div class="section-head">
+          <span class="sec-num">§0.4</span>
+          <h2>The Java Ecosystem</h2>
+        </div>
 
-    <div class="compile-fanout">
-      <div class="cf-box"><code>hello.c</code><small>Same source</small></div>
-      <div class="cf-branches">
-        <div class="cf-tool"><span class="cf-arrow">→</span><span>clang<br>(Apple Silicon)</span></div>
-        <div class="cf-box"><code>hello</code><small>arm64 Mach-O</small></div>
-        <div class="cf-tool"><span class="cf-arrow">→</span></div>
-        <div class="cf-box">🍎<small>Apple Silicon</small></div>
+        <p>When people say "Java," they usually mean <span class="term">Java SE</span> (Standard Edition) — the core
+          platform: the language itself, the compiler, the JVM, and the standard libraries every Java developer uses.
+          This tutorial focuses entirely on Java SE; everything covered here applies whether you later build desktop
+          applications, backend services, or command-line tools.</p>
 
-        <div class="cf-tool"><span class="cf-arrow">→</span><span>clang<br>(Intel Mac)</span></div>
-        <div class="cf-box"><code>hello</code><small>x86-64 Mach-O</small></div>
-        <div class="cf-tool"><span class="cf-arrow">→</span></div>
-        <div class="cf-box">🍎<small>Intel Mac</small></div>
+        <p>Most real-world Java applications are also built on a framework — <span class="term">Spring Boot</span> is
+          the most popular, simplifying web applications and microservices; Quarkus and Micronaut are two others.
+          These frameworks are built <em>on top of</em> Java, not instead of it — learning the language first gives you
+          a solid foundation for picking up any framework afterward.</p>
+      </section>
 
-        <div class="cf-tool"><span class="cf-arrow">→</span><span>MSVC<br>(Windows x86-64)</span></div>
-        <div class="cf-box"><code>hello.exe</code><small>x86-64 PE</small></div>
-        <div class="cf-tool"><span class="cf-arrow">→</span></div>
-        <div class="cf-box">🪟<small>Windows x86-64</small></div>
+      <!-- §0.5 -->
+      <section id="s0-5">
+        <div class="section-head">
+          <span class="sec-num">§0.5</span>
+          <h2>Java Versions</h2>
+        </div>
 
-        <div class="cf-tool"><span class="cf-arrow">→</span><span>MSVC<br>(Windows on ARM)</span></div>
-        <div class="cf-box"><code>hello.exe</code><small>arm64 PE</small></div>
-        <div class="cf-tool"><span class="cf-arrow">→</span></div>
-        <div class="cf-box">🪟<small>Windows on ARM</small></div>
+        <p>Java is actively developed, with a new feature release every six months. Some releases are designated
+          <span class="term">Long-Term Support</span> (LTS) — these receive updates for years and are the usual choice
+          for production systems. Other releases receive support for a much shorter window, aimed at developers who
+          want early access to new features.
+        </p>
 
-        <div class="cf-tool"><span class="cf-arrow">→</span><span>gcc<br>(Linux)</span></div>
-        <div class="cf-box"><code>hello</code><small>x86-64 ELF</small></div>
-        <div class="cf-tool"><span class="cf-arrow">→</span></div>
-        <div class="cf-box">🐧<small>Linux</small></div>
-      </div>
-    </div>
+        <table class="content-table">
+          <tr>
+            <th>Type</th>
+            <th>Typical use</th>
+          </tr>
+          <tr>
+            <td>LTS release</td>
+            <td>Production systems and long-term projects</td>
+          </tr>
+          <tr>
+            <td>Feature release</td>
+            <td>Trying new language features, early adoption</td>
+          </tr>
+        </table>
 
-    <p>Five platforms, five separate compiles, five binaries — none of which run anywhere but the machine (CPU architecture <em>and</em> operating system) it was built for. Notice that "Windows" alone isn't even one target: the two Windows rows are both Windows, but a different CPU architecture still means a different binary, the same way it does between the two Macs.</p>
+        <p>This tutorial targets <span class="term">Java 25</span>. Most examples also work on earlier versions, but
+          occasionally something introduced more recently gets used deliberately, favoring modern, idiomatic style over
+          maximum backward reach.</p>
+      </section>
 
-    <p>Java inserts a layer of indirection: <code>javac</code> never targets a CPU at all. It targets the JVM's instruction set, which is the same everywhere. Portability moves from the compiler to the runtime — a JVM is built once for each platform, and it knows how to translate that one bytecode format into whatever native instructions the local CPU needs. One compile is all it takes, and that one output runs everywhere, because translating bytecode to native instructions is the JVM's job, not <code>javac</code>'s:</p>
+      <!-- §0.6 -->
+      <section id="s0-6">
+        <div class="section-head">
+          <span class="sec-num">§0.6</span>
+          <h2>Your First Program</h2>
+        </div>
 
-    <div class="compile-fanout">
-      <div class="cf-box"><code>Hello.java</code><small>Source code</small></div>
-      <div class="cf-tool"><span class="cf-arrow">→</span><span>javac</span></div>
-      <div class="cf-box"><code>Hello.class</code><small>Bytecode</small></div>
-      <div class="cf-tool"><span class="cf-arrow">→</span><span>runs on</span></div>
-      <div class="cf-targets">
-        <div class="cf-box">🍎<small>Apple Silicon</small><span class="cf-jvm-badge">JVM installed</span></div>
-        <div class="cf-box">🍎<small>Intel Mac</small><span class="cf-jvm-badge">JVM installed</span></div>
-        <div class="cf-box">🪟<small>Windows x86-64</small><span class="cf-jvm-badge">JVM installed</span></div>
-        <div class="cf-box">🪟<small>Windows on ARM</small><span class="cf-jvm-badge">JVM installed</span></div>
-        <div class="cf-box">🐧<small>Linux</small><span class="cf-jvm-badge">JVM installed</span></div>
-      </div>
-    </div>
+        <p>Here is the simplest complete Java program:</p>
 
-    <p>Line up the two pictures: the C compiler and the Java compiler occupy the same slot, but the C compiler's output is tied to one machine — recompiling is the only way to reach another. Java's output stays identical no matter where it was compiled; it's the JVM that varies from platform to platform, not the bytecode.</p>
-
-    <div class="callout callout-note">
-      <div class="callout-lbl">The trade-off</div>
-      <p>C's approach produces a binary that talks to the CPU directly — no intermediate translation at runtime, and no extra program has to be installed to run it. Java's approach gives up that directness in exchange for portability: the same compiled artifact runs anywhere a JVM exists, at the cost of needing that JVM present and doing a bit of translation work as the program runs.</p>
-    </div>
-
-    <h3>Your First Program</h3>
-
-    <p>Here is the simplest complete Java program:</p>
-
-    <pre><code class="language-java">public class Hello {
+        <pre><code class="language-java">public class Hello {
     public static void main(String[] args) {
         System.out.println("Hello, world.");
     }
 }</code></pre>
 
-    <p>Don't worry about <code>public</code>, <code>static</code>, or <code>String[] args</code> yet — those will make sense by the end of this tutorial. The key observation: even this trivial program is organized as a class. In Java, everything lives inside a class. There are no freestanding functions.</p>
+        <p>Don't worry about <code>public</code>, <code>static</code>, or <code>String[] args</code> yet — those will
+          make
+          sense by the end of this tutorial. The key observation: even this trivial program is organized as a class. In
+          Java, everything lives inside a class. There are no freestanding functions.</p>
 
-    <p>Save it as <code>Hello.java</code> — the file name must match the public class name exactly, including case. With a JDK installed, here's how to compile and run it, step by step:</p>
+        <p>Save it as <code>Hello.java</code> — the file name must match the public class name exactly, including case.
+          With a JDK installed, here's how to compile and run it, step by step:</p>
 
-    <ol>
-      <li>
-        <strong>Open a terminal.</strong> Also called the command line, or a shell — a text window where you type the name of a program and it runs, rather than clicking an icon. On macOS that's Terminal; on Windows, Command Prompt or PowerShell; on Linux, whichever shell your distribution ships.
-      </li>
-      <li>
-        <strong>Navigate to the folder</strong> containing <code>Hello.java</code>.
-      </li>
-      <li>
-        <strong>Compile it:</strong>
-        <pre><code class="hljs language-plaintext">javac Hello.java</code></pre>
-        <div class="cmd-output-lbl">Console Output</div>
-        <p class="cmd-output-empty">(nothing printed — a silent, empty terminal means it compiled successfully)</p>
-        <code>javac</code> reads the text in <code>Hello.java</code> and, if it compiles cleanly, produces no console output at all. Instead it writes a new file, <code>Hello.class</code>, sitting right next to it on disk — the bytecode.
-      </li>
-      <li>
-        <strong>Run it:</strong>
-        <pre><code class="hljs language-plaintext">java Hello</code></pre>
-        <div class="cmd-output-lbl">Console Output</div>
-        <pre><code class="hljs language-plaintext">Hello, world.</code></pre>
-        <code>java</code> starts the JVM and tells it to run the class named <code>Hello</code>. Notice it's given the class name, not a file name — no <code>.class</code> extension. The JVM finds <code>Hello.class</code> on disk, loads its bytecode, and executes it, which is what finally prints the line above to the terminal.
-      </li>
-    </ol>
+        <ol>
+          <li>
+            <strong>Open a terminal.</strong> Also called the command line, or a shell — a text window where you type
+            the
+            name of a program and it runs, rather than clicking an icon. On macOS that's Terminal; on Windows, Command
+            Prompt or PowerShell; on Linux, whichever shell your distribution ships.
+          </li>
+          <li>
+            <strong>Navigate to the folder</strong> containing <code>Hello.java</code>.
+          </li>
+          <li>
+            <strong>Compile it:</strong>
+            <pre><code class="hljs language-plaintext">javac Hello.java</code></pre>
+            <div class="cmd-output-lbl">Console Output</div>
+            <p class="cmd-output-empty">(nothing printed — a silent, empty terminal means it compiled successfully)</p>
+            <code>javac</code> reads the text in <code>Hello.java</code> and, if it compiles cleanly, produces no
+            console
+            output at all. Instead it writes a new file, <code>Hello.class</code>, sitting right next to it on disk —
+            the
+            bytecode.
+          </li>
+          <li>
+            <strong>Run it:</strong>
+            <pre><code class="hljs language-plaintext">java Hello</code></pre>
+            <div class="cmd-output-lbl">Console Output</div>
+            <pre><code class="hljs language-plaintext">Hello, world.</code></pre>
+            <code>java</code> starts the JVM and tells it to run the class named <code>Hello</code>. Notice it's given
+            the
+            class name, not a file name — no <code>.class</code> extension. The JVM finds <code>Hello.class</code> on
+            disk, loads its bytecode, and executes it, which is what finally prints the line above to the terminal.
+          </li>
+        </ol>
 
-    <p>That's the Development stage from earlier, compressed onto a single machine: <code>javac</code> compiles, <code>java</code> is the JVM executing the result. Ship that same <code>Hello.class</code> file to any other machine with a JVM installed, and <code>java Hello</code> runs it there too, unmodified.</p>
+        <p>That's the Development stage from earlier, compressed onto a single machine: <code>javac</code> compiles,
+          <code>java</code> is the JVM executing the result. Ship that same <code>Hello.class</code> file to any other
+          machine with a JVM installed, and <code>java Hello</code> runs it there too, unmodified.
+        </p>
 
-    <h3>Key Features</h3>
+        <div class="callout callout-note">
+          <div class="callout-lbl">A note about modern Java</div>
+          <p>Recent Java versions also allow small examples to be written with less ceremony:</p>
+          <pre><code class="language-java">void main() {
+    System.out.println("Hello, world.");
+}</code></pre>
+          <p>This simplified form is handy for quick experiments, but this tutorial uses the traditional class-based
+            style throughout — it's the shape almost every real Java codebase actually takes.</p>
+        </div>
+      </section>
 
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-card-title"><span class="dot"></span>Statically Typed</div>
-        <p>Every variable has a type declared at compile time. The compiler rejects programs where types don't line up. Many errors are caught before the program ever runs.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-card-title"><span class="dot"></span>Object-Oriented</div>
-        <p>Programs are organized around objects — bundles of data (fields) and behavior (methods). This tutorial builds that model from the ground up.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-card-title"><span class="dot"></span>Garbage Collected</div>
-        <p>You allocate objects with <code>new</code>; the JVM frees them automatically when they're no longer reachable. There is no <code>free()</code> or <code>delete</code>.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-card-title"><span class="dot"></span>Strongly Typed</div>
-        <p>There are no silent conversions between unrelated types. An <code>int</code> is not a <code>boolean</code>. A <code>String</code> is not a <code>Rectangle</code>. The type system is not optional.</p>
-      </div>
-    </div>
+      <!-- §0.7 -->
+      <section id="s0-7">
+        <div class="section-head">
+          <span class="sec-num">§0.7</span>
+          <h2>Key Features</h2>
+        </div>
 
-    <div class="callout callout-note">
-      <div class="callout-lbl">Why this matters for the tutorial</div>
-      <p>Because Java is statically typed, every variable declaration includes a type. That type determines whether the variable holds a value directly (primitive) or an address (reference). That distinction is the central thread of everything that follows.</p>
-    </div>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <div class="feature-card-title"><span class="dot"></span>Statically Typed</div>
+            <p>Every variable has a type declared at compile time. The compiler rejects programs where types don't line
+              up. Many errors are caught before the program ever runs.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card-title"><span class="dot"></span>Object-Oriented</div>
+            <p>Programs are organized around objects — bundles of data (fields) and behavior (methods). This tutorial
+              builds that model from the ground up.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card-title"><span class="dot"></span>Garbage Collected</div>
+            <p>You allocate objects with <code>new</code>; the JVM frees them automatically when they're no longer
+              reachable. There is no <code>free()</code> or <code>delete</code>.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-card-title"><span class="dot"></span>Strongly Typed</div>
+            <p>There are no silent conversions between unrelated types. An <code>int</code> is not a
+              <code>boolean</code>.
+              A <code>String</code> is not a <code>Rectangle</code>. The type system is not optional.
+            </p>
+          </div>
+        </div>
+      </section>
 
-  </article>
+      <!-- §0.8 -->
+      <section id="s0-8">
+        <div class="section-head">
+          <span class="sec-num">§0.8</span>
+          <h2>Key Takeaways</h2>
+        </div>
 
-  <nav class="page-nav" aria-label="Chapter navigation">
-    <div class="page-nav-spacer"></div>
-    <a href="variables.html" class="page-nav-next">
-      <span class="page-nav-label">Next →</span>
-      <span class="page-nav-title">§1 — Variables</span>
-    </a>
-  </nav>
-</main>
+        <ul>
+          <li>Java is a general-purpose language used across many industries, usually through the Java SE platform
+            plus a framework built on top of it.</li>
+          <li>A Java program is compiled once with <code>javac</code> into platform-neutral bytecode, then executed
+            by a JVM — the same bytecode runs unmodified on any platform with a compatible JVM installed.</li>
+          <li>Releases are either LTS (long-term support, for production) or feature releases (faster-moving, for
+            early access); this tutorial targets Java 25.</li>
+          <li>This tutorial teaches the traditional class-based style, since that's the shape most real Java code
+            takes, alongside the core object-oriented concepts the rest of the tutorial builds from the ground up.</li>
+        </ul>
+      </section>
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  hljs.highlightAll();
+      <!-- §0.9 -->
+      <section id="s0-9">
+        <div class="section-head">
+          <span class="sec-num">§0.9</span>
+          <h2>Appendix: Write Once, Run Anywhere <em>— the mechanics in full</em></h2>
+        </div>
 
-  // Flag error-annotation comments in code blocks
-  document.querySelectorAll('.hljs-comment').forEach(el => {
-    if (/\b(compile|compiler|runtime) error\b/i.test(el.textContent)) {
-      el.classList.add('hljs-comment-error');
-    }
-  });
+        <p class="page-lead">§0.1 and §0.3 already named the portability guarantee. This appendix is the mechanical
+          detail behind it — optional on a first read, worth returning to once the rest of the tutorial has given
+          you more Java to anchor it to.</p>
 
-  // Code theme toggle
-  const codeThemeBtn = document.getElementById('code-theme-toggle');
-  const lightTheme = document.getElementById('hljs-light-theme');
-  const darkTheme = document.getElementById('hljs-dark-theme');
-  const themeLabel = codeThemeBtn.querySelector('.code-theme-label');
-  const themeIcon = codeThemeBtn.querySelector('.icon');
+        <h4>The Java Workflow, End to End</h4>
 
-  function applyCodeTheme(theme) {
-    const dark = theme === 'dark';
-    lightTheme.disabled = dark;
-    darkTheme.disabled = !dark;
-    document.documentElement.classList.toggle('code-dark', dark);
-    themeLabel.textContent = dark ? 'Light code' : 'Dark code';
-    themeIcon.textContent = dark ? '☀️' : '🌙';
-  }
+        <p>That word "compiled" is worth pausing on first. A CPU only understands <span class="term">machine
+            instructions</span> — numbers meaningful to that specific processor — and nobody writes programs that way.
+          You
+          write <span class="term">source code</span>: text in a language designed for humans to read and reason about.
+          <span class="term">Compilation</span> is the development-time step that bridges the two — a compiler reads
+          your
+          source, rejects anything that doesn't parse or type-check, and translates whatever survives into an executable
+          form. That step is the first of three distinct stages a Java application moves through, and they don't have to
+          happen on the same machine:
+        </p>
 
-  applyCodeTheme(localStorage.getItem('code-theme') || 'light');
+        <ol>
+          <li><strong>Development.</strong> You write Java source code and compile it with a Java compiler
+            (<code>javac</code>) on your development machine. This produces <code>.class</code> files containing
+            bytecode.
+          </li>
+          <li><strong>Distribution.</strong> You package the <code>.class</code> files, along with any resources they
+            need, into a distributable format — typically a <code>.jar</code> file.</li>
+          <li><strong>Execution.</strong> The user on the target platform needs a compatible JVM installed. They run
+            your
+            application, and their JVM executes the bytecode — no recompilation, regardless of what platform built it.
+          </li>
+        </ol>
 
-  codeThemeBtn.addEventListener('click', () => {
-    const next = darkTheme.disabled ? 'dark' : 'light';
-    localStorage.setItem('code-theme', next);
-    applyCodeTheme(next);
-  });
-  const btn  = document.getElementById('menu-btn');
-  const side = document.getElementById('sidebar');
-  btn.addEventListener('click', () => side.classList.toggle('open'));
-  document.querySelectorAll('#sidebar a').forEach(a => {
-    a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
-  });
-});
-</script>
+        <p>Compilation happens once, on the developer's machine; execution happens anywhere a JVM is installed,
+          unmodified. That separation — compile once, distribute the bytecode, run on any JVM — is what "write once, run
+          anywhere" actually refers to. The next section looks at the mechanics that make the separation possible.</p>
+
+        <p>"A compatible JVM installed" means installing a <span class="term">JDK</span> — the <span class="term">Java
+            Development Kit</span>. It bundles <code>javac</code>, the <code>java</code> launcher (which starts the JVM
+          and runs your bytecode), the standard library, and the rest of the developer tooling in one package. You'll
+          sometimes see the term <span class="term">JRE</span> (Java Runtime Environment) in older material — it
+          referred
+          to a separate, smaller download containing just the JVM and libraries needed to run a compiled program, with
+          none of the development tools. Oracle stopped distributing a standalone JRE starting with Java 11: today
+          there's
+          just the JDK, and both the developer compiling the code and the end user running it install the same thing.
+        </p>
+
+        <h4>Compiling to Native Code vs. Compiling to Bytecode</h4>
+
+        <p>To see why that guarantee holds, it helps to compare Java's pipeline to a language like <span
+            class="term">C</span>, which compiles straight to native machine code.</p>
+
+        <p>A C compiler (<code>gcc</code>, <code>clang</code>, MSVC) translates <code>hello.c</code> directly into
+          instructions for one specific CPU and operating system. Target five different machines, and you compile the
+          same
+          source five separate times — once per machine, on that machine — and get five incompatible binaries out:</p>
+
+        <div class="compile-fanout">
+          <div class="cf-box"><code>hello.c</code><small>Same source</small></div>
+          <div class="cf-branches">
+            <div class="cf-tool"><span class="cf-arrow">→</span><span>clang<br>(Apple Silicon)</span></div>
+            <div class="cf-box"><code>hello</code><small>arm64 Mach-O</small></div>
+            <div class="cf-tool"><span class="cf-arrow">→</span></div>
+            <div class="cf-box">🍎<small>Apple Silicon</small></div>
+
+            <div class="cf-tool"><span class="cf-arrow">→</span><span>clang<br>(Intel Mac)</span></div>
+            <div class="cf-box"><code>hello</code><small>x86-64 Mach-O</small></div>
+            <div class="cf-tool"><span class="cf-arrow">→</span></div>
+            <div class="cf-box">🍎<small>Intel Mac</small></div>
+
+            <div class="cf-tool"><span class="cf-arrow">→</span><span>MSVC<br>(Windows x86-64)</span></div>
+            <div class="cf-box"><code>hello.exe</code><small>x86-64 PE</small></div>
+            <div class="cf-tool"><span class="cf-arrow">→</span></div>
+            <div class="cf-box">🪟<small>Windows x86-64</small></div>
+
+            <div class="cf-tool"><span class="cf-arrow">→</span><span>MSVC<br>(Windows on ARM)</span></div>
+            <div class="cf-box"><code>hello.exe</code><small>arm64 PE</small></div>
+            <div class="cf-tool"><span class="cf-arrow">→</span></div>
+            <div class="cf-box">🪟<small>Windows on ARM</small></div>
+
+            <div class="cf-tool"><span class="cf-arrow">→</span><span>gcc<br>(Linux)</span></div>
+            <div class="cf-box"><code>hello</code><small>x86-64 ELF</small></div>
+            <div class="cf-tool"><span class="cf-arrow">→</span></div>
+            <div class="cf-box">🐧<small>Linux</small></div>
+          </div>
+        </div>
+
+        <p>Five platforms, five separate compiles, five binaries — none of which run anywhere but the machine (CPU
+          architecture <em>and</em> operating system) it was built for. Notice that "Windows" alone isn't even one
+          target:
+          the two Windows rows are both Windows, but a different CPU architecture still means a different binary, the
+          same
+          way it does between the two Macs.</p>
+
+        <p>Java inserts a layer of indirection: <code>javac</code> never targets a CPU at all. It targets the JVM's
+          instruction set, which is the same everywhere. Portability moves from the compiler to the runtime — a JVM is
+          built once for each platform, and it knows how to translate that one bytecode format into whatever native
+          instructions the local CPU needs. One compile is all it takes, and that one output runs everywhere, because
+          translating bytecode to native instructions is the JVM's job, not <code>javac</code>'s:</p>
+
+        <div class="compile-fanout">
+          <div class="cf-box"><code>Hello.java</code><small>Source code</small></div>
+          <div class="cf-tool"><span class="cf-arrow">→</span><span>javac</span></div>
+          <div class="cf-box"><code>Hello.class</code><small>Bytecode</small></div>
+          <div class="cf-tool"><span class="cf-arrow">→</span><span>runs on</span></div>
+          <div class="cf-targets">
+            <div class="cf-box">🍎<small>Apple Silicon</small><span class="cf-jvm-badge">JVM installed</span></div>
+            <div class="cf-box">🍎<small>Intel Mac</small><span class="cf-jvm-badge">JVM installed</span></div>
+            <div class="cf-box">🪟<small>Windows x86-64</small><span class="cf-jvm-badge">JVM installed</span></div>
+            <div class="cf-box">🪟<small>Windows on ARM</small><span class="cf-jvm-badge">JVM installed</span></div>
+            <div class="cf-box">🐧<small>Linux</small><span class="cf-jvm-badge">JVM installed</span></div>
+          </div>
+        </div>
+
+        <p>Line up the two pictures: the C compiler and the Java compiler occupy the same slot, but the C compiler's
+          output is tied to one machine — recompiling is the only way to reach another. Java's output stays identical no
+          matter where it was compiled; it's the JVM that varies from platform to platform, not the bytecode.</p>
+
+        <div class="callout callout-note">
+          <div class="callout-lbl">The trade-off</div>
+          <p>C's approach produces a binary that talks to the CPU directly — no intermediate translation at runtime, and
+            no extra program has to be installed to run it. Java's approach gives up that directness in exchange for
+            portability: the same compiled artifact runs anywhere a JVM exists, at the cost of needing that JVM present
+            and doing a bit of translation work as the program runs.</p>
+        </div>
+      </section>
+
+    </article>
+
+    <nav class="page-nav" aria-label="Chapter navigation">
+      <div class="page-nav-spacer"></div>
+      <a href="variables.html" class="page-nav-next">
+        <span class="page-nav-label">Next →</span>
+        <span class="page-nav-title">§1 — Variables</span>
+      </a>
+    </nav>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      hljs.highlightAll();
+
+      // Flag error-annotation comments in code blocks
+      document.querySelectorAll('.hljs-comment').forEach(el => {
+        if (/\b(compile|compiler|runtime) error\b/i.test(el.textContent)) {
+          el.classList.add('hljs-comment-error');
+        }
+      });
+
+      // Code theme toggle
+      const codeThemeBtn = document.getElementById('code-theme-toggle');
+      const lightTheme = document.getElementById('hljs-light-theme');
+      const darkTheme = document.getElementById('hljs-dark-theme');
+      const themeLabel = codeThemeBtn.querySelector('.code-theme-label');
+      const themeIcon = codeThemeBtn.querySelector('.icon');
+
+      function applyCodeTheme(theme) {
+        const dark = theme === 'dark';
+        lightTheme.disabled = dark;
+        darkTheme.disabled = !dark;
+        document.documentElement.classList.toggle('code-dark', dark);
+        themeLabel.textContent = dark ? 'Light code' : 'Dark code';
+        themeIcon.textContent = dark ? '☀️' : '🌙';
+      }
+
+      applyCodeTheme(localStorage.getItem('code-theme') || 'light');
+
+      codeThemeBtn.addEventListener('click', () => {
+        const next = darkTheme.disabled ? 'dark' : 'light';
+        localStorage.setItem('code-theme', next);
+        applyCodeTheme(next);
+      });
+      const btn = document.getElementById('menu-btn');
+      const side = document.getElementById('sidebar');
+      btn.addEventListener('click', () => side.classList.toggle('open'));
+      document.querySelectorAll('#sidebar a').forEach(a => {
+        a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
+      });
+    });
+  </script>
 </body>
+
 </html>

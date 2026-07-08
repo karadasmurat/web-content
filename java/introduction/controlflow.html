@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>§10 Control Flow — OO with Java</title>
+<title>§8 Control Flow — OO with Java</title>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" id="hljs-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
 <link rel="stylesheet" id="hljs-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
@@ -36,28 +36,65 @@
   </div>
   <nav>
     <ul>
-      <li><a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a></li>
-      <li><a href="variables.html"><span class="nav-num">§1</span>Variables</a></li>
+      <li>
+        <a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a>
+        <ul class="sub-nav">
+          <li><a href="index.html#s0-1"><span class="nav-num">§0.1</span>What Is Java?</a></li>
+          <li><a href="index.html#s0-2"><span class="nav-num">§0.2</span>Where Is Java Used?</a></li>
+          <li><a href="index.html#s0-3"><span class="nav-num">§0.3</span>Why Java?</a></li>
+          <li><a href="index.html#s0-4"><span class="nav-num">§0.4</span>The Java Ecosystem</a></li>
+          <li><a href="index.html#s0-5"><span class="nav-num">§0.5</span>Java Versions</a></li>
+          <li><a href="index.html#s0-6"><span class="nav-num">§0.6</span>Your First Program</a></li>
+          <li><a href="index.html#s0-7"><span class="nav-num">§0.7</span>Key Features</a></li>
+          <li><a href="index.html#s0-8"><span class="nav-num">§0.8</span>Key Takeaways</a></li>
+          <li><a href="index.html#s0-9"><span class="nav-num">§0.9</span>Appendix: Write Once, Run Anywhere</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="variables.html"><span class="nav-num">§1</span>Variables</a>
+        <ul class="sub-nav">
+          <li><a href="variables.html#s1-1"><span class="nav-num">§1.1</span>Values</a></li>
+          <li><a href="variables.html#s1-2"><span class="nav-num">§1.2</span>Giving Values Names</a></li>
+          <li><a href="variables.html#s1-3"><span class="nav-num">§1.3</span>Variables in Java</a></li>
+          <li><a href="variables.html#s1-4"><span class="nav-num">§1.4</span>Naming Variables</a></li>
+          <li><a href="variables.html#s1-5"><span class="nav-num">§1.5</span>What a Variable Holds</a></li>
+          <li><a href="variables.html#s1-6"><span class="nav-num">§1.6</span>Changing a Value</a></li>
+          <li><a href="variables.html#s1-7"><span class="nav-num">§1.7</span><code>var</code></a></li>
+          <li><a href="variables.html#s1-8"><span class="nav-num">§1.8</span>Common Mistakes</a></li>
+          <li><a href="variables.html#s1-9"><span class="nav-num">§1.9</span>Key Takeaways</a></li>
+        </ul>
+      </li>
       <li><a href="primitives.html"><span class="nav-num">§2</span>Primitives</a></li>
       <li><a href="classes.html"><span class="nav-num">§3</span>Classes</a></li>
       <li><a href="objects.html"><span class="nav-num">§4</span>Objects</a></li>
       <li><a href="assignment.html"><span class="nav-num">§5</span>Assignment</a></li>
-      <li><a href="methods.html"><span class="nav-num">§6</span>Methods</a></li>
-      <li><a href="arrays.html"><span class="nav-num">§7</span>Arrays</a></li>
       <li>
-        <a href="strings.html"><span class="nav-num">§8</span>Strings</a>
+        <a href="methods.html"><span class="nav-num">§6</span>Methods</a>
         <ul class="sub-nav">
-          <li><a href="strings.html#s8-1"><span class="nav-num">§8.1</span>Writing Systems &amp; Unicode</a></li>
-          <li><a href="strings.html#s8-2"><span class="nav-num">§8.2</span><code>char</code></a></li>
-          <li><a href="strings.html#s8-3"><span class="nav-num">§8.3</span><code>Character</code></a></li>
-          <li><a href="strings.html#s8-4"><span class="nav-num">§8.4</span>Indexing</a></li>
-          <li><a href="strings.html#s8-5"><span class="nav-num">§8.5</span>Immutability</a></li>
-          <li><a href="strings.html#s8-6"><span class="nav-num">§8.6</span><code>==</code> vs <code>.equals()</code></a></li>
-          <li><a href="strings.html#s8-7"><span class="nav-num">§8.7</span>Concatenation</a></li>
+          <li><a href="methods.html#s6-intro"><span class="nav-num">§6.1</span>What Is a Method?</a></li>
+          <li><a href="methods.html#s62"><span class="nav-num">§6.2</span>Static Methods</a></li>
+          <li><a href="methods.html#s63"><span class="nav-num">§6.3</span>Reference Parameters</a></li>
+          <li><a href="methods.html#s64"><span class="nav-num">§6.4</span>Dot Operator Revisited</a></li>
+          <li><a href="methods.html#s65"><span class="nav-num">§6.5</span>Instance Methods</a></li>
+          <li><a href="methods.html#s66"><span class="nav-num">§6.6</span>Functions to Objects</a></li>
+          <li><a href="methods.html#s67"><span class="nav-num">§6.7</span>Key Takeaways</a></li>
         </ul>
       </li>
-      <li><a href="operators.html"><span class="nav-num">§9</span>Operators</a></li>
-      <li><a href="controlflow.html" class="active"><span class="nav-num">§10</span>Control Flow</a></li>
+      <li><a href="operators.html"><span class="nav-num">§7</span>Operators</a></li>
+      <li><a href="controlflow.html" class="active"><span class="nav-num">§8</span>Control Flow</a></li>
+      <li><a href="arrays.html"><span class="nav-num">§9</span>Arrays</a></li>
+      <li>
+        <a href="strings.html"><span class="nav-num">§10</span>Strings</a>
+        <ul class="sub-nav">
+          <li><a href="strings.html#s10-1"><span class="nav-num">§10.1</span>Writing Systems &amp; Unicode</a></li>
+          <li><a href="strings.html#s10-2"><span class="nav-num">§10.2</span><code>char</code></a></li>
+          <li><a href="strings.html#s10-3"><span class="nav-num">§10.3</span><code>Character</code></a></li>
+          <li><a href="strings.html#s10-4"><span class="nav-num">§10.4</span>Indexing</a></li>
+          <li><a href="strings.html#s10-5"><span class="nav-num">§10.5</span>Immutability</a></li>
+          <li><a href="strings.html#s10-6"><span class="nav-num">§10.6</span><code>==</code> vs <code>.equals()</code></a></li>
+          <li><a href="strings.html#s10-7"><span class="nav-num">§10.7</span>Concatenation</a></li>
+        </ul>
+      </li>
       <li>
         <a href="inheritance.html"><span class="nav-num">§11</span>Inheritance</a>
         <ul class="sub-nav">
@@ -85,7 +122,7 @@
         <ul class="sub-nav">
           <li><a href="immutability.html#s13-1"><span class="nav-num">§13.1</span>Identity &amp; State</a></li>
           <li><a href="immutability.html#s13-2"><span class="nav-num">§13.2</span>A Question of Time</a></li>
-          <li><a href="immutability.html#s13-3"><span class="nav-num">§13.3</span>Building One</a></li>
+          <li><a href="immutability.html#s13-3"><span class="nav-num">§13.3</span>Building an Immutable Class</a></li>
           <li><a href="immutability.html#s13-4"><span class="nav-num">§13.4</span><code>final</code> Isn't Deep</a></li>
           <li><a href="immutability.html#s13-5"><span class="nav-num">§13.5</span>Why It Matters</a></li>
           <li><a href="immutability.html#s13-6"><span class="nav-num">§13.6</span><code>StringBuilder</code></a></li>
@@ -151,22 +188,51 @@
           <li><a href="collections.html#s18-6"><span class="nav-num">§18.6</span><code>Map</code></a></li>
         </ul>
       </li>
+      <li>
+        <a href="lambdas.html"><span class="nav-num">§19</span>Functional Programming</a>
+        <ul class="sub-nav">
+          <li><a href="lambdas.html#s19-1"><span class="nav-num">§19.1</span>Functions as First-Class Citizens</a></li>
+          <li><a href="lambdas.html#s19-2"><span class="nav-num">§19.2</span>Why Java "Simulates" First-Class Functions</a></li>
+          <li><a href="lambdas.html#s19-3"><span class="nav-num">§19.3</span>The Problem</a></li>
+          <li><a href="lambdas.html#s19-4"><span class="nav-num">§19.4</span>Another Anonymous Class</a></li>
+          <li><a href="lambdas.html#s19-5"><span class="nav-num">§19.5</span>Functional Interfaces</a></li>
+          <li><a href="lambdas.html#s19-6"><span class="nav-num">§19.6</span>Lambda Expressions</a></li>
+          <li><a href="lambdas.html#s19-7"><span class="nav-num">§19.7</span>Method References</a></li>
+          <li><a href="lambdas.html#s19-8"><span class="nav-num">§19.8</span><code>java.util.function</code></a></li>
+          <li><a href="lambdas.html#s19-9"><span class="nav-num">§19.9</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="enums.html"><span class="nav-num">§20</span>Enums</a>
+        <ul class="sub-nav">
+          <li><a href="enums.html#s20-1"><span class="nav-num">§20.1</span>The Problem</a></li>
+          <li><a href="enums.html#s20-2"><span class="nav-num">§20.2</span>Declaring an Enum</a></li>
+          <li><a href="enums.html#s20-3"><span class="nav-num">§20.3</span>Objects, Not Constants</a></li>
+          <li><a href="enums.html#s20-4"><span class="nav-num">§20.4</span>Comparing Enum Values</a></li>
+          <li><a href="enums.html#s20-5"><span class="nav-num">§20.5</span>Type Characteristics</a></li>
+          <li><a href="enums.html#s20-6"><span class="nav-num">§20.6</span>Fields, Constructors, Methods</a></li>
+          <li><a href="enums.html#s20-7"><span class="nav-num">§20.7</span>Enums vs. Magic Numbers</a></li>
+          <li><a href="enums.html#s20-8"><span class="nav-num">§20.8</span>Closed Sets vs. Evolving Reality</a></li>
+          <li><a href="enums.html#s20-9"><span class="nav-num">§20.9</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li><a href="oodesign.html"><span class="nav-num">§21</span>Object-Oriented Design</a></li>
     </ul>
   </nav>
 </nav>
 
 <main id="content">
   <header class="page-header">
-    <div class="page-chapter">Chapter 10</div>
+    <div class="page-chapter">Chapter 8</div>
     <h1>Control Flow</h1>
-    <p class="page-lead">Every program so far has run top to bottom, once, every line. Control flow is how you make a <code>boolean</code> (§9) decide whether a line runs at all, or how many times it repeats.</p>
+    <p class="page-lead">Every program so far has run top to bottom, once, every line. Control flow is how you make a <code>boolean</code> (§7) decide whether a line runs at all, or how many times it repeats.</p>
   </header>
 
   <article>
 
     <h3>if / else — conditional execution</h3>
 
-    <p>An <code>if</code> runs a block only when its condition is <code>true</code>. The condition is any expression that produces a <code>boolean</code> — exactly the comparison and logical operators from §9:</p>
+    <p>An <code>if</code> runs a block only when its condition is <code>true</code>. The condition is any expression that produces a <code>boolean</code> — exactly the comparison and logical operators from §7:</p>
 
     <pre><code class="language-java">int width = 10;
 
@@ -203,7 +269,7 @@ while (i &lt; 5) {
 }
 // 0 1 2 3 4</code></pre>
 
-    <p>Three moving parts make this work, and all three are things you already know: <code>i</code> starts at a known value, the condition (§9's <code>&lt;</code>) is checked before each iteration, and <code>i++</code> (§9) changes the value the condition depends on. Leave that last part out, and the condition never becomes <code>false</code> — the loop runs forever.</p>
+    <p>Three moving parts make this work, and all three are things you already know: <code>i</code> starts at a known value, the condition (§7's <code>&lt;</code>) is checked before each iteration, and <code>i++</code> (§7) changes the value the condition depends on. Leave that last part out, and the condition never becomes <code>false</code> — the loop runs forever.</p>
 
     <h3>for — the loop with its bookkeeping up front</h3>
 
@@ -228,8 +294,8 @@ double average = total / (double) temperatures.length;
 System.out.println(average); // 70.28571428571429</code></pre>
 
     <div class="callout callout-conn">
-      <div class="callout-lbl">Same idea as day1 + day2 + ... <a href="arrays.html" class="backref">← §7</a></div>
-      <p>§7 opened by hand-writing <code>day1 + day2 + ... + day7</code> — one variable per value, and a sum that has to name every one of them. <code>temperatures[i]</code>, with <code>i</code> counting <code>0</code> through <code>temperatures.length - 1</code>, reaches every element the same way that hand-written sum did, without a fixed number of terms baked into the code. Ask for thirty temperatures instead of seven, and this loop doesn't change at all.</p>
+      <div class="callout-lbl">Same idea as day1 + day2 + ... <a href="arrays.html" class="backref">← §9</a></div>
+      <p>§9 opened by hand-writing <code>day1 + day2 + ... + day7</code> — one variable per value, and a sum that has to name every one of them. <code>temperatures[i]</code>, with <code>i</code> counting <code>0</code> through <code>temperatures.length - 1</code>, reaches every element the same way that hand-written sum did, without a fixed number of terms baked into the code. Ask for thirty temperatures instead of seven, and this loop doesn't change at all.</p>
     </div>
 
     <h3>for-each — when you don't need the index</h3>
@@ -258,11 +324,11 @@ for (int temp : temperatures) {
   <nav class="page-nav" aria-label="Chapter navigation">
     <a href="operators.html" class="page-nav-prev">
       <span class="page-nav-label">← Previous</span>
-      <span class="page-nav-title">§9 — Operators</span>
+      <span class="page-nav-title">§7 — Operators</span>
     </a>
-    <a href="inheritance.html" class="page-nav-next">
+    <a href="arrays.html" class="page-nav-next">
       <span class="page-nav-label">Next →</span>
-      <span class="page-nav-title">§11 — Inheritance</span>
+      <span class="page-nav-title">§9 — Arrays</span>
     </a>
   </nav>
 </main>

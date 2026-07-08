@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§20 Enums — OO with Java</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" id="hljs-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" id="hljs-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
+<script>
+(function () {
+  if ((localStorage.getItem('code-theme') || 'light') === 'dark') {
+    document.getElementById('hljs-light-theme').disabled = true;
+    document.getElementById('hljs-dark-theme').disabled = false;
+    document.documentElement.classList.add('code-dark');
+  }
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Toggle navigation">
+  <span></span><span></span><span></span>
+</button>
+
+<button id="code-theme-toggle" class="code-theme-toggle" aria-label="Toggle code color scheme">
+  <span class="icon">🌙</span><span class="code-theme-label">Dark code</span>
+</button>
+
+<nav id="sidebar" aria-label="Tutorial navigation">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-label">Tutorial</div>
+    <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
+  </div>
+  <nav>
+    <ul>
+      <li>
+        <a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a>
+        <ul class="sub-nav">
+          <li><a href="index.html#s0-1"><span class="nav-num">§0.1</span>What Is Java?</a></li>
+          <li><a href="index.html#s0-2"><span class="nav-num">§0.2</span>Where Is Java Used?</a></li>
+          <li><a href="index.html#s0-3"><span class="nav-num">§0.3</span>Why Java?</a></li>
+          <li><a href="index.html#s0-4"><span class="nav-num">§0.4</span>The Java Ecosystem</a></li>
+          <li><a href="index.html#s0-5"><span class="nav-num">§0.5</span>Java Versions</a></li>
+          <li><a href="index.html#s0-6"><span class="nav-num">§0.6</span>Your First Program</a></li>
+          <li><a href="index.html#s0-7"><span class="nav-num">§0.7</span>Key Features</a></li>
+          <li><a href="index.html#s0-8"><span class="nav-num">§0.8</span>Key Takeaways</a></li>
+          <li><a href="index.html#s0-9"><span class="nav-num">§0.9</span>Appendix: Write Once, Run Anywhere</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="variables.html"><span class="nav-num">§1</span>Variables</a>
+        <ul class="sub-nav">
+          <li><a href="variables.html#s1-1"><span class="nav-num">§1.1</span>Values</a></li>
+          <li><a href="variables.html#s1-2"><span class="nav-num">§1.2</span>Giving Values Names</a></li>
+          <li><a href="variables.html#s1-3"><span class="nav-num">§1.3</span>Variables in Java</a></li>
+          <li><a href="variables.html#s1-4"><span class="nav-num">§1.4</span>Naming Variables</a></li>
+          <li><a href="variables.html#s1-5"><span class="nav-num">§1.5</span>What a Variable Holds</a></li>
+          <li><a href="variables.html#s1-6"><span class="nav-num">§1.6</span>Changing a Value</a></li>
+          <li><a href="variables.html#s1-7"><span class="nav-num">§1.7</span><code>var</code></a></li>
+          <li><a href="variables.html#s1-8"><span class="nav-num">§1.8</span>Common Mistakes</a></li>
+          <li><a href="variables.html#s1-9"><span class="nav-num">§1.9</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li><a href="primitives.html"><span class="nav-num">§2</span>Primitives</a></li>
+      <li><a href="classes.html"><span class="nav-num">§3</span>Classes</a></li>
+      <li>
+        <a href="objects.html"><span class="nav-num">§4</span>Objects</a>
+        <ul class="sub-nav">
+          <li><a href="objects.html#s41"><span class="nav-num">§4.1</span>Instantiation</a></li>
+          <li><a href="objects.html#s42"><span class="nav-num">§4.2</span>Reference Variables</a></li>
+          <li><a href="objects.html#s43"><span class="nav-num">§4.3</span>Reference Fields</a></li>
+          <li><a href="objects.html#s44"><span class="nav-num">§4.4</span>Constructors</a></li>
+          <li><a href="objects.html#s45"><span class="nav-num">§4.5</span>Static Fields</a></li>
+        </ul>
+      </li>
+      <li><a href="assignment.html"><span class="nav-num">§5</span>Assignment</a></li>
+      <li>
+        <a href="methods.html"><span class="nav-num">§6</span>Methods</a>
+        <ul class="sub-nav">
+          <li><a href="methods.html#s6-intro"><span class="nav-num">§6.1</span>What Is a Method?</a></li>
+          <li><a href="methods.html#s62"><span class="nav-num">§6.2</span>Static Methods</a></li>
+          <li><a href="methods.html#s63"><span class="nav-num">§6.3</span>Reference Parameters</a></li>
+          <li><a href="methods.html#s64"><span class="nav-num">§6.4</span>Dot Operator Revisited</a></li>
+          <li><a href="methods.html#s65"><span class="nav-num">§6.5</span>Instance Methods</a></li>
+          <li><a href="methods.html#s66"><span class="nav-num">§6.6</span>Functions to Objects</a></li>
+          <li><a href="methods.html#s67"><span class="nav-num">§6.7</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li><a href="operators.html"><span class="nav-num">§7</span>Operators</a></li>
+      <li><a href="controlflow.html"><span class="nav-num">§8</span>Control Flow</a></li>
+      <li><a href="arrays.html"><span class="nav-num">§9</span>Arrays</a></li>
+      <li>
+        <a href="strings.html"><span class="nav-num">§10</span>Strings</a>
+        <ul class="sub-nav">
+          <li><a href="strings.html#s10-1"><span class="nav-num">§10.1</span>Writing Systems &amp; Unicode</a></li>
+          <li><a href="strings.html#s10-2"><span class="nav-num">§10.2</span><code>char</code></a></li>
+          <li><a href="strings.html#s10-3"><span class="nav-num">§10.3</span><code>Character</code></a></li>
+          <li><a href="strings.html#s10-4"><span class="nav-num">§10.4</span>Indexing</a></li>
+          <li><a href="strings.html#s10-5"><span class="nav-num">§10.5</span>Immutability</a></li>
+          <li><a href="strings.html#s10-6"><span class="nav-num">§10.6</span><code>==</code> vs <code>.equals()</code></a></li>
+          <li><a href="strings.html#s10-7"><span class="nav-num">§10.7</span>Concatenation</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="inheritance.html"><span class="nav-num">§11</span>Inheritance</a>
+        <ul class="sub-nav">
+          <li><a href="inheritance.html#s10-1"><span class="nav-num">§11.1</span>Taxonomy</a></li>
+          <li><a href="inheritance.html#s10-2"><span class="nav-num">§11.2</span>The Problem</a></li>
+          <li><a href="inheritance.html#s10-3"><span class="nav-num">§11.3</span><code>extends</code></a></li>
+          <li><a href="inheritance.html#s10-4"><span class="nav-num">§11.4</span><code>super(...)</code></a></li>
+          <li><a href="inheritance.html#s10-5"><span class="nav-num">§11.5</span>Polymorphism</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="accessmodifiers.html"><span class="nav-num">§12</span>Packages &amp; Access Modifiers</a>
+        <ul class="sub-nav">
+          <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§12.1</span>Packages</a></li>
+          <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§12.2</span>Why Restrict Access</a></li>
+          <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§12.3</span><code>private</code></a></li>
+          <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§12.4</span>Encapsulation</a></li>
+          <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§12.5</span><code>public</code></a></li>
+          <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§12.6</span>Package-Private</a></li>
+          <li><a href="accessmodifiers.html#s11-7"><span class="nav-num">§12.7</span><code>protected</code></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="immutability.html"><span class="nav-num">§13</span>Immutability</a>
+        <ul class="sub-nav">
+          <li><a href="immutability.html#s13-1"><span class="nav-num">§13.1</span>Two Real-World Analogies</a></li>
+          <li><a href="immutability.html#s13-2"><span class="nav-num">§13.2</span>Identity &amp; State</a></li>
+          <li><a href="immutability.html#s13-3"><span class="nav-num">§13.3</span>A Question of Time</a></li>
+          <li><a href="immutability.html#s13-4"><span class="nav-num">§13.4</span>Building an Immutable Class</a></li>
+          <li><a href="immutability.html#s13-5"><span class="nav-num">§13.5</span><code>final</code> Isn't Deep</a></li>
+          <li><a href="immutability.html#s13-6"><span class="nav-num">§13.6</span>Why It Matters</a></li>
+          <li><a href="immutability.html#s13-7"><span class="nav-num">§13.7</span><code>StringBuilder</code></a></li>
+          <li><a href="immutability.html#s13-8"><span class="nav-num">§13.8</span>Core Pillars</a></li>
+          <li><a href="immutability.html#s13-9"><span class="nav-num">§13.9</span>Putting It Together</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="abstractclasses.html"><span class="nav-num">§14</span>Abstract Classes</a>
+        <ul class="sub-nav">
+          <li><a href="abstractclasses.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
+          <li><a href="abstractclasses.html#s14-2"><span class="nav-num">§14.2</span><code>abstract</code> Classes</a></li>
+          <li><a href="abstractclasses.html#s14-3"><span class="nav-num">§14.3</span><code>abstract</code> Methods</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="interfaces.html"><span class="nav-num">§15</span>Interfaces</a>
+        <ul class="sub-nav">
+          <li><a href="interfaces.html#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
+          <li><a href="interfaces.html#s15-2"><span class="nav-num">§15.2</span>Interface vs. Abstract Class</a></li>
+          <li><a href="interfaces.html#s15-3"><span class="nav-num">§15.3</span>Declaring &amp; Implementing</a></li>
+          <li><a href="interfaces.html#s15-4"><span class="nav-num">§15.4</span>Override vs. Overload</a></li>
+          <li><a href="interfaces.html#s15-5"><span class="nav-num">§15.5</span>Multiple Interfaces</a></li>
+          <li><a href="interfaces.html#s15-6"><span class="nav-num">§15.6</span>Interface-Typed Params</a></li>
+          <li><a href="interfaces.html#s15-7"><span class="nav-num">§15.7</span>Anonymous Classes</a></li>
+          <li><a href="interfaces.html#s15-8"><span class="nav-num">§15.8</span>Default Methods</a></li>
+          <li><a href="interfaces.html#s15-9"><span class="nav-num">§15.9</span>Default Method Collisions</a></li>
+          <li><a href="interfaces.html#s15-10"><span class="nav-num">§15.10</span>Static Methods</a></li>
+          <li><a href="interfaces.html#s15-11"><span class="nav-num">§15.11</span>Interface Inheritance</a></li>
+          <li><a href="interfaces.html#s15-12"><span class="nav-num">§15.12</span>Strategy Pattern</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="generics.html"><span class="nav-num">§16</span>Generics</a>
+        <ul class="sub-nav">
+          <li><a href="generics.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
+          <li><a href="generics.html#s16-2"><span class="nav-num">§16.2</span>Type Parameters</a></li>
+          <li><a href="generics.html#s16-3"><span class="nav-num">§16.3</span>Generic Methods</a></li>
+          <li><a href="generics.html#s16-4"><span class="nav-num">§16.4</span>Bounded Types</a></li>
+          <li><a href="generics.html#s16-5"><span class="nav-num">§16.5</span>Compile Time Only</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="records.html"><span class="nav-num">§17</span>Records</a>
+        <ul class="sub-nav">
+          <li><a href="records.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
+          <li><a href="records.html#s17-2"><span class="nav-num">§17.2</span><code>record</code></a></li>
+          <li><a href="records.html#s17-3"><span class="nav-num">§17.3</span>Implicitly Final</a></li>
+          <li><a href="records.html#s17-4"><span class="nav-num">§17.4</span>Shallow Immutability</a></li>
+          <li><a href="records.html#s17-5"><span class="nav-num">§17.5</span>Compact Constructors</a></li>
+          <li><a href="records.html#s17-6"><span class="nav-num">§17.6</span>Records Can Do More</a></li>
+          <li><a href="records.html#s17-7"><span class="nav-num">§17.7</span>When to Reach for One</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="collections.html"><span class="nav-num">§18</span>Collections Framework</a>
+        <ul class="sub-nav">
+          <li><a href="collections.html#s18-1"><span class="nav-num">§18.1</span>The Problem</a></li>
+          <li><a href="collections.html#s18-2"><span class="nav-num">§18.2</span>The Big Picture</a></li>
+          <li><a href="collections.html#s18-3"><span class="nav-num">§18.3</span><code>List</code></a></li>
+          <li><a href="collections.html#s18-4"><span class="nav-num">§18.4</span><code>Queue</code></a></li>
+          <li><a href="collections.html#s18-5"><span class="nav-num">§18.5</span><code>Set</code></a></li>
+          <li><a href="collections.html#s18-6"><span class="nav-num">§18.6</span><code>Map</code></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="lambdas.html"><span class="nav-num">§19</span>Functional Programming</a>
+        <ul class="sub-nav">
+          <li><a href="lambdas.html#s19-1"><span class="nav-num">§19.1</span>Functions as First-Class Citizens</a></li>
+          <li><a href="lambdas.html#s19-2"><span class="nav-num">§19.2</span>Why Java "Simulates" First-Class Functions</a></li>
+          <li><a href="lambdas.html#s19-3"><span class="nav-num">§19.3</span>The Problem</a></li>
+          <li><a href="lambdas.html#s19-4"><span class="nav-num">§19.4</span>Another Anonymous Class</a></li>
+          <li><a href="lambdas.html#s19-5"><span class="nav-num">§19.5</span>Functional Interfaces</a></li>
+          <li><a href="lambdas.html#s19-6"><span class="nav-num">§19.6</span>Lambda Expressions</a></li>
+          <li><a href="lambdas.html#s19-7"><span class="nav-num">§19.7</span>Method References</a></li>
+          <li><a href="lambdas.html#s19-8"><span class="nav-num">§19.8</span><code>java.util.function</code></a></li>
+          <li><a href="lambdas.html#s19-9"><span class="nav-num">§19.9</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="enums.html" class="active"><span class="nav-num">§20</span>Enums</a>
+        <ul class="sub-nav">
+          <li><a href="#s20-1"><span class="nav-num">§20.1</span>The Problem</a></li>
+          <li><a href="#s20-2"><span class="nav-num">§20.2</span>Declaring an Enum</a></li>
+          <li><a href="#s20-3"><span class="nav-num">§20.3</span>Objects, Not Constants</a></li>
+          <li><a href="#s20-4"><span class="nav-num">§20.4</span>Comparing Enum Values</a></li>
+          <li><a href="#s20-5"><span class="nav-num">§20.5</span>Type Characteristics</a></li>
+          <li><a href="#s20-6"><span class="nav-num">§20.6</span>Fields, Constructors, Methods</a></li>
+          <li><a href="#s20-7"><span class="nav-num">§20.7</span>Enums vs. Magic Numbers</a></li>
+          <li><a href="#s20-8"><span class="nav-num">§20.8</span>Closed Sets vs. Evolving Reality</a></li>
+          <li><a href="#s20-9"><span class="nav-num">§20.9</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li><a href="oodesign.html"><span class="nav-num">§21</span>Object-Oriented Design</a></li>
+    </ul>
+  </nav>
+</nav>
+
+<main id="content">
+  <header class="page-header">
+    <div class="page-chapter">Chapter 20</div>
+    <h1>Enums</h1>
+    <p class="page-lead">Compass directions, seasons, chess pieces — some categories are closed by nature, complete the moment you can name every member. Before Java had a dedicated way to model that, the usual trick was a handful of <code>int</code> constants, and every guarantee a closed set promises quietly evaporated. This chapter builds the real thing: a class (§3) with the one property an ordinary class can't offer on its own — a compiler-enforced, permanently fixed set of instances.</p>
+  </header>
+
+  <article>
+
+    <!-- §20.1 -->
+    <section id="s20-1">
+      <div class="section-head">
+        <span class="sec-num">§20.1</span>
+        <h2>The Problem <em>— closed sets, and the constants that faked them</em></h2>
+      </div>
+
+      <p>Days of the week. Seasons. Compass directions. Chess pieces. Programs constantly need a type that can only ever hold one of a small, known handful of values — and before Java had a dedicated feature for this, the common pattern was a handful of <code>int</code> constants:</p>
+
+      <pre><code class="language-java">public class Navigation {
+    static final int NORTH = 0;
+    static final int SOUTH = 1;
+    static final int EAST = 2;
+    static final int WEST = 3;
+
+    public static void move(int direction) {
+        if (direction == NORTH) {
+            System.out.println("Moving north");
+        } else if (direction == SOUTH) {
+            System.out.println("Moving south");
+        } else if (direction == EAST) {
+            System.out.println("Moving east");
+        } else if (direction == WEST) {
+            System.out.println("Moving west");
+        } else {
+            System.out.println("Unknown direction");
+        }
+    }
+}</code></pre>
+
+      <pre><code class="language-java">Navigation.move(Navigation.NORTH); // works fine</code></pre>
+
+      <p>The idea seems reasonable enough: each direction is represented by a distinct <code>int</code> — <code>NORTH</code> is <code>0</code>, <code>SOUTH</code> is <code>1</code>, and so on — and <code>move</code> compares whatever it's handed against each constant in turn, printing the matching message. And it works, exactly as shown above.</p>
+
+      <p>But look again at the parameter itself: <code>move(int direction)</code>. The method doesn't accept "one of <code>NORTH</code>, <code>SOUTH</code>, <code>EAST</code>, or <code>WEST</code>" — it accepts <em>any</em> <code>int</code> at all. <code>NORTH</code> through <code>WEST</code> are just four particular values the programmer <em>intended</em> callers to use; nothing about the method's signature actually limits a caller to them. That gap — between what the constants were meant for and what the compiler will actually let through — is where every one of the following three problems comes from.</p>
+
+      <ol>
+        <li>
+          <p><strong>The type is real, but it's the wrong one.</strong> The compiler does check <code>move(int)</code>'s argument — pass a <code>String</code> or a <code>boolean</code> and it won't compile. But <code>int</code> is the type of every whole number in the program, not just <code>0</code> through <code>3</code>. The check that runs is "is this an <code>int</code>," never "is this one of the four directions" — so every one of these passes it:</p>
+
+          <pre><code class="language-java">Navigation.move(Navigation.NORTH); // intended
+Navigation.move(0);                // same as NORTH, but unclear at the call site
+Navigation.move(42);               // compiles fine, but completely invalid
+Navigation.move(-1);               // compiles fine, but completely invalid</code></pre>
+        </li>
+        <li>
+          <p><strong>Semantic meaning is lost at runtime.</strong> <code>NORTH</code> is a compile-time alias for <code>0</code> — nothing more. Once the code runs, only <code>0</code> remains; the fact that this number represents a compass direction is gone the moment you'd actually want it, while debugging:</p>
+
+          <pre><code class="language-java">int d = Navigation.NORTH;
+System.out.println(d); // prints: 0</code></pre>
+        </li>
+        <li>
+          <p><strong>The constants are not related.</strong> Four separate <code>int</code>s happen to live in the same class, but the compiler does not know they form a group. Nothing stops this:</p>
+
+          <pre><code class="language-java">static final int MAX_SPEED = 2; // coincidentally the same value as EAST
+Navigation.move(MAX_SPEED);      // compiles fine, silently wrong</code></pre>
+
+          <p>Two completely unrelated constants share the same <code>int</code> value, and the compiler has no way to catch the mistake — as far as it's concerned, <code>MAX_SPEED</code> and <code>EAST</code> are simply the number <code>2</code>, twice.</p>
+        </li>
+      </ol>
+
+      <div class="callout callout-note">
+        <div class="callout-lbl">What's actually missing</div>
+        <p>All three problems trace back to one thing: <code>int</code> is <code>int</code>. The compiler tracks <em>types</em> (§1.3), and every one of these constants has the same type as every other integer in the program — <code>2</code>, <code>42</code>, and <code>EAST</code> are indistinguishable to it. What's needed is a genuinely distinct <em>type</em> for "a compass direction," one the compiler can actually check against. That's exactly what an <code>enum</code> is.</p>
+      </div>
+
+      <p>Before reaching for one, though, it's worth checking that <code>NORTH</code>/<code>SOUTH</code>/<code>EAST</code>/<code>WEST</code> actually has the property that made it a good fit in the first place: it's a <span class="term">closed set</span>, complete and sealed by nature, every member known upfront, membership never changing. Not every set that feels fixed actually is:</p>
+
+      <p><strong>Genuinely closed:</strong></p>
+      <ul>
+        <li>Cardinal directions — <code>NORTH</code>, <code>SOUTH</code>, <code>EAST</code>, <code>WEST</code>. There is no fifth direction to discover.</li>
+        <li>Seasons — <code>SPRING</code>, <code>SUMMER</code>, <code>AUTUMN</code>, <code>WINTER</code>. Fixed by nature.</li>
+        <li>Chess pieces — <code>KING</code>, <code>QUEEN</code>, <code>ROOK</code>, <code>BISHOP</code>, <code>KNIGHT</code>, <code>PAWN</code>. The rules of chess define exactly six.</li>
+      </ul>
+
+      <p><strong>Apparently closed, but actually open:</strong></p>
+      <ul>
+        <li>Countries — feel finite, but countries split, merge, and are created over time.</li>
+        <li>Job titles at a company — change as the organization evolves.</li>
+        <li>HTTP status codes — new ones get added by standards bodies.</li>
+      </ul>
+
+      <p>The distinction matters because of how the fix this chapter builds actually works: its whole set of values gets baked into the compiled class file. A closed set is a good candidate for it. An open one is not — every time it grew, you'd have to recompile and redeploy just to add a value; open sets are better stored in a database or a config file, loaded at runtime instead. The question worth asking before reaching for what comes next: <em>is this set closed by nature, or could it grow?</em> (§20.8 returns to this question in more depth.)</p>
+    </section>
+
+    <!-- §20.2 -->
+    <section id="s20-2">
+      <div class="section-head">
+        <span class="sec-num">§20.2</span>
+        <h2>Declaring an Enum <em>— a fixed set of instances, guaranteed by the compiler</em></h2>
+      </div>
+
+      <p>An <code>enum</code> declares a class whose instances are fixed and finite, fully determined at compile time, and created by the JVM once, when the class is loaded:</p>
+
+      <pre><code class="language-java">enum Season {
+    SPRING, SUMMER, AUTUMN, WINTER;
+}</code></pre>
+
+      <p>Each name is not a number with a label attached — it's a reference to an actual object on the heap, exactly the kind of reference §4.2 already covered, just declared for you by the compiler instead of written by hand with <code>new</code>.</p>
+
+      <p>"Fully determined at compile time" and "created at runtime" aren't in tension — they describe two different moments. The compiler knows everything about the instances ahead of time: their names, how many there are, what order they're declared in. But the objects themselves don't exist until the class is actually loaded, and Java loads classes <span class="term">lazily</span> — not every class up front at startup, but only once something in the running program first refers to it. The first time anything touches <code>Season</code>, the JVM loads the class and runs its static initialization, in the exact order it's written in the source:</p>
+
+      <ol>
+        <li>The enum constants are created first — <code>SPRING</code>, <code>SUMMER</code>, <code>AUTUMN</code>, <code>WINTER</code>, assigned to <code>static final</code> fields the compiler generates for you. This step is implicit; you never write it.</li>
+        <li>Any explicit <code>static</code> fields you declared, in order.</li>
+        <li>Any <code>static</code> initializer blocks, in order.</li>
+      </ol>
+
+      <div class="callout callout-rule">
+        <div class="callout-lbl">The constants always come first</div>
+        <p>Java requires the enum constants to be the first thing declared in the enum body, ahead of any fields or methods. That ordering isn't a style preference — it's what guarantees that by the time any of <em>your</em> static fields or static blocks run, <code>SPRING</code> through <code>WINTER</code> already exist on the heap and can safely be referenced from them.</p>
+      </div>
+
+      <h3>What the compiler actually builds</h3>
+
+      <p><code>enum</code> is <span class="term">syntactic sugar</span>: a more convenient syntax that the compiler expands into something more verbose before the JVM ever sees it. You write the short form; the compiler generates the long form; the JVM only ever runs the long form. Understanding the expansion is understanding what actually executes. The <code>Season</code> declaration above compiles to roughly this:</p>
+
+      <pre><code class="language-java">public final class Season extends Enum<Season> {
+    public static final Season SPRING = new Season("SPRING", 0);
+    public static final Season SUMMER = new Season("SUMMER", 1);
+    public static final Season AUTUMN = new Season("AUTUMN", 2);
+    public static final Season WINTER = new Season("WINTER", 3);
+
+    private static final Season[] $VALUES = { SPRING, SUMMER, AUTUMN, WINTER };
+
+    private Season(String name, int ordinal) { // private — no one else can instantiate it
+        super(name, ordinal);
+    }
+
+    public static Season[] values() {
+        return $VALUES.clone();
+    }
+
+    public static Season valueOf(String name) {
+        return Enum.valueOf(Season.class, name);
+    }
+}</code></pre>
+
+      <p>The compiler-generated constructor takes two implicit parameters — the constant's name as a <code>String</code> and its position as an <code>int</code>, called the <span class="term">ordinal</span> — and passes them straight to <code>Enum</code>'s own constructor. The JVM sees exactly this: a regular class, four <code>static final</code> fields, a <code>private</code> constructor. Every bit of "enum behavior" was handled by the compiler before this class file ever existed.</p>
+
+      <div class="mem-fanout">
+        <div class="mem-region" style="align-items: flex-start;">
+          <div class="mem-col-label">Class Season — static fields</div>
+          <div class="mem-slot" style="text-align: left;">
+            <div class="mem-slot-code">SPRING = <span class="mem-addr">0x7100</span></div>
+            <div class="mem-slot-code">SUMMER = <span class="mem-addr">0x7200</span></div>
+            <div class="mem-slot-code">AUTUMN = <span class="mem-addr">0x7300</span></div>
+            <div class="mem-slot-code">WINTER = <span class="mem-addr">0x7400</span></div>
+          </div>
+        </div>
+        <div class="mem-arrow-col">
+          <svg width="40" height="16" viewBox="0 0 40 16" fill="none">
+            <line x1="0" y1="8" x2="32" y2="8" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M32 2L38 8L32 14" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="mem-region" style="align-items: flex-start;">
+          <div class="mem-col-label">Heap</div>
+          <div class="mem-object">
+            <div class="mem-object-header">Season @ <span class="mem-addr">0x7100</span></div>
+            <div class="mem-object-body">
+              <div class="mem-object-field"><span class="fname">name</span><span class="fval">"SPRING"</span></div>
+              <div class="mem-object-field"><span class="fname">ordinal</span><span class="fval">0</span></div>
+            </div>
+          </div>
+          <div class="mem-object">
+            <div class="mem-object-header">Season @ <span class="mem-addr">0x7200</span></div>
+            <div class="mem-object-body">
+              <div class="mem-object-field"><span class="fname">name</span><span class="fval">"SUMMER"</span></div>
+              <div class="mem-object-field"><span class="fname">ordinal</span><span class="fval">1</span></div>
+            </div>
+          </div>
+          <div class="mem-object">
+            <div class="mem-object-header">Season @ <span class="mem-addr">0x7300</span></div>
+            <div class="mem-object-body">
+              <div class="mem-object-field"><span class="fname">name</span><span class="fval">"AUTUMN"</span></div>
+              <div class="mem-object-field"><span class="fname">ordinal</span><span class="fval">2</span></div>
+            </div>
+          </div>
+          <div class="mem-object">
+            <div class="mem-object-header">Season @ <span class="mem-addr">0x7400</span></div>
+            <div class="mem-object-body">
+              <div class="mem-object-field"><span class="fname">name</span><span class="fval">"WINTER"</span></div>
+              <div class="mem-object-field"><span class="fname">ordinal</span><span class="fval">3</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout callout-note">
+        <div class="callout-lbl">Not compile-time constants</div>
+        <p><code>SPRING</code>, <code>SUMMER</code>, and the rest are declared <code>static final</code>, but they are not <span class="term">compile-time constants</span> the way a <code>final int</code> or a string literal is. A compile-time constant has to be a primitive or a <code>String</code>, fixed entirely by the source text; these are object references, built by running a constructor when the class loads. <code>static final</code> here guarantees the reference can never be reassigned — not that the value was already known before the program ran.</p>
+      </div>
+    </section>
+
+    <!-- §20.3 -->
+    <section id="s20-3">
+      <div class="section-head">
+        <span class="sec-num">§20.3</span>
+        <h2>Objects, Not Constants <em>— why "named constant" is the wrong mental model</em></h2>
+      </div>
+
+      <p>Enum values are sometimes called "named constants," which suggests they're just integers with labels attached — the old <code>Navigation</code> pattern from §20.1, dressed up. That's exactly backward. An enum value is an object: an instance of a real class, capable of fields, methods, and behavior, same as any class from §3 onward.</p>
+
+      <p><code>static final</code> makes the <em>reference</em> constant — <code>Direction.NORTH</code> can never be reassigned to point at a different object (§5) — but that says nothing about whether the object it points to can change internally. A more accurate mental model: enum values are constant references to singleton objects, and it's the full <em>set</em> of those objects that's sealed at compile time, not necessarily their internal state.</p>
+
+      <pre><code class="language-java">enum Direction {
+    NORTH, SOUTH, EAST, WEST;
+
+    private int travelCount = 0;
+
+    public void travel() {
+        travelCount++;
+    }
+
+    public int getTravelCount() {
+        return travelCount;
+    }
+}</code></pre>
+
+      <pre><code class="language-java">Direction.NORTH.travel();
+Direction.NORTH.travel();
+
+System.out.println(Direction.NORTH.getTravelCount()); // 2</code></pre>
+
+      <p>The <code>NORTH</code> object itself changed — its <code>travelCount</code> field went from <code>0</code> to <code>2</code> — while <code>Direction.NORTH</code> still refers to the exact same object on the heap the whole time. Nothing about the singleton guarantee was violated: there's still exactly one <code>NORTH</code>, and there always will be. It just isn't frozen.</p>
+
+      <div class="callout callout-rule">
+        <div class="callout-lbl">The reference is constant; the object doesn't have to be</div>
+        <p>Since enums are classes, giving one a non-<code>final</code> field makes that field just as mutable as it would be on any other class (§13.3). Most enums never need this — <code>Season</code> and <code>Direction</code> as bare constant sets have nothing to mutate — but it's worth knowing the restriction lives in your own field declarations, not in some special enum-wide immutability rule. By convention, enum constant names are written in <code>UPPERCASE</code> — <code>NORTH</code>, <code>SPRING</code>, <code>MONDAY</code> — a widely followed style, not a compiler requirement.</p>
+      </div>
+    </section>
+
+    <!-- §20.4 -->
+    <section id="s20-4">
+      <div class="section-head">
+        <span class="sec-num">§20.4</span>
+        <h2>Comparing Enum Values <em>— why <code>==</code> is not just allowed, but better</em></h2>
+      </div>
+
+      <p>§10.6 warned against using <code>==</code> to compare <code>String</code>s, because two equal-looking strings can be different objects. Enums are the opposite case. Because there is only ever one <code>Season.SUMMER</code> instance in the entire running program — the singleton guarantee from §20.2 — comparing two enum references for identity (§10.6's <code>==</code>) and comparing them for logical equality (<code>.equals()</code>) can never disagree. There's no second, look-alike <code>SUMMER</code> object anywhere for <code>.equals()</code> to be needed against.</p>
+
+      <pre><code class="language-java">Season sn = Season.SUMMER;
+System.out.println(sn == Season.SUMMER); // true</code></pre>
+
+      <p><code>==</code> is not just permitted here — it's the better choice. It's <span class="term">null-safe</span> (an <code>==</code> comparison against <code>null</code> simply evaluates to <code>false</code>, where <code>sn.equals(...)</code> would throw a <code>NullPointerException</code> if <code>sn</code> itself were <code>null</code>), and it's faster, since it compares two addresses directly instead of running <code>equals()</code>'s logic.</p>
+
+      <p>What <code>==</code> cannot do is cross between an enum and a primitive. An enum value is an object, never an <code>int</code>, no matter what its ordinal happens to be:</p>
+
+      <pre><code class="language-java">enum Season { WINTER, SPRING, SUMMER, FALL }
+
+if (Season.SUMMER == 2) { ... } // compile error: incompatible types Season and int</code></pre>
+
+      <p>To compare against a numeric position at all, go through <code>ordinal()</code> explicitly — the position §20.2's desugaring assigned each constant, in declaration order, starting at <code>0</code>:</p>
+
+      <pre><code class="language-java">boolean res = Season.WINTER.ordinal() == 0; // true</code></pre>
+    </section>
+
+    <!-- §20.5 -->
+    <section id="s20-5">
+      <div class="section-head">
+        <span class="sec-num">§20.5</span>
+        <h2>Type Characteristics <em>— what an enum can and can't do</em></h2>
+      </div>
+
+      <p>Every enum implicitly extends <code>java.lang.Enum&lt;E&gt;</code> — itself a generic type (§16), parameterized by the very enum type extending it, which is how <code>values()</code> and <code>ordinal()</code> can be declared once, in <code>Enum</code>, and still work correctly for every enum that will ever exist. Because Java classes can only extend one thing (§11.3), and that one thing is already <code>Enum</code>, two consequences follow immediately:</p>
+
+      <ul>
+        <li><strong>No further class inheritance.</strong> An enum cannot <code>extend</code> anything else — the slot is taken.</li>
+        <li><strong>Interfaces are still fine.</strong> An enum can <code>implement</code> as many interfaces as it likes (§15.5), used polymorphically exactly like any other implementing class. The standard library does this routinely — <code>java.nio.file.StandardCopyOption</code>, for instance, is declared <code>enum StandardCopyOption implements CopyOption</code>.</li>
+      </ul>
+
+      <p>A related question: can you <code>extend</code> an enum to add more constants later? No — and not as an incidental restriction, but as the direct consequence of the single-instance guarantee §20.2 built. Imagine, hypothetically, that it were allowed:</p>
+
+      <pre><code class="language-java">enum Direction { NORTH, SOUTH, EAST, WEST }
+
+// not allowed — but imagine if it were
+class ExtendedDirection extends Direction {
+    NORTHEAST, NORTHWEST; // new instances of type Direction
+}</code></pre>
+
+      <p><code>Direction</code> would now have six possible instances instead of four, depending on what's been loaded — and every guarantee this chapter has built so far would be gone: the "closed set" from §20.1 wouldn't be closed, and any code that assumed it had already seen every <code>Direction</code> could be wrong. To prevent exactly this, every enum is implicitly <code>final</code> as well — a modifier the compiler adds automatically, and one you're not allowed to write yourself:</p>
+
+      <pre><code class="language-java">final enum Size { S, M, L; } // compile error: illegal modifier for the enum</code></pre>
+
+      <p>Writing <code>final</code> explicitly is redundant, since the compiler already guarantees it — and the language specification simply disallows redundant modifiers here rather than silently ignoring them.</p>
+
+      <table class="content-table">
+        <tr>
+          <th>Feature</th>
+          <th>Ordinary class</th>
+          <th>Enum</th>
+        </tr>
+        <tr>
+          <td>Instantiated with <code>new</code>?</td>
+          <td>Yes</td>
+          <td>No — constructor is always <code>private</code></td>
+        </tr>
+        <tr>
+          <td>Fields and methods?</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>Implements interfaces?</td>
+          <td>Yes</td>
+          <td>Yes</td>
+        </tr>
+        <tr>
+          <td>Extends another class?</td>
+          <td>Yes</td>
+          <td>No — implicitly extends <code>Enum&lt;E&gt;</code> already</td>
+        </tr>
+        <tr>
+          <td>Usable in a <code>switch</code>?</td>
+          <td>No (except via a wrapper type or <code>String</code>)</td>
+          <td>Yes — and checked for exhaustiveness</td>
+        </tr>
+      </table>
+
+      <p>That last row is worth a brief, concrete look, even though <code>switch</code>'s full generality is left for a future chapter. In its simplest form, a <code>switch</code> compares one value against a list of possibilities:</p>
+
+      <pre><code class="language-java">Direction d = Direction.NORTH;
+
+switch (d) {
+    case NORTH -> System.out.println("Moving north");
+    case SOUTH -> System.out.println("Moving south");
+    case EAST  -> System.out.println("Moving east");
+    case WEST  -> System.out.println("Moving west");
+}</code></pre>
+
+      <p>This is the direct replacement for §20.1's <code>if</code>/<code>else</code> chain on raw <code>int</code>s — same idea, but now the compiler knows the full set of <code>Direction</code> values ahead of time, and can check that every one of them is handled (an <span class="term">exhaustive</span> switch), something an <code>if</code>/<code>else</code> chain on an <code>int</code> could never offer. The JVM also compiles a switch over an enum into a <span class="term">jump table</span> — a direct lookup by ordinal, rather than a sequence of comparisons — which is part of why the row above says "Yes" so plainly.</p>
+
+      <div class="callout callout-note">
+        <div class="callout-lbl">When to use an enum</div>
+        <p>Reach for one when the set of values is fixed and known at compile time (statuses, directions, days, piece types), when raw numbers or strings would otherwise stand in for a meaningful category, or when values need real behavior attached (§20.6). Avoid one when the set can grow from outside the code — from a database row or a config file — or when the values are genuinely numeric and need arithmetic done on them; an enum is an object, never a number to compute with.</p>
+      </div>
+    </section>
+
+    <!-- §20.6 -->
+    <section id="s20-6">
+      <div class="section-head">
+        <span class="sec-num">§20.6</span>
+        <h2>Fields, Constructors, and Methods <em>— an enum is still a class</em></h2>
+      </div>
+
+      <p>An enum constant carries two pieces of information for free — its name and its ordinal (§20.2). Often, though, the thing being modeled has more data naturally attached to each value. A coin has a face value; an HTTP status has a numeric code and a message. Fields let that data live directly on each constant, instead of being looked up separately in a map or a parallel <code>switch</code> every time it's needed:</p>
+
+      <pre><code class="language-java">enum Coin {
+    PENNY(1), NICKEL(5), DIME(10), QUARTER(25); // passing a value to the enum's own constructor
+
+    private final int cents;
+
+    Coin(int cents) {
+        this.cents = cents;
+    }
+
+    public int getCents() {
+        return cents;
+    }
+}</code></pre>
+
+      <pre><code class="language-java">Coin.QUARTER.getCents(); // 25
+Coin.DIME.getCents();    // 10</code></pre>
+
+      <p>Writing <code>PENNY(1)</code> passes <code>1</code> to <code>Coin</code>'s constructor, run once for that constant when the class loads. A slightly richer example carries two fields and a derived method:</p>
+
+      <pre><code class="language-java">enum HttpStatus {
+    OK(200, "OK"),
+    NOT_FOUND(404, "Not Found"),
+    INTERNAL_SERVER_ERROR(500, "Internal Server Error"),
+    UNAUTHORIZED(401, "Unauthorized"),
+    FORBIDDEN(403, "Forbidden");
+
+    private final int code;
+    private final String message;
+
+    HttpStatus(int code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
+    public int getCode()       { return code; }
+    public String getMessage() { return message; }
+    public boolean isError()   { return code >= 400; }
+}</code></pre>
+
+      <p><code>isError()</code> is the detail worth noticing: it's not a stored field, but a small computation over one that is. An enum constant isn't limited to handing back the data it was built with — like any object, it can derive new facts from its own state, exactly the way an ordinary class method would. <code>HttpStatus.NOT_FOUND.isError()</code> is <code>true</code> without ever storing a boolean anywhere.</p>
+
+      <h3>The constructor is always <code>private</code></h3>
+
+      <p>Enums don't support <code>new</code> at all — creating an instance is illegal from outside the class, and, as §20.2's desugaring showed, the compiler-generated constructor is <code>private</code> even inside it. This isn't optional: every enum constructor is implicitly <code>private</code>, the modifier may be omitted but never changed, and writing <code>public</code> or <code>protected</code> is a compile error:</p>
+
+      <pre><code class="language-java">enum Flavor {
+    VANILLA, CHOCOLATE, STRAWBERRY;
+
+    public Flavor() {} // compile error: illegal modifier for the enum constructor; only private is permitted
+}</code></pre>
+
+      <p>Each constructor call happens exactly once, at class-loading time (§20.2), not whenever a constant is first mentioned in your own code:</p>
+
+      <pre><code class="language-java">enum Season {
+    WINTER, SPRING, SUMMER, FALL;
+
+    Season() {
+        System.out.print("construct ");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("main");
+        System.out.print(Season.WINTER + " ");
+        System.out.print(Season.SPRING);
+    }
+}</code></pre>
+
+      <pre><code class="hljs language-plaintext">main
+construct construct construct construct WINTER SPRING</code></pre>
+
+      <p><code>"main"</code> prints first — the constructor calls only run once something finally references <code>Season</code>, which happens on the very next line. At that point, all four constructors run together, in declaration order, before <code>WINTER</code> is available to be printed at all. Nothing was constructed lazily per-constant; the whole enum loads as one unit.</p>
+
+      <h3>Instance and static methods</h3>
+
+      <p>Like any class, an enum can declare both instance methods and static ones:</p>
+
+      <pre><code class="language-java">enum DayOfWeek {
+    MON, TUE, WED, THU, FRI, SAT, SUN;
+
+    public boolean isWeekend() {
+        return this == SAT || this == SUN;
+    }
+}</code></pre>
+
+      <pre><code class="language-java">DayOfWeek day = DayOfWeek.FRI;
+
+if (day.isWeekend()) {
+    System.out.println("Have a good weekend!");
+} else {
+    System.out.println("Work, work, work!");
+}</code></pre>
+
+      <p><code>isWeekend()</code> reads exactly like a method on any other class, because that's all it is — <code>this</code> refers to whichever constant it was called on, compared against the two constants that count as a weekend. Nothing about it being an enum constant changes how instance methods work; the fixed set of instances from §20.2 is the only thing that's special here.</p>
+
+      <p>A static method can search across every constant using <code>values()</code> — the method §20.2's desugaring showed returning a defensive copy of the constant array:</p>
+
+      <pre><code class="language-java">enum ResponseGroup {
+    INFORMATIONAL(1), SUCCESSFUL(2), REDIRECTION(3), CLIENT_ERROR(4), SERVER_ERROR(5);
+
+    private final int group;
+
+    ResponseGroup(int group) {
+        this.group = group;
+    }
+
+    public static Optional<ResponseGroup> resolve(int statusCode) {
+        int group = statusCode / 100;
+        for (ResponseGroup r : ResponseGroup.values()) {
+            if (r.group == group) {
+                return Optional.of(r);
+            }
+        }
+        return Optional.empty();
+    }
+}</code></pre>
+
+      <pre><code class="language-java">var group = ResponseGroup.resolve(200);
+
+if (group.isPresent()) {
+    System.out.println(group.get()); // SUCCESSFUL
+}</code></pre>
+
+      <p><code>resolve</code> is a static method precisely because looking up a constant doesn't belong to any one constant — it's a question about the whole set, so it's attached to the enum type itself rather than to any particular <code>ResponseGroup</code>. This is the general shape for turning an outside value (a status code fetched from somewhere) into the matching enum constant: loop over <code>values()</code>, compare, return the match.</p>
+
+      <div class="callout callout-note">
+        <div class="callout-lbl"><code>Optional&lt;T&gt;</code>, briefly</div>
+        <p><code>resolve</code> might reasonably have nothing to return — a status code outside every known range. Rather than returning <code>null</code> (§4.2) and leaving every caller to remember to check for it, <code>Optional&lt;T&gt;</code> is a small standard-library wrapper that makes "might legitimately be absent" part of the return type itself: <code>Optional.of(r)</code> wraps a present value, <code>Optional.empty()</code> represents no value at all, and <code>isPresent()</code>/<code>get()</code> ask and unwrap explicitly, so absence has to be handled rather than forgotten.</p>
+      </div>
+    </section>
+
+    <!-- §20.7 -->
+    <section id="s20-7">
+      <div class="section-head">
+        <span class="sec-num">§20.7</span>
+        <h2>Enums vs. Magic Numbers</h2>
+      </div>
+
+      <p>A <span class="term">magic number</span> is a literal value hardcoded directly into logic, with no name explaining what it means:</p>
+
+      <pre><code class="language-java">// what is 2? what is 1?
+if (user.getStatus() == 2) {
+    shipOrder();
+} else if (user.getStatus() == 1) {
+    promptPayment();
+}</code></pre>
+
+      <p>Nothing here is wrong syntactically — it's just unreadable without cross-referencing whatever else in the codebase defines what <code>2</code> and <code>1</code> mean, and nothing stops a third piece of code from using <code>2</code> for something unrelated entirely. The comparison below lays out exactly what an enum buys back:</p>
+
+      <table class="content-table">
+        <tr>
+          <th>Feature</th>
+          <th>Magic numbers</th>
+          <th>Enums</th>
+        </tr>
+        <tr>
+          <td>Readability</td>
+          <td>Poor — "what does <code>2</code> mean?"</td>
+          <td>High — <code>Status.CANCELLED</code> reads on sight</td>
+        </tr>
+        <tr>
+          <td>Type safety</td>
+          <td>Weak — checked as an <code>int</code>, not as a status</td>
+          <td>High — checked as a <code>Status</code>, one of its declared values</td>
+        </tr>
+        <tr>
+          <td>Maintainability</td>
+          <td>Difficult — every <code>2</code> has to be found and checked</td>
+          <td>Easy — change the one definition</td>
+        </tr>
+        <tr>
+          <td>Namespace</td>
+          <td>Global, easily polluted</td>
+          <td>Encapsulated inside the enum type</td>
+        </tr>
+        <tr>
+          <td>Validation</td>
+          <td>Manual — <code>if (val &lt; 4)</code>, easy to forget</td>
+          <td>Automatic — an invalid value can't be constructed</td>
+        </tr>
+      </table>
+
+      <p>§20.1's <code>Navigation</code> pattern — named <code>int</code> constants instead of bare literals — sits partway between the two columns above. It fixes readability at the call site (<code>NORTH</code> reads better than <code>0</code>), but every other row in the table still fails exactly the way it did there: the type checked is still <code>int</code>, never "a valid direction"; the constants share one global namespace regardless of domain; and printing one for debugging shows a bare number.</p>
+
+      <div class="callout callout-note">
+        <div class="callout-lbl">A real example still in the JDK</div>
+        <p><code>java.awt.Font</code> predates enums and still exposes this exact pattern: <code>public static final int PLAIN = 0;</code>, <code>BOLD = 1;</code>, <code>ITALIC = 2;</code>, alongside a <code>protected int style</code> field they're meant to populate. It works, and it ships in the standard library today — but it's a fossil of the era §20.1 opened with, kept for backward compatibility rather than as a model to follow now.</p>
+      </div>
+
+      <h3>Accessing enum constants</h3>
+
+      <p>Enum constants are implicitly <code>public static final</code> (§20.2's desugaring made this explicit) and are read with ordinary dot notation:</p>
+
+      <pre><code class="language-java">Season sn = Season.SUMMER;
+System.out.println(sn); // SUMMER</code></pre>
+
+      <p>That output comes from <code>toString()</code> — every enum inherits an implementation from <code>Enum</code> that prints the constant's own name, with no extra work required. A <span class="term">static import</span> drops the type prefix when a single enum is used heavily throughout one file:</p>
+
+      <pre><code class="language-java">import static com.myapp.Color.*;
+
+Color favorite = RED; // instead of Color.RED</code></pre>
+
+      <p>And this closes the loop back to §20.1's opening problem. An enum used as a parameter type gets the same compile-time protection §20.1 showed missing from <code>move(int)</code>:</p>
+
+      <pre><code class="language-java">public void setDirection(Direction direction) { ... }
+
+setDirection(Direction.NORTH); // correct
+setDirection(0);               // compile error — even though NORTH's own ordinal is 0</code></pre>
+
+      <p>Even though <code>Direction.NORTH</code> happens to have ordinal <code>0</code> internally, <code>0</code> itself is never accepted where a <code>Direction</code> is expected. The type system enforces exactly the boundary §20.1's <code>int</code>-based version couldn't.</p>
+    </section>
+
+    <!-- §20.8 -->
+    <section id="s20-8">
+      <div class="section-head">
+        <span class="sec-num">§20.8</span>
+        <h2>Closed Sets vs. Evolving Reality <em>— choosing safety or flexibility, per dimension</em></h2>
+      </div>
+
+      <p>§20.1 opened with a question — closed by nature, or could it grow — and it's worth returning to as a genuine design tension rather than a one-time filter. If new kinds can appear after the code ships, a hard-coded enum will eventually need a source change and a redeploy to keep up. That isn't a flaw in enums; it's the direct cost of the guarantee they're built to provide. The real question is which side of the trade a given piece of data actually needs — and different parts of the same program are allowed to answer it differently.</p>
+
+      <p><strong>Keep the enum</strong> when the domain is genuinely stable and you want the compiler to force every call site to keep up:</p>
+
+      <pre><code class="language-java">enum BodyType { SOLID, ACOUSTIC, SEMI_HOLLOW }
+enum PickupType { NONE, MAGNETIC, PIEZO }</code></pre>
+
+      <p>This buys exhaustive <code>switch</code>es (§20.5) and a clear, closed domain, at the cost of needing a code change for every new value — worth it when you own the domain and it rarely changes.</p>
+
+      <p><strong>Reach for an open value type</strong> when new values can legitimately appear without a code change — from a database row or an external API, for instance. A <code>record</code> (§17) wrapping a single value is the simplest version:</p>
+
+      <pre><code class="language-java">record BodyType(String value) { }
+record PickupType(String value) { }
+
+record Guitar(
+        String name,
+        int numberOfStrings,
+        BodyType bodyType,
+        PickupType pickupType) { }</code></pre>
+
+      <p>This accepts a brand-new value like <code>new BodyType("CARBON_FIBER_HYBRID")</code> with no redeploy at all — at the cost of losing exhaustiveness checking entirely, and needing some validation layer of your own, since the compiler no longer limits what a <code>BodyType</code> can hold.</p>
+
+      <p>A middle ground keeps a registry of known values while still allowing new ones to be discovered at runtime:</p>
+
+      <pre><code class="language-java">class BodyTypeRegistry {
+    private static final Map<String, BodyType> CACHE = new HashMap<>();
+
+    static {
+        register("SOLID");
+        register("ACOUSTIC");
+        register("SEMI_HOLLOW");
+    }
+
+    static BodyType register(String value) {
+        BodyType type = new BodyType(value);
+        CACHE.put(type.value(), type);
+        return type;
+    }
+
+    static BodyType getOrCreate(String value) {
+        // computeIfAbsent: return the cached BodyType if value is already a key,
+        // otherwise build one with BodyType::new (§19.7) and cache it first
+        return CACHE.computeIfAbsent(value.toUpperCase(), BodyType::new);
+    }
+
+    static Collection<BodyType> knownValues() {
+        return Collections.unmodifiableCollection(CACHE.values());
+    }
+}</code></pre>
+
+      <p>The known values are pre-registered in a static block (§20.2's ordering rules apply here too), exactly the way an enum's constants would be — but <code>getOrCreate</code> leaves the door open for a value nobody anticipated at compile time, backed by the same <code>Map</code> (§18.6) and constructor reference (§19.7) already covered. Nothing here is new mechanism; it's Records, Collections, and method references, combined to sit deliberately between an enum's total safety and a bare value type's total flexibility.</p>
+
+      <div class="callout callout-rule">
+        <div class="callout-lbl">Choose per dimension, not per program</div>
+        <p>A single program can use enums for some fixed categories (say, <code>DayOfWeek</code>) and open value types for others (say, product categories fetched from a catalog service) — the choice is made once per concept being modeled, not once for the whole codebase. The question from §20.1 is worth asking every time: is <em>this particular set</em> closed by nature, or could it grow?</p>
+      </div>
+    </section>
+
+    <!-- §20.9 -->
+    <section id="s20-9">
+      <div class="section-head">
+        <span class="sec-num">§20.9</span>
+        <h2>Key Takeaways</h2>
+      </div>
+
+      <ul>
+        <li>An <code>enum</code> models a set of values that's closed by nature — every member known upfront, membership never changing. If the set can grow after the code ships, an enum is the wrong tool; consider a value type (a <code>record</code>) or a registry instead (§20.8).</li>
+        <li>Enum constants are objects, not labeled integers — real instances of a real class, created once by the JVM when the class loads, and held in <code>static final</code> fields the compiler generates for you.</li>
+        <li><code>static final</code> fixes the <em>reference</em>; it doesn't make the object immutable. An enum constant can carry mutable fields, though most never need to.</li>
+        <li>Every enum implicitly extends <code>java.lang.Enum&lt;E&gt;</code> and is implicitly <code>final</code> — consequences of the same single-instance guarantee that makes the set closed in the first place. Interfaces remain fully available.</li>
+        <li>Because there's only ever one instance per constant, <code>==</code> is not just legal but the better comparison — null-safe and faster than <code>.equals()</code>.</li>
+        <li>Enums can have fields, constructors (always <code>private</code>), and both instance and static methods, exactly like an ordinary class — the fixed set of instances is the only thing that's special.</li>
+        <li>Compared to magic numbers or <code>public static final int</code> constants, enums add real type safety, a real namespace, and a real string representation, at the cost of needing a source change whenever the set of values grows.</li>
+      </ul>
+    </section>
+
+  </article>
+
+  <nav class="page-nav" aria-label="Chapter navigation">
+    <a href="lambdas.html" class="page-nav-prev">
+      <span class="page-nav-label">← Previous</span>
+      <span class="page-nav-title">§19 — Functional Programming</span>
+    </a>
+    <a href="oodesign.html" class="page-nav-next">
+      <span class="page-nav-label">Next →</span>
+      <span class="page-nav-title">§21 — Object-Oriented Design</span>
+    </a>
+  </nav>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  hljs.highlightAll();
+
+  // Flag error-annotation comments in code blocks
+  document.querySelectorAll('.hljs-comment').forEach(el => {
+    if (/\b(compile|compiler|runtime) error\b/i.test(el.textContent)) {
+      el.classList.add('hljs-comment-error');
+    }
+  });
+
+  // Code theme toggle
+  const codeThemeBtn = document.getElementById('code-theme-toggle');
+  const lightTheme = document.getElementById('hljs-light-theme');
+  const darkTheme = document.getElementById('hljs-dark-theme');
+  const themeLabel = codeThemeBtn.querySelector('.code-theme-label');
+  const themeIcon = codeThemeBtn.querySelector('.icon');
+
+  function applyCodeTheme(theme) {
+    const dark = theme === 'dark';
+    lightTheme.disabled = dark;
+    darkTheme.disabled = !dark;
+    document.documentElement.classList.toggle('code-dark', dark);
+    themeLabel.textContent = dark ? 'Light code' : 'Dark code';
+    themeIcon.textContent = dark ? '☀️' : '🌙';
+  }
+
+  applyCodeTheme(localStorage.getItem('code-theme') || 'light');
+
+  codeThemeBtn.addEventListener('click', () => {
+    const next = darkTheme.disabled ? 'dark' : 'light';
+    localStorage.setItem('code-theme', next);
+    applyCodeTheme(next);
+  });
+
+  // Scroll spy for sub-sections
+  const sections = document.querySelectorAll('section[id]');
+  const subLinks = document.querySelectorAll('.sub-nav a[href^="#"]');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = '#' + entry.target.id;
+        subLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+      }
+    });
+  }, { rootMargin: '-8% 0px -78% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+
+  // Mobile toggle
+  const btn  = document.getElementById('menu-btn');
+  const side = document.getElementById('sidebar');
+  btn.addEventListener('click', () => side.classList.toggle('open'));
+  document.querySelectorAll('#sidebar a').forEach(a => {
+    a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
+  });
+});
+</script>
+</body>
+</html>

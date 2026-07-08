@@ -139,13 +139,16 @@ body {
   margin-left: var(--sidebar-w);
   padding: 0 72px 40px;
 }
+article {
+  max-width: 780px;
+}
 
 /* ── Page header ── */
 .page-header {
   padding: 80px 0 52px;
   border-bottom: 2px solid var(--border);
   margin-bottom: 64px;
-  max-width: 700px;
+  max-width: 780px;
 }
 .page-chapter {
   font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
@@ -167,14 +170,13 @@ body {
   font-size: 16.5px;
   color: var(--text-muted);
   line-height: 1.72;
-  max-width: 560px;
 }
 
 /* ── Sections ── */
 section {
   margin-bottom: 72px;
   scroll-margin-top: 36px;
-  max-width: 720px;
+  max-width: 780px;
 }
 .section-head {
   display: flex;
@@ -205,8 +207,8 @@ section {
 }
 
 /* ── Typography ── */
-p { font-size: 16px; margin-bottom: 1em; max-width: 680px; }
-ul, ol { margin: 0 0 1em 1.6em; max-width: 660px; }
+p { font-size: 16px; margin-bottom: 1em; }
+ul, ol { margin: 0 0 1em 1.6em; }
 li { margin-bottom: 0.45em; font-size: 16px; }
 h3 { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 17px; font-weight: 600; margin: 32px 0 12px; color: var(--text); }
 blockquote {
@@ -264,7 +266,6 @@ html.code-dark pre code.hljs {
   padding: 13px 18px 13px 16px;
   border-left: 3px solid;
   border-radius: 0 5px 5px 0;
-  max-width: 680px;
 }
 .callout-lbl {
   font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
@@ -315,14 +316,13 @@ a.backref {
 a.backref:hover { background: #e8d4b0; }
 
 /* ── Divider ── */
-.divider { border: none; border-top: 1px solid var(--border); margin: 64px 0; max-width: 720px; }
+.divider { border: none; border-top: 1px solid var(--border); margin: 64px 0; }
 
 /* ── Side-by-side code compare ── */
 .code-compare {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
-  max-width: 700px;
   margin: 24px 0;
 }
 .cc-label {
@@ -638,6 +638,35 @@ a.backref:hover { background: #e8d4b0; }
   gap: 16px;
 }
 
+.mem-object-garbage {
+  opacity: 0.6;
+  border-style: dashed;
+  border-color: var(--text-muted);
+}
+.mem-object-garbage .mem-object-header {
+  background: transparent;
+}
+.mem-tag {
+  display: inline-block;
+  font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  padding: 1px 7px;
+  margin-left: 8px;
+  white-space: nowrap;
+}
+.mem-tag-gc {
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+.mem-tag-live {
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
 /* ── Taxonomy hierarchy tree ── */
 .tree-diagram {
   overflow-x: auto;
@@ -813,6 +842,15 @@ a.backref:hover { background: #e8d4b0; }
 .hierarchy-tree ul li:last-child:not(:only-child)::after { left: 0; right: 50%; }
 .hierarchy-tree ul li:not(:first-child):not(:last-child)::after { left: 0; right: 0; }
 .hierarchy-tree .tnode { margin-bottom: 4px; }
+/* hollow UML inheritance arrowhead, sitting on a child's vertical connector line */
+.hierarchy-tree .uml-arrow {
+  position: absolute;
+  top: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--border);
+  z-index: 1;
+}
 .tnode {
   display: inline-block;
   padding: 3px 10px;
@@ -839,6 +877,40 @@ a.backref:hover { background: #e8d4b0; }
   font-style: italic;
   color: var(--text-muted);
 }
+
+/* ── UML class diagrams (reuses .hierarchy-tree's connector system) ── */
+.uml-class {
+  display: flex;
+  flex-direction: column;
+  min-width: 190px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  text-align: left;
+}
+.uml-class.uml-abstract { border-color: var(--accent); }
+.uml-class-header {
+  padding: 8px 14px;
+  font-family: 'SFMono-Regular', Menlo, Monaco, Consolas, monospace;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  background: var(--code-bg);
+  border-bottom: 1px solid var(--border);
+}
+.uml-abstract .uml-class-header { font-style: italic; background: var(--accent-bg); }
+.uml-class-section {
+  padding: 8px 14px;
+  font-family: 'SFMono-Regular', Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.7;
+  border-bottom: 1px dashed var(--border);
+}
+.uml-class-section:last-child { border-bottom: none; }
+.uml-class-section .uml-abstract-member { font-style: italic; }
+.uml-class-section div { white-space: nowrap; }
 
 /* ── Array shift diagrams ── */
 .array-stage { margin: 20px 0; }
@@ -928,7 +1000,7 @@ a.backref:hover { background: #e8d4b0; }
   margin-top: 72px;
   padding-top: 32px;
   border-top: 1px solid var(--border);
-  max-width: 720px;
+  max-width: 780px;
 }
 .page-nav a {
   display: flex;
