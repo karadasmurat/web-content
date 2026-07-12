@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>§1 Variables — OO with Java</title>
+  <title>§1 Variables and Values — OO with Java</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" id="hljs-light-theme"
     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
@@ -55,134 +55,211 @@
           </ul>
         </li>
         <li>
-          <a href="variables.html" class="active"><span class="nav-num">§1</span>Variables</a>
+          <a href="variables.html" class="active"><span class="nav-num">§1</span>Variables and Values</a>
           <ul class="sub-nav">
             <li><a href="#s1-1"><span class="nav-num">§1.1</span>Values</a></li>
-            <li><a href="#s1-2"><span class="nav-num">§1.2</span>Giving Values Names</a></li>
-            <li><a href="#s1-3"><span class="nav-num">§1.3</span>Variables in Java</a></li>
-            <li><a href="#s1-4"><span class="nav-num">§1.4</span>Naming Variables</a></li>
-            <li><a href="#s1-5"><span class="nav-num">§1.5</span>What a Variable Holds</a></li>
-            <li><a href="#s1-6"><span class="nav-num">§1.6</span>Changing a Value</a></li>
-            <li><a href="#s1-7"><span class="nav-num">§1.7</span><code>var</code></a></li>
-            <li><a href="#s1-8"><span class="nav-num">§1.8</span>Common Mistakes</a></li>
-            <li><a href="#s1-9"><span class="nav-num">§1.9</span>Key Takeaways</a></li>
-          </ul>
-        </li>
-        <li><a href="primitives.html"><span class="nav-num">§2</span>Primitives</a></li>
-        <li><a href="classes.html"><span class="nav-num">§3</span>Classes</a></li>
-        <li><a href="objects.html"><span class="nav-num">§4</span>Objects</a></li>
-        <li><a href="assignment.html"><span class="nav-num">§5</span>Assignment</a></li>
-        <li>
-          <a href="methods.html"><span class="nav-num">§6</span>Methods</a>
-          <ul class="sub-nav">
-            <li><a href="methods.html#s6-intro"><span class="nav-num">§6.1</span>What Is a Method?</a></li>
-            <li><a href="methods.html#s62"><span class="nav-num">§6.2</span>Static Methods</a></li>
-            <li><a href="methods.html#s63"><span class="nav-num">§6.3</span>Reference Parameters</a></li>
-            <li><a href="methods.html#s64"><span class="nav-num">§6.4</span>Dot Operator Revisited</a></li>
-            <li><a href="methods.html#s65"><span class="nav-num">§6.5</span>Instance Methods</a></li>
-            <li><a href="methods.html#s66"><span class="nav-num">§6.6</span>Functions to Objects</a></li>
-            <li><a href="methods.html#s67"><span class="nav-num">§6.7</span>Key Takeaways</a></li>
-          </ul>
-        </li>
-        <li><a href="operators.html"><span class="nav-num">§7</span>Operators</a></li>
-        <li><a href="controlflow.html"><span class="nav-num">§8</span>Control Flow</a></li>
-        <li><a href="arrays.html"><span class="nav-num">§9</span>Arrays</a></li>
-        <li>
-          <a href="strings.html"><span class="nav-num">§10</span>Strings</a>
-          <ul class="sub-nav">
-            <li><a href="strings.html#s10-1"><span class="nav-num">§10.1</span>Writing Systems &amp; Unicode</a></li>
-            <li><a href="strings.html#s10-2"><span class="nav-num">§10.2</span><code>char</code></a></li>
-            <li><a href="strings.html#s10-3"><span class="nav-num">§10.3</span><code>Character</code></a></li>
-            <li><a href="strings.html#s10-4"><span class="nav-num">§10.4</span>Indexing</a></li>
-            <li><a href="strings.html#s10-5"><span class="nav-num">§10.5</span>Immutability</a></li>
-            <li><a href="strings.html#s10-6"><span class="nav-num">§10.6</span><code>==</code> vs
-                <code>.equals()</code></a></li>
-            <li><a href="strings.html#s10-7"><span class="nav-num">§10.7</span>Concatenation</a></li>
+            <li><a href="#s1-2"><span class="nav-num">§1.2</span>Variables in Java</a></li>
+            <li><a href="#s1-3"><span class="nav-num">§1.3</span>Primitive Types</a></li>
+            <li><a href="#s1-4"><span class="nav-num">§1.4</span>Literals</a></li>
+            <li><a href="#s1-5"><span class="nav-num">§1.5</span><code>var</code></a></li>
+            <li><a href="#s1-6"><span class="nav-num">§1.6</span>Common Mistakes</a></li>
+            <li><a href="#s1-7"><span class="nav-num">§1.7</span>What a Variable Holds</a></li>
+            <li><a href="#s1-8"><span class="nav-num">§1.8</span>Key Takeaways</a></li>
+            <li><a href="#s1-9"><span class="nav-num">§1.9</span>Appendix: Number Systems</a></li>
           </ul>
         </li>
         <li>
-          <a href="inheritance.html"><span class="nav-num">§11</span>Inheritance</a>
+          <a href="classes.html"><span class="nav-num">§2</span>Classes &amp; Objects</a>
           <ul class="sub-nav">
-            <li><a href="inheritance.html#s10-1"><span class="nav-num">§11.1</span>Taxonomy</a></li>
-            <li><a href="inheritance.html#s10-2"><span class="nav-num">§11.2</span>The Problem</a></li>
-            <li><a href="inheritance.html#s10-3"><span class="nav-num">§11.3</span><code>extends</code></a></li>
-            <li><a href="inheritance.html#s10-4"><span class="nav-num">§11.4</span><code>super(...)</code></a></li>
-            <li><a href="inheritance.html#s10-5"><span class="nav-num">§11.5</span>Polymorphism</a></li>
+            <li><a href="classes.html#s2-1"><span class="nav-num">§2.1</span>Classes as Blueprints</a></li>
+            <li><a href="classes.html#s2-2"><span class="nav-num">§2.2</span>Instantiation</a></li>
+            <li><a href="classes.html#s2-3"><span class="nav-num">§2.3</span>Reference Variables</a></li>
+            <li><a href="classes.html#s2-4"><span class="nav-num">§2.4</span>Reference Fields</a></li>
+            <li><a href="classes.html#s2-5"><span class="nav-num">§2.5</span>Constructors</a></li>
+            <li><a href="classes.html#s2-6"><span class="nav-num">§2.6</span>Static Fields</a></li>
           </ul>
         </li>
         <li>
-          <a href="accessmodifiers.html"><span class="nav-num">§12</span>Packages & Access Modifiers</a>
+          <a href="assignment.html"><span class="nav-num">§3</span>Assignment</a>
           <ul class="sub-nav">
-            <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§12.1</span>Packages</a></li>
-            <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§12.2</span>Why Restrict Access</a></li>
-            <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§12.3</span><code>private</code></a></li>
-            <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§12.4</span>Encapsulation</a></li>
-            <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§12.5</span><code>public</code></a></li>
-            <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§12.6</span>Package-Private</a></li>
-            <li><a href="accessmodifiers.html#s11-7"><span class="nav-num">§12.7</span><code>protected</code></a></li>
+            <li><a href="assignment.html#s3-1"><span class="nav-num">§3.1</span>The "Value"</a></li>
+            <li><a href="assignment.html#s3-2"><span class="nav-num">§3.2</span>Primitive Assignment</a></li>
+            <li><a href="assignment.html#s3-3"><span class="nav-num">§3.3</span>Reference Assignment</a></li>
+            <li><a href="assignment.html#s3-4"><span class="nav-num">§3.4</span>Consequence</a></li>
+            <li><a href="assignment.html#s3-5"><span class="nav-num">§3.5</span>Assignment vs. the Dot</a></li>
+            <li><a href="assignment.html#s3-6"><span class="nav-num">§3.6</span>The Rule</a></li>
           </ul>
         </li>
         <li>
-          <a href="immutability.html"><span class="nav-num">§13</span>Immutability</a>
+          <a href="methods.html"><span class="nav-num">§4</span>Methods</a>
           <ul class="sub-nav">
-            <li><a href="immutability.html#s13-1"><span class="nav-num">§13.1</span>Identity &amp; State</a></li>
-            <li><a href="immutability.html#s13-2"><span class="nav-num">§13.2</span>A Question of Time</a></li>
-            <li><a href="immutability.html#s13-3"><span class="nav-num">§13.3</span>Building an Immutable Class</a></li>
-            <li><a href="immutability.html#s13-4"><span class="nav-num">§13.4</span><code>final</code> Isn't Deep</a>
+            <li><a href="methods.html#s4-intro"><span class="nav-num">§4.1</span>Why Methods</a></li>
+            <li><a href="methods.html#s4-2"><span class="nav-num">§4.2</span>What Is a Method?</a></li>
+            <li><a href="methods.html#s4-3"><span class="nav-num">§4.3</span>Outputs</a></li>
+            <li><a href="methods.html#s4-4"><span class="nav-num">§4.4</span>Functions to Objects</a></li>
+            <li><a href="methods.html#s4-5"><span class="nav-num">§4.5</span>The "Hidden" Parameter</a></li>
+            <li><a href="methods.html#s4-6"><span class="nav-num">§4.6</span>Key Takeaways</a></li>
+            <li><a href="methods.html#s4-7"><span class="nav-num">§4.7</span>Appendix: The Call Stack</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="operators.html"><span class="nav-num">§5</span>Operators</a>
+          <ul class="sub-nav">
+            <li><a href="operators.html#s5-1"><span class="nav-num">§5.1</span>Arithmetic Operators</a></li>
+            <li><a href="operators.html#s5-2"><span class="nav-num">§5.2</span>Unary Operators</a></li>
+            <li><a href="operators.html#s5-3"><span class="nav-num">§5.3</span>Comparison Operators</a></li>
+            <li><a href="operators.html#s5-4"><span class="nav-num">§5.4</span>Logical Operators</a></li>
+            <li><a href="operators.html#s5-5"><span class="nav-num">§5.5</span>Compound Assignment</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="arrays.html"><span class="nav-num">§6</span>Arrays</a>
+          <ul class="sub-nav">
+            <li><a href="arrays.html#s6-1"><span class="nav-num">§6.1</span>Why Arrays</a></li>
+            <li><a href="arrays.html#s6-2"><span class="nav-num">§6.2</span>One Variable, Many Values</a></li>
+            <li><a href="arrays.html#s6-3"><span class="nav-num">§6.3</span>The Index</a></li>
+            <li><a href="arrays.html#s6-4"><span class="nav-num">§6.4</span>Creating an Array</a></li>
+            <li><a href="arrays.html#s6-5"><span class="nav-num">§6.5</span>Reading and Writing Elements</a></li>
+            <li><a href="arrays.html#s6-6"><span class="nav-num">§6.6</span><code>.length</code></a></li>
+            <li><a href="arrays.html#s6-7"><span class="nav-num">§6.7</span>Filling in the Week</a></li>
+            <li><a href="arrays.html#s6-8"><span class="nav-num">§6.8</span>Assignment Still Copies the Address</a></li>
+            <li><a href="arrays.html#s6-9"><span class="nav-num">§6.9</span>Arrays of Objects</a></li>
+            <li><a href="arrays.html#s6-10"><span class="nav-num">§6.10</span>Pointing a Slot at an Existing Object</a></li>
+            <li><a href="arrays.html#s6-11"><span class="nav-num">§6.11</span>Passing an Array's Address to a Method</a></li>
+            <li><a href="arrays.html#s6-12"><span class="nav-num">§6.12</span>Variable-Arity Parameters</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="controlflow.html"><span class="nav-num">§7</span>Control Flow</a>
+          <ul class="sub-nav">
+            <li><a href="controlflow.html#s7-1"><span class="nav-num">§7.1</span>The Flow of Execution</a></li>
+            <li><a href="controlflow.html#s7-2"><span class="nav-num">§7.2</span>Variable Scope</a></li>
+            <li><a href="controlflow.html#s7-3"><span class="nav-num">§7.3</span>Conditional Branching</a></li>
+            <li><a href="controlflow.html#s7-4"><span class="nav-num">§7.4</span><code>while</code></a></li>
+            <li><a href="controlflow.html#s7-5"><span class="nav-num">§7.5</span><code>for</code></a></li>
+            <li><a href="controlflow.html#s7-6"><span class="nav-num">§7.6</span>for-each</a></li>
+            <li><a href="controlflow.html#s7-7"><span class="nav-num">§7.7</span>Ternary Operator</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="strings.html"><span class="nav-num">§8</span>Strings</a>
+          <ul class="sub-nav">
+            <li><a href="strings.html#s8-1"><span class="nav-num">§8.1</span>Writing Systems &amp; Unicode</a></li>
+            <li><a href="strings.html#s8-2"><span class="nav-num">§8.2</span><code>char</code></a></li>
+            <li><a href="strings.html#s8-3"><span class="nav-num">§8.3</span><code>Character</code></a></li>
+            <li><a href="strings.html#s8-4"><span class="nav-num">§8.4</span>Sequence of Characters</a></li>
+            <li><a href="strings.html#s8-5"><span class="nav-num">§8.5</span>Text Blocks</a></li>
+            <li><a href="strings.html#s8-6"><span class="nav-num">§8.6</span>Immutability</a></li>
+            <li><a href="strings.html#s8-7"><span class="nav-num">§8.7</span><code>==</code> vs <code>.equals()</code></a></li>
+            <li><a href="strings.html#s8-8"><span class="nav-num">§8.8</span>Concatenation</a></li>
+            <li><a href="strings.html#s8-9"><span class="nav-num">§8.9</span>Important String Methods</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="inheritance.html"><span class="nav-num">§9</span>Inheritance</a>
+          <ul class="sub-nav">
+            <li><a href="inheritance.html#s10-1"><span class="nav-num">§9.1</span>Taxonomy</a></li>
+            <li><a href="inheritance.html#s10-2"><span class="nav-num">§9.2</span>The Problem</a></li>
+            <li><a href="inheritance.html#s10-3"><span class="nav-num">§9.3</span><code>extends</code></a></li>
+            <li><a href="inheritance.html#s10-4"><span class="nav-num">§9.4</span><code>super(...)</code></a></li>
+            <li><a href="inheritance.html#s10-5"><span class="nav-num">§9.5</span>Polymorphism</a></li>
+            <li><a href="inheritance.html#s10-6"><span class="nav-num">§9.6</span>Overriding</a></li>
+            <li><a href="inheritance.html#s10-7"><span class="nav-num">§9.7</span><code>toString()</code></a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="accessmodifiers.html"><span class="nav-num">§10</span>Packages & Access Modifiers</a>
+          <ul class="sub-nav">
+            <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§10.1</span>Packages</a></li>
+            <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§10.2</span>Why Restrict Access</a></li>
+            <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§10.3</span><code>private</code></a></li>
+            <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§10.4</span>Encapsulation</a></li>
+            <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§10.5</span><code>public</code></a></li>
+            <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§10.6</span>Package-Private</a></li>
+            <li><a href="accessmodifiers.html#s11-7"><span class="nav-num">§10.7</span><code>protected</code></a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="immutability.html"><span class="nav-num">§11</span>Immutability</a>
+          <ul class="sub-nav">
+            <li><a href="immutability.html#s11-1"><span class="nav-num">§11.1</span>Identity &amp; State</a></li>
+            <li><a href="immutability.html#s11-2"><span class="nav-num">§11.2</span>A Question of Time</a></li>
+            <li><a href="immutability.html#s11-3"><span class="nav-num">§11.3</span>Building an Immutable Class</a></li>
+            <li><a href="immutability.html#s11-4"><span class="nav-num">§11.4</span><code>final</code> Isn't Deep</a>
             </li>
-            <li><a href="immutability.html#s13-5"><span class="nav-num">§13.5</span>Why It Matters</a></li>
-            <li><a href="immutability.html#s13-6"><span class="nav-num">§13.6</span><code>StringBuilder</code></a></li>
-            <li><a href="immutability.html#s13-7"><span class="nav-num">§13.7</span>Core Pillars</a></li>
-            <li><a href="immutability.html#s13-8"><span class="nav-num">§13.8</span>Putting It Together</a></li>
+            <li><a href="immutability.html#s11-5"><span class="nav-num">§11.5</span>Why It Matters</a></li>
+            <li><a href="immutability.html#s11-6"><span class="nav-num">§11.6</span><code>StringBuilder</code></a></li>
+            <li><a href="immutability.html#s11-7"><span class="nav-num">§11.7</span>Core Pillars</a></li>
+            <li><a href="immutability.html#s11-8"><span class="nav-num">§11.8</span>Putting It Together</a></li>
           </ul>
         </li>
         <li>
-          <a href="abstractclasses.html"><span class="nav-num">§14</span>Abstract Classes</a>
+          <a href="abstractclasses.html"><span class="nav-num">§12</span>Abstract Classes</a>
           <ul class="sub-nav">
-            <li><a href="abstractclasses.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
-            <li><a href="abstractclasses.html#s14-2"><span class="nav-num">§14.2</span><code>abstract</code> Classes</a>
+            <li><a href="abstractclasses.html#s12-1"><span class="nav-num">§12.1</span>The Problem</a></li>
+            <li><a href="abstractclasses.html#s12-2"><span class="nav-num">§12.2</span><code>abstract</code> Classes</a>
             </li>
-            <li><a href="abstractclasses.html#s14-3"><span class="nav-num">§14.3</span><code>abstract</code> Methods</a>
+            <li><a href="abstractclasses.html#s12-3"><span class="nav-num">§12.3</span><code>abstract</code> Methods</a>
             </li>
           </ul>
         </li>
         <li>
-          <a href="interfaces.html"><span class="nav-num">§15</span>Interfaces</a>
+          <a href="interfaces.html"><span class="nav-num">§13</span>Interfaces</a>
           <ul class="sub-nav">
-            <li><a href="interfaces.html#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
-            <li><a href="interfaces.html#s15-2"><span class="nav-num">§15.2</span>Interface vs. Abstract Class</a></li>
-            <li><a href="interfaces.html#s15-3"><span class="nav-num">§15.3</span>Declaring &amp; Implementing</a></li>
-            <li><a href="interfaces.html#s15-4"><span class="nav-num">§15.4</span>Override vs. Overload</a></li>
-            <li><a href="interfaces.html#s15-5"><span class="nav-num">§15.5</span>Multiple Interfaces</a></li>
-            <li><a href="interfaces.html#s15-6"><span class="nav-num">§15.6</span>Interface-Typed Params</a></li>
-            <li><a href="interfaces.html#s15-7"><span class="nav-num">§15.7</span>Anonymous Classes</a></li>
-            <li><a href="interfaces.html#s15-8"><span class="nav-num">§15.8</span>Default Methods</a></li>
-            <li><a href="interfaces.html#s15-9"><span class="nav-num">§15.9</span>Default Method Collisions</a></li>
-            <li><a href="interfaces.html#s15-10"><span class="nav-num">§15.10</span>Static Methods</a></li>
-            <li><a href="interfaces.html#s15-11"><span class="nav-num">§15.11</span>Interface Inheritance</a></li>
-            <li><a href="interfaces.html#s15-12"><span class="nav-num">§15.12</span>Strategy Pattern</a></li>
+            <li><a href="interfaces.html#s13-1"><span class="nav-num">§13.1</span>The Problem</a></li>
+            <li><a href="interfaces.html#s13-2"><span class="nav-num">§13.2</span>Interface vs. Abstract Class</a></li>
+            <li><a href="interfaces.html#s13-3"><span class="nav-num">§13.3</span>Declaring &amp; Implementing</a></li>
+            <li><a href="interfaces.html#s13-4"><span class="nav-num">§13.4</span>Override vs. Overload</a></li>
+            <li><a href="interfaces.html#s13-5"><span class="nav-num">§13.5</span>Multiple Interfaces</a></li>
+            <li><a href="interfaces.html#s13-6"><span class="nav-num">§13.6</span>Interface-Typed Params</a></li>
+            <li><a href="interfaces.html#s13-7"><span class="nav-num">§13.7</span>Anonymous Classes</a></li>
+            <li><a href="interfaces.html#s13-8"><span class="nav-num">§13.8</span>Default Methods</a></li>
+            <li><a href="interfaces.html#s13-9"><span class="nav-num">§13.9</span>Default Method Collisions</a></li>
+            <li><a href="interfaces.html#s13-10"><span class="nav-num">§13.10</span>Static Methods</a></li>
+            <li><a href="interfaces.html#s13-11"><span class="nav-num">§13.11</span>Interface Inheritance</a></li>
+            <li><a href="interfaces.html#s13-12"><span class="nav-num">§13.12</span>Strategy Pattern</a></li>
           </ul>
         </li>
         <li>
-          <a href="generics.html"><span class="nav-num">§16</span>Generics</a>
+          <a href="exceptions.html"><span class="nav-num">§14</span>Exceptions</a>
           <ul class="sub-nav">
-            <li><a href="generics.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
-            <li><a href="generics.html#s16-2"><span class="nav-num">§16.2</span>Type Parameters</a></li>
-            <li><a href="generics.html#s16-3"><span class="nav-num">§16.3</span>Generic Methods</a></li>
-            <li><a href="generics.html#s16-4"><span class="nav-num">§16.4</span>Bounded Types</a></li>
-            <li><a href="generics.html#s16-5"><span class="nav-num">§16.5</span>Compile Time Only</a></li>
+            <li><a href="exceptions.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
+            <li><a href="exceptions.html#s14-2"><span class="nav-num">§14.2</span>The Exception Lifecycle</a></li>
+            <li><a href="exceptions.html#s14-3"><span class="nav-num">§14.3</span>The Exception Hierarchy</a></li>
+            <li><a href="exceptions.html#s14-4"><span class="nav-num">§14.4</span>Checked vs. Unchecked</a></li>
+            <li><a href="exceptions.html#s14-5"><span class="nav-num">§14.5</span>Handling Exceptions</a></li>
+            <li><a href="exceptions.html#s14-6"><span class="nav-num">§14.6</span><code>throw</code> and
+                <code>throws</code></a></li>
+            <li><a href="exceptions.html#s14-7"><span class="nav-num">§14.7</span>Custom Exceptions</a></li>
+            <li><a href="exceptions.html#s14-8"><span class="nav-num">§14.8</span>Exception Chaining</a></li>
+            <li><a href="exceptions.html#s14-9"><span class="nav-num">§14.9</span>Try-with-Resources</a></li>
+            <li><a href="exceptions.html#s14-10"><span class="nav-num">§14.10</span>Exceptions Are Not Control Flow</a>
+            </li>
+            <li><a href="exceptions.html#s14-11"><span class="nav-num">§14.11</span>Best Practices &amp;
+                Anti-Patterns</a></li>
+            <li><a href="exceptions.html#s14-12"><span class="nav-num">§14.12</span>Key Takeaways</a></li>
           </ul>
         </li>
         <li>
-          <a href="records.html"><span class="nav-num">§17</span>Records</a>
+          <a href="generics.html"><span class="nav-num">§15</span>Generics</a>
           <ul class="sub-nav">
-            <li><a href="records.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
-            <li><a href="records.html#s17-2"><span class="nav-num">§17.2</span><code>record</code></a></li>
-            <li><a href="records.html#s17-3"><span class="nav-num">§17.3</span>Implicitly Final</a></li>
-            <li><a href="records.html#s17-4"><span class="nav-num">§17.4</span>Shallow Immutability</a></li>
-            <li><a href="records.html#s17-5"><span class="nav-num">§17.5</span>Compact Constructors</a></li>
-            <li><a href="records.html#s17-6"><span class="nav-num">§17.6</span>Records Can Do More</a></li>
-            <li><a href="records.html#s17-7"><span class="nav-num">§17.7</span>When to Reach for One</a></li>
+            <li><a href="generics.html#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
+            <li><a href="generics.html#s15-2"><span class="nav-num">§15.2</span>Type Parameters</a></li>
+            <li><a href="generics.html#s15-3"><span class="nav-num">§15.3</span>Generic Methods</a></li>
+            <li><a href="generics.html#s15-4"><span class="nav-num">§15.4</span>Bounded Types</a></li>
+            <li><a href="generics.html#s15-5"><span class="nav-num">§15.5</span>Compile Time Only</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="records.html"><span class="nav-num">§16</span>Records</a>
+          <ul class="sub-nav">
+            <li><a href="records.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
+            <li><a href="records.html#s16-2"><span class="nav-num">§16.2</span><code>record</code></a></li>
+            <li><a href="records.html#s16-3"><span class="nav-num">§16.3</span>Implicitly Final</a></li>
+            <li><a href="records.html#s16-4"><span class="nav-num">§16.4</span>Shallow Immutability</a></li>
+            <li><a href="records.html#s16-5"><span class="nav-num">§16.5</span>Compact Constructors</a></li>
+            <li><a href="records.html#s16-6"><span class="nav-num">§16.6</span>Records Can Do More</a></li>
+            <li><a href="records.html#s16-7"><span class="nav-num">§16.7</span>When to Reach for One</a></li>
           </ul>
         </li>
         <li>
@@ -197,34 +274,100 @@
           </ul>
         </li>
         <li>
-        <a href="lambdas.html"><span class="nav-num">§19</span>Functional Programming</a>
-        <ul class="sub-nav">
-          <li><a href="lambdas.html#s19-1"><span class="nav-num">§19.1</span>Functions as First-Class Citizens</a></li>
-          <li><a href="lambdas.html#s19-2"><span class="nav-num">§19.2</span>Why Java "Simulates" First-Class Functions</a></li>
-          <li><a href="lambdas.html#s19-3"><span class="nav-num">§19.3</span>The Problem</a></li>
-          <li><a href="lambdas.html#s19-4"><span class="nav-num">§19.4</span>Another Anonymous Class</a></li>
-          <li><a href="lambdas.html#s19-5"><span class="nav-num">§19.5</span>Functional Interfaces</a></li>
-          <li><a href="lambdas.html#s19-6"><span class="nav-num">§19.6</span>Lambda Expressions</a></li>
-          <li><a href="lambdas.html#s19-7"><span class="nav-num">§19.7</span>Method References</a></li>
-          <li><a href="lambdas.html#s19-8"><span class="nav-num">§19.8</span><code>java.util.function</code></a></li>
-          <li><a href="lambdas.html#s19-9"><span class="nav-num">§19.9</span>Key Takeaways</a></li>
-        </ul>
-      </li>
+          <a href="lambdas.html"><span class="nav-num">§19</span>Functional Programming</a>
+          <ul class="sub-nav">
+            <li><a href="lambdas.html#s19-1"><span class="nav-num">§19.1</span>Functions as First-Class Citizens</a>
+            </li>
+            <li><a href="lambdas.html#s19-2"><span class="nav-num">§19.2</span>Why Java "Simulates" First-Class
+                Functions</a></li>
+            <li><a href="lambdas.html#s19-3"><span class="nav-num">§19.3</span>The Problem</a></li>
+            <li><a href="lambdas.html#s19-4"><span class="nav-num">§19.4</span>Another Anonymous Class</a></li>
+            <li><a href="lambdas.html#s19-5"><span class="nav-num">§19.5</span>Functional Interfaces</a></li>
+            <li><a href="lambdas.html#s19-6"><span class="nav-num">§19.6</span>Lambda Expressions</a></li>
+            <li><a href="lambdas.html#s19-7"><span class="nav-num">§19.7</span>Method References</a></li>
+            <li><a href="lambdas.html#s19-8"><span class="nav-num">§19.8</span><code>java.util.function</code></a></li>
+            <li><a href="lambdas.html#s19-9"><span class="nav-num">§19.9</span>Key Takeaways</a></li>
+          </ul>
+        </li>
         <li>
-        <a href="enums.html"><span class="nav-num">§20</span>Enums</a>
-        <ul class="sub-nav">
-          <li><a href="enums.html#s20-1"><span class="nav-num">§20.1</span>The Problem</a></li>
-          <li><a href="enums.html#s20-2"><span class="nav-num">§20.2</span>Declaring an Enum</a></li>
-          <li><a href="enums.html#s20-3"><span class="nav-num">§20.3</span>Objects, Not Constants</a></li>
-          <li><a href="enums.html#s20-4"><span class="nav-num">§20.4</span>Comparing Enum Values</a></li>
-          <li><a href="enums.html#s20-5"><span class="nav-num">§20.5</span>Type Characteristics</a></li>
-          <li><a href="enums.html#s20-6"><span class="nav-num">§20.6</span>Fields, Constructors, Methods</a></li>
-          <li><a href="enums.html#s20-7"><span class="nav-num">§20.7</span>Enums vs. Magic Numbers</a></li>
-          <li><a href="enums.html#s20-8"><span class="nav-num">§20.8</span>Closed Sets vs. Evolving Reality</a></li>
-          <li><a href="enums.html#s20-9"><span class="nav-num">§20.9</span>Key Takeaways</a></li>
-        </ul>
-      </li>
-      <li><a href="oodesign.html"><span class="nav-num">§21</span>Object-Oriented Design</a></li>
+          <a href="enums.html"><span class="nav-num">§17</span>Enums</a>
+          <ul class="sub-nav">
+            <li><a href="enums.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
+            <li><a href="enums.html#s17-2"><span class="nav-num">§17.2</span>Declaring an Enum</a></li>
+            <li><a href="enums.html#s17-3"><span class="nav-num">§17.3</span>Objects, Not Constants</a></li>
+            <li><a href="enums.html#s17-4"><span class="nav-num">§17.4</span>Comparing Enum Values</a></li>
+            <li><a href="enums.html#s17-5"><span class="nav-num">§17.5</span>Type Characteristics</a></li>
+            <li><a href="enums.html#s17-6"><span class="nav-num">§17.6</span>Fields, Constructors, Methods</a></li>
+            <li><a href="enums.html#s17-7"><span class="nav-num">§17.7</span>Enums vs. Magic Numbers</a></li>
+            <li><a href="enums.html#s17-8"><span class="nav-num">§17.8</span>Closed Sets vs. Evolving Reality</a></li>
+            <li><a href="enums.html#s17-9"><span class="nav-num">§17.9</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="optionals.html"><span class="nav-num">§20</span>Optional&lt;T&gt;</a>
+          <ul class="sub-nav">
+            <li><a href="optionals.html#s20-1"><span class="nav-num">§20.1</span>The Problem</a></li>
+            <li><a href="optionals.html#s20-2"><span class="nav-num">§20.2</span><code>null</code>: The Absence of a
+                Value</a></li>
+            <li><a href="optionals.html#s20-3"><span class="nav-num">§20.3</span>The Defensive Approach</a></li>
+            <li><a href="optionals.html#s20-4"><span class="nav-num">§20.4</span>The <code>Optional&lt;T&gt;</code>
+                Class</a></li>
+            <li><a href="optionals.html#s20-5"><span class="nav-num">§20.5</span><code>Optional&lt;T&gt;</code> vs
+                <code>null</code></a></li>
+            <li><a href="optionals.html#s20-6"><span class="nav-num">§20.6</span>Specialized Primitive Optionals</a>
+            </li>
+            <li><a href="optionals.html#s20-7"><span class="nav-num">§20.7</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="streams.html"><span class="nav-num">§21</span>Streams</a>
+          <ul class="sub-nav">
+            <li><a href="streams.html#s21-1"><span class="nav-num">§21.1</span>The Problem</a></li>
+            <li><a href="streams.html#s21-2"><span class="nav-num">§21.2</span>What Is a Stream</a></li>
+            <li><a href="streams.html#s21-3"><span class="nav-num">§21.3</span>Creating a Stream</a></li>
+            <li><a href="streams.html#s21-4"><span class="nav-num">§21.4</span>Intermediate Operations</a></li>
+            <li><a href="streams.html#s21-5"><span class="nav-num">§21.5</span>Terminal Operations</a></li>
+            <li><a href="streams.html#s21-6"><span class="nav-num">§21.6</span>Collecting Results</a></li>
+            <li><a href="streams.html#s21-7"><span class="nav-num">§21.7</span>Streams and
+                <code>Optional&lt;T&gt;</code></a></li>
+            <li><a href="streams.html#s21-8"><span class="nav-num">§21.8</span>Laziness and Pipelines</a></li>
+            <li><a href="streams.html#s21-9"><span class="nav-num">§21.9</span>When (Not) to Use Streams</a></li>
+            <li><a href="streams.html#s21-10"><span class="nav-num">§21.10</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="concurrency.html"><span class="nav-num">§22</span>Concurrent Programming</a>
+          <ul class="sub-nav">
+            <li><a href="concurrency.html#s22-1"><span class="nav-num">§22.1</span>The Problem</a></li>
+            <li><a href="concurrency.html#s22-2"><span class="nav-num">§22.2</span>Process, Thread, and the OS</a></li>
+            <li><a href="concurrency.html#s22-3"><span class="nav-num">§22.3</span>Independent Progress</a></li>
+            <li><a href="concurrency.html#s22-4"><span class="nav-num">§22.4</span>Why Concurrency Matters</a></li>
+            <li><a href="concurrency.html#s22-5"><span class="nav-num">§22.5</span>Where Parallelism Fits In</a></li>
+            <li><a href="concurrency.html#s22-6"><span class="nav-num">§22.6</span>The Main Thread</a></li>
+            <li><a href="concurrency.html#s22-7"><span class="nav-num">§22.7</span>Step 1: Creating a Task</a></li>
+            <li><a href="concurrency.html#s22-8"><span class="nav-num">§22.8</span>Step 2: Handing a Task to an
+                Executor</a></li>
+            <li><a href="concurrency.html#s22-9"><span class="nav-num">§22.9</span>ExecutorService in Practice</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="modules.html"><span class="nav-num">§23</span>Java Modules</a>
+          <ul class="sub-nav">
+            <li><a href="modules.html#s23-1"><span class="nav-num">§23.1</span>The Problem</a></li>
+            <li><a href="modules.html#s23-2"><span class="nav-num">§23.2</span>What Is a Module</a></li>
+            <li><a href="modules.html#s23-3"><span class="nav-num">§23.3</span><code>module-info.java</code></a></li>
+            <li><a href="modules.html#s23-4"><span class="nav-num">§23.4</span><code>exports</code></a></li>
+            <li><a href="modules.html#s23-5"><span class="nav-num">§23.5</span><code>requires</code></a></li>
+            <li><a href="modules.html#s23-6"><span class="nav-num">§23.6</span>Strong Encapsulation</a></li>
+            <li><a href="modules.html#s23-7"><span class="nav-num">§23.7</span>The Module Path</a></li>
+            <li><a href="modules.html#s23-8"><span class="nav-num">§23.8</span><code>requires transitive</code></a></li>
+            <li><a href="modules.html#s23-9"><span class="nav-num">§23.9</span>When (Not) to Use Modules</a></li>
+            <li><a href="modules.html#s23-10"><span class="nav-num">§23.10</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li><a href="dateandtime.html"><span class="nav-num">§24</span>Date and Time</a></li>
+        <li><a href="io.html"><span class="nav-num">§25</span>Input and Output</a></li>
+        <li><a href="oodesign.html"><span class="nav-num">§26</span>Object-Oriented Design</a></li>
       </ul>
     </nav>
   </nav>
@@ -232,225 +375,707 @@
   <main id="content">
     <header class="page-header">
       <div class="page-chapter">Chapter 1</div>
-      <h1>Variables</h1>
-      <p class="page-lead">A variable is a named slot in memory, and it holds exactly one of two things: a value,
-        stored directly, or an address, pointing elsewhere. That distinction drives everything that follows.</p>
+      <h1>Variables and Values</h1>
     </header>
 
     <article>
 
-    <!-- §1.1 -->
-    <section id="s1-1">
-      <div class="section-head">
-        <span class="sec-num">§1.1</span>
-        <h2>Values</h2>
-      </div>
+      <!-- §1.1 -->
+      <section id="s1-1">
+        <div class="section-head">
+          <span class="sec-num">§1.1</span>
+          <h2>Values</h2>
+        </div>
 
-      <p>Programs work with information — a person's age, a product price, a user's name, the result of a
-        calculation. A <span class="term">value</span> is a piece of information a program can work with:</p>
+        <p>Imagine part of your program is responsible for tracking a person's age. Somewhere, that age has to
+          actually exist as data the program can work with — not as an idea, but as something concrete:</p>
 
-      <pre><code class="language-java">20</code></pre>
+        <pre><code class="language-java">20</code></pre>
 
-      <p>By itself, <code>20</code> is just a number. It becomes useful once a program has a way to refer back to
-        it — which is exactly what a variable gives it.</p>
-    </section>
+        <p>That's the essence of it: a program works with information — a person's age, a product price, a user's
+          name, the result of a calculation. Whatever form it takes, Java has a name for it — a
+          <span class="term">value</span> is a piece of information a program can work with.
+        </p>
 
-    <!-- §1.2 -->
-    <section id="s1-2">
-      <div class="section-head">
-        <span class="sec-num">§1.2</span>
-        <h2>Giving Values Names</h2>
-      </div>
+        <p>By itself, <code>20</code> is just a number. It becomes useful once a program has a way to refer back to
+          it — which is exactly what a variable gives it.</p>
+      </section>
 
-      <p>Say a program needs to keep track of a person's age:</p>
+      <!-- §1.2 -->
+      <section id="s1-2">
+        <div class="section-head">
+          <span class="sec-num">§1.2</span>
+          <h2>Variables in Java</h2>
+        </div>
 
-      <pre><code class="language-java">age = 20;</code></pre>
+        <p>A <span class="term">variable</span> is a named location in memory that stores a value. We use a
+          human-friendly label that lets us refer to a value later. </p>
 
-      <p>This statement creates a name, <code>age</code>, and connects it to the value <code>20</code>. Instead of
-        writing the number <code>20</code> everywhere the program needs it, the program uses the name:</p>
+        <div class="callout callout-mem">
+          <div class="callout-lbl">Memory model</div>
+          <p>Your program runs in a computer that has memory: a vast array of numbered slots, each holding a small piece
+            of data. Think of a variable as a labeled slot. The label is the variable name. The slot has a fixed size
+            determined by the type. What the slot actually contains is a value.</p>
+        </div>
 
-      <pre><code class="language-java">System.out.println(age); // 20</code></pre>
+        <p>Instead of writing the number <code>20</code> everywhere the program needs it, the program uses the name:</p>
 
-      <p>Java looks up what <code>age</code> refers to and prints <code>20</code> — the name and the value are two
-        different things, connected by the variable.</p>
-    </section>
+        <pre><code class="language-java">System.out.println(age); // 20</code></pre>
 
-    <!-- §1.3 -->
-    <section id="s1-3">
-      <div class="section-head">
-        <span class="sec-num">§1.3</span>
-        <h2>Variables in Java</h2>
-      </div>
+        <p>Java looks up what <code>age</code> refers to and prints <code>20</code> — the name and the value are two
+          different things, connected by the variable.</p>
 
-      <p>Your program runs in a computer that has memory: a vast array of numbered slots, each holding a small
-        piece of data. A <span class="term">variable</span> is your way of naming one of those slots so you can
-        refer to it by name rather than by its raw address.</p>
+        <p>Three different pieces of information:</p>
 
-      <p>Java is a <span class="term">statically typed</span> language — every variable has a type, declared up
-        front, that describes what kind of value it can hold. A full declaration names all three parts at once:</p>
+        <ol>
+          <li><strong>Type</strong>: what kind of data this variable can hold, and how large its
+            slot needs to be.</li>
+          <li><strong>Name</strong> : how the rest of the program refers to it.</li>
+          <li><strong>Value</strong>: the actual information stored there.</li>
+        </ol>
 
-      <pre><code class="language-java">int age = 20;</code></pre>
+        <h3>Type</h3>
 
-      <ul>
-        <li><strong>Type</strong> (<code>int</code>) — what kind of data this variable can hold, and how large its
-          slot needs to be.</li>
-        <li><strong>Name</strong> (<code>age</code>) — how the rest of the program refers to it.</li>
-        <li><strong>Value</strong> (<code>20</code>) — the actual information stored there.</li>
-      </ul>
+        <p>Every value has a type. A type is a contract, like a promise: <em>"I will hold values of this type only, and
+            nothing
+            else."</em> Java classifies every type into one of two broad categories: <span class="term">primitive
+            types</span> and <span class="term">reference types</span>.</p>
 
-      <p>The type and name can also be declared without a value yet, filled in later:</p>
+        <figure class="diagram-figure">
+          <ul class="hierarchy-tree">
+            <li><span class="tnode cls">Java Types</span>
+              <ul>
+                <li><span class="tnode cls">Primitive types</span>
+                  <ul>
+                    <li>
+                      <div class="tnode-grid">
+                        <span class="tnode iface">byte</span>
+                        <span class="tnode iface">short</span>
+                        <span class="tnode iface">int</span>
+                        <span class="tnode iface">long</span>
+                        <span class="tnode iface">float</span>
+                        <span class="tnode iface">double</span>
+                        <span class="tnode iface">boolean</span>
+                        <span class="tnode iface">char</span>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+                <li><span class="tnode cls">Reference types</span></li>
+              </ul>
+            </li>
+          </ul>
+          <figcaption>Reference types still empty — that branch fills in once classes are on the table (§2).
+          </figcaption>
+        </figure>
 
-      <pre><code class="language-java">int count;
-boolean active;</code></pre>
 
-      <p>The slot exists the moment the declaration runs, but it has no value in it yet — the variable is declared, not initialized. Trying to read <code>count</code> or <code>active</code> before assigning one is a compile error (§1.8), not a runtime surprise; Java refuses to let a program read a slot it never filled.</p>
 
-      <div class="callout callout-mem">
-        <div class="callout-lbl">Memory model</div>
-        <p>Think of a variable as a labeled slot. The label is the variable name. The slot has a fixed size
-          determined by the type. What the slot actually contains — a value directly, or an address pointing
-          elsewhere — is §1.5's subject.</p>
-      </div>
-    </section>
+        <p>This chapter covers primitive types — §1.3 onward. Reference types wait until there's an object to actually
+          point at, once classes are on the table. Notice what wasn't said just now: not one word about what a reference
+          type actually <em>is</em>. That's deliberate — for now, it's enough to know the other branch of this tree
+          exists at all.</p>
 
-    <!-- §1.4 -->
-    <section id="s1-4">
-      <div class="section-head">
-        <span class="sec-num">§1.4</span>
-        <h2>Naming Variables</h2>
-      </div>
+        <h3>Naming Variables</h3>
+        <p>A variable name is simply a human-friendly label that lets us refer to a value later. The computer could work
+          with anonymous locations in memory, but people write and maintain software—so we give important values
+          meaningful names.</p>
+        <p>Good variable names make programs easier to understand. Prefer names that say what the value actually is:</p>
 
-      <p>Good variable names make programs easier to understand. Prefer names that say what the value actually is:</p>
-
-      <pre><code class="language-java">int customerAge;
+        <pre><code class="language-java">int customerAge;
 double accountBalance;</code></pre>
 
-      <p>over names that say nothing at all:</p>
+        <p>over names that say nothing at all:</p>
 
-      <pre><code class="language-java">int x;
+        <pre><code class="language-java">int x;
 double a;</code></pre>
 
-      <p>Java convention uses <span class="term">camelCase</span> for variable names — the first word lowercase,
-        every following word capitalized, no underscores:</p>
+        <p>Java convention uses <span class="term">camelCase</span> for variable names — the first word lowercase,
+          every following word capitalized, no underscores:</p>
 
-      <pre><code class="language-java">numberOfStudents
+        <pre><code class="language-java">numberOfStudents
 totalPrice
 userName</code></pre>
 
-      <p>None of this changes what the code does — a differently-named variable holds the exact same value the exact same way. What it changes is whether the next person reading the code (often you, months later) can tell what a variable is for without tracing back through the program to find out.</p>
-    </section>
+        <p>None of this changes what the code does — a differently-named variable holds the exact same value the exact
+          same way. What it changes is whether the next person reading the code (often you, months later) can tell what
+          a variable is for without tracing back through the program to find out.</p>
 
-    <!-- §1.5 -->
-    <section id="s1-5">
-      <div class="section-head">
-        <span class="sec-num">§1.5</span>
-        <h2>What a Variable Holds</h2>
-      </div>
+        <h3>Declaration, Assignment, and Reassignment <em>— four different moments, one variable</em></h3>
 
-      <p>Every variable in Java holds exactly one of two things:</p>
+        <p>"Declare," "assign," and "reassign" get used almost interchangeably in casual conversation, but each one
+          names a genuinely distinct moment in a variable's life. Four of them, in fact — and it's worth seeing all
+          four side by side, using the same variable throughout.</p>
 
-      <ul>
-        <li><strong>A value</strong> — the data itself, stored directly in the slot. This is what primitives do
-          (§2).</li>
-        <li><strong>An address</strong> — the location of some data stored elsewhere in memory. This is what
-          reference variables do (§4.2).</li>
-      </ul>
+        <p><strong>1. Declaration</strong> — creating the slot, with a type and a name, but no value yet:</p>
 
-      <div class="callout callout-note">
-        <div class="callout-lbl">Java is statically typed</div>
-        <p>Because Java is statically typed, every variable declaration includes a type, and that type determines
-          which of the two applies: a primitive type means the variable holds a value directly, a reference type
-          means it holds an address. That distinction is the central thread running through the next several
-          chapters.</p>
-      </div>
-    </section>
+        <pre><code class="language-java">int age;</code></pre>
 
-    <!-- §1.6 -->
-    <section id="s1-6">
-      <div class="section-head">
-        <span class="sec-num">§1.6</span>
-        <h2>Changing a Variable's Value</h2>
-      </div>
+        <p>The slot exists the moment this line runs, but it holds nothing yet — the variable is declared, not
+          initialized.</p>
 
-      <p>A variable can usually be assigned a new value after it's created:</p>
+        <p><strong>2. Assignment</strong> — giving that empty slot its first value, using <code>=</code>:</p>
 
-      <pre><code class="language-java">int score = 10;
+        <pre><code class="language-java">age = 20;</code></pre>
 
-score = 20;</code></pre>
+        <p>This is the moment <code>age</code> actually starts holding something. Nothing about this line
+          redeclares <code>age</code> — its type and name were already fixed in step 1; this line only fills the
+          slot in.</p>
 
-      <p>The variable name stays the same — <code>score</code> is still <code>score</code> — but the value it
-        refers to has changed. Nothing about the second line creates a new variable; it overwrites what's already
-        in the slot <code>score</code> names.</p>
-    </section>
+        <figure class="diagram-figure">
+          <div class="decl-assign-compare">
+            <div class="da-panel da-declare">
+              <div class="da-title">Declaration</div>
+              <p class="da-sub">Creates the variable.</p>
+              <pre><code class="language-java">int age;</code></pre>
+              <p class="da-desc">Variable <code>age</code> is created but has no value yet.</p>
+              <div class="da-mem-label">age</div>
+              <div class="da-mem-box da-empty">(no value)</div>
+            </div>
+            <div class="da-panel da-assign">
+              <div class="da-title">Assignment</div>
+              <p class="da-sub">Gives a value to the variable.</p>
+              <pre><code class="language-java">age = 25;</code></pre>
+              <p class="da-desc">The value <code>25</code> is stored in <code>age</code>.</p>
+              <div class="da-mem-label">age</div>
+              <div class="da-mem-box da-filled">25</div>
+            </div>
+          </div>
+          <figcaption>Declaration creates the slot; assignment is what actually puts something in it.</figcaption>
+        </figure>
 
-    <!-- §1.7 -->
-    <section id="s1-7">
-      <div class="section-head">
-        <span class="sec-num">§1.7</span>
-        <h2>The <code>var</code> Keyword</h2>
-      </div>
+        <p><strong>3. Declare and assign, combined</strong> — declaration and assignment don't have to be two
+          separate lines. §1.2's very first example, <code>int age = 20;</code>, is exactly steps 1 and 2 folded
+          into one statement: a type, a name, and a value, all at once.</p>
 
-      <p>Modern Java also supports local variable type inference using <code>var</code>:</p>
+        <pre><code class="language-java">int age = 20;</code></pre>
 
-      <pre><code class="language-java">var age = 20;</code></pre>
+        <figure class="diagram-figure">
+          <div class="sketch-note">
+            <span class="sk-code sk-type">int</span>
+            <span class="sk-code sk-name">age</span>
+            <span class="sk-code sk-op">=</span>
+            <span class="sk-code sk-value">20</span>
+            <span class="sk-code">;</span>
 
-      <p>Java determines from the value on the right that <code>age</code> is an <code>int</code> — but the type is
-        still fixed once that line compiles, exactly as if it had been written out. <code>var</code> changes what
-        you have to <em>type</em>, not what Java actually does:</p>
+            <span class="sk-arrow sk-type">↓</span>
+            <span class="sk-arrow sk-name">↓</span>
+            <span class="sk-arrow sk-op">↓</span>
+            <span class="sk-arrow sk-value">↓</span>
+            <span></span>
 
-      <pre><code class="language-java">var age = 20;
+            <span class="sk-label sk-type">type<small>kind of data</small></span>
+            <span class="sk-label sk-name">name<small>refers to it</small></span>
+            <span class="sk-label sk-op">assigns<small>not "equals"</small></span>
+            <span class="sk-label sk-value">value<small>the actual data</small></span>
+            <span></span>
+          </div>
+          <figcaption>This single line does steps 1 and 2 at once — type, name, and value, all declared and
+            assigned together.</figcaption>
+        </figure>
+
+        <p><strong>4. Reassignment</strong> — giving an already-initialized variable a <em>different</em> value:</p>
+
+        <pre><code class="language-java">int age = 20;
+age = 25;</code></pre>
+
+        <p>The variable name stays the same — <code>age</code> is still <code>age</code> — but the value it
+          refers to has changed, from 20 to 25. Nothing about this line creates a new variable; it just overwrites
+          what's already sitting in the slot <code>age</code> names. Syntactically, this line looks identical to
+          step 2 — <code>age = 20;</code> reads exactly like <code>age = 25;</code> did. The only difference is
+          whether the slot already had something in it beforehand, which is precisely why "assignment" and
+          "reassignment" are worth keeping as two separate words even though Java itself never distinguishes them.</p>
+      </section>
+
+      <!-- §1.3 -->
+      <section id="s1-3">
+        <div class="section-head">
+          <span class="sec-num">§1.3</span>
+          <h2>Primitive Types <em>— the simplest kind of variable</em></h2>
+        </div>
+
+        <p>Picture a labeled box with the actual data sitting directly inside it. Open the box, and the value is right
+          there. That's what a primitive variable is: the slot <em>has</em> the value, sitting there. Java
+          has eight of these primitive types, and a variable's data type determines which kind of value its box may
+          hold.</p>
+
+        <p>The word <span class="term">value</span> is going to show up constantly from here on, so it's worth being
+          precise about what it means the moment it's said of a primitive variable: the data itself, occupying the
+          slot, with nothing standing between the variable and what it holds.</p>
+
+        <pre><code class="language-java">int     width  = 10;    // slot named 'width'  contains 10
+double  price  = 3.99;  // slot named 'price'  contains 3.99
+boolean active = true;  // slot named 'active' contains true</code></pre>
+
+
+
+        <p>All eight primitive types:</p>
+
+        <table class="content-table">
+          <tr>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Size</th>
+            <th>Value range</th>
+          </tr>
+          <tr>
+            <td><code>byte</code></td>
+            <td>Whole number</td>
+            <td>8-bit</td>
+            <td><code>-128</code> to <code>127</code></td>
+          </tr>
+          <tr>
+            <td><code>short</code></td>
+            <td>Whole number</td>
+            <td>16-bit</td>
+            <td><code>-32,768</code> to <code>32,767</code></td>
+          </tr>
+          <tr>
+            <td><code>int</code></td>
+            <td>Whole number</td>
+            <td>32-bit</td>
+            <td><code>-2,147,483,648</code> to <code>2,147,483,647</code></td>
+          </tr>
+          <tr>
+            <td><code>long</code></td>
+            <td>Whole number, for values bigger than <code>int</code> can hold</td>
+            <td>64-bit</td>
+            <td><code>-9,223,372,036,854,775,808</code> to <code>9,223,372,036,854,775,807</code></td>
+          </tr>
+          <tr>
+            <td><code>float</code></td>
+            <td>Decimal number, lower precision</td>
+            <td>32-bit</td>
+            <td>~ ±3.4 &times; 10<sup>38</sup>, about 6&ndash;7 significant decimal digits</td>
+          </tr>
+          <tr>
+            <td><code>double</code></td>
+            <td>Decimal number</td>
+            <td>64-bit</td>
+            <td>~ ±1.8 &times; 10<sup>308</sup>, about 15&ndash;16 significant decimal digits</td>
+          </tr>
+          <tr>
+            <td><code>boolean</code></td>
+            <td>Exactly one of two values</td>
+            <td>1 bit's worth of information</td>
+            <td><code>true</code> or <code>false</code> — nothing else</td>
+          </tr>
+          <tr>
+            <td><code>char</code></td>
+            <td>A single Unicode character</td>
+            <td>16-bit</td>
+            <td><code>0</code> to <code>65,535</code> (one UTF-16 code unit — §8 covers what that means)</td>
+          </tr>
+        </table>
+
+        <p>Worth reinforcing here, since it's easy to reduce a type to nothing but its size: types are about
+          <em>meaning</em>, not just storage. An <code>int</code> isn't just 32 bits — that's how the promise §1.2
+          called a contract gets kept, not what the contract actually says. What it <em>says</em> is that this slot
+          represents a whole number. The bits are the mechanism; the meaning is the point.
+        </p>
+
+        <p>Every one of these types also has a <span class="term">default value</span> — what a field of that type
+          starts out holding, before any constructor runs. §2.5 covers default values in full, once fields and
+          constructors are actually on the table.</p>
+
+        <h4>Type as a contract</h4>
+        <p>We can say "<code>age</code> is an <code>int</code>." Better to say it the way the contract actually reads:
+          <strong>the variable <code>age</code>
+            is allowed to store integer values.</strong> That phrasing is what makes the next two lines make sense:
+        </p>
+
+        <pre><code class="language-java">int age = 20;      // fine — an integer value, exactly what was promised</code></pre>
+
+        <pre><code class="language-java">int age = "Alice"; // compile error — not allowed</code></pre>
+
+        <p>The compiler refuses the assignment. Why? Because <code>age</code> made a promise: <em>"I only store
+            integers."</em> <code>"Alice"</code>
+          isn't one, so its rejected even before the program runs. This is exactly what <span class="term">static
+            typing</span> means — the promise is checked, and enforced, at compile time, not
+          discovered as a surprise later.</p>
+
+        <div class="callout callout-rule">
+          <div class="callout-lbl">What "N-bit" actually means</div>
+          <p>A <span class="term">bit</span> is a single binary digit — 0 or 1, the smallest unit of storage there
+            is. A slot built from <em>N</em> bits can hold exactly 2<sup>N</sup> distinct patterns, and not one more —
+            that's the entire rule, for every type above. 8 bits give 2<sup>8</sup> = 256 distinct patterns, which is
+            exactly <code>byte</code>'s range: 256 values, split to run from <code>-128</code> to <code>127</code>.
+          </p>
+          <p>That ceiling matters more than it looks like it should — enough to be worth its own chapter (§8) once
+            <code>char</code> is asked to represent something bigger than 65,536 possibilities actually turns out to
+            be.
+          </p>
+        </div>
+      </section>
+
+      <!-- §1.4 -->
+      <section id="s1-4">
+        <div class="section-head">
+          <span class="sec-num">§1.4</span>
+          <h2>Literals</h2>
+        </div>
+
+        <p>Every example so far has written a value straight into the code — <code>20</code>, <code>3.99</code>,
+          <code>true</code>. Nothing computed it, nothing read it from anywhere else; it's just typed directly where
+          it's needed. Java has a name for exactly this: a fixed value spelled out in the code itself is called a
+          <span class="term">literal</span>. A literal's own syntax is what tells the compiler which type it is,
+          without needing a declared variable anywhere nearby:
+        </p>
+
+        <table class="content-table">
+          <tr>
+            <th>Kind</th>
+            <th>Example</th>
+            <th>Notes</th>
+          </tr>
+          <tr>
+            <td>Decimal integer</td>
+            <td><code>42</code>, <code>-7</code></td>
+            <td>Base 10 — the default form, <code>int</code></td>
+          </tr>
+          <tr>
+            <td>Hexadecimal integer</td>
+            <td><code>0x2A</code></td>
+            <td>Prefixed <code>0x</code>, base 16 — <code>0x2A</code> is the same value as <code>42</code></td>
+          </tr>
+          <tr>
+            <td>Binary integer</td>
+            <td><code>0b101010</code></td>
+            <td>Prefixed <code>0b</code>, base 2 — also <code>42</code></td>
+          </tr>
+          <tr>
+            <td>Long</td>
+            <td><code>10000000000L</code></td>
+            <td>Trailing <code>L</code> forces 64-bit, overriding the 32-bit <code>int</code> default</td>
+          </tr>
+          <tr>
+            <td>Double</td>
+            <td><code>3.14</code></td>
+            <td>The default for any decimal literal — a trailing <code>D</code> is legal but redundant</td>
+          </tr>
+          <tr>
+            <td>Float</td>
+            <td><code>3.14f</code></td>
+            <td>Trailing <code>f</code> forces 32-bit, overriding the <code>double</code> default</td>
+          </tr>
+          <tr>
+            <td>Boolean</td>
+            <td><code>true</code>, <code>false</code></td>
+            <td>Exactly these two words — nothing else is a <code>boolean</code> literal</td>
+          </tr>
+          <tr>
+            <td>Character</td>
+            <td><code>'A'</code>, <code>'\n'</code>, <code>'&#92;u0041'</code></td>
+            <td>Single quotes; escape sequences like <code>\n</code> and Unicode escapes like <code>&#92;u0041</code>
+              are
+              both legal — <code>'&#92;u0041'</code> is the same character as <code>'A'</code></td>
+          </tr>
+        </table>
+
+        <p>Each of those literals is typically assigned straight into a variable of the matching type:</p>
+
+        <pre><code class="language-java">int   decimal = 42;
+int   hex     = 0x2A;
+int   binary  = 0b101010;
+long  big     = 10000000000L;
+double price  = 3.14;
+float ratio   = 3.14f;
+boolean done  = true;
+char  letter  = 'A';
+char  newline = '\n';
+char  alsoA   = '&#92;u0041';</code></pre>
+
+        <p>Notice each literal's own form already matches the declared type on its left — <code>0x2A</code> and
+          <code>0b101010</code> are both just <code>42</code> written differently, and a variable declared
+          <code>int</code> accepts either one without any conversion, because the value they produce is identical.
+          Get the pairing wrong — say, assigning <code>3.14</code> to an <code>int</code> without a suffix telling
+          the compiler otherwise — and it's a compile error, not a rounding surprise at runtime.
+        </p>
+
+        <div class="callout callout-note">
+          <div class="callout-lbl">Underscores for readability</div>
+          <p>A numeric literal can use underscores to group digits — <code>1_000_000</code> is exactly the same
+            <code>int</code> as <code>1000000</code>. The compiler strips the underscores entirely; they exist purely
+            to make a long literal easier for a person to read at a glance.
+          </p>
+        </div>
+      </section>
+
+      <!-- §1.5 -->
+      <section id="s1-5">
+        <div class="section-head">
+          <span class="sec-num">§1.5</span>
+          <h2>The <code>var</code> Keyword</h2>
+        </div>
+
+        <p>Look back at <code>int age = 20;</code> for a moment. The literal <code>20</code> already makes it obvious
+          this is a whole number — so does writing <code>int</code> just ahead of it actually tell Java anything it
+          couldn't have figured out on its own? Often, it doesn't. Modern Java lets you skip that repetition using
+          <code>var</code>:
+        </p>
+
+        <pre><code class="language-java">var age = 20;</code></pre>
+
+        <p>Java determines from the value on the right that <code>age</code> is an <code>int</code> — but the type is
+          still fixed once that line compiles, exactly as if it had been written out. This is called
+          <span class="term">local variable type inference</span>: <code>var</code> changes what you have to
+          <em>type</em>, not what Java actually does:
+        </p>
+
+        <pre><code class="language-java">var age = 20;
 
 age = "twenty"; // compile error — age is still an int underneath</code></pre>
 
-      <div class="callout callout-note">
-        <div class="callout-lbl">Recommendation</div>
-        <p>Learn traditional declarations first — <code>int age = 20;</code> — since they keep the type visible
-          while you're still learning what each type means. Reach for <code>var</code> later, once it's the type
-          itself that's obvious and repeating it would just be noise.</p>
-      </div>
-    </section>
+        <div class="callout callout-note">
+          <div class="callout-lbl">Recommendation</div>
+          <p>Learn traditional declarations first — <code>int age = 20;</code> — since they keep the type visible
+            while you're still learning what each type means. Reach for <code>var</code> later, once it's the type
+            itself that's obvious and repeating it would just be noise.</p>
+        </div>
+      </section>
 
-    <!-- §1.8 -->
-    <section id="s1-8">
-      <div class="section-head">
-        <span class="sec-num">§1.8</span>
-        <h2>Common Beginner Mistakes</h2>
-      </div>
+      <!-- §1.6 -->
+      <section id="s1-6">
+        <div class="section-head">
+          <span class="sec-num">§1.6</span>
+          <h2>Common Beginner Mistakes</h2>
+        </div>
 
-      <p>Using a variable before it's ever been given a value:</p>
+        <p>Using a variable before it's ever been given a value:</p>
 
-      <pre><code class="language-java">int age;
+        <pre><code class="language-java">int age;
 
 System.out.println(age); // compile error — variable age might not have been initialized</code></pre>
 
-      <p>Trying to store the wrong type of value:</p>
+        <p>Trying to store the wrong type of value:</p>
 
-      <pre><code class="language-java">int age = "twenty"; // compile error — incompatible types</code></pre>
+        <pre><code class="language-java">int age = "twenty"; // compile error — incompatible types</code></pre>
 
-      <p>Confusing the variable name with the value it holds:</p>
+        <p>Confusing the variable name with the value it holds:</p>
 
-      <pre><code class="language-java">age = 20;</code></pre>
+        <pre><code class="language-java">age = 20;</code></pre>
 
-      <p>Here <code>age</code> is not the value — it's the name that refers to the value. §1.2 already drew this
-        distinction; it's worth keeping straight as the rest of the tutorial builds on it.</p>
-    </section>
+        <p>Here <code>age</code> is not the value — it's the name that refers to the value. §1.2 already drew this
+          distinction; it's worth keeping straight as the rest of the tutorial builds on it.</p>
+      </section>
 
-    <!-- §1.9 -->
-    <section id="s1-9">
-      <div class="section-head">
-        <span class="sec-num">§1.9</span>
-        <h2>Key Takeaways</h2>
-      </div>
+      <!-- §1.7 -->
+      <section id="s1-7">
+        <div class="section-head">
+          <span class="sec-num">§1.7</span>
+          <h2>What a Variable Holds</h2>
+        </div>
 
-      <ul>
-        <li>A value is information a program can work with; a variable gives it a name.</li>
-        <li>A Java variable declaration has three parts: a type, a name, and a value.</li>
-        <li>Every variable holds either a value directly (primitives, §2) or an address pointing elsewhere
-          (references, §4.2).</li>
-        <li>A variable's value can change after declaration; its name and type stay fixed.</li>
-        <li><code>var</code> lets Java infer a local variable's type — the type itself never becomes optional.</li>
-      </ul>
-    </section>
+        <p>"When I create a variable, what actually goes inside it?"</p>
+        <p>Every variable holds a value. A piece of information. Easy, right?</p>
+
+        <p>Picture two boxes side by side. One box holds an actual number, sitting right there inside it. The other
+          box holds nothing but a note — an address. The real thing is somewhere else, but can be found following that
+          address.
+          Both boxes are "holding" something, but not in the same sense at all: every variable in Java holds exactly one
+          of two
+          things.</p>
+
+        <ul>
+          <li><strong>Actual data</strong> itself, stored directly in the slot. This is what every primitive type from
+            §1.3 does.</li>
+          <li><strong>A reference</strong> — the memory location of some data stored elsewhere. This is what
+            reference variables do — coming soon.</li>
+        </ul>
+
+        <div class="callout callout-note">
+          <div class="callout-lbl">Java is statically typed</div>
+          <p>Because Java is statically typed, every variable declaration includes a type, and that type determines
+            which of the two applies: a primitive type means the variable holds a value directly, a reference type
+            means it holds an address. The value case is fully behind you now — the address case is still ahead;
+            §2.3 is where it's actually built out, once there's a class, and an object of it, to point at (§2).</p>
+        </div>
+      </section>
+
+      <!-- §1.8 -->
+      <section id="s1-8">
+        <div class="section-head">
+          <span class="sec-num">§1.8</span>
+          <h2>Key Takeaways</h2>
+        </div>
+
+        <ul>
+          <li>A value is information a program can work with; a variable gives it a name to refer to it later.</li>
+          <li>A Java variable declaration has three parts: a type, a name, and a value.</li>
+          <li>Java has eight primitive types; a primitive variable's slot holds its value directly, with no
+            indirection.</li>
+          <li>Every value written directly into source code is a literal — its own syntax tells the compiler which
+            type it is.</li>
+          <li>Every variable holds either a value directly (primitives, just covered) or an address pointing
+            elsewhere (references, §2.3 — still ahead).</li>
+          <li>A variable's value can change after declaration; its name and type stay fixed.</li>
+          <li><code>var</code> lets Java infer a local variable's type — the type itself never becomes optional.</li>
+        </ul>
+      </section>
+
+      <!-- §1.9 -->
+      <section id="s1-9">
+        <div class="section-head">
+          <span class="sec-num">§1.9</span>
+          <h2>Appendix: Number Systems <em>— binary, decimal, and hex</em></h2>
+        </div>
+
+        <p class="page-lead">§1.3's "N-bit" callout and §1.4's <code>0x2A</code> / <code>0b101010</code> literals both
+          leaned on binary and hex without stopping to explain them. This appendix is that missing background —
+          optional on a first read, worth returning to once those two sections have raised the question.</p>
+
+        <h4>Why Base 10 Isn't Special</h4>
+
+        <p>Write the number <code>247</code>, and nobody thinks twice about what it means — but the meaning isn't
+          in the digits alone, it's in their <em>position</em>. That <code>2</code> isn't worth 2; it's worth 200,
+          because of where it sits:</p>
+
+        <table class="content-table">
+
+          <tr>
+            <th>Place (Power)</th>
+            <td>Hundreds (10²)</td>
+            <td>Tens (10¹)</td>
+            <td>Ones (10⁰)</td>
+          </tr>
+          <tr>
+            <th>Digit</th>
+            <td>2</td>
+            <td>4</td>
+            <td>7</td>
+          </tr>
+          <tr>
+            <th>Digit value</th>
+            <td>200</td>
+            <td>40</td>
+            <td>7</td>
+          </tr>
+        </table>
+
+        <p><code>200 + 40 + 7 = 247</code>.</p>
+
+        <p>Each position is worth ten times the position to its right, because decimal has ten available digits —
+          <code>0</code> through <code>9</code> — before it has to roll over into the next position. That's the
+          entire idea behind a <span class="term">base</span>: how many distinct digits exist before counting has
+          to carry into the next column. Nothing about place-value notation actually requires the base to be ten —
+          it's just the base humans happened to standardize on, almost certainly because of finger-counting. A
+          computer has no fingers, and settles on a different base for a very different reason.
+        </p>
+
+        <h4>Binary: Base 2</h4>
+
+        <p>A bit, as §1.3 already said, is a single binary digit — 0 or 1, nothing else. Binary is base 2: only two
+          digits exist before a column has to carry, so each position is worth twice the one to its right instead
+          of ten times:</p>
+
+        <table class="content-table">
+          <tr>
+            <th>Power</th>
+            <td>2⁵</td>
+            <td>2⁴</td>
+            <td>2³</td>
+            <td>2²</td>
+            <td>2¹</td>
+            <td>2⁰</td>
+          </tr>
+          <tr>
+            <th>Digit</th>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+            <td>1</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th>Digit value</th>
+            <td>32</td>
+            <td>0</td>
+            <td>8</td>
+            <td>0</td>
+            <td>2</td>
+            <td>0</td>
+          </tr>
+        </table>
+
+        <p>That's <code>101010</code> in binary — exactly the digits behind <code>0b101010</code> from §1.4.
+          <code>32 + 8 + 2 = 42</code>. Converting the other direction works the same way any base does: read each
+          column's digit times its place value, and add them up.
+        </p>
+
+        <h4>Hexadecimal: Base 16</h4>
+
+        <p>Binary is precise but long-winded — writing out 32 bits one digit at a time is tedious and easy to
+          mis-copy. Hexadecimal exists to make binary shorter to write, not to replace it: each hex digit stands in
+          for exactly 4 bits, so a number twice as long in binary is only half as long in hex. Base 16 needs 16
+          distinct digits before a column carries, and decimal only supplies 10 of them — so hex borrows six letters
+          to fill the rest:</p>
+
+        <table class="content-table">
+          <tr>
+            <th>Decimal</th>
+            <th>0</th>
+            <th>1</th>
+            <th>2</th>
+            <th>...</th>
+            <th>9</th>
+            <th>10</th>
+            <th>11</th>
+            <th>12</th>
+            <th>13</th>
+            <th>14</th>
+            <th>15</th>
+          </tr>
+          <tr>
+            <td>Hex digit</td>
+            <td><code>0</code></td>
+            <td><code>1</code></td>
+            <td><code>2</code></td>
+            <td>...</td>
+            <td><code>9</code></td>
+            <td><code>A</code></td>
+            <td><code>B</code></td>
+            <td><code>C</code></td>
+            <td><code>D</code></td>
+            <td><code>E</code></td>
+            <td><code>F</code></td>
+          </tr>
+        </table>
+
+        <p><code>0x2A</code> from §1.4 reads the same way as any other base — each column times its place value:</p>
+
+        <table class="content-table">
+          <tr>
+            <th>Power</th>
+            <td>16¹</td>
+            <td>16⁰</td>
+          </tr>
+          <tr>
+            <th>Digit</th>
+            <td>2</td>
+            <td>A</td>
+          </tr>
+          <tr>
+            <th>Digit value</th>
+            <td>32</td>
+            <td>10</td>
+          </tr>
+        </table>
+
+        <p><code>A</code> stands for 10, so <code>2A</code> in hex is <code>(2 × 16) + 10</code> — 42 again, the
+          same value <code>0b101010</code> and plain <code>42</code> already named. All three are the same number;
+          only the notation changed.</p>
+
+        <div class="callout callout-rule">
+          <div class="callout-lbl">Why hex lines up with bits so neatly</div>
+          <p>4 bits give exactly 2<sup>4</sup> = 16 distinct patterns — precisely the range one hex digit covers, no
+            more and no less. That's not a coincidence; it's why hex was chosen as binary's shorthand in the first
+            place. A <code>byte</code> (8 bits, §1.3) always fits in exactly 2 hex digits; a 32-bit <code>int</code>
+            always fits in exactly 8. Decimal has no such clean relationship to bit widths, which is exactly why hex
+            — not decimal — is what shows up whenever a raw bit pattern needs to be written out compactly, from
+            memory addresses to color codes.</p>
+        </div>
+      </section>
 
     </article>
 
@@ -459,9 +1084,9 @@ System.out.println(age); // compile error — variable age might not have been i
         <span class="page-nav-label">← Previous</span>
         <span class="page-nav-title">§0 — Java at a Glance</span>
       </a>
-      <a href="primitives.html" class="page-nav-next">
+      <a href="classes.html" class="page-nav-next">
         <span class="page-nav-label">Next →</span>
-        <span class="page-nav-title">§2 — Primitives</span>
+        <span class="page-nav-title">§2 — Classes &amp; Objects</span>
       </a>
     </nav>
   </main>

@@ -1,0 +1,1979 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>§24 Date and Time — OO with Java</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" id="hljs-light-theme"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+  <link rel="stylesheet" id="hljs-dark-theme"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
+  <script>
+    (function () {
+      if ((localStorage.getItem('code-theme') || 'light') === 'dark') {
+        document.getElementById('hljs-light-theme').disabled = true;
+        document.getElementById('hljs-dark-theme').disabled = false;
+        document.documentElement.classList.add('code-dark');
+      }
+    })();
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+</head>
+
+<body>
+
+  <button id="menu-btn" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
+
+  <button id="code-theme-toggle" class="code-theme-toggle" aria-label="Toggle code color scheme">
+    <span class="icon">🌙</span><span class="code-theme-label">Dark code</span>
+  </button>
+
+  <nav id="sidebar" aria-label="Tutorial navigation">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-label">Tutorial</div>
+      <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
+    </div>
+    <nav>
+      <ul>
+        <li>
+          <a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a>
+          <ul class="sub-nav">
+            <li><a href="index.html#s0-1"><span class="nav-num">§0.1</span>What Is Java?</a></li>
+            <li><a href="index.html#s0-2"><span class="nav-num">§0.2</span>Where Is Java Used?</a></li>
+            <li><a href="index.html#s0-3"><span class="nav-num">§0.3</span>Why Java?</a></li>
+            <li><a href="index.html#s0-4"><span class="nav-num">§0.4</span>The Java Ecosystem</a></li>
+            <li><a href="index.html#s0-5"><span class="nav-num">§0.5</span>Java Versions</a></li>
+            <li><a href="index.html#s0-6"><span class="nav-num">§0.6</span>Your First Program</a></li>
+            <li><a href="index.html#s0-7"><span class="nav-num">§0.7</span>Key Features</a></li>
+            <li><a href="index.html#s0-8"><span class="nav-num">§0.8</span>Key Takeaways</a></li>
+            <li><a href="index.html#s0-9"><span class="nav-num">§0.9</span>Appendix: Write Once, Run Anywhere</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="variables.html"><span class="nav-num">§1</span>Variables and Values</a>
+          <ul class="sub-nav">
+            <li><a href="variables.html#s1-1"><span class="nav-num">§1.1</span>Values</a></li>
+            <li><a href="variables.html#s1-2"><span class="nav-num">§1.2</span>Variables in Java</a></li>
+            <li><a href="variables.html#s1-3"><span class="nav-num">§1.3</span>Primitive Types</a></li>
+            <li><a href="variables.html#s1-4"><span class="nav-num">§1.4</span>Literals</a></li>
+            <li><a href="variables.html#s1-5"><span class="nav-num">§1.5</span><code>var</code></a></li>
+            <li><a href="variables.html#s1-6"><span class="nav-num">§1.6</span>Common Mistakes</a></li>
+            <li><a href="variables.html#s1-7"><span class="nav-num">§1.7</span>What a Variable Holds</a></li>
+            <li><a href="variables.html#s1-8"><span class="nav-num">§1.8</span>Key Takeaways</a></li>
+            <li><a href="variables.html#s1-9"><span class="nav-num">§1.9</span>Appendix: Number Systems</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="classes.html"><span class="nav-num">§2</span>Classes &amp; Objects</a>
+          <ul class="sub-nav">
+            <li><a href="classes.html#s2-1"><span class="nav-num">§2.1</span>Classes as Blueprints</a></li>
+            <li><a href="classes.html#s2-2"><span class="nav-num">§2.2</span>Instantiation</a></li>
+            <li><a href="classes.html#s2-3"><span class="nav-num">§2.3</span>Reference Variables</a></li>
+            <li><a href="classes.html#s2-4"><span class="nav-num">§2.4</span>Reference Fields</a></li>
+            <li><a href="classes.html#s2-5"><span class="nav-num">§2.5</span>Constructors</a></li>
+            <li><a href="classes.html#s2-6"><span class="nav-num">§2.6</span>Static Fields</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="assignment.html"><span class="nav-num">§3</span>Assignment</a>
+          <ul class="sub-nav">
+            <li><a href="assignment.html#s3-1"><span class="nav-num">§3.1</span>The "Value"</a></li>
+            <li><a href="assignment.html#s3-2"><span class="nav-num">§3.2</span>Primitive Assignment</a></li>
+            <li><a href="assignment.html#s3-3"><span class="nav-num">§3.3</span>Reference Assignment</a></li>
+            <li><a href="assignment.html#s3-4"><span class="nav-num">§3.4</span>Consequence</a></li>
+            <li><a href="assignment.html#s3-5"><span class="nav-num">§3.5</span>Assignment vs. the Dot</a></li>
+            <li><a href="assignment.html#s3-6"><span class="nav-num">§3.6</span>The Rule</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="methods.html"><span class="nav-num">§4</span>Methods</a>
+          <ul class="sub-nav">
+            <li><a href="methods.html#s4-intro"><span class="nav-num">§4.1</span>Why Methods</a></li>
+            <li><a href="methods.html#s4-2"><span class="nav-num">§4.2</span>What Is a Method?</a></li>
+            <li><a href="methods.html#s4-3"><span class="nav-num">§4.3</span>Outputs</a></li>
+            <li><a href="methods.html#s4-4"><span class="nav-num">§4.4</span>Functions to Objects</a></li>
+            <li><a href="methods.html#s4-5"><span class="nav-num">§4.5</span>The "Hidden" Parameter</a></li>
+            <li><a href="methods.html#s4-6"><span class="nav-num">§4.6</span>Key Takeaways</a></li>
+            <li><a href="methods.html#s4-7"><span class="nav-num">§4.7</span>Appendix: The Call Stack</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="operators.html"><span class="nav-num">§5</span>Operators</a>
+          <ul class="sub-nav">
+            <li><a href="operators.html#s5-1"><span class="nav-num">§5.1</span>Arithmetic Operators</a></li>
+            <li><a href="operators.html#s5-2"><span class="nav-num">§5.2</span>Unary Operators</a></li>
+            <li><a href="operators.html#s5-3"><span class="nav-num">§5.3</span>Comparison Operators</a></li>
+            <li><a href="operators.html#s5-4"><span class="nav-num">§5.4</span>Logical Operators</a></li>
+            <li><a href="operators.html#s5-5"><span class="nav-num">§5.5</span>Compound Assignment</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="arrays.html"><span class="nav-num">§6</span>Arrays</a>
+          <ul class="sub-nav">
+            <li><a href="arrays.html#s6-1"><span class="nav-num">§6.1</span>Why Arrays</a></li>
+            <li><a href="arrays.html#s6-2"><span class="nav-num">§6.2</span>One Variable, Many Values</a></li>
+            <li><a href="arrays.html#s6-3"><span class="nav-num">§6.3</span>The Index</a></li>
+            <li><a href="arrays.html#s6-4"><span class="nav-num">§6.4</span>Creating an Array</a></li>
+            <li><a href="arrays.html#s6-5"><span class="nav-num">§6.5</span>Reading and Writing Elements</a></li>
+            <li><a href="arrays.html#s6-6"><span class="nav-num">§6.6</span><code>.length</code></a></li>
+            <li><a href="arrays.html#s6-7"><span class="nav-num">§6.7</span>Filling in the Week</a></li>
+            <li><a href="arrays.html#s6-8"><span class="nav-num">§6.8</span>Assignment Still Copies the Address</a></li>
+            <li><a href="arrays.html#s6-9"><span class="nav-num">§6.9</span>Arrays of Objects</a></li>
+            <li><a href="arrays.html#s6-10"><span class="nav-num">§6.10</span>Pointing a Slot at an Existing Object</a></li>
+            <li><a href="arrays.html#s6-11"><span class="nav-num">§6.11</span>Passing an Array's Address to a Method</a></li>
+            <li><a href="arrays.html#s6-12"><span class="nav-num">§6.12</span>Variable-Arity Parameters</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="controlflow.html"><span class="nav-num">§7</span>Control Flow</a>
+          <ul class="sub-nav">
+            <li><a href="controlflow.html#s7-1"><span class="nav-num">§7.1</span>The Flow of Execution</a></li>
+            <li><a href="controlflow.html#s7-2"><span class="nav-num">§7.2</span>Variable Scope</a></li>
+            <li><a href="controlflow.html#s7-3"><span class="nav-num">§7.3</span>Conditional Branching</a></li>
+            <li><a href="controlflow.html#s7-4"><span class="nav-num">§7.4</span><code>while</code></a></li>
+            <li><a href="controlflow.html#s7-5"><span class="nav-num">§7.5</span><code>for</code></a></li>
+            <li><a href="controlflow.html#s7-6"><span class="nav-num">§7.6</span>for-each</a></li>
+            <li><a href="controlflow.html#s7-7"><span class="nav-num">§7.7</span>Ternary Operator</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="strings.html"><span class="nav-num">§8</span>Strings</a>
+          <ul class="sub-nav">
+            <li><a href="strings.html#s8-1"><span class="nav-num">§8.1</span>Writing Systems &amp; Unicode</a></li>
+            <li><a href="strings.html#s8-2"><span class="nav-num">§8.2</span><code>char</code></a></li>
+            <li><a href="strings.html#s8-3"><span class="nav-num">§8.3</span><code>Character</code></a></li>
+            <li><a href="strings.html#s8-4"><span class="nav-num">§8.4</span>Sequence of Characters</a></li>
+            <li><a href="strings.html#s8-5"><span class="nav-num">§8.5</span>Text Blocks</a></li>
+            <li><a href="strings.html#s8-6"><span class="nav-num">§8.6</span>Immutability</a></li>
+            <li><a href="strings.html#s8-7"><span class="nav-num">§8.7</span><code>==</code> vs <code>.equals()</code></a></li>
+            <li><a href="strings.html#s8-8"><span class="nav-num">§8.8</span>Concatenation</a></li>
+            <li><a href="strings.html#s8-9"><span class="nav-num">§8.9</span>Important String Methods</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="inheritance.html"><span class="nav-num">§9</span>Inheritance</a>
+          <ul class="sub-nav">
+            <li><a href="inheritance.html#s10-1"><span class="nav-num">§9.1</span>Taxonomy</a></li>
+            <li><a href="inheritance.html#s10-2"><span class="nav-num">§9.2</span>The Problem</a></li>
+            <li><a href="inheritance.html#s10-3"><span class="nav-num">§9.3</span><code>extends</code></a></li>
+            <li><a href="inheritance.html#s10-4"><span class="nav-num">§9.4</span><code>super(...)</code></a></li>
+            <li><a href="inheritance.html#s10-5"><span class="nav-num">§9.5</span>Polymorphism</a></li>
+            <li><a href="inheritance.html#s10-6"><span class="nav-num">§9.6</span>Overriding</a></li>
+            <li><a href="inheritance.html#s10-7"><span class="nav-num">§9.7</span><code>toString()</code></a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="accessmodifiers.html"><span class="nav-num">§10</span>Packages &amp; Access Modifiers</a>
+          <ul class="sub-nav">
+            <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§10.1</span>Packages</a></li>
+            <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§10.2</span>Why Restrict Access</a></li>
+            <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§10.3</span><code>private</code></a></li>
+            <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§10.4</span>Encapsulation</a></li>
+            <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§10.5</span><code>public</code></a></li>
+            <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§10.6</span>Package-Private</a></li>
+            <li><a href="accessmodifiers.html#s11-7"><span class="nav-num">§10.7</span><code>protected</code></a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="immutability.html"><span class="nav-num">§11</span>Immutability</a>
+          <ul class="sub-nav">
+            <li><a href="immutability.html#s11-1"><span class="nav-num">§11.1</span>Identity &amp; State</a></li>
+            <li><a href="immutability.html#s11-2"><span class="nav-num">§11.2</span>A Question of Time</a></li>
+            <li><a href="immutability.html#s11-3"><span class="nav-num">§11.3</span>Building an Immutable Class</a></li>
+            <li><a href="immutability.html#s11-4"><span class="nav-num">§11.4</span><code>final</code> Isn't Deep</a>
+            </li>
+            <li><a href="immutability.html#s11-5"><span class="nav-num">§11.5</span>Why It Matters</a></li>
+            <li><a href="immutability.html#s11-6"><span class="nav-num">§11.6</span><code>StringBuilder</code></a></li>
+            <li><a href="immutability.html#s11-7"><span class="nav-num">§11.7</span>Core Pillars</a></li>
+            <li><a href="immutability.html#s11-8"><span class="nav-num">§11.8</span>Putting It Together</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="abstractclasses.html"><span class="nav-num">§12</span>Abstract Classes</a>
+          <ul class="sub-nav">
+            <li><a href="abstractclasses.html#s12-1"><span class="nav-num">§12.1</span>The Problem</a></li>
+            <li><a href="abstractclasses.html#s12-2"><span class="nav-num">§12.2</span><code>abstract</code> Classes</a>
+            </li>
+            <li><a href="abstractclasses.html#s12-3"><span class="nav-num">§12.3</span><code>abstract</code> Methods</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="interfaces.html"><span class="nav-num">§13</span>Interfaces</a>
+          <ul class="sub-nav">
+            <li><a href="interfaces.html#s13-1"><span class="nav-num">§13.1</span>The Problem</a></li>
+            <li><a href="interfaces.html#s13-2"><span class="nav-num">§13.2</span>Interface vs. Abstract Class</a></li>
+            <li><a href="interfaces.html#s13-3"><span class="nav-num">§13.3</span>Declaring &amp; Implementing</a></li>
+            <li><a href="interfaces.html#s13-4"><span class="nav-num">§13.4</span>Override vs. Overload</a></li>
+            <li><a href="interfaces.html#s13-5"><span class="nav-num">§13.5</span>Multiple Interfaces</a></li>
+            <li><a href="interfaces.html#s13-6"><span class="nav-num">§13.6</span>Interface-Typed Params</a></li>
+            <li><a href="interfaces.html#s13-7"><span class="nav-num">§13.7</span>Anonymous Classes</a></li>
+            <li><a href="interfaces.html#s13-8"><span class="nav-num">§13.8</span>Default Methods</a></li>
+            <li><a href="interfaces.html#s13-9"><span class="nav-num">§13.9</span>Default Method Collisions</a></li>
+            <li><a href="interfaces.html#s13-10"><span class="nav-num">§13.10</span>Static Methods</a></li>
+            <li><a href="interfaces.html#s13-11"><span class="nav-num">§13.11</span>Interface Inheritance</a></li>
+            <li><a href="interfaces.html#s13-12"><span class="nav-num">§13.12</span>Strategy Pattern</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="exceptions.html"><span class="nav-num">§14</span>Exceptions</a>
+          <ul class="sub-nav">
+            <li><a href="exceptions.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
+            <li><a href="exceptions.html#s14-2"><span class="nav-num">§14.2</span>The Exception Lifecycle</a></li>
+            <li><a href="exceptions.html#s14-3"><span class="nav-num">§14.3</span>The Exception Hierarchy</a></li>
+            <li><a href="exceptions.html#s14-4"><span class="nav-num">§14.4</span>Checked vs. Unchecked</a></li>
+            <li><a href="exceptions.html#s14-5"><span class="nav-num">§14.5</span>Handling Exceptions</a></li>
+            <li><a href="exceptions.html#s14-6"><span class="nav-num">§14.6</span><code>throw</code> and
+                <code>throws</code></a></li>
+            <li><a href="exceptions.html#s14-7"><span class="nav-num">§14.7</span>Custom Exceptions</a></li>
+            <li><a href="exceptions.html#s14-8"><span class="nav-num">§14.8</span>Exception Chaining</a></li>
+            <li><a href="exceptions.html#s14-9"><span class="nav-num">§14.9</span>Try-with-Resources</a></li>
+            <li><a href="exceptions.html#s14-10"><span class="nav-num">§14.10</span>Exceptions Are Not Control Flow</a>
+            </li>
+            <li><a href="exceptions.html#s14-11"><span class="nav-num">§14.11</span>Best Practices &amp;
+                Anti-Patterns</a></li>
+            <li><a href="exceptions.html#s14-12"><span class="nav-num">§14.12</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="generics.html"><span class="nav-num">§15</span>Generics</a>
+          <ul class="sub-nav">
+            <li><a href="generics.html#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
+            <li><a href="generics.html#s15-2"><span class="nav-num">§15.2</span>Type Parameters</a></li>
+            <li><a href="generics.html#s15-3"><span class="nav-num">§15.3</span>Generic Methods</a></li>
+            <li><a href="generics.html#s15-4"><span class="nav-num">§15.4</span>Bounded Types</a></li>
+            <li><a href="generics.html#s15-5"><span class="nav-num">§15.5</span>Compile Time Only</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="records.html"><span class="nav-num">§16</span>Records</a>
+          <ul class="sub-nav">
+            <li><a href="records.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
+            <li><a href="records.html#s16-2"><span class="nav-num">§16.2</span><code>record</code></a></li>
+            <li><a href="records.html#s16-3"><span class="nav-num">§16.3</span>Implicitly Final</a></li>
+            <li><a href="records.html#s16-4"><span class="nav-num">§16.4</span>Shallow Immutability</a></li>
+            <li><a href="records.html#s16-5"><span class="nav-num">§16.5</span>Compact Constructors</a></li>
+            <li><a href="records.html#s16-6"><span class="nav-num">§16.6</span>Records Can Do More</a></li>
+            <li><a href="records.html#s16-7"><span class="nav-num">§16.7</span>When to Reach for One</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="collections.html"><span class="nav-num">§18</span>Collections Framework</a>
+          <ul class="sub-nav">
+            <li><a href="collections.html#s18-1"><span class="nav-num">§18.1</span>The Problem</a></li>
+            <li><a href="collections.html#s18-2"><span class="nav-num">§18.2</span>The Big Picture</a></li>
+            <li><a href="collections.html#s18-3"><span class="nav-num">§18.3</span><code>List</code></a></li>
+            <li><a href="collections.html#s18-4"><span class="nav-num">§18.4</span><code>Queue</code></a></li>
+            <li><a href="collections.html#s18-5"><span class="nav-num">§18.5</span><code>Set</code></a></li>
+            <li><a href="collections.html#s18-6"><span class="nav-num">§18.6</span><code>Map</code></a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="lambdas.html"><span class="nav-num">§19</span>Functional Programming</a>
+          <ul class="sub-nav">
+            <li><a href="lambdas.html#s19-1"><span class="nav-num">§19.1</span>Functions as First-Class Citizens</a>
+            </li>
+            <li><a href="lambdas.html#s19-2"><span class="nav-num">§19.2</span>Why Java "Simulates" First-Class
+                Functions</a></li>
+            <li><a href="lambdas.html#s19-3"><span class="nav-num">§19.3</span>The Problem</a></li>
+            <li><a href="lambdas.html#s19-4"><span class="nav-num">§19.4</span>Another Anonymous Class</a></li>
+            <li><a href="lambdas.html#s19-5"><span class="nav-num">§19.5</span>Functional Interfaces</a></li>
+            <li><a href="lambdas.html#s19-6"><span class="nav-num">§19.6</span>Lambda Expressions</a></li>
+            <li><a href="lambdas.html#s19-7"><span class="nav-num">§19.7</span>Method References</a></li>
+            <li><a href="lambdas.html#s19-8"><span class="nav-num">§19.8</span><code>java.util.function</code></a></li>
+            <li><a href="lambdas.html#s19-9"><span class="nav-num">§19.9</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="enums.html"><span class="nav-num">§17</span>Enums</a>
+          <ul class="sub-nav">
+            <li><a href="enums.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
+            <li><a href="enums.html#s17-2"><span class="nav-num">§17.2</span>Declaring an Enum</a></li>
+            <li><a href="enums.html#s17-3"><span class="nav-num">§17.3</span>Objects, Not Constants</a></li>
+            <li><a href="enums.html#s17-4"><span class="nav-num">§17.4</span>Comparing Enum Values</a></li>
+            <li><a href="enums.html#s17-5"><span class="nav-num">§17.5</span>Type Characteristics</a></li>
+            <li><a href="enums.html#s17-6"><span class="nav-num">§17.6</span>Fields, Constructors, Methods</a></li>
+            <li><a href="enums.html#s17-7"><span class="nav-num">§17.7</span>Enums vs. Magic Numbers</a></li>
+            <li><a href="enums.html#s17-8"><span class="nav-num">§17.8</span>Closed Sets vs. Evolving Reality</a></li>
+            <li><a href="enums.html#s17-9"><span class="nav-num">§17.9</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="optionals.html"><span class="nav-num">§20</span>Optional&lt;T&gt;</a>
+          <ul class="sub-nav">
+            <li><a href="optionals.html#s20-1"><span class="nav-num">§20.1</span>The Problem</a></li>
+            <li><a href="optionals.html#s20-2"><span class="nav-num">§20.2</span><code>null</code>: The Absence of a
+                Value</a></li>
+            <li><a href="optionals.html#s20-3"><span class="nav-num">§20.3</span>The Defensive Approach</a></li>
+            <li><a href="optionals.html#s20-4"><span class="nav-num">§20.4</span>The <code>Optional&lt;T&gt;</code>
+                Class</a></li>
+            <li><a href="optionals.html#s20-5"><span class="nav-num">§20.5</span><code>Optional&lt;T&gt;</code> vs
+                <code>null</code></a></li>
+            <li><a href="optionals.html#s20-6"><span class="nav-num">§20.6</span>Specialized Primitive Optionals</a>
+            </li>
+            <li><a href="optionals.html#s20-7"><span class="nav-num">§20.7</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="streams.html"><span class="nav-num">§21</span>Streams</a>
+          <ul class="sub-nav">
+            <li><a href="streams.html#s21-1"><span class="nav-num">§21.1</span>The Problem</a></li>
+            <li><a href="streams.html#s21-2"><span class="nav-num">§21.2</span>What Is a Stream</a></li>
+            <li><a href="streams.html#s21-3"><span class="nav-num">§21.3</span>Creating a Stream</a></li>
+            <li><a href="streams.html#s21-4"><span class="nav-num">§21.4</span>Intermediate Operations</a></li>
+            <li><a href="streams.html#s21-5"><span class="nav-num">§21.5</span>Terminal Operations</a></li>
+            <li><a href="streams.html#s21-6"><span class="nav-num">§21.6</span>Collecting Results</a></li>
+            <li><a href="streams.html#s21-7"><span class="nav-num">§21.7</span>Streams and
+                <code>Optional&lt;T&gt;</code></a></li>
+            <li><a href="streams.html#s21-8"><span class="nav-num">§21.8</span>Laziness and Pipelines</a></li>
+            <li><a href="streams.html#s21-9"><span class="nav-num">§21.9</span>When (Not) to Use Streams</a></li>
+            <li><a href="streams.html#s21-10"><span class="nav-num">§21.10</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="concurrency.html"><span class="nav-num">§22</span>Concurrent Programming</a>
+          <ul class="sub-nav">
+            <li><a href="concurrency.html#s22-1"><span class="nav-num">§22.1</span>The Problem</a></li>
+            <li><a href="concurrency.html#s22-2"><span class="nav-num">§22.2</span>Process, Thread, and the OS</a></li>
+            <li><a href="concurrency.html#s22-3"><span class="nav-num">§22.3</span>Independent Progress</a></li>
+            <li><a href="concurrency.html#s22-4"><span class="nav-num">§22.4</span>Why Concurrency Matters</a></li>
+            <li><a href="concurrency.html#s22-5"><span class="nav-num">§22.5</span>Where Parallelism Fits In</a></li>
+            <li><a href="concurrency.html#s22-6"><span class="nav-num">§22.6</span>The Main Thread</a></li>
+            <li><a href="concurrency.html#s22-7"><span class="nav-num">§22.7</span>Step 1: Creating a Task</a></li>
+            <li><a href="concurrency.html#s22-8"><span class="nav-num">§22.8</span>Step 2: Handing a Task to an
+                Executor</a></li>
+            <li><a href="concurrency.html#s22-9"><span class="nav-num">§22.9</span>ExecutorService in Practice</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="modules.html"><span class="nav-num">§23</span>Java Modules</a>
+          <ul class="sub-nav">
+            <li><a href="modules.html#s23-1"><span class="nav-num">§23.1</span>The Problem</a></li>
+            <li><a href="modules.html#s23-2"><span class="nav-num">§23.2</span>What Is a Module</a></li>
+            <li><a href="modules.html#s23-3"><span class="nav-num">§23.3</span><code>module-info.java</code></a></li>
+            <li><a href="modules.html#s23-4"><span class="nav-num">§23.4</span><code>exports</code></a></li>
+            <li><a href="modules.html#s23-5"><span class="nav-num">§23.5</span><code>requires</code></a></li>
+            <li><a href="modules.html#s23-6"><span class="nav-num">§23.6</span>Strong Encapsulation</a></li>
+            <li><a href="modules.html#s23-7"><span class="nav-num">§23.7</span>The Module Path</a></li>
+            <li><a href="modules.html#s23-8"><span class="nav-num">§23.8</span><code>requires transitive</code></a></li>
+            <li><a href="modules.html#s23-9"><span class="nav-num">§23.9</span>When (Not) to Use Modules</a></li>
+            <li><a href="modules.html#s23-10"><span class="nav-num">§23.10</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="dateandtime.html" class="active"><span class="nav-num">§24</span>Date and Time</a>
+          <ul class="sub-nav">
+            <li><a href="#s24-1"><span class="nav-num">§24.1</span>The Problem</a></li>
+            <li><a href="#s24-2"><span class="nav-num">§24.2</span>Human Time vs. Machine Time</a></li>
+            <li><a href="#s24-3"><span class="nav-num">§24.3</span>The Core "Local" Types</a></li>
+            <li><a href="#s24-4"><span class="nav-num">§24.4</span><code>Instant</code></a></li>
+            <li><a href="#s24-5"><span class="nav-num">§24.5</span>Timezones</a></li>
+            <li><a href="#s24-6"><span class="nav-num">§24.6</span><code>Duration</code> &amp; <code>Period</code></a>
+            </li>
+            <li><a href="#s24-7"><span class="nav-num">§24.7</span><code>DateTimeFormatter</code></a></li>
+            <li><a href="#s24-8"><span class="nav-num">§24.8</span>Partial Types</a></li>
+            <li><a href="#s24-9"><span class="nav-num">§24.9</span>Interop &amp; Migration</a></li>
+            <li><a href="#s24-10"><span class="nav-num">§24.10</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="io.html"><span class="nav-num">§25</span>Input and Output</a>
+        </li>
+        <li>
+          <a href="oodesign.html"><span class="nav-num">§26</span>Object-Oriented Design</a>
+        </li>
+      </ul>
+    </nav>
+  </nav>
+
+  <main id="content">
+    <header class="page-header">
+      <div class="page-chapter">Chapter 24</div>
+      <h1>Date and Time</h1>
+      <p class="page-lead">A date has quietly shown up a few times already — a <code>createdDate</code> field here, an
+        <code>Instant</code> there in §26's pricing example, used without much explanation. This chapter is where that
+        gets taken seriously: what Java's old date and time classes got wrong, badly enough that Java 8 replaced them
+        outright, and how <code>java.time</code> fixed it.
+      </p>
+    </header>
+
+    <article>
+
+      <!-- §24.1 -->
+      <section id="s24-1">
+        <div class="section-head">
+          <span class="sec-num">§24.1</span>
+          <h2>The Problem <em>— why <code>java.time</code>?</em></h2>
+        </div>
+
+        <p>Before Java 8, date and time lived in two classes: <code>java.util.Date</code> and
+          <code>java.util.Calendar</code>. Both had real, well-documented design flaws — serious enough that Java 8
+          didn't patch them, it replaced them wholesale with a new API, <code>java.time</code>, built specifically to
+          fix what came before.
+        </p>
+
+        <ul>
+          <li>
+            <p><strong>Mutable, when it never should have been.</strong> <code>Date</code> exposes setters —
+              <code>setHours</code>, <code>setMinutes</code>, and more — directly on itself, which means any method
+              holding a reference can rewrite it:
+            </p>
+
+            <pre><code class="language-java">Date meeting = new Date();
+someMethod(meeting);
+
+void someMethod(Date d) {
+    d.setHours(d.getHours() + 1); // mutates the caller's own object
+}</code></pre>
+
+            <p>Nothing about calling <code>someMethod(meeting)</code> looks dangerous — it's an ordinary reference
+              assignment, the same aliasing §3 already covered. The danger is what <code>someMethod</code> is
+              <em>allowed</em> to do with that alias: reach in and rewrite the hour, and the caller's own
+              <code>meeting</code> has silently changed, with nothing in the call site hinting that it might.
+            </p>
+
+            <p>Every <code>java.time</code> type, by contrast, is immutable (§11) — none of them expose a single
+              setter. <code>LocalDate.plusDays(1)</code> doesn't change the object it's called on; it returns a
+              brand-new <code>LocalDate</code>, leaving the original exactly as it was:
+            </p>
+
+            <pre><code class="language-java">LocalDate date = LocalDate.of(2026, 6, 18);
+
+date.plusDays(1);                  // does nothing to `date` — the return value is discarded
+System.out.println(date);          // still 2026-06-18
+
+LocalDate next = date.plusDays(1); // the return value must be captured
+System.out.println(next);          // 2026-06-19</code></pre>
+
+            <div class="callout callout-mem">
+              <div class="callout-lbl">Immutability's other payoff: no synchronization, ever</div>
+              <p>§22 spent a whole chapter on what goes wrong when more than one thread shares mutable state. An
+                immutable object sidesteps the entire problem — there's no state left to race over, because nothing
+                about it can ever change after construction. A single <code>LocalDate</code> or <code>Instant</code>
+                can be handed to as many threads as needed, freely, with no lock and no defensive copy, for the same
+                reason a <code>String</code> could be (§8.5).</p>
+            </div>
+          </li>
+
+          <li>
+            <p><strong>Zero-indexed months, and other inconsistencies.</strong> <code>Calendar</code> numbered
+              months starting from <code>0</code> — inherited from decades-old C library convention — which meant
+              this looked entirely reasonable and was completely wrong:</p>
+
+            <pre><code class="language-java">Calendar cal = Calendar.getInstance();
+cal.set(2026, 5, 18); // sets JUNE 18th, not May — month 5 means June
+                      // January is 0, December is 11</code></pre>
+
+            <p>It's one of the most commonly cited <code>Calendar</code> complaints, and a constant source of
+              off-by-one bugs for exactly that reason. <code>java.time</code> simply fixed it:</p>
+
+            <pre><code class="language-java">LocalDate date = LocalDate.of(2026, 6, 18); // 6 = June, exactly what it looks like</code></pre>
+          </li>
+
+          <li>
+            <p><strong>Machine time and human time, tangled together.</strong> <code>Date</code> is fundamentally a
+              millisecond counter — a single number, counted from a fixed reference point. That's machine time. But
+              <code>Date</code> also exposed human-time-shaped accessors directly on itself —
+              <code>getYear()</code>, <code>getMonth()</code>, <code>getDay()</code> — deprecated since Java 1.1,
+              with no way to say which time zone they meant. They silently used the JVM's default:
+            </p>
+
+            <pre><code class="language-java">Date d = new Date();       // internally: just a long, milliseconds since the epoch — machine time
+int year = d.getYear();     // but also exposes human-time-shaped accessors — in which time zone, though?</code></pre>
+
+            <p><code>java.time</code> keeps the two ideas in entirely separate classes — §24.2 and §24.3 cover each
+              in turn — and any conversion between them has to be written explicitly. There's no silent default to
+              fall back on.</p>
+          </li>
+
+          <li>
+            <p><strong>No way to talk about "an amount of time," separate from "a point in time."</strong>
+              <code>Date</code> had no equivalent of <code>Duration</code> or <code>Period</code> at all — adding
+              three days to a date meant computing milliseconds by hand, or reaching for the clunky
+              <code>Calendar.add(...)</code>. §24.6 covers the two types <code>java.time</code> gives this idea of
+              its own.
+            </p>
+          </li>
+
+          <li>
+            <p><strong>String formatting, with the same mutability problem all over again.</strong>
+              <code>SimpleDateFormat</code> carries mutable internal state of its own, which makes a single shared
+              instance unsafe to use from more than one thread at once — the identical failure mode as the rest of
+              this list, just wearing a formatting hat instead of a calendar one. <code>DateTimeFormatter</code>, its
+              replacement, is immutable by design, exactly like everything else in this chapter — §24.7 covers it.
+            </p>
+          </li>
+        </ul>
+
+        <p>None of this is really five separate complaints. It's one story, told five times: <code>Date</code> and
+          <code>Calendar</code> were designed before mutability's real costs were well understood, and
+          <code>java.time</code> (formalized as JSR-310, with heavy involvement from Stephen Colebourne, the creator of
+          the earlier third-party Joda-Time library it draws on) exists to fix all of it at once, not patch it
+          piecemeal.
+        </p>
+      </section>
+
+      <!-- §24.2 -->
+      <section id="s24-2">
+        <div class="section-head">
+          <span class="sec-num">§24.2</span>
+          <h2>Human Time vs. Machine Time <em>— the conceptual foundation</em></h2>
+        </div>
+
+        <p>Picture a New Year's Eve broadcast, watched at home in London — and the exact same broadcast, watched by
+          a viewer in Paris. Same event, same instant, and yet each of them reads a different time off their own
+          wall clock. That gap between "the same moment" and "what a clock says" is where this whole chapter
+          starts.</p>
+
+        <p>A <strong>"moment in time"</strong> can be described in two fundamentally different ways, and conflating
+          them is the single largest source of date-and-time bugs in software. <code>java.time</code>'s entire
+          architecture — every type, every method that initially looks surprising — is a deliberate, type-enforced
+          separation of these two descriptions. Get this part right, and the rest of the chapter stops being a list
+          of classes to memorize.
+        </p>
+
+        <h3>A. Human Time</h3>
+
+        <h4>Irregularities</h4>
+        <p>The word "month" comes from "moon." Ancient calendars — Babylonian, early Roman — based months on the lunar
+          cycle: the time from one new moon to the next, about 29.5 days. That's not a clean whole number, so there was
+          a rounding problem from the very start: does a month get 29 days or 30, and which months get which? Wanting
+          each month to roughly track one moon cycle forces an alternation — 29, 30, 29, 30 — to average out close to
+          29.53. That's the entire reason ancient lunar calendars had "long months" and "short months" at all, and it's
+          the first hint of something this chapter comes back to repeatedly: human units of time are a human
+          construction, accumulated through astronomy plus roughly two thousand years of political patchwork, not
+          derived from any physical constant.</p>
+
+        <p>Human time has irregular unit lengths by nature:
+        <ul>
+          <li>months differ in
+            length</li>
+          <li>years vary with leap-year rules</li>
+          <li>individual days vary in length around DST transitions.</li>
+        </ul>
+        None of that is accidental sloppiness — it's the direct fingerprint of the whole system being a human
+        construction,
+        accumulated over centuries of astronomical approximation and political decision-making, not derived from any
+        physical constant the way a second is.</p>
+
+        <h4>The same moment, different clocks</h4>
+        <p>The Earth is a rotating sphere, lit by the sun on one side at any given moment. As it rotates, different
+          places face the sun at different angles — some at midday, some at midnight, some catching sunrise, some
+          sunset. That's pure physics, happening continuously, identically, whether or not anyone names it. The sun
+          doesn't "rise" or "set" anywhere in any objective sense — it's always shining; what changes is which part of
+          a rotating sphere happens to be facing it.</p>
+
+        <p>Humans, historically, set their clocks so "noon" meant "the sun is roughly at its highest point, here." A
+          sensible local convention — but it immediately creates a problem: if every town sets its clock to its own
+          local solar noon, no two places more than a few miles apart will ever quite agree on what time it is. For
+          centuries that didn't matter, because nobody needed to coordinate precisely across long distances. Then
+          railways happened — timetables suddenly needed to make sense across hundreds of miles, and "every town has
+          its own time" became unworkable almost overnight.</p>
+
+        <h4>The Context: Where?</h4>
+        <p>Picture watching a live New Year's Eve broadcast at home in London. Glance at your own clock: it reads
+          23:00. But the broadcast cuts to Paris, already celebrating — their clock reads 00:00, a new year already
+          begun. Same physical instant, two different numbers, because London and Paris were never reading the same
+          clock face to begin with. "23:00" and "00:00" are both correct; neither means anything on its own without
+          also knowing <em>where</em> that reading came from — London, or Paris. That's the whole gap in miniature,
+          before scaling it up to four cities at once.</p>
+
+        <p>Picture the same idea from the other direction, the way a television viewers experience New Year's Eve.
+          The broadcast cuts to Sydney's fireworks at "midnight," then hours later to Tokyo's "midnight," then hours
+          after that to London's, and finally to New York's — four different celebrations, four genuinely different
+          physical instants, each one honestly called "midnight" by the city having it. The viewer at home isn't
+          confused by any of this; watching from one living room, on one continuous timeline, they understand
+          perfectly well that each city rang in its new year separately, one after another, not all at once. That's
+          the same label-versus-instant gap, approached from the opposite side: instead of one instant read as four
+          different labels, it's one label — "midnight" — attached to four different instants, because the label was
+          never anything more than a position-relative description to begin with.</p>
+
+        <p>At one single physical instant, four people standing in New York, London, Tokyo, and Sydney each read a
+          different label off their own clock. None of them is wrong. Each is accurately reporting the local
+          relationship between their position and the sun — human time was designed, from the very beginning, to be a
+          position-relative description, not a universal one:</p>
+
+        <div class="instant-flow">
+          <div class="instant-flow-cities">
+            <div class="instant-flow-city">New York</div>
+            <div class="instant-flow-city">London</div>
+            <div class="instant-flow-city">Tokyo</div>
+            <div class="instant-flow-city">Sydney</div>
+          </div>
+
+          <svg class="instant-flow-connector" viewBox="0 0 400 44" preserveAspectRatio="none">
+            <line x1="50" y1="2" x2="198" y2="42"></line>
+            <line x1="150" y1="2" x2="199" y2="42"></line>
+            <line x1="250" y1="2" x2="201" y2="42"></line>
+            <line x1="350" y1="2" x2="202" y2="42"></line>
+          </svg>
+
+          <div class="instant-flow-hub">
+            <div class="instant-flow-label">Instant</div>
+            <div class="instant-flow-value">2026-06-19T02:00:00Z</div>
+          </div>
+
+          <p class="instant-flow-caption">one universal moment, the same for everyone</p>
+
+          <svg class="instant-flow-connector" viewBox="0 0 400 44" preserveAspectRatio="none">
+            <line x1="198" y1="2" x2="50" y2="42"></line>
+            <line x1="199" y1="2" x2="150" y2="42"></line>
+            <line x1="201" y1="2" x2="250" y2="42"></line>
+            <line x1="202" y1="2" x2="350" y2="42"></line>
+          </svg>
+
+          <p class="instant-flow-tier-label"><code>ZonedDateTime</code></p>
+          <div class="instant-flow-row">
+            <div class="instant-flow-card city-ny">
+              <div class="instant-flow-zone">America/New_York</div>
+              <div class="instant-flow-offset">offset -04:00</div>
+            </div>
+            <div class="instant-flow-card city-london">
+              <div class="instant-flow-zone">Europe/London</div>
+              <div class="instant-flow-offset">offset +01:00</div>
+            </div>
+            <div class="instant-flow-card city-tokyo">
+              <div class="instant-flow-zone">Asia/Tokyo</div>
+              <div class="instant-flow-offset">offset +09:00</div>
+            </div>
+            <div class="instant-flow-card city-sydney">
+              <div class="instant-flow-zone">Australia/Sydney</div>
+              <div class="instant-flow-offset">offset +10:00</div>
+            </div>
+          </div>
+
+          <p class="instant-flow-caption">contrast — what's left once the zone is stripped away</p>
+
+          <svg class="instant-flow-connector" style="height: 26px;" viewBox="0 0 400 26" preserveAspectRatio="none">
+            <line x1="50" y1="0" x2="50" y2="24"></line>
+            <line x1="150" y1="0" x2="150" y2="24"></line>
+            <line x1="250" y1="0" x2="250" y2="24"></line>
+            <line x1="350" y1="0" x2="350" y2="24"></line>
+          </svg>
+
+          <p class="instant-flow-tier-label"><code>LocalDateTime</code></p>
+          <div class="instant-flow-row">
+            <div class="instant-flow-card city-ny">
+              <div class="instant-flow-local">📅 Jun 18, 22:00</div>
+            </div>
+            <div class="instant-flow-card city-london">
+              <div class="instant-flow-local">📅 Jun 19, 03:00</div>
+            </div>
+            <div class="instant-flow-card city-tokyo">
+              <div class="instant-flow-local">📅 Jun 19, 11:00</div>
+            </div>
+            <div class="instant-flow-card city-sydney">
+              <div class="instant-flow-local">📅 Jun 19, 12:00</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout callout-mem">
+          <div class="callout-lbl">One moment, four labels</div>
+          <p>The same physical instant, read from four cities, collapses into one shared <code>Instant</code> — the
+            identical underlying moment — and then fans back out into four different local readings, one per city,
+            because each city's <span class="term">zone</span> translates that one instant through its own local
+            clock. New York reads it as an evening the day before; London reads it mid-morning; Tokyo and Sydney read
+            it well into the next day. Nobody's reading is wrong — they're each accurately answering "what time is it
+            <em>here</em>," and the differences between the four answers — different hours, sometimes different
+            calendar dates entirely — are purely a function of which zone did the translating.
+          </p>
+        </div>
+
+
+
+        <h4>What a Time Zone Actually Consists Of</h4>
+
+        <div class="callout callout-rule">
+          <div class="callout-lbl">What is UTC?</div>
+
+          Although UTC is often used like a time zone, it is better thought of as a global time reference, based on
+          International Atomic Time (TAI). This identifies one specific moment.
+          UTC never changes for daylight saving; it's
+          the fixed reference every zone's
+          offset is measured against, including the zones that shift twice a year. Everywhere in the world can convert
+          that moment into local time. In Java, an <code>Instant</code>
+          represents
+          such a
+          universal moment, independent of time zones. To display it to a user, Java
+          converts the Instant into a local date and time using a time zone, producing a <code>ZonedDateTime</code>.
+
+        </div>
+        <p>A time zone isn't a single number. It's two layers stacked together:</p>
+
+        <ol>
+          <li>A <strong>base offset from UTC</strong> — the amount of time a region's clock differs from Coordinated
+            Universal Time. New York is typically UTC-5; Tokyo is UTC+9; India, unusually, is UTC+5:30 — a half-hour
+            offset, a quirk of splitting the difference between neighboring zones rather than adopting a whole-hour
+            one.</li>
+          <li><strong>Daylight Saving Time rules</strong>, where they apply — many regions shift their clocks forward
+            an hour for part of the year, to align more daylight with typical waking hours, then shift back. The same
+            time zone can carry two different offsets depending on the time of year.</li>
+        </ol>
+
+        <table class="content-table">
+          <tr>
+            <th>City</th>
+            <th>Local time</th>
+            <th>Offset</th>
+            <th>UTC</th>
+          </tr>
+          <tr>
+            <td>Istanbul</td>
+            <td>03:05</td>
+            <td>+3</td>
+            <td>00:05</td>
+          </tr>
+          <tr>
+            <td>London</td>
+            <td>01:05</td>
+            <td>+1 (BST)</td>
+            <td>00:05</td>
+          </tr>
+          <tr>
+            <td>Washington</td>
+            <td>20:05</td>
+            <td>-4</td>
+            <td>00:05</td>
+          </tr>
+        </table>
+
+        <p>Local time is always UTC plus that city's current offset. <span class="term">GMT</span> (Greenwich Mean
+          Time) is the time zone historically used as the offset's zero point, and is still the name commonly used for
+          the UK's own zone in winter — <span class="term">British Summer Time</span> (BST), UTC+1, is what the UK
+          actually observes for part of the year, which is exactly why a London timestamp can read either
+          <code>+00:00</code> or <code>+01:00</code> depending on the date.
+        </p>
+
+
+
+
+
+        <div class="callout callout-rule">
+          <div class="callout-lbl">The one fact this whole section rests on</div>
+          <p>In order to become a specific, unambiguous point in physical reality, a human-time reading needs one more
+            piece of information: which time zone's grid it's being read against. Without that, "2026-06-19T02:00" is
+            only ever a label, never a moment — §24.3 and §24.4 build directly on that gap.</p>
+        </div>
+
+        <h3>B. Machine Time</h3>
+
+        <p>None of those four clocks knows anything about <code>Instant</code> — each is just a local mechanism
+          showing a local label. But underlying all four readings is the one physical moment they're each describing,
+          and <code>Instant</code> is Java's representation of exactly that: one flat, continuous count of elapsed
+          physical time from a single fixed reference point. No labels, no calendar, no time zone, no daylight saving —
+          just a number that increases continuously and means the same thing to everyone, everywhere, at a given
+          physical instant.</p>
+
+        <p>Human time answers "what does a person, standing somewhere specific, call this moment?" Machine time
+          answers "what physical moment is this, independent of anyone's location or convention?" Machine time isn't
+          <em>converted from</em> human time — it comes first. It's not a translation of "your local time into a
+          universal one"; it's the raw, unlabeled physical progression that every human-time reading is itself a
+          location-relative label <em>for</em>.
+        </p>
+
+        <h3>Comparing Across Systems</h3>
+
+        <p>Say a system in London and another one in Istanbul each log the current moment, at the exact same
+          physical instant:</p>
+
+        <table class="content-table">
+          <tr>
+            <th></th>
+            <th><code>Instant.now()</code></th>
+            <th><code>LocalDateTime.now()</code></th>
+          </tr>
+          <tr>
+            <td>London</td>
+            <td><code>2026-04-24T14:00:00Z</code></td>
+            <td><code>2026-04-24T15:00:00</code></td>
+          </tr>
+          <tr>
+            <td>Istanbul</td>
+            <td><code>2026-04-24T14:00:00Z</code></td>
+            <td><code>2026-04-24T17:00:00</code></td>
+          </tr>
+          <tr>
+            <td>Meaning</td>
+            <td>Both read the same raw epoch counter (§24.4) — identical values, comparable and sortable across systems.
+            </td>
+            <td>Each consults its own local zone — two different labels for the same instant.</td>
+          </tr>
+        </table>
+
+        <p>Anyone scanning the two <code>LocalDateTime</code> lines would reasonably assume two distinct events, two
+          hours apart. They're not — they're the exact same moment, wearing two different local labels. A naive
+          comparison would conclude "London happened before Istanbul," which is simply false: neither is before the
+          other, because they're not two moments at all.</p>
+
+        <div class="callout callout-rule">
+          <div class="callout-lbl">Never compare timestamps across systems using <code>LocalDateTime</code></div>
+          <p>Comparing, sorting, or correlating <code>LocalDateTime</code> values that originated on systems in
+            different zones can give a false reading — this isn't a hypothetical edge case, it's the default outcome
+            whenever those systems don't happen to share a zone. <code>Instant</code> values are always safe to
+            compare, sort, and correlate across systems, for the reason the table above shows directly: they're
+            reading the same underlying counter, not a zone-dependent label built on top of it. UTC is just the
+            rendering choice for an <code>Instant</code> when it's printed — it is not evidence that an
+            <code>Instant</code> is somehow zone-aware.
+          </p>
+        </div>
+
+        <p>Even the boundaries of something as basic as "a day" shift with location. Tokyo's June 19th and New York's
+          June 19th are different, overlapping 24-hour stretches of the same universal timeline — not the same
+          stretch, just described identically.</p>
+
+      </section>
+
+      <!-- §24.3 -->
+      <section id="s24-3">
+        <div class="section-head">
+          <span class="sec-num">§24.3</span>
+          <h2>The Core "Local" Types <em>— <code>LocalDate</code>, <code>LocalTime</code>,
+              <code>LocalDateTime</code></em></h2>
+        </div>
+
+        <p>Imagine walking to your local bakery. A sign on the door says, "Open daily from 09:00." You wouldn't stop and
+          wonder, "Is
+          that 09:00 UTC?" Of course not. You'd naturally read it as 09:00 in your local time. Some dates and times are
+          simply tied to a particular place rather than a global moment.
+        </p>
+
+
+        <p>These three core types are the foundation of human time in <code>java.time</code>.</p>
+
+        <pre><code class="language-plaintext">LocalDate   ─┐
+             ├─► LocalDateTime  (combination)
+LocalTime   ─┘</code></pre>
+
+        <p>None of these three types has any concept of time zone whatsoever. <code>LocalDate.now()</code>, for
+          example, silently uses the JVM's default system time zone just to compute the current wall-clock reading —
+          then discards that zone information entirely from the resulting object.</p>
+
+        <h3>The <code>Temporal</code> Interface</h3>
+
+        <p><code>LocalDate</code>, <code>LocalTime</code>, and <code>LocalDateTime</code> each implement
+          <code>Temporal</code> — the framework-level interface (§13) that's the actual contract making
+          <code>plus(...)</code>, <code>minus(...)</code>, <code>with(...)</code>, and
+          <code>isSupported(...)</code> available on all three, consistently:
+        </p>
+
+        <pre><code class="language-java">LocalDate.of(2026, 6, 19) instanceof Temporal; // true
+LocalTime.of(14, 30)      instanceof Temporal; // true
+LocalDateTime.now()       instanceof Temporal; // true</code></pre>
+
+        <p>Every <code>java.time</code> type is immutable (§24.1), so "read-write" in <code>Temporal</code>'s own
+          documentation isn't describing mutation — it can't be. What "write" means here is the ability to produce a
+          <em>new</em> instance representing a different point in time:
+        </p>
+
+        <pre><code class="language-java">Temporal date = LocalDate.of(2026, 6, 19);
+Temporal next = date.plus(Period.ofDays(7)); // a new Temporal, 2026-06-26</code></pre>
+
+        <p><code>Temporal</code> is rarely used directly in everyday application code — most code just declares a
+          <code>LocalDate</code> and calls its own methods. It matters for a different reason: it's the interface
+          letting polymorphic code (§9.5) shift <em>any</em> <code>Temporal</code> forward or backward without knowing
+          its concrete type in advance, and it's why <code>date.plus(1, ChronoUnit.YEARS)</code> and
+          <code>date.plusYears(1)</code> both compile and do the same thing — the first goes through
+          <code>Temporal</code>'s general-purpose method, the second through a type-specific one declared directly on
+          <code>LocalDate</code> that exists purely to be more readable for something extremely common. The generic
+          interface has to stay broad enough to serve every implementing type; the concrete class is free to narrow
+          that surface down to only the operations that are always valid for it specifically.
+        </p>
+
+        <h3><code>LocalDate</code></h3>
+        <p>A calendar date — year, month, day — with no time and no time zone. A birthday is a good mental model: it's
+          your birthday for a full day, regardless of what time it happens to be.</p>
+
+        <pre><code class="language-java">LocalDate birthday = LocalDate.of(1999, 12, 31);</code></pre>
+
+        <p>It's simply "Dec 31, 1999" — the concept of a birthday doesn't need a time zone at all; it represents only
+          a calendar date. A <code>LocalDate</code> is almost never used in total isolation, though: it's interpreted
+          within whatever context it shows up in — a user's location, a store's location, a business region — and
+          that surrounding context is what supplies a time zone, on the rare occasion one is actually needed.</p>
+
+        <h4>static factory methods</h4>
+        <p>So far, every object in this tutorial has come from the same pattern:</p>
+
+        <pre><code class="language-java">Person person = new Person("Alice");</code></pre>
+
+        <p>or:</p>
+
+        <pre><code class="language-java">Book book = new Book("Effective Java");</code></pre>
+
+        <p>Both use the <code>new</code> keyword to call a constructor. Then this shows up:</p>
+
+        <pre><code class="language-java">LocalDate date = LocalDate.of(2026, 7, 1);</code></pre>
+
+        <p>Something is different. There's no <code>new</code>. At first glance this looks strange — if
+          <code>LocalDate</code> is a class, why aren't we writing <code>new LocalDate(...)</code>? The answer:
+          instead of exposing a public constructor, <code>LocalDate</code> provides <span class="term">static factory
+            methods</span> that create instances for us.
+        </p>
+
+        <p>A static factory method is simply a <code>static</code> method (§4.1) whose job is to create and return an
+          object. <code>LocalDate.of(2026, 7, 1)</code> calls the static method <code>LocalDate.of(...)</code>, which
+          creates a <code>LocalDate</code> instance and returns it. From the caller's perspective, a new object still
+          comes back either way — the only thing that's changed is who's doing the creating: not <code>new</code>,
+          directly, but a method standing in for it.</p>
+
+        <p>Constructors are still an
+          important way to create objects, and you'll use them when designing your own classes. Some
+          library classes, however, choose to hide their constructors and offer static factory methods instead. This
+          gives the API designers more flexibility and often makes the code easier to read. <code>java.time</code> leans
+          on this pattern everywhere, and not by accident.
+        </p>
+
+        <pre><code class="language-java">LocalDate d1     = LocalDate.of(2026, 6, 18);
+LocalDate d2     = LocalDate.of(2026, Month.JUNE, 18); // Month enum overload — more readable
+LocalDate today  = LocalDate.now();                    // system clock + default time zone
+LocalDate parsed = LocalDate.parse("2026-06-18");      // ISO-8601 by default</code></pre>
+
+        <p><code>LocalDate.of(...)</code> does nothing hidden: it validates the inputs — year in a sane range, month
+          1–12, day valid for that month, including checking February 29th against leap-year rules — then constructs a
+          plain object with three fields set directly. No system clock call, no zone lookup, about as close to a pure
+          data constructor as the JDK has.</p>
+
+        <p><code>LocalDate.now()</code> is a different story, because "what's today's date?" isn't a universal fact —
+          it depends on where in the world it's asked from. It reads the same raw epoch counter
+          <code>Instant.now()</code>
+          does, looks up the JVM's default time zone, converts that counter into a wall-clock date using that zone's
+          rules, and keeps only the result — year, month, day. The zone used to do the conversion is discarded, not
+          stored anywhere in the returned object.
+        </p>
+
+        <pre><code class="language-java">// Reading components
+System.out.println(d1.getYear());       // 2026
+System.out.println(d1.getMonth());      // JUNE (an enum, not an int)
+System.out.println(d1.getMonthValue()); // 6 (the int, if needed)
+System.out.println(d1.getDayOfWeek());  // THURSDAY
+System.out.println(d1.getDayOfMonth()); // 18
+System.out.println(d1.getDayOfYear());  // 169
+System.out.println(d1.lengthOfMonth()); // 30
+System.out.println(d1.isLeapYear());    // false
+
+// Arithmetic — every call returns a NEW LocalDate
+LocalDate next1     = d1.plus(Period.ofDays(1));
+LocalDate next2     = d1.plusDays(1);
+LocalDate prevMonth = d1.minusMonths(1);
+
+// Comparison
+System.out.println(d1.isBefore(next1)); // true
+System.out.println(d1.isEqual(d2));     // true
+
+// "With" — a new LocalDate with exactly one field changed
+LocalDate firstOfMonth = d1.withDayOfMonth(1); // 2026-06-01</code></pre>
+
+        <p>That validation is real, not decorative: <code>LocalDate.of(2023, Month.OCTOBER, 40)</code> compiles fine and
+          throws
+          <code>DateTimeException</code> at runtime, and so does
+          <code>LocalDate.of(2023, Month.FEBRUARY, 1).withDayOfMonth(31)</code> — February never has a 31st, and
+          neither the compiler nor the method's own signature can catch that; only the runtime check can.
+        </p>
+
+        <h3><code>LocalTime</code></h3>
+
+        <p>A time of day — hour, minute, second, nanosecond — with no date and no time zone. Midnight is a good mental
+          model: it's midnight at the same time every day, regardless of which day.</p>
+
+        <pre><code class="language-java">LocalTime t1  = LocalTime.of(14, 30);             // seconds default to 0
+LocalTime t2  = LocalTime.of(14, 30, 45);
+LocalTime now = LocalTime.now();
+
+System.out.println(LocalTime.MIDNIGHT); // 00:00
+System.out.println(LocalTime.NOON);     // 12:00
+System.out.println(LocalTime.MAX);      // 23:59:59.999999999
+
+System.out.println(t1.getHour());   // 14
+System.out.println(t1.getMinute()); // 30
+
+// Arithmetic wraps around midnight — there's no date to carry the overflow into
+LocalTime wrapped = LocalTime.of(23, 0).plusHours(3);
+System.out.println(wrapped); // 02:00</code></pre>
+
+        <h3><code>LocalDateTime</code></h3>
+
+        <p>A <code>LocalDate</code> and a <code>LocalTime</code> combined — still no time zone. "The stroke of midnight
+          on New Year's Eve" is a good mental model: a specific calendar date and a specific wall-clock time, together,
+          but still ambiguous about whose wall clock.</p>
+
+        <pre><code class="language-java">LocalDateTime dt1 = LocalDateTime.of(2026, 6, 18, 14, 30);
+LocalDateTime dt2 = LocalDateTime.of(LocalDate.of(2026, 6, 18), LocalTime.of(14, 30));
+LocalDateTime dt3 = LocalDate.of(2026, 6, 18).atTime(14, 30); // LocalDate -> LocalDateTime
+LocalDateTime dt4 = LocalDate.of(2026, 6, 18).atStartOfDay(); // shortcut for atTime(0, 0)
+
+// Decomposing back into parts
+LocalDate datePart = dt1.toLocalDate();
+LocalTime timePart = dt1.toLocalTime();
+
+// Every method from both LocalDate and LocalTime is available directly
+System.out.println(dt1.getYear());   // 2026
+System.out.println(dt1.getHour());   // 14
+System.out.println(dt1.plusDays(1)); // calendar-aware date arithmetic</code></pre>
+
+        <p><code>LocalDateTime</code> is still a label, not a moment — "2026-06-18T14:30" doesn't correspond to one
+          specific real-world instant on its own. Attaching a zone is what finally resolves that ambiguity, through
+          <code>atZone(...)</code>:
+        </p>
+
+        <pre><code class="language-java">LocalDateTime ldt = LocalDateTime.of(2026, 6, 18, 14, 30);
+System.out.println(ldt); // 2026-06-18T14:30 — ambiguous
+
+ZonedDateTime zdt = ldt.atZone(ZoneId.of("Europe/Istanbul"));
+System.out.println(zdt); // 2026-06-18T14:30+03:00[Europe/Istanbul] — unambiguous</code></pre>
+
+        <p><code>ZonedDateTime</code> and time-zone handling in full are covered in §24.5 — the point worth taking now
+          is simply that <code>atZone(...)</code> is the moment a label becomes a resolved, unambiguous instant, and
+          that every <code>LocalDateTime</code> is that label, waiting to be resolved.</p>
+      </section>
+
+      <!-- §24.4 -->
+      <section id="s24-4">
+        <div class="section-head">
+          <span class="sec-num">§24.4</span>
+          <h2><code>Instant</code> <em>— machine time, done properly</em></h2>
+        </div>
+
+        <p><code>Instant</code> is what <code>Date</code> was always meant to be: a single, fixed point on the
+          timeline, with no time zone attached and no ambiguity about which moment it means — the type §24.2 already
+          introduced conceptually, now with its actual API.</p>
+
+        <pre><code class="language-java">Instant now      = Instant.now();
+Instant deadline = Instant.parse("2026-07-01T00:00:00Z");
+
+boolean isPast = now.isAfter(deadline);</code></pre>
+
+        <p>Two instants are either before, after, or equal to each other — full stop, no reader's time zone involved.
+          That's precisely what made it the right choice for §26's <code>ValidityPeriod</code>: "the discount is
+          active from 00:00 UTC on July 1" is a statement about one specific instant, true or false the same way for
+          every shopper everywhere, regardless of their own zone.</p>
+
+        <div class="callout callout-conn">
+          <div class="callout-lbl">The type depends on the business meaning <a href="oodesign.html#s19-3"
+              class="backref">← §26.3</a></div>
+          <p>§26's <code>ValidityPeriod</code> case study makes the point this chapter can only set up: choosing
+            <code>Instant</code> over <code>LocalDate</code> isn't a rule that applies everywhere. A single, physical
+            store announcing "our sale starts when we open on July 1" genuinely means a <code>LocalDate</code> — the
+            store has one time zone, and that date, read in the store's own zone, is the entire meaning. Global,
+            zone-independent business rules call for <code>Instant</code>; local, single-zone ones can call for
+            <code>LocalDate</code> instead. The type is a modeling decision, not a default.
+          </p>
+        </div>
+
+        <h3>The Epoch</h3>
+
+        <p>Every <code>Instant</code> is really just "however many seconds have elapsed since a fixed reference point,
+          plus nanoseconds." That reference point is called the <span class="term">epoch</span>:
+          <code>1970-01-01T00:00:00Z</code>. Negative values represent moments before it.
+        </p>
+
+        <pre><code class="language-java">System.out.println(Instant.EPOCH);                  // 1970-01-01T00:00:00Z
+System.out.println(Instant.EPOCH.getEpochSecond());  // 0
+
+Instant now = Instant.now();
+System.out.println(now.getEpochSecond()); // a large positive number
+System.out.println(now.getNano());        // 0 to 999,999,999 — the sub-second part</code></pre>
+
+        <p>January 1st, 1970 has no special physical significance — it's a historical engineering choice, not a law of
+          physics. Unix was developed at Bell Labs starting around 1969, its designers needed some reference point to
+          count time from, and 1970-01-01 was a clean, round, recent date at the time. <code>java.time</code>'s
+          <code>Instant</code> deliberately reuses this exact same reference point — often called "Unix time" or
+          "POSIX time" — specifically so it interoperates cleanly with the vast amount of existing infrastructure that
+          already counts from the same zero.
+        </p>
+
+        <p>The <code>Z</code> in <code>1970-01-01T00:00:00Z</code> is ISO-8601 shorthand for "zero UTC offset,"
+          literally interchangeable with writing <code>+00:00</code>. It's also read aloud as "Zulu time" — military
+          and aviation phonetic-alphabet terminology for the letter Z, adopted because pilots, air traffic control, and
+          ground crews are routinely spread across several time zones at once, and a flight plan time of "14:00" means
+          nothing safe unless everyone agrees on whose 14:00. Aviation solved that by having everyone defer to one
+          shared reference clock and calling it Zulu — a human-coordination problem, solved by humans agreeing to a
+          shared standard, arrived at independently and decades before <code>java.time</code> existed, for the same
+          underlying reason.</p>
+
+        <div class="callout callout-mem">
+          <div class="callout-lbl">The epoch never happened in New York</div>
+          <p><code>Instant.EPOCH</code> does not map to one single <code>LocalDate</code> — converting an
+            <code>Instant</code> to a human date always requires a time zone (§24.2), and different zones produce
+            different dates for the same instant. The single most famous "moment" in computing — the very thing every
+            long timestamp in every system is measured from — never actually happened on January 1st in New York at
+            all. Anyone there at that instant was experiencing 7:00 PM on December 31st, 1969, five hours of New
+            Year's Eve still to go:
+          </p>
+          <table class="content-table">
+            <tr>
+              <th>New York</th>
+              <th>UTC</th>
+              <th>Tokyo</th>
+            </tr>
+            <tr>
+              <td>1969-12-31T19:00 (the night before)</td>
+              <td>1970-01-01T00:00 (midnight)</td>
+              <td>1970-01-01T09:00 (the "expected" date)</td>
+            </tr>
+          </table>
+          <p>This is exactly why <code>Instant</code> has no <code>getYear()</code>: a raw elapsed-seconds count has no
+            calendar concept until a time zone is attached to it. "What year is it" is a more fragile question than it
+            feels like day to day — the same <code>Instant</code> is simultaneously 2025 in New York and 2026 in
+            Tokyo, at the identical physical moment, with someone in each city correctly reporting a different year.</p>
+        </div>
+
+        <p>Each type in this chapter only stores the fields its own domain has meaning for — <code>LocalDate</code>
+          holds year, month, day; <code>LocalTime</code> holds hour, minute, second, nanosecond;
+          <code>LocalDateTime</code> holds all of it, still with no zone; <code>Instant</code> holds only seconds and
+          nanoseconds since the epoch, zone-free by construction, exactly because machine time and human time (§24.2)
+          are different questions with different answers.
+        </p>
+
+        <p>Converting between <code>Instant</code> and a human-readable date or time requires a time zone, explicitly —
+          Java represents one as a <code>ZoneId</code>, and §24.5 covers the full mechanics of that conversion. The
+          point worth taking now is simply that the conversion is never implicit, the way <code>Date</code>'s used to
+          be.</p>
+      </section>
+
+      <!-- §24.5 -->
+      <section id="s24-5">
+        <div class="section-head">
+          <span class="sec-num">§24.5</span>
+          <h2>Timezones <em>— <code>ZoneId</code>, <code>ZoneOffset</code>, <code>ZonedDateTime</code></em></h2>
+        </div>
+        <p>§24.2 and §24.3 left one thread hanging: <code>atZone(...)</code> resolves a <code>LocalDateTime</code>'s
+          ambiguity, but attaching what, exactly? "Time zone" turns out to mean three things bundled together, not
+          one — a <em>region</em>, an <em>offset</em>, and a set of <em>changing rules</em> tying the two together.
+          Once those three ideas are separated out, the Java classes built around them stop looking like an
+          arbitrary pile of names.
+        </p>
+
+        <h4>A time zone as a region</h4>
+
+        <p>Let's start with something already familiar: when someone says "London" or "Tokyo," they're describing a
+          place on Earth. Java represents exactly that:</p>
+
+        <pre><code class="language-java">ZoneId london = ZoneId.of("Europe/London");</code></pre>
+
+        <p><code>ZoneId</code> identifies a geographical region — <code>Europe/London</code>,
+          <code>Europe/Paris</code>, <code>America/New_York</code>, <code>Asia/Tokyo</code>. Notice what all four have
+          in common: they're places, not numbers.
+        </p>
+
+        <h4>Offsets are numbers</h4>
+
+        <p>If London is a region, how does Java know what time it actually is there? Because every zone currently
+          has an offset from UTC — at 12:00 UTC, Tokyo (UTC+09:00) reads 21:00, and New York (UTC-04:00) reads 08:00.
+          The offset says how much to add or subtract. Java represents that separately:</p>
+
+        <pre><code class="language-java">ZoneOffset offset = ZoneOffset.of("+09:00");</code></pre>
+
+        <p>A <code>ZoneOffset</code> is simply a number. It contains no geography at all — nothing in
+          <code>+09:00</code> says "Tokyo," it only says "nine hours ahead of UTC."
+        </p>
+
+        <h4>Daylight Saving Time</h4>
+
+        <p>Is London always <code>UTC+00:00</code>? <strong>No.</strong>
+          <br>Imagine:
+        <ul>
+          <li> visiting London in January. Phone settings show:
+
+            <code class="language-plaintext">London UTC+00:00</code>
+          </li>
+          <li>Visiting again in July, without changing a single setting, now it shows:
+
+            <code class="language-plaintext">London UTC+01:00</code>
+          </li>
+        </ul>
+
+
+
+
+        </p>
+
+        <p>What changed? Not London — The city didn't move, but the rules for interpreting its local time changed. </p>
+        <p>Some
+          countries choose to move their
+          clocks by one hour during part of the year. This practice is <span class="term">Daylight Saving
+            Time</span> (DST). Once that's
+          in view, everything clicks: a <code>ZoneId</code> isn't valuable because it stores an offset. It's valuable
+          because it stores the <em>rules</em>. Java already knows that <code>Europe/London</code> means
+          <code>UTC+00:00</code> in January and <code>UTC+01:00</code> in July — the same fact demonstrated directly:
+        </p>
+
+        <pre><code class="language-java">ZoneId nyZone = ZoneId.of("America/New_York");
+
+ZonedDateTime winterInNY = ZonedDateTime.of(2026, 1, 15, 12, 0, 0, 0, nyZone);
+ZonedDateTime summerInNY = ZonedDateTime.of(2026, 7, 15, 12, 0, 0, 0, nyZone);
+
+System.out.println(winterInNY.getOffset()); // -05:00 (Eastern Standard Time)
+System.out.println(summerInNY.getOffset()); // -04:00 (Eastern Daylight Time)</code></pre>
+
+        <p>The programmer never has to look any of that up by hand — <code>ZoneId</code> already carries the rules,
+          for every date, past and future, that region has ever observed. The chain of authority behind that one
+          <code>getOffset()</code> call is worth stating plainly:
+        </p>
+
+        <pre><code class="language-plaintext">ZoneId
+  ↓ determines
+ZoneOffset
+  ↓ which determines
+the local clock</code></pre>
+
+        <p>A region alone doesn't tell you the time; a region plus a date tells Java which rule applies, and that
+          rule is what produces a specific offset — only then does the local clock reading follow. Skip straight to
+          an offset, the way <code>ZoneOffset</code> alone does, and that whole chain above it — the region, the
+          rules, the reason it's <em>this</em> offset today rather than some other one — is gone, on purpose.</p>
+
+        <h4>Whose Clock Are We Looking At?</h4>
+        <p>Here's where the friction actually shows up. Imagine living in London and planning a trip to New York.
+          The outbound ticket says:</p>
+
+        <pre><code class="language-plaintext">Departure: July 1, 09:00</code></pre>
+
+        <p>No hesitation there — leaving from London, "09:00" is obviously 09:00 in London. A week later, the return
+          ticket says:</p>
+
+        <pre><code class="language-plaintext">Departure: July 8, 11:00</code></pre>
+
+        <p>Now there's real hesitation. Is that 11:00 in London, because that's where the ticket was booked? Or 11:00
+          in New York, because that's where the flight actually departs from? It has to be New York — otherwise
+          there'd be no way to know when to actually arrive at the airport. The departure time was never just a date
+          and a time; it was always tied to a particular place too, and "09:00" only felt unambiguous on the outbound
+          leg because that place happened to match where the reader already was. Once the time zone is included
+          explicitly, the ambiguity disappears entirely:</p>
+
+        <pre><code class="language-plaintext">July 8, 11:00 America/New_York</code></pre>
+
+        <p>A <code>ZonedDateTime</code> represents exactly this idea: a date and time that belong to a specific time
+          zone. It's the full picture — date, time, and a <code>ZoneId</code>'s complete rule set, together — and
+          it's the type that actually resolves the ambiguity every plain <code>LocalDateTime</code> carries:
+        </p>
+
+        <pre><code class="language-java">ZonedDateTime zdt = ZonedDateTime.of(2026, 6, 18, 14, 30, 0, 0, ZoneId.of("America/New_York"));
+
+System.out.println(zdt);               // 2026-06-18T14:30-04:00[America/New_York]
+System.out.println(zdt.toLocalDate()); // 2026-06-18 — decomposable back into its parts
+System.out.println(zdt.getOffset());   // -04:00
+System.out.println(zdt.getZone());     // America/New_York</code></pre>
+
+        <p>So why not just use <code>Instant</code> everywhere, given §24.4 spent a whole section making the case for
+          it? Because humans rarely think in instants. Suppose someone hands you this:</p>
+
+        <pre><code class="language-plaintext">2026-07-01T08:00:00Z</code></pre>
+
+        <p>Can you tell whether that's morning? Lunchtime? Tomorrow, from where you're sitting? Probably not — not
+          without doing the zone math yourself first. But this:</p>
+
+        <pre><code class="language-plaintext">July 1
+09:00
+Europe/London</code></pre>
+
+        <p>immediately makes sense. That's exactly why calendars, airline tickets, meeting invitations, and TV
+          schedules all use local date and time paired with a zone, never a bare UTC timestamp — a
+          <code>ZonedDateTime</code> is precise <em>and</em> readable at the same time, which is precisely the
+          combination a raw <code>Instant</code> can't offer a person reading it directly.
+        </p>
+
+        <div class="callout callout-rule">
+          <div class="callout-lbl">Pattern 1 — "Store UTC, display local"</div>
+          <p>The single most important architectural rule from this whole chapter. Never store
+            <code>LocalDateTime</code> for "when did this happen" — it has no zone, so it can't be compared safely
+            against another timestamp from elsewhere, exactly as the New York/Tokyo wall-clock example (§24.2)
+            demonstrated.
+          </p>
+          <pre><code class="language-java">// Storage / domain layer
+Instant eventOccurredAt = Instant.now(); // the one true moment
+
+// Display layer - convert only at the edge, per viewer
+ZoneId viewerZone = ZoneId.of("Europe/London"); // wherever THIS specific viewer is
+
+ZonedDateTime forDisplay = eventOccurredAt.atZone(viewerZone);
+
+String text = forDisplay.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
+               .withLocale(Locale.UK));</code></pre>
+          <p>Everything upstream of display — storage, comparison, sorting, business logic — stays in
+            <code>Instant</code>. Only the last step, rendering something for a specific person to read, ever needs to
+            know a zone at all — that last <code>.format(...)</code> call is a preview of §24.7, which covers
+            <code>DateTimeFormatter</code> properly.
+          </p>
+        </div>
+
+        <p><code>OffsetDateTime</code> sits between the two: date, time, and a fixed <code>ZoneOffset</code>, but
+          without a full <code>ZoneId</code> rule set attached. It's the right choice when a fixed offset is all that's
+          needed — many database columns and wire formats store exactly this — without committing to a named region's
+          entire DST history.</p>
+      </section>
+      <!-- §24.6 -->
+      <section id="s24-6">
+        <div class="section-head">
+          <span class="sec-num">§24.6</span>
+          <h2><code>Duration</code> and <code>Period</code> <em>— an amount of time, not a point in time</em></h2>
+        </div>
+
+        <p>A point in time (<code>LocalDate</code>, §24.3; <code>Instant</code>, §24.4; etc.) tells you where you are
+          on a timeline. But often you need to express a <em>quantity</em> — "3 days," "1 month," "2 hours" — either
+          to add to a point in time, or to describe a gap between two points. <code>java.time</code> splits this
+          concept the same way it splits points in time: one type for the human/calendar domain, one type for the
+          machine/physical domain.</p>
+
+        <p>Both <code>Duration</code> and <code>Period</code> implement a shared interface,
+          <code>TemporalAmount</code>, which is precisely why <code>LocalDate.plus(...)</code> compiles for either
+          one — but which one to reach for depends on what kind of "how much" is actually meant, and the two are not
+          interchangeable.
+        </p>
+
+        <p><code>Period</code> counts in calendar terms — years, months, days — because calendar units don't have a
+          fixed length; a month is sometimes 28 days, sometimes 31. There are several ways to build one, all reading
+          naturally as "every ... ":</p>
+
+        <pre><code class="language-java">Period p = Period.ofMonths(3); //  just builds a plain data holder</code></pre>
+
+        <div class="callout callout-mem">
+          <div class="callout-lbl">The Internal Storage</div>
+
+          <p>This doesn't do any math at all. It just creates an object with three fields:</p>
+          <ul>
+            <li>years: 0</li>
+            <li>months: 3</li>
+            <li>days: 0</li>
+          </ul>
+        </div>
+
+        <pre><code class="language-java">Period everyYearAndAWeek = Period.of(1, 0, 7); // every year and 7 days
+
+Period annually        = Period.ofYears(1);   // every 1 year
+Period quarterly       = Period.ofMonths(3);  // every 3 months
+Period everyThreeWeeks = Period.ofWeeks(-3);  // every 3 weeks going backwards
+Period everyOtherDay   = Period.ofDays(2);    // every 2 days
+
+System.out.println(quarterly);         // P3M
+System.out.println(everyYearAndAWeek); // P1Y7D</code></pre>
+
+
+
+        <p>Java's own <code>toString()</code> for a <code>Period</code> omits any field that's zero — <code>P3M</code>
+          has no "0Y0D" cluttering it, and a <code>Period</code> can run backward in time just as easily as forward,
+          the way <code>everyThreeWeeks</code> above does. <code>Period</code> has no <code>getSeconds()</code> at
+          all, though, and that omission is deliberate: <code>period.getDays()</code> can't know how many real days
+          "9 months" represents, because months don't have one:
+        </p>
+
+        <pre><code class="language-java">LocalDate start = LocalDate.of(2026, 1, 1);
+LocalDate end   = LocalDate.of(2026, 6, 18);
+
+Period between = Period.between(start, end);
+System.out.println(between.getMonths()); // 5
+System.out.println(between.getDays());   // 17</code></pre>
+
+        <div class="callout callout-conn">
+          <div class="callout-lbl">Example: How Java's Period Defines a "Full Month"</div>
+
+          <p><strong>The "Anchor Day" Logic</strong><br>
+            Java takes the <code>dayOfMonth</code> from your start date and uses it as an anchor.
+            What actually happens when the "month parameter" advances and clamping applied:
+          </p>
+          <p>⚠️ A month is only considered "full" when the timeline reaches that same day number in a subsequent
+            month.
+            <code>plusMonths(N)</code> does roughly this:
+
+          <ol>
+            <li>Compute the new month number (and roll the year if it overflows past 12)</li>
+            <li>If originalDay doesn't exist in newMonth (e.g. 31 in February) -&gt; clamp: use newMonth's actual last
+              valid day instead</li>
+            <li>Return the resulting <code>LocalDate</code></li>
+          </ol>
+          </p>
+
+
+          <table class="content-table">
+            <tr>
+              <th>Start</th>
+              <th></th>
+              <th></th>
+              <th>Result</th>
+            </tr>
+            <tr>
+              <td>Jan 1</td>
+              <td><code>plus()</code></td>
+              <td><code>Period.ofMonths(1)</code></td>
+              <td>Feb 1</td>
+            </tr>
+            <tr>
+              <td>Jan 31</td>
+              <td><code>plus()</code></td>
+              <td><code>Period.ofMonths(1)</code></td>
+              <td>Feb 28</td>
+            </tr>
+            <tr>
+              <td>Feb 28</td>
+              <td><code>plus()</code></td>
+              <td><code>Period.ofMonths(1)</code></td>
+              <td>Mar 28</td>
+            </tr>
+          </table>
+          <div class="month-timeline">
+            <svg viewBox="0 0 100 44">
+              <line class="mt-axis" x1="3" y1="24" x2="97" y2="24"></line>
+              <line class="mt-tick" x1="6" y1="22" x2="6" y2="26"></line>
+              <line class="mt-tick" x1="33" y1="22" x2="33" y2="26"></line>
+              <line class="mt-tick" x1="36" y1="22" x2="36" y2="26"></line>
+              <line class="mt-tick" x1="63" y1="22" x2="63" y2="26"></line>
+              <line class="mt-tick" x1="93" y1="22" x2="93" y2="26"></line>
+              <line class="mt-connector" x1="6" y1="15" x2="6" y2="22"></line>
+              <line class="mt-connector" x1="36" y1="15" x2="36" y2="22"></line>
+              <line class="mt-connector" x1="33" y1="26" x2="33" y2="30"></line>
+              <line class="mt-connector" x1="63" y1="26" x2="63" y2="30"></line>
+              <line class="mt-connector" x1="63" y1="15" x2="63" y2="22"></line>
+              <line class="mt-connector" x1="93" y1="15" x2="93" y2="22"></line>
+            </svg>
+            <div class="month-timeline-box mt-green" style="left: 6%; width: 30%; top: 2.3%; height: 31.8%;">
+              <div class="mt-title">+1 month</div>
+              <div class="mt-detail">Jan 1 &rarr; Feb 1 (31 days)</div>
+            </div>
+            <div class="month-timeline-box mt-red" style="left: 63%; width: 30%; top: 2.3%; height: 31.8%;">
+              <div class="mt-title">+1 month</div>
+              <div class="mt-detail">Feb 28 &rarr; Mar 28 (28 days)</div>
+            </div>
+            <div class="month-timeline-box mt-tan" style="left: 33%; width: 30%; top: 68.2%; height: 27.3%;">
+              <div class="mt-title">+1 month (clamped)</div>
+              <div class="mt-detail">Jan 31 &rarr; Feb 28 (28 days)</div>
+            </div>
+            <div class="month-timeline-label" style="left: 6%; top: 59%;">Jan 1</div>
+            <div class="month-timeline-label" style="left: 33%; top: 59%;">Jan 31</div>
+            <div class="month-timeline-label" style="left: 36%; top: 59%;">Feb 1</div>
+            <div class="month-timeline-label" style="left: 63%; top: 59%;">Feb 28</div>
+            <div class="month-timeline-label" style="left: 93%; top: 59%;">Mar 28</div>
+          </div>
+
+          <pre><code class="language-java">LocalDate dec31 = LocalDate.of(2025, 12, 31);
+                    
+LocalDate target = dec31.plusMonths(2);  // 2026-02-28
+                                         // 1. roll the year as it overflows past 12
+                                         // 2. clamp: use newMonth's actual last valid day</code></pre>
+
+        </div>
+
+        <p>What <code>Period</code> stores internally makes the omission concrete, not just a documented rule:</p>
+
+        <pre><code class="language-java">private final int years;
+private final int months;
+private final int days;
+
+// no seconds field — Period has no concept of time-of-day at all</code></pre>
+
+        <p>Because there's no seconds field, <code>Period</code> has no <code>getSeconds()</code> method — it
+          genuinely cannot answer "how long are you, in absolute terms" without first being applied to a specific
+          date. The method isn't missing by oversight; there's nothing in the object for it to read.</p>
+
+        <div class="callout callout-rule">
+          <div class="callout-lbl">Example: raw field accessors</div>
+          <p><code>getYears()</code>, <code>getMonths()</code>, and <code>getDays()</code> are pure field accessors —
+            each one just returns its own raw integer. There's no normalization, no cross-field computation, no
+            "convert months to days" logic anywhere in these getters. <code>period.getDays()</code> literally cannot
+            know how many real days "9 months" represents, because months don't have a fixed length, so there's no
+            honest single answer to convert with — it could be 28, 29, 30, or 31, depending on which month:</p>
+          <pre><code class="language-java">var period = Period.of(0, 9, 10);
+
+System.out.println(period);             // P9M10D
+System.out.println(period.getDays());   // 10 — NOT (9*30)+10, just 10!
+System.out.println(period.getMonths()); // 9</code></pre>
+        </div>
+
+        <p>Adding a <code>Period</code> back to a date can land somewhere slightly surprising, when the target month
+          is shorter than the one the calculation started from — Java falls back, or <em>clamps</em>, to that month's
+          actual last day:</p>
+
+        <pre><code class="language-java">LocalDate jan31 = LocalDate.of(2026, 1, 31);
+LocalDate result = jan31.plus(Period.ofMonths(1));
+System.out.println(result); // 2026-02-28 — February has no 31st, so it clamps</code></pre>
+
+        <p>The same <code>Period</code> value, unchanged, produces a genuinely different number of actual elapsed
+          days depending on where it's applied — that's not a quirk to work around, it's the entire point of the
+          type, since calendar months don't have a fixed length to begin with:</p>
+
+        <pre><code class="language-java">LocalDate jan31 = LocalDate.of(2026, 1, 31);
+LocalDate mar31 = LocalDate.of(2026, 3, 31);
+
+System.out.println(jan31.plus(Period.ofMonths(1))); // 2026-02-28 -> "1 month" = 28 days here
+System.out.println(mar31.plus(Period.ofMonths(1))); // 2026-04-30 -> "1 month" = 30 days here</code></pre>
+
+        <div class="callout callout-mem">
+          <div class="callout-lbl">Example: the clamping rule</div>
+          <p>Clamping isn't something every <code>plus(Period...)</code> call triggers — it only activates when the
+            naive target date, the one you'd get by simply advancing the month number and keeping the same
+            day-of-month, turns out not to exist. Most months don't force that question at all.</p>
+          <pre><code class="language-java">var jan31 = LocalDate.of(2026, 1, 31);
+
+// Going from Jan 31 forward by a month, the naive target is "Feb 31," which is invalid,
+// so clamping kicks in and the result lands on Feb 28 instead:
+var lastDayOfFeb = jan31.plus(Period.ofMonths(1)); // 2026-02-28
+
+var diff = Period.between(lastDayOfFeb, jan31); // P-28D</code></pre>
+          <p>Notice the gap back is measured in days, not "-1 month" — going from Feb 28 back to Jan 31, the naive
+            target ("Jan 28") would have been perfectly valid, so nothing forced a clamp on the reverse trip, and
+            <code>Period.between</code> simply reports the plain day count that actually separates the two dates.
+            The forward trip clamped; the reverse measurement didn't need to.
+          </p>
+        </div>
+
+        <div class="callout callout-rule">
+          <div class="callout-lbl">Is <code>Period.ofMonths(3)</code> exactly 90 days?</div>
+          <p>The short answer is no. In Java, a <code>Period</code> stores the conceptual amount of time, not the
+            normalized total of days. "3 months" is a moving target: the number of days that actually pass during a
+            3-month period depends entirely on the start date.</p>
+          <p><strong>Example: seasonal duration analysis (3-month periods)</strong><br>
+            In meteorology, seasons are defined as 3-month blocks starting on the first of the month. Because our
+            calendar months vary from 28 to 31 days, each "season" actually has a different physical duration.</p>
+          <table class="content-table">
+            <tr>
+              <th></th>
+              <th>Months</th>
+              <th>Total</th>
+            </tr>
+            <tr>
+              <td>Winter, standard year</td>
+              <td>Dec(31), Jan(31), Feb(28)</td>
+              <td>31 + 31 + 28 = 90 days</td>
+            </tr>
+            <tr>
+              <td>Winter, leap year</td>
+              <td>Dec(31), Jan(31), Feb(29)</td>
+              <td>31 + 31 + 29 = 91 days</td>
+            </tr>
+            <tr>
+              <td>Spring</td>
+              <td>Mar(31), Apr(30), May(31)</td>
+              <td>31 + 30 + 31 = 92 days</td>
+            </tr>
+          </table>
+          <pre><code class="language-java">LocalDate start = LocalDate.of(2026, Month.NOVEMBER, 30);
+Period p3m = Period.ofMonths(3);
+var end = start.plus(p3m);
+
+System.out.println(end); // 2027-02-28</code></pre>
+        </div>
+
+        <p><code>Duration</code> counts in exact, fixed-length terms — seconds and nanoseconds — because it's measuring
+          elapsed machine time, not calendar distance. <code>Duration.ofDays(1)</code> is permanently, unconditionally
+          86,400 seconds — there's no "day" concept left inside it after construction, only the number:</p>
+
+        <pre><code class="language-java">Instant requestStart = Instant.now();
+// ... work happens ...
+Instant requestEnd = Instant.now();
+
+Duration elapsed = Duration.between(requestStart, requestEnd);
+System.out.println(elapsed.toMillis());</code></pre>
+
+        <div class="callout callout-mem">
+          <div class="callout-lbl">Where the difference actually bites: a DST transition</div>
+          <p>On March 8th, 2026, clocks in <code>America/New_York</code> spring forward — 1:59 AM jumps straight to
+            3:00 AM, so that particular day is only 23 hours long. Adding "one day" to midnight that day with
+            <code>Duration</code> and with <code>Period</code> gives two different answers:
+          </p>
+          <pre><code class="language-java">ZoneId ny = ZoneId.of("America/New_York");
+ZonedDateTime start = ZonedDateTime.of(2026, 3, 8, 0, 0, 0, 0, ny);
+
+ZonedDateTime plusDuration = start.plus(Duration.ofDays(1));
+ZonedDateTime plusPeriod   = start.plus(Period.ofDays(1));
+
+System.out.println(plusDuration); // 2026-03-09T01:00-04:00 — exactly 86400s later, overshoots midnight by an hour
+System.out.println(plusPeriod);   // 2026-03-09T00:00-04:00 — midnight, wall-clock time preserved</code></pre>
+          <p><code>Duration</code> added exactly 86,400 seconds of real elapsed time, which is honestly what it
+            promises — but since that particular day was only 23 hours long, 86,400 seconds overshoots the next
+            midnight by an hour. <code>Period</code> asked a completely different question — "the same wall-clock time,
+            one calendar day later" — and got exactly that, DST transition handled automatically. Neither answer is
+            wrong; they're answers to two different questions that happen to look identical on an ordinary day.</p>
+        </div>
+
+        <p>A third option exists for when neither a <code>Period</code> nor a <code>Duration</code> object is actually
+          needed — just a plain number, for sorting or display ("posted 3 days ago"):</p>
+
+        <pre><code class="language-java">long daysBetween = ChronoUnit.DAYS.between(start, end);</code></pre>
+
+        <p><code>ChronoUnit.DAYS.between(...)</code> always returns one smoothly-varying count in that single unit, with
+          none of <code>Period</code>'s calendar decomposition — the right tool specifically when what's needed is a
+          number to sort or compare, not a <code>Period</code> or <code>Duration</code> object to add back to something
+          later.</p>
+
+        <div class="callout callout-conn">
+          <div class="callout-lbl"><code>Period.between()</code> vs
+            <code>ChronoUnit.DAYS.between(Temporal, Temporal)</code>
+          </div>
+          <p>If you need a number that varies smoothly and predictably (e.g., for sorting, for a numeric "days ago"
+            display), <code>ChronoUnit.DAYS.between(start, end)</code> is the more appropriate tool — it always gives
+            a plain day count with no jumpy unit-boundary behavior:</p>
+          <pre><code class="language-java">import java.time.temporal.ChronoUnit;
+
+long daysBetween   = ChronoUnit.DAYS.between(birthDate, today);
+long monthsBetween  = ChronoUnit.MONTHS.between(birthDate, today);
+long yearsBetween   = ChronoUnit.YEARS.between(birthDate, today);
+
+Instant start = Instant.now();
+Instant end   = start.plusSeconds(5000);
+long secondsBetween = ChronoUnit.SECONDS.between(start, end);</code></pre>
+          <pre><code class="language-java">var jan28 = LocalDate.of(2026, 1, 28);
+var jan31 = LocalDate.of(2026, 1, 31);
+var feb28 = LocalDate.of(2026, 2, 28);
+
+Period diff0 = Period.between(jan28, feb28); // P1M
+Period diff1 = Period.between(jan31, feb28); // P28D
+
+long diff2 = ChronoUnit.DAYS.between(jan28, feb28); // 31
+long diff3 = ChronoUnit.DAYS.between(jan31, feb28); // 28</code></pre>
+        </div>
+
+        <table class="content-table">
+          <tr>
+            <th></th>
+            <th><code>Period</code></th>
+            <th><code>Duration</code></th>
+          </tr>
+          <tr>
+            <td>Domain</td>
+            <td>Human time (calendar-aware)</td>
+            <td>Machine time (fixed-length)</td>
+          </tr>
+          <tr>
+            <td>Units</td>
+            <td>Years, months, days</td>
+            <td>Seconds, nanoseconds</td>
+          </tr>
+          <tr>
+            <td>Works on</td>
+            <td><code>LocalDate</code>, <code>LocalDateTime</code>, <code>ZonedDateTime</code></td>
+            <td><code>Instant</code>, <code>LocalTime</code>, <code>LocalDateTime</code>, <code>ZonedDateTime</code>
+            </td>
+          </tr>
+          <tr>
+            <td>Reach for it when</td>
+            <td>"Remind me in 1 month," calculating an age, an anniversary</td>
+            <td>A timeout, a cache TTL, measuring how long an operation took</td>
+          </tr>
+        </table>
+
+        <p>Asking "how many months between these two dates" and asking "how many milliseconds did that request take"
+          are different questions with different units of measure — <code>Period</code> and <code>Duration</code> keep
+          them as two separate types for exactly that reason, rather than forcing both through one generic "amount of
+          time" class that would have to guess which kind of amount was meant.</p>
+      </section>
+
+      <!-- §24.7 -->
+      <section id="s24-7">
+        <div class="section-head">
+          <span class="sec-num">§24.7</span>
+          <h2>Formatting Dates and Times <em>— thread-safe by design</em></h2>
+        </div>
+
+        <p>Formatting dates and times in Java (the <code>java.time</code> API) can be done using the
+          <code>DateTimeFormatter</code> class. Both <code>DateTimeFormatter.format(...)</code> and
+          <code>LocalDate.format(DateTimeFormatter)</code> do similar jobs — but they differ in which object drives
+          the formatting: call <code>format(...)</code> on the formatter and hand it a date, or call it on the date
+          and hand it a formatter. Either way produces the same string.
+        </p>
+
+        <h4>Summary: the decision in one pass</h4>
+
+        <table class="content-table wrap-first">
+          <tr>
+            <th>What's needed</th>
+            <th>Use</th>
+          </tr>
+          <tr>
+            <td>A machine-readable, standard, unambiguous string (logs, APIs, storage)</td>
+            <td>
+              <ul>
+                <li><code>.toString()</code></li>
+                <li>a predefined ISO-8601 constant:</li>
+                <ul>
+                  <li><code>ISO_LOCAL_DATE</code> (<code>2024-05-25</code>),</li>
+                  <li><code>ISO_LOCAL_TIME</code> (<code>14:30:00</code>),</li>
+                  <li><code>ISO_LOCAL_DATE_TIME</code> (<code>2024-05-25T14:30:00</code>),</li>
+                  <li><code>ISO_ZONED_DATE_TIME</code> (<code>2024-05-25T14:30:00+02:00[Europe/Paris]</code>)</li>
+                </ul>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>Output that looks correct and natural to each user in their own locale, without researching every
+              locale's date conventions by hand</td>
+
+            <td>
+              <ul>
+                <li><code>ofLocalizedDate(FormatStyle.SHORT).withLocale(Locale.US)</code> <br>&rarr;
+                  <code>6/19/26</code>
+                </li>
+                <li><code>ofLocalizedDate(FormatStyle.SHORT).withLocale(Locale.FRANCE)</code><br> &rarr;
+                  <code>19/06/2026</code>
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>An exact, specific layout — a legacy system's expected format, an export spec, a product's own
+              standardized convention, regardless of locale</td>
+            <td><code>ofPattern("dd.MM.yyyy HH:mm")</code> &rarr; <code>19.06.2026 14:30</code><br>
+              <code>ofPattern("EEEE, MMMM d, yyyy")</code> &rarr; <code>Friday, June 19, 2026</code>
+            </td>
+          </tr>
+        </table>
+
+        <p><code>DateTimeFormatter</code> turns a date or time into a specific text form, and back. Three ways to get
+          one, matching the three rows above.</p>
+
+        <p>For a fixed, unambiguous, machine-readable format — logs, APIs, storage — reach for one of the predefined
+          constants rather than typing out a pattern by hand:</p>
+
+        <pre><code class="language-java">LocalDate date = LocalDate.of(2026, 6, 18);
+System.out.println(date.format(DateTimeFormatter.ISO_LOCAL_DATE)); // 2026-06-18
+
+Instant now = Instant.now();
+System.out.println(DateTimeFormatter.ISO_INSTANT.format(now)); // 2026-06-18T14:30:00Z</code></pre>
+
+        <p>For an exact, specific layout — matching a legacy system's expected format, say — a custom pattern gives
+          full control, built from a small vocabulary of case-sensitive letters:</p>
+
+        <pre><code class="language-java">DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+System.out.println(date.format(formatter)); // 18/06/2026</code></pre>
+
+        <table class="content-table">
+          <tr>
+            <th>Symbol</th>
+            <th>Meaning</th>
+            <th>Example</th>
+          </tr>
+          <tr>
+            <td><code>y</code></td>
+            <td>Year</td>
+            <td><code>yyyy</code> → 2026</td>
+          </tr>
+          <tr>
+            <td><code>M</code></td>
+            <td>Month</td>
+            <td><code>M</code> → 6, <code>MM</code> → 06, <code>MMM</code> → Jun, <code>MMMM</code> → June</td>
+          </tr>
+          <tr>
+            <td><code>d</code></td>
+            <td>Day of month</td>
+            <td><code>d</code> → 5, <code>dd</code> → 05</td>
+          </tr>
+          <tr>
+            <td><code>H</code> / <code>h</code></td>
+            <td>Hour, 24h / 12h</td>
+            <td><code>HH</code> → 15, <code>hh</code> → 03</td>
+          </tr>
+          <tr>
+            <td><code>m</code> / <code>s</code></td>
+            <td>Minute / second</td>
+            <td><code>mm</code> → 45, <code>ss</code> → 52</td>
+          </tr>
+        </table>
+
+        <p>For output that looks natural to a specific user, without researching every locale's own date conventions —
+          a localized formatter delegates that decision to the locale itself:</p>
+
+        <pre><code class="language-java">DateTimeFormatter usFmt = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).withLocale(Locale.US);
+DateTimeFormatter ukFmt = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT).withLocale(Locale.UK);
+
+System.out.println(date.format(usFmt)); // 6/18/26
+System.out.println(date.format(ukFmt)); // 18/06/26</code></pre>
+
+        <p>Like every other type in this chapter, a <code>DateTimeFormatter</code> is immutable once built — nothing
+          about calling <code>format(...)</code> changes it, and methods like <code>withLocale(...)</code> return a new
+          formatter rather than modifying the one they're called on. That makes a single instance safe to build once
+          and reuse freely, from as many threads as needed, without synchronization (§22) — precisely the property
+          <code>SimpleDateFormat</code> (§24.1) never had, since its own mutable internal state made sharing one
+          instance across threads a genuine hazard, not just a style preference.
+        </p>
+      </section>
+
+      <!-- §24.8 -->
+      <section id="s24-8">
+        <div class="section-head">
+          <span class="sec-num">§24.8</span>
+          <h2>Partial Types <em>— <code>YearMonth</code>, <code>MonthDay</code>, <code>Year</code></em></h2>
+        </div>
+
+        <p>Real-world data often doesn't need a full date at all. "Expires end of this month." "My birthday is March
+          3rd" — no year attached. Reaching for <code>LocalDate</code> in cases like these forces picking an arbitrary,
+          meaningless placeholder day or year, and then writing extra logic to ignore it correctly everywhere.</p>
+
+        <p><code>YearMonth</code> is exactly a year and a month — the right type for a credit card expiry or a billing
+          period, where "which specific day" was never meaningful data in the first place:</p>
+
+        <pre><code class="language-java">YearMonth cardExpiry = YearMonth.of(2028, 3);
+System.out.println(cardExpiry.isBefore(YearMonth.now())); // is the card expired?
+
+LocalDate dueDate = YearMonth.now().atEndOfMonth(); // handles 28/29/30/31 correctly, no lookup needed</code></pre>
+
+        <p><code>MonthDay</code> is a month and a day, with no year — the right type for a recurring annual event like
+          a birthday, where "no year" isn't a limitation, it's the actual, correct meaning:</p>
+
+        <pre><code class="language-java">MonthDay birthday = MonthDay.of(3, 3); // March 3rd, any year
+MonthDay today = MonthDay.from(LocalDate.now());
+
+System.out.println(birthday.equals(today)); // is today their birthday? — year-agnostic, on purpose</code></pre>
+
+        <p><code>Year</code> is just a year — useful for anything genuinely scoped to a whole year at a time, like
+          fiscal-year tracking. All three follow the same principle as <code>Month</code> (an enum, not a raw int, the
+          exact fix §24.1 already credited for making Calendar's zero-indexing bug structurally impossible): a type
+          that only claims to hold the fields its own concept actually has.</p>
+      </section>
+
+      <!-- §24.9 -->
+      <section id="s24-9">
+        <div class="section-head">
+          <span class="sec-num">§24.9</span>
+          <h2>Interop and Migration <em>— living alongside legacy code</em></h2>
+        </div>
+
+        <p>New code rarely gets to ignore old code entirely — a legacy API, a JDBC driver, a database column may still
+          expect <code>Date</code> or <code>Calendar</code>. Java 8 added bridge methods specifically for this, rather
+          than leaving anyone to hand-roll millisecond arithmetic at the boundary.</p>
+
+        <p><code>Date</code> is fundamentally the same kind of thing as <code>Instant</code> — a millisecond counter —
+          so the bridge between them is direct:</p>
+
+        <pre><code class="language-java">Date legacyDate = new Date();
+Instant instant = legacyDate.toInstant();
+
+Instant now = Instant.now();
+Date backToLegacy = Date.from(now);</code></pre>
+
+        <p>There is deliberately no <code>Date.from(LocalDateTime)</code> — a <code>LocalDateTime</code> doesn't carry
+          enough information to determine which single moment it should become (§24.2 covered exactly why); it has to
+          be resolved through <code>atZone(...)</code> first, with the correct zone, not just whatever
+          <code>ZoneId.systemDefault()</code> happens to return on that particular machine.
+        </p>
+
+        <p>The practical pattern for working alongside an older library: convert at the boundary, and keep
+          <code>java.time</code> types everywhere in your own code:
+        </p>
+
+        <pre><code class="language-java">void saveEvent(LocalDateTime eventTime) {
+    Date legacyParam = Date.from(eventTime.atZone(ZoneId.systemDefault()).toInstant());
+    legacyLibraryCall(legacyParam); // convert only where the old API demands it
+}</code></pre>
+      </section>
+
+      <!-- §24.10 -->
+      <section id="s24-10">
+        <div class="section-head">
+          <span class="sec-num">§24.10</span>
+          <h2>Key Takeaways</h2>
+        </div>
+
+        <ul>
+          <li><code>Date</code> and <code>Calendar</code> were mutable, zero-indexed in places, conflated machine time
+            with human time, and had no type for "an amount of time" — <code>java.time</code> (Java 8, JSR-310) exists
+            to fix all of it at once.</li>
+          <li>Every <code>java.time</code> type is immutable — methods like <code>plusDays(...)</code> return a new
+            instance and never modify the one they're called on; the return value must be captured.</li>
+          <li>Immutability also means thread-safety with no synchronization required, the same guarantee
+            <code>String</code>
+            (§8.5) already relied on.
+          </li>
+          <li><code>LocalDate</code>, <code>LocalTime</code>, and <code>LocalDateTime</code> model human time, with no
+            time zone attached — built through static factory methods (<code>of(...)</code>, <code>now()</code>), the
+            same pattern as <code>Optional</code> (§20.4).</li>
+          <li><code>Instant</code> models one fixed point on the timeline, independent of any time zone — the right
+            choice specifically when the business rule itself is zone-independent, not as a universal default over
+            <code>LocalDate</code>.
+          </li>
+          <li><code>Period</code> measures calendar-based amounts of time (years, months, days); <code>Duration</code>
+            measures exact, fixed-length amounts (seconds, nanoseconds) — two types because they answer two different
+            questions, and they can visibly disagree across a DST transition.</li>
+          <li><code>ZoneOffset</code> is a fixed number; <code>ZoneId</code> is a named region with a full rule set
+            that can change twice a year. <code>ZonedDateTime</code> combines a <code>LocalDateTime</code> with a
+            <code>ZoneId</code> to finally produce an unambiguous moment.
+          </li>
+          <li>Store <code>Instant</code> (or UTC-fixed <code>OffsetDateTime</code>) for "when did this happen";
+            convert to <code>ZonedDateTime</code> only at the point of display, for a specific viewer's zone.</li>
+          <li><code>DateTimeFormatter</code> replaces <code>SimpleDateFormat</code> with an immutable, thread-safe
+            formatter that can be built once and shared freely — predefined constants, custom patterns, or localized
+            formatters, depending on what the output actually needs to look like.</li>
+          <li><code>YearMonth</code>, <code>MonthDay</code>, and <code>Year</code> exist so a partial concept — an
+            expiry month, a recurring birthday — never needs a fake placeholder day or year invented just to fit
+            <code>LocalDate</code>.
+          </li>
+          <li><code>Date.toInstant()</code> and <code>Date.from(Instant)</code> are the intended bridge to legacy code
+            — convert at the boundary, and keep <code>java.time</code> types everywhere in your own code.</li>
+        </ul>
+      </section>
+
+    </article>
+
+    <nav class="page-nav" aria-label="Chapter navigation">
+      <a href="modules.html" class="page-nav-prev">
+        <span class="page-nav-label">← Previous</span>
+        <span class="page-nav-title">§23 — Java Modules</span>
+      </a>
+      <a href="io.html" class="page-nav-next">
+        <span class="page-nav-label">Next →</span>
+        <span class="page-nav-title">§25 — Input and Output</span>
+      </a>
+    </nav>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      hljs.highlightAll();
+
+      // Flag error-annotation comments in code blocks
+      document.querySelectorAll('.hljs-comment').forEach(el => {
+        if (/\b(compile|compiler|runtime) error\b/i.test(el.textContent)) {
+          el.classList.add('hljs-comment-error');
+        }
+      });
+
+      // Code theme toggle
+      const codeThemeBtn = document.getElementById('code-theme-toggle');
+      const lightTheme = document.getElementById('hljs-light-theme');
+      const darkTheme = document.getElementById('hljs-dark-theme');
+      const themeLabel = codeThemeBtn.querySelector('.code-theme-label');
+      const themeIcon = codeThemeBtn.querySelector('.icon');
+
+      function applyCodeTheme(theme) {
+        const dark = theme === 'dark';
+        lightTheme.disabled = dark;
+        darkTheme.disabled = !dark;
+        document.documentElement.classList.toggle('code-dark', dark);
+        themeLabel.textContent = dark ? 'Light code' : 'Dark code';
+        themeIcon.textContent = dark ? '☀️' : '🌙';
+      }
+
+      applyCodeTheme(localStorage.getItem('code-theme') || 'light');
+
+      codeThemeBtn.addEventListener('click', () => {
+        const next = darkTheme.disabled ? 'dark' : 'light';
+        localStorage.setItem('code-theme', next);
+        applyCodeTheme(next);
+      });
+
+      // Scroll spy for sub-sections
+      const sections = document.querySelectorAll('section[id]');
+      const subLinks = document.querySelectorAll('.sub-nav a[href^="#"]');
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = '#' + entry.target.id;
+            subLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+          }
+        });
+      }, { rootMargin: '-8% 0px -78% 0px', threshold: 0 });
+
+      sections.forEach(s => observer.observe(s));
+
+      const btn = document.getElementById('menu-btn');
+      const side = document.getElementById('sidebar');
+      btn.addEventListener('click', () => side.classList.toggle('open'));
+      document.querySelectorAll('#sidebar a').forEach(a => {
+        a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
+      });
+    });
+  </script>
+</body>
+
+</html>

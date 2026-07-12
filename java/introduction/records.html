@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>§17 Records — OO with Java</title>
+<title>§16 Records — OO with Java</title>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" id="hljs-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
 <link rel="stylesheet" id="hljs-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
@@ -51,130 +51,205 @@
         </ul>
       </li>
       <li>
-        <a href="variables.html"><span class="nav-num">§1</span>Variables</a>
+        <a href="variables.html"><span class="nav-num">§1</span>Variables and Values</a>
         <ul class="sub-nav">
           <li><a href="variables.html#s1-1"><span class="nav-num">§1.1</span>Values</a></li>
-          <li><a href="variables.html#s1-2"><span class="nav-num">§1.2</span>Giving Values Names</a></li>
-          <li><a href="variables.html#s1-3"><span class="nav-num">§1.3</span>Variables in Java</a></li>
-          <li><a href="variables.html#s1-4"><span class="nav-num">§1.4</span>Naming Variables</a></li>
-          <li><a href="variables.html#s1-5"><span class="nav-num">§1.5</span>What a Variable Holds</a></li>
-          <li><a href="variables.html#s1-6"><span class="nav-num">§1.6</span>Changing a Value</a></li>
-          <li><a href="variables.html#s1-7"><span class="nav-num">§1.7</span><code>var</code></a></li>
-          <li><a href="variables.html#s1-8"><span class="nav-num">§1.8</span>Common Mistakes</a></li>
-          <li><a href="variables.html#s1-9"><span class="nav-num">§1.9</span>Key Takeaways</a></li>
-        </ul>
-      </li>
-      <li><a href="primitives.html"><span class="nav-num">§2</span>Primitives</a></li>
-      <li><a href="classes.html"><span class="nav-num">§3</span>Classes</a></li>
-      <li><a href="objects.html"><span class="nav-num">§4</span>Objects</a></li>
-      <li><a href="assignment.html"><span class="nav-num">§5</span>Assignment</a></li>
-      <li>
-        <a href="methods.html"><span class="nav-num">§6</span>Methods</a>
-        <ul class="sub-nav">
-          <li><a href="methods.html#s6-intro"><span class="nav-num">§6.1</span>What Is a Method?</a></li>
-          <li><a href="methods.html#s62"><span class="nav-num">§6.2</span>Static Methods</a></li>
-          <li><a href="methods.html#s63"><span class="nav-num">§6.3</span>Reference Parameters</a></li>
-          <li><a href="methods.html#s64"><span class="nav-num">§6.4</span>Dot Operator Revisited</a></li>
-          <li><a href="methods.html#s65"><span class="nav-num">§6.5</span>Instance Methods</a></li>
-          <li><a href="methods.html#s66"><span class="nav-num">§6.6</span>Functions to Objects</a></li>
-          <li><a href="methods.html#s67"><span class="nav-num">§6.7</span>Key Takeaways</a></li>
-        </ul>
-      </li>
-      <li><a href="operators.html"><span class="nav-num">§7</span>Operators</a></li>
-      <li><a href="controlflow.html"><span class="nav-num">§8</span>Control Flow</a></li>
-      <li><a href="arrays.html"><span class="nav-num">§9</span>Arrays</a></li>
-      <li>
-        <a href="strings.html"><span class="nav-num">§10</span>Strings</a>
-        <ul class="sub-nav">
-          <li><a href="strings.html#s10-1"><span class="nav-num">§10.1</span>Writing Systems &amp; Unicode</a></li>
-          <li><a href="strings.html#s10-2"><span class="nav-num">§10.2</span><code>char</code></a></li>
-          <li><a href="strings.html#s10-3"><span class="nav-num">§10.3</span><code>Character</code></a></li>
-          <li><a href="strings.html#s10-4"><span class="nav-num">§10.4</span>Indexing</a></li>
-          <li><a href="strings.html#s10-5"><span class="nav-num">§10.5</span>Immutability</a></li>
-          <li><a href="strings.html#s10-6"><span class="nav-num">§10.6</span><code>==</code> vs <code>.equals()</code></a></li>
-          <li><a href="strings.html#s10-7"><span class="nav-num">§10.7</span>Concatenation</a></li>
+          <li><a href="variables.html#s1-2"><span class="nav-num">§1.2</span>Variables in Java</a></li>
+          <li><a href="variables.html#s1-3"><span class="nav-num">§1.3</span>Primitive Types</a></li>
+          <li><a href="variables.html#s1-4"><span class="nav-num">§1.4</span>Literals</a></li>
+          <li><a href="variables.html#s1-5"><span class="nav-num">§1.5</span><code>var</code></a></li>
+          <li><a href="variables.html#s1-6"><span class="nav-num">§1.6</span>Common Mistakes</a></li>
+          <li><a href="variables.html#s1-7"><span class="nav-num">§1.7</span>What a Variable Holds</a></li>
+          <li><a href="variables.html#s1-8"><span class="nav-num">§1.8</span>Key Takeaways</a></li>
+          <li><a href="variables.html#s1-9"><span class="nav-num">§1.9</span>Appendix: Number Systems</a></li>
         </ul>
       </li>
       <li>
-        <a href="inheritance.html"><span class="nav-num">§11</span>Inheritance</a>
+        <a href="classes.html"><span class="nav-num">§2</span>Classes &amp; Objects</a>
         <ul class="sub-nav">
-          <li><a href="inheritance.html#s10-1"><span class="nav-num">§11.1</span>Taxonomy</a></li>
-          <li><a href="inheritance.html#s10-2"><span class="nav-num">§11.2</span>The Problem</a></li>
-          <li><a href="inheritance.html#s10-3"><span class="nav-num">§11.3</span><code>extends</code></a></li>
-          <li><a href="inheritance.html#s10-4"><span class="nav-num">§11.4</span><code>super(...)</code></a></li>
-          <li><a href="inheritance.html#s10-5"><span class="nav-num">§11.5</span>Polymorphism</a></li>
+          <li><a href="classes.html#s2-1"><span class="nav-num">§2.1</span>Classes as Blueprints</a></li>
+          <li><a href="classes.html#s2-2"><span class="nav-num">§2.2</span>Instantiation</a></li>
+          <li><a href="classes.html#s2-3"><span class="nav-num">§2.3</span>Reference Variables</a></li>
+          <li><a href="classes.html#s2-4"><span class="nav-num">§2.4</span>Reference Fields</a></li>
+          <li><a href="classes.html#s2-5"><span class="nav-num">§2.5</span>Constructors</a></li>
+          <li><a href="classes.html#s2-6"><span class="nav-num">§2.6</span>Static Fields</a></li>
         </ul>
       </li>
       <li>
-        <a href="accessmodifiers.html"><span class="nav-num">§12</span>Packages &amp; Access Modifiers</a>
+        <a href="assignment.html"><span class="nav-num">§3</span>Assignment</a>
         <ul class="sub-nav">
-          <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§12.1</span>Packages</a></li>
-          <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§12.2</span>Why Restrict Access</a></li>
-          <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§12.3</span><code>private</code></a></li>
-          <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§12.4</span>Encapsulation</a></li>
-          <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§12.5</span><code>public</code></a></li>
-          <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§12.6</span>Package-Private</a></li>
-          <li><a href="accessmodifiers.html#s11-7"><span class="nav-num">§12.7</span><code>protected</code></a></li>
+          <li><a href="assignment.html#s3-1"><span class="nav-num">§3.1</span>The "Value"</a></li>
+          <li><a href="assignment.html#s3-2"><span class="nav-num">§3.2</span>Primitive Assignment</a></li>
+          <li><a href="assignment.html#s3-3"><span class="nav-num">§3.3</span>Reference Assignment</a></li>
+          <li><a href="assignment.html#s3-4"><span class="nav-num">§3.4</span>Consequence</a></li>
+          <li><a href="assignment.html#s3-5"><span class="nav-num">§3.5</span>Assignment vs. the Dot</a></li>
+          <li><a href="assignment.html#s3-6"><span class="nav-num">§3.6</span>The Rule</a></li>
         </ul>
       </li>
       <li>
-        <a href="immutability.html"><span class="nav-num">§13</span>Immutability</a>
+        <a href="methods.html"><span class="nav-num">§4</span>Methods</a>
         <ul class="sub-nav">
-          <li><a href="immutability.html#s13-1"><span class="nav-num">§13.1</span>Identity &amp; State</a></li>
-          <li><a href="immutability.html#s13-2"><span class="nav-num">§13.2</span>A Question of Time</a></li>
-          <li><a href="immutability.html#s13-3"><span class="nav-num">§13.3</span>Building an Immutable Class</a></li>
-          <li><a href="immutability.html#s13-4"><span class="nav-num">§13.4</span><code>final</code> Isn't Deep</a></li>
-          <li><a href="immutability.html#s13-5"><span class="nav-num">§13.5</span>Why It Matters</a></li>
-          <li><a href="immutability.html#s13-6"><span class="nav-num">§13.6</span><code>StringBuilder</code></a></li>
-          <li><a href="immutability.html#s13-7"><span class="nav-num">§13.7</span>Core Pillars</a></li>
-          <li><a href="immutability.html#s13-8"><span class="nav-num">§13.8</span>Putting It Together</a></li>
+          <li><a href="methods.html#s4-intro"><span class="nav-num">§4.1</span>Why Methods</a></li>
+          <li><a href="methods.html#s4-2"><span class="nav-num">§4.2</span>What Is a Method?</a></li>
+          <li><a href="methods.html#s4-3"><span class="nav-num">§4.3</span>Outputs</a></li>
+          <li><a href="methods.html#s4-4"><span class="nav-num">§4.4</span>Functions to Objects</a></li>
+          <li><a href="methods.html#s4-5"><span class="nav-num">§4.5</span>The "Hidden" Parameter</a></li>
+          <li><a href="methods.html#s4-6"><span class="nav-num">§4.6</span>Key Takeaways</a></li>
+          <li><a href="methods.html#s4-7"><span class="nav-num">§4.7</span>Appendix: The Call Stack</a></li>
         </ul>
       </li>
       <li>
-        <a href="abstractclasses.html"><span class="nav-num">§14</span>Abstract Classes</a>
+        <a href="operators.html"><span class="nav-num">§5</span>Operators</a>
         <ul class="sub-nav">
-          <li><a href="abstractclasses.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
-          <li><a href="abstractclasses.html#s14-2"><span class="nav-num">§14.2</span><code>abstract</code> Classes</a></li>
-          <li><a href="abstractclasses.html#s14-3"><span class="nav-num">§14.3</span><code>abstract</code> Methods</a></li>
+          <li><a href="operators.html#s5-1"><span class="nav-num">§5.1</span>Arithmetic Operators</a></li>
+          <li><a href="operators.html#s5-2"><span class="nav-num">§5.2</span>Unary Operators</a></li>
+          <li><a href="operators.html#s5-3"><span class="nav-num">§5.3</span>Comparison Operators</a></li>
+          <li><a href="operators.html#s5-4"><span class="nav-num">§5.4</span>Logical Operators</a></li>
+          <li><a href="operators.html#s5-5"><span class="nav-num">§5.5</span>Compound Assignment</a></li>
         </ul>
       </li>
       <li>
-        <a href="interfaces.html"><span class="nav-num">§15</span>Interfaces</a>
+        <a href="arrays.html"><span class="nav-num">§6</span>Arrays</a>
         <ul class="sub-nav">
-          <li><a href="interfaces.html#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
-          <li><a href="interfaces.html#s15-2"><span class="nav-num">§15.2</span>Interface vs. Abstract Class</a></li>
-          <li><a href="interfaces.html#s15-3"><span class="nav-num">§15.3</span>Declaring &amp; Implementing</a></li>
-          <li><a href="interfaces.html#s15-4"><span class="nav-num">§15.4</span>Override vs. Overload</a></li>
-          <li><a href="interfaces.html#s15-5"><span class="nav-num">§15.5</span>Multiple Interfaces</a></li>
-          <li><a href="interfaces.html#s15-6"><span class="nav-num">§15.6</span>Interface-Typed Params</a></li>
-          <li><a href="interfaces.html#s15-7"><span class="nav-num">§15.7</span>Anonymous Classes</a></li>
-          <li><a href="interfaces.html#s15-8"><span class="nav-num">§15.8</span>Default Methods</a></li>
-          <li><a href="interfaces.html#s15-9"><span class="nav-num">§15.9</span>Default Method Collisions</a></li>
-          <li><a href="interfaces.html#s15-10"><span class="nav-num">§15.10</span>Static Methods</a></li>
-          <li><a href="interfaces.html#s15-11"><span class="nav-num">§15.11</span>Interface Inheritance</a></li>
-          <li><a href="interfaces.html#s15-12"><span class="nav-num">§15.12</span>Strategy Pattern</a></li>
+          <li><a href="arrays.html#s6-1"><span class="nav-num">§6.1</span>Why Arrays</a></li>
+          <li><a href="arrays.html#s6-2"><span class="nav-num">§6.2</span>One Variable, Many Values</a></li>
+          <li><a href="arrays.html#s6-3"><span class="nav-num">§6.3</span>The Index</a></li>
+          <li><a href="arrays.html#s6-4"><span class="nav-num">§6.4</span>Creating an Array</a></li>
+          <li><a href="arrays.html#s6-5"><span class="nav-num">§6.5</span>Reading and Writing Elements</a></li>
+          <li><a href="arrays.html#s6-6"><span class="nav-num">§6.6</span><code>.length</code></a></li>
+          <li><a href="arrays.html#s6-7"><span class="nav-num">§6.7</span>Filling in the Week</a></li>
+          <li><a href="arrays.html#s6-8"><span class="nav-num">§6.8</span>Assignment Still Copies the Address</a></li>
+          <li><a href="arrays.html#s6-9"><span class="nav-num">§6.9</span>Arrays of Objects</a></li>
+          <li><a href="arrays.html#s6-10"><span class="nav-num">§6.10</span>Pointing a Slot at an Existing Object</a></li>
+          <li><a href="arrays.html#s6-11"><span class="nav-num">§6.11</span>Passing an Array's Address to a Method</a></li>
+          <li><a href="arrays.html#s6-12"><span class="nav-num">§6.12</span>Variable-Arity Parameters</a></li>
         </ul>
       </li>
       <li>
-        <a href="generics.html"><span class="nav-num">§16</span>Generics</a>
+        <a href="controlflow.html"><span class="nav-num">§7</span>Control Flow</a>
         <ul class="sub-nav">
-          <li><a href="generics.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
-          <li><a href="generics.html#s16-2"><span class="nav-num">§16.2</span>Type Parameters</a></li>
-          <li><a href="generics.html#s16-3"><span class="nav-num">§16.3</span>Generic Methods</a></li>
-          <li><a href="generics.html#s16-4"><span class="nav-num">§16.4</span>Bounded Types</a></li>
-          <li><a href="generics.html#s16-5"><span class="nav-num">§16.5</span>Compile Time Only</a></li>
+          <li><a href="controlflow.html#s7-1"><span class="nav-num">§7.1</span>The Flow of Execution</a></li>
+          <li><a href="controlflow.html#s7-2"><span class="nav-num">§7.2</span>Variable Scope</a></li>
+          <li><a href="controlflow.html#s7-3"><span class="nav-num">§7.3</span>Conditional Branching</a></li>
+          <li><a href="controlflow.html#s7-4"><span class="nav-num">§7.4</span><code>while</code></a></li>
+          <li><a href="controlflow.html#s7-5"><span class="nav-num">§7.5</span><code>for</code></a></li>
+          <li><a href="controlflow.html#s7-6"><span class="nav-num">§7.6</span>for-each</a></li>
+          <li><a href="controlflow.html#s7-7"><span class="nav-num">§7.7</span>Ternary Operator</a></li>
         </ul>
       </li>
       <li>
-        <a href="records.html" class="active"><span class="nav-num">§17</span>Records</a>
+        <a href="strings.html"><span class="nav-num">§8</span>Strings</a>
         <ul class="sub-nav">
-          <li><a href="#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
-          <li><a href="#s17-2"><span class="nav-num">§17.2</span><code>record</code></a></li>
-          <li><a href="#s17-3"><span class="nav-num">§17.3</span>Implicitly Final</a></li>
-          <li><a href="#s17-4"><span class="nav-num">§17.4</span>Shallow Immutability</a></li>
-          <li><a href="#s17-5"><span class="nav-num">§17.5</span>Compact Constructors</a></li>
-          <li><a href="#s17-6"><span class="nav-num">§17.6</span>Records Can Do More</a></li>
-          <li><a href="#s17-7"><span class="nav-num">§17.7</span>When to Reach for One</a></li>
+          <li><a href="strings.html#s8-1"><span class="nav-num">§8.1</span>Writing Systems &amp; Unicode</a></li>
+          <li><a href="strings.html#s8-2"><span class="nav-num">§8.2</span><code>char</code></a></li>
+          <li><a href="strings.html#s8-3"><span class="nav-num">§8.3</span><code>Character</code></a></li>
+          <li><a href="strings.html#s8-4"><span class="nav-num">§8.4</span>Sequence of Characters</a></li>
+          <li><a href="strings.html#s8-5"><span class="nav-num">§8.5</span>Text Blocks</a></li>
+          <li><a href="strings.html#s8-6"><span class="nav-num">§8.6</span>Immutability</a></li>
+          <li><a href="strings.html#s8-7"><span class="nav-num">§8.7</span><code>==</code> vs <code>.equals()</code></a></li>
+          <li><a href="strings.html#s8-8"><span class="nav-num">§8.8</span>Concatenation</a></li>
+          <li><a href="strings.html#s8-9"><span class="nav-num">§8.9</span>Important String Methods</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="inheritance.html"><span class="nav-num">§9</span>Inheritance</a>
+        <ul class="sub-nav">
+          <li><a href="inheritance.html#s10-1"><span class="nav-num">§9.1</span>Taxonomy</a></li>
+          <li><a href="inheritance.html#s10-2"><span class="nav-num">§9.2</span>The Problem</a></li>
+          <li><a href="inheritance.html#s10-3"><span class="nav-num">§9.3</span><code>extends</code></a></li>
+          <li><a href="inheritance.html#s10-4"><span class="nav-num">§9.4</span><code>super(...)</code></a></li>
+          <li><a href="inheritance.html#s10-5"><span class="nav-num">§9.5</span>Polymorphism</a></li>
+          <li><a href="inheritance.html#s10-6"><span class="nav-num">§9.6</span>Overriding</a></li>
+          <li><a href="inheritance.html#s10-7"><span class="nav-num">§9.7</span><code>toString()</code></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="accessmodifiers.html"><span class="nav-num">§10</span>Packages &amp; Access Modifiers</a>
+        <ul class="sub-nav">
+          <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§10.1</span>Packages</a></li>
+          <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§10.2</span>Why Restrict Access</a></li>
+          <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§10.3</span><code>private</code></a></li>
+          <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§10.4</span>Encapsulation</a></li>
+          <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§10.5</span><code>public</code></a></li>
+          <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§10.6</span>Package-Private</a></li>
+          <li><a href="accessmodifiers.html#s11-7"><span class="nav-num">§10.7</span><code>protected</code></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="immutability.html"><span class="nav-num">§11</span>Immutability</a>
+        <ul class="sub-nav">
+          <li><a href="immutability.html#s11-1"><span class="nav-num">§11.1</span>Identity &amp; State</a></li>
+          <li><a href="immutability.html#s11-2"><span class="nav-num">§11.2</span>A Question of Time</a></li>
+          <li><a href="immutability.html#s11-3"><span class="nav-num">§11.3</span>Building an Immutable Class</a></li>
+          <li><a href="immutability.html#s11-4"><span class="nav-num">§11.4</span><code>final</code> Isn't Deep</a></li>
+          <li><a href="immutability.html#s11-5"><span class="nav-num">§11.5</span>Why It Matters</a></li>
+          <li><a href="immutability.html#s11-6"><span class="nav-num">§11.6</span><code>StringBuilder</code></a></li>
+          <li><a href="immutability.html#s11-7"><span class="nav-num">§11.7</span>Core Pillars</a></li>
+          <li><a href="immutability.html#s11-8"><span class="nav-num">§11.8</span>Putting It Together</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="abstractclasses.html"><span class="nav-num">§12</span>Abstract Classes</a>
+        <ul class="sub-nav">
+          <li><a href="abstractclasses.html#s12-1"><span class="nav-num">§12.1</span>The Problem</a></li>
+          <li><a href="abstractclasses.html#s12-2"><span class="nav-num">§12.2</span><code>abstract</code> Classes</a></li>
+          <li><a href="abstractclasses.html#s12-3"><span class="nav-num">§12.3</span><code>abstract</code> Methods</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="interfaces.html"><span class="nav-num">§13</span>Interfaces</a>
+        <ul class="sub-nav">
+          <li><a href="interfaces.html#s13-1"><span class="nav-num">§13.1</span>The Problem</a></li>
+          <li><a href="interfaces.html#s13-2"><span class="nav-num">§13.2</span>Interface vs. Abstract Class</a></li>
+          <li><a href="interfaces.html#s13-3"><span class="nav-num">§13.3</span>Declaring &amp; Implementing</a></li>
+          <li><a href="interfaces.html#s13-4"><span class="nav-num">§13.4</span>Override vs. Overload</a></li>
+          <li><a href="interfaces.html#s13-5"><span class="nav-num">§13.5</span>Multiple Interfaces</a></li>
+          <li><a href="interfaces.html#s13-6"><span class="nav-num">§13.6</span>Interface-Typed Params</a></li>
+          <li><a href="interfaces.html#s13-7"><span class="nav-num">§13.7</span>Anonymous Classes</a></li>
+          <li><a href="interfaces.html#s13-8"><span class="nav-num">§13.8</span>Default Methods</a></li>
+          <li><a href="interfaces.html#s13-9"><span class="nav-num">§13.9</span>Default Method Collisions</a></li>
+          <li><a href="interfaces.html#s13-10"><span class="nav-num">§13.10</span>Static Methods</a></li>
+          <li><a href="interfaces.html#s13-11"><span class="nav-num">§13.11</span>Interface Inheritance</a></li>
+          <li><a href="interfaces.html#s13-12"><span class="nav-num">§13.12</span>Strategy Pattern</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="exceptions.html"><span class="nav-num">§14</span>Exceptions</a>
+        <ul class="sub-nav">
+          <li><a href="exceptions.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
+          <li><a href="exceptions.html#s14-2"><span class="nav-num">§14.2</span>The Exception Lifecycle</a></li>
+          <li><a href="exceptions.html#s14-3"><span class="nav-num">§14.3</span>The Exception Hierarchy</a></li>
+          <li><a href="exceptions.html#s14-4"><span class="nav-num">§14.4</span>Checked vs. Unchecked</a></li>
+          <li><a href="exceptions.html#s14-5"><span class="nav-num">§14.5</span>Handling Exceptions</a></li>
+          <li><a href="exceptions.html#s14-6"><span class="nav-num">§14.6</span><code>throw</code> and <code>throws</code></a></li>
+          <li><a href="exceptions.html#s14-7"><span class="nav-num">§14.7</span>Custom Exceptions</a></li>
+          <li><a href="exceptions.html#s14-8"><span class="nav-num">§14.8</span>Exception Chaining</a></li>
+          <li><a href="exceptions.html#s14-9"><span class="nav-num">§14.9</span>Try-with-Resources</a></li>
+          <li><a href="exceptions.html#s14-10"><span class="nav-num">§14.10</span>Exceptions Are Not Control Flow</a></li>
+          <li><a href="exceptions.html#s14-11"><span class="nav-num">§14.11</span>Best Practices &amp; Anti-Patterns</a></li>
+          <li><a href="exceptions.html#s14-12"><span class="nav-num">§14.12</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="generics.html"><span class="nav-num">§15</span>Generics</a>
+        <ul class="sub-nav">
+          <li><a href="generics.html#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
+          <li><a href="generics.html#s15-2"><span class="nav-num">§15.2</span>Type Parameters</a></li>
+          <li><a href="generics.html#s15-3"><span class="nav-num">§15.3</span>Generic Methods</a></li>
+          <li><a href="generics.html#s15-4"><span class="nav-num">§15.4</span>Bounded Types</a></li>
+          <li><a href="generics.html#s15-5"><span class="nav-num">§15.5</span>Compile Time Only</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="records.html" class="active"><span class="nav-num">§16</span>Records</a>
+        <ul class="sub-nav">
+          <li><a href="#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
+          <li><a href="#s16-2"><span class="nav-num">§16.2</span><code>record</code></a></li>
+          <li><a href="#s16-3"><span class="nav-num">§16.3</span>Implicitly Final</a></li>
+          <li><a href="#s16-4"><span class="nav-num">§16.4</span>Shallow Immutability</a></li>
+          <li><a href="#s16-5"><span class="nav-num">§16.5</span>Compact Constructors</a></li>
+          <li><a href="#s16-6"><span class="nav-num">§16.6</span>Records Can Do More</a></li>
+          <li><a href="#s16-7"><span class="nav-num">§16.7</span>When to Reach for One</a></li>
         </ul>
       </li>
       <li>
@@ -203,43 +278,101 @@
         </ul>
       </li>
       <li>
-        <a href="enums.html"><span class="nav-num">§20</span>Enums</a>
+        <a href="enums.html"><span class="nav-num">§17</span>Enums</a>
         <ul class="sub-nav">
-          <li><a href="enums.html#s20-1"><span class="nav-num">§20.1</span>The Problem</a></li>
-          <li><a href="enums.html#s20-2"><span class="nav-num">§20.2</span>Declaring an Enum</a></li>
-          <li><a href="enums.html#s20-3"><span class="nav-num">§20.3</span>Objects, Not Constants</a></li>
-          <li><a href="enums.html#s20-4"><span class="nav-num">§20.4</span>Comparing Enum Values</a></li>
-          <li><a href="enums.html#s20-5"><span class="nav-num">§20.5</span>Type Characteristics</a></li>
-          <li><a href="enums.html#s20-6"><span class="nav-num">§20.6</span>Fields, Constructors, Methods</a></li>
-          <li><a href="enums.html#s20-7"><span class="nav-num">§20.7</span>Enums vs. Magic Numbers</a></li>
-          <li><a href="enums.html#s20-8"><span class="nav-num">§20.8</span>Closed Sets vs. Evolving Reality</a></li>
-          <li><a href="enums.html#s20-9"><span class="nav-num">§20.9</span>Key Takeaways</a></li>
+          <li><a href="enums.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
+          <li><a href="enums.html#s17-2"><span class="nav-num">§17.2</span>Declaring an Enum</a></li>
+          <li><a href="enums.html#s17-3"><span class="nav-num">§17.3</span>Objects, Not Constants</a></li>
+          <li><a href="enums.html#s17-4"><span class="nav-num">§17.4</span>Comparing Enum Values</a></li>
+          <li><a href="enums.html#s17-5"><span class="nav-num">§17.5</span>Type Characteristics</a></li>
+          <li><a href="enums.html#s17-6"><span class="nav-num">§17.6</span>Fields, Constructors, Methods</a></li>
+          <li><a href="enums.html#s17-7"><span class="nav-num">§17.7</span>Enums vs. Magic Numbers</a></li>
+          <li><a href="enums.html#s17-8"><span class="nav-num">§17.8</span>Closed Sets vs. Evolving Reality</a></li>
+          <li><a href="enums.html#s17-9"><span class="nav-num">§17.9</span>Key Takeaways</a></li>
         </ul>
       </li>
-      <li><a href="oodesign.html"><span class="nav-num">§21</span>Object-Oriented Design</a></li>
+      <li>
+        <a href="optionals.html"><span class="nav-num">§20</span>Optional&lt;T&gt;</a>
+        <ul class="sub-nav">
+          <li><a href="optionals.html#s20-1"><span class="nav-num">§20.1</span>The Problem</a></li>
+          <li><a href="optionals.html#s20-2"><span class="nav-num">§20.2</span><code>null</code>: The Absence of a Value</a></li>
+          <li><a href="optionals.html#s20-3"><span class="nav-num">§20.3</span>The Defensive Approach</a></li>
+          <li><a href="optionals.html#s20-4"><span class="nav-num">§20.4</span>The <code>Optional&lt;T&gt;</code> Class</a></li>
+          <li><a href="optionals.html#s20-5"><span class="nav-num">§20.5</span><code>Optional&lt;T&gt;</code> vs <code>null</code></a></li>
+          <li><a href="optionals.html#s20-6"><span class="nav-num">§20.6</span>Specialized Primitive Optionals</a></li>
+          <li><a href="optionals.html#s20-7"><span class="nav-num">§20.7</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="streams.html"><span class="nav-num">§21</span>Streams</a>
+        <ul class="sub-nav">
+          <li><a href="streams.html#s21-1"><span class="nav-num">§21.1</span>The Problem</a></li>
+          <li><a href="streams.html#s21-2"><span class="nav-num">§21.2</span>What Is a Stream</a></li>
+          <li><a href="streams.html#s21-3"><span class="nav-num">§21.3</span>Creating a Stream</a></li>
+          <li><a href="streams.html#s21-4"><span class="nav-num">§21.4</span>Intermediate Operations</a></li>
+          <li><a href="streams.html#s21-5"><span class="nav-num">§21.5</span>Terminal Operations</a></li>
+          <li><a href="streams.html#s21-6"><span class="nav-num">§21.6</span>Collecting Results</a></li>
+          <li><a href="streams.html#s21-7"><span class="nav-num">§21.7</span>Streams and <code>Optional&lt;T&gt;</code></a></li>
+          <li><a href="streams.html#s21-8"><span class="nav-num">§21.8</span>Laziness and Pipelines</a></li>
+          <li><a href="streams.html#s21-9"><span class="nav-num">§21.9</span>When (Not) to Use Streams</a></li>
+          <li><a href="streams.html#s21-10"><span class="nav-num">§21.10</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="concurrency.html"><span class="nav-num">§22</span>Concurrent Programming</a>
+        <ul class="sub-nav">
+          <li><a href="concurrency.html#s22-1"><span class="nav-num">§22.1</span>The Problem</a></li>
+          <li><a href="concurrency.html#s22-2"><span class="nav-num">§22.2</span>Process, Thread, and the OS</a></li>
+          <li><a href="concurrency.html#s22-3"><span class="nav-num">§22.3</span>Independent Progress</a></li>
+          <li><a href="concurrency.html#s22-4"><span class="nav-num">§22.4</span>Why Concurrency Matters</a></li>
+          <li><a href="concurrency.html#s22-5"><span class="nav-num">§22.5</span>Where Parallelism Fits In</a></li>
+          <li><a href="concurrency.html#s22-6"><span class="nav-num">§22.6</span>The Main Thread</a></li>
+          <li><a href="concurrency.html#s22-7"><span class="nav-num">§22.7</span>Step 1: Creating a Task</a></li>
+          <li><a href="concurrency.html#s22-8"><span class="nav-num">§22.8</span>Step 2: Handing a Task to an Executor</a></li>
+          <li><a href="concurrency.html#s22-9"><span class="nav-num">§22.9</span>ExecutorService in Practice</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="modules.html"><span class="nav-num">§23</span>Java Modules</a>
+        <ul class="sub-nav">
+          <li><a href="modules.html#s23-1"><span class="nav-num">§23.1</span>The Problem</a></li>
+          <li><a href="modules.html#s23-2"><span class="nav-num">§23.2</span>What Is a Module</a></li>
+          <li><a href="modules.html#s23-3"><span class="nav-num">§23.3</span><code>module-info.java</code></a></li>
+          <li><a href="modules.html#s23-4"><span class="nav-num">§23.4</span><code>exports</code></a></li>
+          <li><a href="modules.html#s23-5"><span class="nav-num">§23.5</span><code>requires</code></a></li>
+          <li><a href="modules.html#s23-6"><span class="nav-num">§23.6</span>Strong Encapsulation</a></li>
+          <li><a href="modules.html#s23-7"><span class="nav-num">§23.7</span>The Module Path</a></li>
+          <li><a href="modules.html#s23-8"><span class="nav-num">§23.8</span><code>requires transitive</code></a></li>
+          <li><a href="modules.html#s23-9"><span class="nav-num">§23.9</span>When (Not) to Use Modules</a></li>
+          <li><a href="modules.html#s23-10"><span class="nav-num">§23.10</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li><a href="dateandtime.html"><span class="nav-num">§24</span>Date and Time</a></li>
+      <li><a href="io.html"><span class="nav-num">§25</span>Input and Output</a></li>
+      <li><a href="oodesign.html"><span class="nav-num">§26</span>Object-Oriented Design</a></li>
     </ul>
   </nav>
 </nav>
 
 <main id="content">
   <header class="page-header">
-    <div class="page-chapter">Chapter 17</div>
+    <div class="page-chapter">Chapter 16</div>
     <h1>Records</h1>
-    <p class="page-lead">§13 built a data carrier by hand — fields, constructor, getters — and that was already the leanest version. This chapter shows what was still missing, and the one-line declaration that supplies all of it at once.</p>
+    <p class="page-lead">§11 built a data carrier by hand — fields, constructor, getters — and that was already the leanest version. This chapter shows what was still missing, and the one-line declaration that supplies all of it at once.</p>
   </header>
 
   <article>
 
-    <!-- §17.1 -->
-    <section id="s17-1">
+    <!-- §16.1 -->
+    <section id="s16-1">
       <div class="section-head">
-        <span class="sec-num">§17.1</span>
+        <span class="sec-num">§16.1</span>
         <h2>The Problem <em>— the boilerplate a data carrier still needs</em></h2>
       </div>
 
-    <p>A class built to hold onto a couple of related values — a point's <code>x</code> and <code>y</code>, say — keeps its fields <code>private</code> (§12.3) and exposes them through accessor methods, a getter per field. That's already the ordinary shape any class takes: private state, plus a way to read it from outside. But a class meant to represent a plain value like this has to answer a few more questions correctly before it's actually safe to use, and none of those answers come for free.</p>
+    <p>A class built to hold onto a couple of related values — a point's <code>x</code> and <code>y</code>, say — keeps its fields <code>private</code> (§10.3) and exposes them through accessor methods, a getter per field. That's already the ordinary shape any class takes: private state, plus a way to read it from outside. But a class meant to represent a plain value like this has to answer a few more questions correctly before it's actually safe to use, and none of those answers come for free.</p>
 
-    <p>Every class inherits an <code>equals(Object)</code> method whose default behavior is to compare addresses — the same rule <code>==</code> follows (§10.6 already established exactly this for <code>String</code>, before it overrides the default). Left alone, two separately-constructed points with identical coordinates would compare unequal, because they're two different objects, at two different addresses, even though the values they represent are the same. Fixing that means overriding <code>equals</code> — and once <code>equals</code> is overridden, <code>hashCode</code> has to be overridden too, with logic that agrees with it, or the object silently misbehaves the moment it's placed in a hash-based collection. And printing an object without its own <code>toString</code> prints whatever <code>Object</code>'s default produces — a class name and a hash, not the coordinates anyone actually wants to see.</p>
+    <p>Every class inherits an <code>equals(Object)</code> method whose default behavior is to compare addresses — the same rule <code>==</code> follows (§8.6 already established exactly this for <code>String</code>, before it overrides the default). Left alone, two separately-constructed points with identical coordinates would compare unequal, because they're two different objects, at two different addresses, even though the values they represent are the same. Fixing that means overriding <code>equals</code> — and once <code>equals</code> is overridden, <code>hashCode</code> has to be overridden too, with logic that agrees with it, or the object silently misbehaves the moment it's placed in a hash-based collection. And printing an object without its own <code>toString</code> prints whatever <code>Object</code>'s default produces — a class name and a hash, not the coordinates anyone actually wants to see.</p>
 
     <pre><code class="language-java">class Point {
     private final int x;
@@ -274,18 +407,18 @@
     <p>Every line added here is entirely predictable from the two fields alone — nothing about <code>equals</code>, <code>hashCode</code>, or <code>toString</code> for a simple coordinate pair requires a human decision. And yet Java requires all of it spelled out by hand, for every class shaped like this one, with real, silent consequences for getting it wrong: forget <code>hashCode</code> after overriding <code>equals</code>, and a <code>HashSet</code> of points quietly stops finding duplicates it should have caught.</p>
     </section>
 
-    <!-- §17.2 -->
-    <section id="s17-2">
+    <!-- §16.2 -->
+    <section id="s16-2">
       <div class="section-head">
-        <span class="sec-num">§17.2</span>
+        <span class="sec-num">§16.2</span>
         <h2><code>record</code> <em>— one declaration, everything generated</em></h2>
       </div>
 
-    <p>A <span class="term">record</span> declares its fields once, as part of the type's own header, and the compiler generates everything §17.1 had to write by hand:</p>
+    <p>A <span class="term">record</span> declares its fields once, as part of the type's own header, and the compiler generates everything §16.1 had to write by hand:</p>
 
     <pre><code class="language-java">record Point(int x, int y) { }</code></pre>
 
-    <p><code>x</code> and <code>y</code>, declared right there in the header, are called the record's <span class="term">components</span> — the vocabulary used for this chapter's rest. This single line produces a class with: a <code>private final</code> field for each component; a constructor taking all of them and assigning them, in order; public accessor methods; and working <code>equals</code>, <code>hashCode</code>, and <code>toString</code> implementations, matching the ones written by hand in §17.1 exactly.</p>
+    <p><code>x</code> and <code>y</code>, declared right there in the header, are called the record's <span class="term">components</span> — the vocabulary used for this chapter's rest. This single line produces a class with: a <code>private final</code> field for each component; a constructor taking all of them and assigning them, in order; public accessor methods; and working <code>equals</code>, <code>hashCode</code>, and <code>toString</code> implementations, matching the ones written by hand in §16.1 exactly.</p>
 
     <pre><code class="language-java">Point p1 = new Point(3, 4);
 Point p2 = new Point(3, 4);
@@ -297,10 +430,10 @@ System.out.println(p1);            // Point[x=3, y=4]</code></pre>
 
     <div class="callout callout-rule">
       <div class="callout-lbl">The accessor is named <code>x()</code>, not <code>getX()</code></div>
-      <p>A record's generated accessors take the field's own name directly, with no <code>get</code> prefix — <code>x()</code> and <code>y()</code>, not <code>getX()</code> and <code>getY()</code>. This is a deliberate, different convention from the hand-written getters in §13.3 and §17.1, not an inconsistency to work around.</p>
+      <p>A record's generated accessors take the field's own name directly, with no <code>get</code> prefix — <code>x()</code> and <code>y()</code>, not <code>getX()</code> and <code>getY()</code>. This is a deliberate, different convention from the hand-written getters in §11.3 and §16.1, not an inconsistency to work around.</p>
     </div>
 
-    <p>An ordinary class (§12.3) can keep a <code>private</code> field entirely to itself — state that exists inside the object, used by its own methods, but never exposed to any caller at all. A record cannot do this. <code>record Point(int x, int y)</code> declares <em>everything</em> there is to know about the type, right there in the header — every field is listed, and the compiler generates a public accessor for every single one. There is no way to add a field to a record that isn't in the header, and so no way to give it a field the outside world can't see.</p>
+    <p>An ordinary class (§10.3) can keep a <code>private</code> field entirely to itself — state that exists inside the object, used by its own methods, but never exposed to any caller at all. A record cannot do this. <code>record Point(int x, int y)</code> declares <em>everything</em> there is to know about the type, right there in the header — every field is listed, and the compiler generates a public accessor for every single one. There is no way to add a field to a record that isn't in the header, and so no way to give it a field the outside world can't see.</p>
 
     <div class="callout callout-note">
       <div class="callout-lbl">A record is transparent</div>
@@ -308,54 +441,56 @@ System.out.println(p1);            // Point[x=3, y=4]</code></pre>
     </div>
     </section>
 
-    <!-- §17.3 -->
-    <section id="s17-3">
+    <!-- §16.3 -->
+    <section id="s16-3">
       <div class="section-head">
-        <span class="sec-num">§17.3</span>
+        <span class="sec-num">§16.3</span>
         <h2>Implicitly Final <em>— nothing left to add, nothing left to override</em></h2>
       </div>
 
-    <p>A record is implicitly <code>final</code> — a keyword on a <em>class</em> that blocks it from ever being <code>extend</code>ed, the mirror image of <code>abstract</code> (§14.2): where <code>abstract</code> forces a class to be extended before it can produce an object, <code>final</code> forbids extending it at all. <code>Point</code> is exactly this kind of dead end, whether written as a record or not — there is no meaningful subclass of "a pair of coordinates," and a record makes that guarantee automatic rather than a matter of discipline.</p>
+    <p>Could someone write <code>class ColoredPoint extends Point</code>? A record says no — flatly, always, whether or not that would have been a reasonable thing to want. That's deliberate, not a limitation nobody got around to lifting.</p>
 
-    <p>The generated fields are implicitly <code>private</code> and <code>final</code> as well, exactly matching §13.3's two ingredients for immutability — except now neither one can be forgotten. There is no way to declare a setter that actually reassigns <code>x</code> or <code>y</code>, because nothing outside the generated constructor is ever allowed to touch those fields at all. Everything §13 achieved through careful, disciplined class design, a record achieves by construction.</p>
+    <p>A record is implicitly <code>final</code> — a keyword on a <em>class</em> that blocks it from ever being <code>extend</code>ed, the mirror image of <code>abstract</code> (§12.2): where <code>abstract</code> forces a class to be extended before it can produce an object, <code>final</code> forbids extending it at all. <code>Point</code> is exactly this kind of dead end, whether written as a record or not — there is no meaningful subclass of "a pair of coordinates," and a record makes that guarantee automatic rather than a matter of discipline.</p>
+
+    <p>The generated fields are implicitly <code>private</code> and <code>final</code> as well, exactly matching §11.3's two ingredients for immutability — except now neither one can be forgotten. There is no way to declare a setter that actually reassigns <code>x</code> or <code>y</code>, because nothing outside the generated constructor is ever allowed to touch those fields at all. Everything §11 achieved through careful, disciplined class design, a record achieves by construction.</p>
     </section>
 
-    <!-- §17.4 -->
-    <section id="s17-4">
+    <!-- §16.4 -->
+    <section id="s16-4">
       <div class="section-head">
-        <span class="sec-num">§17.4</span>
+        <span class="sec-num">§16.4</span>
         <h2>Shallow Immutability <em>— <code>final</code> protects the reference, not what it points to</em></h2>
       </div>
 
-    <p>§13.4 already showed the gap this creates for an ordinary hand-written immutable class: <code>final</code> only locks a field's own slot — the address it holds — never what that address points to. A record's generated fields are just <code>final</code> fields (§17.3), so they inherit the exact same gap:</p>
+    <p>§11.4 already showed the gap this creates for an ordinary hand-written immutable class: <code>final</code> only locks a field's own slot — the address it holds — never what that address points to. A record's generated fields are just <code>final</code> fields (§16.3), so they inherit the exact same gap:</p>
 
     <pre><code class="language-java">record Person(String name, List&lt;String&gt; hobbies) { }</code></pre>
 
     <pre><code class="language-java">Person p = new Person("Alice", new ArrayList&lt;&gt;(List.of("reading")));
 p.hobbies().add("gaming"); // compiles and runs fine</code></pre>
 
-    <p>The <code>hobbies</code> field is <code>final</code> in exactly the sense §17.3 described: it can never be reassigned to point at a different <code>List</code>. But the generated accessor, <code>p.hobbies()</code>, hands back that exact same <code>List</code> object — the live one, not a defensive copy — so anything holding <code>p</code> can call <code>p.hobbies()</code> and mutate it directly, entirely through the public accessor itself, no reflection or workaround required. <code>hobbies</code> the field is never reassigned by that <code>.add(...)</code> call; the one <code>ArrayList</code> it has always pointed to is just modified in place, through a reference that <code>final</code> was never protecting from writes to begin with.</p>
+    <p>The <code>hobbies</code> field is <code>final</code> in exactly the sense §16.3 described: it can never be reassigned to point at a different <code>List</code>. But the generated accessor, <code>p.hobbies()</code>, hands back that exact same <code>List</code> object — the live one, not a defensive copy — so anything holding <code>p</code> can call <code>p.hobbies()</code> and mutate it directly, entirely through the public accessor itself, no reflection or workaround required. <code>hobbies</code> the field is never reassigned by that <code>.add(...)</code> call; the one <code>ArrayList</code> it has always pointed to is just modified in place, through a reference that <code>final</code> was never protecting from writes to begin with.</p>
 
     <div class="callout callout-rule">
       <div class="callout-lbl">A record is not "an immutable data container"</div>
       <p>The accurate description is narrower: a record is a transparently <em>shallow</em>-immutable data container — every component reference is guaranteed <code>final</code>, but whether the object each one points to is itself immutable depends entirely on that component's own type. <code>Person</code> above is only genuinely, fully immutable if <code>List&lt;String&gt;</code> itself never changes after construction — which an ordinary <code>ArrayList</code> does not guarantee at all.</p>
     </div>
 
-    <p>Java could have required every record component to be an immutable type, but that would rule out <code>List</code>, <code>Map</code>, and a long list of other everyday types as record components, making records far less useful in practice. Instead, Java enforces only what §17.3 already promised — the reference itself can't be reassigned — and leaves deep immutability to the programmer: passing in an already-immutable collection (<code>List.copyOf(...)</code>, say) is what actually closes this gap, not the <code>record</code> keyword by itself.</p>
+    <p>Java could have required every record component to be an immutable type, but that would rule out <code>List</code>, <code>Map</code>, and a long list of other everyday types as record components, making records far less useful in practice. Instead, Java enforces only what §16.3 already promised — the reference itself can't be reassigned — and leaves deep immutability to the programmer: passing in an already-immutable collection (<code>List.copyOf(...)</code>, say) is what actually closes this gap, not the <code>record</code> keyword by itself.</p>
     </section>
 
-    <!-- §17.5 -->
-    <section id="s17-5">
+    <!-- §16.5 -->
+    <section id="s16-5">
       <div class="section-head">
-        <span class="sec-num">§17.5</span>
+        <span class="sec-num">§16.5</span>
         <h2>Compact Constructors <em>— validation without repeating the parameter list</em></h2>
       </div>
 
-    <p>Sometimes a value needs validating before it's accepted — a negative coordinate might be nonsense for whatever <code>Point</code> represents in a given program. An ordinary constructor would restate the full parameter list and assign every field by hand, exactly like §17.1's hand-written version did. A record instead allows a <span class="term">compact constructor</span>: the validation only, with no parameter list and no assignment statements at all.</p>
+    <p>Sometimes a value needs validating before it's accepted — a negative coordinate might be nonsense for whatever <code>Point</code> represents in a given program. An ordinary constructor would restate the full parameter list and assign every field by hand, exactly like §16.1's hand-written version did. A record instead allows a <span class="term">compact constructor</span>: the validation only, with no parameter list and no assignment statements at all.</p>
 
     <pre><code class="language-java">record Point(int x, int y) {
     Point {
-        if (x < 0 || y < 0) {
+        if (x &lt; 0 || y &lt; 0) {
             throw new IllegalArgumentException("Coordinates cannot be negative");
         }
     }
@@ -363,13 +498,13 @@ p.hobbies().add("gaming"); // compiles and runs fine</code></pre>
 
     <pre><code class="language-java">Point p = new Point(-1, 4); // throws IllegalArgumentException</code></pre>
 
-    <p>The compact constructor's body runs first, given <code>x</code> and <code>y</code> exactly as passed to <code>new Point(...)</code> — and once it finishes without throwing, the compiler still performs the ordinary field assignments automatically, the same assignments §17.2's plain <code>record Point(int x, int y) { }</code> always generated. Nothing about declaring a compact constructor removes that generated behavior; it only inserts a checkpoint in front of it.</p>
+    <p>The compact constructor's body runs first, given <code>x</code> and <code>y</code> exactly as passed to <code>new Point(...)</code> — and once it finishes without throwing, the compiler still performs the ordinary field assignments automatically, the same assignments §16.2's plain <code>record Point(int x, int y) { }</code> always generated. Nothing about declaring a compact constructor removes that generated behavior; it only inserts a checkpoint in front of it.</p>
     </section>
 
-    <!-- §17.6 -->
-    <section id="s17-6">
+    <!-- §16.6 -->
+    <section id="s16-6">
       <div class="section-head">
-        <span class="sec-num">§17.6</span>
+        <span class="sec-num">§16.6</span>
         <h2>Records Can Do More <em>— additional methods, implemented interfaces</em></h2>
       </div>
 
@@ -384,21 +519,21 @@ p.hobbies().add("gaming"); // compiles and runs fine</code></pre>
     <pre><code class="language-java">Point p = new Point(3, 4);
 System.out.println(p.distanceFromOrigin()); // 5.0</code></pre>
 
-    <p><code>distanceFromOrigin()</code> is a method written the ordinary way, with full access to <code>x</code> and <code>y</code> — a record only automates the constructor, the accessors, and <code>equals</code>/<code>hashCode</code>/<code>toString</code>; everything else about writing a class still applies. A record can also <code>implement</code> an interface (§15.3), exactly the way any class does — the generated pieces and any interface's required methods coexist without conflict.</p>
+    <p><code>distanceFromOrigin()</code> is a method written the ordinary way, with full access to <code>x</code> and <code>y</code> — a record only automates the constructor, the accessors, and <code>equals</code>/<code>hashCode</code>/<code>toString</code>; everything else about writing a class still applies. A record can also <code>implement</code> an interface (§13.3), exactly the way any class does — the generated pieces and any interface's required methods coexist without conflict.</p>
     </section>
 
-    <!-- §17.7 -->
-    <section id="s17-7">
+    <!-- §16.7 -->
+    <section id="s16-7">
       <div class="section-head">
-        <span class="sec-num">§17.7</span>
+        <span class="sec-num">§16.7</span>
         <h2>When to Reach for One <em>— a record is a shape, not a replacement</em></h2>
       </div>
 
-    <p>A record fits exactly the shape §13 was already building toward: a fixed bundle of values, set once at construction, never reassigned, compared by content rather than address. The moment a type needs mutable state, a meaningful subclass, or fields beyond what the constructor receives, it no longer fits that shape — and an ordinary class, written out in full, is still the right tool.</p>
+    <p>A record fits exactly the shape §11 was already building toward: a fixed bundle of values, set once at construction, never reassigned, compared by content rather than address. The moment a type needs mutable state, a meaningful subclass, or fields beyond what the constructor receives, it no longer fits that shape — and an ordinary class, written out in full, is still the right tool.</p>
 
     <div class="callout callout-note">
       <div class="callout-lbl">Scope of this chapter</div>
-      <p>Generic records, records used with <code>switch</code> and pattern matching, and manually overriding a single generated accessor while keeping the rest are all left for later. The core shape carries over unchanged: a record is the data carrier §13 already described — transparent, shallow-immutable by construction (§17.4), with the boilerplate written for you.</p>
+      <p>Generic records, records used with <code>switch</code> and pattern matching, and manually overriding a single generated accessor while keeping the rest are all left for later. The core shape carries over unchanged: a record is the data carrier §11 already described — transparent, shallow-immutable by construction (§16.4), with the boilerplate written for you.</p>
     </div>
     </section>
 
@@ -407,11 +542,11 @@ System.out.println(p.distanceFromOrigin()); // 5.0</code></pre>
   <nav class="page-nav" aria-label="Chapter navigation">
     <a href="generics.html" class="page-nav-prev">
       <span class="page-nav-label">← Previous</span>
-      <span class="page-nav-title">§16 — Generics</span>
+      <span class="page-nav-title">§15 — Generics</span>
     </a>
-    <a href="collections.html" class="page-nav-next">
+    <a href="enums.html" class="page-nav-next">
       <span class="page-nav-label">Next →</span>
-      <span class="page-nav-title">§18 — Collections Framework</span>
+      <span class="page-nav-title">§17 — Enums</span>
     </a>
   </nav>
 </main>

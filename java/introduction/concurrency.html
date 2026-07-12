@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§22 Concurrent Programming — OO with Java</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" id="hljs-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" id="hljs-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
+<script>
+(function () {
+  if ((localStorage.getItem('code-theme') || 'light') === 'dark') {
+    document.getElementById('hljs-light-theme').disabled = true;
+    document.getElementById('hljs-dark-theme').disabled = false;
+    document.documentElement.classList.add('code-dark');
+  }
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Toggle navigation">
+  <span></span><span></span><span></span>
+</button>
+
+<button id="code-theme-toggle" class="code-theme-toggle" aria-label="Toggle code color scheme">
+  <span class="icon">🌙</span><span class="code-theme-label">Dark code</span>
+</button>
+
+<nav id="sidebar" aria-label="Tutorial navigation">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-label">Tutorial</div>
+    <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
+  </div>
+  <nav>
+    <ul>
+      <li>
+        <a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a>
+        <ul class="sub-nav">
+          <li><a href="index.html#s0-1"><span class="nav-num">§0.1</span>What Is Java?</a></li>
+          <li><a href="index.html#s0-2"><span class="nav-num">§0.2</span>Where Is Java Used?</a></li>
+          <li><a href="index.html#s0-3"><span class="nav-num">§0.3</span>Why Java?</a></li>
+          <li><a href="index.html#s0-4"><span class="nav-num">§0.4</span>The Java Ecosystem</a></li>
+          <li><a href="index.html#s0-5"><span class="nav-num">§0.5</span>Java Versions</a></li>
+          <li><a href="index.html#s0-6"><span class="nav-num">§0.6</span>Your First Program</a></li>
+          <li><a href="index.html#s0-7"><span class="nav-num">§0.7</span>Key Features</a></li>
+          <li><a href="index.html#s0-8"><span class="nav-num">§0.8</span>Key Takeaways</a></li>
+          <li><a href="index.html#s0-9"><span class="nav-num">§0.9</span>Appendix: Write Once, Run Anywhere</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="variables.html"><span class="nav-num">§1</span>Variables and Values</a>
+        <ul class="sub-nav">
+          <li><a href="variables.html#s1-1"><span class="nav-num">§1.1</span>Values</a></li>
+          <li><a href="variables.html#s1-2"><span class="nav-num">§1.2</span>Variables in Java</a></li>
+          <li><a href="variables.html#s1-3"><span class="nav-num">§1.3</span>Primitive Types</a></li>
+          <li><a href="variables.html#s1-4"><span class="nav-num">§1.4</span>Literals</a></li>
+          <li><a href="variables.html#s1-5"><span class="nav-num">§1.5</span><code>var</code></a></li>
+          <li><a href="variables.html#s1-6"><span class="nav-num">§1.6</span>Common Mistakes</a></li>
+          <li><a href="variables.html#s1-7"><span class="nav-num">§1.7</span>What a Variable Holds</a></li>
+          <li><a href="variables.html#s1-8"><span class="nav-num">§1.8</span>Key Takeaways</a></li>
+          <li><a href="variables.html#s1-9"><span class="nav-num">§1.9</span>Appendix: Number Systems</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="classes.html"><span class="nav-num">§2</span>Classes &amp; Objects</a>
+        <ul class="sub-nav">
+          <li><a href="classes.html#s2-1"><span class="nav-num">§2.1</span>Classes as Blueprints</a></li>
+          <li><a href="classes.html#s2-2"><span class="nav-num">§2.2</span>Instantiation</a></li>
+          <li><a href="classes.html#s2-3"><span class="nav-num">§2.3</span>Reference Variables</a></li>
+          <li><a href="classes.html#s2-4"><span class="nav-num">§2.4</span>Reference Fields</a></li>
+          <li><a href="classes.html#s2-5"><span class="nav-num">§2.5</span>Constructors</a></li>
+          <li><a href="classes.html#s2-6"><span class="nav-num">§2.6</span>Static Fields</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="assignment.html"><span class="nav-num">§3</span>Assignment</a>
+        <ul class="sub-nav">
+          <li><a href="assignment.html#s3-1"><span class="nav-num">§3.1</span>The "Value"</a></li>
+          <li><a href="assignment.html#s3-2"><span class="nav-num">§3.2</span>Primitive Assignment</a></li>
+          <li><a href="assignment.html#s3-3"><span class="nav-num">§3.3</span>Reference Assignment</a></li>
+          <li><a href="assignment.html#s3-4"><span class="nav-num">§3.4</span>Consequence</a></li>
+          <li><a href="assignment.html#s3-5"><span class="nav-num">§3.5</span>Assignment vs. the Dot</a></li>
+          <li><a href="assignment.html#s3-6"><span class="nav-num">§3.6</span>The Rule</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="methods.html"><span class="nav-num">§4</span>Methods</a>
+        <ul class="sub-nav">
+          <li><a href="methods.html#s4-intro"><span class="nav-num">§4.1</span>Why Methods</a></li>
+          <li><a href="methods.html#s4-2"><span class="nav-num">§4.2</span>What Is a Method?</a></li>
+          <li><a href="methods.html#s4-3"><span class="nav-num">§4.3</span>Outputs</a></li>
+          <li><a href="methods.html#s4-4"><span class="nav-num">§4.4</span>Functions to Objects</a></li>
+          <li><a href="methods.html#s4-5"><span class="nav-num">§4.5</span>The "Hidden" Parameter</a></li>
+          <li><a href="methods.html#s4-6"><span class="nav-num">§4.6</span>Key Takeaways</a></li>
+          <li><a href="methods.html#s4-7"><span class="nav-num">§4.7</span>Appendix: The Call Stack</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="operators.html"><span class="nav-num">§5</span>Operators</a>
+        <ul class="sub-nav">
+          <li><a href="operators.html#s5-1"><span class="nav-num">§5.1</span>Arithmetic Operators</a></li>
+          <li><a href="operators.html#s5-2"><span class="nav-num">§5.2</span>Unary Operators</a></li>
+          <li><a href="operators.html#s5-3"><span class="nav-num">§5.3</span>Comparison Operators</a></li>
+          <li><a href="operators.html#s5-4"><span class="nav-num">§5.4</span>Logical Operators</a></li>
+          <li><a href="operators.html#s5-5"><span class="nav-num">§5.5</span>Compound Assignment</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="arrays.html"><span class="nav-num">§6</span>Arrays</a>
+        <ul class="sub-nav">
+          <li><a href="arrays.html#s6-1"><span class="nav-num">§6.1</span>Why Arrays</a></li>
+          <li><a href="arrays.html#s6-2"><span class="nav-num">§6.2</span>One Variable, Many Values</a></li>
+          <li><a href="arrays.html#s6-3"><span class="nav-num">§6.3</span>The Index</a></li>
+          <li><a href="arrays.html#s6-4"><span class="nav-num">§6.4</span>Creating an Array</a></li>
+          <li><a href="arrays.html#s6-5"><span class="nav-num">§6.5</span>Reading and Writing Elements</a></li>
+          <li><a href="arrays.html#s6-6"><span class="nav-num">§6.6</span><code>.length</code></a></li>
+          <li><a href="arrays.html#s6-7"><span class="nav-num">§6.7</span>Filling in the Week</a></li>
+          <li><a href="arrays.html#s6-8"><span class="nav-num">§6.8</span>Assignment Still Copies the Address</a></li>
+          <li><a href="arrays.html#s6-9"><span class="nav-num">§6.9</span>Arrays of Objects</a></li>
+          <li><a href="arrays.html#s6-10"><span class="nav-num">§6.10</span>Pointing a Slot at an Existing Object</a></li>
+          <li><a href="arrays.html#s6-11"><span class="nav-num">§6.11</span>Passing an Array's Address to a Method</a></li>
+          <li><a href="arrays.html#s6-12"><span class="nav-num">§6.12</span>Variable-Arity Parameters</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="controlflow.html"><span class="nav-num">§7</span>Control Flow</a>
+        <ul class="sub-nav">
+          <li><a href="controlflow.html#s7-1"><span class="nav-num">§7.1</span>The Flow of Execution</a></li>
+          <li><a href="controlflow.html#s7-2"><span class="nav-num">§7.2</span>Variable Scope</a></li>
+          <li><a href="controlflow.html#s7-3"><span class="nav-num">§7.3</span>Conditional Branching</a></li>
+          <li><a href="controlflow.html#s7-4"><span class="nav-num">§7.4</span><code>while</code></a></li>
+          <li><a href="controlflow.html#s7-5"><span class="nav-num">§7.5</span><code>for</code></a></li>
+          <li><a href="controlflow.html#s7-6"><span class="nav-num">§7.6</span>for-each</a></li>
+          <li><a href="controlflow.html#s7-7"><span class="nav-num">§7.7</span>Ternary Operator</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="strings.html"><span class="nav-num">§8</span>Strings</a>
+        <ul class="sub-nav">
+          <li><a href="strings.html#s8-1"><span class="nav-num">§8.1</span>Writing Systems &amp; Unicode</a></li>
+          <li><a href="strings.html#s8-2"><span class="nav-num">§8.2</span><code>char</code></a></li>
+          <li><a href="strings.html#s8-3"><span class="nav-num">§8.3</span><code>Character</code></a></li>
+          <li><a href="strings.html#s8-4"><span class="nav-num">§8.4</span>Sequence of Characters</a></li>
+          <li><a href="strings.html#s8-5"><span class="nav-num">§8.5</span>Text Blocks</a></li>
+          <li><a href="strings.html#s8-6"><span class="nav-num">§8.6</span>Immutability</a></li>
+          <li><a href="strings.html#s8-7"><span class="nav-num">§8.7</span><code>==</code> vs <code>.equals()</code></a></li>
+          <li><a href="strings.html#s8-8"><span class="nav-num">§8.8</span>Concatenation</a></li>
+          <li><a href="strings.html#s8-9"><span class="nav-num">§8.9</span>Important String Methods</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="inheritance.html"><span class="nav-num">§9</span>Inheritance</a>
+        <ul class="sub-nav">
+          <li><a href="inheritance.html#s10-1"><span class="nav-num">§9.1</span>Taxonomy</a></li>
+          <li><a href="inheritance.html#s10-2"><span class="nav-num">§9.2</span>The Problem</a></li>
+          <li><a href="inheritance.html#s10-3"><span class="nav-num">§9.3</span><code>extends</code></a></li>
+          <li><a href="inheritance.html#s10-4"><span class="nav-num">§9.4</span><code>super(...)</code></a></li>
+          <li><a href="inheritance.html#s10-5"><span class="nav-num">§9.5</span>Polymorphism</a></li>
+          <li><a href="inheritance.html#s10-6"><span class="nav-num">§9.6</span>Overriding</a></li>
+          <li><a href="inheritance.html#s10-7"><span class="nav-num">§9.7</span><code>toString()</code></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="accessmodifiers.html"><span class="nav-num">§10</span>Packages &amp; Access Modifiers</a>
+        <ul class="sub-nav">
+          <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§10.1</span>Packages</a></li>
+          <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§10.2</span>Why Restrict Access</a></li>
+          <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§10.3</span><code>private</code></a></li>
+          <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§10.4</span>Encapsulation</a></li>
+          <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§10.5</span><code>public</code></a></li>
+          <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§10.6</span>Package-Private</a></li>
+          <li><a href="accessmodifiers.html#s11-7"><span class="nav-num">§10.7</span><code>protected</code></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="immutability.html"><span class="nav-num">§11</span>Immutability</a>
+        <ul class="sub-nav">
+          <li><a href="immutability.html#s11-1"><span class="nav-num">§11.1</span>Two Real-World Analogies</a></li>
+          <li><a href="immutability.html#s11-2"><span class="nav-num">§11.2</span>Identity &amp; State</a></li>
+          <li><a href="immutability.html#s11-3"><span class="nav-num">§11.3</span>A Question of Time</a></li>
+          <li><a href="immutability.html#s11-4"><span class="nav-num">§11.4</span>Building an Immutable Class</a></li>
+          <li><a href="immutability.html#s11-5"><span class="nav-num">§11.5</span><code>final</code> Isn't Deep</a></li>
+          <li><a href="immutability.html#s11-6"><span class="nav-num">§11.6</span>Why It Matters</a></li>
+          <li><a href="immutability.html#s11-7"><span class="nav-num">§11.7</span><code>StringBuilder</code></a></li>
+          <li><a href="immutability.html#s11-8"><span class="nav-num">§11.8</span>Core Pillars</a></li>
+          <li><a href="immutability.html#s11-9"><span class="nav-num">§11.9</span>Putting It Together</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="abstractclasses.html"><span class="nav-num">§12</span>Abstract Classes</a>
+        <ul class="sub-nav">
+          <li><a href="abstractclasses.html#s12-1"><span class="nav-num">§12.1</span>The Problem</a></li>
+          <li><a href="abstractclasses.html#s12-2"><span class="nav-num">§12.2</span><code>abstract</code> Classes</a></li>
+          <li><a href="abstractclasses.html#s12-3"><span class="nav-num">§12.3</span><code>abstract</code> Methods</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="interfaces.html"><span class="nav-num">§13</span>Interfaces</a>
+        <ul class="sub-nav">
+          <li><a href="interfaces.html#s13-1"><span class="nav-num">§13.1</span>The Problem</a></li>
+          <li><a href="interfaces.html#s13-2"><span class="nav-num">§13.2</span>Interface vs. Abstract Class</a></li>
+          <li><a href="interfaces.html#s13-3"><span class="nav-num">§13.3</span>Declaring &amp; Implementing</a></li>
+          <li><a href="interfaces.html#s13-4"><span class="nav-num">§13.4</span>Override vs. Overload</a></li>
+          <li><a href="interfaces.html#s13-5"><span class="nav-num">§13.5</span>Multiple Interfaces</a></li>
+          <li><a href="interfaces.html#s13-6"><span class="nav-num">§13.6</span>Interface-Typed Params</a></li>
+          <li><a href="interfaces.html#s13-7"><span class="nav-num">§13.7</span>Anonymous Classes</a></li>
+          <li><a href="interfaces.html#s13-8"><span class="nav-num">§13.8</span>Default Methods</a></li>
+          <li><a href="interfaces.html#s13-9"><span class="nav-num">§13.9</span>Default Method Collisions</a></li>
+          <li><a href="interfaces.html#s13-10"><span class="nav-num">§13.10</span>Static Methods</a></li>
+          <li><a href="interfaces.html#s13-11"><span class="nav-num">§13.11</span>Interface Inheritance</a></li>
+          <li><a href="interfaces.html#s13-12"><span class="nav-num">§13.12</span>Strategy Pattern</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="exceptions.html"><span class="nav-num">§14</span>Exceptions</a>
+        <ul class="sub-nav">
+          <li><a href="exceptions.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
+          <li><a href="exceptions.html#s14-2"><span class="nav-num">§14.2</span>The Exception Lifecycle</a></li>
+          <li><a href="exceptions.html#s14-3"><span class="nav-num">§14.3</span>The Exception Hierarchy</a></li>
+          <li><a href="exceptions.html#s14-4"><span class="nav-num">§14.4</span>Checked vs. Unchecked</a></li>
+          <li><a href="exceptions.html#s14-5"><span class="nav-num">§14.5</span>Handling Exceptions</a></li>
+          <li><a href="exceptions.html#s14-6"><span class="nav-num">§14.6</span><code>throw</code> and <code>throws</code></a></li>
+          <li><a href="exceptions.html#s14-7"><span class="nav-num">§14.7</span>Custom Exceptions</a></li>
+          <li><a href="exceptions.html#s14-8"><span class="nav-num">§14.8</span>Exception Chaining</a></li>
+          <li><a href="exceptions.html#s14-9"><span class="nav-num">§14.9</span>Try-with-Resources</a></li>
+          <li><a href="exceptions.html#s14-10"><span class="nav-num">§14.10</span>Exceptions Are Not Control Flow</a></li>
+          <li><a href="exceptions.html#s14-11"><span class="nav-num">§14.11</span>Best Practices &amp; Anti-Patterns</a></li>
+          <li><a href="exceptions.html#s14-12"><span class="nav-num">§14.12</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="generics.html"><span class="nav-num">§15</span>Generics</a>
+        <ul class="sub-nav">
+          <li><a href="generics.html#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
+          <li><a href="generics.html#s15-2"><span class="nav-num">§15.2</span>Type Parameters</a></li>
+          <li><a href="generics.html#s15-3"><span class="nav-num">§15.3</span>Generic Methods</a></li>
+          <li><a href="generics.html#s15-4"><span class="nav-num">§15.4</span>Bounded Types</a></li>
+          <li><a href="generics.html#s15-5"><span class="nav-num">§15.5</span>Compile Time Only</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="records.html"><span class="nav-num">§16</span>Records</a>
+        <ul class="sub-nav">
+          <li><a href="records.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
+          <li><a href="records.html#s16-2"><span class="nav-num">§16.2</span><code>record</code></a></li>
+          <li><a href="records.html#s16-3"><span class="nav-num">§16.3</span>Implicitly Final</a></li>
+          <li><a href="records.html#s16-4"><span class="nav-num">§16.4</span>Shallow Immutability</a></li>
+          <li><a href="records.html#s16-5"><span class="nav-num">§16.5</span>Compact Constructors</a></li>
+          <li><a href="records.html#s16-6"><span class="nav-num">§16.6</span>Records Can Do More</a></li>
+          <li><a href="records.html#s16-7"><span class="nav-num">§16.7</span>When to Reach for One</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="collections.html"><span class="nav-num">§18</span>Collections Framework</a>
+        <ul class="sub-nav">
+          <li><a href="collections.html#s18-1"><span class="nav-num">§18.1</span>The Problem</a></li>
+          <li><a href="collections.html#s18-2"><span class="nav-num">§18.2</span>The Big Picture</a></li>
+          <li><a href="collections.html#s18-3"><span class="nav-num">§18.3</span><code>List</code></a></li>
+          <li><a href="collections.html#s18-4"><span class="nav-num">§18.4</span><code>Queue</code></a></li>
+          <li><a href="collections.html#s18-5"><span class="nav-num">§18.5</span><code>Set</code></a></li>
+          <li><a href="collections.html#s18-6"><span class="nav-num">§18.6</span><code>Map</code></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="lambdas.html"><span class="nav-num">§19</span>Functional Programming</a>
+        <ul class="sub-nav">
+          <li><a href="lambdas.html#s19-1"><span class="nav-num">§19.1</span>Functions as First-Class Citizens</a></li>
+          <li><a href="lambdas.html#s19-2"><span class="nav-num">§19.2</span>Why Java "Simulates" First-Class Functions</a></li>
+          <li><a href="lambdas.html#s19-3"><span class="nav-num">§19.3</span>The Problem</a></li>
+          <li><a href="lambdas.html#s19-4"><span class="nav-num">§19.4</span>Another Anonymous Class</a></li>
+          <li><a href="lambdas.html#s19-5"><span class="nav-num">§19.5</span>Functional Interfaces</a></li>
+          <li><a href="lambdas.html#s19-6"><span class="nav-num">§19.6</span>Lambda Expressions</a></li>
+          <li><a href="lambdas.html#s19-7"><span class="nav-num">§19.7</span>Method References</a></li>
+          <li><a href="lambdas.html#s19-8"><span class="nav-num">§19.8</span><code>java.util.function</code></a></li>
+          <li><a href="lambdas.html#s19-9"><span class="nav-num">§19.9</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="enums.html"><span class="nav-num">§17</span>Enums</a>
+        <ul class="sub-nav">
+          <li><a href="enums.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
+          <li><a href="enums.html#s17-2"><span class="nav-num">§17.2</span>Declaring an Enum</a></li>
+          <li><a href="enums.html#s17-3"><span class="nav-num">§17.3</span>Objects, Not Constants</a></li>
+          <li><a href="enums.html#s17-4"><span class="nav-num">§17.4</span>Comparing Enum Values</a></li>
+          <li><a href="enums.html#s17-5"><span class="nav-num">§17.5</span>Type Characteristics</a></li>
+          <li><a href="enums.html#s17-6"><span class="nav-num">§17.6</span>Fields, Constructors, Methods</a></li>
+          <li><a href="enums.html#s17-7"><span class="nav-num">§17.7</span>Enums vs. Magic Numbers</a></li>
+          <li><a href="enums.html#s17-8"><span class="nav-num">§17.8</span>Closed Sets vs. Evolving Reality</a></li>
+          <li><a href="enums.html#s17-9"><span class="nav-num">§17.9</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="optionals.html"><span class="nav-num">§20</span>Optional&lt;T&gt;</a>
+        <ul class="sub-nav">
+          <li><a href="optionals.html#s20-1"><span class="nav-num">§20.1</span>The Problem</a></li>
+          <li><a href="optionals.html#s20-2"><span class="nav-num">§20.2</span><code>null</code>: The Absence of a Value</a></li>
+          <li><a href="optionals.html#s20-3"><span class="nav-num">§20.3</span>The Defensive Approach</a></li>
+          <li><a href="optionals.html#s20-4"><span class="nav-num">§20.4</span>The <code>Optional&lt;T&gt;</code> Class</a></li>
+          <li><a href="optionals.html#s20-5"><span class="nav-num">§20.5</span><code>Optional&lt;T&gt;</code> vs <code>null</code></a></li>
+          <li><a href="optionals.html#s20-6"><span class="nav-num">§20.6</span>Specialized Primitive Optionals</a></li>
+          <li><a href="optionals.html#s20-7"><span class="nav-num">§20.7</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="streams.html"><span class="nav-num">§21</span>Streams</a>
+        <ul class="sub-nav">
+          <li><a href="streams.html#s21-1"><span class="nav-num">§21.1</span>The Problem</a></li>
+          <li><a href="streams.html#s21-2"><span class="nav-num">§21.2</span>What Is a Stream</a></li>
+          <li><a href="streams.html#s21-3"><span class="nav-num">§21.3</span>Creating a Stream</a></li>
+          <li><a href="streams.html#s21-4"><span class="nav-num">§21.4</span>Intermediate Operations</a></li>
+          <li><a href="streams.html#s21-5"><span class="nav-num">§21.5</span>Terminal Operations</a></li>
+          <li><a href="streams.html#s21-6"><span class="nav-num">§21.6</span>Collecting Results</a></li>
+          <li><a href="streams.html#s21-7"><span class="nav-num">§21.7</span>Streams and <code>Optional&lt;T&gt;</code></a></li>
+          <li><a href="streams.html#s21-8"><span class="nav-num">§21.8</span>Laziness and Pipelines</a></li>
+          <li><a href="streams.html#s21-9"><span class="nav-num">§21.9</span>When (Not) to Use Streams</a></li>
+          <li><a href="streams.html#s21-10"><span class="nav-num">§21.10</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="concurrency.html" class="active"><span class="nav-num">§22</span>Concurrent Programming</a>
+        <ul class="sub-nav">
+          <li><a href="#s22-1"><span class="nav-num">§22.1</span>The Problem</a></li>
+          <li><a href="#s22-2"><span class="nav-num">§22.2</span>Process, Thread, and the OS</a></li>
+          <li><a href="#s22-3"><span class="nav-num">§22.3</span>Independent Progress</a></li>
+          <li><a href="#s22-4"><span class="nav-num">§22.4</span>Why Concurrency Matters</a></li>
+          <li><a href="#s22-5"><span class="nav-num">§22.5</span>Where Parallelism Fits In</a></li>
+          <li><a href="#s22-6"><span class="nav-num">§22.6</span>The Main Thread</a></li>
+          <li><a href="#s22-7"><span class="nav-num">§22.7</span>Step 1: Creating a Task</a></li>
+          <li><a href="#s22-8"><span class="nav-num">§22.8</span>Step 2: Handing a Task to an Executor</a></li>
+          <li><a href="#s22-9"><span class="nav-num">§22.9</span>ExecutorService in Practice</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="modules.html"><span class="nav-num">§23</span>Java Modules</a>
+        <ul class="sub-nav">
+          <li><a href="modules.html#s23-1"><span class="nav-num">§23.1</span>The Problem</a></li>
+          <li><a href="modules.html#s23-2"><span class="nav-num">§23.2</span>What Is a Module</a></li>
+          <li><a href="modules.html#s23-3"><span class="nav-num">§23.3</span><code>module-info.java</code></a></li>
+          <li><a href="modules.html#s23-4"><span class="nav-num">§23.4</span><code>exports</code></a></li>
+          <li><a href="modules.html#s23-5"><span class="nav-num">§23.5</span><code>requires</code></a></li>
+          <li><a href="modules.html#s23-6"><span class="nav-num">§23.6</span>Strong Encapsulation</a></li>
+          <li><a href="modules.html#s23-7"><span class="nav-num">§23.7</span>The Module Path</a></li>
+          <li><a href="modules.html#s23-8"><span class="nav-num">§23.8</span><code>requires transitive</code></a></li>
+          <li><a href="modules.html#s23-9"><span class="nav-num">§23.9</span>When (Not) to Use Modules</a></li>
+          <li><a href="modules.html#s23-10"><span class="nav-num">§23.10</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li><a href="dateandtime.html"><span class="nav-num">§24</span>Date and Time</a></li>
+      <li><a href="io.html"><span class="nav-num">§25</span>Input and Output</a></li>
+      <li><a href="oodesign.html"><span class="nav-num">§26</span>Object-Oriented Design</a></li>
+    </ul>
+  </nav>
+</nav>
+
+<main id="content">
+  <header class="page-header">
+    <div class="page-chapter">Chapter 22</div>
+    <h1>Concurrent Programming</h1>
+    <p class="page-lead">§11.6 promised this chapter the moment threads first came up: sharing mutable state safely between them. Before any of that mechanics, though, comes a more basic question — why bother with more than one thread of execution at all? This chapter starts with a problem every program with the outside world runs into, using nothing but a real-world analogy anyone can picture — then names the vocabulary that problem was already speaking in, before a single line of Java thread code appears.</p>
+  </header>
+
+  <article>
+
+    <!-- §22.1 -->
+    <section id="s22-1">
+      <div class="section-head">
+        <span class="sec-num">§22.1</span>
+        <h2>The Problem <em>— one thing at a time, and everything waits</em></h2>
+      </div>
+
+      <p>Picture a coffee shop with a single barista and a queue of customers.</p>
+
+      <p><strong>Case 1.</strong> The barista takes the first customer's order and payment, then presses the button on the espresso machine — and <strong>waits</strong> for the shot to pull. Once it's ready, they turn on the steamer and <strong>wait</strong> again while the milk heats. They assemble the drink, call the customer's name — and <strong>wait</strong> once more for that customer to actually step up and take it. Only once the cup has left the counter does the barista turn to the next person in line and start the entire sequence over. Every other customer in the queue stands there through all three waits, for a drink that isn't even theirs.</p>
+
+      <div class="callout callout-note">
+        <div class="callout-lbl">Somebody is paying for that barista</div>
+        <p>The shop owner isn't paying the barista only for the moments spent actually pulling shots and steaming milk — the wage runs the whole shift, waiting included. Every one of Case 1's three waits is time the owner is paying for while nothing productive happens: a resource on the clock, standing still. A barista who spends a third of the shift waiting is a barista the owner is paying full price for one-third less work out of. That's not a people problem or a bad-attitude problem — it's what the sequential arrangement itself guarantees, no matter how diligent the barista is.</p>
+      </div>
+
+      <p><strong>Case 2.</strong> Now picture the same barista handling the same queue differently. They take the first customer's order and payment, press the button on the espresso machine — and, instead of waiting, immediately take the second customer's order. Since the first machine isn't ready yet, they <strong>switch</strong> to preparing the second drink: measuring syrup, pouring milk into the shaker, using exactly the dead time the first order's machine is filling. The espresso machine beeps; the barista <strong>switches</strong> back to the first drink, finishes it, sets it on the counter, and calls the name — then, without waiting for that customer to walk over and collect it, <strong>switches</strong> straight to whatever's next.</p>
+
+      <p>Same barista. Same two customers. Same machine. The only difference is what happens the instant something isn't ready yet:</p>
+
+      <ol type="a">
+        <li><strong>Wait</strong> — do nothing until it is.</li>
+        <li><strong>Switch</strong> — move to something else that's actually ready right now.</li>
+      </ol>
+
+      <p>Case 1 is a <span class="term">sequential</span> program: each operation completes before the next begins, in a strict, fixed order. The barista here plays the part of the CPU core — the one resource everything in the queue is ultimately waiting on. When the barista is genuinely working — taking an order, assembling a drink — that's pure computation, and it costs nothing: the core is doing exactly what it exists to do, with nothing else it could be doing instead. The waste shows up specifically the moment the barista is <strong>waiting</strong> rather than working — for the machine to heat, for a customer to arrive to collect their cup — because a resource sitting idle, waiting, is a resource going to waste, whether that resource is a barista or a CPU core. But most real programs aren't pure computation, any more than the barista's job was pure drink-assembly. They read files, query databases, call remote services, wait on a person to click something. Those operations take real, measurable time — not because the CPU is working hard, but because the program is <em>waiting</em>, exactly the way the barista waited on the espresso machine: for a disk to seek, for a network packet to arrive, for some other service that is itself waiting on something further down the chain.</p>
+
+      <p>To isolate the actual problem, picture a simplified, theoretical machine running nothing but this one sequential program — no other process for anything else to reach for, nothing else that could possibly use the core in the meantime. In that simplified world, the CPU genuinely sits idle for the entire wait, the same way the barista just stood there instead of touching the second order. A real computer is never actually this empty — dozens of other processes are always around, and something will typically find its way onto that core regardless. But no matter how busy the core stays with other people's work, it does nothing to unfreeze <em>this</em> program: its one sequential thread is still stuck waiting, and everything it was responsible for — including things that had nothing to do with the wait — sits frozen right along with it, exactly like the rest of the queue behind Case 1's barista.</p>
+
+      <h3>The same shape, in a web browser</h3>
+
+      <p>Click a link to download a file, and the browser has to actually go fetch it — reading the response from the network as it arrives, which takes real time no disk or CPU speed can shortcut. Written sequentially, that download runs directly on the very same thread that draws the page and listens for clicks. While it runs:</p>
+
+      <ul>
+        <li>The page stops repainting.</li>
+        <li>Clicks are ignored — links, buttons, even scrolling do nothing.</li>
+        <li>The whole browser looks — and behaves — as if it has crashed.</li>
+      </ul>
+
+      <p>The download might take ten seconds. The browser is frozen for all ten of them — not because the CPU is overloaded (the one thread doing the waiting isn't asking it for anything during that time), but because a single sequential thread of execution was made responsible for two unrelated things, one after the other, and the first one blocks.</p>
+
+      <div class="callout callout-rule">
+        <div class="callout-lbl">The problem, precisely</div>
+        <p>A single thread of execution cannot make progress on multiple things at once. If one thing it's doing blocks — waiting on a disk, a network, another service — everything else that same thread was responsible for blocks along with it, whether or not that other work had anything to do with the wait.</p>
+      </div>
+
+      <p>Case 2's barista already proved this doesn't have to be the outcome — nobody hired a second barista, they just refused to stand still during a wait. §22.3 turns that same move into software.</p>
+    </section>
+
+    <!-- §22.2 -->
+    <section id="s22-2">
+      <div class="section-head">
+        <span class="sec-num">§22.2</span>
+        <h2>Process, Thread, and the Operating System <em>— vocabulary from a user's chair</em></h2>
+      </div>
+
+      <p>Before any of this can be about Java, it helps to have names for a few things every computer user has already seen, usually without needing a name for them. None of what follows is specific to programming — it's just how a modern computer runs more than one thing at a time, described from the outside, the way it looks to whoever is sitting in front of the screen.</p>
+
+      <h3>Process: one running app, walled off from every other</h3>
+
+      <p>Open a web browser, a music player, and a word processor, and — on Windows, macOS, or Linux alike — a window like Task Manager or Activity Monitor will list each one separately, each with its own row, its own slice of memory, its own share of CPU time. Each of those rows is a <span class="term">process</span>: one running copy of one program, with its own private memory that no other process can casually reach into. Quit the music player, and the word processor doesn't even notice — as far as it's concerned, the two might as well be running on separate computers.</p>
+
+      <h3>The operating system: the one thing every process shares</h3>
+
+      <p>Something has to decide which processes exist, hand each one its own private memory, and let them all share the one CPU, the one disk, the one network connection, without any of them needing to know the others exist. That something is the <span class="term">operating system</span> (the <span class="term">OS</span>) — Windows, macOS, or Linux itself, running underneath every application, the one piece of software every process depends on and none of them can bypass.</p>
+
+      <h3>Thread: more than one thing happening inside a single process</h3>
+
+      <p>A process is rarely doing just one single thing internally, either. Open one browser tab on a video-heavy page, and inside that <em>one</em> process, several things are clearly happening together: the page keeps scrolling smoothly, the video keeps playing without stuttering, and a download in another tab keeps ticking upward — all at once, all inside what Task Manager still shows as a single row. Each of those separate, independently progressing activities inside one process is a <span class="term">thread</span>.</p>
+
+      <p>Think of a process as one company renting a floor of an office building: it has its own space, its own locked door, its own supplies, none of it accessible to the company on the floor above. A thread is one employee inside that company — several employees can work on different tasks at once, all sharing the same one floor, the same shared filing cabinet, the same shared phone line, precisely because they all belong to the same one company. Different companies (processes) are isolated from each other; different employees of the <em>same</em> company (threads of the same process) share almost everything, on purpose.</p>
+
+      <div class="callout callout-rule">
+        <div class="callout-lbl">Three terms, together</div>
+        <p>A computer runs many <strong>processes</strong> at once, each one isolated from the others, all of them managed by the <strong>operating system</strong>. Inside any one process, multiple <strong>threads</strong> can be making progress at the same time, sharing that process's own memory. §22.3 picks up from here — with far more threads wanting to run than there are CPU cores to run them on, something has to decide who actually gets one right now.</p>
+      </div>
+    </section>
+
+    <!-- §22.3 -->
+    <section id="s22-3">
+      <div class="section-head">
+        <span class="sec-num">§22.3</span>
+        <h2>Independent Progress <em>— separate threads for separate activities</em></h2>
+      </div>
+
+      <p>§22.1's Case 2 barista pulled off the fix alone, through nothing but discipline: notice when something isn't ready, and switch to other real work instead of standing still. A program could try to replicate that same discipline by hand, everywhere it does anything that might block — but that's exactly the kind of thing worth handing to something more reliable than remembering to do it right, every time, at every blocking call. Give each activity its own <span class="term">thread</span> — its own independent, separately scheduled line of execution — and the operating system enforces the same discipline automatically, without the program having to think about it at every wait. The download runs on one thread; the window-drawing and click-handling run on another. Neither can block the other, because blocking is something that happens to a thread, and now there are two.</p>
+
+      <p>This works even on a machine with a single CPU core, because of a part of the operating system §22.2 didn't need yet: the <span class="term">scheduler</span>. With far more threads wanting to run than there are cores to run them on — true even here, with just two — something has to decide, from one moment to the next, which thread actually gets the core, and for how long, before making way for another. That decision-maker is the scheduler, and its entire job is exactly this: pick a thread, let it run for a short slice of time, then pick the next one. Picture a conference with a hundred attendees and one shared microphone: a moderator — the scheduler — decides who speaks next and for how long, cutting each speaker off after their turn and handing the microphone to someone else, over and over, fast enough that everyone who wanted to speak eventually gets heard. No attendee controls when their turn comes; the moderator does.</p>
+
+      <p>Handing the microphone to a new speaker isn't free, either. The previous speaker has to be interrupted mid-thought, their place noted so they can resume later exactly where they left off; the next speaker has to get situated before they can usefully begin. The operating system does the equivalent of this every time the scheduler swaps one thread out for another: it saves precisely where the interrupted thread was, then loads in whatever the newly scheduled thread needs to continue. That save-and-restore operation is a <span class="term">context switch</span> — it produces no useful work of its own, purely the overhead of sharing one core among many threads. A handful of switches per second is unnoticeable; §22.4 returns to what happens when there are far more than a handful.</p>
+
+      <p>With the scheduler doing this fast enough, the two threads from the download example <span class="term">interleave</span> — switching between them rapidly enough that both appear, to a person watching, to be making continuous progress. The download thread blocks on network I/O; the scheduler immediately switches to the UI thread, which repaints the window and responds to a click; when the network data finally arrives, the scheduler switches back. The core is never left with nothing to do for the whole ten seconds — it's handed to other work the instant the download thread has nothing for it to do.</p>
+
+      <div class="callout callout-rule">
+        <div class="callout-lbl">What concurrency actually means</div>
+        <p><span class="term">Concurrency</span> is structuring a program so that independent activities can make progress independently, without blocking each other. That's the whole definition — nothing here requires more than one CPU core. A single core, switching fast enough between threads, is enough to deliver it.</p>
+      </div>
+
+      <p>The same principle scales up unchanged. A web server handling thousands of requests at once faces the identical shape of problem: each request involves I/O of its own — reading a socket, querying a database, writing a response. Written sequentially, request B cannot even begin until request A finishes completely, so one slow database query stalls every other client waiting behind it. Give each request its own thread instead, and while thread A waits on its database, thread B computes, thread C writes a response, and thread D reads from its own socket — each advancing on its own schedule. A slow request no longer freezes the server; it only ever blocks the one thread handling it.</p>
+
+      <h3>The browser, unfrozen</h3>
+
+      <p>§22.1's Case 2 barista already made the shape of concurrency concrete, with no hardware involved at all — one worker, multiple orders in progress, nothing frozen because nobody stood still during a wait. The same browser that froze solid over a single download in §22.1 runs the identical shape once it's built concurrently, with several activities in flight the moment a page starts loading:</p>
+
+      <ul>
+        <li>The network is fetching HTML, CSS, images, and scripts from the server.</li>
+        <li>The rendering engine is laying out whatever HTML has already arrived.</li>
+        <li>The UI thread keeps the window responsive — scrolling, tab-switching, and clicks all still work.</li>
+        <li>The JavaScript engine may be running a script in the background.</li>
+      </ul>
+
+      <p>None of these waits for the others to fully finish before starting. The page begins rendering before every image has downloaded; the window can scroll before the page has fully loaded; a slow resource fetching on one tab doesn't stop a click on another. Each activity advances on its own terms, blocking only when it genuinely needs something the others haven't produced yet. A sequential browser — fully download, then fully parse, then fully render, then finally accept input — would be unusable; concurrency is what makes the experience feel alive rather than frozen between steps.</p>
+    </section>
+
+    <!-- §22.4 -->
+    <section id="s22-4">
+      <div class="section-head">
+        <span class="sec-num">§22.4</span>
+        <h2>Why Concurrency Matters</h2>
+      </div>
+
+      <p>Concurrency pays off in three distinct ways.</p>
+
+      <ul>
+        <li>
+          <p><strong>Reduced execution time.</strong> The payoff looks different depending on what kind of work is actually waiting:</p>
+
+          <table class="content-table">
+            <tr>
+              <th>Scenario</th>
+              <th>What happens</th>
+            </tr>
+            <tr>
+              <td>I/O-bound tasks</td>
+              <td>While one thread waits on a database or a remote service (blocking, not computing), another thread uses the CPU to do real work. The wait stops being wasted time.</td>
+            </tr>
+            <tr>
+              <td>CPU-bound tasks, matched to cores</td>
+              <td>Eight genuinely CPU-bound threads on eight cores each get a core to themselves — the work finishes roughly eight times faster. This is the sweet spot §22.5's parallelism describes.</td>
+            </tr>
+            <tr>
+              <td>CPU-bound tasks, oversubscribed</td>
+              <td>Run a hundred CPU-bound threads on eight cores, and all hundred are fighting over eight execution units. None of them ever blocks on I/O — they're always ready to run — so the scheduler is forced into a constant stream of context switches (§22.3) just to give each one a turn. Those switches have a real cost of their own, and can leave the total work slower than simply running eight threads to begin with.</td>
+            </tr>
+          </table>
+
+          <p>The oversubscribed case has a second, less obvious cost sitting underneath the swapping itself: each core keeps the data it's actively working on in a small, extremely fast on-chip <span class="term">cache</span> — the equivalent of a chef keeping every ingredient in reach on the counter, instead of walking back to a distant pantry for each one. A hundred threads competing for the same core constantly evict each other's data from that cache; every time a thread gets its brief turn, it often has to fetch its own working data all over again from much slower main memory, because the previous thread's turn overwrote what was there. More threads than cores doesn't just add switching overhead — it can quietly sabotage the one thing that makes any of this fast in the first place.</p>
+        </li>
+        <li>
+          <p><strong>Better resource utilization.</strong> §22.1's underused barista was a cost the shop owner paid regardless of how much got done; a CPU sitting idle is the identical cost, just paid in silicon instead of wages. The CPU, network, and disk are all expensive relative to how often a purely sequential program actually keeps them busy. A CPU is millions of times faster than a disk or a Wi-Fi radio; without concurrency, it sends a request and then sits at effectively 0% utilization until the response arrives. With concurrency, the instant one thread starts waiting on the network, the scheduler hands the CPU to another thread with real work ready — the idle gap gets filled instead of discarded.</p>
+        </li>
+        <li>
+          <p><strong>Improved responsiveness.</strong> Of the three, this is the one a person actually feels — it shows up directly as the <span class="term">user experience</span> of the program, not just a number in a performance report. §22.1's frozen download button generalizes to any interface with a main thread responsible for drawing the screen. Run heavy work directly on that thread, and the window freezes for exactly as long as that work takes. Move the same work to a background thread, and the main thread stays free to keep drawing animations, responding to hovers, and updating a progress bar — the same reasoning §22.3 already applied to the download, now framed as a general design habit rather than a one-off fix.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- §22.5 -->
+    <section id="s22-5">
+      <div class="section-head">
+        <span class="sec-num">§22.5</span>
+        <h2>Where Parallelism Fits In <em>— a hardware bonus, not the definition</em></h2>
+      </div>
+
+      <p>So far, one barista has been doing all the switching — §22.1's Case 2 got two orders moving with exactly one pair of hands, no matter how sharp that barista's switching got, they could still only do one physical thing at any given instant: pulling a shot, or steaming milk, never both. What changes the moment there's a second barista, at a second machine? Two orders can now be worked on at the exact same instant — one barista pulling a shot while the other steams milk for a completely different drink, neither one waiting on the other to free up. That's what a second core buys that no amount of clever switching on the first one ever could.</p>
+
+      <p>A core is that second barista. Modern CPUs ship with multiple independent <span class="term">cores</span> — a typical consumer chip has 8 to 16, a server chip 32 or more — each one capable of executing instructions at the same time as every other core. A single-threaded program only ever uses one of them; every other core sits idle as far as that program is concerned, regardless of how busy the one it's using gets.</p>
+
+      <p>Running threads on more than one core this way is <span class="term">parallelism</span>, and it adds a second, distinct benefit on top of the responsiveness §22.3 already bought: <span class="term">throughput</span> — genuinely more work completed in the same span of wall-clock time, because more than one core (more than one barista) is doing it at once.</p>
+
+      <p>It's worth keeping the two ideas separate, since it's easy to blur them together:</p>
+
+      <ul>
+        <li><strong>Concurrency</strong> is a structuring choice: when something causes a <strong>wait</strong>, <strong>switch</strong> to something else instead of standing still — exactly the rule §22.1's Case 2 barista followed. It works on a single core.</li>
+        <li><strong>Parallelism</strong> is a hardware capability — activities actually executing at the same instant, on separate cores. Two baristas, two machines, two drinks moving forward in the same second, is parallelism. It requires more than one core to exist at all.</li>
+      </ul>
+
+      <p>Every parallel program is concurrent — running on separate cores at once is one way of making independent progress. But not every concurrent program is parallel — a single barista, interleaving orders through nothing but fast switching, delivers the whole of §22.3's definition without two drinks ever moving forward in the identical instant. The distinction is worth holding onto, because the problems concurrent programs actually have to solve — shared state, coordinating access, one thread seeing another's changes — come from independent progress itself, not from how many cores (or baristas) happen to be available. A single core interleaving two threads has exactly the same coordination problems a sixty-four-core machine running the same two threads in true parallel does — the shared filing cabinet from §22.2's office-building analogy is just as much in dispute either way.</p>
+
+      <div class="callout callout-note">
+        <div class="callout-lbl">A hybrid in practice</div>
+        <p>Real systems usually land in between. Picture four baristas handling eight orders between them: four orders move forward at the exact same instant — one per barista, genuine parallelism — while each barista additionally switches between their own two orders to keep all eight progressing. Swap in a four-core machine running eight threads, and it's the identical picture. Parallelism explains why four things are moving at the exact same time; concurrency explains why all eight are moving at all.</p>
+      </div>
+    </section>
+
+    <!-- §22.6 -->
+    <section id="s22-6">
+      <div class="section-head">
+        <span class="sec-num">§22.6</span>
+        <h2>The Main Thread <em>— where the first thread comes from</em></h2>
+      </div>
+
+      <p>§22.8 is about to show how a program hands a task off to a thread — but creating a thread takes an already-running thread to do the creating. That raises an obvious question: if every thread is created by another thread that's already running, where did the very first one come from?</p>
+
+      <h3>The genesis, at the OS level</h3>
+
+      <p>The answer is that it isn't created inside the Java world at all — it's handed to Java by the operating system, before the JVM has done anything of its own. Running <code>java app.Main</code> from a terminal sets off a short handoff, each step passing control to the next:</p>
+
+      <ol>
+        <li>The operating system creates a new <span class="term">process</span> (§22.2) for the command.</li>
+        <li>The OS starts exactly one native execution thread inside that process, and hands it to the newly started JVM.</li>
+        <li>The JVM uses that one thread to initialize itself, then searches the named class for one specific signature: <code>public static void main(String[] args)</code>.</li>
+      </ol>
+
+      <p>That thread — the one the OS handed over, now running the method the JVM found — is the <span class="term">main thread</span>. Every Java application starts with exactly one of these, and every other thread the program ever creates (§22.8 shows how) traces back to it, directly or indirectly.</p>
+
+      <h3>Not actually alone</h3>
+
+      <p>It's tempting to picture the main thread starting out by itself, with the whole process to itself until it deliberately creates a second thread. That's not quite what happens. By the time the JVM hands control to <code>main()</code>, it has already quietly started several of its own background threads just to keep itself running:</p>
+
+      <ul>
+        <li>A <strong>garbage collector</strong> thread, reclaiming heap memory that's no longer reachable.</li>
+        <li>A <strong>finalizer</strong> thread, running cleanup code for objects on their way out.</li>
+        <li>A <strong>signal dispatcher</strong> thread, handling signals from the OS — what actually notices, for instance, when a user presses Ctrl+C in the terminal running the program.</li>
+      </ul>
+
+      <p>None of this code was written by the program itself, and none of it appears anywhere in <code>main()</code>'s own source. By the time your first line of code runs, the main thread is already sharing the process with a handful of threads the JVM created for its own purposes — a concurrent program before a single line you wrote has asked for one.</p>
+    </section>
+
+    <!-- §22.7 -->
+    <section id="s22-7">
+      <div class="section-head">
+        <span class="sec-num">§22.7</span>
+        <h2>Step 1: Creating a Task <em>— defining work, independent of how it will run</em></h2>
+      </div>
+
+      <p>Getting concurrent work done in Java breaks cleanly into two separate steps, worth keeping apart from the start: first, define the work itself — a <span class="term">task</span>; only then decide what will actually run it. This section is entirely about the first step. §22.8 is entirely about the second.</p>
+
+      <p>Java has supported threads since its very first version, and over time two distinct ways of defining a task emerged. Understanding both — and why the second replaced the first as the default — is the foundation everything else in this section is built on.</p>
+
+      <h3>The original model: a task <em>is</em> a thread</h3>
+
+      <p>The earliest approach fuses the work itself and the machinery that runs it into one object, by extending <code>Thread</code> directly:</p>
+
+      <pre><code class="language-java">class DownloadTask extends Thread {
+    @Override
+    public void run() {
+        System.out.println("Downloading...");
+    }
+}</code></pre>
+
+      <pre><code class="language-java">DownloadTask task = new DownloadTask();
+task.start(); // Downloading...</code></pre>
+
+      <p><code>DownloadTask</code> <em>is</em> a <code>Thread</code> (§9.3) — not something that merely uses one. That inheritance relationship is exactly the problem. The download logic and the thread that runs it are permanently one object; there's no way to hand just the logic somewhere else. Want to run this same work through a thread pool instead of a raw thread later on? There's no "just the logic" to hand over — <code>run()</code>'s body only exists bolted onto a full <code>Thread</code>, and Java classes only get to <code>extend</code> one thing (§9.3). A class that's already spent its one <code>extends</code> on <code>Thread</code> can't also extend anything else, and the task can't be run any way except by starting this particular kind of <code>Thread</code>.</p>
+
+      <h3>The modern model: a task is <em>handed to</em> a thread</h3>
+
+      <p>The cleaner approach keeps the two ideas separate from the start:</p>
+
+      <ul>
+        <li>A <span class="term">task</span> is a unit of work — <em>what</em> should happen.</li>
+        <li>A <span class="term">thread</span> (or, later, an executor) is the execution mechanism — <em>what actually runs it</em>.</li>
+      </ul>
+
+      <p>A task defined this way is an ordinary object implementing an interface (§13) — <code>Runnable</code>, in the simplest case, whose single method is exactly the <code>run()</code> body from before, with the <code>Thread</code> machinery entirely removed:</p>
+
+      <pre><code class="language-java">class DownloadTask implements Runnable {
+    @Override
+    public void run() {
+        System.out.println("Downloading...");
+    }
+}</code></pre>
+
+      <p><code>DownloadTask</code> no longer <em>is</em> a <code>Thread</code> — it has no relationship with one at all yet. That relationship only forms later, at the exact moment something decides to actually run it, which is what §22.8 is entirely about. The task object itself stays exactly this simple no matter what ends up running it — a plain <code>Thread</code>, a configured one, or a managed pool — with not one line of <code>DownloadTask</code> ever needing to change. <code>Runnable</code> is the one plug every execution mechanism in Java is built to accept.</p>
+
+      <table class="content-table">
+        <tr>
+          <th>Aspect</th>
+          <th><code>extends Thread</code></th>
+          <th><code>implements Runnable</code></th>
+        </tr>
+        <tr>
+          <td>Relationship</td>
+          <td>IS-A — the class <em>is</em> a specialized kind of thread</td>
+          <td>HAS-A — the class <em>has</em> work; a thread only carries it out</td>
+        </tr>
+        <tr>
+          <td>What it says</td>
+          <td>"I am a worker" — the task and the execution mechanism are the same object</td>
+          <td>"I have a task" — the work is defined once, independent of whatever ends up running it</td>
+        </tr>
+        <tr>
+          <td>Inheritance cost</td>
+          <td>Spends the class's one <code>extends</code> slot (§9.3) — it can never extend anything else</td>
+          <td>Uses one implemented interface among as many as the class likes (§13.5) — <code>extends</code> stays free for something else entirely</td>
+        </tr>
+        <tr>
+          <td>Generally preferred?</td>
+          <td>Rarely — only when the class-per-thread coupling is genuinely wanted</td>
+          <td>Yes — the default choice for defining work in Java</td>
+        </tr>
+      </table>
+
+      <p>The inheritance row is worth restating plainly: Java permits a class to implement as many interfaces as it likes, but only ever <code>extend</code> one class (§9.3). A class that spends that one slot on <code>Thread</code> has no <code>extends</code> left for anything else it might legitimately need to be. A class implementing <code>Runnable</code> spends nothing from that same budget — it's free to extend some other class entirely, on top of carrying the task. Preferring HAS-A here is the identical instinct §26.5 gives a formal name to: reach for composition before inheritance, unless "is a more specific kind of" is genuinely the relationship being modeled — and a task is not a more specific kind of thread, any more than a <code>BookEdition</code> was a more specific kind of <code>Book</code>.</p>
+
+      <h3><code>Runnable</code> and <code>Callable</code>, formally</h3>
+
+      <p><code>Runnable</code> is declared in the standard library, in its entirety, as one method:</p>
+
+      <pre><code class="language-java">public interface Runnable {
+    void run();
+}</code></pre>
+
+      <p>No parameters in, nothing returned, no checked exception declared. That shape fits a task run purely for its side effect — print something, write a file, update the screen — where the caller never needs anything handed back. It's a functional interface (§19.5), exactly one abstract method, which is exactly why <code>DownloadTask</code> above could just as easily have been written as a lambda instead of a named class:</p>
+
+      <pre><code class="language-java">Runnable task = () -&gt; System.out.println("Downloading...");</code></pre>
+
+      <p>Some work doesn't fit that shape, though — a task that computes something the caller actually needs back, or one that might fail in a way worth reporting as a checked exception. <code>Callable&lt;V&gt;</code> is the counterpart built for exactly that case, generic (§15) over whatever type its result will be:</p>
+
+      <pre><code class="language-java">public interface Callable&lt;V&gt; {
+    V call() throws Exception;
+}</code></pre>
+
+      <pre><code class="language-java">Callable&lt;Integer&gt; sum = () -&gt; 2 + 3;
+System.out.println(sum.call()); // 5</code></pre>
+
+      <p><code>call()</code> returns a value of type <code>V</code> — <code>Integer</code> here — where <code>run()</code> always returns nothing at all. <code>call()</code>'s signature also declares <code>throws Exception</code>, meaning it's allowed to throw a checked exception (§14.4) — one the caller is <em>required</em> to acknowledge, either by catching it or declaring the same <code>throws</code> itself. <code>run()</code> has no such room in its signature; a <code>Runnable</code> can only ever throw the kind of exception nothing forces a caller to plan for. Both interfaces are functional (§19.5), and both get handed to the identical execution mechanisms §22.8 covers — the choice between them is entirely about whether the task needs to hand a result back.</p>
+
+      <div class="callout callout-rule">
+        <div class="callout-lbl">Why this is the foundation, not just a style preference</div>
+        <p>Every more advanced execution mechanism Java offers — thread pools, scheduled executors, virtual threads — exists to run something. What they run is a <code>Runnable</code> or a <code>Callable</code>, never a raw <code>Thread</code> subclass. Defining work as a task, independent of how it will run, is what lets the exact same task move between execution mechanisms without ever being rewritten. The IS-A model forecloses that; the HAS-A model is what makes the rest of the concurrency API possible at all.</p>
+      </div>
+
+      <h3>A task is an object</h3>
+
+      <p>Every task, however it's written, is still just an object (§2.2) implementing <code>Runnable</code> or <code>Callable</code> — created with <code>new</code>, or, since both are functional interfaces, written as a lambda; sitting on the heap, reachable through a reference. §19.6 already made the point once, and it applies here without modification: a lambda is never a free-floating block of code, it's an instance of some class implementing the target interface. A task is that same idea, aimed at concurrency specifically.</p>
+
+      <p>Because a task is an object, it can capture references from the scope it was created in — the same closure behavior §19's lambdas already have. What it captures is what decides whether running it is safe:</p>
+
+      <pre><code class="language-java">Runnable greeting = () -&gt; System.out.println("Hello!");</code></pre>
+
+      <p><code>greeting</code> captures nothing — no field, no reference to anything outside itself. It's <span class="term">stateless</span>: handing this exact same object to a hundred different threads, all running it at once, is perfectly safe, because there's no shared data anywhere for any of them to disagree about.</p>
+
+      <pre><code class="language-java">class Counter {
+    int value;
+}</code></pre>
+
+      <pre><code class="language-java">Counter counter = new Counter();
+Runnable increment = () -&gt; counter.value++;</code></pre>
+
+      <p><code>increment</code> is a different shape entirely. The lambda captures <code>counter</code> — a reference to a mutable object outside itself — making <code>increment</code> a closure over shared, mutable state. Hand this same <code>Runnable</code> to two threads, and both are now reading and writing the identical <code>counter.value</code> field, with none of the coordination described so far having said anything about yet. That's not a flaw in this particular example — it's the general shape of the hazard multi-threaded programs run into the moment a task captures something mutable, and later sections in this chapter come back to exactly what it takes to make that safe.</p>
+
+      <div class="callout callout-rule">
+        <div class="callout-lbl">The one question worth asking about any task</div>
+        <p>Defining a task is defining an object, and every object has fields, captured or otherwise. Before handing a <code>Runnable</code> or <code>Callable</code> to more than one thread, the question that matters is simply: what does this object actually capture? Nothing — and it's stateless, safe to share without a second thought. Something mutable — and every hazard shared, mutable state has ever caused (§11.6 named the category first) is back on the table, this time with more than one thread able to trigger it at once.</p>
+      </div>
+
+      <h3>Expressing a task: four equivalent forms</h3>
+
+      <p>§19 built one progression in full, using <code>DiscountStrategy</code> as its running example: the same behavior, expressed as a named class, then an anonymous class, then a lambda, then a method reference — each one shrinking the ceremony without changing what runs. <code>Runnable</code> and <code>Callable</code> are functional interfaces exactly like <code>DiscountStrategy</code> was, so every one of those four forms applies to a task without a single new idea — only a new domain to apply them to.</p>
+
+      <p><strong>A named class.</strong></p>
+
+      <pre><code class="language-java">class FileProcessor implements Runnable {
+    private final Path path;
+
+    FileProcessor(Path path) {
+        this.path = path;
+    }
+
+    @Override
+    public void run() {
+        // process file at path
+    }
+}</code></pre>
+
+      <pre><code class="language-java">Runnable task = new FileProcessor(somePath);</code></pre>
+
+      <p>The task is a first-class citizen here — a name, a constructor, explicit fields. Its state is declared openly, not captured implicitly from wherever the object happens to be built. This form earns its keep when the task carries meaningful state deserving real fields, when it needs to be tested on its own, when it's complex enough that a name adds real clarity, or when the same task type gets instantiated repeatedly with different parameters — exactly the reasoning §19.1 already gave for when a named class pays for itself.</p>
+
+      <p><strong>An anonymous class.</strong></p>
+
+      <pre><code class="language-java">Runnable task = new Runnable() {
+    @Override
+    public void run() { }
+};</code></pre>
+
+      <p>A one-off implementation with no name (§19.4), capable of capturing variables from its enclosing scope but noticeably more verbose than a lambda doing the identical thing. It still fits when a task is simple, used exactly once, and a name would add nothing — but as §19.6 already showed, a lambda almost always says the same thing more directly, which is why this form has been largely superseded since Java 8 introduced the alternative.</p>
+
+      <p><strong>A lambda.</strong></p>
+
+      <pre><code class="language-java">Runnable task = () -&gt; {};
+
+Runnable task2 = () -&gt; Utils.process();
+
+Callable&lt;String&gt; task3 = () -&gt; Files.readString(path);</code></pre>
+
+      <p>The most common form in modern Java for exactly the reason §19.7 already gave: concise, readable, capturing whatever it needs from the enclosing scope without ceremony. It's the right choice when the task is short, has no name worth giving it, and captures at most a handful of variables.</p>
+
+      <div class="callout callout-rule">
+        <div class="callout-lbl">Captured variables and shared state</div>
+        <p>This is where this section's earlier warning becomes concrete, in code:</p>
+        <pre><code class="language-java">List&lt;Integer&gt; nums = new ArrayList&lt;&gt;();
+Runnable task = () -&gt; nums.add(42); // captures nums</code></pre>
+        <p>A lambda that captures a variable creates a closure (§19.6), and the captured reference becomes a field of the object the compiler generates — this lambda holds the exact same address <code>nums</code> does, pointing at the exact same <code>ArrayList</code> on the heap (§2.3's aliasing, again). Run this one <code>task</code> on several threads, and every one of them reaches that identical list: shared mutable state, with every race condition that shape has ever caused (§11.6). A stateless task is safe by construction — there's nothing to disagree about. A task that captures something mutable needs exactly the same care any other shared mutable state needs in a concurrent program, no more and no less.</p>
+      </div>
+
+      <div class="callout callout-note">
+        <div class="callout-lbl">Not always a new object</div>
+        <p>Every lambda expression is an object (§19.6), but not necessarily a fresh one on every evaluation. A lambda that captures nothing is stateless, and the JVM is free to cache and reuse one instance across every place it's evaluated. A lambda that captures a variable can't be shared this way — the captured value is part of that object now, so capturing a <em>different</em> value means building a genuinely new instance, one per capture.</p>
+      </div>
+
+      <p><strong>A method reference.</strong></p>
+
+      <pre><code class="language-java">class Utils {
+    public static void process() { }
+}</code></pre>
+
+      <pre><code class="language-java">Runnable task = Utils::process;
+
+Runnable staticRef   = MyClass::doWork;   // static method
+Runnable instanceRef = instance::doWork;  // instance method
+Runnable ctorRef      = MyClass::new;     // constructor</code></pre>
+
+      <p>A method reference (§19.7) is a lambda whose entire body is already just a call to one existing method — <code>() -&gt; Utils.process()</code> and <code>Utils::process</code> run identically, the second just says it with less noise. It's the right call whenever a task's whole body is exactly one existing method, cleaner than wrapping that same call in a lambda for no reason.</p>
+
+      <p>Four forms, one underlying object every time — a named class, an anonymous class, a lambda, or a method reference, chosen the same way §19 already taught, now aimed specifically at defining the tasks §22.8 hands off to run.</p>
+    </section>
+
+    <!-- §22.8 -->
+    <section id="s22-8">
+      <div class="section-head">
+        <span class="sec-num">§22.8</span>
+        <h2>Step 2: Handing a Task to an Executor <em>— three ways to actually run one</em></h2>
+      </div>
+
+      <p>A task from §22.7 doesn't run itself — something has to actually execute it. Java offers three ways to make that handoff, in increasing order of how much control they give over the thread doing the running: a raw <code>Thread</code>, a configured one built through <code>Thread.Builder</code>, or a managed pool through an <code>ExecutorService</code>.</p>
+
+      <h3>2.1 — <code>new Thread</code>: the simplest handoff</h3>
+
+      <pre><code class="language-java">Runnable task = () -&gt; System.out.println("Downloading...");
+
+Thread thread = new Thread(task);
+thread.start(); // Downloading...</code></pre>
+
+      <p><code>new Thread(task)</code> builds a thread configured with nothing beyond the task itself — no name worth mentioning, no daemon status deliberately chosen, no priority set — and <code>start()</code> immediately hands it to the OS scheduler (§22.2) to begin running. It's the most direct way to get a task onto its own thread, and also the least configurable one; the next two approaches exist for exactly the cases where that matters.</p>
+
+      <h3>2.2 — The Thread Builder API: configuring before handoff</h3>
+
+      <p><code>new Thread(task)</code> constructs a thread directly — there's no room in that expression to configure anything about the thread itself before it exists. <code>Thread.Builder</code> is a fluent, nested interface for exactly that: constructing and customizing a thread — its name, whether it's a daemon, which kind of thread it even is — before deciding whether to start it immediately or hold onto it for later.</p>
+
+      <p><strong>Getting a builder.</strong> Two static factory methods on <code>Thread</code> produce one, depending on which kind of thread is wanted:</p>
+
+      <pre><code class="language-java">Thread.Builder platform = Thread.ofPlatform(); // a platform thread — backed directly by an OS thread (§22.2)
+Thread.Builder virtual  = Thread.ofVirtual();   // a virtual thread — lightweight, managed by the JVM itself</code></pre>
+
+      <p>Every thread this chapter has discussed so far — the ones §22.2 defined, the one §22.6 traced back to the OS — has been a <span class="term">platform thread</span>: one genuinely backed by a native OS thread, exactly as heavy as that implies. A <span class="term">virtual thread</span> is a newer, much lighter alternative the JVM manages internally rather than handing off to the OS one-for-one; a later section is where that distinction actually earns its keep. For now, the builder API itself works identically either way — everything below applies to both.</p>
+
+      <p><strong>An active build step.</strong> A typical builder is passive: configure it property by property, then call a <code>build()</code> that hands back a finished, but otherwise inert, object. <code>Thread.Builder</code>'s equivalent step does something more:</p>
+
+      <pre><code class="language-java">Thread t = Thread.ofPlatform().start(task);</code></pre>
+
+      <p><code>start(Runnable)</code> is <code>Thread.Builder</code>'s version of <code>build()</code> — except it doesn't just construct the <code>Thread</code>, it also immediately tells the operating system to begin running it. Building and starting happen in the same call. When that's one step too many — the thread needs to exist first, and run later — <code>unstarted(Runnable)</code> is the genuinely passive version:</p>
+
+      <pre><code class="language-java">Thread t = Thread.ofPlatform().unstarted(task); // built, not running yet
+
+// ...do other setup...
+
+t.start(); // now it runs</code></pre>
+
+      <p>Either way, the object handed back is an ordinary <code>Thread</code> (§22.2) — the builder's job ends the moment one exists; <code>start()</code> and <code>join()</code> from here on are plain <code>Thread</code> methods, not builder methods. <code>t.join()</code>, in particular, is worth naming now: it blocks whichever thread calls it until <code>t</code> finishes running, the ordinary way to wait for a thread's work to actually be done before moving on.</p>
+
+      <p><strong>Configuring before building.</strong> Every configuration method returns the same builder, so calls chain naturally before the final <code>start()</code> or <code>unstarted()</code>:</p>
+
+      <pre><code class="language-java">Thread thread = Thread.ofPlatform()
+        .name("worker")
+        .daemon()
+        .unstarted(() -&gt; System.out.println("Working..."));
+
+thread.start();</code></pre>
+
+      <p><code>name(...)</code> is self-explanatory; <code>daemon()</code> is not, without a callback. §22.6's garbage collector, finalizer, and signal dispatcher threads were all <span class="term">daemon threads</span>: background helpers the JVM never expects to be the reason the program keeps running. A non-daemon thread keeps the whole program alive until it finishes; a daemon thread doesn't — once every non-daemon thread has finished, the JVM exits, daemon threads included, mid-execution if need be. Marking a thread a daemon is saying, explicitly, "don't wait on this one to decide the program is done."</p>
+
+      <p><strong>One builder, many threads.</strong> A builder isn't consumed by building — the same instance can produce several threads, one per call:</p>
+
+      <pre><code class="language-java">List&lt;Thread&gt; threads = new ArrayList&lt;&gt;();
+var builder = Thread.ofPlatform().name("worker-", 0);
+
+for (int i = 0; i &lt; 3; i++) {
+    threads.add(builder.start(task)); // start() returns the built Thread
+}</code></pre>
+
+      <p><code>name("worker-", 0)</code> takes a prefix and a starting count; each thread this builder goes on to create is numbered automatically — <code>worker-0</code>, <code>worker-1</code>, <code>worker-2</code> — without the loop having to track that count itself.</p>
+
+      <p><strong>Builders as a <code>ThreadFactory</code>.</strong> A thread pool needs to build its own threads internally, on its own schedule, using whatever naming or configuration a caller wants — which is exactly what a builder is for. <code>ThreadFactory</code> is the interface that connects the two: a functional interface (§19.5) with one method, <code>Thread newThread(Runnable r)</code>, and a builder is a natural way to implement it:</p>
+
+      <pre><code class="language-java">try (var executor = Executors.newFixedThreadPool(4,
+        r -&gt; Thread.ofPlatform().name("worker-", 0).unstarted(r))) {
+
+    for (int i = 0; i &lt; 12; i++) {
+        executor.submit(task);
+    }
+}</code></pre>
+
+      <p>The lambda <code>r -> Thread.ofPlatform().name("worker-", 0).unstarted(r)</code> <em>is</em> the <code>ThreadFactory</code> — a task expressed exactly the way §22.7 catalogs (a lambda implementing a functional interface), handed to <code>newFixedThreadPool</code> so that every thread the pool ever creates for itself comes out named and configured the same deliberate way, instead of whatever a plain <code>new Thread(r)</code> would have produced by default. That call is also this section's first real look at <code>ExecutorService</code>, which the next part covers properly.</p>
+
+      <h3>2.3 — <code>ExecutorService</code>: handing off to a managed pool</h3>
+
+      <p>The first two approaches still create one thread per task, by hand, every time. That habit generalizes badly the moment the number of tasks stops being small and fixed:</p>
+
+      <pre><code class="language-java">// naive web server — one thread per request
+while (true) {
+    Socket connection = serverSocket.accept();
+    new Thread(() -&gt; handleRequest(connection)).start();
+}</code></pre>
+
+      <p>This runs perfectly well under light load — a handful of requests, a handful of threads, nothing under any real pressure. Under heavy load, the exact same code degrades in ways that have nothing to do with how much actual work is being done:</p>
+
+      <ul>
+        <li>Memory fills up with reserved stack space, one reservation per thread, whether that thread is doing anything yet or not.</li>
+        <li>The OS scheduler (§22.2) struggles to fairly divide time across thousands of native threads at once.</li>
+        <li>Context switches (§22.3) climb in direct proportion to the thread count, not the amount of real work.</li>
+        <li>Throughput plateaus and latency climbs — not because the CPU has too much work to do, but because it's spending an increasing share of its time managing threads instead of running them.</li>
+      </ul>
+
+      <p>The fundamental problem sits one level up from any of these symptoms: the number of OS threads is being driven directly by the number of concurrent requests — a quantity the program doesn't control at all. A traffic spike produces a proportional thread spike, and nothing about <code>new Thread(...).start()</code> puts any ceiling on how far that's allowed to go.</p>
+
+      <p><strong>Decoupling task count from thread count.</strong> The fix doesn't touch the tasks themselves — a task defined the HAS-A way §22.7 already built doesn't change at all — it changes what's allowed to create threads and when:</p>
+
+      <ul>
+        <li>Create a fixed pool of threads once, upfront, sized deliberately rather than reactively.</li>
+        <li>Submit tasks to a queue instead of starting a thread per task.</li>
+        <li>Pool threads pull tasks from that queue and run them, one at a time, each.</li>
+        <li>When a thread finishes a task, it goes back to the pool and picks up whatever's next in the queue.</li>
+      </ul>
+
+      <pre><code class="hljs language-plaintext">tasks submitted → [ queue ] → thread 1, thread 2, ... thread N → results</code></pre>
+
+      <p>The number of threads is now a controlled variable, sized to the hardware and the workload instead of to however many requests happen to be arriving this second. A pool of a hundred threads can work through thousands of submitted tasks, just in batches, one queue's worth at a time — memory use, OS overhead, and context-switching are all bounded by the pool size, not by however large a traffic spike turns out to be.</p>
+
+      <div class="callout callout-rule">
+        <div class="callout-lbl">The executor framework</div>
+        <p>This pattern — a fixed pool, a queue, workers pulling from it — is common enough that Java standardizes it directly, rather than leaving every program to build its own version by hand. That standardized implementation is the <span class="term">executor framework</span>, built around the <code>ExecutorService</code> interface glimpsed above — the subject the rest of this chapter turns to next.</p>
+      </div>
+    </section>
+
+    <!-- §22.9 -->
+    <section id="s22-9">
+      <div class="section-head">
+        <span class="sec-num">§22.9</span>
+        <h2><code>ExecutorService</code> in Practice <em>— predefined pools, shutdown, and <code>Future&lt;V&gt;</code></em></h2>
+      </div>
+
+      <h3>Predefined implementations: the <code>Executors</code> utility class</h3>
+
+      <p>§22.8's last example called <code>Executors.newFixedThreadPool(4, ...)</code> without pausing on it. <code>Executors</code> is a utility class — never instantiated, existing purely to hold a set of static factory methods — each one building and configuring a specific <code>ExecutorService</code> strategy so that no program has to assemble a fixed pool, a queue, and a worker loop by hand, the way §22.8's "Decoupling task count from thread count" walked through conceptually.</p>
+
+      <p>The motivation behind supplying these ready-made strategies rather than leaving every program to build its own is worth stating plainly:</p>
+
+      <ul>
+        <li><strong>Reusable, well-tested thread pool strategies</strong> — the same handful of pooling strategies almost every concurrent program actually needs, implemented once, correctly, instead of reinvented per project.</li>
+        <li><strong>Safe task queuing and execution</strong> — the queue-and-worker coordination §22.8 described is exactly the kind of code that's easy to get subtly wrong; <code>Executors</code> gets it right so individual programs don't have to.</li>
+        <li><strong>Better performance than constantly creating and destroying threads</strong> — the create-per-task cost §22.8 opened with, avoided by construction rather than by discipline.</li>
+        <li><strong>Simplified concurrency management</strong> — one factory call in place of manually wiring a pool, a queue, and a rejection policy together.</li>
+      </ul>
+
+      <div class="callout callout-rule">
+        <div class="callout-lbl">A factory, in the pattern sense</div>
+        <p><code>Executors</code> is a <span class="term">factory</span>: its methods hide the concrete class actually being built and hand back only the <code>ExecutorService</code> interface (§13) it implements. Calling code never names, or needs to name, whichever class is doing the pooling underneath — it programs to the interface (§26.6 gives this idea its formal name), and could swap which factory method built that <code>ExecutorService</code> without a single other line changing. The same HAS-A instinct §22.7 already built into <code>Runnable</code> shows up again here, one level up: a caller depends on <em>what an executor can do</em>, never on <em>which concrete class is doing it</em>.</p>
+      </div>
+
+      <h3>Shutting down an executor: why it's not optional</h3>
+
+      <p><strong>Why shutdown matters.</strong></p>
+
+      <p>An <code>ExecutorService</code> holds live threads, and — unlike §22.6's JVM-internal helper threads, or a thread explicitly marked with <code>.daemon()</code> back in §22.8 — those pool threads are not daemon threads by default. §22.8 already established what a non-daemon thread does: it keeps the whole program running for as long as it's alive, and a pool thread is exactly that kind of thread. A program that creates an executor and never shuts it down will hang indefinitely after every line of its own application code has finished, waiting on threads that will never be asked to do anything again.</p>
+
+      <p>Shutdown isn't an optional cleanup step, the way forgetting to close a file eventually gets cleaned up anyway. It's a required part of an executor's lifecycle.</p>
+
+      <p><strong>Why the executor stays reachable.</strong> Say a method creates an executor, submits some tasks, and returns — the local variable holding the executor reference goes out of scope. §11.7 already covered what normally happens next: an object with no reachable reference becomes eligible for garbage collection. An executor doesn't follow that rule on its own, and the reason is worth tracing all the way through. Each pool thread's entire job, for its whole life, is running a loop shaped roughly like this:</p>
+
+      <pre><code class="language-java">Runnable workerLoop = () -&gt; {
+    while (true) {
+        Runnable task = queue.take();
+        task.run();
+    }
+};
+
+new Thread(workerLoop).start();</code></pre>
+
+      <p>There are two levels of <code>Runnable</code> stacked on top of each other here, easy to conflate:</p>
+
+      <ul>
+        <li>The <strong>worker <code>Runnable</code></strong> — <code>workerLoop</code> itself, started once when the pool thread is created, running for that thread's entire lifetime. This loop <em>is</em> the thread's own task: sit here forever, picking up and running whatever arrives.</li>
+        <li>The <strong>task <code>Runnable</code></strong> — the actual work submitted to the executor (§22.7's tasks), picked up and executed one at a time, inside that outer loop.</li>
+      </ul>
+
+      <p><code>queue.take()</code> blocks indefinitely whenever the queue is empty — the thread is parked, burning no CPU, but still fully alive. That queue is a field of the executor object itself, the same internal <code>BlockingQueue</code> every submitted task passes through on its way to a pool thread. A live thread blocked inside <code>queue.take()</code> holds a reference back to that field, which means the executor object it belongs to is still reachable — not because any of the caller's own code still points to it, but because one of its own threads does.</p>
+
+      <div class="callout callout-rule">
+        <div class="callout-lbl">GC root</div>
+        <p>§11.7 introduced <span class="term">unreachable</span> as the condition that makes an object eligible for collection. A <span class="term">GC root</span> is one of a small set of places the garbage collector always treats as reachable by definition — a running thread's own stack is one of them. A live thread, parked in <code>queue.take()</code> with the executor's queue reachable from its stack, is exactly such a root: everything reachable from it — the queue, and the executor object that owns it — gets traced as alive, no matter how many other references to that same executor have long since gone out of scope.</p>
+      </div>
+
+      <p>So, once the last external reference is gone and the queue has drained: no new tasks can arrive, since nothing is left to submit one; no queued tasks remain, since the queue is empty; every pool thread is still alive, parked in <code>queue.take()</code>, waiting for a task that can now never come; and the executor object stays on the heap, reachable only through those very threads. The JVM can't exit either — it's still waiting on live, non-daemon threads, and those threads are waiting on it.</p>
+
+      <p><strong><code>shutdown()</code> — graceful.</strong> The standard, polite way to stop an executor: it lets work already in flight finish rather than cutting it off.</p>
+
+      <pre><code class="language-java">executor.shutdown();</code></pre>
+
+      <p><code>shutdown()</code> signals the executor to stop accepting new tasks, and returns immediately — it doesn't wait for anything to actually finish. After the call: <code>submit()</code> throws <code>RejectedExecutionException</code> for any new task offered; tasks already running keep running to completion; tasks already queued still execute, in order; and once every one of those finishes, the executor moves to a <code>TERMINATED</code> state — the point where its pool threads finally exit their loops for good, and the executor object becomes reachable from nowhere again.</p>
+
+      <p><strong><code>awaitTermination()</code> — waiting for completion.</strong> <code>shutdown()</code> only signals; it doesn't wait. Code that needs to know the work is actually finished — before, say, reading results those tasks produced — calls <code>awaitTermination(...)</code> instead, which blocks the calling thread until either every task completes or a given timeout elapses, whichever comes first. It returns <code>true</code> if the executor reached <code>TERMINATED</code> inside that window, <code>false</code> if the timeout ran out first, with some of the executor's tasks possibly still unfinished.</p>
+
+      <p><strong>Try-with-resources on <code>ExecutorService</code>.</strong> Since Java 19, <code>ExecutorService</code> extends <code>AutoCloseable</code> — the interface (§13) any resource needing guaranteed cleanup can implement, by declaring exactly one method: <code>void close() throws Exception</code>. A class implementing it can be declared as the resource in a <span class="term">try-with-resources</span> statement, and Java guarantees <code>close()</code> runs automatically the moment the block exits, on success or on failure, without a separate <code>finally</code> block around to remember it.</p>
+
+      <p>For <code>ExecutorService</code>, <code>close()</code> performs exactly the graceful shutdown just described, in one call: it invokes <code>shutdown()</code>, then blocks indefinitely on <code>awaitTermination()</code> until every task completes. The code immediately following the block is guaranteed to see every task's finished results — a coordination guarantee formally called <em>happens-before</em>, which a later section in this chapter returns to in full.</p>
+
+      <pre><code class="language-java">try (ExecutorService executor = Executors.newFixedThreadPool(4)) {
+    executor.submit(task);
+    // close() called automatically, no checked exception to handle
+}</code></pre>
+
+      <p>This is the cleanest pattern for a bounded, known set of tasks — declare the executor as the resource, submit whatever it needs to do, and let the block's exit guarantee both shutdown and completion without an explicit <code>shutdown()</code>/<code>awaitTermination()</code> pair. Code written before Java 19 has no <code>close()</code> to rely on; an explicit <code>shutdown()</code> call, paired with <code>awaitTermination()</code> wherever completion genuinely needs to be waited on, is what appears in its place.</p>
+
+      <div class="callout callout-note">
+        <div class="callout-lbl">A narrowed <code>throws</code> clause</div>
+        <p><code>AutoCloseable.close()</code> declares <code>throws Exception</code> — any implementor is allowed to throw a checked exception (§14.4) from <code>close()</code>, which is exactly why a try-with-resources block (§14.9 covers the general mechanism) normally has to plan for one. <code>ExecutorService.close()</code> overrides that same method (§9.5 covered overriding) and declares no checked exception at all. This is legal Java: an overriding method may narrow or eliminate the checked exceptions its parent declared, but it can never add ones the parent didn't. The practical effect: a try-with-resources block using an <code>ExecutorService</code> never needs a <code>catch</code> for a checked exception that <code>close()</code> is now guaranteed not to throw.</p>
+      </div>
+
+      <h3><code>Future&lt;V&gt;</code>: a handle to a result that isn't ready yet</h3>
+
+      <p><strong>What <code>Future&lt;V&gt;</code> represents.</strong></p>
+
+      <p>Submitting a <code>Callable</code> to an <code>ExecutorService</code> doesn't run it on the calling thread — it runs on a pool thread (§22.8), asynchronously. The calling thread gets something back immediately, before the task has necessarily even started: a <code>Future&lt;V&gt;</code>, a handle to a computation that may still be running, or may not have begun at all.</p>
+
+      <p><code>Future&lt;V&gt;</code> represents exactly one thing: a result that will be available <em>at some point</em>. It decouples the moment a task is submitted from the moment its result is actually needed — and in the gap between those two moments, the calling thread is free to do other work.</p>
+
+      <p><strong>The <code>Future&lt;V&gt;</code> interface.</strong> <code>Future&lt;V&gt;</code>, in <code>java.util.concurrent</code>, is a placeholder for a result that may not yet exist, with methods to check on it and eventually retrieve it:</p>
+
+      <ul>
+        <li><code>boolean isDone()</code> — has the computation finished, one way or another?</li>
+        <li><code>boolean isCancelled()</code> — was it cancelled before it finished?</li>
+        <li><code>V get()</code> — blocks until the result is ready, then returns it.</li>
+        <li><code>V get(long timeout, TimeUnit unit)</code> — waits at most the given time for the result, then returns it if it's available.</li>
+        <li><code>boolean cancel(boolean mayInterruptIfRunning)</code> — attempts to cancel the computation.</li>
+      </ul>
+
+      <p><strong><code>isDone()</code>: a non-blocking check.</strong></p>
+
+      <pre><code class="language-java">Future&lt;String&gt; future = executor.submit(task);
+
+if (future.isDone()) {
+    String result = future.get();
+}
+// if isDone() returns false, this skips get() entirely —
+// the result is never retrieved!</code></pre>
+
+      <p><code>isDone()</code> returns <code>true</code> once the task has completed — successfully, with an exception, or through cancellation — without ever blocking to find out. That makes it useful for checking progress without committing to a wait, but the snippet above shows the trap: if <code>isDone()</code> happens to return <code>false</code>, the <code>if</code> body simply doesn't run, and the result — once it does arrive — is never retrieved at all. Nothing crashes; the value is just silently lost.</p>
+
+      <p><code>isDone()</code> alone is not a complete retrieval strategy. It only earns its keep when there's genuinely something else to do if the task isn't finished yet, and a real plan to come back to it:</p>
+
+      <pre><code class="language-java">if (future.isDone()) {
+    String result = future.get(); // already done — no block
+} else {
+    useDefault(); // task not done yet — fall back, or retry later
+}</code></pre>
+
+      <pre><code class="language-java">while (!future.isDone()) {
+    doOtherWork(); // genuinely useful work while waiting
+}
+
+String result = future.get(); // now guaranteed not to block</code></pre>
+
+      <p><strong><code>Optional&lt;T&gt;</code> vs <code>Future&lt;V&gt;</code>.</strong> <code>Optional</code> (§20) and <code>Future</code> can look alike at a glance — both wrap a value that might not be sitting right there waiting — but they answer two entirely different questions.</p>
+
+      <table class="content-table">
+        <tr>
+          <th></th>
+          <th><code>Optional&lt;T&gt;</code></th>
+          <th><code>Future&lt;V&gt;</code></th>
+        </tr>
+        <tr>
+          <td>Question answered</td>
+          <td>Is the value there at all?</td>
+          <td>Is the result ready <em>yet</em>?</td>
+        </tr>
+        <tr>
+          <td>Problem it solves</td>
+          <td>A <code>null</code> return (§2.3) nobody remembered to check for</td>
+          <td>Slow work that shouldn't freeze the calling thread</td>
+        </tr>
+        <tr>
+          <td>State check</td>
+          <td><code>isPresent()</code> — a fixed, binary state</td>
+          <td><code>isDone()</code> — a state that changes over time on its own</td>
+        </tr>
+        <tr>
+          <td>Blocking?</td>
+          <td>Never — accessing it is instantaneous</td>
+          <td>Potentially — <code>get()</code> waits if the work isn't done</td>
+        </tr>
+        <tr>
+          <td>Empty/unready access</td>
+          <td><code>get()</code> throws <code>NoSuchElementException</code> immediately</td>
+          <td><code>get()</code> simply blocks until the result exists</td>
+        </tr>
+        <tr>
+          <td>Best for</td>
+          <td>Replacing a <code>null</code> return so absence must be handled</td>
+          <td>Offloading work to a background pool (§22.8)</td>
+        </tr>
+      </table>
+
+      <p><code>Optional</code>'s box is either full or empty right now, permanently, the instant it's created. A <code>Future</code>'s box starts empty and may fill in on its own, at any point after submission — and even once it's full, it still carries the history of how it got there, since <code>get()</code> can surface an exception the task threw instead of a result.</p>
+
+      <p><strong>The submit-all-then-collect pattern.</strong> <code>Future&lt;V&gt;</code> doesn't mean a result is available now — only that it will be, eventually — and <code>get()</code> blocks until it is. That raises a fair question: if waiting is still required, what's actually been gained?</p>
+
+      <pre><code class="language-java">Future&lt;String&gt; future = executor.submit(() -&gt; fetchFromDatabase());
+String result = future.get(); // blocks until result is available</code></pre>
+
+      <p>Calling <code>get()</code> immediately after <code>submit()</code>, with no other work done in between, gains nothing — the calling thread blocks right away, and the whole arrangement is effectively sequential. The value in <code>Future</code> comes specifically from the <em>gap</em> between submission and retrieval; whether anything actually happens in that gap is entirely up to the caller.</p>
+
+      <p>The pattern that exploits it: submit every task first, then collect every result — never submit and immediately <code>get()</code> one at a time.</p>
+
+      <pre><code class="language-java">// Wrong — defeats the purpose
+Future&lt;String&gt; f1 = executor.submit(task1);
+String r1 = f1.get(); // blocks here — task2 hasn't even started yet
+
+Future&lt;String&gt; f2 = executor.submit(task2);
+String r2 = f2.get(); // blocks here — effectively sequential
+
+Future&lt;String&gt; f3 = executor.submit(task3);
+String r3 = f3.get(); // blocks here — effectively sequential</code></pre>
+
+      <pre><code class="language-java">// Right — all three tasks may run concurrently
+Future&lt;String&gt; f1 = executor.submit(task1);
+Future&lt;String&gt; f2 = executor.submit(task2);
+Future&lt;String&gt; f3 = executor.submit(task3);
+// all three are now either running or queued to run
+
+String r1 = f1.get(); // wait for the first
+String r2 = f2.get(); // probably already done
+String r3 = f3.get(); // probably already done</code></pre>
+
+      <p><code>submit()</code> places a task in the executor's queue and returns immediately; a pool thread picks it up as soon as one is free (§22.8). Submitting all three before calling <code>get()</code> on any of them leaves all three running in parallel during the gap — the calling thread is free the whole time, and the total wait ends up close to the length of the single longest task, not the sum of all three the way calling <code>get()</code> after each individual <code>submit()</code> would force. <code>invokeAll()</code> exists specifically because this submit-all-then-collect pattern is common enough to deserve one method that does it directly.</p>
+    </section>
+
+  </article>
+
+  <nav class="page-nav" aria-label="Chapter navigation">
+    <a href="streams.html" class="page-nav-prev">
+      <span class="page-nav-label">← Previous</span>
+      <span class="page-nav-title">§21 — Streams</span>
+    </a>
+    <a href="modules.html" class="page-nav-next">
+      <span class="page-nav-label">Next →</span>
+      <span class="page-nav-title">§23 — Java Modules</span>
+    </a>
+  </nav>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  hljs.highlightAll();
+
+  // Flag error-annotation comments in code blocks
+  document.querySelectorAll('.hljs-comment').forEach(el => {
+    if (/\b(compile|compiler|runtime) error\b/i.test(el.textContent)) {
+      el.classList.add('hljs-comment-error');
+    }
+  });
+
+  // Code theme toggle
+  const codeThemeBtn = document.getElementById('code-theme-toggle');
+  const lightTheme = document.getElementById('hljs-light-theme');
+  const darkTheme = document.getElementById('hljs-dark-theme');
+  const themeLabel = codeThemeBtn.querySelector('.code-theme-label');
+  const themeIcon = codeThemeBtn.querySelector('.icon');
+
+  function applyCodeTheme(theme) {
+    const dark = theme === 'dark';
+    lightTheme.disabled = dark;
+    darkTheme.disabled = !dark;
+    document.documentElement.classList.toggle('code-dark', dark);
+    themeLabel.textContent = dark ? 'Light code' : 'Dark code';
+    themeIcon.textContent = dark ? '☀️' : '🌙';
+  }
+
+  applyCodeTheme(localStorage.getItem('code-theme') || 'light');
+
+  codeThemeBtn.addEventListener('click', () => {
+    const next = darkTheme.disabled ? 'dark' : 'light';
+    localStorage.setItem('code-theme', next);
+    applyCodeTheme(next);
+  });
+
+  // Scroll spy for sub-sections
+  const sections = document.querySelectorAll('section[id]');
+  const subLinks = document.querySelectorAll('.sub-nav a[href^="#"]');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = '#' + entry.target.id;
+        subLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+      }
+    });
+  }, { rootMargin: '-8% 0px -78% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+
+  // Mobile toggle
+  const btn  = document.getElementById('menu-btn');
+  const side = document.getElementById('sidebar');
+  btn.addEventListener('click', () => side.classList.toggle('open'));
+  document.querySelectorAll('#sidebar a').forEach(a => {
+    a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
+  });
+});
+</script>
+</body>
+</html>

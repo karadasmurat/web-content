@@ -1,383 +1,926 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>§12 Packages & Access Modifiers — OO with Java</title>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" id="hljs-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
-<link rel="stylesheet" id="hljs-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
-<script>
-(function () {
-  if ((localStorage.getItem('code-theme') || 'light') === 'dark') {
-    document.getElementById('hljs-light-theme').disabled = true;
-    document.getElementById('hljs-dark-theme').disabled = false;
-    document.documentElement.classList.add('code-dark');
-  }
-})();
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>§10 Packages & Access Modifiers — OO with Java</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" id="hljs-light-theme"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+  <link rel="stylesheet" id="hljs-dark-theme"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
+  <script>
+    (function () {
+      if ((localStorage.getItem('code-theme') || 'light') === 'dark') {
+        document.getElementById('hljs-light-theme').disabled = true;
+        document.getElementById('hljs-dark-theme').disabled = false;
+        document.documentElement.classList.add('code-dark');
+      }
+    })();
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
 </head>
+
 <body>
 
-<button id="menu-btn" aria-label="Toggle navigation">
-  <span></span><span></span><span></span>
-</button>
+  <button id="menu-btn" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
 
-<button id="code-theme-toggle" class="code-theme-toggle" aria-label="Toggle code color scheme">
-  <span class="icon">🌙</span><span class="code-theme-label">Dark code</span>
-</button>
+  <button id="code-theme-toggle" class="code-theme-toggle" aria-label="Toggle code color scheme">
+    <span class="icon">🌙</span><span class="code-theme-label">Dark code</span>
+  </button>
 
-<nav id="sidebar" aria-label="Tutorial navigation">
-  <div class="sidebar-brand">
-    <div class="sidebar-brand-label">Tutorial</div>
-    <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
-  </div>
-  <nav>
-    <ul>
-      <li>
-        <a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a>
-        <ul class="sub-nav">
-          <li><a href="index.html#s0-1"><span class="nav-num">§0.1</span>What Is Java?</a></li>
-          <li><a href="index.html#s0-2"><span class="nav-num">§0.2</span>Where Is Java Used?</a></li>
-          <li><a href="index.html#s0-3"><span class="nav-num">§0.3</span>Why Java?</a></li>
-          <li><a href="index.html#s0-4"><span class="nav-num">§0.4</span>The Java Ecosystem</a></li>
-          <li><a href="index.html#s0-5"><span class="nav-num">§0.5</span>Java Versions</a></li>
-          <li><a href="index.html#s0-6"><span class="nav-num">§0.6</span>Your First Program</a></li>
-          <li><a href="index.html#s0-7"><span class="nav-num">§0.7</span>Key Features</a></li>
-          <li><a href="index.html#s0-8"><span class="nav-num">§0.8</span>Key Takeaways</a></li>
-          <li><a href="index.html#s0-9"><span class="nav-num">§0.9</span>Appendix: Write Once, Run Anywhere</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="variables.html"><span class="nav-num">§1</span>Variables</a>
-        <ul class="sub-nav">
-          <li><a href="variables.html#s1-1"><span class="nav-num">§1.1</span>Values</a></li>
-          <li><a href="variables.html#s1-2"><span class="nav-num">§1.2</span>Giving Values Names</a></li>
-          <li><a href="variables.html#s1-3"><span class="nav-num">§1.3</span>Variables in Java</a></li>
-          <li><a href="variables.html#s1-4"><span class="nav-num">§1.4</span>Naming Variables</a></li>
-          <li><a href="variables.html#s1-5"><span class="nav-num">§1.5</span>What a Variable Holds</a></li>
-          <li><a href="variables.html#s1-6"><span class="nav-num">§1.6</span>Changing a Value</a></li>
-          <li><a href="variables.html#s1-7"><span class="nav-num">§1.7</span><code>var</code></a></li>
-          <li><a href="variables.html#s1-8"><span class="nav-num">§1.8</span>Common Mistakes</a></li>
-          <li><a href="variables.html#s1-9"><span class="nav-num">§1.9</span>Key Takeaways</a></li>
-        </ul>
-      </li>
-      <li><a href="primitives.html"><span class="nav-num">§2</span>Primitives</a></li>
-      <li><a href="classes.html"><span class="nav-num">§3</span>Classes</a></li>
-      <li><a href="objects.html"><span class="nav-num">§4</span>Objects</a></li>
-      <li><a href="assignment.html"><span class="nav-num">§5</span>Assignment</a></li>
-      <li>
-        <a href="methods.html"><span class="nav-num">§6</span>Methods</a>
-        <ul class="sub-nav">
-          <li><a href="methods.html#s6-intro"><span class="nav-num">§6.1</span>What Is a Method?</a></li>
-          <li><a href="methods.html#s62"><span class="nav-num">§6.2</span>Static Methods</a></li>
-          <li><a href="methods.html#s63"><span class="nav-num">§6.3</span>Reference Parameters</a></li>
-          <li><a href="methods.html#s64"><span class="nav-num">§6.4</span>Dot Operator Revisited</a></li>
-          <li><a href="methods.html#s65"><span class="nav-num">§6.5</span>Instance Methods</a></li>
-          <li><a href="methods.html#s66"><span class="nav-num">§6.6</span>Functions to Objects</a></li>
-          <li><a href="methods.html#s67"><span class="nav-num">§6.7</span>Key Takeaways</a></li>
-        </ul>
-      </li>
-      <li><a href="operators.html"><span class="nav-num">§7</span>Operators</a></li>
-      <li><a href="controlflow.html"><span class="nav-num">§8</span>Control Flow</a></li>
-      <li><a href="arrays.html"><span class="nav-num">§9</span>Arrays</a></li>
-      <li>
-        <a href="strings.html"><span class="nav-num">§10</span>Strings</a>
-        <ul class="sub-nav">
-          <li><a href="strings.html#s10-1"><span class="nav-num">§10.1</span>Writing Systems &amp; Unicode</a></li>
-          <li><a href="strings.html#s10-2"><span class="nav-num">§10.2</span><code>char</code></a></li>
-          <li><a href="strings.html#s10-3"><span class="nav-num">§10.3</span><code>Character</code></a></li>
-          <li><a href="strings.html#s10-4"><span class="nav-num">§10.4</span>Indexing</a></li>
-          <li><a href="strings.html#s10-5"><span class="nav-num">§10.5</span>Immutability</a></li>
-          <li><a href="strings.html#s10-6"><span class="nav-num">§10.6</span><code>==</code> vs <code>.equals()</code></a></li>
-          <li><a href="strings.html#s10-7"><span class="nav-num">§10.7</span>Concatenation</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="inheritance.html"><span class="nav-num">§11</span>Inheritance</a>
-        <ul class="sub-nav">
-          <li><a href="inheritance.html#s10-1"><span class="nav-num">§11.1</span>Taxonomy</a></li>
-          <li><a href="inheritance.html#s10-2"><span class="nav-num">§11.2</span>The Problem</a></li>
-          <li><a href="inheritance.html#s10-3"><span class="nav-num">§11.3</span><code>extends</code></a></li>
-          <li><a href="inheritance.html#s10-4"><span class="nav-num">§11.4</span><code>super(...)</code></a></li>
-          <li><a href="inheritance.html#s10-5"><span class="nav-num">§11.5</span>Polymorphism</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="accessmodifiers.html" class="active"><span class="nav-num">§12</span>Packages &amp; Access Modifiers</a>
-        <ul class="sub-nav">
-          <li><a href="#s11-1"><span class="nav-num">§12.1</span>Packages</a></li>
-          <li><a href="#s11-2"><span class="nav-num">§12.2</span>Why Restrict Access</a></li>
-          <li><a href="#s11-3"><span class="nav-num">§12.3</span><code>private</code></a></li>
-          <li><a href="#s11-4"><span class="nav-num">§12.4</span>Encapsulation</a></li>
-          <li><a href="#s11-5"><span class="nav-num">§12.5</span><code>public</code></a></li>
-          <li><a href="#s11-6"><span class="nav-num">§12.6</span>Package-Private</a></li>
-          <li><a href="#s11-7"><span class="nav-num">§12.7</span><code>protected</code></a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="immutability.html"><span class="nav-num">§13</span>Immutability</a>
-        <ul class="sub-nav">
-          <li><a href="immutability.html#s13-1"><span class="nav-num">§13.1</span>Identity &amp; State</a></li>
-          <li><a href="immutability.html#s13-2"><span class="nav-num">§13.2</span>A Question of Time</a></li>
-          <li><a href="immutability.html#s13-3"><span class="nav-num">§13.3</span>Building an Immutable Class</a></li>
-          <li><a href="immutability.html#s13-4"><span class="nav-num">§13.4</span><code>final</code> Isn't Deep</a></li>
-          <li><a href="immutability.html#s13-5"><span class="nav-num">§13.5</span>Why It Matters</a></li>
-          <li><a href="immutability.html#s13-6"><span class="nav-num">§13.6</span><code>StringBuilder</code></a></li>
-          <li><a href="immutability.html#s13-7"><span class="nav-num">§13.7</span>Core Pillars</a></li>
-          <li><a href="immutability.html#s13-8"><span class="nav-num">§13.8</span>Putting It Together</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="abstractclasses.html"><span class="nav-num">§14</span>Abstract Classes</a>
-        <ul class="sub-nav">
-          <li><a href="abstractclasses.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
-          <li><a href="abstractclasses.html#s14-2"><span class="nav-num">§14.2</span><code>abstract</code> Classes</a></li>
-          <li><a href="abstractclasses.html#s14-3"><span class="nav-num">§14.3</span><code>abstract</code> Methods</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="interfaces.html"><span class="nav-num">§15</span>Interfaces</a>
-        <ul class="sub-nav">
-          <li><a href="interfaces.html#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
-          <li><a href="interfaces.html#s15-2"><span class="nav-num">§15.2</span>Interface vs. Abstract Class</a></li>
-          <li><a href="interfaces.html#s15-3"><span class="nav-num">§15.3</span>Declaring &amp; Implementing</a></li>
-          <li><a href="interfaces.html#s15-4"><span class="nav-num">§15.4</span>Override vs. Overload</a></li>
-          <li><a href="interfaces.html#s15-5"><span class="nav-num">§15.5</span>Multiple Interfaces</a></li>
-          <li><a href="interfaces.html#s15-6"><span class="nav-num">§15.6</span>Interface-Typed Params</a></li>
-          <li><a href="interfaces.html#s15-7"><span class="nav-num">§15.7</span>Anonymous Classes</a></li>
-          <li><a href="interfaces.html#s15-8"><span class="nav-num">§15.8</span>Default Methods</a></li>
-          <li><a href="interfaces.html#s15-9"><span class="nav-num">§15.9</span>Default Method Collisions</a></li>
-          <li><a href="interfaces.html#s15-10"><span class="nav-num">§15.10</span>Static Methods</a></li>
-          <li><a href="interfaces.html#s15-11"><span class="nav-num">§15.11</span>Interface Inheritance</a></li>
-          <li><a href="interfaces.html#s15-12"><span class="nav-num">§15.12</span>Strategy Pattern</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="generics.html"><span class="nav-num">§16</span>Generics</a>
-        <ul class="sub-nav">
-          <li><a href="generics.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
-          <li><a href="generics.html#s16-2"><span class="nav-num">§16.2</span>Type Parameters</a></li>
-          <li><a href="generics.html#s16-3"><span class="nav-num">§16.3</span>Generic Methods</a></li>
-          <li><a href="generics.html#s16-4"><span class="nav-num">§16.4</span>Bounded Types</a></li>
-          <li><a href="generics.html#s16-5"><span class="nav-num">§16.5</span>Compile Time Only</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="records.html"><span class="nav-num">§17</span>Records</a>
-        <ul class="sub-nav">
-          <li><a href="records.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
-          <li><a href="records.html#s17-2"><span class="nav-num">§17.2</span><code>record</code></a></li>
-          <li><a href="records.html#s17-3"><span class="nav-num">§17.3</span>Implicitly Final</a></li>
-          <li><a href="records.html#s17-4"><span class="nav-num">§17.4</span>Shallow Immutability</a></li>
-          <li><a href="records.html#s17-5"><span class="nav-num">§17.5</span>Compact Constructors</a></li>
-          <li><a href="records.html#s17-6"><span class="nav-num">§17.6</span>Records Can Do More</a></li>
-          <li><a href="records.html#s17-7"><span class="nav-num">§17.7</span>When to Reach for One</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="collections.html"><span class="nav-num">§18</span>Collections Framework</a>
-        <ul class="sub-nav">
-          <li><a href="collections.html#s18-1"><span class="nav-num">§18.1</span>The Problem</a></li>
-          <li><a href="collections.html#s18-2"><span class="nav-num">§18.2</span>The Big Picture</a></li>
-          <li><a href="collections.html#s18-3"><span class="nav-num">§18.3</span><code>List</code></a></li>
-          <li><a href="collections.html#s18-4"><span class="nav-num">§18.4</span><code>Queue</code></a></li>
-          <li><a href="collections.html#s18-5"><span class="nav-num">§18.5</span><code>Set</code></a></li>
-          <li><a href="collections.html#s18-6"><span class="nav-num">§18.6</span><code>Map</code></a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="lambdas.html"><span class="nav-num">§19</span>Functional Programming</a>
-        <ul class="sub-nav">
-          <li><a href="lambdas.html#s19-1"><span class="nav-num">§19.1</span>Functions as First-Class Citizens</a></li>
-          <li><a href="lambdas.html#s19-2"><span class="nav-num">§19.2</span>Why Java "Simulates" First-Class Functions</a></li>
-          <li><a href="lambdas.html#s19-3"><span class="nav-num">§19.3</span>The Problem</a></li>
-          <li><a href="lambdas.html#s19-4"><span class="nav-num">§19.4</span>Another Anonymous Class</a></li>
-          <li><a href="lambdas.html#s19-5"><span class="nav-num">§19.5</span>Functional Interfaces</a></li>
-          <li><a href="lambdas.html#s19-6"><span class="nav-num">§19.6</span>Lambda Expressions</a></li>
-          <li><a href="lambdas.html#s19-7"><span class="nav-num">§19.7</span>Method References</a></li>
-          <li><a href="lambdas.html#s19-8"><span class="nav-num">§19.8</span><code>java.util.function</code></a></li>
-          <li><a href="lambdas.html#s19-9"><span class="nav-num">§19.9</span>Key Takeaways</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="enums.html"><span class="nav-num">§20</span>Enums</a>
-        <ul class="sub-nav">
-          <li><a href="enums.html#s20-1"><span class="nav-num">§20.1</span>The Problem</a></li>
-          <li><a href="enums.html#s20-2"><span class="nav-num">§20.2</span>Declaring an Enum</a></li>
-          <li><a href="enums.html#s20-3"><span class="nav-num">§20.3</span>Objects, Not Constants</a></li>
-          <li><a href="enums.html#s20-4"><span class="nav-num">§20.4</span>Comparing Enum Values</a></li>
-          <li><a href="enums.html#s20-5"><span class="nav-num">§20.5</span>Type Characteristics</a></li>
-          <li><a href="enums.html#s20-6"><span class="nav-num">§20.6</span>Fields, Constructors, Methods</a></li>
-          <li><a href="enums.html#s20-7"><span class="nav-num">§20.7</span>Enums vs. Magic Numbers</a></li>
-          <li><a href="enums.html#s20-8"><span class="nav-num">§20.8</span>Closed Sets vs. Evolving Reality</a></li>
-          <li><a href="enums.html#s20-9"><span class="nav-num">§20.9</span>Key Takeaways</a></li>
-        </ul>
-      </li>
-      <li><a href="oodesign.html"><span class="nav-num">§21</span>Object-Oriented Design</a></li>
-    </ul>
+  <nav id="sidebar" aria-label="Tutorial navigation">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-label">Tutorial</div>
+      <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
+    </div>
+    <nav>
+      <ul>
+        <li>
+          <a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a>
+          <ul class="sub-nav">
+            <li><a href="index.html#s0-1"><span class="nav-num">§0.1</span>What Is Java?</a></li>
+            <li><a href="index.html#s0-2"><span class="nav-num">§0.2</span>Where Is Java Used?</a></li>
+            <li><a href="index.html#s0-3"><span class="nav-num">§0.3</span>Why Java?</a></li>
+            <li><a href="index.html#s0-4"><span class="nav-num">§0.4</span>The Java Ecosystem</a></li>
+            <li><a href="index.html#s0-5"><span class="nav-num">§0.5</span>Java Versions</a></li>
+            <li><a href="index.html#s0-6"><span class="nav-num">§0.6</span>Your First Program</a></li>
+            <li><a href="index.html#s0-7"><span class="nav-num">§0.7</span>Key Features</a></li>
+            <li><a href="index.html#s0-8"><span class="nav-num">§0.8</span>Key Takeaways</a></li>
+            <li><a href="index.html#s0-9"><span class="nav-num">§0.9</span>Appendix: Write Once, Run Anywhere</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="variables.html"><span class="nav-num">§1</span>Variables and Values</a>
+          <ul class="sub-nav">
+            <li><a href="variables.html#s1-1"><span class="nav-num">§1.1</span>Values</a></li>
+            <li><a href="variables.html#s1-2"><span class="nav-num">§1.2</span>Variables in Java</a></li>
+            <li><a href="variables.html#s1-3"><span class="nav-num">§1.3</span>Primitive Types</a></li>
+            <li><a href="variables.html#s1-4"><span class="nav-num">§1.4</span>Literals</a></li>
+            <li><a href="variables.html#s1-5"><span class="nav-num">§1.5</span><code>var</code></a></li>
+            <li><a href="variables.html#s1-6"><span class="nav-num">§1.6</span>Common Mistakes</a></li>
+            <li><a href="variables.html#s1-7"><span class="nav-num">§1.7</span>What a Variable Holds</a></li>
+            <li><a href="variables.html#s1-8"><span class="nav-num">§1.8</span>Key Takeaways</a></li>
+            <li><a href="variables.html#s1-9"><span class="nav-num">§1.9</span>Appendix: Number Systems</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="classes.html"><span class="nav-num">§2</span>Classes &amp; Objects</a>
+          <ul class="sub-nav">
+            <li><a href="classes.html#s2-1"><span class="nav-num">§2.1</span>Classes as Blueprints</a></li>
+            <li><a href="classes.html#s2-2"><span class="nav-num">§2.2</span>Instantiation</a></li>
+            <li><a href="classes.html#s2-3"><span class="nav-num">§2.3</span>Reference Variables</a></li>
+            <li><a href="classes.html#s2-4"><span class="nav-num">§2.4</span>Reference Fields</a></li>
+            <li><a href="classes.html#s2-5"><span class="nav-num">§2.5</span>Constructors</a></li>
+            <li><a href="classes.html#s2-6"><span class="nav-num">§2.6</span>Static Fields</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="assignment.html"><span class="nav-num">§3</span>Assignment</a>
+          <ul class="sub-nav">
+            <li><a href="assignment.html#s3-1"><span class="nav-num">§3.1</span>The "Value"</a></li>
+            <li><a href="assignment.html#s3-2"><span class="nav-num">§3.2</span>Primitive Assignment</a></li>
+            <li><a href="assignment.html#s3-3"><span class="nav-num">§3.3</span>Reference Assignment</a></li>
+            <li><a href="assignment.html#s3-4"><span class="nav-num">§3.4</span>Consequence</a></li>
+            <li><a href="assignment.html#s3-5"><span class="nav-num">§3.5</span>Assignment vs. the Dot</a></li>
+            <li><a href="assignment.html#s3-6"><span class="nav-num">§3.6</span>The Rule</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="methods.html"><span class="nav-num">§4</span>Methods</a>
+          <ul class="sub-nav">
+            <li><a href="methods.html#s4-intro"><span class="nav-num">§4.1</span>Why Methods</a></li>
+            <li><a href="methods.html#s4-2"><span class="nav-num">§4.2</span>What Is a Method?</a></li>
+            <li><a href="methods.html#s4-3"><span class="nav-num">§4.3</span>Outputs</a></li>
+            <li><a href="methods.html#s4-4"><span class="nav-num">§4.4</span>Functions to Objects</a></li>
+            <li><a href="methods.html#s4-5"><span class="nav-num">§4.5</span>The "Hidden" Parameter</a></li>
+            <li><a href="methods.html#s4-6"><span class="nav-num">§4.6</span>Key Takeaways</a></li>
+            <li><a href="methods.html#s4-7"><span class="nav-num">§4.7</span>Appendix: The Call Stack</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="operators.html"><span class="nav-num">§5</span>Operators</a>
+          <ul class="sub-nav">
+            <li><a href="operators.html#s5-1"><span class="nav-num">§5.1</span>Arithmetic Operators</a></li>
+            <li><a href="operators.html#s5-2"><span class="nav-num">§5.2</span>Unary Operators</a></li>
+            <li><a href="operators.html#s5-3"><span class="nav-num">§5.3</span>Comparison Operators</a></li>
+            <li><a href="operators.html#s5-4"><span class="nav-num">§5.4</span>Logical Operators</a></li>
+            <li><a href="operators.html#s5-5"><span class="nav-num">§5.5</span>Compound Assignment</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="arrays.html"><span class="nav-num">§6</span>Arrays</a>
+          <ul class="sub-nav">
+            <li><a href="arrays.html#s6-1"><span class="nav-num">§6.1</span>Why Arrays</a></li>
+            <li><a href="arrays.html#s6-2"><span class="nav-num">§6.2</span>One Variable, Many Values</a></li>
+            <li><a href="arrays.html#s6-3"><span class="nav-num">§6.3</span>The Index</a></li>
+            <li><a href="arrays.html#s6-4"><span class="nav-num">§6.4</span>Creating an Array</a></li>
+            <li><a href="arrays.html#s6-5"><span class="nav-num">§6.5</span>Reading and Writing Elements</a></li>
+            <li><a href="arrays.html#s6-6"><span class="nav-num">§6.6</span><code>.length</code></a></li>
+            <li><a href="arrays.html#s6-7"><span class="nav-num">§6.7</span>Filling in the Week</a></li>
+            <li><a href="arrays.html#s6-8"><span class="nav-num">§6.8</span>Assignment Still Copies the Address</a></li>
+            <li><a href="arrays.html#s6-9"><span class="nav-num">§6.9</span>Arrays of Objects</a></li>
+            <li><a href="arrays.html#s6-10"><span class="nav-num">§6.10</span>Pointing a Slot at an Existing Object</a>
+            </li>
+            <li><a href="arrays.html#s6-11"><span class="nav-num">§6.11</span>Passing an Array's Address to a Method</a>
+            </li>
+            <li><a href="arrays.html#s6-12"><span class="nav-num">§6.12</span>Variable-Arity Parameters</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="controlflow.html"><span class="nav-num">§7</span>Control Flow</a>
+          <ul class="sub-nav">
+            <li><a href="controlflow.html#s7-1"><span class="nav-num">§7.1</span>The Flow of Execution</a></li>
+            <li><a href="controlflow.html#s7-2"><span class="nav-num">§7.2</span>Variable Scope</a></li>
+            <li><a href="controlflow.html#s7-3"><span class="nav-num">§7.3</span>Conditional Branching</a></li>
+            <li><a href="controlflow.html#s7-4"><span class="nav-num">§7.4</span><code>while</code></a></li>
+            <li><a href="controlflow.html#s7-5"><span class="nav-num">§7.5</span><code>for</code></a></li>
+            <li><a href="controlflow.html#s7-6"><span class="nav-num">§7.6</span>for-each</a></li>
+            <li><a href="controlflow.html#s7-7"><span class="nav-num">§7.7</span>Ternary Operator</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="strings.html"><span class="nav-num">§8</span>Strings</a>
+          <ul class="sub-nav">
+            <li><a href="strings.html#s8-1"><span class="nav-num">§8.1</span>Writing Systems &amp; Unicode</a></li>
+            <li><a href="strings.html#s8-2"><span class="nav-num">§8.2</span><code>char</code></a></li>
+            <li><a href="strings.html#s8-3"><span class="nav-num">§8.3</span><code>Character</code></a></li>
+            <li><a href="strings.html#s8-4"><span class="nav-num">§8.4</span>Sequence of Characters</a></li>
+            <li><a href="strings.html#s8-5"><span class="nav-num">§8.5</span>Text Blocks</a></li>
+            <li><a href="strings.html#s8-6"><span class="nav-num">§8.6</span>Immutability</a></li>
+            <li><a href="strings.html#s8-7"><span class="nav-num">§8.7</span><code>==</code> vs
+                <code>.equals()</code></a></li>
+            <li><a href="strings.html#s8-8"><span class="nav-num">§8.8</span>Concatenation</a></li>
+            <li><a href="strings.html#s8-9"><span class="nav-num">§8.9</span>Important String Methods</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="inheritance.html"><span class="nav-num">§9</span>Inheritance</a>
+          <ul class="sub-nav">
+            <li><a href="inheritance.html#s10-1"><span class="nav-num">§9.1</span>Taxonomy</a></li>
+            <li><a href="inheritance.html#s10-2"><span class="nav-num">§9.2</span>The Problem</a></li>
+            <li><a href="inheritance.html#s10-3"><span class="nav-num">§9.3</span><code>extends</code></a></li>
+            <li><a href="inheritance.html#s10-4"><span class="nav-num">§9.4</span><code>super(...)</code></a></li>
+            <li><a href="inheritance.html#s10-5"><span class="nav-num">§9.5</span>Polymorphism</a></li>
+            <li><a href="inheritance.html#s10-6"><span class="nav-num">§9.6</span>Overriding</a></li>
+            <li><a href="inheritance.html#s10-7"><span class="nav-num">§9.7</span><code>toString()</code></a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="accessmodifiers.html" class="active"><span class="nav-num">§10</span>Packages &amp; Access
+            Modifiers</a>
+          <ul class="sub-nav">
+            <li><a href="#s11-1"><span class="nav-num">§10.1</span>Packages</a></li>
+            <li><a href="#s11-2"><span class="nav-num">§10.2</span>Why Restrict Access</a></li>
+            <li><a href="#s11-3"><span class="nav-num">§10.3</span><code>private</code></a></li>
+            <li><a href="#s11-4"><span class="nav-num">§10.4</span>Encapsulation</a></li>
+            <li><a href="#s11-5"><span class="nav-num">§10.5</span><code>public</code></a></li>
+            <li><a href="#s11-6"><span class="nav-num">§10.6</span>Package-Private</a></li>
+            <li><a href="#s11-7"><span class="nav-num">§10.7</span><code>protected</code></a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="immutability.html"><span class="nav-num">§11</span>Immutability</a>
+          <ul class="sub-nav">
+            <li><a href="immutability.html#s11-1"><span class="nav-num">§11.1</span>Identity &amp; State</a></li>
+            <li><a href="immutability.html#s11-2"><span class="nav-num">§11.2</span>A Question of Time</a></li>
+            <li><a href="immutability.html#s11-3"><span class="nav-num">§11.3</span>Building an Immutable Class</a></li>
+            <li><a href="immutability.html#s11-4"><span class="nav-num">§11.4</span><code>final</code> Isn't Deep</a>
+            </li>
+            <li><a href="immutability.html#s11-5"><span class="nav-num">§11.5</span>Why It Matters</a></li>
+            <li><a href="immutability.html#s11-6"><span class="nav-num">§11.6</span><code>StringBuilder</code></a></li>
+            <li><a href="immutability.html#s11-7"><span class="nav-num">§11.7</span>Core Pillars</a></li>
+            <li><a href="immutability.html#s11-8"><span class="nav-num">§11.8</span>Putting It Together</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="abstractclasses.html"><span class="nav-num">§12</span>Abstract Classes</a>
+          <ul class="sub-nav">
+            <li><a href="abstractclasses.html#s12-1"><span class="nav-num">§12.1</span>The Problem</a></li>
+            <li><a href="abstractclasses.html#s12-2"><span class="nav-num">§12.2</span><code>abstract</code> Classes</a>
+            </li>
+            <li><a href="abstractclasses.html#s12-3"><span class="nav-num">§12.3</span><code>abstract</code> Methods</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="interfaces.html"><span class="nav-num">§13</span>Interfaces</a>
+          <ul class="sub-nav">
+            <li><a href="interfaces.html#s13-1"><span class="nav-num">§13.1</span>The Problem</a></li>
+            <li><a href="interfaces.html#s13-2"><span class="nav-num">§13.2</span>Interface vs. Abstract Class</a></li>
+            <li><a href="interfaces.html#s13-3"><span class="nav-num">§13.3</span>Declaring &amp; Implementing</a></li>
+            <li><a href="interfaces.html#s13-4"><span class="nav-num">§13.4</span>Override vs. Overload</a></li>
+            <li><a href="interfaces.html#s13-5"><span class="nav-num">§13.5</span>Multiple Interfaces</a></li>
+            <li><a href="interfaces.html#s13-6"><span class="nav-num">§13.6</span>Interface-Typed Params</a></li>
+            <li><a href="interfaces.html#s13-7"><span class="nav-num">§13.7</span>Anonymous Classes</a></li>
+            <li><a href="interfaces.html#s13-8"><span class="nav-num">§13.8</span>Default Methods</a></li>
+            <li><a href="interfaces.html#s13-9"><span class="nav-num">§13.9</span>Default Method Collisions</a></li>
+            <li><a href="interfaces.html#s13-10"><span class="nav-num">§13.10</span>Static Methods</a></li>
+            <li><a href="interfaces.html#s13-11"><span class="nav-num">§13.11</span>Interface Inheritance</a></li>
+            <li><a href="interfaces.html#s13-12"><span class="nav-num">§13.12</span>Strategy Pattern</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="exceptions.html"><span class="nav-num">§14</span>Exceptions</a>
+          <ul class="sub-nav">
+            <li><a href="exceptions.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
+            <li><a href="exceptions.html#s14-2"><span class="nav-num">§14.2</span>The Exception Lifecycle</a></li>
+            <li><a href="exceptions.html#s14-3"><span class="nav-num">§14.3</span>The Exception Hierarchy</a></li>
+            <li><a href="exceptions.html#s14-4"><span class="nav-num">§14.4</span>Checked vs. Unchecked</a></li>
+            <li><a href="exceptions.html#s14-5"><span class="nav-num">§14.5</span>Handling Exceptions</a></li>
+            <li><a href="exceptions.html#s14-6"><span class="nav-num">§14.6</span><code>throw</code> and
+                <code>throws</code></a></li>
+            <li><a href="exceptions.html#s14-7"><span class="nav-num">§14.7</span>Custom Exceptions</a></li>
+            <li><a href="exceptions.html#s14-8"><span class="nav-num">§14.8</span>Exception Chaining</a></li>
+            <li><a href="exceptions.html#s14-9"><span class="nav-num">§14.9</span>Try-with-Resources</a></li>
+            <li><a href="exceptions.html#s14-10"><span class="nav-num">§14.10</span>Exceptions Are Not Control Flow</a>
+            </li>
+            <li><a href="exceptions.html#s14-11"><span class="nav-num">§14.11</span>Best Practices &amp;
+                Anti-Patterns</a></li>
+            <li><a href="exceptions.html#s14-12"><span class="nav-num">§14.12</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="generics.html"><span class="nav-num">§15</span>Generics</a>
+          <ul class="sub-nav">
+            <li><a href="generics.html#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
+            <li><a href="generics.html#s15-2"><span class="nav-num">§15.2</span>Type Parameters</a></li>
+            <li><a href="generics.html#s15-3"><span class="nav-num">§15.3</span>Generic Methods</a></li>
+            <li><a href="generics.html#s15-4"><span class="nav-num">§15.4</span>Bounded Types</a></li>
+            <li><a href="generics.html#s15-5"><span class="nav-num">§15.5</span>Compile Time Only</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="records.html"><span class="nav-num">§16</span>Records</a>
+          <ul class="sub-nav">
+            <li><a href="records.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
+            <li><a href="records.html#s16-2"><span class="nav-num">§16.2</span><code>record</code></a></li>
+            <li><a href="records.html#s16-3"><span class="nav-num">§16.3</span>Implicitly Final</a></li>
+            <li><a href="records.html#s16-4"><span class="nav-num">§16.4</span>Shallow Immutability</a></li>
+            <li><a href="records.html#s16-5"><span class="nav-num">§16.5</span>Compact Constructors</a></li>
+            <li><a href="records.html#s16-6"><span class="nav-num">§16.6</span>Records Can Do More</a></li>
+            <li><a href="records.html#s16-7"><span class="nav-num">§16.7</span>When to Reach for One</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="collections.html"><span class="nav-num">§18</span>Collections Framework</a>
+          <ul class="sub-nav">
+            <li><a href="collections.html#s18-1"><span class="nav-num">§18.1</span>The Problem</a></li>
+            <li><a href="collections.html#s18-2"><span class="nav-num">§18.2</span>The Big Picture</a></li>
+            <li><a href="collections.html#s18-3"><span class="nav-num">§18.3</span><code>List</code></a></li>
+            <li><a href="collections.html#s18-4"><span class="nav-num">§18.4</span><code>Queue</code></a></li>
+            <li><a href="collections.html#s18-5"><span class="nav-num">§18.5</span><code>Set</code></a></li>
+            <li><a href="collections.html#s18-6"><span class="nav-num">§18.6</span><code>Map</code></a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="lambdas.html"><span class="nav-num">§19</span>Functional Programming</a>
+          <ul class="sub-nav">
+            <li><a href="lambdas.html#s19-1"><span class="nav-num">§19.1</span>Functions as First-Class Citizens</a>
+            </li>
+            <li><a href="lambdas.html#s19-2"><span class="nav-num">§19.2</span>Why Java "Simulates" First-Class
+                Functions</a></li>
+            <li><a href="lambdas.html#s19-3"><span class="nav-num">§19.3</span>The Problem</a></li>
+            <li><a href="lambdas.html#s19-4"><span class="nav-num">§19.4</span>Another Anonymous Class</a></li>
+            <li><a href="lambdas.html#s19-5"><span class="nav-num">§19.5</span>Functional Interfaces</a></li>
+            <li><a href="lambdas.html#s19-6"><span class="nav-num">§19.6</span>Lambda Expressions</a></li>
+            <li><a href="lambdas.html#s19-7"><span class="nav-num">§19.7</span>Method References</a></li>
+            <li><a href="lambdas.html#s19-8"><span class="nav-num">§19.8</span><code>java.util.function</code></a></li>
+            <li><a href="lambdas.html#s19-9"><span class="nav-num">§19.9</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="enums.html"><span class="nav-num">§17</span>Enums</a>
+          <ul class="sub-nav">
+            <li><a href="enums.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
+            <li><a href="enums.html#s17-2"><span class="nav-num">§17.2</span>Declaring an Enum</a></li>
+            <li><a href="enums.html#s17-3"><span class="nav-num">§17.3</span>Objects, Not Constants</a></li>
+            <li><a href="enums.html#s17-4"><span class="nav-num">§17.4</span>Comparing Enum Values</a></li>
+            <li><a href="enums.html#s17-5"><span class="nav-num">§17.5</span>Type Characteristics</a></li>
+            <li><a href="enums.html#s17-6"><span class="nav-num">§17.6</span>Fields, Constructors, Methods</a></li>
+            <li><a href="enums.html#s17-7"><span class="nav-num">§17.7</span>Enums vs. Magic Numbers</a></li>
+            <li><a href="enums.html#s17-8"><span class="nav-num">§17.8</span>Closed Sets vs. Evolving Reality</a></li>
+            <li><a href="enums.html#s17-9"><span class="nav-num">§17.9</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="optionals.html"><span class="nav-num">§20</span>Optional&lt;T&gt;</a>
+          <ul class="sub-nav">
+            <li><a href="optionals.html#s20-1"><span class="nav-num">§20.1</span>The Problem</a></li>
+            <li><a href="optionals.html#s20-2"><span class="nav-num">§20.2</span><code>null</code>: The Absence of a
+                Value</a></li>
+            <li><a href="optionals.html#s20-3"><span class="nav-num">§20.3</span>The Defensive Approach</a></li>
+            <li><a href="optionals.html#s20-4"><span class="nav-num">§20.4</span>The <code>Optional&lt;T&gt;</code>
+                Class</a></li>
+            <li><a href="optionals.html#s20-5"><span class="nav-num">§20.5</span><code>Optional&lt;T&gt;</code> vs
+                <code>null</code></a></li>
+            <li><a href="optionals.html#s20-6"><span class="nav-num">§20.6</span>Specialized Primitive Optionals</a>
+            </li>
+            <li><a href="optionals.html#s20-7"><span class="nav-num">§20.7</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="streams.html"><span class="nav-num">§21</span>Streams</a>
+          <ul class="sub-nav">
+            <li><a href="streams.html#s21-1"><span class="nav-num">§21.1</span>The Problem</a></li>
+            <li><a href="streams.html#s21-2"><span class="nav-num">§21.2</span>What Is a Stream</a></li>
+            <li><a href="streams.html#s21-3"><span class="nav-num">§21.3</span>Creating a Stream</a></li>
+            <li><a href="streams.html#s21-4"><span class="nav-num">§21.4</span>Intermediate Operations</a></li>
+            <li><a href="streams.html#s21-5"><span class="nav-num">§21.5</span>Terminal Operations</a></li>
+            <li><a href="streams.html#s21-6"><span class="nav-num">§21.6</span>Collecting Results</a></li>
+            <li><a href="streams.html#s21-7"><span class="nav-num">§21.7</span>Streams and
+                <code>Optional&lt;T&gt;</code></a></li>
+            <li><a href="streams.html#s21-8"><span class="nav-num">§21.8</span>Laziness and Pipelines</a></li>
+            <li><a href="streams.html#s21-9"><span class="nav-num">§21.9</span>When (Not) to Use Streams</a></li>
+            <li><a href="streams.html#s21-10"><span class="nav-num">§21.10</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="concurrency.html"><span class="nav-num">§22</span>Concurrent Programming</a>
+          <ul class="sub-nav">
+            <li><a href="concurrency.html#s22-1"><span class="nav-num">§22.1</span>The Problem</a></li>
+            <li><a href="concurrency.html#s22-2"><span class="nav-num">§22.2</span>Process, Thread, and the OS</a></li>
+            <li><a href="concurrency.html#s22-3"><span class="nav-num">§22.3</span>Independent Progress</a></li>
+            <li><a href="concurrency.html#s22-4"><span class="nav-num">§22.4</span>Why Concurrency Matters</a></li>
+            <li><a href="concurrency.html#s22-5"><span class="nav-num">§22.5</span>Where Parallelism Fits In</a></li>
+            <li><a href="concurrency.html#s22-6"><span class="nav-num">§22.6</span>The Main Thread</a></li>
+            <li><a href="concurrency.html#s22-7"><span class="nav-num">§22.7</span>Step 1: Creating a Task</a></li>
+            <li><a href="concurrency.html#s22-8"><span class="nav-num">§22.8</span>Step 2: Handing a Task to an
+                Executor</a></li>
+            <li><a href="concurrency.html#s22-9"><span class="nav-num">§22.9</span>ExecutorService in Practice</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="modules.html"><span class="nav-num">§23</span>Java Modules</a>
+          <ul class="sub-nav">
+            <li><a href="modules.html#s23-1"><span class="nav-num">§23.1</span>The Problem</a></li>
+            <li><a href="modules.html#s23-2"><span class="nav-num">§23.2</span>What Is a Module</a></li>
+            <li><a href="modules.html#s23-3"><span class="nav-num">§23.3</span><code>module-info.java</code></a></li>
+            <li><a href="modules.html#s23-4"><span class="nav-num">§23.4</span><code>exports</code></a></li>
+            <li><a href="modules.html#s23-5"><span class="nav-num">§23.5</span><code>requires</code></a></li>
+            <li><a href="modules.html#s23-6"><span class="nav-num">§23.6</span>Strong Encapsulation</a></li>
+            <li><a href="modules.html#s23-7"><span class="nav-num">§23.7</span>The Module Path</a></li>
+            <li><a href="modules.html#s23-8"><span class="nav-num">§23.8</span><code>requires transitive</code></a></li>
+            <li><a href="modules.html#s23-9"><span class="nav-num">§23.9</span>When (Not) to Use Modules</a></li>
+            <li><a href="modules.html#s23-10"><span class="nav-num">§23.10</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li><a href="dateandtime.html"><span class="nav-num">§24</span>Date and Time</a></li>
+        <li><a href="io.html"><span class="nav-num">§25</span>Input and Output</a></li>
+        <li><a href="oodesign.html"><span class="nav-num">§26</span>Object-Oriented Design</a></li>
+      </ul>
+    </nav>
   </nav>
-</nav>
 
-<main id="content">
-  <header class="page-header">
-    <div class="page-chapter">Chapter 12</div>
-    <h1>Packages &amp; Access Modifiers</h1>
-    <p class="page-lead">Every class so far has quietly lived in the same unnamed place, and every field and method has been reachable from anywhere in the program, the moment you have a reference. This chapter names both: the packages classes are organized into, and the access modifiers that use them to control who's allowed to reach in.</p>
-  </header>
+  <main id="content">
+    <header class="page-header">
+      <div class="page-chapter">Chapter 10</div>
+      <h1>Packages &amp; Access Modifiers</h1>
+      <p class="page-lead">Marking a field <code>private</code> restricts it to code written inside that field's own
+        class — not other classes, not even a subclass. This chapter covers the full set of access modifiers Java
+        gives a class to make that kind of decision, and the packages that organize classes in the first place.</p>
+    </header>
 
-  <article>
+    <article>
 
-    <!-- §12.1 -->
-    <section id="s11-1">
-      <div class="section-head">
-        <span class="sec-num">§12.1</span>
-        <h2>Packages <em>— organizing code into named groups</em></h2>
-      </div>
+      <!-- §10.1 -->
+      <section id="s11-1">
+        <div class="section-head">
+          <span class="sec-num">§10.1</span>
+          <h2>Packages <em>— organizing code into named groups</em></h2>
+        </div>
 
-    <p>A <span class="term">package</span> is a named group of related classes — Java's way of organizing a codebase into folders instead of one flat pile of files, and of keeping two unrelated classes from colliding if they ever happen to share a name. A class declares which package it belongs to with a <code>package</code> statement, as the very first line of the file, above even its imports:</p>
+        <p>A <span class="term">package</span> is a named group of related classes — Java's way of organizing a
+          codebase, and of keeping two unrelated classes from colliding if they ever happen to share a name. </p>
 
-    <pre><code class="language-java">package com.example.shapes;
+        <h3>Naming a Package</h3>
+        <p>A class declares which package it belongs to with a <code>package</code> statement, as the very first line of
+          the file:</p>
 
+        <pre><code class="language-java">package com.example.shapes;
+                
 class Rectangle {
     ...
 }</code></pre>
+        <p>Notice the name isn't just <code>shapes</code> — it's <code>com.example.shapes</code>. That's not decoration;
+          it's a convention every real Java codebase follows, built to solve
+          a problem one level up from the collision problem above. <code>shapes</code> alone is exactly the kind of
+          name two completely unrelated projects might both reach for — a graphics library and a geometry teaching
+          tool could both plausibly have a package just called <code>shapes</code>, with no relation to each other at
+          all. If both ever ended up being used in the same program, that's a collision, because
+          the package names themselves are now identical.</p>
 
-    <p>Every class in this tutorial has omitted that line. Omitting it doesn't mean "no package" — it places the class in Java's single, unnamed <span class="term">default package</span>. Every class shown so far has quietly shared that one package with every other class. Reaching a class declared in a <em>different</em>, named package requires an <code>import</code> statement naming it — a detail this tutorial hasn't needed, precisely because everything so far has lived in the same one.</p>
+        <p>The convention is to prefix a package with a reversed domain name the organization actually owns —
+          <code>com.example</code> for a company at <code>example.com</code>, <code>com.google</code> for Google,
+          <code>org.apache</code> for the Apache Software Foundation. Domain names are already globally unique — that
+          uniqueness is the entire reason they cost money and require registration — so reusing one, reversed, as a
+          package prefix gives every organization's code a namespace nobody else can accidentally collide with.
+          <code>com.example.shapes</code> and some unrelated team's <code>com.othercompany.shapes</code> can both exist
+          on the same classpath without incident, because the part before <code>shapes</code> is what actually keeps
+          them apart. This tutorial's own package tree above follows the same idea in miniature:
+          <code>com.store</code> stands in for whatever domain a real store's engineering team would actually own.
+        </p>
+        <h3>Default Package</h3>
+        <p>Every class in this tutorial has omitted package declaration line. Omitting it doesn't mean "no package" — it
+          places the class in Java's single, unnamed <span class="term">default package</span>. Every class shown so far
+          has quietly shared that one package with every other class, which is exactly why none of them ever had to say
+          where any other one lived.</p>
 
-    <div class="callout callout-conn">
-      <div class="callout-lbl">Why this chapter starts here</div>
-      <p>Packages matter to <em>this</em> chapter specifically because two of Java's four access levels are defined directly in terms of them: package-private (§12.6) means "same package," and <code>protected</code> (§12.7) means "same package, plus subclasses anywhere." Neither rule means anything without already knowing what a package is.</p>
-    </div>
-    </section>
+        <h3>The import statement</h3>
+        <p>A class in a <em>different</em> named package doesn't get that for free. Suppose <code>Rectangle</code>
+          above lives in <code>com.example.shapes</code>, and some billing code, in its own
+          <code>com.example.billing</code> package, wants to use it:
+        </p>
 
-    <!-- §12.2 -->
-    <section id="s11-2">
-      <div class="section-head">
-        <span class="sec-num">§12.2</span>
-        <h2>Why Restrict Access <em>— a class with no way to say no</em></h2>
-      </div>
+        <pre><code class="language-java">package com.example.billing;
 
-    <p>Every field declared so far — <code>width</code>, <code>height</code>, <code>make</code>, <code>doors</code> — has been directly <span class="term">accessible</span> from outside its class, with nothing in between. <em>Accessible</em> covers both directions at once: any code holding a reference can <em>read</em> the field's current value, and can just as freely <em>write</em> a new one:</p>
+import com.example.shapes.Rectangle;
 
-    <pre><code class="language-java">Rectangle r = new Rectangle(10, 20);
-System.out.println(r.width); // read — anyone can see it
-r.width = -5;                // write — compiles fine, nothing stops this either</code></pre>
-
-    <p>Nothing about <code>Rectangle</code>'s definition says outside code shouldn't be able to see <code>width</code>, or that a width can't be negative — the field is just an <code>int</code> slot, and any code holding a reference to the object can dereference it, in either direction, and do exactly that. The class has no way to say "outsiders shouldn't be allowed to do that," because every field has been, by default, exactly as accessible as a field can be — visible to read, and open to write. <span class="term">Access modifiers</span> are Java's way of giving a class control over both.</p>
-    </section>
-
-    <!-- §12.3 -->
-    <section id="s11-3">
-      <div class="section-head">
-        <span class="sec-num">§12.3</span>
-        <h2><code>private</code> <em>— visible only inside the declaring class</em></h2>
-      </div>
-
-    <p>Marking a field <code>private</code> restricts it to code written inside that field's own class — not other classes, not even a subclass:</p>
-
-    <pre><code class="language-java">class Rectangle {
-    private int width;
-    private int height;
+class InvoiceLineItem {
+    Rectangle area;
 }</code></pre>
 
-    <pre><code class="language-java">Rectangle r = new Rectangle(10, 20);
-System.out.println(r.width); // compile error — width has private access in Rectangle
-r.width = -5;                // compile error — same reason, either direction</code></pre>
+        <p>The <code>import</code> statement names exactly which class, in which package, this file means by the bare
+          word <code>Rectangle</code> everywhere below it. Without it, the compiler has no way to find
+          <code>Rectangle</code> at all — <code>com.example.billing</code> and <code>com.example.shapes</code> are
+          different folders, as far as Java is concerned, and nothing about being "nearby" makes one visible to the
+          other. The alternative to importing is spelling out the <span class="term">fully qualified name</span> every
+          single time instead: <code>com.example.shapes.Rectangle area;</code> works too, with no import at all —
+          <code>import</code> exists purely so the rest of the file can say the short name.
+        </p>
 
-    <p>The field still exists — every Rectangle object still has a <code>width</code> slot, laid out exactly as before (§3). <code>private</code> doesn't change the memory layout at all; it changes what the <em>compiler</em> lets other code write. Code inside <code>Rectangle</code>'s own class body — its constructors, its methods — can still read and write <code>width</code> freely. Everyone else is locked out.</p>
-    </section>
+        <p><code>com.example.shapes</code> and <code>com.example.billing</code> hint at something larger than a
+          two-class example: real projects are organized into several packages, one per area of responsibility, all
+          living under one shared root. A small online store might lay its source tree out like this:</p>
 
-    <!-- §12.4 -->
-    <section id="s11-4">
-      <div class="section-head">
-        <span class="sec-num">§12.4</span>
-        <h2>Encapsulation <em>— exposing behavior instead of state</em></h2>
-      </div>
+        <div class="file-tree-wrap">
+          <ul class="file-tree">
+            <li><span class="f-folder">com/store/</span>
+              <ul>
+                <li><span class="f-folder">model/</span>
+                  <ul>
+                    <li><span class="f-file">Customer.java</span></li>
+                    <li><span class="f-file">Product.java</span></li>
+                    <li><span class="f-file">Order.java</span></li>
+                  </ul>
+                </li>
+                <li><span class="f-folder">billing/</span>
+                  <ul>
+                    <li><span class="f-file">Invoice.java</span></li>
+                    <li><span class="f-file">Payment.java</span></li>
+                  </ul>
+                </li>
+                <li><span class="f-folder">inventory/</span>
+                  <ul>
+                    <li><span class="f-file">Warehouse.java</span></li>
+                    <li><span class="f-file">StockItem.java</span></li>
+                  </ul>
+                </li>
+                <li><span class="f-file">Main.java</span></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
 
-    <p>Locking a field with <code>private</code> is only useful if there's still some way to reach it — otherwise no code, including <code>Rectangle</code>'s own users, could ever set a width at all. The standard idiom is a pair of methods: a <span class="term">getter</span> to read the field, and a <span class="term">setter</span> to write it — with the setter free to enforce rules the field alone never could:</p>
+        <p>The folders aren't just filing cabinets — each one <em>is</em> a package, and the folder path spells the
+          package name directly: <code>Order.java</code>, sitting in <code>com/store/model/</code>, declares
+          <code>package com.store.model;</code> as its first line; <code>Invoice.java</code>, in
+          <code>com/store/billing/</code>, declares <code>package com.store.billing;</code>. Grouping this way keeps
+          each area's classes together and named for what they are — <code>model</code> holds the store's core data,
+          <code>billing</code> the money-handling code, <code>inventory</code> everything about stock — rather than
+          one flat folder of thirty unrelated files. An <code>Invoice</code> that needs an <code>Order</code> reaches
+          across that boundary exactly the way <code>InvoiceLineItem</code> reached <code>Rectangle</code> above: an
+          <code>import com.store.model.Order;</code> line, naming precisely which package the class it needs actually
+          lives in.
+        </p>
 
-    <pre><code class="language-java">class Rectangle {
-    private int width;
-    private int height;
+        <h3>How Packages Solve Naming Collisions</h3>
 
-    public int getWidth() {
-        return width;
+        <p>Suppose the store integrates with a shipping partner's library, and that library happens to define its own
+          class named <code>Order</code> too — a shipping order, a completely different concept, that just happens to
+          share the name the store already picked for a customer order. Without packages, that's a dead end: Java
+          would have no way to tell the two apart, and whichever one got declared first would be the only
+          <code>Order</code> the compiler could ever recognize. With the help of packages, both <code>Order</code>
+          classes simply live in different places
+          and neither one has to change:
+        </p>
+
+        <pre><code class="language-plaintext">com.store.model.Order      — a customer's order, placed in the store
+com.shipping.Order         — a shipment handed to the carrier</code></pre>
+
+        <p>Two classes, same simple name, two completely different types — and Java has no trouble telling them apart,
+          because their <em>fully qualified</em> names, package included, are different. Code that only ever needs one
+          of them just imports that one, same as always:</p>
+
+        <pre><code class="language-java">package com.store.billing;
+
+import com.store.model.Order;
+
+class Invoice {
+    Order order; // unambiguous — com.store.model.Order is the only Order this file imported
+}</code></pre>
+
+        <p>Code that genuinely needs <em>both</em> in the same file has to be explicit about the one that isn't
+          imported by its short name — an import claims the bare word <code>Order</code> for whichever package it
+          names, so the other one falls back to being spelled out in full:</p>
+
+        <pre><code class="language-java">package com.store.fulfillment;
+
+import com.store.model.Order;
+
+class ShipmentTracker {
+    Order storeOrder;                 // com.store.model.Order, via the import above
+    com.shipping.Order shippingOrder; // com.shipping.Order, written out in full — "Order" was already taken
+}</code></pre>
+
+        <p>Nothing about this required either <code>Order</code> class to be renamed, and neither library needed to
+          know the other one existed. That's the collision problem packages actually solve: not by preventing two
+          classes from ever sharing a name, but by giving every class a fully qualified name that's guaranteed unique,
+          so a short-name clash can always be resolved by simply being more specific about which one is meant.</p>
+
+      </section>
+
+      <!-- §10.2 -->
+      <section id="s11-2">
+        <div class="section-head">
+          <span class="sec-num">§10.2</span>
+          <h2>Why Restrict Access <em>— a class with no way to say no</em></h2>
+        </div>
+
+        <p>Before any Java is involved, imagine designing a coffee machine. The person using it should be able to:</p>
+
+        <ul>
+          <li>fill the water tank</li>
+          <li>brew a coffee</li>
+          <li>empty the waste container</li>
+        </ul>
+
+        <p>But should they be able to:</p>
+
+        <ul>
+          <li>adjust the boiler pressure</li>
+          <li>change the heating algorithm</li>
+          <li>open the electronic components adjusting pressure</li>
+        </ul>
+
+        <p>Probably not. Those are <span class="term">implementation details</span>. </p>
+
+        <p>Every system built for someone else to use ends up with this same split:
+        <ul>
+          <li>a public side, meant to be used</li>
+          <li>an internal side, meant to be left alone so the public side can stay simple.</li>
+        </ul> That's not a Java idea, or even a programming one. It's a broader design idea Java's classes happen to run
+        into as well, the moment a class is written for someone else to use.
+        </p>
+
+        <p>Translate the coffee machine straight into a class — a water level anyone should be able to change by
+          filling the tank, and a boiler pressure nobody outside the machine should be touching, plus one simple
+          behavior computed from them:</p>
+
+        <pre><code class="language-java">class CoffeeMachine {
+    int waterLevel;     // ml remaining in the tank
+    int boilerPressure; // bar
+
+    int cupsRemaining() {
+        return waterLevel / 200;
+    }
+}</code></pre>
+
+        <p>Every field and method declared this way — no modifier at all, in every chapter up to this one — has, in
+          every example so far, been directly <span class="term">accessible</span> from outside its class, with nothing
+          in between (§10.6 explains exactly why "no modifier" still means <em>something</em>, not "wide open"). For a
+          field, that simply means: outside code can look at the value, and outside code can change it. For a method, it
+          means outside code can call it, same as if it were its own:</p>
+
+        <pre><code class="language-java">CoffeeMachine machine = new CoffeeMachine();
+int level = machine.waterLevel;     // read — anyone can see it
+
+machine.waterLevel = -500;          // write — compiles fine
+                                    // -500 is a valid int, nothing stops this assignment
+
+machine.boilerPressure = 999;       // exactly the tampering the motivation above warned about
+
+int cups = machine.cupsRemaining(); // call — anyone can invoke it too</code></pre>
+
+        <p>Nothing about <code>CoffeeMachine</code>'s definition says outside code shouldn't be able to see
+          <code>waterLevel</code>, or that a water level can't be negative, or that <code>boilerPressure</code> is off
+          limits entirely — every field is just an <code>int</code> slot, and any code holding a reference to the
+          object can dereference it, in either direction, and do exactly that. <code>cupsRemaining()</code> is no
+          different in spirit — a class member the same way <code>waterLevel</code> is, just one you call instead of
+          one you read or write, and reachable the same way. The class has no way to say "outsiders shouldn't be
+          allowed to do that" — every field and method has, so far, been left exactly as open as our examples happened
+          to need — visible to read, open to write, free to call.
+        </p>
+
+        <p>A well-designed class doesn't leave that gap open. It exposes only what other code actually needs to use —
+          filling the tank, brewing, reading how many cups are left — and keeps everything else, like
+          <code>boilerPressure</code>, hidden from anything outside it. This idea has a name: <span
+            class="term">encapsulation</span> — a class deciding, deliberately, what's exposed and what stays hidden,
+          rather than leaving every field open by default the way <code>CoffeeMachine</code> does above.
+        </p>
+
+        <p>Java provides <span class="term">access modifiers</span> to express exactly that design in code — a way for
+          a class to say, field by field and method by method, who's allowed to reach what. <code>private</code> is
+          where that starts.</p>
+
+        <div class="callout callout-note">
+          <div class="callout-lbl">Software Design: What does this class expose?</div>
+          <p>Notice what actually came first, above: the coffee machine, the question of what a user should and
+            shouldn't touch, the decision to call that <em>encapsulation</em> — and only then, a keyword. That order
+            isn't an accident. This chapter is about class design, not keywords. <code>private</code>,
+            <code>public</code>, <code>protected</code>, and package-private are simply the language's tools for
+            implementing a design decision a class has already made — they don't make the decision for you, and
+            memorizing what each one does is worth little without first asking, for every field and method, the
+            question <code>CoffeeMachine</code> forced above: is this part of what the class exposes, or part of how
+            it works underneath?
+          </p>
+        </div>
+      </section>
+
+      <!-- §10.3 -->
+      <section id="s11-3">
+        <div class="section-head">
+          <span class="sec-num">§10.3</span>
+          <h2><code>private</code> <em>— visible only inside the declaring class</em></h2>
+        </div>
+
+        <p>Instead of exposing a class member directly, we can make it <code>private</code>.
+        </p>
+
+        <pre><code class="language-java">class CoffeeMachine {
+    private int waterLevel;
+    private int boilerPressure;
+}</code></pre>
+
+        <p>Now direct access is restricted only from within the CoffeeMachine class itself.
+          Even a subclass cannot see private members.</p>
+        <pre><code class="language-java">CoffeeMachine machine = new CoffeeMachine();
+int level = machine.waterLevel; // compile error — waterLevel has private access in CoffeeMachine
+machine.boilerPressure = 999;   // compile error — same reason, and exactly the tampering §10.2 warned about</code></pre>
+
+
+      </section>
+
+      <!-- §10.4 -->
+      <section id="s11-4">
+        <div class="section-head">
+          <span class="sec-num">§10.4</span>
+          <h2>Getters and Setters <em>— exposing behavior instead of state</em></h2>
+        </div>
+
+        <p><code>private</code> field is there — every CoffeeMachine object still has a <code>waterLevel</code> slot and
+          a <code>boilerPressure</code> slot, laid out exactly as before (§2). <code>private</code> doesn't change the
+          memory layout at all; it changes what the <em>compiler</em> lets others see. Code inside
+          <code>CoffeeMachine</code>'s own class body — its constructors, its methods — can still read and write both
+          fields freely. Everyone else is blind to them.
+        </p>
+
+        <p>Hiding a field with <code>private</code> is only useful if there's still some way to reach the parts that
+          should be reachable. The standard idiom is a pair of methods:
+        <ul>
+          <li>a <span class="term">getter</span> to read the
+            field, and</li>
+          <li>a <span class="term">setter</span> to write it,
+          </li>
+        </ul>
+        enforcing rules the field alone never could. By keeping the field private and exposing carefully designed
+        methods, the object remains responsible for its own state. An object's fields represent its state, and its
+        methods define the safe ways that state can change.
+
+        </p>
+
+        <pre><code class="language-java">class CoffeeMachine {
+    private int waterLevel;
+    private int boilerPressure;
+
+    public CoffeeMachine(int waterLevel) {
+        setWaterLevel(waterLevel);
+        this.boilerPressure = 15; // bar — fixed internally, never exposed to the caller
     }
 
-    public void setWidth(int width) {
-        if (width < 0) {
-            throw new IllegalArgumentException("width cannot be negative");
+    public int getWaterLevel() {
+        return waterLevel;
+    }
+
+    public void setWaterLevel(int waterLevel) {
+        if (waterLevel &lt; 0) {
+            throw new IllegalArgumentException("water level cannot be negative");
         }
-        this.width = width;
+        this.waterLevel = waterLevel;
     }
 }</code></pre>
 
-    <pre><code class="language-java">Rectangle r = new Rectangle(10, 20);
-r.setWidth(15);  // fine
-r.setWidth(-5);  // throws IllegalArgumentException</code></pre>
+        <pre><code class="language-java">CoffeeMachine machine = new CoffeeMachine(10);
+machine.setWaterLevel(100);  // fine — filling the tank, exactly what the machine should allow
+machine.setWaterLevel(-50);   // throws IllegalArgumentException</code></pre>
 
-    <p><code>setWidth</code> is an ordinary method — the same shape as every method since §6 — with one detail worth noticing: <code>this.width = width;</code> only runs when the check above it passes. There is no longer any way to give a Rectangle a negative width, because the <em>only</em> door into <code>width</code> is a method that refuses to let one through.</p>
+        <p><code>setWaterLevel</code> is an ordinary method — the same shape as every method since §4 — with one detail
+          worth noticing: <code>this.waterLevel = waterLevel;</code> only runs when the check above it passes. There is
+          no longer any way to give a CoffeeMachine a negative water level, because the <em>only</em> door into
+          <code>waterLevel</code> is a method that refuses to let one through.
+        </p>
 
-    <div class="callout callout-conn">
-      <div class="callout-lbl">Throwing one yourself <a href="objects.html#s42" class="backref">← §4.2</a></div>
-      <p>§4.2 introduced exceptions the way you first meet them: happening <em>to</em> your code, automatically, when Java hits a problem it discovers on its own — dereferencing <code>null</code> raises a <code>NullPointerException</code> without you ever writing the word <code>throw</code>. <code>throw</code> is the statement that raises one <em>deliberately</em>: <code>throw</code>, followed by an expression that produces an exception object, ends the statement there. <code>new IllegalArgumentException("width cannot be negative")</code> constructs that object exactly the way <code>new Rectangle(...)</code> constructs any other (§4.1) — it's <code>throw</code> that then hands it off, instead of an ordinary assignment. Once thrown, execution stops at that line and jumps out looking for a handler, same as any exception. <code>IllegalArgumentException</code> itself is just a different name for the same kind of thing <code>NullPointerException</code> is — Java ships many exception types; this one specifically means "an argument was unacceptable."</p>
-    </div>
+        <div class="callout callout-conn">
+          <div class="callout-lbl">Throwing an Exception <span class="backref">← §14</span></div>
+          <p>When the program arrives at a situation where its normal logic simply has no next step for, it "throws" an
+            Exception, and execution stops at that line. Java ships many exception types;
+            <code>IllegalArgumentException</code> specifically means "an argument was unacceptable."
+          </p>
+        </div>
 
-    <p>Bundling data (<code>width</code>) together with the code that guards it (<code>setWidth</code>) — so the only way in or out is through methods the class itself controls — is called <span class="term">encapsulation</span>. It's the reason <code>private</code> fields with <code>public</code> getters and setters are the default shape of a Java class, rather than the plain public fields this tutorial started with.</p>
-    </section>
+        <p>Notice what <code>boilerPressure</code> gets: no getter, no setter, nothing. §10.2 already decided
+          adjusting the boiler pressure was never something outside code should do — so unlike <code>waterLevel</code>,
+          it gets no doorway back in at all. Bundling data (<code>waterLevel</code>) together with the code that guards
+          it (<code>setWaterLevel</code>) — so the only way in or out is through methods the class itself controls —
+          is <span class="term">encapsulation</span> in practice, the same idea §10.2 named, now expressed in actual
+          code. It's the reason <code>private</code> fields with <code>public</code> getters and setters are the
+          default shape of a Java class, rather than the plain public fields this tutorial started with.</p>
+      </section>
 
-    <!-- §12.5 -->
-    <section id="s11-5">
-      <div class="section-head">
-        <span class="sec-num">§12.5</span>
-        <h2><code>public</code> <em>— visible everywhere</em></h2>
-      </div>
+      <!-- §10.5 -->
+      <section id="s11-5">
+        <div class="section-head">
+          <span class="sec-num">§10.5</span>
+          <h2><code>public</code> <em>— visible everywhere</em></h2>
+        </div>
 
-    <p><code>public</code> is the opposite end from <code>private</code>: no restriction at all — any code, anywhere, holding a reference to the object, can call it. It's why <code>getWidth</code> and <code>setWidth</code> are declared <code>public</code> above: they're the class's deliberate, controlled doorway, so they need to be reachable from outside. Constructors are almost always <code>public</code> for the same reason — nothing else can create the object otherwise:</p>
+        <p><code>public</code> is the opposite end from <code>private</code>: no restriction at all — any code,
+          anywhere, holding a reference to the object, can call it. It's why <code>getWaterLevel</code> and
+          <code>setWaterLevel</code> are declared <code>public</code> above: they're the class's deliberate, controlled
+          doorway, so they need to be reachable from outside. Constructors are usually <code>public</code> for the
+          same reason — object creation could be limited otherwise.
+        </p>
 
-    <pre><code class="language-java">public Rectangle(int width, int height) {
-    setWidth(width);
-    this.height = height;
+        <p>Notice the constructor can call <code>setWaterLevel</code> instead of assigning <code>waterLevel</code>
+          directly — the validation rule lives in exactly one place, and even CoffeeMachine's own constructor goes
+          through it. <code>boilerPressure</code> isn't even a constructor parameter — there was never a reason to let
+          a caller supply it, so the constructor doesn't offer the option.</p>
+
+        <div class="callout callout-rule">
+          <div class="callout-lbl">Contract, exposed</div>
+          <p>Restricting access is the mechanism, not the point. What a class actually marks out, member by
+            member, is its <span class="term">public contract</span>: the part it promises to keep working the same
+            way for whoever calls it. Marking <code>getWaterLevel</code> and <code>setWaterLevel</code>
+            <code>public</code> is a promise — <em>other code may depend on this</em> — and once other code does,
+            changing how it behaves means breaking that promise. Marking <code>waterLevel</code> and
+            <code>boilerPressure</code> <code>private</code> is the opposite kind of statement — <em>this is an
+              implementation detail; I reserve the right to change it</em> — <code>CoffeeMachine</code> could switch
+            <code>waterLevel</code>'s unit from milliliters to fluid ounces tomorrow, and nothing outside the class
+            would need to know, because nothing outside the class was ever promised a unit in the first place. Every
+            access modifier choice is really this same question, asked one member at a time: is this something callers
+            should be able to depend on, or something the class needs the freedom to change later?
+          </p>
+        </div>
+      </section>
+
+      <!-- §10.6 -->
+      <section id="s11-6">
+        <div class="section-head">
+          <span class="sec-num">§10.6</span>
+          <h2>Package-Private <em>— the default, when no modifier is written</em></h2>
+        </div>
+
+        <p>A field or method can be declared with <em>no</em> access modifier at all. This represents a
+          distinct access level, usually called <span class="term">package-private</span>: visible to every class in the
+          same package, and invisible to everything outside it.
+        </p>
+
+        <pre><code class="language-java">package com.store.machines;
+
+class CoffeeMachine {
+    int waterLevel; // no modifier — package-private
 }</code></pre>
 
-    <p>Notice the constructor can call <code>setWidth</code> instead of assigning <code>width</code> directly — the validation rule lives in exactly one place, and even Rectangle's own constructor goes through it.</p>
-    </section>
+        <p>This is stricter than <code>public</code> (outside code can't reach it) but looser than <code>private</code>
+          (other classes in the same package still can). Every earlier chapter's field declarations, before this one,
+          were package-private by default — reachable from anywhere in this tutorial's examples because every class
+          happened to share one package (§10.1), which is exactly what made the unrestricted access in §10.2 possible in
+          the first place.</p>
 
-    <!-- §12.6 -->
-    <section id="s11-6">
-      <div class="section-head">
-        <span class="sec-num">§12.6</span>
-        <h2>Package-Private <em>— the default, when no modifier is written</em></h2>
-      </div>
+        <p>A second class in that same package, <code>com.store.machines</code>, reaches <code>waterLevel</code>
+          exactly the way <code>CoffeeMachine</code>'s own code would — no import needed, since same-package classes
+          never need one (§10.1):</p>
 
-    <p>§12.1 covered what a package is; this section names what happens when a field or method is declared with <em>no</em> access modifier at all. It isn't unrestricted — it's a fourth, distinct level, usually called <span class="term">package-private</span>: visible to every class in the same package, and invisible to everything outside it.</p>
+        <pre><code class="language-java">package com.store.machines;
 
-    <pre><code class="language-java">class Rectangle {
-    int width; // no modifier — package-private
+class MachineDiagnostics {
+    void checkWater(CoffeeMachine machine) {
+        System.out.println(machine.waterLevel); // fine — same package
+    }
 }</code></pre>
 
-    <p>This is stricter than <code>public</code> (outside code can't reach it) but looser than <code>private</code> (other classes in the same package still can). Every earlier chapter's field declarations, before this one, were package-private by default — reachable from anywhere in this tutorial's examples because every class happened to share one package (§12.1), which is exactly what made the unrestricted access in §12.2 possible in the first place.</p>
-    </section>
+        <p>A class in a <em>different</em> package doesn't get that, even with an <code>import</code> naming the class
+          directly:</p>
 
-    <!-- §12.7 -->
-    <section id="s11-7">
-      <div class="section-head">
-        <span class="sec-num">§12.7</span>
-        <h2><code>protected</code> <em>— visible to subclasses too</em></h2>
-      </div>
+        <pre><code class="language-java">package com.store.billing;
 
-    <p><code>protected</code> sits between package-private and <code>public</code>: visible within the same package, exactly like package-private, <em>plus</em> visible to subclasses even outside the package.</p>
+import com.store.machines.CoffeeMachine;
 
-    <p><code>protected</code> is primarily about allowing subclasses to participate in a design, usually through methods — a subclass overriding a hook, say, or calling a piece of shared logic its superclass exposes just for that purpose. Fields and constructors can be <code>protected</code> too, but methods are where the modifier earns its keep.</p>
+class InvoiceService {
+    void checkWater(CoffeeMachine machine) {
+        System.out.println(machine.waterLevel);
+        // compile error — waterLevel is not public in com.store.machines.CoffeeMachine;
+        // cannot be accessed from outside package
+    }
+}</code></pre>
 
-    <h3>Why starting with a protected field is misleading</h3>
+        <p><code>import</code> only ever does what §10.1 said it does: it lets this file spell <code>CoffeeMachine</code>
+          instead of <code>com.store.machines.CoffeeMachine</code>. It says nothing about which of
+          <code>CoffeeMachine</code>'s members <code>InvoiceService</code> is allowed to touch — that question belongs
+          entirely to the access modifier on <code>waterLevel</code> itself, and package-private's answer is the same
+          regardless of which package is asking, except the one it was declared in.</p>
 
-    <p>The classic example looks like this:</p>
+        <div class="mem-fanout" style="max-width: 900px; gap: 48px;">
+          <div class="pkg-box" style="width: 280px;">
+            <div class="pkg-label">com.store.machines</div>
+            <div class="mem-object" id="pkg-coffeemachine">
+              <div class="mem-object-header">CoffeeMachine</div>
+              <div class="mem-object-body">
+                <div class="mem-object-field"><span class="fname">waterLevel</span><span class="fval">pkg-private</span></div>
+              </div>
+            </div>
+            <div style="position: relative;" id="pkg-diagnostics">
+              <div class="mem-slot" style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center;">
+                <div class="mem-slot-code">MachineDiagnostics</div>
+              </div>
+              <svg width="20" height="21" style="position: absolute; left: 108.5px; top: -19px; color: var(--conn-label);" viewBox="0 0 20 21" fill="none">
+                <line x1="10" y1="19" x2="10" y2="2" stroke="currentColor" stroke-width="1.5" />
+                <g transform="translate(10,2) rotate(-90)">
+                  <path d="M -7 -5 L 0 0 L -7 5" stroke="currentColor" stroke-width="1.5" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                </g>
+              </svg>
+            </div>
+            <div class="pkg-access-lbl pkg-access-ok">✓ can reach waterLevel — same package</div>
+          </div>
 
-    <pre><code class="language-java">class Animal {
+          <div class="pkg-box" style="width: 240px;">
+            <div class="pkg-label">com.store.billing</div>
+            <div class="mem-slot" style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center;">
+              <div class="mem-slot-code">InvoiceService</div>
+            </div>
+            <div class="pkg-access-lbl pkg-access-blocked">✗ cannot reach waterLevel — different package</div>
+          </div>
+        </div>
+
+        <h3>The Package as a Trust Boundary</h3>
+
+        <p>It's worth stepping back from the individual keyword to what a package actually represents. A package
+          isn't just a folder for filing classes away for tidiness — placing several classes in the same package is a
+          statement about them: <em>these classes are designed to work together as one cohesive component.</em>
+          <code>com.store.model</code>'s classes (§10.1) all cooperate to represent the store's data; that's exactly
+          why they were grouped together in the first place, not an accident of alphabetizing files.
+        </p>
+
+        <p>That statement and the <code>package-private</code> keyword are related, but they're not the same thing.
+          <code>package-private</code> is one specific modifier — the one a member gets when no modifier is written at
+          all, granting access to same-package code and nobody else. But being in the same package as another class
+          grants more than just <code>package-private</code> reach, because nothing about being in the same package
+          makes <code>protected</code> or <code>public</code> members any <em>less</em> visible. A class sitting
+          alongside <code>CoffeeMachine</code> in <code>com.store</code> can reach:
+        </p>
+
+        <ul>
+          <li>its <code>package-private</code> members — by definition, that's exactly what the modifier grants;</li>
+          <li>its <code>protected</code> members — package-private access is part of what <code>protected</code>
+            includes (§10.7);</li>
+          <li>its <code>public</code> members — <code>public</code> holds nothing back from anyone, same package or
+            not.</li>
+        </ul>
+
+        <p>The only member a same-package class <em>can't</em> reach is a <code>private</code> one. Put the other way
+          around: from inside the package, <code>private</code> is the only wall still standing — every other
+          modifier lets a fellow package member through. That's the sense in which a package functions as a
+          <span class="term">trust boundary</span>: it's not one access level among four, it's the neighborhood inside
+          which three of the four already assume some level of cooperation, and only <code>private</code> still means
+          "just this one class."
+        </p>
+      </section>
+
+      <!-- §10.7 -->
+      <section id="s11-7">
+        <div class="section-head">
+          <span class="sec-num">§10.7</span>
+          <h2><code>protected</code> <em>— visible to subclasses too</em></h2>
+        </div>
+
+        <p><code>protected</code> sits between package-private and <code>public</code>: visible within the same package,
+          exactly like package-private, <em>plus</em> visible to subclasses even outside the package.</p>
+
+        <p><code>protected</code> is primarily about allowing subclasses to participate in a design, usually through
+          methods — a subclass overriding a hook, say, or calling a piece of shared logic its superclass exposes just
+          for that purpose. Fields and constructors can be <code>protected</code> too, but methods are where the
+          modifier earns its keep.</p>
+
+        <h3>Why starting with a protected field is misleading</h3>
+
+        <p>The classic example looks like this:</p>
+
+        <pre><code class="language-java">class Animal {
     protected String name;
 }
 
@@ -387,14 +930,15 @@ class Dog extends Animal {
     }
 }</code></pre>
 
-    <p>It works — but what did the student actually learn? They learn: <em>"subclasses need direct access to their
-      parent's variables."</em> That is not the most useful inheritance lesson, and it isn't really what
-      <code>protected</code> is for. A field sitting open for any subclass to read or overwrite, with no rule
-      governing how, is closer to an accident than a design.</p>
+        <p>It works — but what did the student actually learn? They learn: <em>"subclasses need direct access to their
+            parent's variables."</em> That is not the most useful inheritance lesson, and it isn't really what
+          <code>protected</code> is for. A field sitting open for any subclass to read or overwrite, with no rule
+          governing how, is closer to an accident than a design.
+        </p>
 
-    <p>A better design leans on methods instead:</p>
+        <p>A better design leans on methods instead:</p>
 
-    <pre><code class="language-java">class Document {
+        <pre><code class="language-java">class Document {
     private String title;
 
     public Document(String title) {
@@ -433,148 +977,188 @@ class Report extends Document {
     }
 }</code></pre>
 
-    <pre><code class="language-java">Document myReport = new Report("Financials");
+        <pre><code class="language-java">Document myReport = new Report("Financials");
 myReport.generate();
 // Generating: Financials
 // Document: Loading data
 // Report: Loading data
 // Document: Processing</code></pre>
 
-    <p><code>title</code> stays <code>private</code> — no subclass ever touches it directly, and it doesn't need to.
-      <code>generate()</code> is <code>public</code>, and <code>final</code> — here meaning a subclass cannot override
-      it, not the field-reassignment sense §13 covers: it's the fixed shape every Document's generation follows,
-      meant to be called from outside, and no subclass can replace that shape. <code>loadData()</code> and
-      <code>process()</code> are <code>protected</code>: steps of that shape a subclass is allowed to customize, but
-      never meant to be called
-      by outside code on their own — <code>Report</code> overrides <code>loadData()</code> to add its own step, and
-      <code>generate()</code> automatically picks it up, without either the caller or <code>Document</code> itself
-      needing to know <code>Report</code> exists.</p>
+        <p><code>title</code> stays <code>private</code> — no subclass ever touches it directly, and it doesn't need to.
+          <code>generate()</code> is <code>public</code>, and <code>final</code> — here meaning a subclass cannot
+          override
+          it, not the field-reassignment sense §11 covers: it's the fixed shape every Document's generation follows,
+          meant to be called from outside, and no subclass can replace that shape. <code>loadData()</code> and
+          <code>process()</code> are <code>protected</code>: steps of that shape a subclass is allowed to customize, but
+          never meant to be called
+          by outside code on their own — <code>Report</code> overrides <code>loadData()</code> to add its own step, and
+          <code>generate()</code> automatically picks it up, without either the caller or <code>Document</code> itself
+          needing to know <code>Report</code> exists.
+        </p>
 
-    <p>Now the lesson is different: <em>"the parent controls what subclasses are allowed to do."</em>
-      <code>Document</code> decides, field by field and method by method, exactly what it exposes to subclasses and
-      exactly what it keeps for itself — <code>protected</code> is one of the tools it uses to draw that line, not
-      an invitation for subclasses to reach in and grab whatever they need.</p>
+        <p>Now the lesson is different: <em>"the parent controls what subclasses are allowed to do."</em>
+          <code>Document</code> decides, field by field and method by method, exactly what it exposes to subclasses and
+          exactly what it keeps for itself — <code>protected</code> is one of the tools it uses to draw that line, not
+          an invitation for subclasses to reach in and grab whatever they need.
+        </p>
 
-    <div class="callout callout-mem">
-      <div class="callout-lbl">The real payoff is cross-package</div>
-      <p><code>protected</code> only becomes truly interesting once the subclass lives in a <em>different</em> package. Inside the same package, it barely adds anything — package-private already grants every class there direct access to non-private members, so a same-package subclass would have reached <code>loadData()</code> anyway, protected or not. The behavior <code>protected</code> uniquely adds is <em>cross-package</em> subclass access: a subclass in another package, another module, even another library entirely, can still override the hooks and extend the internals, while unrelated classes in that same foreign package still can't. That's precisely the shape of a real framework: its classes and the code extending them are almost never in the same package, so <code>protected</code>'s cross-package reach is the part actually doing the work — not the same-package case, which package-private already covered.</p>
-    </div>
+        <div class="callout callout-mem">
+          <div class="callout-lbl">The real payoff is cross-package</div>
+          <p><code>protected</code> only becomes truly interesting once the subclass lives in a <em>different</em>
+            package. Inside the same package, it barely adds anything — package-private already grants every class there
+            direct access to non-private members, so a same-package subclass would have reached <code>loadData()</code>
+            anyway, protected or not. The behavior <code>protected</code> uniquely adds is <em>cross-package</em>
+            subclass access: a subclass in another package, another module, even another library entirely, can still
+            override the hooks and extend the internals, while unrelated classes in that same foreign package still
+            can't. That's precisely the shape of a real framework: its classes and the code extending them are almost
+            never in the same package, so <code>protected</code>'s cross-package reach is the part actually doing the
+            work — not the same-package case, which package-private already covered.</p>
+        </div>
 
-    <p>The intuition behind all of this: <code>protected</code> is a class designer saying <em>"this isn't part of the public API for everyone, but subclasses may need it to extend or customize what I built."</em> Subclasses get to cooperate with the internals; arbitrary outside code still doesn't. That's what makes <code>protected</code> the modifier of choice for framework and library code specifically — code meant to be extended by callers the author will never meet, without handing those callers free rein over everything inside.</p>
+        <p>The intuition behind all of this: <code>protected</code> is a class designer saying <em>"this isn't part of
+            the public API for everyone, but subclasses may need it to extend or customize what I built."</em>
+          Subclasses get to cooperate with the internals; arbitrary outside code still doesn't. That's what makes
+          <code>protected</code> the modifier of choice for framework and library code specifically — code meant to be
+          extended by callers the author will never meet, without handing those callers free rein over everything
+          inside.
+        </p>
 
-    <h3>Summary: The Hierarchy of Trust</h3>
+        <h3>Summary: The Hierarchy of Trust</h3>
 
-    <p>Java's access levels can be viewed as layers of a concentric circle. At each level, we share with more external actors, starting with nobody and ending with everyone:</p>
+        <p>Java's access levels can be viewed as layers of a concentric circle. At each level, we share with more
+          external actors, starting with nobody and ending with everyone:</p>
 
-    <table class="content-table">
-      <tr>
-        <th>Modifier</th>
-        <th>Trusts</th>
-        <th>Meaning</th>
-      </tr>
-      <tr>
-        <td><code>private</code></td>
-        <td><strong>Nobody</strong></td>
-        <td>Trust only myself. No one else. No exceptions.</td>
-      </tr>
-      <tr>
-        <td><em>package-private</em></td>
-        <td><strong>My trusted neighborhood</strong></td>
-        <td>Trust my coworkers (classes in the same package). If no access modifier is explicitly written, this is the default. Remove <code>private</code> — write nothing — and sharing begins, first with package mates; opening it up further, to classes outside the package too, needs <code>protected</code> or <code>public</code>.</td>
-      </tr>
-      <tr>
-        <td><code>protected</code></td>
-        <td><strong>Neighborhood + descendants</strong></td>
-        <td>Trust my coworkers (the classes in this package), <em>plus</em> my descendants (subclasses, wherever they live). Key nuance: <code>protected</code> does not mean "subclasses only" — it also lets any class in the same package reach in. Java has no subclass-only modifier.</td>
-      </tr>
-      <tr>
-        <td><code>public</code></td>
-        <td><strong>Everyone</strong></td>
-        <td>Trust everyone.</td>
-      </tr>
-    </table>
+        <table class="content-table">
+          <tr>
+            <th>Modifier</th>
+            <th>Trusts</th>
+            <th>Meaning</th>
+          </tr>
+          <tr>
+            <td><code>private</code></td>
+            <td><strong>Nobody</strong></td>
+            <td>Trust only myself. No one else. No exceptions.</td>
+          </tr>
+          <tr>
+            <td><em>package-private</em></td>
+            <td><strong>My trusted neighborhood</strong></td>
+            <td>Trust my coworkers (classes in the same package). If no access modifier is explicitly written, this is
+              the default. Remove <code>private</code> — write nothing — and sharing begins, first with package mates;
+              opening it up further, to classes outside the package too, needs <code>protected</code> or
+              <code>public</code>.
+            </td>
+          </tr>
+          <tr>
+            <td><code>protected</code></td>
+            <td><strong>Neighborhood + descendants</strong></td>
+            <td>Trust my coworkers (the classes in this package), <em>plus</em> my descendants (subclasses, wherever
+              they live). Key nuance: <code>protected</code> does not mean "subclasses only" — it also lets any class in
+              the same package reach in. Java has no subclass-only modifier.</td>
+          </tr>
+          <tr>
+            <td><code>public</code></td>
+            <td><strong>Everyone</strong></td>
+            <td>Trust everyone.</td>
+          </tr>
+        </table>
 
-    <p><strong>Why the "coworker" wins over the "child."</strong> A subclass in a <em>different</em> package cannot see a package-private member, but a class in the <em>same</em> package can — even one completely unrelated by inheritance. If a subclass lives in a different package, it's an external entity as far as that member is concerned: it may inherit everything else about the parent, but it lives in a different neighborhood. If Java let subclasses in other packages see package-private members just by extending the class, package-private would stop meaning anything — anyone could gain access to code meant to stay internal simply by writing <code>class Hack extends YourClass</code> in their own project, in their own package. Restricting the default to "same package" is what keeps "internal" actually internal.</p>
+        <p><strong>Why the "coworker" wins over the "child."</strong> A subclass in a <em>different</em> package cannot
+          see a package-private member, but a class in the <em>same</em> package can — even one completely unrelated by
+          inheritance. If a subclass lives in a different package, it's an external entity as far as that member is
+          concerned: it may inherit everything else about the parent, but it lives in a different neighborhood. If Java
+          let subclasses in other packages see package-private members just by extending the class, package-private
+          would stop meaning anything — anyone could gain access to code meant to stay internal simply by writing
+          <code>class Hack extends YourClass</code> in their own project, in their own package. Restricting the default
+          to "same package" is what keeps "internal" actually internal.
+        </p>
 
-    <p>The short version: classes in the same package already have a high degree of visibility into each other, reaching anything declared <code>public</code>, <code>protected</code>, or package-private (whether that member was declared directly, or inherited from a superclass). <code>private</code> is the only level that visibility never crosses.</p>
+        <p>The short version: classes in the same package already have a high degree of visibility into each other,
+          reaching anything declared <code>public</code>, <code>protected</code>, or package-private (whether that
+          member was declared directly, or inherited from a superclass). <code>private</code> is the only level that
+          visibility never crosses.</p>
 
-    <div class="callout callout-note">
-      <div class="callout-lbl">Scope of this chapter</div>
-      <p>Interfaces, records, and nested classes each add their own wrinkles to access control, and are left for later — this chapter only needed ordinary top-level and member declarations. The general engineering principle behind all of this — expose as little as a class can get away with, called the <span class="term">principle of least privilege</span> — is worth remembering even before every rule above is second nature.</p>
-    </div>
-    </section>
+        <div class="callout callout-note">
+          <div class="callout-lbl">Scope of this chapter</div>
+          <p>Interfaces, records, and nested classes each add their own wrinkles to access control, and are left for
+            later — this chapter only needed ordinary top-level and member declarations. The general engineering
+            principle behind all of this — expose as little as a class can get away with, called the <span
+              class="term">principle of least privilege</span> — is worth remembering even before every rule above is
+            second nature.</p>
+        </div>
+      </section>
 
-  </article>
+    </article>
 
-  <nav class="page-nav" aria-label="Chapter navigation">
-    <a href="inheritance.html" class="page-nav-prev">
-      <span class="page-nav-label">← Previous</span>
-      <span class="page-nav-title">§11 — Inheritance</span>
-    </a>
-    <a href="immutability.html" class="page-nav-next">
-      <span class="page-nav-label">Next →</span>
-      <span class="page-nav-title">§13 — Immutability</span>
-    </a>
-  </nav>
-</main>
+    <nav class="page-nav" aria-label="Chapter navigation">
+      <a href="inheritance.html" class="page-nav-prev">
+        <span class="page-nav-label">← Previous</span>
+        <span class="page-nav-title">§9 — Inheritance</span>
+      </a>
+      <a href="immutability.html" class="page-nav-next">
+        <span class="page-nav-label">Next →</span>
+        <span class="page-nav-title">§11 — Immutability</span>
+      </a>
+    </nav>
+  </main>
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  hljs.highlightAll();
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      hljs.highlightAll();
 
-  // Flag error-annotation comments in code blocks
-  document.querySelectorAll('.hljs-comment').forEach(el => {
-    if (/\b(compile|compiler|runtime) error\b/i.test(el.textContent)) {
-      el.classList.add('hljs-comment-error');
-    }
-  });
+      // Flag error-annotation comments in code blocks
+      document.querySelectorAll('.hljs-comment').forEach(el => {
+        if (/\b(compile|compiler|runtime) error\b/i.test(el.textContent)) {
+          el.classList.add('hljs-comment-error');
+        }
+      });
 
-  // Code theme toggle
-  const codeThemeBtn = document.getElementById('code-theme-toggle');
-  const lightTheme = document.getElementById('hljs-light-theme');
-  const darkTheme = document.getElementById('hljs-dark-theme');
-  const themeLabel = codeThemeBtn.querySelector('.code-theme-label');
-  const themeIcon = codeThemeBtn.querySelector('.icon');
+      // Code theme toggle
+      const codeThemeBtn = document.getElementById('code-theme-toggle');
+      const lightTheme = document.getElementById('hljs-light-theme');
+      const darkTheme = document.getElementById('hljs-dark-theme');
+      const themeLabel = codeThemeBtn.querySelector('.code-theme-label');
+      const themeIcon = codeThemeBtn.querySelector('.icon');
 
-  function applyCodeTheme(theme) {
-    const dark = theme === 'dark';
-    lightTheme.disabled = dark;
-    darkTheme.disabled = !dark;
-    document.documentElement.classList.toggle('code-dark', dark);
-    themeLabel.textContent = dark ? 'Light code' : 'Dark code';
-    themeIcon.textContent = dark ? '☀️' : '🌙';
-  }
-
-  applyCodeTheme(localStorage.getItem('code-theme') || 'light');
-
-  codeThemeBtn.addEventListener('click', () => {
-    const next = darkTheme.disabled ? 'dark' : 'light';
-    localStorage.setItem('code-theme', next);
-    applyCodeTheme(next);
-  });
-
-  // Scroll spy for sub-sections
-  const sections = document.querySelectorAll('section[id]');
-  const subLinks = document.querySelectorAll('.sub-nav a[href^="#"]');
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = '#' + entry.target.id;
-        subLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+      function applyCodeTheme(theme) {
+        const dark = theme === 'dark';
+        lightTheme.disabled = dark;
+        darkTheme.disabled = !dark;
+        document.documentElement.classList.toggle('code-dark', dark);
+        themeLabel.textContent = dark ? 'Light code' : 'Dark code';
+        themeIcon.textContent = dark ? '☀️' : '🌙';
       }
+
+      applyCodeTheme(localStorage.getItem('code-theme') || 'light');
+
+      codeThemeBtn.addEventListener('click', () => {
+        const next = darkTheme.disabled ? 'dark' : 'light';
+        localStorage.setItem('code-theme', next);
+        applyCodeTheme(next);
+      });
+
+      // Scroll spy for sub-sections
+      const sections = document.querySelectorAll('section[id]');
+      const subLinks = document.querySelectorAll('.sub-nav a[href^="#"]');
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = '#' + entry.target.id;
+            subLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+          }
+        });
+      }, { rootMargin: '-8% 0px -78% 0px', threshold: 0 });
+
+      sections.forEach(s => observer.observe(s));
+
+      const btn = document.getElementById('menu-btn');
+      const side = document.getElementById('sidebar');
+      btn.addEventListener('click', () => side.classList.toggle('open'));
+      document.querySelectorAll('#sidebar a').forEach(a => {
+        a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
+      });
     });
-  }, { rootMargin: '-8% 0px -78% 0px', threshold: 0 });
-
-  sections.forEach(s => observer.observe(s));
-
-  const btn  = document.getElementById('menu-btn');
-  const side = document.getElementById('sidebar');
-  btn.addEventListener('click', () => side.classList.toggle('open'));
-  document.querySelectorAll('#sidebar a').forEach(a => {
-    a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
-  });
-});
-</script>
+  </script>
 </body>
+
 </html>

@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>§14 Exceptions — OO with Java</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" id="hljs-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+<link rel="stylesheet" id="hljs-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
+<script>
+(function () {
+  if ((localStorage.getItem('code-theme') || 'light') === 'dark') {
+    document.getElementById('hljs-light-theme').disabled = true;
+    document.getElementById('hljs-dark-theme').disabled = false;
+    document.documentElement.classList.add('code-dark');
+  }
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+</head>
+<body>
+
+<button id="menu-btn" aria-label="Toggle navigation">
+  <span></span><span></span><span></span>
+</button>
+
+<button id="code-theme-toggle" class="code-theme-toggle" aria-label="Toggle code color scheme">
+  <span class="icon">🌙</span><span class="code-theme-label">Dark code</span>
+</button>
+
+<nav id="sidebar" aria-label="Tutorial navigation">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-label">Tutorial</div>
+    <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
+  </div>
+  <nav>
+    <ul>
+      <li>
+        <a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a>
+        <ul class="sub-nav">
+          <li><a href="index.html#s0-1"><span class="nav-num">§0.1</span>What Is Java?</a></li>
+          <li><a href="index.html#s0-2"><span class="nav-num">§0.2</span>Where Is Java Used?</a></li>
+          <li><a href="index.html#s0-3"><span class="nav-num">§0.3</span>Why Java?</a></li>
+          <li><a href="index.html#s0-4"><span class="nav-num">§0.4</span>The Java Ecosystem</a></li>
+          <li><a href="index.html#s0-5"><span class="nav-num">§0.5</span>Java Versions</a></li>
+          <li><a href="index.html#s0-6"><span class="nav-num">§0.6</span>Your First Program</a></li>
+          <li><a href="index.html#s0-7"><span class="nav-num">§0.7</span>Key Features</a></li>
+          <li><a href="index.html#s0-8"><span class="nav-num">§0.8</span>Key Takeaways</a></li>
+          <li><a href="index.html#s0-9"><span class="nav-num">§0.9</span>Appendix: Write Once, Run Anywhere</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="variables.html"><span class="nav-num">§1</span>Variables and Values</a>
+        <ul class="sub-nav">
+          <li><a href="variables.html#s1-1"><span class="nav-num">§1.1</span>Values</a></li>
+          <li><a href="variables.html#s1-2"><span class="nav-num">§1.2</span>Variables in Java</a></li>
+          <li><a href="variables.html#s1-3"><span class="nav-num">§1.3</span>Primitive Types</a></li>
+          <li><a href="variables.html#s1-4"><span class="nav-num">§1.4</span>Literals</a></li>
+          <li><a href="variables.html#s1-5"><span class="nav-num">§1.5</span><code>var</code></a></li>
+          <li><a href="variables.html#s1-6"><span class="nav-num">§1.6</span>Common Mistakes</a></li>
+          <li><a href="variables.html#s1-7"><span class="nav-num">§1.7</span>What a Variable Holds</a></li>
+          <li><a href="variables.html#s1-8"><span class="nav-num">§1.8</span>Key Takeaways</a></li>
+          <li><a href="variables.html#s1-9"><span class="nav-num">§1.9</span>Appendix: Number Systems</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="classes.html"><span class="nav-num">§2</span>Classes &amp; Objects</a>
+        <ul class="sub-nav">
+          <li><a href="classes.html#s2-1"><span class="nav-num">§2.1</span>Classes as Blueprints</a></li>
+          <li><a href="classes.html#s2-2"><span class="nav-num">§2.2</span>Instantiation</a></li>
+          <li><a href="classes.html#s2-3"><span class="nav-num">§2.3</span>Reference Variables</a></li>
+          <li><a href="classes.html#s2-4"><span class="nav-num">§2.4</span>Reference Fields</a></li>
+          <li><a href="classes.html#s2-5"><span class="nav-num">§2.5</span>Constructors</a></li>
+          <li><a href="classes.html#s2-6"><span class="nav-num">§2.6</span>Static Fields</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="assignment.html"><span class="nav-num">§3</span>Assignment</a>
+        <ul class="sub-nav">
+          <li><a href="assignment.html#s3-1"><span class="nav-num">§3.1</span>The "Value"</a></li>
+          <li><a href="assignment.html#s3-2"><span class="nav-num">§3.2</span>Primitive Assignment</a></li>
+          <li><a href="assignment.html#s3-3"><span class="nav-num">§3.3</span>Reference Assignment</a></li>
+          <li><a href="assignment.html#s3-4"><span class="nav-num">§3.4</span>Consequence</a></li>
+          <li><a href="assignment.html#s3-5"><span class="nav-num">§3.5</span>Assignment vs. the Dot</a></li>
+          <li><a href="assignment.html#s3-6"><span class="nav-num">§3.6</span>The Rule</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="methods.html"><span class="nav-num">§4</span>Methods</a>
+        <ul class="sub-nav">
+          <li><a href="methods.html#s4-intro"><span class="nav-num">§4.1</span>Why Methods</a></li>
+          <li><a href="methods.html#s4-2"><span class="nav-num">§4.2</span>What Is a Method?</a></li>
+          <li><a href="methods.html#s4-3"><span class="nav-num">§4.3</span>Outputs</a></li>
+          <li><a href="methods.html#s4-4"><span class="nav-num">§4.4</span>Functions to Objects</a></li>
+          <li><a href="methods.html#s4-5"><span class="nav-num">§4.5</span>The "Hidden" Parameter</a></li>
+          <li><a href="methods.html#s4-6"><span class="nav-num">§4.6</span>Key Takeaways</a></li>
+          <li><a href="methods.html#s4-7"><span class="nav-num">§4.7</span>Appendix: The Call Stack</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="operators.html"><span class="nav-num">§5</span>Operators</a>
+        <ul class="sub-nav">
+          <li><a href="operators.html#s5-1"><span class="nav-num">§5.1</span>Arithmetic Operators</a></li>
+          <li><a href="operators.html#s5-2"><span class="nav-num">§5.2</span>Unary Operators</a></li>
+          <li><a href="operators.html#s5-3"><span class="nav-num">§5.3</span>Comparison Operators</a></li>
+          <li><a href="operators.html#s5-4"><span class="nav-num">§5.4</span>Logical Operators</a></li>
+          <li><a href="operators.html#s5-5"><span class="nav-num">§5.5</span>Compound Assignment</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="arrays.html"><span class="nav-num">§6</span>Arrays</a>
+        <ul class="sub-nav">
+          <li><a href="arrays.html#s6-1"><span class="nav-num">§6.1</span>Why Arrays</a></li>
+          <li><a href="arrays.html#s6-2"><span class="nav-num">§6.2</span>One Variable, Many Values</a></li>
+          <li><a href="arrays.html#s6-3"><span class="nav-num">§6.3</span>The Index</a></li>
+          <li><a href="arrays.html#s6-4"><span class="nav-num">§6.4</span>Creating an Array</a></li>
+          <li><a href="arrays.html#s6-5"><span class="nav-num">§6.5</span>Reading and Writing Elements</a></li>
+          <li><a href="arrays.html#s6-6"><span class="nav-num">§6.6</span><code>.length</code></a></li>
+          <li><a href="arrays.html#s6-7"><span class="nav-num">§6.7</span>Filling in the Week</a></li>
+          <li><a href="arrays.html#s6-8"><span class="nav-num">§6.8</span>Assignment Still Copies the Address</a></li>
+          <li><a href="arrays.html#s6-9"><span class="nav-num">§6.9</span>Arrays of Objects</a></li>
+          <li><a href="arrays.html#s6-10"><span class="nav-num">§6.10</span>Pointing a Slot at an Existing Object</a></li>
+          <li><a href="arrays.html#s6-11"><span class="nav-num">§6.11</span>Passing an Array's Address to a Method</a></li>
+          <li><a href="arrays.html#s6-12"><span class="nav-num">§6.12</span>Variable-Arity Parameters</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="controlflow.html"><span class="nav-num">§7</span>Control Flow</a>
+        <ul class="sub-nav">
+          <li><a href="controlflow.html#s7-1"><span class="nav-num">§7.1</span>The Flow of Execution</a></li>
+          <li><a href="controlflow.html#s7-2"><span class="nav-num">§7.2</span>Variable Scope</a></li>
+          <li><a href="controlflow.html#s7-3"><span class="nav-num">§7.3</span>Conditional Branching</a></li>
+          <li><a href="controlflow.html#s7-4"><span class="nav-num">§7.4</span><code>while</code></a></li>
+          <li><a href="controlflow.html#s7-5"><span class="nav-num">§7.5</span><code>for</code></a></li>
+          <li><a href="controlflow.html#s7-6"><span class="nav-num">§7.6</span>for-each</a></li>
+          <li><a href="controlflow.html#s7-7"><span class="nav-num">§7.7</span>Ternary Operator</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="strings.html"><span class="nav-num">§8</span>Strings</a>
+        <ul class="sub-nav">
+          <li><a href="strings.html#s8-1"><span class="nav-num">§8.1</span>Writing Systems &amp; Unicode</a></li>
+          <li><a href="strings.html#s8-2"><span class="nav-num">§8.2</span><code>char</code></a></li>
+          <li><a href="strings.html#s8-3"><span class="nav-num">§8.3</span><code>Character</code></a></li>
+          <li><a href="strings.html#s8-4"><span class="nav-num">§8.4</span>Sequence of Characters</a></li>
+          <li><a href="strings.html#s8-5"><span class="nav-num">§8.5</span>Text Blocks</a></li>
+          <li><a href="strings.html#s8-6"><span class="nav-num">§8.6</span>Immutability</a></li>
+          <li><a href="strings.html#s8-7"><span class="nav-num">§8.7</span><code>==</code> vs <code>.equals()</code></a></li>
+          <li><a href="strings.html#s8-8"><span class="nav-num">§8.8</span>Concatenation</a></li>
+          <li><a href="strings.html#s8-9"><span class="nav-num">§8.9</span>Important String Methods</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="inheritance.html"><span class="nav-num">§9</span>Inheritance</a>
+        <ul class="sub-nav">
+          <li><a href="inheritance.html#s10-1"><span class="nav-num">§9.1</span>Taxonomy</a></li>
+          <li><a href="inheritance.html#s10-2"><span class="nav-num">§9.2</span>The Problem</a></li>
+          <li><a href="inheritance.html#s10-3"><span class="nav-num">§9.3</span><code>extends</code></a></li>
+          <li><a href="inheritance.html#s10-4"><span class="nav-num">§9.4</span><code>super(...)</code></a></li>
+          <li><a href="inheritance.html#s10-5"><span class="nav-num">§9.5</span>Polymorphism</a></li>
+          <li><a href="inheritance.html#s10-6"><span class="nav-num">§9.6</span>Overriding</a></li>
+          <li><a href="inheritance.html#s10-7"><span class="nav-num">§9.7</span><code>toString()</code></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="accessmodifiers.html"><span class="nav-num">§10</span>Packages &amp; Access Modifiers</a>
+        <ul class="sub-nav">
+          <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§10.1</span>Packages</a></li>
+          <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§10.2</span>Why Restrict Access</a></li>
+          <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§10.3</span><code>private</code></a></li>
+          <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§10.4</span>Encapsulation</a></li>
+          <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§10.5</span><code>public</code></a></li>
+          <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§10.6</span>Package-Private</a></li>
+          <li><a href="accessmodifiers.html#s11-7"><span class="nav-num">§10.7</span><code>protected</code></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="immutability.html"><span class="nav-num">§11</span>Immutability</a>
+        <ul class="sub-nav">
+          <li><a href="immutability.html#s11-1"><span class="nav-num">§11.1</span>Identity &amp; State</a></li>
+          <li><a href="immutability.html#s11-2"><span class="nav-num">§11.2</span>A Question of Time</a></li>
+          <li><a href="immutability.html#s11-3"><span class="nav-num">§11.3</span>Building an Immutable Class</a></li>
+          <li><a href="immutability.html#s11-4"><span class="nav-num">§11.4</span><code>final</code> Isn't Deep</a></li>
+          <li><a href="immutability.html#s11-5"><span class="nav-num">§11.5</span>Why It Matters</a></li>
+          <li><a href="immutability.html#s11-6"><span class="nav-num">§11.6</span><code>StringBuilder</code></a></li>
+          <li><a href="immutability.html#s11-7"><span class="nav-num">§11.7</span>Core Pillars</a></li>
+          <li><a href="immutability.html#s11-8"><span class="nav-num">§11.8</span>Putting It Together</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="abstractclasses.html"><span class="nav-num">§12</span>Abstract Classes</a>
+        <ul class="sub-nav">
+          <li><a href="abstractclasses.html#s12-1"><span class="nav-num">§12.1</span>The Problem</a></li>
+          <li><a href="abstractclasses.html#s12-2"><span class="nav-num">§12.2</span><code>abstract</code> Classes</a></li>
+          <li><a href="abstractclasses.html#s12-3"><span class="nav-num">§12.3</span><code>abstract</code> Methods</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="interfaces.html"><span class="nav-num">§13</span>Interfaces</a>
+        <ul class="sub-nav">
+          <li><a href="interfaces.html#s13-1"><span class="nav-num">§13.1</span>The Problem</a></li>
+          <li><a href="interfaces.html#s13-2"><span class="nav-num">§13.2</span>Interface vs. Abstract Class</a></li>
+          <li><a href="interfaces.html#s13-3"><span class="nav-num">§13.3</span>Declaring &amp; Implementing</a></li>
+          <li><a href="interfaces.html#s13-4"><span class="nav-num">§13.4</span>Override vs. Overload</a></li>
+          <li><a href="interfaces.html#s13-5"><span class="nav-num">§13.5</span>Multiple Interfaces</a></li>
+          <li><a href="interfaces.html#s13-6"><span class="nav-num">§13.6</span>Interface-Typed Params</a></li>
+          <li><a href="interfaces.html#s13-7"><span class="nav-num">§13.7</span>Anonymous Classes</a></li>
+          <li><a href="interfaces.html#s13-8"><span class="nav-num">§13.8</span>Default Methods</a></li>
+          <li><a href="interfaces.html#s13-9"><span class="nav-num">§13.9</span>Default Method Collisions</a></li>
+          <li><a href="interfaces.html#s13-10"><span class="nav-num">§13.10</span>Static Methods</a></li>
+          <li><a href="interfaces.html#s13-11"><span class="nav-num">§13.11</span>Interface Inheritance</a></li>
+          <li><a href="interfaces.html#s13-12"><span class="nav-num">§13.12</span>Strategy Pattern</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="exceptions.html" class="active"><span class="nav-num">§14</span>Exceptions</a>
+        <ul class="sub-nav">
+          <li><a href="#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
+          <li><a href="#s14-2"><span class="nav-num">§14.2</span>The Exception Lifecycle</a></li>
+          <li><a href="#s14-3"><span class="nav-num">§14.3</span>The Exception Hierarchy</a></li>
+          <li><a href="#s14-4"><span class="nav-num">§14.4</span>Checked vs. Unchecked</a></li>
+          <li><a href="#s14-5"><span class="nav-num">§14.5</span>Handling Exceptions</a></li>
+          <li><a href="#s14-6"><span class="nav-num">§14.6</span><code>throw</code> and <code>throws</code></a></li>
+          <li><a href="#s14-7"><span class="nav-num">§14.7</span>Custom Exceptions</a></li>
+          <li><a href="#s14-8"><span class="nav-num">§14.8</span>Exception Chaining</a></li>
+          <li><a href="#s14-9"><span class="nav-num">§14.9</span>Try-with-Resources</a></li>
+          <li><a href="#s14-10"><span class="nav-num">§14.10</span>Exceptions Are Not Control Flow</a></li>
+          <li><a href="#s14-11"><span class="nav-num">§14.11</span>Best Practices &amp; Anti-Patterns</a></li>
+          <li><a href="#s14-12"><span class="nav-num">§14.12</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="generics.html"><span class="nav-num">§15</span>Generics</a>
+        <ul class="sub-nav">
+          <li><a href="generics.html#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
+          <li><a href="generics.html#s15-2"><span class="nav-num">§15.2</span>Type Parameters</a></li>
+          <li><a href="generics.html#s15-3"><span class="nav-num">§15.3</span>Generic Methods</a></li>
+          <li><a href="generics.html#s15-4"><span class="nav-num">§15.4</span>Bounded Types</a></li>
+          <li><a href="generics.html#s15-5"><span class="nav-num">§15.5</span>Compile Time Only</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="records.html"><span class="nav-num">§16</span>Records</a>
+        <ul class="sub-nav">
+          <li><a href="records.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
+          <li><a href="records.html#s16-2"><span class="nav-num">§16.2</span><code>record</code></a></li>
+          <li><a href="records.html#s16-3"><span class="nav-num">§16.3</span>Implicitly Final</a></li>
+          <li><a href="records.html#s16-4"><span class="nav-num">§16.4</span>Shallow Immutability</a></li>
+          <li><a href="records.html#s16-5"><span class="nav-num">§16.5</span>Compact Constructors</a></li>
+          <li><a href="records.html#s16-6"><span class="nav-num">§16.6</span>Records Can Do More</a></li>
+          <li><a href="records.html#s16-7"><span class="nav-num">§16.7</span>When to Reach for One</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="collections.html"><span class="nav-num">§18</span>Collections Framework</a>
+        <ul class="sub-nav">
+          <li><a href="collections.html#s18-1"><span class="nav-num">§18.1</span>The Problem</a></li>
+          <li><a href="collections.html#s18-2"><span class="nav-num">§18.2</span>The Big Picture</a></li>
+          <li><a href="collections.html#s18-3"><span class="nav-num">§18.3</span><code>List</code></a></li>
+          <li><a href="collections.html#s18-4"><span class="nav-num">§18.4</span><code>Queue</code></a></li>
+          <li><a href="collections.html#s18-5"><span class="nav-num">§18.5</span><code>Set</code></a></li>
+          <li><a href="collections.html#s18-6"><span class="nav-num">§18.6</span><code>Map</code></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="lambdas.html"><span class="nav-num">§19</span>Functional Programming</a>
+        <ul class="sub-nav">
+          <li><a href="lambdas.html#s19-1"><span class="nav-num">§19.1</span>Functions as First-Class Citizens</a></li>
+          <li><a href="lambdas.html#s19-2"><span class="nav-num">§19.2</span>Why Java "Simulates" First-Class Functions</a></li>
+          <li><a href="lambdas.html#s19-3"><span class="nav-num">§19.3</span>The Problem</a></li>
+          <li><a href="lambdas.html#s19-4"><span class="nav-num">§19.4</span>Another Anonymous Class</a></li>
+          <li><a href="lambdas.html#s19-5"><span class="nav-num">§19.5</span>Functional Interfaces</a></li>
+          <li><a href="lambdas.html#s19-6"><span class="nav-num">§19.6</span>Lambda Expressions</a></li>
+          <li><a href="lambdas.html#s19-7"><span class="nav-num">§19.7</span>Method References</a></li>
+          <li><a href="lambdas.html#s19-8"><span class="nav-num">§19.8</span><code>java.util.function</code></a></li>
+          <li><a href="lambdas.html#s19-9"><span class="nav-num">§19.9</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="enums.html"><span class="nav-num">§17</span>Enums</a>
+        <ul class="sub-nav">
+          <li><a href="enums.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
+          <li><a href="enums.html#s17-2"><span class="nav-num">§17.2</span>Declaring an Enum</a></li>
+          <li><a href="enums.html#s17-3"><span class="nav-num">§17.3</span>Objects, Not Constants</a></li>
+          <li><a href="enums.html#s17-4"><span class="nav-num">§17.4</span>Comparing Enum Values</a></li>
+          <li><a href="enums.html#s17-5"><span class="nav-num">§17.5</span>Type Characteristics</a></li>
+          <li><a href="enums.html#s17-6"><span class="nav-num">§17.6</span>Fields, Constructors, Methods</a></li>
+          <li><a href="enums.html#s17-7"><span class="nav-num">§17.7</span>Enums vs. Magic Numbers</a></li>
+          <li><a href="enums.html#s17-8"><span class="nav-num">§17.8</span>Closed Sets vs. Evolving Reality</a></li>
+          <li><a href="enums.html#s17-9"><span class="nav-num">§17.9</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="optionals.html"><span class="nav-num">§20</span>Optional&lt;T&gt;</a>
+        <ul class="sub-nav">
+          <li><a href="optionals.html#s20-1"><span class="nav-num">§20.1</span>The Problem</a></li>
+          <li><a href="optionals.html#s20-2"><span class="nav-num">§20.2</span><code>null</code>: The Absence of a Value</a></li>
+          <li><a href="optionals.html#s20-3"><span class="nav-num">§20.3</span>The Defensive Approach</a></li>
+          <li><a href="optionals.html#s20-4"><span class="nav-num">§20.4</span>The <code>Optional&lt;T&gt;</code> Class</a></li>
+          <li><a href="optionals.html#s20-5"><span class="nav-num">§20.5</span><code>Optional&lt;T&gt;</code> vs <code>null</code></a></li>
+          <li><a href="optionals.html#s20-6"><span class="nav-num">§20.6</span>Specialized Primitive Optionals</a></li>
+          <li><a href="optionals.html#s20-7"><span class="nav-num">§20.7</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="streams.html"><span class="nav-num">§21</span>Streams</a>
+        <ul class="sub-nav">
+          <li><a href="streams.html#s21-1"><span class="nav-num">§21.1</span>The Problem</a></li>
+          <li><a href="streams.html#s21-2"><span class="nav-num">§21.2</span>What Is a Stream</a></li>
+          <li><a href="streams.html#s21-3"><span class="nav-num">§21.3</span>Creating a Stream</a></li>
+          <li><a href="streams.html#s21-4"><span class="nav-num">§21.4</span>Intermediate Operations</a></li>
+          <li><a href="streams.html#s21-5"><span class="nav-num">§21.5</span>Terminal Operations</a></li>
+          <li><a href="streams.html#s21-6"><span class="nav-num">§21.6</span>Collecting Results</a></li>
+          <li><a href="streams.html#s21-7"><span class="nav-num">§21.7</span>Streams and <code>Optional&lt;T&gt;</code></a></li>
+          <li><a href="streams.html#s21-8"><span class="nav-num">§21.8</span>Laziness and Pipelines</a></li>
+          <li><a href="streams.html#s21-9"><span class="nav-num">§21.9</span>When (Not) to Use Streams</a></li>
+          <li><a href="streams.html#s21-10"><span class="nav-num">§21.10</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="concurrency.html"><span class="nav-num">§22</span>Concurrent Programming</a>
+        <ul class="sub-nav">
+          <li><a href="concurrency.html#s22-1"><span class="nav-num">§22.1</span>The Problem</a></li>
+          <li><a href="concurrency.html#s22-2"><span class="nav-num">§22.2</span>Process, Thread, and the OS</a></li>
+          <li><a href="concurrency.html#s22-3"><span class="nav-num">§22.3</span>Independent Progress</a></li>
+          <li><a href="concurrency.html#s22-4"><span class="nav-num">§22.4</span>Why Concurrency Matters</a></li>
+          <li><a href="concurrency.html#s22-5"><span class="nav-num">§22.5</span>Where Parallelism Fits In</a></li>
+          <li><a href="concurrency.html#s22-6"><span class="nav-num">§22.6</span>The Main Thread</a></li>
+          <li><a href="concurrency.html#s22-7"><span class="nav-num">§22.7</span>Step 1: Creating a Task</a></li>
+          <li><a href="concurrency.html#s22-8"><span class="nav-num">§22.8</span>Step 2: Handing a Task to an Executor</a></li>
+          <li><a href="concurrency.html#s22-9"><span class="nav-num">§22.9</span>ExecutorService in Practice</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="modules.html"><span class="nav-num">§23</span>Java Modules</a>
+        <ul class="sub-nav">
+          <li><a href="modules.html#s23-1"><span class="nav-num">§23.1</span>The Problem</a></li>
+          <li><a href="modules.html#s23-2"><span class="nav-num">§23.2</span>What Is a Module</a></li>
+          <li><a href="modules.html#s23-3"><span class="nav-num">§23.3</span><code>module-info.java</code></a></li>
+          <li><a href="modules.html#s23-4"><span class="nav-num">§23.4</span><code>exports</code></a></li>
+          <li><a href="modules.html#s23-5"><span class="nav-num">§23.5</span><code>requires</code></a></li>
+          <li><a href="modules.html#s23-6"><span class="nav-num">§23.6</span>Strong Encapsulation</a></li>
+          <li><a href="modules.html#s23-7"><span class="nav-num">§23.7</span>The Module Path</a></li>
+          <li><a href="modules.html#s23-8"><span class="nav-num">§23.8</span><code>requires transitive</code></a></li>
+          <li><a href="modules.html#s23-9"><span class="nav-num">§23.9</span>When (Not) to Use Modules</a></li>
+          <li><a href="modules.html#s23-10"><span class="nav-num">§23.10</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li><a href="dateandtime.html"><span class="nav-num">§24</span>Date and Time</a></li>
+      <li><a href="io.html"><span class="nav-num">§25</span>Input and Output</a></li>
+      <li><a href="oodesign.html"><span class="nav-num">§26</span>Object-Oriented Design</a></li>
+    </ul>
+  </nav>
+</nav>
+
+<main id="content">
+  <header class="page-header">
+    <div class="page-chapter">Chapter 14</div>
+    <h1>Exceptions</h1>
+    <p class="page-lead">Some failures have no honest value to return at all — dividing by zero, a file that isn't there, an index past the end of an array. §2.3 already used the word informally for exactly this shape of problem. This chapter builds it out in full: what an exception actually is, the hierarchy Java organizes them into, the difference between one the compiler forces a caller to confront and one it doesn't, and the syntax — <code>try</code>, <code>catch</code>, <code>finally</code>, <code>throw</code>, <code>throws</code> — for raising and handling them.</p>
+  </header>
+
+  <article>
+
+    <!-- §14.1 -->
+    <section id="s14-1">
+      <div class="section-head">
+        <span class="sec-num">§14.1</span>
+        <h2>The Problem <em>— when there's no sensible value to return</em></h2>
+      </div>
+
+      <p>A program, most of the time, does exactly what it's meant to: each piece of work finishes, and whatever depends on its result picks up from there, assuming everything before it went fine. Picture a simple reporting tool, built around three pieces of work in this order — read a file, process what's in it, produce a report from the result:</p>
+
+      <pre><code class="hljs language-plaintext">Start
+  │
+  ▼
+Read the file
+  │
+  ▼
+Process what's in it
+  │
+  ▼
+Produce the report
+  │
+  ▼
+Finish</code></pre>
+
+      <p>Call this the <span class="term">happy path</span>: everything completes, in this order, and there's nothing more interesting to say about it than that. This diagram deliberately says nothing about which method calls which — §14.2 fills that in, and the order shown here turns out to survive it completely unchanged.</p>
+
+      <h3>Unexpected situations</h3>
+
+      <p>Real programs interact with a world outside their own control, and every one of those steps is a place that world can fail to cooperate:</p>
+
+      <pre><code class="hljs language-plaintext">Open a file       → file missing
+Connect to a database → database unavailable
+Parse a number    → invalid input
+Read network data → connection lost</code></pre>
+
+      <p>Each of these is the program arriving at a situation its normal logic simply has no next step for — not a wrong answer to compute around, but no honest answer to give at all.</p>
+
+      <h3>What are the options?</h3>
+
+      <p>Take the very first step from the happy path above — reading the raw file, before anything has been processed or reported on:</p>
+
+      <pre><code class="language-java">String contents = readFile("sales.txt");</code></pre>
+
+      <p>What should happen if <code>sales.txt</code> doesn't exist? A few genuinely different answers are possible.</p>
+
+      <p><strong>Return a special value.</strong></p>
+
+      <pre><code class="language-java">String contents = readFile("sales.txt");
+
+if (contents == null) {
+    // ...handle the missing file...
+}</code></pre>
+
+      <p><strong>Return a special value, which has a special meaning.</strong> Pick some particular value, reserve it, and give it a name so a reader isn't left decoding something unexplained — for a method returning an index or a count, that might be an <code>int</code> like <code>-1</code>:</p>
+
+      <pre><code class="language-java">static final int ERROR_FILE_NOT_FOUND = -1;
+
+int lineCount = countLines("sales.txt");
+
+if (lineCount == ERROR_FILE_NOT_FOUND) {
+    // ...handle the missing file...
+}</code></pre>
+
+      <p>The trouble shows up the moment every possible value is already a legitimate one. Suppose the method were this instead:</p>
+
+      <pre><code class="language-java">int readTemperature()</code></pre>
+
+      <p><code>-1</code> can no longer be reserved for "reading failed" — it might be an entirely real temperature. There's no int left over to sacrifice as a special value, because the method's whole range is already spoken for. This is exactly why special values don't scale: they only work in domains that happen to have a value nothing legitimate would ever produce, and plenty of domains don't.</p>
+
+      <h3>Why exceptions exist</h3>
+
+      <p>The first two options work, but they share a cost that only shows up once a single method has more than one place where things can go wrong. Consider what <code>generateReport()</code> itself has to do internally: read the file, then process what it read. Each of those is a call site needing its own check, mixed directly into the logic that's actually trying to get something done:</p>
+
+      <pre><code class="language-java">if (readFileFails) {
+    // handle error
+} else {
+    if (processDataFails) {
+        // handle error
+    } else {
+        // ...build and return the report...
+    }
+}</code></pre>
+
+      <p>Repeated at every step, that shape buries the actual point of <code>generateReport()</code> — read a file, process it, produce a report — under a pyramid of failure handling that has nothing to do with what the method is for. Exceptions exist to separate those two concerns entirely: normal program logic in one place, error handling in another, connected by a mechanism instead of by nested conditionals at every step:</p>
+
+      <pre><code class="language-java">String contents = readFile(path);
+List&lt;Entry&gt; entries = processData(contents);
+return buildReport(entries);</code></pre>
+
+      <p>The happy path stays exactly as readable as §14.1 opened with — one statement after another — and none of it needs to mention failure at all. Handling failure doesn't disappear; it just isn't here anymore. Which raises the obvious next question: <em>who</em>, exactly, is now responsible for handling it?</p>
+
+      <p>Not every language answers that question the same way. Some — Rust's <code>Result</code>, Go's multiple-return-value convention — keep success and failure as two ordinary values riding along in the same return, and hand the responsibility straight to whoever called the method: inspect what came back, right there, before doing anything else with it. Nothing but the caller's own discipline enforces that inspection.</p>
+
+      <p>Java was designed around a different answer. A method's normal return type describes only success — <code>Report</code>, never "a <code>Report</code>, or a failure." Failure doesn't travel through that return type at all; it takes an entirely separate path, the one the rest of this chapter is about. Responsibility for handling it isn't assigned to the immediate caller by default — it belongs to whichever piece of code, anywhere up the chain of calls, actually catches it. §14.2 turns that idea into the precise mechanics: what that path up the chain of calls is actually called, and what happens if it runs out of road entirely.</p>
+    </section>
+
+    <!-- §14.2 -->
+    <section id="s14-2">
+      <div class="section-head">
+        <span class="sec-num">§14.2</span>
+        <h2>The Exception Lifecycle <em>— unwinding the call stack until something agrees to handle it</em></h2>
+      </div>
+
+      <p>This is the core mental model for the whole chapter, worth having firmly in place before any of the syntax: an exception <span class="term">unwinds the call stack</span> until something agrees to handle it — or the program terminates if nothing does. Everything from here to the end of the chapter is detail on top of that one sentence.</p>
+
+      <h3>Creation and throwing</h3>
+
+      <p>When something goes wrong inside a method, that method creates an exception object and hands it off to the runtime — the JVM itself. The object carries information about the failure: its type, and typically a description of what happened. Creating that object and handing it to the runtime is called <span class="term">throwing</span> an exception, and it's always done with the <code>throw</code> statement (§14.6), no matter what code is doing the throwing — your own code, a third-party library, or the JVM acting on its own.</p>
+
+      <p>There are two different ways the exception object actually gets created, though both end the same way — thrown:</p>
+
+      <ul>
+        <li>
+          <p><strong>Explicit creation.</strong> Nothing implicit at all: the code calls <code>new</code> itself, and throws the result itself.</p>
+          <pre><code class="language-java">void withdraw(double amount) {
+    if (amount &gt; balance) {
+        throw new InsufficientFundsException("Not enough balance");
+    }
+}</code></pre>
+        </li>
+        <li>
+          <p><strong>Implicit creation.</strong> Many exceptions are constructed automatically, by the JVM, the instant it detects a violation — no <code>new</code> anywhere in sight in the code that triggers it:</p>
+          <pre><code class="language-java">int[] arr = new int[3];
+int x = arr[5]; // the JVM constructs and throws ArrayIndexOutOfBoundsException on your behalf</code></pre>
+        </li>
+      </ul>
+
+      <p>Either way, the moment an exception is thrown, the method it was thrown from stops executing immediately, right there — no further line in that method runs, and no value is ever returned from it.</p>
+
+      <h3>The search for a handler</h3>
+
+      <p>§14.1's happy path completed three pieces of work in order. Here's the piece §14.1 left out: <code>main()</code> calls <code>generateReport()</code>, and <code>generateReport()</code> is the one actually doing the work — it calls <code>readFile()</code> first to get the raw data, then calls <code>processData()</code> to turn that into something reportable, then assembles the report itself from the result:</p>
+
+      <pre><code class="language-java">void main() {
+    Report report = generateReport();
+}
+
+Report generateReport() {
+    String contents = readFile(path);      // called first
+    List&lt;Entry&gt; entries = processData(contents); // called next
+    return buildReport(entries);
+}</code></pre>
+
+      <p>The chain of calls actually in progress at any one moment — <code>main()</code> waiting on <code>generateReport()</code>, which is waiting on whichever of <code>readFile()</code> or <code>processData()</code> it's currently running — is the <span class="term">call stack</span>.</p>
+
+      <p>Say <code>readFile()</code> is the one running, and the file it was asked to open is missing. At that exact moment, the call stack is just three frames deep: <code>main()</code>, waiting on <code>generateReport()</code>, waiting on <code>readFile()</code> — <code>processData()</code> was never even called yet, since <code>generateReport()</code> was still waiting on <code>readFile()</code>'s result before it could call anything else.</p>
+
+      <div class="callout callout-rule">
+        <div class="callout-lbl">Exception propagation</div>
+        <p>If <code>readFile()</code> throws an <code>IOException</code> and doesn't catch it, the exception moves up to <code>generateReport()</code>. If <code>generateReport()</code> doesn't catch it either, it keeps moving up, to <code>main()</code>. This upward movement, one frame of the call stack at a time, is <span class="term">exception propagation</span> — and it stops the instant something along the way actually catches it.</p>
+      </div>
+
+      <p>Underneath that upward movement, the JVM is asking one question at each frame it reaches: does this one know how to handle an exception of this type (§14.5 covers the syntax for that)? If not, that frame is abandoned entirely — this is the "unwinding" the mental model opened with, and it's why nothing after the original <code>throw</code>, in any of those methods, ever runs — including <code>processData()</code>, which was waiting to be called and now never will be.</p>
+
+      <h3>Program termination</h3>
+
+      <p>If that search reaches the very bottom of the call stack — every method unwound, nothing anywhere willing to catch it — the program, or at minimum the one thread (§22.2) that was running it, terminates.</p>
+
+      <div class="callout callout-rule">
+        <div class="callout-lbl">"I give up. You deal with it."</div>
+        <p>An exception is Java's way of saying exactly that: I don't know what to do about this right now, so I'm handing the problem to whoever called me. Writing a method that might fail always comes down to the same choice, for every exception it might let escape: deal with it right there, with a <code>catch</code>, or explicitly make it the calling code's problem, with a <code>throws</code> declaration (§14.6) — passing the same choice one level further up the exact call stack this section just described.</p>
+      </div>
+    </section>
+
+    <!-- §14.3 -->
+    <section id="s14-3">
+      <div class="section-head">
+        <span class="sec-num">§14.3</span>
+        <h2>The Exception Hierarchy <em>— every exception is an object, in a family tree</em></h2>
+      </div>
+
+      <p>An exception in Java isn't a special language construct sitting outside the type system — it's an ordinary object (§2.2), an instance of an ordinary class, related to every other exception class the same way any classes are related: through inheritance (§9).</p>
+
+      <p>Every exception class ultimately extends <code>Throwable</code>, which splits into two branches immediately below it:</p>
+
+      <pre><code class="hljs language-plaintext">Throwable
+├── Error                     (JVM-level trouble — not meant to be caught)
+│   ├── OutOfMemoryError
+│   └── StackOverflowError
+└── Exception
+    ├── RuntimeException      (unchecked — §14.4)
+    │   ├── NullPointerException
+    │   ├── ArrayIndexOutOfBoundsException
+    │   ├── ArithmeticException
+    │   └── NoSuchElementException
+    └── IOException, and other checked exceptions (§14.4)</code></pre>
+
+      <p><code>Error</code> represents problems below the level a normal program is expected to recover from — the JVM running out of memory, or a stack overflowing from runaway recursion (§4). Catching an <code>Error</code> is legal but rarely useful: by the time one occurs, the JVM itself is often in no state to keep going reliably. <code>Exception</code> is the branch this chapter is actually about — problems a program can reasonably anticipate and respond to, from a missing file to a malformed number to an index that ran off the end of an array.</p>
+
+      <div class="callout callout-note">
+        <div class="callout-lbl">An exception is just an object, thrown</div>
+        <p>Every box in that tree is a class, constructed with <code>new</code> exactly like any other object — <code>new ArithmeticException("/ by zero")</code> is a perfectly ordinary constructor call. What makes it an exception isn't anything about the object itself; it's the <code>throw</code> keyword (§14.6) applied to it, which hands that object to the runtime specifically to interrupt normal execution and go looking for a handler.</p>
+      </div>
+    </section>
+
+    <!-- §14.4 -->
+    <section id="s14-4">
+      <div class="section-head">
+        <span class="sec-num">§14.4</span>
+        <h2>Checked vs. Unchecked <em>— what the compiler actually enforces</em></h2>
+      </div>
+
+      <p>Some failures are ones a well-written program should genuinely expect and plan for — a file that might not be there, a network request that might fail. Others are just bugs — an index that should never have gone out of range, a value that should never have been <code>null</code>. Java draws a hard line between these two categories, and backs it with the compiler:</p>
+
+      <ul>
+        <li>A <span class="term">checked exception</span> is one the compiler forces every caller to actually confront — either catch it (§14.5), or declare it in the caller's own <code>throws</code> clause (§14.6) — before the code is even allowed to compile.</li>
+        <li>An <span class="term">unchecked exception</span> gets no such enforcement. Code is free to ignore the possibility entirely, and it will still compile.</li>
+      </ul>
+
+      <pre><code class="language-java">// Bad — does not compile
+void loadConfig(String path) {
+    FileReader reader = new FileReader(path); // constructor declares throws FileNotFoundException — unhandled here
+}</code></pre>
+
+      <p>This is exactly what checked-exception enforcement exists to prevent. <code>FileReader</code>'s constructor is declared <code>throws FileNotFoundException</code> in the standard library — not "might fail, who knows," but an explicit, compiler-visible declaration that this specific checked exception is possible. Because the declaration is there, Java refuses to even compile a caller that ignores it. Catching it, or declaring it in turn, is not optional:</p>
+
+      <pre><code class="language-java">// Good — compiles, because the possibility is acknowledged
+void loadConfig(String path) throws FileNotFoundException {
+    FileReader reader = new FileReader(path);
+}</code></pre>
+
+      <p>An unchecked exception gets none of this ceremony, deliberately. It's worth seeing exactly what Java spared every program from by making that choice, using a genuinely ordinary piece of business logic: a teacher's grade book, computing a class average from a completed set of exam scores:</p>
+
+      <pre><code class="language-java">class GradeBook {
+    private final int[] scores;
+
+    GradeBook(int[] scores) {
+        this.scores = scores;
+    }
+
+    int scoreAt(int index) {
+        return scores[index]; // index comes from the caller — genuinely might be out of range
+    }
+
+    double average() {
+        int total = 0;
+        for (int i = 0; i &lt; scores.length; i++) {
+            total += scores[i];
+        }
+        return (double) total / scores.length;
+    }
+}</code></pre>
+
+      <pre><code class="language-java">public class ReportCard {
+    public static void main(String[] args) {
+        GradeBook gradeBook = new GradeBook(new int[] { 90, 85, 78, 92 });
+        System.out.println("First score: " + gradeBook.scoreAt(0));
+        System.out.println("Class average: " + gradeBook.average());
+    }
+}</code></pre>
+
+      <p><code>scoreAt(int index)</code> is the honest case: <code>index</code> comes from whoever calls it, and nothing about <code>GradeBook</code> can guarantee it's in range the way <code>average()</code>'s own loop bound guarantees safety for itself. Calling <code>gradeBook.scoreAt(10)</code> against a four-score array genuinely does throw. If Java had made <code>ArrayIndexOutOfBoundsException</code> checked, this is exactly the kind of method that rule was supposedly protecting against — and the ceremony it would demand:</p>
+
+      <pre><code class="language-java">// Bad — imagine if array access worked like a checked exception
+int scoreAt(int index) throws ArrayIndexOutOfBoundsException {
+    return scores[index];
+}</code></pre>
+
+      <pre><code class="language-java">// ...and now every caller needs one, whether or not the index is ever actually wrong
+try {
+    System.out.println("First score: " + gradeBook.scoreAt(0));
+} catch (ArrayIndexOutOfBoundsException e) {
+    // ...what would this even do? "0" is obviously fine — but the compiler can't tell that
+}</code></pre>
+
+      <p>A human reading <code>scoreAt(0)</code> can see the index is fine; the compiler enforcing a checked exception can't — it has no way to evaluate whether a given call site is actually safe, so it would demand the identical <code>catch</code> at every single call, correct index or not. Multiply that across every array access in every program ever written, and checked-exception ceremony stops being a safeguard and starts being noise nobody reads. That's the actual dividing line: because <code>ArrayIndexOutOfBoundsException</code> is unchecked, <code>scoreAt()</code> compiles exactly as first written, with none of this —</p>
+
+      <pre><code class="language-java">// Good — no ceremony, because this is what unchecked buys you
+int scoreAt(int index) {
+    return scores[index]; // still throws ArrayIndexOutOfBoundsException if index is bad — just not enforced
+}</code></pre>
+
+      <p>— and on the occasion a caller genuinely does pass a bad index (a real bug: a typo, an off-by-one, an index meant for a different <code>GradeBook</code> entirely), the exception still happens, still propagates, and still crashes exactly where the bug actually is — which is a far more useful outcome for whoever has to fix it than a <code>catch</code> block that exists at every call site just in case, quietly hiding a caller's mistake instead.</p>
+
+      <p>Which category a given exception falls into isn't a special marker stuck on the class — it's simply where that class sits in §14.3's hierarchy. Every subclass of <code>RuntimeException</code> is unchecked; every other subclass of <code>Exception</code> is checked. <code>Error</code> and its subclasses are technically unchecked too, but since they're not meant to be handled in the first place, that distinction rarely comes up in practice.</p>
+
+      <table class="content-table">
+        <tr>
+          <th></th>
+          <th>Checked</th>
+          <th>Unchecked</th>
+        </tr>
+        <tr>
+          <td>Hierarchy</td>
+          <td><code>Exception</code>, excluding <code>RuntimeException</code></td>
+          <td><code>RuntimeException</code> and its subclasses</td>
+        </tr>
+        <tr>
+          <td>Compiler enforcement</td>
+          <td>Must be caught or declared — code won't compile otherwise</td>
+          <td>None — catching it is always optional</td>
+        </tr>
+        <tr>
+          <td>Typical cause</td>
+          <td>A condition outside the program's control — a missing file, a network failure</td>
+          <td>A programming mistake — a bad index, a null dereference, invalid arguments</td>
+        </tr>
+        <tr>
+          <td>Example</td>
+          <td><code>IOException</code></td>
+          <td><code>NullPointerException</code>, <code>ArrayIndexOutOfBoundsException</code></td>
+        </tr>
+      </table>
+
+      <p>That "typical cause" row is the practical rule of thumb worth internalizing: reach for a checked exception when a caller genuinely might encounter the failure through no fault of their own, and needs to be reminded to plan for it — a file that might not exist, a connection that might drop. Reach for unchecked when the failure signals a bug in the calling code itself — an index that should never have been out of range, an argument that violated a documented precondition. Forcing every caller to catch a <code>NullPointerException</code> around every dereference would make checked exceptions a burden instead of a safeguard; leaving a missing file uncaught would let a program silently limp forward on a false assumption. §14.7 returns to this same question when deciding which to extend for a custom exception.</p>
+    </section>
+
+    <!-- §14.5 -->
+    <section id="s14-5">
+      <div class="section-head">
+        <span class="sec-num">§14.5</span>
+        <h2>Handling Exceptions <em>— <code>try</code>, <code>catch</code>, and <code>finally</code></em></h2>
+      </div>
+
+      <p>A <code>try</code> block marks a region of code whose exceptions should be caught rather than left to propagate; each <code>catch</code> that follows handles one specific exception type:</p>
+
+      <pre><code class="language-java">try {
+    int result = 10 / 0; // throws ArithmeticException
+    System.out.println(result); // never reached
+} catch (ArithmeticException e) {
+    System.out.println("Can't divide by zero: " + e.getMessage());
+}</code></pre>
+
+      <p>The instant <code>10 / 0</code> throws, everything else remaining in the <code>try</code> block is skipped — <code>result</code> is never assigned, the <code>println</code> never runs — and control jumps directly to the first <code>catch</code> whose declared type matches the exception that was thrown. <code>e.getMessage()</code> retrieves whatever description the exception was constructed with (§14.3's <code>new ArithmeticException("/ by zero")</code>, in this case).</p>
+
+      <p>More than one <code>catch</code> can follow the same <code>try</code>, each handling a different possible failure:</p>
+
+      <pre><code class="language-java">try {
+    int[] values = { 1, 2, 3 };
+    System.out.println(values[5] / 0);
+} catch (ArrayIndexOutOfBoundsException e) {
+    System.out.println("Index out of range.");
+} catch (ArithmeticException e) {
+    System.out.println("Division by zero.");
+}</code></pre>
+
+      <p>Java checks each <code>catch</code> in order, top to bottom, and runs the first one whose type matches — only one <code>catch</code> block ever runs per exception.</p>
+
+      <div class="callout callout-rule">
+        <div class="callout-lbl">The Rule of Specificity</div>
+        <p>When handling a hierarchy of related exceptions, the order of <code>catch</code> blocks is critically important — get it wrong, and the code fails to compile at all, not just at runtime. The Golden Rule: catch more specific (subclass) exceptions before more general (superclass) ones. A <code>catch</code> for a supertype placed before a <code>catch</code> for its subtype would catch the subtype's exceptions too (polymorphism, §9.5, applies here exactly as it does anywhere else) — put <code>Exception</code> itself at the top, and it silently swallows every single error, leaving every specific handler beneath it unreachable. Java actually refuses to compile a <code>catch</code> block it can prove can never run this way. The rule is simple: order every <code>catch</code> from most specific to most general.</p>
+      </div>
+
+      <p>When two or more exception types genuinely deserve identical handling, <span class="term">multi-catch</span> combines them into a single block with a <code>|</code>:</p>
+
+      <pre><code class="language-java">try {
+    riskyOperation();
+} catch (ArrayIndexOutOfBoundsException | ArithmeticException e) {
+    System.out.println("Something went wrong: " + e.getMessage());
+}</code></pre>
+
+      <p>This is exactly equivalent to writing the same <code>catch</code> body twice, once per type — multi-catch exists purely to avoid that duplication, not to change what gets caught.</p>
+
+      <h3>Catching the wrong exception</h3>
+
+      <p>For a checked exception (§14.4), the compiler doesn't just check that some <code>catch</code> exists — it checks that the <code>catch</code> actually covers everything the declared type could mean. A method declared <code>throws IOException</code> is free to throw <em>any</em> subclass of it at runtime — <code>FileNotFoundException</code>, <code>SocketException</code>, or others §14.6's polymorphic throwing already named — and catching only one narrower subclass doesn't account for the rest:</p>
+
+      <pre><code class="language-java">void riskyBusiness() throws IOException { } // declares the checked exception
+
+void process() {
+    try {
+        riskyBusiness(); // compile error
+    } catch (FileNotFoundException e) { // doesn't cover every IOException riskyBusiness() could throw
+        System.out.println("We have an exception!");
+    }
+}</code></pre>
+
+      <p>This doesn't compile. <code>riskyBusiness()</code> is declared to throw <code>IOException</code> — any <code>IOException</code>, not specifically a <code>FileNotFoundException</code> — and the only <code>catch</code> present handles just that one narrow subtype. The compiler can see that a <code>SocketException</code>, or any other <code>IOException</code> that isn't a <code>FileNotFoundException</code>, would leave this <code>try</code> block with nowhere to go, so it refuses to compile <code>process()</code> at all.</p>
+
+      <p>Fixing this means the <code>catch</code> clauses actually have to cover everything the <code>try</code> block might throw — catching the exact declared type, a broader supertype of it, or the narrower subtype alongside the exact declared type:</p>
+
+      <pre><code class="language-java">void process() {
+    try {
+        riskyBusiness();
+    } catch (FileNotFoundException e) {
+        System.out.println("Specifically missing a file.");
+    } catch (IOException e) { // catches every other IOException riskyBusiness() might throw
+        System.out.println("Some other I/O problem.");
+    }
+}</code></pre>
+
+      <h3><code>finally</code>: the block that always runs</h3>
+
+      <p>A <code>finally</code> block, attached after a <code>try</code> (and any <code>catch</code>es), runs no matter what happens inside the <code>try</code> — whether it completed normally, threw an exception that got caught, or threw one that didn't:</p>
+
+      <pre><code class="language-java">try {
+    System.out.println("Trying...");     // prints: Trying...
+    int result = 10 / 0;                 // throws ArithmeticException
+} catch (ArithmeticException e) {
+    System.out.println("Caught: " + e.getMessage()); // prints: Caught: / by zero
+} finally {
+    System.out.println("This always runs."); // prints: This always runs.
+}</code></pre>
+
+      <p>"Always" is meant precisely here: <code>finally</code> runs even if the <code>try</code> block returns a value, even if the <code>catch</code> block itself throws a new exception, even if neither block finishes normally at all.</p>
+
+      <p>Here's exactly why that guarantee matters. Say a connection is opened, and something throws before it's closed:</p>
+
+      <pre><code class="language-java">// Bad — the connection leaks if sendData() throws
+Connection conn = openConnection();
+sendData(conn);       // throws IOException
+conn.close();         // never reached</code></pre>
+
+      <p><code>conn.close()</code> was right there on the next line, and it still never runs — the exception from <code>sendData(conn)</code> skips straight past it, exactly as §14.2 already described. The connection stays open, forever, unless something further up the call stack happens to close it, which nothing here promises. Putting the cleanup in a <code>finally</code> block fixes this directly:</p>
+
+      <pre><code class="language-java">// Good — close() always runs, even if sendData() throws
+Connection conn = openConnection();
+try {
+    sendData(conn);
+} finally {
+    conn.close();     // runs whether sendData() succeeded, threw, or was caught elsewhere
+}</code></pre>
+
+      <p>This is exactly the cleanup <code>finally</code> exists for: closing a connection, releasing a resource, anything that would otherwise need to be duplicated at the end of both the success path and every failure path. §14.9 covers the modern alternative for exactly this cleanup case, which most new code reaches for instead of a manual <code>finally</code>.</p>
+
+      <h3>Double trouble: an exception inside <code>catch</code> or <code>finally</code></h3>
+
+      <p>Nothing stops a <code>catch</code> or <code>finally</code> block from throwing an exception of its own — and a real one, saving an order to a database, is exactly the kind of place both can fail at once:</p>
+
+      <pre><code class="language-java">// Bad — the real problem disappears
+try {
+    saveOrder(order);       // throws OrderException: "Invalid order data"
+} finally {
+    connection.close();     // ALSO throws IOException: "Connection already closed"
+}</code></pre>
+
+      <p><code>saveOrder(order)</code> throws first, with the actual, useful problem: the order data was invalid. But <code>finally</code> still runs before that exception is allowed to propagate (§14.5 already established this), and <code>connection.close()</code> throws too. The second exception doesn't join the first — it replaces it. The <code>IOException</code> about a connection is what reaches the caller; the <code>OrderException</code> that would have actually explained what went wrong is simply gone, discarded the moment the second exception was thrown on top of it.</p>
+
+      <p>The fix is to keep cleanup failures from ever being allowed to overwrite whatever the <code>try</code> block was already reporting:</p>
+
+      <pre><code class="language-java">// Good — the real problem still gets through
+try {
+    saveOrder(order);       // throws OrderException: "Invalid order data"
+} finally {
+    try {
+        connection.close();
+    } catch (IOException closeException) {
+        System.err.println("Also failed to close connection: " + closeException.getMessage());
+        // the OrderException from saveOrder() is still the one that propagates
+    }
+}</code></pre>
+
+      <p>Wrapping the cleanup itself in its own <code>try</code>/<code>catch</code> means a failure while closing the connection gets logged rather than thrown — it's real, and worth knowing about, but it's not allowed to bury the original failure that actually caused the problem. §14.9's try-with-resources handles this exact situation automatically, keeping both exceptions instead of losing one, which is one more reason it's usually preferred over a hand-written <code>finally</code>.</p>
+
+      <h3>Nested <code>try</code>/<code>catch</code></h3>
+
+      <p>The <code>close()</code> call above wasn't the only place a fallback action could fail — it's a general problem. Picture loading a user's preferences: if the primary file is corrupted, falling back to a bundled set of defaults is reasonable. But that fallback is itself a file read, and file reads fail:</p>
+
+      <pre><code class="language-java">// Bad — if loadDefaultPreferences() also fails, nothing here says why
+try {
+    loadPrimaryPreferences();
+} catch (IOException e) {
+    loadDefaultPreferences(); // itself throws IOException — propagates uncaught
+}</code></pre>
+
+      <p>If <code>loadDefaultPreferences()</code> throws, that new <code>IOException</code> propagates straight out of this method entirely uncaught — indistinguishable from the original failure, with no indication that this was actually the fallback breaking down, not the primary attempt. The recovery action needs handling of its own, distinct from the failure it was recovering from:</p>
+
+      <pre><code class="language-java">// Good — the fallback's own failure gets its own, more specific response
+try {
+    loadPrimaryPreferences();
+} catch (IOException primaryError) {
+    try {
+        loadDefaultPreferences();
+    } catch (IOException fallbackError) {
+        throw new PreferencesUnavailableException(
+            "Neither the primary nor the default preferences could be loaded", fallbackError);
+    }
+}</code></pre>
+
+      <p>A <code>try</code> block nested inside a <code>catch</code> (or, just as legitimately, inside another <code>try</code>) is handled exactly like any other — its own <code>catch</code> only sees exceptions thrown within its own <code>try</code>, entirely independent of the outer one. Here, that means a failure in the fallback gets converted into a single, honest exception (§14.8's chaining preserves <code>fallbackError</code> as the cause) that says plainly what actually happened: not one preferences source failed, but both.</p>
+
+      <h3>Summary</h3>
+
+      <ol>
+        <li>
+          <p>You place code that might throw an exception inside a <code>try</code> block. The <code>try</code> block wraps the code segment that might throw an exception — the "protected" block. If everything inside succeeds, every <code>catch</code> block is skipped entirely.</p>
+        </li>
+        <li>
+          <p>You define one or more <code>catch</code> blocks to intercept specific types of exceptions. A <code>catch</code> block declares the exception type it's willing to handle; inside it, you write the code that responds to that particular failure — recovering from it, or at least managing it gracefully. That might involve:</p>
+          <ul>
+            <li><strong>Logging:</strong> <code>logger.error("Error processing file", e);</code></li>
+            <li><strong>A user-facing message:</strong> <code>System.err.println("An error occurred: " + e.getMessage());</code></li>
+            <li><strong>Partial recovery:</strong> re-prompting the user for input, or retrying an operation after a delay.</li>
+            <li><strong>Setting a flag:</strong> <code>operationSuccessful = false;</code></li>
+            <li><strong>Converting exception types:</strong> throwing a different, perhaps more abstract or custom (§14.7), exception instead.</li>
+          </ul>
+          <p>A <code>try</code> can be followed by several <code>catch</code> blocks, each handling a different exception type. Order matters — see The Rule of Specificity above.</p>
+        </li>
+        <li>
+          <p>The <code>finally</code> block contains code that must run regardless of whether an exception occurred in the <code>try</code> block or was caught by a <code>catch</code> block. It's primarily used for cleanup — critically, for closing resources like file streams, database connections, and network sockets, preventing exactly the kind of leak this section opened with.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- §14.6 -->
+    <section id="s14-6">
+      <div class="section-head">
+        <span class="sec-num">§14.6</span>
+        <h2><code>throw</code> and <code>throws</code> <em>— raising an exception, and declaring one</em></h2>
+      </div>
+
+      <p>Two keywords, easy to conflate by how similar they look, doing entirely different jobs. <code>throw</code> is a statement — it actually raises one specific exception instance, right now:</p>
+
+      <pre><code class="language-java">static int divide(int a, int b) {
+    if (b == 0) {
+        throw new ArithmeticException("Cannot divide by zero");
+    }
+    return a / b;
+}</code></pre>
+
+      <p><code>throw</code> takes a <code>Throwable</code> object — built with <code>new</code>, exactly as §14.3 described — and hands it to the runtime to interrupt execution immediately; nothing after a <code>throw</code> statement in the same block ever runs.</p>
+
+      <p><code>throws</code>, by contrast, is part of a method's signature, not something that executes — it declares which checked exceptions (§14.4) a method might let escape, so that every caller is compiler-enforced to deal with them:</p>
+
+      <pre><code class="language-java">void readConfig(String path) throws IOException {
+    // ...code that might throw IOException...
+}</code></pre>
+
+      <p>A method that calls <code>readConfig</code> now has exactly two options for its own checked-exception obligation: catch <code>IOException</code> itself, or declare <code>throws IOException</code> in its own signature and pass the responsibility one level further up the call chain. An unchecked exception (§14.4) never needs a <code>throws</code> declaration — nothing forces one, though a method is still free to add one for documentation's sake even when it isn't required.</p>
+
+      <h3>Calling a method that declares a checked exception</h3>
+
+      <p>The moment a method's signature declares a checked exception, calling it hands that exception straight to the caller as a decision they now have to make — there's no third option, and no way to simply ignore it. Every checked exception a method can throw is effectively part of its public interface, exactly as visible to a caller as its parameter list or return type: whoever calls the method needs to know what it might throw, precisely so they can decide what to do about it — catch it there (§14.5), or declare it themselves and pass the decision one level further up.</p>
+
+      <p>One consequence of this rule is easy to miss: a method can declare a checked exception it never actually throws, anywhere in its own body:</p>
+
+      <pre><code class="language-java">void eatCarrot() throws NutritionException {
+    System.out.println("Munch.");
+    // NutritionException is never actually constructed or thrown here
+}</code></pre>
+
+      <p>The compiler never checks whether a method's body actually produces every exception it declares — only that whoever calls a method handles or declares every checked exception that method's signature lists. So <code>eatCarrot()</code>'s declaration alone is enough to bind every one of its callers:</p>
+
+      <pre><code class="language-java">void feedRabbit() throws NutritionException { // required, even though eatCarrot() never actually throws it
+    eatCarrot();
+}</code></pre>
+
+      <p>This is genuinely useful when a method is expected to throw something in a future version but doesn't yet: declaring the exception now means every caller already handles or declares it, so adding the real <code>throw</code> later never breaks a single caller that compiles against this method today.</p>
+
+      <h3>Polymorphic throwing</h3>
+
+      <p>A method that saves a file can fail in several distinct ways at once — the network drops mid-write, the file itself has vanished, the destination directory no longer exists. Each of those is a real, separate exception type in the standard library, and declaring all of them individually gets unwieldy fast:</p>
+
+      <pre><code class="language-java">// Bad — every new failure type means editing this signature again
+public void saveFile() throws SocketException, FileNotFoundException, NoSuchFileException {
+    // ...
+}</code></pre>
+
+      <p>A caller now has to know about, and handle, three specific types — and a fourth I/O failure the method starts throwing next year would mean updating this signature and every caller's <code>catch</code> blocks all over again. But <code>SocketException</code>, <code>FileNotFoundException</code>, and <code>NoSuchFileException</code> all extend the same class: <code>IOException</code> (§14.3's hierarchy). Declaring the parent instead of the children covers the whole family at once, exactly the way a supertype reference can hold any of its subtypes (polymorphism, §9.5):</p>
+
+      <pre><code class="language-java">// Good — one declaration, whole family of I/O failures covered
+public void saveFile() throws IOException {
+    // ...
+}</code></pre>
+
+      <p>The method itself is free to throw a <code>SocketException</code> today and a brand-new <code>IOException</code> subclass next year, without its signature ever needing to change. A caller only needs to know that <em>some</em> kind of I/O problem is possible — <code>catch (IOException e)</code> handles every one of them, named or not, the same way a variable declared as a supertype can be handed any subtype without the caller needing to know which one specifically arrived (§9.5 covered this same substitutability for ordinary method parameters; a <code>throws</code> clause gets it for free, too).</p>
+    </section>
+
+    <!-- §14.7 -->
+    <section id="s14-7">
+      <div class="section-head">
+        <span class="sec-num">§14.7</span>
+        <h2>Custom Exceptions <em>— modeling a domain-specific failure</em></h2>
+      </div>
+
+      <p>The standard library's exception classes cover generic problems — a bad index, a missing file — but a program's own domain often has failures with no natural standard-library name. Without one, a method is left borrowing something generic and stuffing the real problem into a string:</p>
+
+      <pre><code class="language-java">// Bad — no exception type actually means "insufficient funds"
+void withdraw(double amount, double balance) throws Exception {
+    if (amount &gt; balance) {
+        throw new Exception("Cannot withdraw " + amount + " from balance of " + balance);
+    }
+}</code></pre>
+
+      <pre><code class="language-java">try {
+    withdraw(500, 100);
+} catch (Exception e) {
+    // catches insufficient funds — and every other possible failure this
+    // method (or anything it calls) could ever throw, with no way to tell them apart
+}</code></pre>
+
+      <p>A caller here can't catch "insufficient funds" specifically — only <code>Exception</code>, the same catch-all that would also swallow a bug, a null dereference three calls deep, or anything else. Extending <code>Exception</code> or <code>RuntimeException</code> (§9.3) instead creates a new exception type that names the problem precisely, catchable on its own:</p>
+
+      <pre><code class="language-java">// Good — a real type for this one specific failure
+class InsufficientFundsException extends Exception {
+    public InsufficientFundsException(String message) {
+        super(message);
+    }
+}</code></pre>
+
+      <pre><code class="language-java">void withdraw(double amount, double balance) throws InsufficientFundsException {
+    if (amount &gt; balance) {
+        throw new InsufficientFundsException("Cannot withdraw " + amount + " from balance of " + balance);
+    }
+}</code></pre>
+
+      <p>The constructor does nothing but forward its message to <code>Exception</code>'s own constructor via <code>super(...)</code> (§9.4) — everything <code>getMessage()</code>, the exception hierarchy, and every <code>catch</code> block already know how to do with an exception, <code>InsufficientFundsException</code> inherits for free. What's new is purely the name and the type: <code>catch (InsufficientFundsException e)</code> now catches exactly this domain failure and nothing else, distinct from an <code>ArithmeticException</code>, an <code>IOException</code>, or the generic <code>Exception</code> the bad version above was forced to use.</p>
+
+      <p>The choice of what to extend is exactly §14.4's checked-vs-unchecked question, applied to this one new type: extend <code>Exception</code> when callers genuinely need to be compiler-reminded to handle the failure (as above — a caller forgetting to plan for insufficient funds is a real, likely mistake); extend <code>RuntimeException</code> when the failure represents a caller's own programming error, the same way <code>IllegalArgumentException</code> does for a bad argument.</p>
+    </section>
+
+    <!-- §14.8 -->
+    <section id="s14-8">
+      <div class="section-head">
+        <span class="sec-num">§14.8</span>
+        <h2>Exception Chaining <em>— preserving the original problem</em></h2>
+      </div>
+
+      <p>Catching one exception only to throw a different, more domain-appropriate one is common — a low-level <code>IOException</code> caught and re-thrown as a <code>ConfigLoadException</code>, say. Done carelessly, that step throws away exactly the information that would explain what actually went wrong underneath:</p>
+
+      <pre><code class="language-java">try {
+    loadFile(path);
+} catch (IOException e) {
+    throw new ConfigLoadException("Could not load configuration"); // original cause lost
+}</code></pre>
+
+      <p><code>Throwable</code> has a constructor overload built specifically to avoid this — one that takes a <span class="term">cause</span> alongside the message:</p>
+
+      <pre><code class="language-java">try {
+    loadFile(path);
+} catch (IOException e) {
+    throw new ConfigLoadException("Could not load configuration", e); // e preserved as the cause
+}</code></pre>
+
+      <p>The new exception now carries the original one inside it, retrievable later with <code>getCause()</code>. A stack trace printed from the outer exception shows both — the higher-level failure a caller actually asked about, and, chained beneath it, the lower-level one that actually caused it. Whenever wrapping one exception in another, passing the original along as the cause costs nothing and keeps the real explanation from disappearing.</p>
+    </section>
+
+    <!-- §14.9 -->
+    <section id="s14-9">
+      <div class="section-head">
+        <span class="sec-num">§14.9</span>
+        <h2>Try-with-Resources <em>— cleanup that can't be forgotten</em></h2>
+      </div>
+
+      <p>A resource that must be closed — a file, a network connection, a thread pool — traditionally needed a manual <code>finally</code> block (§14.5) to guarantee that cleanup, even when an exception interrupted whatever was using it. But <code>FileReader.close()</code> is itself declared <code>throws IOException</code> — the exact "cleanup that can itself fail" problem §14.5 just walked through — so doing this properly meant a nested <code>try</code>/<code>catch</code> just to handle <code>close()</code> potentially throwing too:</p>
+
+      <pre><code class="language-java">// Bad — correct, but this much ceremony for one resource
+void readFile(String path) throws IOException { // still required — FileReader(...) and reader.close() both declare it
+    FileReader reader = new FileReader(path);
+    try {
+        // ...use reader...
+    } finally {
+        try {
+            reader.close(); // must remember this, every time — and it can throw too
+        } catch (IOException closeError) {
+            System.err.println("Failed to close reader: " + closeError.getMessage());
+        }
+    }
+}</code></pre>
+
+      <p>Every class fit to be cleaned up this way implements <code>AutoCloseable</code> — an interface (§13) with exactly one method, <code>void close() throws Exception</code>. <span class="term">Try-with-resources</span> is syntax built directly around that interface, specifically to make this ceremony unnecessary: declare the resource inside the parentheses of a <code>try</code>, and Java calls <code>close()</code> automatically the moment the block ends, success or failure, handling a failure in <code>close()</code> itself without a nested <code>try</code>/<code>catch</code> ever being written by hand:</p>
+
+      <pre><code class="language-java">void readFile(String path) throws IOException { // still required — try-with-resources doesn't remove this
+    try (FileReader reader = new FileReader(path)) {
+        // ...use reader...
+    } // reader.close() is called automatically here
+}</code></pre>
+
+      <p>More than one resource can be declared the same way, separated by semicolons, and they're closed in the reverse of the order they were opened — the last one declared is the first one closed. §22.10 puts this exact mechanism to work for <code>ExecutorService</code> specifically; its <code>close()</code> is simply one particular <code>AutoCloseable</code> implementation, doing the graceful-shutdown work appropriate to a thread pool instead of releasing a file handle.</p>
+
+      <h3><code>AutoCloseable</code> and <code>Closeable</code></h3>
+
+      <p>Any resource declared inside a <code>try</code>'s parentheses has to implement one of exactly two interfaces: <code>java.lang.AutoCloseable</code>, or <code>java.io.Closeable</code>.</p>
+
+      <pre><code class="language-java">public interface AutoCloseable {
+    void close() throws Exception;
+}</code></pre>
+
+      <pre><code class="language-java">public interface Closeable extends AutoCloseable {
+    void close() throws IOException;
+}</code></pre>
+
+      <p><code>Closeable</code> actually extends <code>AutoCloseable</code> — it isn't a separate, competing interface, just a more specific one, overriding <code>close()</code> to narrow its declared <code>throws Exception</code> down to <code>throws IOException</code>. An overriding method is always free to narrow or drop the checked exceptions its parent declared, just never add ones the parent didn't (§22.9 shows this same narrowing again, for <code>ExecutorService.close()</code>). <code>Reader</code> — and through it, <code>FileReader</code> — implements <code>Closeable</code>, along with <code>BufferedReader</code>, <code>Socket</code>, <code>Scanner</code>, and <code>InputStream</code>: all specifically I/O resources.</p>
+
+      <p><code>AutoCloseable</code> is the broader of the two, and it exists precisely because try-with-resources wasn't meant to stay limited to I/O. When it was introduced, declaring <code>close()</code> against the base <code>Exception</code> type — rather than the narrower <code>IOException</code> — made the interface general enough for any resource needing cleanup, I/O or not: a database connection, or a thread pool.</p>
+
+      <pre><code class="language-java">public interface ExecutorService extends Executor, AutoCloseable</code></pre>
+
+      <p><code>ExecutorService</code> (§22.9) implements <code>AutoCloseable</code> directly, not <code>Closeable</code> — shutting down a thread pool has nothing to do with I/O, so the broader interface is the correct fit. Either way, notice that both interfaces' <code>close()</code> declares a checked exception — <code>Exception</code> for <code>AutoCloseable</code>, <code>IOException</code> for <code>Closeable</code> — which is exactly why the "what try-with-resources does not do" callout below still applies to every resource declared this way, regardless of which of the two it implements.</p>
+
+      <h3>Automatic execution of <code>close()</code></h3>
+
+      <p>In a try-with-resources statement, <code>close()</code> runs automatically as part of exiting the <code>try</code> block — whether that exit is normal or via an exception — and it runs before any <code>catch</code> or <code>finally</code> attached to that same <code>try</code>. That ordering matters: it means a <code>catch</code> block here covers exceptions thrown by <code>close()</code> itself, not just ones thrown by the body of the <code>try</code>.</p>
+
+      <p>There's one important nuance to that, though. If the <code>try</code> body throws <em>and</em> <code>close()</code> also throws while cleaning up after it, only one of those two exceptions can actually propagate to the <code>catch</code> block — and it's the body's, not <code>close()</code>'s:</p>
+
+      <pre><code class="language-java">try (FileReader reader = new FileReader(path)) {
+    throw new RuntimeException("Something went wrong reading");
+    // reader.close() also throws IOException here, while unwinding
+} catch (Exception e) {
+    System.out.println(e.getMessage());          // "Something went wrong reading"
+    for (Throwable suppressed : e.getSuppressed()) {
+        System.out.println("Also: " + suppressed.getMessage()); // the IOException from close()
+    }
+}</code></pre>
+
+      <p>The exception from <code>close()</code> isn't discarded the way §14.5's "double trouble" showed a hand-written <code>finally</code> discarding one — it's attached to the primary exception as a <span class="term">suppressed exception</span>, retrievable through <code>getSuppressed()</code>, without ever propagating on its own. This is exactly the improvement try-with-resources makes over a manual <code>finally</code>: both failures survive, instead of the second one silently overwriting the first.</p>
+
+      <div class="callout callout-rule">
+        <div class="callout-lbl">What try-with-resources does <em>not</em> do</div>
+        <p>Try-with-resources automates exactly one thing: calling <code>close()</code> on the resource, guaranteed, regardless of how the block exits. That's the whole feature. It says nothing about exceptions themselves — a checked exception thrown from inside the <code>try</code> body still propagates exactly as it would without it, and still needs, per §14.4, either a <code>catch</code> block to handle it locally or a <code>throws</code> declaration to push the responsibility to the caller. Without one of those two, the compiler rejects the method — the same rule as always, unaffected by whether the resource happens to be declared in the <code>try</code>'s parentheses.</p>
+      </div>
+    </section>
+
+    <!-- §14.10 -->
+    <section id="s14-10">
+      <div class="section-head">
+        <span class="sec-num">§14.10</span>
+        <h2>Exceptions Are Not Control Flow <em>— reserved for what's actually exceptional</em></h2>
+      </div>
+
+      <p>Everything so far has been about failures a program's normal logic has no next step for at all — a missing file, a bad index, a connection that dropped. Not every unsuccessful-looking outcome belongs in that category, and treating one that doesn't is one of the easiest ways to misuse everything else this chapter builds.</p>
+
+      <p>Consider a method that looks a user up by ID. Not finding one is often a routine, expected outcome — the ID simply doesn't exist yet, the same way a search coming up empty is still a completed search, not a failed one. Modeling that as an exception is a common mistake:</p>
+
+      <pre><code class="language-java">// Bad — "not found" isn't exceptional here
+User user = findUser(id); // throws UserNotFoundException if missing</code></pre>
+
+      <pre><code class="language-java">try {
+    User user = findUser(id);
+    // ...
+} catch (UserNotFoundException e) {
+    // ...
+}</code></pre>
+
+      <p>A <code>try</code>/<code>catch</code> used this way isn't handling a failure at all — it's an ordinary <code>if</code>/<code>else</code> wearing exception syntax, for a branch of logic that's a completely normal, everyday outcome of calling <code>findUser</code>. §20 covers <code>Optional&lt;T&gt;</code> in full, but the shape of the better fix is already visible here: a return value that represents "might not be there" directly and honestly, without treating a routine miss as if it were a breakdown.</p>
+
+      <div class="callout callout-rule">
+        <div class="callout-lbl">The dividing line</div>
+        <p>An exception should represent something exceptional actually happening — a genuine failure, a violated assumption, a job that could not be completed. It should not represent one ordinary branch of a method's normal logic, reached for instead of an <code>if</code> purely because throwing felt like the more deliberate way to write it. If a caller is expected to see a particular outcome regularly, in the ordinary course of using a method correctly, that outcome is normal — not exceptional — no matter which syntax reports it.</p>
+      </div>
+    </section>
+
+    <!-- §14.11 -->
+    <section id="s14-11">
+      <div class="section-head">
+        <span class="sec-num">§14.11</span>
+        <h2>Best Practices &amp; Anti-Patterns <em>— habits worth building, and ones worth breaking</em></h2>
+      </div>
+
+      <p>Everything in this chapter comes with real ways to misuse it. A few habits account for most of the trouble in practice — each one easy to fall into, and each with a straightforward fix.</p>
+
+      <h3>Anti-pattern: swallowing an exception</h3>
+
+      <pre><code class="language-java">// Bad — the failure vanishes without a trace
+try {
+    riskyOperation();
+} catch (IOException e) {
+    // ignored
+}</code></pre>
+
+      <p>An empty <code>catch</code> block doesn't make the problem go away — it just deletes every trace that it happened. Whatever <code>riskyOperation()</code> was trying to do silently didn't happen, and nothing here says so; a caller three layers up, or a user staring at a blank screen, has no way to know why. At an absolute minimum, a caught exception should be logged, even when there's genuinely nothing else to do about it:</p>
+
+      <pre><code class="language-java">// Good — the failure is invisible to the program's logic, not to whoever reads the logs
+try {
+    riskyOperation();
+} catch (IOException e) {
+    logger.error("riskyOperation failed", e);
+}</code></pre>
+
+      <h3>Anti-pattern: catching <code>Throwable</code> or <code>Error</code></h3>
+
+      <pre><code class="language-java">// Bad — catches far more than was ever intended
+try {
+    doWork();
+} catch (Throwable t) {
+    // ...
+}</code></pre>
+
+      <p><code>Throwable</code> sits above both branches of §14.3's hierarchy — this catches every <code>Exception</code>, but also every <code>Error</code>: an <code>OutOfMemoryError</code>, a <code>StackOverflowError</code>, conditions the JVM itself is in no state to recover from. Catching one of these doesn't fix anything; it just delays a crash that was already coming, often while masking the fact that something in the program is fundamentally broken. Catch <code>Exception</code>, not <code>Throwable</code>, unless there's a genuinely deliberate reason — logging a fatal condition right before the program exits, say — to see an <code>Error</code> at all:</p>
+
+      <pre><code class="language-java">// Good — catches real, recoverable problems, and nothing below Error
+try {
+    doWork();
+} catch (Exception e) {
+    logger.error("doWork failed", e);
+}</code></pre>
+
+      <h3>Anti-pattern: logging the same failure at every level</h3>
+
+      <pre><code class="language-java">// Bad — one failure, logged three times on its way up
+void processData() throws IOException {
+    try {
+        readFile();
+    } catch (IOException e) {
+        logger.error("processData failed", e);
+        throw e; // still propagates — and gets logged again by whoever catches it next
+    }
+}</code></pre>
+
+      <p>Propagation (§14.2) means the same exception can pass through several methods on its way to a handler — and logging it at every one of those methods turns one real failure into a wall of duplicate log entries, each describing the identical problem. Log once, at the point that actually has enough context to act on it or report it meaningfully — typically much further up the call stack than where the exception was first thrown — and let it propagate silently everywhere beneath that:</p>
+
+      <pre><code class="language-java">// Good — propagates quietly; logged exactly once, where it's actually handled
+void processData() throws IOException {
+    readFile(); // no catch here — nothing at this level can act on a failure anyway
+}</code></pre>
+
+      <h3>Anti-pattern: losing the original exception</h3>
+
+      <p>§14.8 already covered exception chaining, but it's common enough to misuse that it belongs here again, stated plainly as what not to do:</p>
+
+      <pre><code class="language-java">// Bad — the real cause is discarded
+} catch (SQLException e) {
+    throw new UserNotFoundException("User not found"); // cause dropped
+}</code></pre>
+
+      <p><code>e</code> is right there, holding the actual database problem that led here, and the new exception simply doesn't mention it. Whoever eventually handles or logs the <code>UserNotFoundException</code> sees a plausible-looking message and nothing else — the <code>SQLException</code> underneath, which might have said exactly why the lookup really failed, is gone the moment this line runs. Passing it as the <code>cause</code> costs nothing and keeps it recoverable:</p>
+
+      <pre><code class="language-java">// Good — the cause is preserved
+} catch (SQLException e) {
+    throw new UserNotFoundException("User not found", e); // cause preserved
+}</code></pre>
+
+      <h3>Recap: rules from earlier in this chapter</h3>
+
+      <ul>
+        <li><strong>Order <code>catch</code> blocks from most specific to most general</strong> (§14.5's Rule of Specificity) — a broad <code>catch</code> placed first silently swallows every subtype beneath it.</li>
+        <li><strong>Don't use exceptions for routine, expected outcomes</strong> (§14.10) — a normal "not found" belongs in a return value, not a <code>try</code>/<code>catch</code> standing in for an <code>if</code>.</li>
+        <li><strong>Prefer try-with-resources over a hand-written <code>finally</code></strong> (§14.9) — it closes resources automatically and keeps a cleanup failure from silently overwriting the original one.</li>
+      </ul>
+    </section>
+
+    <!-- §14.12 -->
+    <section id="s14-12">
+      <div class="section-head">
+        <span class="sec-num">§14.12</span>
+        <h2>Key Takeaways</h2>
+      </div>
+
+      <p>Every mechanic in this chapter is detail on top of one shape, and it's worth ending exactly where §14.2 began — with that shape drawn out in full:</p>
+
+      <pre><code class="hljs language-plaintext">Normal execution
+       │
+       ▼
+    Success
+
+          OR
+
+Problem occurs
+       │
+       ▼
+Exception thrown
+       │
+       ▼
+Search upward for handler
+       │
+       ▼
+Handled — or program terminates</code></pre>
+
+      <ul>
+        <li>An exception is an ordinary object, an instance of a class descending from <code>Throwable</code> — <code>throw</code> is what turns constructing one into interrupting normal execution.</li>
+        <li>Thrown, an exception unwinds the call stack, method by method, until something agrees to handle it; reaching the bottom with nothing willing to catch it terminates the program (or the thread).</li>
+        <li><code>Error</code> represents JVM-level trouble not meant to be caught; <code>Exception</code> represents problems a program can reasonably anticipate and recover from.</li>
+        <li>A <span class="term">checked</span> exception (any <code>Exception</code> subclass outside <code>RuntimeException</code>) must be caught or declared, enforced by the compiler; an <span class="term">unchecked</span> exception (<code>RuntimeException</code> and its subclasses) carries no such enforcement.</li>
+        <li>An exception should represent something exceptional — a genuine failure. A routine, expected outcome like "not found" belongs in an ordinary return value, not a <code>try</code>/<code>catch</code> standing in for an <code>if</code>/<code>else</code>.</li>
+        <li><code>try</code>/<code>catch</code> handles an exception where it's actually manageable; multiple <code>catch</code> blocks are checked top to bottom, and multi-catch (<code>A | B</code>) combines identical handling for more than one type.</li>
+        <li><code>finally</code> runs no matter how the <code>try</code> block exits — normally, by a caught exception, or by one that wasn't caught at all.</li>
+        <li><code>throw</code> raises one specific exception instance; <code>throws</code>, part of a method's signature, declares which checked exceptions might escape it.</li>
+        <li>A custom exception, extending <code>Exception</code> or <code>RuntimeException</code>, names a domain-specific failure precisely — checked when callers genuinely need reminding to handle it, unchecked when it signals the caller's own programming error.</li>
+        <li>Passing the original exception as a <code>cause</code> when wrapping it in a new one preserves the real underlying problem instead of discarding it.</li>
+        <li>Try-with-resources calls <code>close()</code> on any <code>AutoCloseable</code> automatically once its block ends, removing the need for a hand-written <code>finally</code> just to guarantee cleanup.</li>
+      </ul>
+    </section>
+
+  </article>
+
+  <nav class="page-nav" aria-label="Chapter navigation">
+    <a href="interfaces.html" class="page-nav-prev">
+      <span class="page-nav-label">← Previous</span>
+      <span class="page-nav-title">§13 — Interfaces</span>
+    </a>
+    <a href="generics.html" class="page-nav-next">
+      <span class="page-nav-label">Next →</span>
+      <span class="page-nav-title">§15 — Generics</span>
+    </a>
+  </nav>
+</main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  hljs.highlightAll();
+
+  // Flag error-annotation comments in code blocks
+  document.querySelectorAll('.hljs-comment').forEach(el => {
+    if (/\b(compile|compiler|runtime) error\b/i.test(el.textContent)) {
+      el.classList.add('hljs-comment-error');
+    }
+  });
+
+  // Code theme toggle
+  const codeThemeBtn = document.getElementById('code-theme-toggle');
+  const lightTheme = document.getElementById('hljs-light-theme');
+  const darkTheme = document.getElementById('hljs-dark-theme');
+  const themeLabel = codeThemeBtn.querySelector('.code-theme-label');
+  const themeIcon = codeThemeBtn.querySelector('.icon');
+
+  function applyCodeTheme(theme) {
+    const dark = theme === 'dark';
+    lightTheme.disabled = dark;
+    darkTheme.disabled = !dark;
+    document.documentElement.classList.toggle('code-dark', dark);
+    themeLabel.textContent = dark ? 'Light code' : 'Dark code';
+    themeIcon.textContent = dark ? '☀️' : '🌙';
+  }
+
+  applyCodeTheme(localStorage.getItem('code-theme') || 'light');
+
+  codeThemeBtn.addEventListener('click', () => {
+    const next = darkTheme.disabled ? 'dark' : 'light';
+    localStorage.setItem('code-theme', next);
+    applyCodeTheme(next);
+  });
+
+  // Scroll spy for sub-sections
+  const sections = document.querySelectorAll('section[id]');
+  const subLinks = document.querySelectorAll('.sub-nav a[href^="#"]');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = '#' + entry.target.id;
+        subLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+      }
+    });
+  }, { rootMargin: '-8% 0px -78% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+
+  // Mobile toggle
+  const btn  = document.getElementById('menu-btn');
+  const side = document.getElementById('sidebar');
+  btn.addEventListener('click', () => side.classList.toggle('open'));
+  document.querySelectorAll('#sidebar a').forEach(a => {
+    a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
+  });
+});
+</script>
+</body>
+</html>

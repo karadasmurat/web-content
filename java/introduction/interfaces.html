@@ -1,247 +1,419 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>§15 Interfaces — OO with Java</title>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" id="hljs-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
-<link rel="stylesheet" id="hljs-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
-<script>
-(function () {
-  if ((localStorage.getItem('code-theme') || 'light') === 'dark') {
-    document.getElementById('hljs-light-theme').disabled = true;
-    document.getElementById('hljs-dark-theme').disabled = false;
-    document.documentElement.classList.add('code-dark');
-  }
-})();
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>§13 Interfaces — OO with Java</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" id="hljs-light-theme"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+  <link rel="stylesheet" id="hljs-dark-theme"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
+  <script>
+    (function () {
+      if ((localStorage.getItem('code-theme') || 'light') === 'dark') {
+        document.getElementById('hljs-light-theme').disabled = true;
+        document.getElementById('hljs-dark-theme').disabled = false;
+        document.documentElement.classList.add('code-dark');
+      }
+    })();
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
 </head>
+
 <body>
 
-<button id="menu-btn" aria-label="Toggle navigation">
-  <span></span><span></span><span></span>
-</button>
+  <button id="menu-btn" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
 
-<button id="code-theme-toggle" class="code-theme-toggle" aria-label="Toggle code color scheme">
-  <span class="icon">🌙</span><span class="code-theme-label">Dark code</span>
-</button>
+  <button id="code-theme-toggle" class="code-theme-toggle" aria-label="Toggle code color scheme">
+    <span class="icon">🌙</span><span class="code-theme-label">Dark code</span>
+  </button>
 
-<nav id="sidebar" aria-label="Tutorial navigation">
-  <div class="sidebar-brand">
-    <div class="sidebar-brand-label">Tutorial</div>
-    <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
-  </div>
-  <nav>
-    <ul>
-      <li>
-        <a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a>
-        <ul class="sub-nav">
-          <li><a href="index.html#s0-1"><span class="nav-num">§0.1</span>What Is Java?</a></li>
-          <li><a href="index.html#s0-2"><span class="nav-num">§0.2</span>Where Is Java Used?</a></li>
-          <li><a href="index.html#s0-3"><span class="nav-num">§0.3</span>Why Java?</a></li>
-          <li><a href="index.html#s0-4"><span class="nav-num">§0.4</span>The Java Ecosystem</a></li>
-          <li><a href="index.html#s0-5"><span class="nav-num">§0.5</span>Java Versions</a></li>
-          <li><a href="index.html#s0-6"><span class="nav-num">§0.6</span>Your First Program</a></li>
-          <li><a href="index.html#s0-7"><span class="nav-num">§0.7</span>Key Features</a></li>
-          <li><a href="index.html#s0-8"><span class="nav-num">§0.8</span>Key Takeaways</a></li>
-          <li><a href="index.html#s0-9"><span class="nav-num">§0.9</span>Appendix: Write Once, Run Anywhere</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="variables.html"><span class="nav-num">§1</span>Variables</a>
-        <ul class="sub-nav">
-          <li><a href="variables.html#s1-1"><span class="nav-num">§1.1</span>Values</a></li>
-          <li><a href="variables.html#s1-2"><span class="nav-num">§1.2</span>Giving Values Names</a></li>
-          <li><a href="variables.html#s1-3"><span class="nav-num">§1.3</span>Variables in Java</a></li>
-          <li><a href="variables.html#s1-4"><span class="nav-num">§1.4</span>Naming Variables</a></li>
-          <li><a href="variables.html#s1-5"><span class="nav-num">§1.5</span>What a Variable Holds</a></li>
-          <li><a href="variables.html#s1-6"><span class="nav-num">§1.6</span>Changing a Value</a></li>
-          <li><a href="variables.html#s1-7"><span class="nav-num">§1.7</span><code>var</code></a></li>
-          <li><a href="variables.html#s1-8"><span class="nav-num">§1.8</span>Common Mistakes</a></li>
-          <li><a href="variables.html#s1-9"><span class="nav-num">§1.9</span>Key Takeaways</a></li>
-        </ul>
-      </li>
-      <li><a href="primitives.html"><span class="nav-num">§2</span>Primitives</a></li>
-      <li><a href="classes.html"><span class="nav-num">§3</span>Classes</a></li>
-      <li><a href="objects.html"><span class="nav-num">§4</span>Objects</a></li>
-      <li><a href="assignment.html"><span class="nav-num">§5</span>Assignment</a></li>
-      <li>
-        <a href="methods.html"><span class="nav-num">§6</span>Methods</a>
-        <ul class="sub-nav">
-          <li><a href="methods.html#s6-intro"><span class="nav-num">§6.1</span>What Is a Method?</a></li>
-          <li><a href="methods.html#s62"><span class="nav-num">§6.2</span>Static Methods</a></li>
-          <li><a href="methods.html#s63"><span class="nav-num">§6.3</span>Reference Parameters</a></li>
-          <li><a href="methods.html#s64"><span class="nav-num">§6.4</span>Dot Operator Revisited</a></li>
-          <li><a href="methods.html#s65"><span class="nav-num">§6.5</span>Instance Methods</a></li>
-          <li><a href="methods.html#s66"><span class="nav-num">§6.6</span>Functions to Objects</a></li>
-          <li><a href="methods.html#s67"><span class="nav-num">§6.7</span>Key Takeaways</a></li>
-        </ul>
-      </li>
-      <li><a href="operators.html"><span class="nav-num">§7</span>Operators</a></li>
-      <li><a href="controlflow.html"><span class="nav-num">§8</span>Control Flow</a></li>
-      <li><a href="arrays.html"><span class="nav-num">§9</span>Arrays</a></li>
-      <li>
-        <a href="strings.html"><span class="nav-num">§10</span>Strings</a>
-        <ul class="sub-nav">
-          <li><a href="strings.html#s10-1"><span class="nav-num">§10.1</span>Writing Systems &amp; Unicode</a></li>
-          <li><a href="strings.html#s10-2"><span class="nav-num">§10.2</span><code>char</code></a></li>
-          <li><a href="strings.html#s10-3"><span class="nav-num">§10.3</span><code>Character</code></a></li>
-          <li><a href="strings.html#s10-4"><span class="nav-num">§10.4</span>Indexing</a></li>
-          <li><a href="strings.html#s10-5"><span class="nav-num">§10.5</span>Immutability</a></li>
-          <li><a href="strings.html#s10-6"><span class="nav-num">§10.6</span><code>==</code> vs <code>.equals()</code></a></li>
-          <li><a href="strings.html#s10-7"><span class="nav-num">§10.7</span>Concatenation</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="inheritance.html"><span class="nav-num">§11</span>Inheritance</a>
-        <ul class="sub-nav">
-          <li><a href="inheritance.html#s10-1"><span class="nav-num">§11.1</span>Taxonomy</a></li>
-          <li><a href="inheritance.html#s10-2"><span class="nav-num">§11.2</span>The Problem</a></li>
-          <li><a href="inheritance.html#s10-3"><span class="nav-num">§11.3</span><code>extends</code></a></li>
-          <li><a href="inheritance.html#s10-4"><span class="nav-num">§11.4</span><code>super(...)</code></a></li>
-          <li><a href="inheritance.html#s10-5"><span class="nav-num">§11.5</span>Polymorphism</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="accessmodifiers.html"><span class="nav-num">§12</span>Packages &amp; Access Modifiers</a>
-        <ul class="sub-nav">
-          <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§12.1</span>Packages</a></li>
-          <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§12.2</span>Why Restrict Access</a></li>
-          <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§12.3</span><code>private</code></a></li>
-          <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§12.4</span>Encapsulation</a></li>
-          <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§12.5</span><code>public</code></a></li>
-          <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§12.6</span>Package-Private</a></li>
-          <li><a href="accessmodifiers.html#s11-7"><span class="nav-num">§12.7</span><code>protected</code></a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="immutability.html"><span class="nav-num">§13</span>Immutability</a>
-        <ul class="sub-nav">
-          <li><a href="immutability.html#s13-1"><span class="nav-num">§13.1</span>Identity &amp; State</a></li>
-          <li><a href="immutability.html#s13-2"><span class="nav-num">§13.2</span>A Question of Time</a></li>
-          <li><a href="immutability.html#s13-3"><span class="nav-num">§13.3</span>Building an Immutable Class</a></li>
-          <li><a href="immutability.html#s13-4"><span class="nav-num">§13.4</span><code>final</code> Isn't Deep</a></li>
-          <li><a href="immutability.html#s13-5"><span class="nav-num">§13.5</span>Why It Matters</a></li>
-          <li><a href="immutability.html#s13-6"><span class="nav-num">§13.6</span><code>StringBuilder</code></a></li>
-          <li><a href="immutability.html#s13-7"><span class="nav-num">§13.7</span>Core Pillars</a></li>
-          <li><a href="immutability.html#s13-8"><span class="nav-num">§13.8</span>Putting It Together</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="abstractclasses.html"><span class="nav-num">§14</span>Abstract Classes</a>
-        <ul class="sub-nav">
-          <li><a href="abstractclasses.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
-          <li><a href="abstractclasses.html#s14-2"><span class="nav-num">§14.2</span><code>abstract</code> Classes</a></li>
-          <li><a href="abstractclasses.html#s14-3"><span class="nav-num">§14.3</span><code>abstract</code> Methods</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="interfaces.html" class="active"><span class="nav-num">§15</span>Interfaces</a>
-        <ul class="sub-nav">
-          <li><a href="#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
-          <li><a href="#s15-2"><span class="nav-num">§15.2</span>Interface vs. Abstract Class</a></li>
-          <li><a href="#s15-3"><span class="nav-num">§15.3</span>Declaring &amp; Implementing</a></li>
-          <li><a href="#s15-4"><span class="nav-num">§15.4</span>Override vs. Overload</a></li>
-          <li><a href="#s15-5"><span class="nav-num">§15.5</span>Multiple Interfaces</a></li>
-          <li><a href="#s15-6"><span class="nav-num">§15.6</span>Interface-Typed Params</a></li>
-          <li><a href="#s15-7"><span class="nav-num">§15.7</span>Anonymous Classes</a></li>
-          <li><a href="#s15-8"><span class="nav-num">§15.8</span>Default Methods</a></li>
-          <li><a href="#s15-9"><span class="nav-num">§15.9</span>Default Method Collisions</a></li>
-          <li><a href="#s15-10"><span class="nav-num">§15.10</span>Static Methods</a></li>
-          <li><a href="#s15-11"><span class="nav-num">§15.11</span>Interface Inheritance</a></li>
-          <li><a href="#s15-12"><span class="nav-num">§15.12</span>Strategy Pattern</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="generics.html"><span class="nav-num">§16</span>Generics</a>
-        <ul class="sub-nav">
-          <li><a href="generics.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
-          <li><a href="generics.html#s16-2"><span class="nav-num">§16.2</span>Type Parameters</a></li>
-          <li><a href="generics.html#s16-3"><span class="nav-num">§16.3</span>Generic Methods</a></li>
-          <li><a href="generics.html#s16-4"><span class="nav-num">§16.4</span>Bounded Types</a></li>
-          <li><a href="generics.html#s16-5"><span class="nav-num">§16.5</span>Compile Time Only</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="records.html"><span class="nav-num">§17</span>Records</a>
-        <ul class="sub-nav">
-          <li><a href="records.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
-          <li><a href="records.html#s17-2"><span class="nav-num">§17.2</span><code>record</code></a></li>
-          <li><a href="records.html#s17-3"><span class="nav-num">§17.3</span>Implicitly Final</a></li>
-          <li><a href="records.html#s17-4"><span class="nav-num">§17.4</span>Shallow Immutability</a></li>
-          <li><a href="records.html#s17-5"><span class="nav-num">§17.5</span>Compact Constructors</a></li>
-          <li><a href="records.html#s17-6"><span class="nav-num">§17.6</span>Records Can Do More</a></li>
-          <li><a href="records.html#s17-7"><span class="nav-num">§17.7</span>When to Reach for One</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="collections.html"><span class="nav-num">§18</span>Collections Framework</a>
-        <ul class="sub-nav">
-          <li><a href="collections.html#s18-1"><span class="nav-num">§18.1</span>The Problem</a></li>
-          <li><a href="collections.html#s18-2"><span class="nav-num">§18.2</span>The Big Picture</a></li>
-          <li><a href="collections.html#s18-3"><span class="nav-num">§18.3</span><code>List</code></a></li>
-          <li><a href="collections.html#s18-4"><span class="nav-num">§18.4</span><code>Queue</code></a></li>
-          <li><a href="collections.html#s18-5"><span class="nav-num">§18.5</span><code>Set</code></a></li>
-          <li><a href="collections.html#s18-6"><span class="nav-num">§18.6</span><code>Map</code></a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="lambdas.html"><span class="nav-num">§19</span>Functional Programming</a>
-        <ul class="sub-nav">
-          <li><a href="lambdas.html#s19-1"><span class="nav-num">§19.1</span>Functions as First-Class Citizens</a></li>
-          <li><a href="lambdas.html#s19-2"><span class="nav-num">§19.2</span>Why Java "Simulates" First-Class Functions</a></li>
-          <li><a href="lambdas.html#s19-3"><span class="nav-num">§19.3</span>The Problem</a></li>
-          <li><a href="lambdas.html#s19-4"><span class="nav-num">§19.4</span>Another Anonymous Class</a></li>
-          <li><a href="lambdas.html#s19-5"><span class="nav-num">§19.5</span>Functional Interfaces</a></li>
-          <li><a href="lambdas.html#s19-6"><span class="nav-num">§19.6</span>Lambda Expressions</a></li>
-          <li><a href="lambdas.html#s19-7"><span class="nav-num">§19.7</span>Method References</a></li>
-          <li><a href="lambdas.html#s19-8"><span class="nav-num">§19.8</span><code>java.util.function</code></a></li>
-          <li><a href="lambdas.html#s19-9"><span class="nav-num">§19.9</span>Key Takeaways</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="enums.html"><span class="nav-num">§20</span>Enums</a>
-        <ul class="sub-nav">
-          <li><a href="enums.html#s20-1"><span class="nav-num">§20.1</span>The Problem</a></li>
-          <li><a href="enums.html#s20-2"><span class="nav-num">§20.2</span>Declaring an Enum</a></li>
-          <li><a href="enums.html#s20-3"><span class="nav-num">§20.3</span>Objects, Not Constants</a></li>
-          <li><a href="enums.html#s20-4"><span class="nav-num">§20.4</span>Comparing Enum Values</a></li>
-          <li><a href="enums.html#s20-5"><span class="nav-num">§20.5</span>Type Characteristics</a></li>
-          <li><a href="enums.html#s20-6"><span class="nav-num">§20.6</span>Fields, Constructors, Methods</a></li>
-          <li><a href="enums.html#s20-7"><span class="nav-num">§20.7</span>Enums vs. Magic Numbers</a></li>
-          <li><a href="enums.html#s20-8"><span class="nav-num">§20.8</span>Closed Sets vs. Evolving Reality</a></li>
-          <li><a href="enums.html#s20-9"><span class="nav-num">§20.9</span>Key Takeaways</a></li>
-        </ul>
-      </li>
-      <li><a href="oodesign.html"><span class="nav-num">§21</span>Object-Oriented Design</a></li>
-    </ul>
+  <nav id="sidebar" aria-label="Tutorial navigation">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-label">Tutorial</div>
+      <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
+    </div>
+    <nav>
+      <ul>
+        <li>
+          <a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a>
+          <ul class="sub-nav">
+            <li><a href="index.html#s0-1"><span class="nav-num">§0.1</span>What Is Java?</a></li>
+            <li><a href="index.html#s0-2"><span class="nav-num">§0.2</span>Where Is Java Used?</a></li>
+            <li><a href="index.html#s0-3"><span class="nav-num">§0.3</span>Why Java?</a></li>
+            <li><a href="index.html#s0-4"><span class="nav-num">§0.4</span>The Java Ecosystem</a></li>
+            <li><a href="index.html#s0-5"><span class="nav-num">§0.5</span>Java Versions</a></li>
+            <li><a href="index.html#s0-6"><span class="nav-num">§0.6</span>Your First Program</a></li>
+            <li><a href="index.html#s0-7"><span class="nav-num">§0.7</span>Key Features</a></li>
+            <li><a href="index.html#s0-8"><span class="nav-num">§0.8</span>Key Takeaways</a></li>
+            <li><a href="index.html#s0-9"><span class="nav-num">§0.9</span>Appendix: Write Once, Run Anywhere</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="variables.html"><span class="nav-num">§1</span>Variables and Values</a>
+          <ul class="sub-nav">
+            <li><a href="variables.html#s1-1"><span class="nav-num">§1.1</span>Values</a></li>
+            <li><a href="variables.html#s1-2"><span class="nav-num">§1.2</span>Variables in Java</a></li>
+            <li><a href="variables.html#s1-3"><span class="nav-num">§1.3</span>Primitive Types</a></li>
+            <li><a href="variables.html#s1-4"><span class="nav-num">§1.4</span>Literals</a></li>
+            <li><a href="variables.html#s1-5"><span class="nav-num">§1.5</span><code>var</code></a></li>
+            <li><a href="variables.html#s1-6"><span class="nav-num">§1.6</span>Common Mistakes</a></li>
+            <li><a href="variables.html#s1-7"><span class="nav-num">§1.7</span>What a Variable Holds</a></li>
+            <li><a href="variables.html#s1-8"><span class="nav-num">§1.8</span>Key Takeaways</a></li>
+            <li><a href="variables.html#s1-9"><span class="nav-num">§1.9</span>Appendix: Number Systems</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="classes.html"><span class="nav-num">§2</span>Classes &amp; Objects</a>
+          <ul class="sub-nav">
+            <li><a href="classes.html#s2-1"><span class="nav-num">§2.1</span>Classes as Blueprints</a></li>
+            <li><a href="classes.html#s2-2"><span class="nav-num">§2.2</span>Instantiation</a></li>
+            <li><a href="classes.html#s2-3"><span class="nav-num">§2.3</span>Reference Variables</a></li>
+            <li><a href="classes.html#s2-4"><span class="nav-num">§2.4</span>Reference Fields</a></li>
+            <li><a href="classes.html#s2-5"><span class="nav-num">§2.5</span>Constructors</a></li>
+            <li><a href="classes.html#s2-6"><span class="nav-num">§2.6</span>Static Fields</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="assignment.html"><span class="nav-num">§3</span>Assignment</a>
+          <ul class="sub-nav">
+            <li><a href="assignment.html#s3-1"><span class="nav-num">§3.1</span>The "Value"</a></li>
+            <li><a href="assignment.html#s3-2"><span class="nav-num">§3.2</span>Primitive Assignment</a></li>
+            <li><a href="assignment.html#s3-3"><span class="nav-num">§3.3</span>Reference Assignment</a></li>
+            <li><a href="assignment.html#s3-4"><span class="nav-num">§3.4</span>Consequence</a></li>
+            <li><a href="assignment.html#s3-5"><span class="nav-num">§3.5</span>Assignment vs. the Dot</a></li>
+            <li><a href="assignment.html#s3-6"><span class="nav-num">§3.6</span>The Rule</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="methods.html"><span class="nav-num">§4</span>Methods</a>
+          <ul class="sub-nav">
+            <li><a href="methods.html#s4-intro"><span class="nav-num">§4.1</span>Why Methods</a></li>
+            <li><a href="methods.html#s4-2"><span class="nav-num">§4.2</span>What Is a Method?</a></li>
+            <li><a href="methods.html#s4-3"><span class="nav-num">§4.3</span>Outputs</a></li>
+            <li><a href="methods.html#s4-4"><span class="nav-num">§4.4</span>Functions to Objects</a></li>
+            <li><a href="methods.html#s4-5"><span class="nav-num">§4.5</span>The "Hidden" Parameter</a></li>
+            <li><a href="methods.html#s4-6"><span class="nav-num">§4.6</span>Key Takeaways</a></li>
+            <li><a href="methods.html#s4-7"><span class="nav-num">§4.7</span>Appendix: The Call Stack</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="operators.html"><span class="nav-num">§5</span>Operators</a>
+          <ul class="sub-nav">
+            <li><a href="operators.html#s5-1"><span class="nav-num">§5.1</span>Arithmetic Operators</a></li>
+            <li><a href="operators.html#s5-2"><span class="nav-num">§5.2</span>Unary Operators</a></li>
+            <li><a href="operators.html#s5-3"><span class="nav-num">§5.3</span>Comparison Operators</a></li>
+            <li><a href="operators.html#s5-4"><span class="nav-num">§5.4</span>Logical Operators</a></li>
+            <li><a href="operators.html#s5-5"><span class="nav-num">§5.5</span>Compound Assignment</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="arrays.html"><span class="nav-num">§6</span>Arrays</a>
+          <ul class="sub-nav">
+            <li><a href="arrays.html#s6-1"><span class="nav-num">§6.1</span>Why Arrays</a></li>
+            <li><a href="arrays.html#s6-2"><span class="nav-num">§6.2</span>One Variable, Many Values</a></li>
+            <li><a href="arrays.html#s6-3"><span class="nav-num">§6.3</span>The Index</a></li>
+            <li><a href="arrays.html#s6-4"><span class="nav-num">§6.4</span>Creating an Array</a></li>
+            <li><a href="arrays.html#s6-5"><span class="nav-num">§6.5</span>Reading and Writing Elements</a></li>
+            <li><a href="arrays.html#s6-6"><span class="nav-num">§6.6</span><code>.length</code></a></li>
+            <li><a href="arrays.html#s6-7"><span class="nav-num">§6.7</span>Filling in the Week</a></li>
+            <li><a href="arrays.html#s6-8"><span class="nav-num">§6.8</span>Assignment Still Copies the Address</a></li>
+            <li><a href="arrays.html#s6-9"><span class="nav-num">§6.9</span>Arrays of Objects</a></li>
+            <li><a href="arrays.html#s6-10"><span class="nav-num">§6.10</span>Pointing a Slot at an Existing Object</a></li>
+            <li><a href="arrays.html#s6-11"><span class="nav-num">§6.11</span>Passing an Array's Address to a Method</a></li>
+            <li><a href="arrays.html#s6-12"><span class="nav-num">§6.12</span>Variable-Arity Parameters</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="controlflow.html"><span class="nav-num">§7</span>Control Flow</a>
+          <ul class="sub-nav">
+            <li><a href="controlflow.html#s7-1"><span class="nav-num">§7.1</span>The Flow of Execution</a></li>
+            <li><a href="controlflow.html#s7-2"><span class="nav-num">§7.2</span>Variable Scope</a></li>
+            <li><a href="controlflow.html#s7-3"><span class="nav-num">§7.3</span>Conditional Branching</a></li>
+            <li><a href="controlflow.html#s7-4"><span class="nav-num">§7.4</span><code>while</code></a></li>
+            <li><a href="controlflow.html#s7-5"><span class="nav-num">§7.5</span><code>for</code></a></li>
+            <li><a href="controlflow.html#s7-6"><span class="nav-num">§7.6</span>for-each</a></li>
+            <li><a href="controlflow.html#s7-7"><span class="nav-num">§7.7</span>Ternary Operator</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="strings.html"><span class="nav-num">§8</span>Strings</a>
+          <ul class="sub-nav">
+            <li><a href="strings.html#s8-1"><span class="nav-num">§8.1</span>Writing Systems &amp; Unicode</a></li>
+            <li><a href="strings.html#s8-2"><span class="nav-num">§8.2</span><code>char</code></a></li>
+            <li><a href="strings.html#s8-3"><span class="nav-num">§8.3</span><code>Character</code></a></li>
+            <li><a href="strings.html#s8-4"><span class="nav-num">§8.4</span>Sequence of Characters</a></li>
+            <li><a href="strings.html#s8-5"><span class="nav-num">§8.5</span>Text Blocks</a></li>
+            <li><a href="strings.html#s8-6"><span class="nav-num">§8.6</span>Immutability</a></li>
+            <li><a href="strings.html#s8-7"><span class="nav-num">§8.7</span><code>==</code> vs <code>.equals()</code></a></li>
+            <li><a href="strings.html#s8-8"><span class="nav-num">§8.8</span>Concatenation</a></li>
+            <li><a href="strings.html#s8-9"><span class="nav-num">§8.9</span>Important String Methods</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="inheritance.html"><span class="nav-num">§9</span>Inheritance</a>
+          <ul class="sub-nav">
+            <li><a href="inheritance.html#s10-1"><span class="nav-num">§9.1</span>Taxonomy</a></li>
+            <li><a href="inheritance.html#s10-2"><span class="nav-num">§9.2</span>The Problem</a></li>
+            <li><a href="inheritance.html#s10-3"><span class="nav-num">§9.3</span><code>extends</code></a></li>
+            <li><a href="inheritance.html#s10-4"><span class="nav-num">§9.4</span><code>super(...)</code></a></li>
+            <li><a href="inheritance.html#s10-5"><span class="nav-num">§9.5</span>Polymorphism</a></li>
+            <li><a href="inheritance.html#s10-6"><span class="nav-num">§9.6</span>Overriding</a></li>
+            <li><a href="inheritance.html#s10-7"><span class="nav-num">§9.7</span><code>toString()</code></a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="accessmodifiers.html"><span class="nav-num">§10</span>Packages &amp; Access Modifiers</a>
+          <ul class="sub-nav">
+            <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§10.1</span>Packages</a></li>
+            <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§10.2</span>Why Restrict Access</a></li>
+            <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§10.3</span><code>private</code></a></li>
+            <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§10.4</span>Encapsulation</a></li>
+            <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§10.5</span><code>public</code></a></li>
+            <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§10.6</span>Package-Private</a></li>
+            <li><a href="accessmodifiers.html#s11-7"><span class="nav-num">§10.7</span><code>protected</code></a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="immutability.html"><span class="nav-num">§11</span>Immutability</a>
+          <ul class="sub-nav">
+            <li><a href="immutability.html#s11-1"><span class="nav-num">§11.1</span>Identity &amp; State</a></li>
+            <li><a href="immutability.html#s11-2"><span class="nav-num">§11.2</span>A Question of Time</a></li>
+            <li><a href="immutability.html#s11-3"><span class="nav-num">§11.3</span>Building an Immutable Class</a></li>
+            <li><a href="immutability.html#s11-4"><span class="nav-num">§11.4</span><code>final</code> Isn't Deep</a>
+            </li>
+            <li><a href="immutability.html#s11-5"><span class="nav-num">§11.5</span>Why It Matters</a></li>
+            <li><a href="immutability.html#s11-6"><span class="nav-num">§11.6</span><code>StringBuilder</code></a></li>
+            <li><a href="immutability.html#s11-7"><span class="nav-num">§11.7</span>Core Pillars</a></li>
+            <li><a href="immutability.html#s11-8"><span class="nav-num">§11.8</span>Putting It Together</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="abstractclasses.html"><span class="nav-num">§12</span>Abstract Classes</a>
+          <ul class="sub-nav">
+            <li><a href="abstractclasses.html#s12-1"><span class="nav-num">§12.1</span>The Problem</a></li>
+            <li><a href="abstractclasses.html#s12-2"><span class="nav-num">§12.2</span><code>abstract</code> Classes</a>
+            </li>
+            <li><a href="abstractclasses.html#s12-3"><span class="nav-num">§12.3</span><code>abstract</code> Methods</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="interfaces.html" class="active"><span class="nav-num">§13</span>Interfaces</a>
+          <ul class="sub-nav">
+            <li><a href="#s13-1"><span class="nav-num">§13.1</span>The Problem</a></li>
+            <li><a href="#s13-2"><span class="nav-num">§13.2</span>Interface vs. Abstract Class</a></li>
+            <li><a href="#s13-3"><span class="nav-num">§13.3</span>Declaring &amp; Implementing</a></li>
+            <li><a href="#s13-4"><span class="nav-num">§13.4</span>Override vs. Overload</a></li>
+            <li><a href="#s13-5"><span class="nav-num">§13.5</span>Multiple Interfaces</a></li>
+            <li><a href="#s13-6"><span class="nav-num">§13.6</span>Interface-Typed Params</a></li>
+            <li><a href="#s13-7"><span class="nav-num">§13.7</span>Anonymous Classes</a></li>
+            <li><a href="#s13-8"><span class="nav-num">§13.8</span>Default Methods</a></li>
+            <li><a href="#s13-9"><span class="nav-num">§13.9</span>Default Method Collisions</a></li>
+            <li><a href="#s13-10"><span class="nav-num">§13.10</span>Static Methods</a></li>
+            <li><a href="#s13-11"><span class="nav-num">§13.11</span>Interface Inheritance</a></li>
+            <li><a href="#s13-12"><span class="nav-num">§13.12</span>Strategy Pattern</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="exceptions.html"><span class="nav-num">§14</span>Exceptions</a>
+          <ul class="sub-nav">
+            <li><a href="exceptions.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
+            <li><a href="exceptions.html#s14-2"><span class="nav-num">§14.2</span>The Exception Lifecycle</a></li>
+            <li><a href="exceptions.html#s14-3"><span class="nav-num">§14.3</span>The Exception Hierarchy</a></li>
+            <li><a href="exceptions.html#s14-4"><span class="nav-num">§14.4</span>Checked vs. Unchecked</a></li>
+            <li><a href="exceptions.html#s14-5"><span class="nav-num">§14.5</span>Handling Exceptions</a></li>
+            <li><a href="exceptions.html#s14-6"><span class="nav-num">§14.6</span><code>throw</code> and
+                <code>throws</code></a></li>
+            <li><a href="exceptions.html#s14-7"><span class="nav-num">§14.7</span>Custom Exceptions</a></li>
+            <li><a href="exceptions.html#s14-8"><span class="nav-num">§14.8</span>Exception Chaining</a></li>
+            <li><a href="exceptions.html#s14-9"><span class="nav-num">§14.9</span>Try-with-Resources</a></li>
+            <li><a href="exceptions.html#s14-10"><span class="nav-num">§14.10</span>Exceptions Are Not Control Flow</a>
+            </li>
+            <li><a href="exceptions.html#s14-11"><span class="nav-num">§14.11</span>Best Practices &amp;
+                Anti-Patterns</a></li>
+            <li><a href="exceptions.html#s14-12"><span class="nav-num">§14.12</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="generics.html"><span class="nav-num">§15</span>Generics</a>
+          <ul class="sub-nav">
+            <li><a href="generics.html#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
+            <li><a href="generics.html#s15-2"><span class="nav-num">§15.2</span>Type Parameters</a></li>
+            <li><a href="generics.html#s15-3"><span class="nav-num">§15.3</span>Generic Methods</a></li>
+            <li><a href="generics.html#s15-4"><span class="nav-num">§15.4</span>Bounded Types</a></li>
+            <li><a href="generics.html#s15-5"><span class="nav-num">§15.5</span>Compile Time Only</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="records.html"><span class="nav-num">§16</span>Records</a>
+          <ul class="sub-nav">
+            <li><a href="records.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
+            <li><a href="records.html#s16-2"><span class="nav-num">§16.2</span><code>record</code></a></li>
+            <li><a href="records.html#s16-3"><span class="nav-num">§16.3</span>Implicitly Final</a></li>
+            <li><a href="records.html#s16-4"><span class="nav-num">§16.4</span>Shallow Immutability</a></li>
+            <li><a href="records.html#s16-5"><span class="nav-num">§16.5</span>Compact Constructors</a></li>
+            <li><a href="records.html#s16-6"><span class="nav-num">§16.6</span>Records Can Do More</a></li>
+            <li><a href="records.html#s16-7"><span class="nav-num">§16.7</span>When to Reach for One</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="collections.html"><span class="nav-num">§18</span>Collections Framework</a>
+          <ul class="sub-nav">
+            <li><a href="collections.html#s18-1"><span class="nav-num">§18.1</span>The Problem</a></li>
+            <li><a href="collections.html#s18-2"><span class="nav-num">§18.2</span>The Big Picture</a></li>
+            <li><a href="collections.html#s18-3"><span class="nav-num">§18.3</span><code>List</code></a></li>
+            <li><a href="collections.html#s18-4"><span class="nav-num">§18.4</span><code>Queue</code></a></li>
+            <li><a href="collections.html#s18-5"><span class="nav-num">§18.5</span><code>Set</code></a></li>
+            <li><a href="collections.html#s18-6"><span class="nav-num">§18.6</span><code>Map</code></a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="lambdas.html"><span class="nav-num">§19</span>Functional Programming</a>
+          <ul class="sub-nav">
+            <li><a href="lambdas.html#s19-1"><span class="nav-num">§19.1</span>Functions as First-Class Citizens</a>
+            </li>
+            <li><a href="lambdas.html#s19-2"><span class="nav-num">§19.2</span>Why Java "Simulates" First-Class
+                Functions</a></li>
+            <li><a href="lambdas.html#s19-3"><span class="nav-num">§19.3</span>The Problem</a></li>
+            <li><a href="lambdas.html#s19-4"><span class="nav-num">§19.4</span>Another Anonymous Class</a></li>
+            <li><a href="lambdas.html#s19-5"><span class="nav-num">§19.5</span>Functional Interfaces</a></li>
+            <li><a href="lambdas.html#s19-6"><span class="nav-num">§19.6</span>Lambda Expressions</a></li>
+            <li><a href="lambdas.html#s19-7"><span class="nav-num">§19.7</span>Method References</a></li>
+            <li><a href="lambdas.html#s19-8"><span class="nav-num">§19.8</span><code>java.util.function</code></a></li>
+            <li><a href="lambdas.html#s19-9"><span class="nav-num">§19.9</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="enums.html"><span class="nav-num">§17</span>Enums</a>
+          <ul class="sub-nav">
+            <li><a href="enums.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
+            <li><a href="enums.html#s17-2"><span class="nav-num">§17.2</span>Declaring an Enum</a></li>
+            <li><a href="enums.html#s17-3"><span class="nav-num">§17.3</span>Objects, Not Constants</a></li>
+            <li><a href="enums.html#s17-4"><span class="nav-num">§17.4</span>Comparing Enum Values</a></li>
+            <li><a href="enums.html#s17-5"><span class="nav-num">§17.5</span>Type Characteristics</a></li>
+            <li><a href="enums.html#s17-6"><span class="nav-num">§17.6</span>Fields, Constructors, Methods</a></li>
+            <li><a href="enums.html#s17-7"><span class="nav-num">§17.7</span>Enums vs. Magic Numbers</a></li>
+            <li><a href="enums.html#s17-8"><span class="nav-num">§17.8</span>Closed Sets vs. Evolving Reality</a></li>
+            <li><a href="enums.html#s17-9"><span class="nav-num">§17.9</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="optionals.html"><span class="nav-num">§20</span>Optional&lt;T&gt;</a>
+          <ul class="sub-nav">
+            <li><a href="optionals.html#s20-1"><span class="nav-num">§20.1</span>The Problem</a></li>
+            <li><a href="optionals.html#s20-2"><span class="nav-num">§20.2</span><code>null</code>: The Absence of a
+                Value</a></li>
+            <li><a href="optionals.html#s20-3"><span class="nav-num">§20.3</span>The Defensive Approach</a></li>
+            <li><a href="optionals.html#s20-4"><span class="nav-num">§20.4</span>The <code>Optional&lt;T&gt;</code>
+                Class</a></li>
+            <li><a href="optionals.html#s20-5"><span class="nav-num">§20.5</span><code>Optional&lt;T&gt;</code> vs
+                <code>null</code></a></li>
+            <li><a href="optionals.html#s20-6"><span class="nav-num">§20.6</span>Specialized Primitive Optionals</a>
+            </li>
+            <li><a href="optionals.html#s20-7"><span class="nav-num">§20.7</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="streams.html"><span class="nav-num">§21</span>Streams</a>
+          <ul class="sub-nav">
+            <li><a href="streams.html#s21-1"><span class="nav-num">§21.1</span>The Problem</a></li>
+            <li><a href="streams.html#s21-2"><span class="nav-num">§21.2</span>What Is a Stream</a></li>
+            <li><a href="streams.html#s21-3"><span class="nav-num">§21.3</span>Creating a Stream</a></li>
+            <li><a href="streams.html#s21-4"><span class="nav-num">§21.4</span>Intermediate Operations</a></li>
+            <li><a href="streams.html#s21-5"><span class="nav-num">§21.5</span>Terminal Operations</a></li>
+            <li><a href="streams.html#s21-6"><span class="nav-num">§21.6</span>Collecting Results</a></li>
+            <li><a href="streams.html#s21-7"><span class="nav-num">§21.7</span>Streams and
+                <code>Optional&lt;T&gt;</code></a></li>
+            <li><a href="streams.html#s21-8"><span class="nav-num">§21.8</span>Laziness and Pipelines</a></li>
+            <li><a href="streams.html#s21-9"><span class="nav-num">§21.9</span>When (Not) to Use Streams</a></li>
+            <li><a href="streams.html#s21-10"><span class="nav-num">§21.10</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="concurrency.html"><span class="nav-num">§22</span>Concurrent Programming</a>
+          <ul class="sub-nav">
+            <li><a href="concurrency.html#s22-1"><span class="nav-num">§22.1</span>The Problem</a></li>
+            <li><a href="concurrency.html#s22-2"><span class="nav-num">§22.2</span>Process, Thread, and the OS</a></li>
+            <li><a href="concurrency.html#s22-3"><span class="nav-num">§22.3</span>Independent Progress</a></li>
+            <li><a href="concurrency.html#s22-4"><span class="nav-num">§22.4</span>Why Concurrency Matters</a></li>
+            <li><a href="concurrency.html#s22-5"><span class="nav-num">§22.5</span>Where Parallelism Fits In</a></li>
+            <li><a href="concurrency.html#s22-6"><span class="nav-num">§22.6</span>The Main Thread</a></li>
+            <li><a href="concurrency.html#s22-7"><span class="nav-num">§22.7</span>Step 1: Creating a Task</a></li>
+            <li><a href="concurrency.html#s22-8"><span class="nav-num">§22.8</span>Step 2: Handing a Task to an
+                Executor</a></li>
+            <li><a href="concurrency.html#s22-9"><span class="nav-num">§22.9</span>ExecutorService in Practice</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="modules.html"><span class="nav-num">§23</span>Java Modules</a>
+          <ul class="sub-nav">
+            <li><a href="modules.html#s23-1"><span class="nav-num">§23.1</span>The Problem</a></li>
+            <li><a href="modules.html#s23-2"><span class="nav-num">§23.2</span>What Is a Module</a></li>
+            <li><a href="modules.html#s23-3"><span class="nav-num">§23.3</span><code>module-info.java</code></a></li>
+            <li><a href="modules.html#s23-4"><span class="nav-num">§23.4</span><code>exports</code></a></li>
+            <li><a href="modules.html#s23-5"><span class="nav-num">§23.5</span><code>requires</code></a></li>
+            <li><a href="modules.html#s23-6"><span class="nav-num">§23.6</span>Strong Encapsulation</a></li>
+            <li><a href="modules.html#s23-7"><span class="nav-num">§23.7</span>The Module Path</a></li>
+            <li><a href="modules.html#s23-8"><span class="nav-num">§23.8</span><code>requires transitive</code></a></li>
+            <li><a href="modules.html#s23-9"><span class="nav-num">§23.9</span>When (Not) to Use Modules</a></li>
+            <li><a href="modules.html#s23-10"><span class="nav-num">§23.10</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li><a href="dateandtime.html"><span class="nav-num">§24</span>Date and Time</a></li>
+        <li><a href="io.html"><span class="nav-num">§25</span>Input and Output</a></li>
+        <li><a href="oodesign.html"><span class="nav-num">§26</span>Object-Oriented Design</a></li>
+      </ul>
+    </nav>
   </nav>
-</nav>
 
-<main id="content">
-  <header class="page-header">
-    <div class="page-chapter">Chapter 15</div>
-    <h1>Interfaces</h1>
-    <p class="page-lead">Not everything two classes share is an "is-a" relationship — and Java only lets a class <code>extend</code> one thing anyway. This chapter covers the other kind of shared shape, and modern Java's biggest revision to it: an interface can carry real behavior, not just a promise.</p>
-  </header>
+  <main id="content">
+    <header class="page-header">
+      <div class="page-chapter">Chapter 13</div>
+      <h1>Interfaces</h1>
+      <p class="page-lead">Not everything two classes share is an "is-a" relationship — and Java only lets a class
+        <code>extend</code> one thing anyway. This chapter covers the other kind of shared shape, and modern Java's
+        biggest revision to it: an interface can carry real behavior, not just a promise.
+      </p>
+    </header>
 
-  <article>
+    <article>
 
-    <!-- §15.1 -->
-    <section id="s15-1">
-      <div class="section-head">
-        <span class="sec-num">§15.1</span>
-        <h2>The Problem <em>— a shared capability, no shared ancestor</em></h2>
-      </div>
+      <!-- §13.1 -->
+      <section id="s13-1">
+        <div class="section-head">
+          <span class="sec-num">§13.1</span>
+          <h2>The Problem <em>— a shared capability, no shared ancestor</em></h2>
+        </div>
 
-    <p>A plane flies. So does a bird. So does an insect, for that matter. All three share the exact same capability, described by the exact same word — <em>fly</em> — but <em>how</em> each one manages it has nothing in common at all: fixed wings and jet engines, feathers and flapping, an entirely different mechanism built on an entirely different body plan. And a Plane, a Bird, and an Insect share no real ancestry either — a Plane is not a kind of Bird, and inventing a shared parent class just so all three can have a <code>fly()</code> method would invent a relationship that isn't really there. Same capability — the <em>what</em> — expressed identically; completely different implementation — the <em>how</em> — underneath; no "is-a" relationship forcing them together at all.</p>
+        <h4>Similar capability</h4>
+        <p>A plane flies. So does a bird. So does an insect, for that matter. All three share similar capability,
+          described by the exact same word — <em>fly</em> — but <em>how</em> each one manages it has nothing in common
+          at all: fixed wings and jet engines, feathers and flapping, an entirely different mechanism built on an
+          entirely different body plan.
+        </p>
+        <h4>No common ancestry</h4>
+        <p>
+          A Plane, a Bird, and an Insect share no real ancestry either — a Plane is
+          not a kind of Bird, and inventing a shared parent class just so all three can have a <code>fly()</code> method
+          would invent a relationship that isn't really there. Same capability — the <em>what</em> — expressed
+          identically; completely different implementation — the <em>how</em> — underneath; no "is-a" relationship
+          forcing them together at all.</p>
 
-    <p>Software runs into this constantly, usually over something more mundane than flight. A <code>Subscription</code> can be renewed. So can a <code>Passport</code>. Neither fact has anything to do with the other — a Subscription isn't a kind of Passport, and forcing one to extend the other, or inventing a shared superclass just to hold a <code>renew()</code> method, would be the exact same mistake as forcing Plane and Bird under one parent just for <code>fly()</code>: inventing a lineage a class doesn't actually have, purely to satisfy the compiler.</p>
+        <p>Software runs into this constantly, usually over something more mundane than flight. A
+          <code>Subscription</code> can be renewed. So can a <code>Passport</code>. Neither fact has anything to do with
+          the other — a Subscription isn't a kind of Passport, and forcing one to extend the other, or inventing a
+          shared superclass just to hold a <code>renew()</code> method, would be the exact same mistake as forcing Plane
+          and Bird under one parent just for <code>fly()</code>: inventing a lineage a class doesn't actually have,
+          purely to satisfy the compiler.
+        </p>
 
-    <pre><code class="language-java">class Subscription {
+        <pre><code class="language-java">class Subscription {
     void renew() {
         System.out.println("Subscription renewed for another year.");
     }
@@ -253,63 +425,76 @@ class Passport {
     }
 }</code></pre>
 
-    <p>Both classes happen to have a method with the same name and meaning — <em>renewable</em> is a real, shared idea — but nothing in the code says so. Worse, Java only allows <code>extends</code> on one class at a time (§11.3): even if a shared superclass made sense here, a class already extending something else — a <code>Passport</code> that's also a kind of <code>GovernmentDocument</code>, say — couldn't extend a second thing just to pick up <code>renew()</code> too. Inheritance alone can't express "this class can do X," separately from "this class is a kind of Y."</p>
-    </section>
+        <p>Both classes happen to have a method with the same name and meaning — <em>renewable</em> is a real, shared
+          idea — but nothing in the code says so. Worse, Java only allows <code>extends</code> on one class at a time
+          (§9.3): even if a shared superclass made sense here, a class already extending something else — a
+          <code>Passport</code> that's also a kind of <code>GovernmentDocument</code>, say — couldn't extend a second
+          thing just to pick up <code>renew()</code> too. Inheritance alone can't express "this class can do X,"
+          separately from "this class is a kind of Y."
+        </p>
+      </section>
 
-    <!-- §15.2 -->
-    <section id="s15-2">
-      <div class="section-head">
-        <span class="sec-num">§15.2</span>
-        <h2>Interface vs. Abstract Class <em>— which fits</em></h2>
-      </div>
+      <!-- §13.2 -->
+      <section id="s13-2">
+        <div class="section-head">
+          <span class="sec-num">§13.2</span>
+          <h2>Interface vs. Abstract Class <em>— which fits</em></h2>
+        </div>
 
-    <p>Both let a class promise a method without yet supplying it. The difference is in what kind of relationship each one is built to express:</p>
+        <p>Both let a class promise a method without yet supplying it. The difference is in what kind of relationship
+          each one is built to express:</p>
 
-    <table class="content-table">
-      <tr>
-        <th></th>
-        <th>Abstract class (§14)</th>
-        <th>Interface</th>
-      </tr>
-      <tr>
-        <td>Relationship</td>
-        <td>"Is a kind of" — a true, single lineage (§11.1)</td>
-        <td>"Can do" — a capability, unrelated to lineage</td>
-      </tr>
-      <tr>
-        <td>How many, per class</td>
-        <td>One (<code>extends</code> allows only one)</td>
-        <td>As many as needed (<code>implements</code> takes a list)</td>
-      </tr>
-      <tr>
-        <td>Instance fields</td>
-        <td>Yes — <code>Vehicle</code>'s <code>make</code>, <code>model</code>, <code>year</code></td>
-        <td>No instance state at all</td>
-      </tr>
-      <tr>
-        <td>Constructors</td>
-        <td>Yes — subclasses call it via <code>super(...)</code></td>
-        <td>None — nothing to initialize</td>
-      </tr>
-    </table>
+        <table class="content-table">
+          <tr>
+            <th></th>
+            <th>Abstract class (§12)</th>
+            <th>Interface</th>
+          </tr>
+          <tr>
+            <td>Relationship</td>
+            <td>"Is a kind of" — a true, single lineage (§9.1)</td>
+            <td>"Can do" — a capability, unrelated to lineage</td>
+          </tr>
+          <tr>
+            <td>How many, per class</td>
+            <td>One (<code>extends</code> allows only one)</td>
+            <td>As many as needed (<code>implements</code> takes a list)</td>
+          </tr>
+          <tr>
+            <td>Instance fields</td>
+            <td>Yes — <code>MotorVehicle</code>'s <code>brand</code>, <code>model</code>, <code>engineRunning</code>
+            </td>
+            <td>No instance state at all</td>
+          </tr>
+          <tr>
+            <td>Constructors</td>
+            <td>Yes — subclasses call it via <code>super(...)</code></td>
+            <td>None — nothing to initialize</td>
+          </tr>
+        </table>
 
-    <p><code>Vehicle</code> stayed an abstract class because Car and Truck genuinely <em>are</em> vehicles, sharing real fields and a real constructor. <code>Renewable</code> is an interface because being renewable has nothing to do with what else a class is — a Subscription and a Passport share the capability without sharing an ancestor, a field, or a constructor.</p>
-    </section>
+        <p><code>MotorVehicle</code> stayed an abstract class because Car, Motorcycle, and Truck genuinely <em>are</em>
+          vehicles, sharing real fields and a real constructor. <code>Renewable</code> is an interface because being
+          renewable has nothing to do with what else a class is — a Subscription and a Passport share the capability
+          without sharing an ancestor, a field, or a constructor.</p>
+      </section>
 
-    <!-- §15.3 -->
-    <section id="s15-3">
-      <div class="section-head">
-        <span class="sec-num">§15.3</span>
-        <h2>Declaring and Implementing <em>— <code>interface</code>, <code>implements</code></em></h2>
-      </div>
+      <!-- §13.3 -->
+      <section id="s13-3">
+        <div class="section-head">
+          <span class="sec-num">§13.3</span>
+          <h2>Declaring and Implementing <em>— <code>interface</code>, <code>implements</code></em></h2>
+        </div>
 
-    <p>An <span class="term">interface</span> declares a capability as a set of method signatures, with no bodies — a contract, not an implementation. Any class, regardless of what it extends, can promise to fulfill that contract:</p>
+        <p>An <span class="term">interface</span> declares a capability as a set of method signatures, with no bodies —
+          a contract, not an implementation. Any class, regardless of what it extends, can promise to fulfill that
+          contract:</p>
 
-    <pre><code class="language-java">interface Renewable {
+        <pre><code class="language-java">interface Renewable {
     void renew();
 }</code></pre>
 
-    <pre><code class="language-java">class Subscription implements Renewable {
+        <pre><code class="language-java">class Subscription implements Renewable {
     @Override
     public void renew() {
         System.out.println("Subscription renewed for another year.");
@@ -323,30 +508,63 @@ class Passport implements Renewable {
     }
 }</code></pre>
 
-    <p><code>implements</code> is the relationship an interface creates — distinct from <code>extends</code> (§11.3), and not mutually exclusive with it: a class can <code>extend</code> exactly one class <em>and</em> <code>implement</code> as many interfaces as it needs. Notice, too, that <code>renew()</code> is <code>public</code> in both classes: every method declared in an interface is implicitly <code>public</code>, and every class implementing it must match that — there's no way to implement an interface method with anything more restrictive (§12.5).</p>
+        <p><code>implements</code> is the relationship an interface creates — distinct from <code>extends</code> (§9.3),
+          and not mutually exclusive with it: a class can <code>extend</code> exactly one class <em>and</em>
+          <code>implement</code> as many interfaces as it needs. Notice, too, that <code>renew()</code> is
+          <code>public</code> in both classes: every method declared in an interface is implicitly <code>public</code>,
+          and every class implementing it must match that — there's no way to implement an interface method with
+          anything more restrictive (§10.5).
+        </p>
 
-    <p>Declaring <code>interface Renewable</code> doesn't just declare a contract — it declares a new <span class="term">type</span>, exactly as much a type as <code>Subscription</code> or <code>Passport</code> themselves. A variable can be declared with that type directly, and hold the address of any object whose class implements it:</p>
+        <h4>Declaring an interface introduces a new type</h4>
+        <p>Declaring <code>interface Renewable</code> doesn't just declare a contract — it declares a new <span
+            class="term">type</span>, exactly as much a type as <code>Subscription</code> or <code>Passport</code>
+          themselves. A variable can be declared with that type directly, and hold the address of any object whose class
+          implements it:</p>
 
-    <pre><code class="language-java">Renewable r1 = new Subscription();
+        <pre><code class="language-java">Renewable r1 = new Subscription();
 Renewable r2 = new Passport();
 r1.renew(); // Subscription renewed for another year.
 r2.renew(); // Passport renewed for another decade.</code></pre>
 
-    <p>Nothing is ever instantiated <em>as</em> an interface — <code>new Renewable()</code> isn't legal, any more than <code>new Vehicle()</code> was once <code>Vehicle</code> became abstract (§14.2); what actually gets built by <code>new</code> is always a concrete class, <code>Subscription</code> or <code>Passport</code>. What changes is what the <em>caller</em> sees afterward: <code>r1</code>'s declared type is <code>Renewable</code>, so that's the entire view <code>r1</code> offers — the fact that a <code>Subscription</code> specifically is sitting at that address is invisible through this reference, the same declared-type limit §11.6 already established for any reference type. A reference variable, in other words, is always three things layered together: an interface (or class) type it's declared as, a concrete class that actually implements or extends it, and one specific object of that class, instantiated on the heap. This is the exact same substitutability from §11.6, just with an interface standing in for a superclass, and with no shared ancestor required at all.</p>
+        <p>Nothing is ever instantiated <em>as</em> an interface — <code>new Renewable()</code> isn't legal, any more
+          than <code>new MotorVehicle()</code> was once <code>MotorVehicle</code> became abstract (§12.2); what actually
+          gets built by <code>new</code> is always a concrete class, <code>Subscription</code> or <code>Passport</code>.
+          What changes is what the <em>caller</em> sees afterward: <code>r1</code>'s declared type is
+          <code>Renewable</code>, so that's the entire view <code>r1</code> offers — the fact that a
+          <code>Subscription</code> specifically is sitting at that address is invisible through this reference, the
+          same declared-type limit §9.6 already established for any reference type. A reference variable, in other
+          words, is always three things layered together: an interface (or class) type it's declared as, a concrete
+          class that actually implements or extends it, and one specific object of that class, instantiated on the heap.
+          This is the exact same substitutability from §9.6, just with an interface standing in for a superclass, and
+          with no shared ancestor required at all.
+        </p>
 
-    <p>Introducing an interface purely for a shared capability — never for lineage — earns two things at once, from two different angles. From the type system's side: unrelated classes become interchangeable through that interface — <span class="term">polymorphism without lineage</span>. <code>r1</code> and <code>r2</code> above are a Subscription and a Passport underneath, with no common ancestor beyond <code>Object</code>, yet both are fully substitutable wherever a <code>Renewable</code> is expected. From the dependency's side: any code written against <code>Renewable</code> — a method taking a <code>Renewable</code> parameter, say — depends on the interface alone, never on <code>Subscription</code> or <code>Passport</code> specifically. That's <span class="term">loose coupling</span>: the call site doesn't know, and doesn't need to know, which concrete class it actually received.</p>
-    </section>
+        <p>Introducing an interface purely for a shared capability — never for lineage — earns two things at once, from
+          two different angles. From the type system's side: unrelated classes become interchangeable through that
+          interface — <span class="term">polymorphism without lineage</span>. <code>r1</code> and <code>r2</code> above
+          are a Subscription and a Passport underneath, with no common ancestor beyond <code>Object</code>, yet both are
+          fully substitutable wherever a <code>Renewable</code> is expected. From the dependency's side: any code
+          written against <code>Renewable</code> — a method taking a <code>Renewable</code> parameter, say — depends on
+          the interface alone, never on <code>Subscription</code> or <code>Passport</code> specifically. That's <span
+            class="term">loose coupling</span>: the call site doesn't know, and doesn't need to know, which concrete
+          class it actually received.</p>
+      </section>
 
-    <!-- §15.4 -->
-    <section id="s15-4">
-      <div class="section-head">
-        <span class="sec-num">§15.4</span>
-        <h2>Overriding vs. Overloading <em>— same name, two different things</em></h2>
-      </div>
+      <!-- §13.4 -->
+      <section id="s13-4">
+        <div class="section-head">
+          <span class="sec-num">§13.4</span>
+          <h2>Overriding vs. Overloading <em>— same name, two different things</em></h2>
+        </div>
 
-    <p><code>Subscription</code> supplying a real <code>renew()</code> for the one <code>Renewable</code> declared is a form of <span class="term">overriding</span> — the same relationship a subclass has with an inherited method it redefines (§11.5), just against an interface's promise instead of a superclass's default. Nothing stops <code>Subscription</code> from <em>also</em> declaring more methods sharing that name, as long as each one's parameter list is different:</p>
+        <p><code>Subscription</code> supplying a real <code>renew()</code> for the one <code>Renewable</code> declared
+          is a form of <span class="term">overriding</span> — the same relationship a subclass has with an inherited
+          method it redefines (§9.5), just against an interface's promise instead of a superclass's default. Nothing
+          stops <code>Subscription</code> from <em>also</em> declaring more methods sharing that name, as long as each
+          one's parameter list is different:</p>
 
-    <pre><code class="language-java">class Subscription implements Renewable {
+        <pre><code class="language-java">class Subscription implements Renewable {
     @Override
     public void renew() {
         System.out.println("Subscription renewed for another year.");
@@ -357,28 +575,43 @@ r2.renew(); // Passport renewed for another decade.</code></pre>
     }
 }</code></pre>
 
-    <pre><code class="language-java">Subscription sub = new Subscription();
+        <pre><code class="language-java">Subscription sub = new Subscription();
 sub.renew();  // Subscription renewed for another year.
 sub.renew(3); // Subscription renewed for 3 years.</code></pre>
 
-    <p>This is <span class="term">overloading</span>: multiple methods sharing one name, distinguished entirely by parameter list — different number of parameters, different types, or both. Which one runs is decided at compile time, from the arguments actually written at the call site: <code>sub.renew()</code> matches the no-argument version, <code>sub.renew(3)</code> matches the one taking an <code>int</code>. Nothing about the object's runtime type is involved in that choice at all.</p>
+        <p>This is <span class="term">overloading</span> again — §4.2 introduced it with <code>calculateArea</code>,
+          long before interfaces or inheritance existed to confuse it with anything: multiple methods sharing one
+          name, distinguished entirely by parameter list — different number of parameters, different types, or both.
+          Which one runs is decided at compile time, from the arguments actually written at the call site:
+          <code>sub.renew()</code> matches the no-argument version, <code>sub.renew(3)</code> matches the one taking
+          an <code>int</code>. Nothing about the object's runtime type is involved in that choice at all.</p>
 
-    <div class="callout callout-rule">
-      <div class="callout-lbl">Do not confuse these</div>
-      <p><span class="term">Overriding</span> replaces an inherited or interface-promised method with a new body for the <em>same</em> signature — same name, same parameter list — and which version runs is chosen at runtime, from the object's actual type (§11.5's dynamic dispatch). <span class="term">Overloading</span> defines multiple, genuinely separate methods that happen to share a name, distinguished by parameter list, and which one runs is chosen at compile time, from the arguments in the call. <code>renew()</code> and <code>renew(int)</code> are two different methods, not one method "overridden" with an extra parameter — <code>@Override</code> could never apply to the second one, because there's nothing declared in <code>Renewable</code> for it to replace.</p>
-    </div>
-    </section>
+        <div class="callout callout-rule">
+          <div class="callout-lbl">Do not confuse these</div>
+          <p><span class="term">Overriding</span> replaces an inherited or interface-promised method with a new body for
+            the <em>same</em> signature — same name, same parameter list — and which version runs is chosen at runtime,
+            from the object's actual type (§9.5's dynamic dispatch). <span class="term">Overloading</span> defines
+            multiple, genuinely separate methods that happen to share a name, distinguished by parameter list, and which
+            one runs is chosen at compile time, from the arguments in the call. <code>renew()</code> and
+            <code>renew(int)</code> are two different methods, not one method "overridden" with an extra parameter —
+            <code>@Override</code> could never apply to the second one, because there's nothing declared in
+            <code>Renewable</code> for it to replace.
+          </p>
+        </div>
+      </section>
 
-    <!-- §15.5 -->
-    <section id="s15-5">
-      <div class="section-head">
-        <span class="sec-num">§15.5</span>
-        <h2>Implementing Multiple Interfaces <em>— adopting more than one role at once</em></h2>
-      </div>
+      <!-- §13.5 -->
+      <section id="s13-5">
+        <div class="section-head">
+          <span class="sec-num">§13.5</span>
+          <h2>Implementing Multiple Interfaces <em>— adopting more than one role at once</em></h2>
+        </div>
 
-    <p>§11.3 fixed how many classes a class can extend at once: exactly one. Interfaces carry no such limit — a class can <code>implement</code> as many as it needs, each one a separate, independent capability the class is declaring it has:</p>
+        <p>§9.3 fixed how many classes a class can extend at once: exactly one. Interfaces carry no such limit — a class
+          can <code>implement</code> as many as it needs, each one a separate, independent capability the class is
+          declaring it has:</p>
 
-    <pre><code class="language-java">interface Cancellable {
+        <pre><code class="language-java">interface Cancellable {
     void cancel();
 }
 
@@ -394,49 +627,77 @@ class Subscription implements Renewable, Cancellable {
     }
 }</code></pre>
 
-    <pre><code class="language-java">Subscription sub = new Subscription();
+        <pre><code class="language-java">Subscription sub = new Subscription();
 
 Renewable   r = sub; // Subscription, viewed as something renewable
 Cancellable c = sub; // the exact same object, viewed as something cancellable</code></pre>
 
-    <p><code>Subscription</code> now satisfies two separate contracts at once, and implementing one has nothing to do with implementing the other — <code>Cancellable</code> doesn't know <code>Renewable</code> exists, and neither interface changes what the other requires. Each is a distinct role <code>Subscription</code> is entitled to be treated as: <code>r</code> and <code>c</code> above hold the identical address, the same one object on the heap, just viewed through two unrelated declared types, each one showing only its own slice of what <code>Subscription</code> can do.</p>
+        <p><code>Subscription</code> now satisfies two separate contracts at once, and implementing one has nothing to
+          do with implementing the other — <code>Cancellable</code> doesn't know <code>Renewable</code> exists, and
+          neither interface changes what the other requires. Each is a distinct role <code>Subscription</code> is
+          entitled to be treated as: <code>r</code> and <code>c</code> above hold the identical address, the same one
+          object on the heap, just viewed through two unrelated declared types, each one showing only its own slice of
+          what <code>Subscription</code> can do.</p>
 
-    <p>This is exactly what <code>extends</code> can't offer. A class fits into exactly one "is-a" lineage, because <code>extends</code> allows only one parent (§11.3) — but it can adopt as many "can-do" roles as it needs, because interfaces carry no state and no constructor for multiple parents to conflict over (§15.11 shows the same freedom one level up, for interfaces extending other interfaces).</p>
-    </section>
+        <p>This is exactly what <code>extends</code> can't offer. A class fits into exactly one "is-a" lineage, because
+          <code>extends</code> allows only one parent (§9.3) — but it can adopt as many "can-do" roles as it needs,
+          because interfaces carry no state and no constructor for multiple parents to conflict over (§13.11 shows the
+          same freedom one level up, for interfaces extending other interfaces).
+        </p>
+      </section>
 
-    <!-- §15.6 -->
-    <section id="s15-6">
-      <div class="section-head">
-        <span class="sec-num">§15.6</span>
-        <h2>Interface-Typed Parameters <em>— accepting any implementer</em></h2>
-      </div>
+      <!-- §13.6 -->
+      <section id="s13-6">
+        <div class="section-head">
+          <span class="sec-num">§13.6</span>
+          <h2>Interface-Typed Parameters <em>— accepting any implementer</em></h2>
+        </div>
 
-    <p>A method parameter can be declared with an interface type, exactly like any other type:</p>
+        <p>A method parameter can be declared with an interface type, exactly like any other type:</p>
 
-    <pre><code class="language-java">static void processRenewal(Renewable item) {
+        <pre><code class="language-java">static void processRenewal(Renewable item) {
     item.renew();
 }</code></pre>
 
-    <pre><code class="language-java">processRenewal(new Subscription()); // Subscription renewed for another year.
+        <pre><code class="language-java">processRenewal(new Subscription()); // Subscription renewed for another year.
 processRenewal(new Passport());     // Passport renewed for another decade.</code></pre>
 
-    <p><code>processRenewal</code> accepts anything that implements <code>Renewable</code> — not just <code>Subscription</code> and <code>Passport</code>, but any class written later, by anyone, that adds <code>implements Renewable</code> to its own declaration. The parameter's declared type, <code>Renewable</code>, is the entire contract the method can rely on at compile time: it's guaranteed a <code>renew()</code> to call, and guaranteed nothing else. What actually arrives at runtime is still a genuine object of some concrete class — <code>item</code> can't hold an address unless something concrete was instantiated somewhere first (§4.1) — and that concrete, runtime type is what decides which <code>renew()</code> actually runs, exactly the dynamic dispatch already established in §11.5.</p>
+        <p><code>processRenewal</code> accepts anything that implements <code>Renewable</code> — not just
+          <code>Subscription</code> and <code>Passport</code>, but any class written later, by anyone, that adds
+          <code>implements Renewable</code> to its own declaration. The parameter's declared type,
+          <code>Renewable</code>, is the entire contract the method can rely on at compile time: it's guaranteed a
+          <code>renew()</code> to call, and guaranteed nothing else. What actually arrives at runtime is still a genuine
+          object of some concrete class — <code>item</code> can't hold an address unless something concrete was
+          instantiated somewhere first (§2.2) — and that concrete, runtime type is what decides which
+          <code>renew()</code> actually runs, exactly the dynamic dispatch already established in §9.5.
+        </p>
 
-    <p>And exactly like any other reference parameter (§6.2), what's copied into <code>item</code> is only the address — never the object itself. Passing a <code>Subscription</code> to <code>processRenewal</code> doesn't duplicate it; <code>item</code> and the caller's original variable end up holding the identical address, both pointing at the one object on the heap.</p>
-    </section>
+        <p>And exactly like any other reference parameter (§4.2), what's copied into <code>item</code> is only the
+          address — never the object itself. Passing a <code>Subscription</code> to <code>processRenewal</code> doesn't
+          duplicate it; <code>item</code> and the caller's original variable end up holding the identical address, both
+          pointing at the one object on the heap.</p>
+      </section>
 
-    <!-- §15.7 -->
-    <section id="s15-7">
-      <div class="section-head">
-        <span class="sec-num">§15.7</span>
-        <h2>Anonymous Classes <em>— an implementation with no name at all</em></h2>
-      </div>
+      <!-- §13.7 -->
+      <section id="s13-7">
+        <div class="section-head">
+          <span class="sec-num">§13.7</span>
+          <h2>Anonymous Classes <em>— an implementation with no name at all</em></h2>
+        </div>
 
-    <p>Getting a real <code>Renewable</code> object onto the heap has exactly one dead end, and so far exactly one route around it. The dead end: <code>new Renewable()</code> is illegal — an interface has no body to run, so there's nothing for <code>new</code> to build. The route: declare a named class — <code>Subscription</code>, <code>Passport</code> — that <code>implements Renewable</code> and supplies a real body for every method, then instantiate <em>that</em> instead.</p>
+        <p>Getting a real <code>Renewable</code> object onto the heap has exactly one dead end, and so far exactly one
+          route around it. The dead end: <code>new Renewable()</code> is illegal — an interface has no body to run, so
+          there's nothing for <code>new</code> to build. The route: declare a named class — <code>Subscription</code>,
+          <code>Passport</code> — that <code>implements Renewable</code> and supplies a real body for every method, then
+          instantiate <em>that</em> instead.
+        </p>
 
-    <p>Sometimes a named class is more ceremony than the situation calls for — a <code>Renewable</code> needed exactly once, for one specific use, with no reason to ever exist as its own reusable type anywhere else. Java allows a third route: declare the class and create its one instance in the same expression, with no name at all.</p>
+        <p>Sometimes a named class is more ceremony than the situation calls for — a <code>Renewable</code> needed
+          exactly once, for one specific use, with no reason to ever exist as its own reusable type anywhere else. Java
+          allows a third route: declare the class and create its one instance in the same expression, with no name at
+          all.</p>
 
-    <pre><code class="language-java">Renewable oneOff = new Renewable() {
+        <pre><code class="language-java">Renewable oneOff = new Renewable() {
     @Override
     public void renew() {
         System.out.println("Renewed, just this once.");
@@ -445,24 +706,36 @@ processRenewal(new Passport());     // Passport renewed for another decade.</cod
 
 oneOff.renew(); // Renewed, just this once.</code></pre>
 
-    <p><code>new Renewable() { ... }</code> looks like it instantiates the interface directly — it doesn't. Java generates an unnamed class right there, implementing <code>Renewable</code> exactly the way <code>Subscription</code> does, and that single expression both declares it and creates its one and only instance. <code>oneOff</code>'s declared type is still <code>Renewable</code> — everything about substitutability and the interface-as-type relationship from §15.3 applies exactly as before. The only thing missing is a name for the class, because nothing else in the program will ever need to refer to it.</p>
+        <p><code>new Renewable() { ... }</code> looks like it instantiates the interface directly — it doesn't. Java
+          generates an unnamed class right there, implementing <code>Renewable</code> exactly the way
+          <code>Subscription</code> does, and that single expression both declares it and creates its one and only
+          instance. <code>oneOff</code>'s declared type is still <code>Renewable</code> — everything about
+          substitutability and the interface-as-type relationship from §13.3 applies exactly as before. The only thing
+          missing is a name for the class, because nothing else in the program will ever need to refer to it.
+        </p>
 
-    <div class="callout callout-note">
-      <div class="callout-lbl">When each one earns its keep</div>
-      <p>A named class pays for itself the moment more than one object needs the same implementation, or the implementation is substantial enough to deserve its own file. An anonymous class fits the opposite case: a single, throwaway implementation, used once, right where it's created — common enough in real Java code to be worth recognizing on sight, even though this tutorial won't lean on it further.</p>
-    </div>
-    </section>
+        <div class="callout callout-note">
+          <div class="callout-lbl">When each one earns its keep</div>
+          <p>A named class pays for itself the moment more than one object needs the same implementation, or the
+            implementation is substantial enough to deserve its own file. An anonymous class fits the opposite case: a
+            single, throwaway implementation, used once, right where it's created — common enough in real Java code to
+            be worth recognizing on sight, even though this tutorial won't lean on it further.</p>
+        </div>
+      </section>
 
-    <!-- §15.8 -->
-    <section id="s15-8">
-      <div class="section-head">
-        <span class="sec-num">§15.8</span>
-        <h2>Default Methods <em>— an interface that carries behavior</em></h2>
-      </div>
+      <!-- §13.8 -->
+      <section id="s13-8">
+        <div class="section-head">
+          <span class="sec-num">§13.8</span>
+          <h2>Default Methods <em>— an interface that carries behavior</em></h2>
+        </div>
 
-    <p>Everything so far treats an interface as a pure contract — signatures only, no shared logic, matching how interfaces worked in Java's earliest versions. Modern Java allows more: a <span class="term">default method</span> is a method written directly in the interface, with a real body, that every implementing class gets for free:</p>
+        <p>Everything so far treats an interface as a pure contract — signatures only, no shared logic, matching how
+          interfaces worked in Java's earliest versions. Modern Java allows more: a <span class="term">default
+            method</span> is a method written directly in the interface, with a real body, that every implementing class
+          gets for free:</p>
 
-    <pre><code class="language-java">interface Renewable {
+        <pre><code class="language-java">interface Renewable {
     void renew();
 
     default void remind() {
@@ -470,28 +743,123 @@ oneOff.renew(); // Renewed, just this once.</code></pre>
     }
 }</code></pre>
 
-    <pre><code class="language-java">Subscription sub = new Subscription();
+        <pre><code class="language-java">Subscription sub = new Subscription();
 sub.renew();  // Subscription renewed for another year.
 sub.remind(); // Don't forget to renew! — never written in Subscription itself</code></pre>
 
-    <p><code>Subscription</code> never declared <code>remind()</code> — it inherited a working implementation directly from the interface, the same way a subclass inherits a concrete method from a superclass (§11.3). <code>Passport</code> gets the identical <code>remind()</code> for free too, with zero shared ancestor between the two classes. And exactly like an inherited class method, a default method can still be overridden — a class implementing <code>Renewable</code> is free to write its own <code>remind()</code> if the default wording doesn't fit.</p>
+        <p><code>Subscription</code> never declared <code>remind()</code> — it inherited a working implementation
+          directly from the interface, the same way a subclass inherits a concrete method from a superclass (§9.3).
+          <code>Passport</code> gets the identical <code>remind()</code> for free too, with zero shared ancestor between
+          the two classes. And exactly like an inherited class method, a default method can still be overridden — a
+          class implementing <code>Renewable</code> is free to write its own <code>remind()</code> if the default
+          wording doesn't fit.
+        </p>
 
-    <div class="callout callout-rule">
-      <div class="callout-lbl">This is what makes modern interfaces more than a contract</div>
-      <p>Before default methods existed, an interface could declare <em>that</em> something was possible, never <em>how</em>. Adding shared behavior meant a shared superclass — which only works when every class involved can agree on a single one, and Java's single-inheritance rule (§11.3) means that's not always possible. Default methods close that gap: real, shared, working code, distributed to any class that implements the interface, regardless of what — if anything — that class already extends.</p>
-    </div>
-    </section>
+        <div class="callout callout-rule">
+          <div class="callout-lbl">This is what makes modern interfaces more than a contract</div>
+          <p>Before default methods existed, an interface could declare <em>that</em> something was possible, never
+            <em>how</em>. Adding shared behavior meant a shared superclass — which only works when every class involved
+            can agree on a single one, and Java's single-inheritance rule (§9.3) means that's not always possible.
+            Default methods close that gap: real, shared, working code, distributed to any class that implements the
+            interface, regardless of what — if anything — that class already extends.
+          </p>
+        </div>
 
-    <!-- §15.9 -->
-    <section id="s15-9">
-      <div class="section-head">
-        <span class="sec-num">§15.9</span>
-        <h2>Default Method Collisions <em>— when two interfaces disagree</em></h2>
-      </div>
+        <p>One detail is easy to overlook once a default method calls another method declared on the same
+          interface: an interface doesn't have state, but a default method executes on an object that does. Three
+          small steps get to why that's not a contradiction:</p>
 
-    <p>§15.5 implemented two interfaces at once with no overlap between them — <code>Renewable</code> and <code>Cancellable</code> each contributed a method the other didn't have. Nothing stops two different interfaces from declaring a default method with the exact same name and parameter list, and a single class implementing both then has a real conflict to resolve:</p>
+        <ol>
+          <li>An interface can declare fields only as <code>public static final</code> constants — never an
+            instance field, so an interface itself never holds per-object state.</li>
+          <li>A default method is still just a method — code, not storage. Writing it inside an interface says
+            where that code lives, not where any data lives.</li>
+          <li>Every method, default or not, runs <em>on</em> a specific object — whatever appears before the dot at
+            the call site. That object is where its state actually lives, whichever interface or class happens to
+            declare the code being run.</li>
+        </ol>
 
-    <pre><code class="language-java">interface Walk {
+        <p>So a default method's code and the state it touches were never in the same place to begin with: the
+          method lives with its declaration, permanently; the state lives with the object, and travels with whatever
+          object is calling it. A simpler example makes the split obvious:</p>
+
+        <pre><code class="language-java">interface Person {
+    String getName();
+
+    default void greet() {
+        System.out.println("Hello, " + getName());
+    }
+}</code></pre>
+
+        <pre><code class="language-java">class Employee implements Person {
+    private String name = "Alice";
+
+    @Override
+    public String getName() {
+        return name;
+    }
+}</code></pre>
+
+        <pre><code class="language-java">Person person = new Employee();
+person.greet(); // Hello, Alice</code></pre>
+
+        <p>Where does <code>greet()</code> come from? The interface — <code>Person</code> is the only place it's
+          written. Where does <code>name</code> come from? The <code>Employee</code> object — <code>Person</code>
+          has no field, and no state of its own, to hold it. <code>greet()</code> runs as code borrowed from the
+          interface, but every <code>getName()</code> call inside it reads state that only ever lived on the
+          specific <code>Employee</code> instance <code>greet()</code> happened to be called on.</p>
+
+        <p>"The code lives with its declaration" is true down to the compiled bytecode, not just as a way of
+          talking about it. Take a smaller interface with no abstract method at all:</p>
+
+        <pre><code class="language-java">interface Person {
+    default void greet() {
+        System.out.println("Hello");
+    }
+}</code></pre>
+
+        <p>After compilation, the bytecode for <code>greet()</code> is stored inside <code>Person.class</code> —
+          not inside any class that implements <code>Person</code>. Consider an <code>Employee</code> that
+          implements <code>Person</code> and adds nothing of its own:</p>
+
+        <pre><code class="language-java">class Employee implements Person {
+}</code></pre>
+
+        <p><code>Employee.class</code> contains no copy of <code>greet()</code> — not a duplicate, not a stub,
+          nothing. When a program calls it:</p>
+
+        <pre><code class="language-java">Employee employee = new Employee();
+employee.greet();</code></pre>
+
+        <p>the JVM resolves that call by walking a lookup, roughly:</p>
+
+        <ol>
+          <li>Does <code>Employee</code> declare <code>greet()</code>? No.</li>
+          <li>Does any superclass declare it? No.</li>
+          <li>Does one of the implemented interfaces provide a default implementation? Yes —
+            <code>Person</code> does.</li>
+        </ol>
+
+        <p>Having found it, the JVM executes the bytecode sitting in <code>Person.class</code>, with
+          <code>employee</code> supplying whatever state that code happens to touch. Nothing was copied into
+          <code>Employee.class</code> at compile time to make the call work — the lookup happens every time, and
+          the bytecode being run never leaves the interface that declared it.</p>
+      </section>
+
+      <!-- §13.9 -->
+      <section id="s13-9">
+        <div class="section-head">
+          <span class="sec-num">§13.9</span>
+          <h2>Default Method Collisions <em>— when two interfaces disagree</em></h2>
+        </div>
+
+        <p>§13.5 implemented two interfaces at once with no overlap between them — <code>Renewable</code> and
+          <code>Cancellable</code> each contributed a method the other didn't have. Nothing stops two different
+          interfaces from declaring a default method with the exact same name and parameter list, and a single class
+          implementing both then has a real conflict to resolve:
+        </p>
+
+        <pre><code class="language-java">interface Walk {
     default long getSpeed() {
         return 5;
     }
@@ -510,11 +878,16 @@ class Horse implements Walk, Run {
     }
 }</code></pre>
 
-    <p>Both <code>Walk</code> and <code>Run</code> offer a <code>getSpeed()</code>, and neither default wins automatically — Java refuses to guess which one <code>Horse</code> meant, so this doesn't compile at all unless <code>Horse</code> supplies its own <code>getSpeed()</code>, overriding both defaults at once with a single, unambiguous implementation. The override doesn't have to reuse either interface's version — it just has to exist, replacing the ambiguity with an actual decision.</p>
+        <p>Both <code>Walk</code> and <code>Run</code> offer a <code>getSpeed()</code>, and neither default wins
+          automatically — Java refuses to guess which one <code>Horse</code> meant, so this doesn't compile at all
+          unless <code>Horse</code> supplies its own <code>getSpeed()</code>, overriding both defaults at once with a
+          single, unambiguous implementation. The override doesn't have to reuse either interface's version — it just
+          has to exist, replacing the ambiguity with an actual decision.</p>
 
-    <p>Sometimes there's no override that could ever resolve it — not because the class hasn't tried hard enough, but because no single method could satisfy both interfaces at once:</p>
+        <p>Sometimes there's no override that could ever resolve it — not because the class hasn't tried hard enough,
+          but because no single method could satisfy both interfaces at once:</p>
 
-    <pre><code class="language-java">interface Walk {
+        <pre><code class="language-java">interface Walk {
     default long getSpeed() {
         return 5;
     }
@@ -528,19 +901,28 @@ interface Run {
 
 class Horse implements Walk, Run { } // compile error — no override could ever fix this</code></pre>
 
-    <p>Overriding a method requires the same return type, or a subtype of it — and <code>int</code> and <code>long</code> aren't related that way in either direction, despite one converting to the other in ordinary expressions (§7). <code>Walk</code> and <code>Run</code> aren't asking <code>Horse</code> to pick a winner here; they're demanding a single method that is somehow both an <code>int</code>-returning <code>getSpeed()</code> and a <code>long</code>-returning one. Nothing <code>Horse</code> could write satisfies both — this pair of interfaces simply cannot be implemented by the same class at all, override or no override.</p>
-    </section>
+        <p>Overriding a method requires the same return type, or a subtype of it — and <code>int</code> and
+          <code>long</code> aren't related that way in either direction, despite one converting to the other in ordinary
+          expressions (§5). <code>Walk</code> and <code>Run</code> aren't asking <code>Horse</code> to pick a winner
+          here; they're demanding a single method that is somehow both an <code>int</code>-returning
+          <code>getSpeed()</code> and a <code>long</code>-returning one. Nothing <code>Horse</code> could write
+          satisfies both — this pair of interfaces simply cannot be implemented by the same class at all, override or no
+          override.
+        </p>
+      </section>
 
-    <!-- §15.10 -->
-    <section id="s15-10">
-      <div class="section-head">
-        <span class="sec-num">§15.10</span>
-        <h2>Static Methods <em>— utilities that live on the interface itself</em></h2>
-      </div>
+      <!-- §13.10 -->
+      <section id="s13-10">
+        <div class="section-head">
+          <span class="sec-num">§13.10</span>
+          <h2>Static Methods <em>— utilities that live on the interface itself</em></h2>
+        </div>
 
-    <p>An interface can also declare <code>static</code> methods — utilities called on the interface's own name, never on an implementing object, the same way a class's static methods are called on the class itself (§6.1):</p>
+        <p>An interface can also declare <code>static</code> methods — utilities called on the interface's own name,
+          never on an implementing object, the same way a class's static methods are called on the class itself (§4.1):
+        </p>
 
-    <pre><code class="language-java">interface Renewable {
+        <pre><code class="language-java">interface Renewable {
     void renew();
 
     default void remind() {
@@ -552,14 +934,22 @@ class Horse implements Walk, Run { } // compile error — no override could ever
     }
 }</code></pre>
 
-    <pre><code class="language-java">System.out.println(Renewable.isRenewable(new Subscription()));                // true
+        <pre><code class="language-java">System.out.println(Renewable.isRenewable(new Subscription()));                // true
 System.out.println(Renewable.isRenewable(new Car("Toyota", "Corolla", 2022))); // false</code></pre>
 
-    <p><code>Renewable.isRenewable(...)</code> is called on <code>Renewable</code> directly — there's no object being asked, no <code>renew()</code> being invoked, just a helper that happens to live in the interface because it's about the interface's own concept.</p>
+        <p><code>Renewable.isRenewable(...)</code> is called on <code>Renewable</code> directly — there's no object
+          being asked, no <code>renew()</code> being invoked, just a helper that happens to live in the interface
+          because it's about the interface's own concept.</p>
 
-    <p>Being called on the interface itself, with no object involved, comes with the same restriction any <code>static</code> method has (§6.1): nothing inside it can depend on a particular object existing. A static interface method can call other <code>static</code> methods, and read <code>public static final</code> constants — anything that belongs to the interface itself, not to any one implementer. It cannot call an instance method, use <code>this</code>, or touch any per-object data, because at the point it runs, there may be no object at all:</p>
+        <p>Being called on the interface itself, with no object involved, comes with the same restriction any
+          <code>static</code> method has (§4.1): nothing inside it can depend on a particular object existing. A static
+          interface method can call other <code>static</code> methods, and read <code>public static final</code>
+          constants — anything that belongs to the interface itself, not to any one implementer. It cannot call an
+          instance method, use <code>this</code>, or touch any per-object data, because at the point it runs, there may
+          be no object at all:
+        </p>
 
-    <pre><code class="language-java">interface Example {
+        <pre><code class="language-java">interface Example {
     default void sayHi() {
         System.out.println("Hi");
     }
@@ -570,25 +960,38 @@ System.out.println(Renewable.isRenewable(new Car("Toyota", "Corolla", 2022))); /
     }
 }</code></pre>
 
-    <p><code>sayHi()</code> is a default method — it only exists once some class has implemented <code>Example</code> and produced an actual object to call it on. <code>test()</code> is called on <code>Example</code> directly, with no such object anywhere in sight, so there's nothing for <code>sayHi()</code> to run on and nothing for <code>this</code> to refer to. The same divide already separates static and instance methods on ordinary classes (§6.1); an interface's static methods sit on the static side of it, same as ever.</p>
-    </section>
+        <p><code>sayHi()</code> is a default method — it only exists once some class has implemented
+          <code>Example</code> and produced an actual object to call it on. <code>test()</code> is called on
+          <code>Example</code> directly, with no such object anywhere in sight, so there's nothing for
+          <code>sayHi()</code> to run on and nothing for <code>this</code> to refer to. The same divide already
+          separates static and instance methods on ordinary classes (§4.1); an interface's static methods sit on the
+          static side of it, same as ever.
+        </p>
+      </section>
 
-    <!-- §15.11 -->
-    <section id="s15-11">
-      <div class="section-head">
-        <span class="sec-num">§15.11</span>
-        <h2>Interface Inheritance <em>— one interface extending another</em></h2>
-      </div>
+      <!-- §13.11 -->
+      <section id="s13-11">
+        <div class="section-head">
+          <span class="sec-num">§13.11</span>
+          <h2>Interface Inheritance <em>— one interface extending another</em></h2>
+        </div>
 
-    <p>Interfaces can extend other interfaces, using the same keyword classes use to extend classes (§11.3) — with one difference: an interface can extend more than one other interface at once, since there's still no shared state or constructor for multiple parents to conflict over.</p>
+        <p>Interfaces can extend other interfaces, using the same keyword classes use to extend classes (§9.3) — with
+          one difference: an interface can extend more than one other interface at once, since there's still no shared
+          state or constructor for multiple parents to conflict over.</p>
 
-    <pre><code class="language-java">interface AutoRenewable extends Renewable {
+        <pre><code class="language-java">interface AutoRenewable extends Renewable {
     void enableAutoRenew();
 }</code></pre>
 
-    <p><code>AutoRenewable</code> inherits everything <code>Renewable</code> declared — the abstract <code>renew()</code>, and the default <code>remind()</code> from §15.8 — and adds one more abstract method of its own, <code>enableAutoRenew()</code>. A class implementing <code>AutoRenewable</code> takes on the combined contract: every abstract method from both interfaces, inherited and newly added alike, needs a real implementation before that class can be instantiated.</p>
+        <p><code>AutoRenewable</code> inherits everything <code>Renewable</code> declared — the abstract
+          <code>renew()</code>, and the default <code>remind()</code> from §13.8 — and adds one more abstract method of
+          its own, <code>enableAutoRenew()</code>. A class implementing <code>AutoRenewable</code> takes on the combined
+          contract: every abstract method from both interfaces, inherited and newly added alike, needs a real
+          implementation before that class can be instantiated.
+        </p>
 
-    <pre><code class="language-java">class CloudSubscription implements AutoRenewable {
+        <pre><code class="language-java">class CloudSubscription implements AutoRenewable {
     @Override
     public void renew() {
         System.out.println("Cloud subscription renewed.");
@@ -600,14 +1003,22 @@ System.out.println(Renewable.isRenewable(new Car("Toyota", "Corolla", 2022))); /
     }
 }</code></pre>
 
-    <p><code>CloudSubscription</code> gets <code>remind()</code> for free, inherited through <code>AutoRenewable</code> from <code>Renewable</code>, exactly as if it had implemented <code>Renewable</code> directly — <code>extends</code> between interfaces doesn't create a new kind of relationship, just a longer chain of the same one.</p>
+        <p><code>CloudSubscription</code> gets <code>remind()</code> for free, inherited through
+          <code>AutoRenewable</code> from <code>Renewable</code>, exactly as if it had implemented
+          <code>Renewable</code> directly — <code>extends</code> between interfaces doesn't create a new kind of
+          relationship, just a longer chain of the same one.
+        </p>
 
-    <p>An extending interface doesn't have to leave an inherited default method untouched, either. Facing a default method it inherits, <code>AutoRenewable</code> has three options:</p>
+        <p>An extending interface doesn't have to leave an inherited default method untouched, either. Facing a default
+          method it inherits, <code>AutoRenewable</code> has three options:</p>
 
-    <ol>
-      <li><strong>Leave it alone.</strong> This is what it did with <code>remind()</code> above — say nothing, and the inherited default is exactly what implementing classes get.</li>
-      <li><strong>Override it as a default.</strong> Provide a new <code>default</code> body under the same name, following the same overriding rules a class would (§11.5) — implementing classes now get <em>this</em> version instead, unless they override it again themselves.
-        <pre><code class="language-java">interface AutoRenewable extends Renewable {
+        <ol>
+          <li><strong>Leave it alone.</strong> This is what it did with <code>remind()</code> above — say nothing, and
+            the inherited default is exactly what implementing classes get.</li>
+          <li><strong>Override it as a default.</strong> Provide a new <code>default</code> body under the same name,
+            following the same overriding rules a class would (§9.5) — implementing classes now get <em>this</em>
+            version instead, unless they override it again themselves.
+            <pre><code class="language-java">interface AutoRenewable extends Renewable {
     void enableAutoRenew();
 
     @Override
@@ -615,18 +1026,21 @@ System.out.println(Renewable.isRenewable(new Car("Toyota", "Corolla", 2022))); /
         System.out.println("Auto-renew is on — no action needed.");
     }
 }</code></pre>
-      </li>
-      <li><strong>Redeclare it as abstract.</strong> Repeat the method with no body and no <code>default</code> — this withdraws the inherited implementation, and every implementing class is back to needing its own, exactly as if the method had never had a default at all.
-        <pre><code class="language-java">interface AutoRenewable extends Renewable {
+          </li>
+          <li><strong>Redeclare it as abstract.</strong> Repeat the method with no body and no <code>default</code> —
+            this withdraws the inherited implementation, and every implementing class is back to needing its own,
+            exactly as if the method had never had a default at all.
+            <pre><code class="language-java">interface AutoRenewable extends Renewable {
     void enableAutoRenew();
     void remind(); // no longer default — implementing classes must supply it themselves
 }</code></pre>
-      </li>
-    </ol>
+          </li>
+        </ol>
 
-    <p>That third option has a real, visible consequence, not just a theoretical one — withdrawing a default changes whether code compiles:</p>
+        <p>That third option has a real, visible consequence, not just a theoretical one — withdrawing a default changes
+          whether code compiles:</p>
 
-    <pre><code class="language-java">interface Mover {
+        <pre><code class="language-java">interface Mover {
     default void move() {
         System.out.println("Default moving behavior");
     }
@@ -639,15 +1053,27 @@ interface Runner extends Mover {
 class Car implements Mover { }          // fine — inherits Mover's default untouched
 class MarathonMan implements Runner { } // compile error — must implement Runner's move()</code></pre>
 
-    <p><code>Car</code> implements <code>Mover</code> directly and never mentions <code>move()</code> at all — perfectly legal, since <code>Mover</code>'s default is still standing. <code>MarathonMan</code> implements <code>Runner</code> instead, and <code>Runner</code> redeclared <code>move()</code> as abstract, which erased the default for anything going through <code>Runner</code> — so <code>MarathonMan</code> owes an implementation the exact same way it would for any interface method that was never given a default to begin with.</p>
+        <p><code>Car</code> implements <code>Mover</code> directly and never mentions <code>move()</code> at all —
+          perfectly legal, since <code>Mover</code>'s default is still standing. <code>MarathonMan</code> implements
+          <code>Runner</code> instead, and <code>Runner</code> redeclared <code>move()</code> as abstract, which erased
+          the default for anything going through <code>Runner</code> — so <code>MarathonMan</code> owes an
+          implementation the exact same way it would for any interface method that was never given a default to begin
+          with.
+        </p>
 
-    <div class="callout callout-rule">
-      <div class="callout-lbl">Every abstract method needs an implementer — with one exception</div>
-      <p>Any concrete class implementing an interface must provide a real body for every abstract method the interface declares, inherited or its own — this has held throughout the chapter, and it's the same rule §14 established for abstract classes. The one exception is symmetrical, too: a class declared <code>abstract</code> (§14.2) is allowed to leave some — or all — of those methods unimplemented. The obligation doesn't disappear; it simply passes down to whatever concrete subclass eventually extends that abstract class.</p>
+        <div class="callout callout-rule">
+          <div class="callout-lbl">Every abstract method needs an implementer — with one exception</div>
+          <p>Any concrete class implementing an interface must provide a real body for every abstract method the
+            interface declares, inherited or its own — this has held throughout the chapter, and it's the same rule §12
+            established for abstract classes. The one exception is symmetrical, too: a class declared
+            <code>abstract</code> (§12.2) is allowed to leave some — or all — of those methods unimplemented. The
+            obligation doesn't disappear; it simply passes down to whatever concrete subclass eventually extends that
+            abstract class.
+          </p>
 
-      <p>Implementing directly, with no detour, looks like every other example in this chapter:</p>
+          <p>Implementing directly, with no detour, looks like every other example in this chapter:</p>
 
-      <pre><code class="language-java">interface Movable {
+          <pre><code class="language-java">interface Movable {
     void move();
 }
 
@@ -659,9 +1085,9 @@ class Bike implements Movable {
     }
 }</code></pre>
 
-      <p>An abstract class sitting in between can defer that same obligation instead of meeting it:</p>
+          <p>An abstract class sitting in between can defer that same obligation instead of meeting it:</p>
 
-      <pre><code class="language-java">interface Movable {
+          <pre><code class="language-java">interface Movable {
     void move();
 }
 
@@ -676,20 +1102,28 @@ class Bike extends Vehicle {
     }
 }</code></pre>
 
-      <p><code>Vehicle</code> is allowed to implement <code>Movable</code> without ever writing <code>move()</code> — being <code>abstract</code> is exactly what makes that legal (§14.2). The requirement hasn't gone away; it's simply been handed down one level, to <code>Bike</code>, the first <em>concrete</em> class in the chain. Either path — implementing an interface directly, or inheriting the obligation through an abstract class first — arrives at the same rule: some concrete class, somewhere, has to supply <code>move()</code> before an object can exist at all.</p>
-    </div>
-    </section>
+          <p><code>Vehicle</code> is allowed to implement <code>Movable</code> without ever writing <code>move()</code>
+            — being <code>abstract</code> is exactly what makes that legal (§12.2). The requirement hasn't gone away;
+            it's simply been handed down one level, to <code>Bike</code>, the first <em>concrete</em> class in the
+            chain. Either path — implementing an interface directly, or inheriting the obligation through an abstract
+            class first — arrives at the same rule: some concrete class, somewhere, has to supply <code>move()</code>
+            before an object can exist at all.</p>
+        </div>
+      </section>
 
-    <!-- §15.12 -->
-    <section id="s15-12">
-      <div class="section-head">
-        <span class="sec-num">§15.12</span>
-        <h2>The Strategy Pattern <em>— swapping algorithms at runtime</em></h2>
-      </div>
+      <!-- §13.12 -->
+      <section id="s13-12">
+        <div class="section-head">
+          <span class="sec-num">§13.12</span>
+          <h2>The Strategy Pattern <em>— swapping algorithms at runtime</em></h2>
+        </div>
 
-    <p>§15.6 showed a method accepting anything that implements an interface. Take that one step further — store the interface-typed reference as a <em>field</em>, not just a parameter — and a class can hold onto a swappable piece of behavior, decided by whoever creates it, and changeable later. This combination has a name recognized across the industry: the <span class="term">Strategy pattern</span>.</p>
+        <p>§13.6 showed a method accepting anything that implements an interface. Take that one step further — store the
+          interface-typed reference as a <em>field</em>, not just a parameter — and a class can hold onto a swappable
+          piece of behavior, decided by whoever creates it, and changeable later. This combination has a name recognized
+          across the industry: the <span class="term">Strategy pattern</span>.</p>
 
-    <pre><code class="language-java">interface DiscountStrategy {
+        <pre><code class="language-java">interface DiscountStrategy {
     double apply(double price); // returns the discounted price, not the discount itself
 }
 
@@ -719,11 +1153,18 @@ class FlatDiscount implements DiscountStrategy {
     }
 }</code></pre>
 
-    <p><code>PercentageDiscount</code> and <code>FlatDiscount</code> aren't specific kinds of anything, and neither is a kind of the other — they're two different <em>algorithms</em> for the exact same operation, <code>apply(double)</code>, entirely interchangeable with each other. That's the shape Strategy names: not "can this class do X," the way <code>Renewable</code> did, but "here is one particular way of doing X, packaged as an object in its own right."</p>
+        <p><code>PercentageDiscount</code> and <code>FlatDiscount</code> aren't specific kinds of anything, and neither
+          is a kind of the other — they're two different <em>algorithms</em> for the exact same operation,
+          <code>apply(double)</code>, entirely interchangeable with each other. That's the shape Strategy names: not
+          "can this class do X," the way <code>Renewable</code> did, but "here is one particular way of doing X,
+          packaged as an object in its own right."
+        </p>
 
-    <p>A class that needs the operation done doesn't pick an algorithm itself — it holds a reference to whichever <code>DiscountStrategy</code> it was given, and defers to it:</p>
+        <p>A class that needs the operation done doesn't pick an algorithm itself — it holds a reference to whichever
+          <code>DiscountStrategy</code> it was given, and defers to it:
+        </p>
 
-    <pre><code class="language-java">class Order {
+        <pre><code class="language-java">class Order {
     private double total;
     private DiscountStrategy discount;
 
@@ -741,101 +1182,118 @@ class FlatDiscount implements DiscountStrategy {
     }
 }</code></pre>
 
-    <pre><code class="language-java">Order order = new Order(100.0, new PercentageDiscount(0.10));
+        <pre><code class="language-java">Order order = new Order(100.0, new PercentageDiscount(0.10));
 System.out.println(order.finalPrice()); // 90.0
 
 order.setDiscount(new FlatDiscount(15));
 System.out.println(order.finalPrice()); // 85.0</code></pre>
 
-    <p><code>Order</code> never mentions <code>PercentageDiscount</code> or <code>FlatDiscount</code> anywhere in its own declaration — only <code>DiscountStrategy</code>. Constructing it with one strategy, then swapping in a completely different one through <code>setDiscount</code>, changes what <code>finalPrice()</code> computes without changing a single line of <code>Order</code> itself, and without <code>Order</code> ever being told which strategy it's holding at any given moment.</p>
+        <p><code>Order</code> never mentions <code>PercentageDiscount</code> or <code>FlatDiscount</code> anywhere in
+          its own declaration — only <code>DiscountStrategy</code>. Constructing it with one strategy, then swapping in
+          a completely different one through <code>setDiscount</code>, changes what <code>finalPrice()</code> computes
+          without changing a single line of <code>Order</code> itself, and without <code>Order</code> ever being told
+          which strategy it's holding at any given moment.</p>
 
-    <div class="callout callout-rule">
-      <div class="callout-lbl">Why this is worth naming</div>
-      <p>Nothing here is new syntax — it's the interface-as-type relationship from §15.3, interface-typed references from §15.6 held in a field instead of just a parameter, and the loose coupling named back in §15.3, combined into one recurring shape. Giving that shape a name — Strategy — means recognizing it on sight in unfamiliar code, and reaching for it deliberately: whenever "the same operation, done one of several interchangeable ways, chosen by whoever creates the object" shows up, an interface plus a held reference is usually the answer.</p>
-    </div>
+        <div class="callout callout-rule">
+          <div class="callout-lbl">Why this is worth naming</div>
+          <p>Nothing here is new syntax — it's the interface-as-type relationship from §13.3, interface-typed references
+            from §13.6 held in a field instead of just a parameter, and the loose coupling named back in §13.3, combined
+            into one recurring shape. Giving that shape a name — Strategy — means recognizing it on sight in unfamiliar
+            code, and reaching for it deliberately: whenever "the same operation, done one of several interchangeable
+            ways, chosen by whoever creates the object" shows up, an interface plus a held reference is usually the
+            answer.</p>
+        </div>
 
-    <div class="callout callout-note">
-      <div class="callout-lbl">A caveat worth flagging</div>
-      <p><code>setDiscount</code> is exactly what makes this Strategy demo work — swapping the held reference is the whole trick this section is naming. But notice what that means for <code>finalPrice()</code>: it recomputes from <code>discount</code> every time it's called, so the same <code>Order</code> can honestly report two different prices at two different times, with no record of which one was ever actually charged. Fine for illustrating the pattern; not fine for anything meant to double as a real business record, for exactly the reason §13.3 gave for mutable state in general. §19 revisits this same <code>Order</code> and fixes it.</p>
-    </div>
+        <div class="callout callout-note">
+          <div class="callout-lbl">A caveat worth flagging</div>
+          <p><code>setDiscount</code> is exactly what makes this Strategy demo work — swapping the held reference is the
+            whole trick this section is naming. But notice what that means for <code>finalPrice()</code>: it recomputes
+            from <code>discount</code> every time it's called, so the same <code>Order</code> can honestly report two
+            different prices at two different times, with no record of which one was ever actually charged. Fine for
+            illustrating the pattern; not fine for anything meant to double as a real business record, for exactly the
+            reason §11.3 gave for mutable state in general. §19 revisits this same <code>Order</code> and fixes it.</p>
+        </div>
 
-    <div class="callout callout-note">
-      <div class="callout-lbl">Scope of this chapter</div>
-      <p>Functional interfaces and lambda expressions, sealed interfaces, and generic interfaces are all left for later. The core shape carries over unchanged: an interface is a capability a class opts into, separate from what that class already is.</p>
-    </div>
-    </section>
+        <div class="callout callout-note">
+          <div class="callout-lbl">Scope of this chapter</div>
+          <p>Functional interfaces and lambda expressions, sealed interfaces, and generic interfaces are all left for
+            later. The core shape carries over unchanged: an interface is a capability a class opts into, separate from
+            what that class already is.</p>
+        </div>
+      </section>
 
-  </article>
+    </article>
 
-  <nav class="page-nav" aria-label="Chapter navigation">
-    <a href="abstractclasses.html" class="page-nav-prev">
-      <span class="page-nav-label">← Previous</span>
-      <span class="page-nav-title">§14 — Abstract Classes</span>
-    </a>
-    <a href="generics.html" class="page-nav-next">
-      <span class="page-nav-label">Next →</span>
-      <span class="page-nav-title">§16 — Generics</span>
-    </a>
-  </nav>
-</main>
+    <nav class="page-nav" aria-label="Chapter navigation">
+      <a href="abstractclasses.html" class="page-nav-prev">
+        <span class="page-nav-label">← Previous</span>
+        <span class="page-nav-title">§12 — Abstract Classes</span>
+      </a>
+      <a href="exceptions.html" class="page-nav-next">
+        <span class="page-nav-label">Next →</span>
+        <span class="page-nav-title">§14 — Exceptions</span>
+      </a>
+    </nav>
+  </main>
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  hljs.highlightAll();
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      hljs.highlightAll();
 
-  // Flag error-annotation comments in code blocks
-  document.querySelectorAll('.hljs-comment').forEach(el => {
-    if (/\b(compile|compiler|runtime) error\b/i.test(el.textContent)) {
-      el.classList.add('hljs-comment-error');
-    }
-  });
+      // Flag error-annotation comments in code blocks
+      document.querySelectorAll('.hljs-comment').forEach(el => {
+        if (/\b(compile|compiler|runtime) error\b/i.test(el.textContent)) {
+          el.classList.add('hljs-comment-error');
+        }
+      });
 
-  // Code theme toggle
-  const codeThemeBtn = document.getElementById('code-theme-toggle');
-  const lightTheme = document.getElementById('hljs-light-theme');
-  const darkTheme = document.getElementById('hljs-dark-theme');
-  const themeLabel = codeThemeBtn.querySelector('.code-theme-label');
-  const themeIcon = codeThemeBtn.querySelector('.icon');
+      // Code theme toggle
+      const codeThemeBtn = document.getElementById('code-theme-toggle');
+      const lightTheme = document.getElementById('hljs-light-theme');
+      const darkTheme = document.getElementById('hljs-dark-theme');
+      const themeLabel = codeThemeBtn.querySelector('.code-theme-label');
+      const themeIcon = codeThemeBtn.querySelector('.icon');
 
-  function applyCodeTheme(theme) {
-    const dark = theme === 'dark';
-    lightTheme.disabled = dark;
-    darkTheme.disabled = !dark;
-    document.documentElement.classList.toggle('code-dark', dark);
-    themeLabel.textContent = dark ? 'Light code' : 'Dark code';
-    themeIcon.textContent = dark ? '☀️' : '🌙';
-  }
-
-  applyCodeTheme(localStorage.getItem('code-theme') || 'light');
-
-  codeThemeBtn.addEventListener('click', () => {
-    const next = darkTheme.disabled ? 'dark' : 'light';
-    localStorage.setItem('code-theme', next);
-    applyCodeTheme(next);
-  });
-
-  // Scroll spy for sub-sections
-  const sections = document.querySelectorAll('section[id]');
-  const subLinks = document.querySelectorAll('.sub-nav a[href^="#"]');
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = '#' + entry.target.id;
-        subLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+      function applyCodeTheme(theme) {
+        const dark = theme === 'dark';
+        lightTheme.disabled = dark;
+        darkTheme.disabled = !dark;
+        document.documentElement.classList.toggle('code-dark', dark);
+        themeLabel.textContent = dark ? 'Light code' : 'Dark code';
+        themeIcon.textContent = dark ? '☀️' : '🌙';
       }
+
+      applyCodeTheme(localStorage.getItem('code-theme') || 'light');
+
+      codeThemeBtn.addEventListener('click', () => {
+        const next = darkTheme.disabled ? 'dark' : 'light';
+        localStorage.setItem('code-theme', next);
+        applyCodeTheme(next);
+      });
+
+      // Scroll spy for sub-sections
+      const sections = document.querySelectorAll('section[id]');
+      const subLinks = document.querySelectorAll('.sub-nav a[href^="#"]');
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = '#' + entry.target.id;
+            subLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+          }
+        });
+      }, { rootMargin: '-8% 0px -78% 0px', threshold: 0 });
+
+      sections.forEach(s => observer.observe(s));
+
+      const btn = document.getElementById('menu-btn');
+      const side = document.getElementById('sidebar');
+      btn.addEventListener('click', () => side.classList.toggle('open'));
+      document.querySelectorAll('#sidebar a').forEach(a => {
+        a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
+      });
     });
-  }, { rootMargin: '-8% 0px -78% 0px', threshold: 0 });
-
-  sections.forEach(s => observer.observe(s));
-
-  const btn  = document.getElementById('menu-btn');
-  const side = document.getElementById('sidebar');
-  btn.addEventListener('click', () => side.classList.toggle('open'));
-  document.querySelectorAll('#sidebar a').forEach(a => {
-    a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
-  });
-});
-</script>
+  </script>
 </body>
+
 </html>

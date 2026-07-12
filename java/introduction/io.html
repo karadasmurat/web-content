@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>§25 Input and Output — OO with Java</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" id="hljs-light-theme"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
+  <link rel="stylesheet" id="hljs-dark-theme"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
+  <script>
+    (function () {
+      if ((localStorage.getItem('code-theme') || 'light') === 'dark') {
+        document.getElementById('hljs-light-theme').disabled = true;
+        document.getElementById('hljs-dark-theme').disabled = false;
+        document.documentElement.classList.add('code-dark');
+      }
+    })();
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+</head>
+
+<body>
+
+  <button id="menu-btn" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
+
+  <button id="code-theme-toggle" class="code-theme-toggle" aria-label="Toggle code color scheme">
+    <span class="icon">🌙</span><span class="code-theme-label">Dark code</span>
+  </button>
+
+  <nav id="sidebar" aria-label="Tutorial navigation">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-label">Tutorial</div>
+      <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
+    </div>
+    <nav>
+      <ul>
+        <li>
+          <a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a>
+          <ul class="sub-nav">
+            <li><a href="index.html#s0-1"><span class="nav-num">§0.1</span>What Is Java?</a></li>
+            <li><a href="index.html#s0-2"><span class="nav-num">§0.2</span>Where Is Java Used?</a></li>
+            <li><a href="index.html#s0-3"><span class="nav-num">§0.3</span>Why Java?</a></li>
+            <li><a href="index.html#s0-4"><span class="nav-num">§0.4</span>The Java Ecosystem</a></li>
+            <li><a href="index.html#s0-5"><span class="nav-num">§0.5</span>Java Versions</a></li>
+            <li><a href="index.html#s0-6"><span class="nav-num">§0.6</span>Your First Program</a></li>
+            <li><a href="index.html#s0-7"><span class="nav-num">§0.7</span>Key Features</a></li>
+            <li><a href="index.html#s0-8"><span class="nav-num">§0.8</span>Key Takeaways</a></li>
+            <li><a href="index.html#s0-9"><span class="nav-num">§0.9</span>Appendix: Write Once, Run Anywhere</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="variables.html"><span class="nav-num">§1</span>Variables and Values</a>
+          <ul class="sub-nav">
+            <li><a href="variables.html#s1-1"><span class="nav-num">§1.1</span>Values</a></li>
+            <li><a href="variables.html#s1-2"><span class="nav-num">§1.2</span>Variables in Java</a></li>
+            <li><a href="variables.html#s1-3"><span class="nav-num">§1.3</span>Primitive Types</a></li>
+            <li><a href="variables.html#s1-4"><span class="nav-num">§1.4</span>Literals</a></li>
+            <li><a href="variables.html#s1-5"><span class="nav-num">§1.5</span><code>var</code></a></li>
+            <li><a href="variables.html#s1-6"><span class="nav-num">§1.6</span>Common Mistakes</a></li>
+            <li><a href="variables.html#s1-7"><span class="nav-num">§1.7</span>What a Variable Holds</a></li>
+            <li><a href="variables.html#s1-8"><span class="nav-num">§1.8</span>Key Takeaways</a></li>
+            <li><a href="variables.html#s1-9"><span class="nav-num">§1.9</span>Appendix: Number Systems</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="classes.html"><span class="nav-num">§2</span>Classes &amp; Objects</a>
+          <ul class="sub-nav">
+            <li><a href="classes.html#s2-1"><span class="nav-num">§2.1</span>Classes as Blueprints</a></li>
+            <li><a href="classes.html#s2-2"><span class="nav-num">§2.2</span>Instantiation</a></li>
+            <li><a href="classes.html#s2-3"><span class="nav-num">§2.3</span>Reference Variables</a></li>
+            <li><a href="classes.html#s2-4"><span class="nav-num">§2.4</span>Reference Fields</a></li>
+            <li><a href="classes.html#s2-5"><span class="nav-num">§2.5</span>Constructors</a></li>
+            <li><a href="classes.html#s2-6"><span class="nav-num">§2.6</span>Static Fields</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="assignment.html"><span class="nav-num">§3</span>Assignment</a>
+          <ul class="sub-nav">
+            <li><a href="assignment.html#s3-1"><span class="nav-num">§3.1</span>The "Value"</a></li>
+            <li><a href="assignment.html#s3-2"><span class="nav-num">§3.2</span>Primitive Assignment</a></li>
+            <li><a href="assignment.html#s3-3"><span class="nav-num">§3.3</span>Reference Assignment</a></li>
+            <li><a href="assignment.html#s3-4"><span class="nav-num">§3.4</span>Consequence</a></li>
+            <li><a href="assignment.html#s3-5"><span class="nav-num">§3.5</span>Assignment vs. the Dot</a></li>
+            <li><a href="assignment.html#s3-6"><span class="nav-num">§3.6</span>The Rule</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="methods.html"><span class="nav-num">§4</span>Methods</a>
+          <ul class="sub-nav">
+            <li><a href="methods.html#s4-intro"><span class="nav-num">§4.1</span>Why Methods</a></li>
+            <li><a href="methods.html#s4-2"><span class="nav-num">§4.2</span>What Is a Method?</a></li>
+            <li><a href="methods.html#s4-3"><span class="nav-num">§4.3</span>Outputs</a></li>
+            <li><a href="methods.html#s4-4"><span class="nav-num">§4.4</span>Functions to Objects</a></li>
+            <li><a href="methods.html#s4-5"><span class="nav-num">§4.5</span>The "Hidden" Parameter</a></li>
+            <li><a href="methods.html#s4-6"><span class="nav-num">§4.6</span>Key Takeaways</a></li>
+            <li><a href="methods.html#s4-7"><span class="nav-num">§4.7</span>Appendix: The Call Stack</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="operators.html"><span class="nav-num">§5</span>Operators</a>
+          <ul class="sub-nav">
+            <li><a href="operators.html#s5-1"><span class="nav-num">§5.1</span>Arithmetic Operators</a></li>
+            <li><a href="operators.html#s5-2"><span class="nav-num">§5.2</span>Unary Operators</a></li>
+            <li><a href="operators.html#s5-3"><span class="nav-num">§5.3</span>Comparison Operators</a></li>
+            <li><a href="operators.html#s5-4"><span class="nav-num">§5.4</span>Logical Operators</a></li>
+            <li><a href="operators.html#s5-5"><span class="nav-num">§5.5</span>Compound Assignment</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="arrays.html"><span class="nav-num">§6</span>Arrays</a>
+          <ul class="sub-nav">
+            <li><a href="arrays.html#s6-1"><span class="nav-num">§6.1</span>Why Arrays</a></li>
+            <li><a href="arrays.html#s6-2"><span class="nav-num">§6.2</span>One Variable, Many Values</a></li>
+            <li><a href="arrays.html#s6-3"><span class="nav-num">§6.3</span>The Index</a></li>
+            <li><a href="arrays.html#s6-4"><span class="nav-num">§6.4</span>Creating an Array</a></li>
+            <li><a href="arrays.html#s6-5"><span class="nav-num">§6.5</span>Reading and Writing Elements</a></li>
+            <li><a href="arrays.html#s6-6"><span class="nav-num">§6.6</span><code>.length</code></a></li>
+            <li><a href="arrays.html#s6-7"><span class="nav-num">§6.7</span>Filling in the Week</a></li>
+            <li><a href="arrays.html#s6-8"><span class="nav-num">§6.8</span>Assignment Still Copies the Address</a></li>
+            <li><a href="arrays.html#s6-9"><span class="nav-num">§6.9</span>Arrays of Objects</a></li>
+            <li><a href="arrays.html#s6-10"><span class="nav-num">§6.10</span>Pointing a Slot at an Existing Object</a></li>
+            <li><a href="arrays.html#s6-11"><span class="nav-num">§6.11</span>Passing an Array's Address to a Method</a></li>
+            <li><a href="arrays.html#s6-12"><span class="nav-num">§6.12</span>Variable-Arity Parameters</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="controlflow.html"><span class="nav-num">§7</span>Control Flow</a>
+          <ul class="sub-nav">
+            <li><a href="controlflow.html#s7-1"><span class="nav-num">§7.1</span>The Flow of Execution</a></li>
+            <li><a href="controlflow.html#s7-2"><span class="nav-num">§7.2</span>Variable Scope</a></li>
+            <li><a href="controlflow.html#s7-3"><span class="nav-num">§7.3</span>Conditional Branching</a></li>
+            <li><a href="controlflow.html#s7-4"><span class="nav-num">§7.4</span><code>while</code></a></li>
+            <li><a href="controlflow.html#s7-5"><span class="nav-num">§7.5</span><code>for</code></a></li>
+            <li><a href="controlflow.html#s7-6"><span class="nav-num">§7.6</span>for-each</a></li>
+            <li><a href="controlflow.html#s7-7"><span class="nav-num">§7.7</span>Ternary Operator</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="strings.html"><span class="nav-num">§8</span>Strings</a>
+          <ul class="sub-nav">
+            <li><a href="strings.html#s8-1"><span class="nav-num">§8.1</span>Writing Systems &amp; Unicode</a></li>
+            <li><a href="strings.html#s8-2"><span class="nav-num">§8.2</span><code>char</code></a></li>
+            <li><a href="strings.html#s8-3"><span class="nav-num">§8.3</span><code>Character</code></a></li>
+            <li><a href="strings.html#s8-4"><span class="nav-num">§8.4</span>Sequence of Characters</a></li>
+            <li><a href="strings.html#s8-5"><span class="nav-num">§8.5</span>Text Blocks</a></li>
+            <li><a href="strings.html#s8-6"><span class="nav-num">§8.6</span>Immutability</a></li>
+            <li><a href="strings.html#s8-7"><span class="nav-num">§8.7</span><code>==</code> vs <code>.equals()</code></a></li>
+            <li><a href="strings.html#s8-8"><span class="nav-num">§8.8</span>Concatenation</a></li>
+            <li><a href="strings.html#s8-9"><span class="nav-num">§8.9</span>Important String Methods</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="inheritance.html"><span class="nav-num">§9</span>Inheritance</a>
+          <ul class="sub-nav">
+            <li><a href="inheritance.html#s10-1"><span class="nav-num">§9.1</span>Taxonomy</a></li>
+            <li><a href="inheritance.html#s10-2"><span class="nav-num">§9.2</span>The Problem</a></li>
+            <li><a href="inheritance.html#s10-3"><span class="nav-num">§9.3</span><code>extends</code></a></li>
+            <li><a href="inheritance.html#s10-4"><span class="nav-num">§9.4</span><code>super(...)</code></a></li>
+            <li><a href="inheritance.html#s10-5"><span class="nav-num">§9.5</span>Polymorphism</a></li>
+            <li><a href="inheritance.html#s10-6"><span class="nav-num">§9.6</span>Overriding</a></li>
+            <li><a href="inheritance.html#s10-7"><span class="nav-num">§9.7</span><code>toString()</code></a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="accessmodifiers.html"><span class="nav-num">§10</span>Packages &amp; Access Modifiers</a>
+          <ul class="sub-nav">
+            <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§10.1</span>Packages</a></li>
+            <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§10.2</span>Why Restrict Access</a></li>
+            <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§10.3</span><code>private</code></a></li>
+            <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§10.4</span>Encapsulation</a></li>
+            <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§10.5</span><code>public</code></a></li>
+            <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§10.6</span>Package-Private</a></li>
+            <li><a href="accessmodifiers.html#s11-7"><span class="nav-num">§10.7</span><code>protected</code></a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="immutability.html"><span class="nav-num">§11</span>Immutability</a>
+          <ul class="sub-nav">
+            <li><a href="immutability.html#s11-1"><span class="nav-num">§11.1</span>Identity &amp; State</a></li>
+            <li><a href="immutability.html#s11-2"><span class="nav-num">§11.2</span>A Question of Time</a></li>
+            <li><a href="immutability.html#s11-3"><span class="nav-num">§11.3</span>Building an Immutable Class</a></li>
+            <li><a href="immutability.html#s11-4"><span class="nav-num">§11.4</span><code>final</code> Isn't Deep</a>
+            </li>
+            <li><a href="immutability.html#s11-5"><span class="nav-num">§11.5</span>Why It Matters</a></li>
+            <li><a href="immutability.html#s11-6"><span class="nav-num">§11.6</span><code>StringBuilder</code></a></li>
+            <li><a href="immutability.html#s11-7"><span class="nav-num">§11.7</span>Core Pillars</a></li>
+            <li><a href="immutability.html#s11-8"><span class="nav-num">§11.8</span>Putting It Together</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="abstractclasses.html"><span class="nav-num">§12</span>Abstract Classes</a>
+          <ul class="sub-nav">
+            <li><a href="abstractclasses.html#s12-1"><span class="nav-num">§12.1</span>The Problem</a></li>
+            <li><a href="abstractclasses.html#s12-2"><span class="nav-num">§12.2</span><code>abstract</code> Classes</a>
+            </li>
+            <li><a href="abstractclasses.html#s12-3"><span class="nav-num">§12.3</span><code>abstract</code> Methods</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="interfaces.html"><span class="nav-num">§13</span>Interfaces</a>
+          <ul class="sub-nav">
+            <li><a href="interfaces.html#s13-1"><span class="nav-num">§13.1</span>The Problem</a></li>
+            <li><a href="interfaces.html#s13-2"><span class="nav-num">§13.2</span>Interface vs. Abstract Class</a></li>
+            <li><a href="interfaces.html#s13-3"><span class="nav-num">§13.3</span>Declaring &amp; Implementing</a></li>
+            <li><a href="interfaces.html#s13-4"><span class="nav-num">§13.4</span>Override vs. Overload</a></li>
+            <li><a href="interfaces.html#s13-5"><span class="nav-num">§13.5</span>Multiple Interfaces</a></li>
+            <li><a href="interfaces.html#s13-6"><span class="nav-num">§13.6</span>Interface-Typed Params</a></li>
+            <li><a href="interfaces.html#s13-7"><span class="nav-num">§13.7</span>Anonymous Classes</a></li>
+            <li><a href="interfaces.html#s13-8"><span class="nav-num">§13.8</span>Default Methods</a></li>
+            <li><a href="interfaces.html#s13-9"><span class="nav-num">§13.9</span>Default Method Collisions</a></li>
+            <li><a href="interfaces.html#s13-10"><span class="nav-num">§13.10</span>Static Methods</a></li>
+            <li><a href="interfaces.html#s13-11"><span class="nav-num">§13.11</span>Interface Inheritance</a></li>
+            <li><a href="interfaces.html#s13-12"><span class="nav-num">§13.12</span>Strategy Pattern</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="exceptions.html"><span class="nav-num">§14</span>Exceptions</a>
+          <ul class="sub-nav">
+            <li><a href="exceptions.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
+            <li><a href="exceptions.html#s14-2"><span class="nav-num">§14.2</span>The Exception Lifecycle</a></li>
+            <li><a href="exceptions.html#s14-3"><span class="nav-num">§14.3</span>The Exception Hierarchy</a></li>
+            <li><a href="exceptions.html#s14-4"><span class="nav-num">§14.4</span>Checked vs. Unchecked</a></li>
+            <li><a href="exceptions.html#s14-5"><span class="nav-num">§14.5</span>Handling Exceptions</a></li>
+            <li><a href="exceptions.html#s14-6"><span class="nav-num">§14.6</span><code>throw</code> and
+                <code>throws</code></a></li>
+            <li><a href="exceptions.html#s14-7"><span class="nav-num">§14.7</span>Custom Exceptions</a></li>
+            <li><a href="exceptions.html#s14-8"><span class="nav-num">§14.8</span>Exception Chaining</a></li>
+            <li><a href="exceptions.html#s14-9"><span class="nav-num">§14.9</span>Try-with-Resources</a></li>
+            <li><a href="exceptions.html#s14-10"><span class="nav-num">§14.10</span>Exceptions Are Not Control Flow</a>
+            </li>
+            <li><a href="exceptions.html#s14-11"><span class="nav-num">§14.11</span>Best Practices &amp;
+                Anti-Patterns</a></li>
+            <li><a href="exceptions.html#s14-12"><span class="nav-num">§14.12</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="generics.html"><span class="nav-num">§15</span>Generics</a>
+          <ul class="sub-nav">
+            <li><a href="generics.html#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
+            <li><a href="generics.html#s15-2"><span class="nav-num">§15.2</span>Type Parameters</a></li>
+            <li><a href="generics.html#s15-3"><span class="nav-num">§15.3</span>Generic Methods</a></li>
+            <li><a href="generics.html#s15-4"><span class="nav-num">§15.4</span>Bounded Types</a></li>
+            <li><a href="generics.html#s15-5"><span class="nav-num">§15.5</span>Compile Time Only</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="records.html"><span class="nav-num">§16</span>Records</a>
+          <ul class="sub-nav">
+            <li><a href="records.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
+            <li><a href="records.html#s16-2"><span class="nav-num">§16.2</span><code>record</code></a></li>
+            <li><a href="records.html#s16-3"><span class="nav-num">§16.3</span>Implicitly Final</a></li>
+            <li><a href="records.html#s16-4"><span class="nav-num">§16.4</span>Shallow Immutability</a></li>
+            <li><a href="records.html#s16-5"><span class="nav-num">§16.5</span>Compact Constructors</a></li>
+            <li><a href="records.html#s16-6"><span class="nav-num">§16.6</span>Records Can Do More</a></li>
+            <li><a href="records.html#s16-7"><span class="nav-num">§16.7</span>When to Reach for One</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="collections.html"><span class="nav-num">§18</span>Collections Framework</a>
+          <ul class="sub-nav">
+            <li><a href="collections.html#s18-1"><span class="nav-num">§18.1</span>The Problem</a></li>
+            <li><a href="collections.html#s18-2"><span class="nav-num">§18.2</span>The Big Picture</a></li>
+            <li><a href="collections.html#s18-3"><span class="nav-num">§18.3</span><code>List</code></a></li>
+            <li><a href="collections.html#s18-4"><span class="nav-num">§18.4</span><code>Queue</code></a></li>
+            <li><a href="collections.html#s18-5"><span class="nav-num">§18.5</span><code>Set</code></a></li>
+            <li><a href="collections.html#s18-6"><span class="nav-num">§18.6</span><code>Map</code></a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="lambdas.html"><span class="nav-num">§19</span>Functional Programming</a>
+          <ul class="sub-nav">
+            <li><a href="lambdas.html#s19-1"><span class="nav-num">§19.1</span>Functions as First-Class Citizens</a>
+            </li>
+            <li><a href="lambdas.html#s19-2"><span class="nav-num">§19.2</span>Why Java "Simulates" First-Class
+                Functions</a></li>
+            <li><a href="lambdas.html#s19-3"><span class="nav-num">§19.3</span>The Problem</a></li>
+            <li><a href="lambdas.html#s19-4"><span class="nav-num">§19.4</span>Another Anonymous Class</a></li>
+            <li><a href="lambdas.html#s19-5"><span class="nav-num">§19.5</span>Functional Interfaces</a></li>
+            <li><a href="lambdas.html#s19-6"><span class="nav-num">§19.6</span>Lambda Expressions</a></li>
+            <li><a href="lambdas.html#s19-7"><span class="nav-num">§19.7</span>Method References</a></li>
+            <li><a href="lambdas.html#s19-8"><span class="nav-num">§19.8</span><code>java.util.function</code></a></li>
+            <li><a href="lambdas.html#s19-9"><span class="nav-num">§19.9</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="enums.html"><span class="nav-num">§17</span>Enums</a>
+          <ul class="sub-nav">
+            <li><a href="enums.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
+            <li><a href="enums.html#s17-2"><span class="nav-num">§17.2</span>Declaring an Enum</a></li>
+            <li><a href="enums.html#s17-3"><span class="nav-num">§17.3</span>Objects, Not Constants</a></li>
+            <li><a href="enums.html#s17-4"><span class="nav-num">§17.4</span>Comparing Enum Values</a></li>
+            <li><a href="enums.html#s17-5"><span class="nav-num">§17.5</span>Type Characteristics</a></li>
+            <li><a href="enums.html#s17-6"><span class="nav-num">§17.6</span>Fields, Constructors, Methods</a></li>
+            <li><a href="enums.html#s17-7"><span class="nav-num">§17.7</span>Enums vs. Magic Numbers</a></li>
+            <li><a href="enums.html#s17-8"><span class="nav-num">§17.8</span>Closed Sets vs. Evolving Reality</a></li>
+            <li><a href="enums.html#s17-9"><span class="nav-num">§17.9</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="optionals.html"><span class="nav-num">§20</span>Optional&lt;T&gt;</a>
+          <ul class="sub-nav">
+            <li><a href="optionals.html#s20-1"><span class="nav-num">§20.1</span>The Problem</a></li>
+            <li><a href="optionals.html#s20-2"><span class="nav-num">§20.2</span><code>null</code>: The Absence of a
+                Value</a></li>
+            <li><a href="optionals.html#s20-3"><span class="nav-num">§20.3</span>The Defensive Approach</a></li>
+            <li><a href="optionals.html#s20-4"><span class="nav-num">§20.4</span>The <code>Optional&lt;T&gt;</code>
+                Class</a></li>
+            <li><a href="optionals.html#s20-5"><span class="nav-num">§20.5</span><code>Optional&lt;T&gt;</code> vs
+                <code>null</code></a></li>
+            <li><a href="optionals.html#s20-6"><span class="nav-num">§20.6</span>Specialized Primitive Optionals</a>
+            </li>
+            <li><a href="optionals.html#s20-7"><span class="nav-num">§20.7</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="streams.html"><span class="nav-num">§21</span>Streams</a>
+          <ul class="sub-nav">
+            <li><a href="streams.html#s21-1"><span class="nav-num">§21.1</span>The Problem</a></li>
+            <li><a href="streams.html#s21-2"><span class="nav-num">§21.2</span>What Is a Stream</a></li>
+            <li><a href="streams.html#s21-3"><span class="nav-num">§21.3</span>Creating a Stream</a></li>
+            <li><a href="streams.html#s21-4"><span class="nav-num">§21.4</span>Intermediate Operations</a></li>
+            <li><a href="streams.html#s21-5"><span class="nav-num">§21.5</span>Terminal Operations</a></li>
+            <li><a href="streams.html#s21-6"><span class="nav-num">§21.6</span>Collecting Results</a></li>
+            <li><a href="streams.html#s21-7"><span class="nav-num">§21.7</span>Streams and
+                <code>Optional&lt;T&gt;</code></a></li>
+            <li><a href="streams.html#s21-8"><span class="nav-num">§21.8</span>Laziness and Pipelines</a></li>
+            <li><a href="streams.html#s21-9"><span class="nav-num">§21.9</span>When (Not) to Use Streams</a></li>
+            <li><a href="streams.html#s21-10"><span class="nav-num">§21.10</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="concurrency.html"><span class="nav-num">§22</span>Concurrent Programming</a>
+          <ul class="sub-nav">
+            <li><a href="concurrency.html#s22-1"><span class="nav-num">§22.1</span>The Problem</a></li>
+            <li><a href="concurrency.html#s22-2"><span class="nav-num">§22.2</span>Process, Thread, and the OS</a></li>
+            <li><a href="concurrency.html#s22-3"><span class="nav-num">§22.3</span>Independent Progress</a></li>
+            <li><a href="concurrency.html#s22-4"><span class="nav-num">§22.4</span>Why Concurrency Matters</a></li>
+            <li><a href="concurrency.html#s22-5"><span class="nav-num">§22.5</span>Where Parallelism Fits In</a></li>
+            <li><a href="concurrency.html#s22-6"><span class="nav-num">§22.6</span>The Main Thread</a></li>
+            <li><a href="concurrency.html#s22-7"><span class="nav-num">§22.7</span>Step 1: Creating a Task</a></li>
+            <li><a href="concurrency.html#s22-8"><span class="nav-num">§22.8</span>Step 2: Handing a Task to an
+                Executor</a></li>
+            <li><a href="concurrency.html#s22-9"><span class="nav-num">§22.9</span>ExecutorService in Practice</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="modules.html"><span class="nav-num">§23</span>Java Modules</a>
+          <ul class="sub-nav">
+            <li><a href="modules.html#s23-1"><span class="nav-num">§23.1</span>The Problem</a></li>
+            <li><a href="modules.html#s23-2"><span class="nav-num">§23.2</span>What Is a Module</a></li>
+            <li><a href="modules.html#s23-3"><span class="nav-num">§23.3</span><code>module-info.java</code></a></li>
+            <li><a href="modules.html#s23-4"><span class="nav-num">§23.4</span><code>exports</code></a></li>
+            <li><a href="modules.html#s23-5"><span class="nav-num">§23.5</span><code>requires</code></a></li>
+            <li><a href="modules.html#s23-6"><span class="nav-num">§23.6</span>Strong Encapsulation</a></li>
+            <li><a href="modules.html#s23-7"><span class="nav-num">§23.7</span>The Module Path</a></li>
+            <li><a href="modules.html#s23-8"><span class="nav-num">§23.8</span><code>requires transitive</code></a></li>
+            <li><a href="modules.html#s23-9"><span class="nav-num">§23.9</span>When (Not) to Use Modules</a></li>
+            <li><a href="modules.html#s23-10"><span class="nav-num">§23.10</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="dateandtime.html"><span class="nav-num">§24</span>Date and Time</a>
+          <ul class="sub-nav">
+            <li><a href="dateandtime.html#s24-1"><span class="nav-num">§24.1</span>The Problem</a></li>
+            <li><a href="dateandtime.html#s24-2"><span class="nav-num">§24.2</span>Human Time vs. Machine Time</a></li>
+            <li><a href="dateandtime.html#s24-3"><span class="nav-num">§24.3</span>The Core "Local" Types</a></li>
+            <li><a href="dateandtime.html#s24-4"><span class="nav-num">§24.4</span><code>Instant</code></a></li>
+            <li><a href="dateandtime.html#s24-5"><span class="nav-num">§24.5</span>Timezones</a></li>
+            <li><a href="dateandtime.html#s24-6"><span class="nav-num">§24.6</span><code>Duration</code> &amp;
+                <code>Period</code></a></li>
+            <li><a href="dateandtime.html#s24-7"><span class="nav-num">§24.7</span>Formatting Dates and Times</a></li>
+            <li><a href="dateandtime.html#s24-8"><span class="nav-num">§24.8</span>Partial Types</a></li>
+            <li><a href="dateandtime.html#s24-9"><span class="nav-num">§24.9</span>Interop &amp; Migration</a></li>
+            <li><a href="dateandtime.html#s24-10"><span class="nav-num">§24.10</span>Key Takeaways</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="io.html" class="active"><span class="nav-num">§25</span>Input and Output</a>
+          <ul class="sub-nav">
+            <li><a href="#s25-1"><span class="nav-num">§25.1</span>The Problem</a></li>
+            <li><a href="#s25-2"><span class="nav-num">§25.2</span>Bytes or Characters?</a></li>
+            <li><a href="#s25-3"><span class="nav-num">§25.3</span>Abstract vs. Concrete</a></li>
+            <li><a href="#s25-4"><span class="nav-num">§25.4</span>Reading and Writing</a></li>
+            <li><a href="#s25-5"><span class="nav-num">§25.5</span>Buffering</a></li>
+            <li><a href="#s25-6"><span class="nav-num">§25.6</span>Flushing</a></li>
+            <li><a href="#s25-7"><span class="nav-num">§25.7</span>NIO.2</a></li>
+            <li><a href="#s25-8"><span class="nav-num">§25.8</span>Closing Streams Safely</a></li>
+            <li><a href="#s25-9"><span class="nav-num">§25.9</span>Comparing Files</a></li>
+            <li><a href="#s25-10"><span class="nav-num">§25.10</span>Handling <code>IOException</code></a></li>
+            <li><a href="#s25-11"><span class="nav-num">§25.11</span>Creating Files and Directories</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="oodesign.html"><span class="nav-num">§26</span>Object-Oriented Design</a>
+        </li>
+      </ul>
+    </nav>
+  </nav>
+
+  <main id="content">
+    <header class="page-header">
+      <div class="page-chapter">Chapter 25</div>
+      <h1>Input and Output</h1>
+      <p class="page-lead">So far, every program in this tutorial has lived inside its own little world — variables,
+        methods, and objects that already exist in memory. Real programs rarely stay that contained. This chapter is
+        where data starts crossing the boundary between a program and everything outside it.</p>
+    </header>
+
+    <article>
+
+      <!-- §25.1 -->
+      <section id="s25-1">
+        <div class="section-head">
+          <span class="sec-num">§25.1</span>
+          <h2>The Problem <em>— your program is not an island</em></h2>
+        </div>
+
+        <p>So far, our programs have lived inside their own little world. We create variables, call methods, and
+          work with objects that already exist in memory. Everything a program has needed, up to this point, was
+          already there before the program started running.</p>
+
+        <p>But real programs rarely work that way. A banking application needs transactions from a database. A photo
+          editor needs images from disk. A chat application needs messages from the network. At some point, data has
+          to cross the boundary between a program and the outside world — and that boundary is exactly what
+          <span class="term">I/O</span> (input/output) is about.
+        </p>
+
+        <h3>The Idea of a Stream</h3>
+
+        <p>Imagine filling a bucket with water
+          from a pipe. The bucket doesn't receive an entire river all at once — it receives a continuous flow,
+          arriving gradually. Data crossing the boundary into or out of a program often works the same way: a program
+          receives or sends data gradually, not as one complete object handed over in an instant.</p>
+
+        <pre><code class="language-plaintext">Input: program <- outside world
+
+Output: program -> outside world</code></pre>
+
+        <p>Java names these two directions directly:</p>
+        <ul>
+          <li>an <code>InputStream</code> is a connection data flows in through;</li>
+          <li>an <code>OutputStream</code> is a connection data flows out through.</li>
+        </ul>
+
+        <div class="callout callout-rule">
+          <div class="callout-lbl">A stream is a connection, not the data itself</div>
+          <p>The single most important idea to hold onto before writing a line of I/O code: a stream is not the
+            data — it's a connection through which data moves. A file on disk, a socket on the network, a database
+            result set — none of these <em>are</em> a stream; a stream is simply the pipe a program reads them
+            through, or writes them out through, one piece at a time.</p>
+        </div>
+      </section>
+
+      <!-- §25.2 -->
+      <section id="s25-2">
+        <div class="section-head">
+          <span class="sec-num">§25.2</span>
+          <h2>Bytes or Characters?</h2>
+        </div>
+
+        <p>Imagine we are building a photo-sharing application. A user uploads a profile picture:
+
+          <code class="language-plaintext">profile-picture.jpg</code>
+          The program needs to read the file from disk and send it somewhere else. But what exactly are we
+          reading? We are not reading "a picture" in the way a human sees it. The computer sees a sequence of bytes —
+          something like:
+        </p>
+
+        <pre><code class="language-plaintext">[137] [80] [78] [71] [13] [10] [26] [10] ...</code></pre>
+
+        <p>Those numbers are the actual data stored in the file. Our program does not need to understand that they
+          represent a picture. It just needs to move the bytes correctly.</p>
+
+        <p>Now imagine a different feature: loading a user's saved message. The file contains the text:
+
+          <code class="language-plaintext">Happy birthday!</code>
+
+          This time, the program does not just need the raw data. It needs to understand the text as characters.
+          The same kind of stored bytes now need to be interpreted as:
+        </p>
+
+        <pre><code class="language-plaintext">H a p p y (space) b i r t h d a y !</code></pre>
+
+        <p>Now the distinction emerges naturally: the computer always stores bytes. Humans usually work with
+          characters. The difference is whether the program cares about the raw representation, or the meaning of
+          the text.</p>
+
+        <table class="content-table">
+          <tr>
+            <th></th>
+            <th><code>InputStream</code> / <code>OutputStream</code></th>
+            <th><code>Reader</code> / <code>Writer</code></th>
+          </tr>
+          <tr>
+            <td>Works with</td>
+            <td>Bytes</td>
+            <td>Characters</td>
+          </tr>
+          <tr>
+            <td>Used for</td>
+            <td>Images, videos, compressed files, network protocols</td>
+            <td>Text files, configuration files, source code, JSON</td>
+          </tr>
+        </table>
+
+        <p>Both pairs are still streams in the sense of §25.1 — a connection through which data moves, not the data
+          itself. The difference is what unit that data moves in: raw bytes, or characters already decoded into
+          text.</p>
+      </section>
+
+      <!-- §25.3 -->
+      <section id="s25-3">
+        <div class="section-head">
+          <span class="sec-num">§25.3</span>
+          <h2>Abstract vs. Concrete <em>— <code>InputStream</code> vs. <code>FileInputStream</code></em></h2>
+        </div>
+
+        <p><code>InputStream</code> says nothing about where the bytes actually come from. That's deliberate. Bytes
+          might come from a file on disk, from a socket on the network, from a zip entry, from a chunk of memory —
+          <code>InputStream</code> only promises that <em>something</em> can hand it bytes, one <code>read()</code>
+          call at a time. It is an <a href="abstractclasses.html#s12-2">abstract class</a>, in exactly the sense
+          §12 introduced: it defines the contract, but has no idea how to fulfill it.</p>
+
+        <p>The class that actually knows how to fulfill it is a concrete subclass. Reading a profile picture from
+          disk means reaching for a specific one: <code>FileInputStream</code>.</p>
+
+        <pre><code class="language-java">InputStream in = new FileInputStream("profile-picture.jpg");</code></pre>
+
+        <p>Notice the shape of that line: the declared type is the abstract <code>InputStream</code>, but the object
+          created is the concrete <code>FileInputStream</code>. This is the same "program to an interface, not an
+          implementation" idea from <a href="oodesign.html#s19-6">§26.6</a> — the rest of the code that reads bytes
+          from <code>in</code> never needs to know, or care, that they happen to be coming from a file.</p>
+
+        <p>The same split exists on the output side, and again on the character side. Four abstract types, each
+          with its own family of concrete implementations that know exactly where the data is coming from or going
+          to:</p>
+
+        <table class="content-table">
+          <tr>
+            <th></th>
+            <th>Bytes</th>
+            <th>Characters</th>
+          </tr>
+          <tr>
+            <td>Input</td>
+            <td><code>InputStream</code> → <code>FileInputStream</code></td>
+            <td><code>Reader</code> → <code>FileReader</code></td>
+          </tr>
+          <tr>
+            <td>Output</td>
+            <td><code>OutputStream</code> → <code>FileOutputStream</code></td>
+            <td><code>Writer</code> → <code>FileWriter</code></td>
+          </tr>
+        </table>
+
+        <p><code>FileInputStream</code>, <code>FileOutputStream</code>, <code>FileReader</code>, and
+          <code>FileWriter</code> are only one family among several — <code>ByteArrayInputStream</code> reads bytes
+          already sitting in memory, <code>Socket</code> exposes an <code>InputStream</code>/<code>OutputStream</code>
+          pair for network data, and so on. The abstract type is what the rest of the program is written against;
+          the concrete type is chosen once, at the point where the stream is created, based on where the data
+          actually lives.</p>
+      </section>
+
+      <!-- §25.4 -->
+      <section id="s25-4">
+        <div class="section-head">
+          <span class="sec-num">§25.4</span>
+          <h2>Reading and Writing <em>— the core methods</em></h2>
+        </div>
+
+        <p>I/O streams are all about reading and writing data, so it shouldn't be a surprise that the most important
+          methods are <code>read()</code> and <code>write()</code>.</p>
+
+        <p>Both <code>InputStream</code> and <code>Reader</code> declare a <code>read()</code> method to pull data
+          from a stream — a byte at a time for <code>InputStream</code>, a character at a time for <code>Reader</code>.
+          Likewise, both <code>OutputStream</code> and <code>Writer</code> declare a <code>write()</code> method to
+          push a single unit of data onto the stream.</p>
+
+        <pre><code class="language-java">abstract int  read();   // InputStream — returns a byte, or -1 at end of stream
+abstract void write(int b);   // OutputStream — writes a single byte</code></pre>
+
+        <p>These are exactly the methods that make <code>InputStream</code> and <code>OutputStream</code> abstract
+          in the first place, per §25.3: the abstract class only declares that <em>some</em> byte can be read or
+          written; a concrete subclass like <code>FileInputStream</code> is what actually implements
+          <code>read()</code> against a real file. Every other operation covered in this chapter — buffering,
+          locating a file through <code>Path</code> — exists to make calling these two methods more convenient or
+          more efficient. Neither replaces them.</p>
+      </section>
+
+      <!-- §25.5 -->
+      <section id="s25-5">
+        <div class="section-head">
+          <span class="sec-num">§25.5</span>
+          <h2>Buffering</h2>
+        </div>
+
+        <p>Imagine asking someone to deliver rice one grain at a time. They walk to the storeroom, pick up a single
+          grain, carry it to the kitchen, set it down — then turn around and walk all the way back for the next one.
+          Technically, the rice gets delivered. But almost none of that effort is actually about the rice; nearly all
+          of it is the walking. Do that a few thousand times and the trip itself becomes the bottleneck, not the
+          grain.</p>
+
+        <p>Nobody delivers rice this way. Instead, we scoop up a bowlful in one trip and carry the whole bowl to the
+          kitchen. The number of grains delivered hasn't changed — only the number of trips has, and that's what
+          makes the difference.</p>
+
+        <p>The same tradeoff shows up in I/O. A stream created directly on a file or a socket typically talks to the
+          operating system on every single <code>read()</code> or <code>write()</code> call, and each of those calls
+          is expensive compared to the actual work of moving a byte:</p>
+
+        <pre><code class="language-plaintext">Without buffering:
+
+read byte
+read byte
+read byte
+...</code></pre>
+
+        <p>Buffering collects data into a chunk first, and lets the program work through that chunk in memory, only
+          going back to the operating system once the chunk is exhausted:</p>
+
+        <pre><code class="language-plaintext">With buffering:
+
+read chunk
+process chunk
+...</code></pre>
+
+        <p>This is exactly what <code>BufferedInputStream</code> and <code>BufferedReader</code> are for. Neither one
+          changes <em>what</em> is being read — bytes are still bytes, characters are still characters — they only
+          change how many round trips it takes to read them. And true to the pattern from §25.3, both are wrapped
+          around another stream rather than replacing it:</p>
+
+        <pre><code class="language-java">InputStream in = new BufferedInputStream(new FileInputStream("profile-picture.jpg"));
+Reader in = new BufferedReader(new FileReader("message.txt"));</code></pre>
+
+        <p><code>FileInputStream</code> and <code>FileReader</code> still own the connection to the actual file;
+          <code>BufferedInputStream</code> and <code>BufferedReader</code> just sit in front of them, collecting
+          bytes or characters into a chunk before handing them onward. The rest of the program still just sees an
+          <code>InputStream</code> or a <code>Reader</code> — it never needs to know that a buffer is doing the
+          heavy lifting underneath.</p>
+      </section>
+
+      <!-- §25.6 -->
+      <section id="s25-6">
+        <div class="section-head">
+          <span class="sec-num">§25.6</span>
+          <h2>Flushing</h2>
+        </div>
+
+        <p>Write a document, hit save, and the laptop dies half a second later — did that last change actually make
+          it to disk, or was it still sitting somewhere in between? Buffering, as §25.5 just showed, means a write
+          doesn't necessarily land immediately; sometimes it's just waiting in memory for the bucket to fill.</p>
+
+        <p><span class="term">Flushing</span> is the act of forcing whatever is sitting in the buffer to be written
+          to its destination — disk, network, console — immediately.</p>
+
+        <h3>Why Flushing Is Needed</h3>
+
+        <p>A buffer, as §25.5 introduced, accumulates data in memory and writes to the destination in chunks for
+          efficiency. But that means data can sit in the buffer and never reach the destination if the program never
+          flushes it:</p>
+
+        <pre><code class="language-java">BufferedWriter bw = new BufferedWriter(new FileWriter("file.txt"));
+
+bw.write("important data");
+
+// program crashes here — buffer never flushed — file.txt is empty!</code></pre>
+
+        <div class="callout callout-mem">
+          <div class="callout-lbl">A write() is not a promise it's on disk</div>
+          <p>Calling <code>write()</code> only hands data to the buffer sitting in memory — it says nothing about
+            whether that data has actually reached the file, the socket, or wherever the stream is headed. Until a
+            flush happens, "important data" above exists only in memory, and memory doesn't survive a crash.</p>
+        </div>
+
+        <h3>When Does Flush Happen?</h3>
+
+        <p><strong>1. Automatically</strong></p>
+
+        <p><em>a. When the buffer is full</em> — once the buffer has no room left, it empties itself into the
+          destination on its own, making room for more:</p>
+
+        <pre><code class="language-plaintext">your code                buffer (memory)           destination (disk)
+─────────                ───────────────           ──────────────────
+write("Hello ")     →    [ Hello  ]                [ empty ]
+write("World")      →    [ Hello World ]           [ empty ]
+write("!!")         →    [ Hello World!! ]         [ empty ]
+-- buffer full --
+auto flush          →    [ empty ]            →    [ Hello World!! ]</code></pre>
+
+        <p><em>b. When the stream is closed</em> — <code>close()</code> calls <code>flush()</code> internally
+          before shutting the stream down, so closing always flushes. The difference between the two is what happens
+          to the stream afterward:</p>
+
+        <pre><code class="language-java">// flush() — empties the buffer, stream stays open for more writing
+bw.flush();
+bw.write("more data"); // still works
+
+// close() — flushes AND closes, no more writing
+bw.close();
+bw.write("more data"); // IOException — stream closed</code></pre>
+
+        <p><strong>2. Explicit <code>flush()</code></strong></p>
+
+        <p>A program doesn't have to wait for either of those to happen. Calling <code>flush()</code> directly forces
+          whatever is currently buffered out to the destination right now, without closing the stream — useful
+          anywhere the program needs a guarantee that data has actually left memory, such as after logging an event:</p>
+
+        <pre><code class="language-java">BufferedWriter bw = new BufferedWriter(new FileWriter("log.txt"));
+
+bw.write("Server started");
+bw.newLine();
+bw.flush(); // force to disk now, don't wait for the buffer to fill
+
+bw.write("Request received");
+bw.newLine();
+bw.flush(); // again</code></pre>
+      </section>
+
+      <!-- §25.7 -->
+      <section id="s25-7">
+        <div class="section-head">
+          <span class="sec-num">§25.7</span>
+          <h2>NIO.2 <em>— the modern file API</em></h2>
+        </div>
+
+        <p>Everything so far has been about streams — connections that data flows through. But before a program can
+          open a stream on a file, it first has to say <em>which</em> file. That's a separate question, and it
+          deserves its own story, centered on a single type: <code>Path</code>.</p>
+
+        <h3>Introduce: What Is a <code>Path</code>?</h3>
+
+        <p>The old way of naming a file looks like this:</p>
+
+        <pre><code class="language-java">File file = new File("notes.txt");</code></pre>
+
+        <p>The modern way looks similar on the surface, but is built on a different idea:</p>
+
+        <pre><code class="language-java">Path path = Path.of("notes.txt");</code></pre>
+
+        <div class="callout callout-rule">
+          <div class="callout-lbl">A path is not a file</div>
+          <p>A <code>Path</code> is a description of where something exists — a location, expressed as a sequence
+            of names, nothing more. It doesn't open anything, lock anything, or guarantee that the file is even
+            there. It is to a file what an address is to a house: writing the address down doesn't mean the house
+            exists, and it doesn't move anyone into it.</p>
+        </div>
+
+        <p>Sit with that for a moment against the line above: <code>path</code> doesn't represent a file — it
+          represents where a file <em>could be</em>. <code>notes.txt</code> might not even exist. A <code>Path</code>
+          can just as easily be built pointing at:</p>
+
+        <ul>
+          <li>an existing file,</li>
+          <li>a non-existent file,</li>
+          <li>a directory,</li>
+          <li>or a symbolic link.</li>
+        </ul>
+
+        <p><code>Path.of(...)</code> doesn't check which of these it is, or whether it's any of them at all — it
+          simply describes a location in the file system, nothing more.</p>
+
+        <p>That same "just a location" idea means a <code>Path</code> doesn't know, or care, whether it points to a
+          file or a directory. It's nothing more than a sequence of name components — <code>"some/folder/file.txt"</code>
+          or <code>"mydir/"</code> are both equally valid paths, and <code>Path</code> makes no distinction between
+          them.</p>
+
+        <div class="callout callout-mem">
+          <div class="callout-lbl">A <code>.txt</code> name doesn't make it a file</div>
+          <p><code>/data/zoo.txt</code> could just as easily be a directory — nothing about a <code>Path</code>'s
+            text guarantees what it actually is on disk, or that anything is there at all. Whether a given
+            <code>Path</code> refers to a file or a directory is something to check, with <code>Files</code> (later
+            in this section), never something to assume from how the name is spelled.</p>
+        </div>
+
+        <h3>Create: <code>Path.of()</code> vs. <code>Paths.get()</code></h3>
+
+        <p><code>Path</code> is an <em>interface</em> — and an interface can never be instantiated with
+          <code>new</code>. So how does a line like <code>Path.of("notes.txt")</code> actually produce an object?</p>
+
+        <p>When NIO.2 was first introduced, the standard way to hand back an instance of an interface was a
+          separate, plural-named utility class holding the factory method, since the interface itself couldn't hold
+          one. That's how <code>Paths.get()</code> was born, and for years it was the only way to create a
+          <code>Path</code>:</p>
+
+        <pre><code class="language-java">// Java 7–10 — had to go through the Paths factory class
+Path p = Paths.get("file.txt");
+
+// Java 11+ — Path has its own factory method
+Path p = Path.of("file.txt");</code></pre>
+
+        <p>Java 8 changed the premise that pattern rested on, by letting interfaces carry actual method bodies —
+          not just declarations — in two forms: <a href="interfaces.html#s13-8">default methods</a>, run on an
+          instance, and <a href="interfaces.html#s13-10">static methods</a>, run on the interface type itself,
+          exactly the way <code>Path.of(...)</code> is called on <code>Path</code> rather than on some separate
+          factory class. (Java 9 later added a third form, private methods, for reusable logic internal to the
+          interface — not covered elsewhere in this tutorial, but part of the same shift.) Java 11's
+          <code>Path.of()</code> is a direct product of that shift: rather than adding another method to a
+          <code>Paths</code>-style helper class, the factory method was placed directly on <code>Path</code> itself,
+          as part of a broader effort across the language to reduce exactly this kind of
+          "utility class pollution" — one interface, one place to look, instead of an interface plus a
+          same-purpose-different-name class beside it. <code>Paths</code> still exists, but is largely a relic of
+          the pattern <code>Path.of()</code> replaced.</p>
+
+        <p>So <code>Path.of("notes.txt")</code> hands back an object — but an object of what actual class? Not
+          <code>Path</code> itself; an interface has no object of its own, only whatever concrete class implements
+          it (§13). On Linux or macOS that's a class called <code>sun.nio.fs.UnixPath</code>; on Windows, it's
+          <code>sun.nio.fs.WindowsPath</code> instead. Neither one is something a program is ever meant to
+          reference, or even likely to encounter by name:</p>
+
+        <ul>
+          <li>They are not part of the public Java API — the <a href="https://docs.oracle.com/en/java/javase/25/docs/api/index.html">official Javadoc</a> only documents exported public API, and these classes aren't in it.</li>
+          <li>They live in a package beginning with <code>sun.*</code>, which has never been part of the supported
+            Java SE API — a naming convention that itself signals "implementation detail, not public contract."</li>
+          <li>Since the module system arrived in Java 9, they're harder to reach still: the <code>java.base</code>
+            module doesn't export <code>sun.nio.fs</code> at all, so code outside the JDK can't normally access
+            those classes even by name.</li>
+        </ul>
+
+        <p>The only place to actually see them is the JDK's own source — OpenJDK ships files like
+          <code>src/java.base/unix/classes/sun/nio/fs/UnixPath.java</code> and
+          <code>src/java.base/windows/classes/sun/nio/fs/WindowsPath.java</code>, each implementing the same
+          <code>Path</code> interface against a completely different underlying file system.</p>
+
+        <p>That invisibility is exactly the point, and it's the same "program to an interface" payoff
+          <a href="oodesign.html#s19-6">§26.6</a> makes elsewhere: every line of code in this chapter has been
+          written against <code>Path</code>, never against
+          <code>UnixPath</code> or <code>WindowsPath</code> by name. If a future JDK rewrote the file system
+          implementation from scratch, any program written against <code>Path</code> wouldn't need to change at
+          all — only code that had reached past the interface, into <code>sun.*</code>, could possibly break.</p>
+
+        <h3>Operate: Working with an Existing <code>Path</code></h3>
+
+        <p>Every operation on a <code>Path</code> follows the same rule: none of them change the
+          <code>Path</code> they're called on. <code>resolve()</code> is the simplest example — it's easy to misread
+          a line like <code>p1.resolve("README.md")</code> as changing <code>p1</code>, but it doesn't. It returns a
+          new <code>Path</code>, leaving the original exactly as it was:</p>
+
+        <pre><code class="language-java">Path p1 = Path.of("/users/mk/dev/java");
+Path p2 = p1.resolve("README.md");
+// p1 is unchanged; p2 is a new object
+
+System.out.println(p1); // /users/mk/dev/java
+System.out.println(p2); // /users/mk/dev/java/README.md</code></pre>
+
+        <p>That's the same immutable-value discipline §11 built up for classes like <code>String</code>: a
+          <code>Path</code> can be handed to another method, stored, or shared across threads without any risk that
+          something else silently changes what it points to. <code>Path</code> also plugs directly into streams
+          (§21) through methods like <code>Files.lines()</code> and <code>Files.walk()</code>, which is not
+          something <code>File</code> was ever built to support.</p>
+
+        <p><code>normalize()</code> is a second operation with the same shape, and it earns its keep because a
+          <code>Path</code> is only text — nothing stops that text from containing redundant pieces: a stray
+          current-directory marker, a detour up and back down the tree, a doubled separator. <code>normalize()</code>
+          cleans exactly that up, without ever touching the file system. Nothing is read, moved, or checked for
+          existence — it's pure text processing on the <code>Path</code> itself, and it handles three kinds of
+          redundancy:</p>
+
+        <table class="content-table wrap-first">
+          <tr>
+            <th>Redundancy</th>
+            <th>Example</th>
+          </tr>
+          <tr>
+            <td>A <code>.</code> ("current directory") component — doesn't change the effective path, so it's
+              simply dropped</td>
+            <td><code>/home/user/./documents</code> → <code>/home/user/documents</code></td>
+          </tr>
+          <tr>
+            <td>A <code>..</code> ("parent directory") component — resolved by moving back up the tree, when
+              possible</td>
+            <td><code>/home/user/../documents</code> → <code>/home/documents</code></td>
+          </tr>
+          <tr>
+            <td>Doubled directory separators — condensed to one</td>
+            <td><code>/home//user</code> → <code>/home/user</code></td>
+          </tr>
+        </table>
+
+        <pre><code class="language-java">Path p = Path.of("/home/user/../documents/./notes.txt");
+Path cleaned = p.normalize();
+
+System.out.println(p);       // /home/user/../documents/./notes.txt
+System.out.println(cleaned); // /home/documents/notes.txt</code></pre>
+
+        <p>A directory and a <code>..</code> right after it don't just move up the tree — they cancel each other out
+          completely, since going into <code>armadillo</code> and immediately back out leaves nothing behind:</p>
+
+        <pre><code class="language-java">var p1 = Path.of("./armadillo/../shells.txt");
+
+System.out.println(p1); // ./armadillo/../shells.txt
+
+// normalize: remove redundant elements from the path
+System.out.println(p1.normalize()); // shells.txt
+
+// notice immutability!
+System.out.println(p1); // ./armadillo/../shells.txt</code></pre>
+
+        <p>The leading <code>./</code> is dropped as a redundant current-directory marker, and
+          <code>armadillo/..</code> collapses to nothing at all — leaving just <code>shells.txt</code>. And exactly
+          as with <code>resolve()</code>, <code>p1</code> itself never changes: <code>normalize()</code> only ever
+          hands back a new <code>Path</code>.</p>
+
+        <div class="callout callout-rule">
+          <div class="callout-lbl"><code>..</code> beyond the root</div>
+          <p>Resolving <code>..</code> assumes there's a parent to move up to. Whether that assumption holds when
+            <code>..</code> would climb past the root — and what <code>normalize()</code> does about it — depends on
+            the underlying file system and on whether the <code>Path</code> is absolute or relative to begin with.</p>
+        </div>
+
+        <h3>Acting On a Path: <code>Files</code></h3>
+
+        <p>Everything above only describes a location, or reshapes that description — none of it touches the file
+          system. Actually doing something with that location — reading it, copying it, deleting it — is a separate
+          step, handled by the <code>Files</code> utility class:</p>
+
+        <pre><code class="language-java">String contents = Files.readString(path);
+Files.copy(source, target);
+Files.delete(path);</code></pre>
+
+        <p><code>Files</code> is built the same way as <code>Collections</code> or <code>Arrays</code>: nothing but
+          <code>static</code> methods, a private constructor, and no reason to ever be instantiated. Splitting
+          "where something is" (<code>Path</code>) from "what to do with it" (<code>Files</code>) is what makes this
+          API so much more expressive than the old <code>File</code> class, which bundled both ideas into one object
+          with a much smaller, clumsier set of operations.</p>
+
+        <h3>Summary: Four Types, Four Jobs</h3>
+
+        <table class="content-table wrap-first">
+          <tr>
+            <th>Type</th>
+            <th>Purpose</th>
+          </tr>
+          <tr>
+            <td><code>java.io.File</code></td>
+            <td>The old I/O representation of a location in the file system. A concrete, mutable class that
+              bundles "where" and "what to do with it" together.</td>
+          </tr>
+          <tr>
+            <td><code>java.nio.file.Path</code></td>
+            <td>The NIO.2 representation of a location — a file or a directory. An interface, and effectively
+              immutable: no operation changes a <code>Path</code>, every operation returns a new one.</td>
+          </tr>
+          <tr>
+            <td><code>java.nio.file.Paths</code></td>
+            <td>A factory class for creating a <code>Path</code> from a string or URI — largely superseded once
+              <code>Path</code> got its own static factory method.</td>
+          </tr>
+          <tr>
+            <td><code>java.nio.file.Files</code></td>
+            <td>A utility class of <code>static</code> methods that operate <em>on</em> a <code>Path</code> —
+              reading, writing, copying, deleting, and more.</td>
+          </tr>
+        </table>
+      </section>
+
+      <!-- §25.8 -->
+      <section id="s25-8">
+        <div class="section-head">
+          <span class="sec-num">§25.8</span>
+          <h2>Closing Streams Safely <em>— try-with-resources</em></h2>
+        </div>
+
+        <p>Every concrete stream this chapter has introduced — <code>FileInputStream</code>, <code>FileReader</code>,
+          <code>BufferedWriter</code>, and the rest — is a resource that has to be closed once a program is done with
+          it, the same way §25.6 showed a buffer has to be flushed. And the same problem shows up: if an exception
+          is thrown between opening the stream and closing it, a hand-written <code>close()</code> call never runs,
+          and the file handle or socket leaks.</p>
+
+        <pre><code class="language-java">// Bad — close() never runs if reading throws
+FileInputStream in = new FileInputStream("data.txt");
+in.read();
+in.close();</code></pre>
+
+        <p>This is exactly the problem <a href="exceptions.html#s14-9">§14.9's try-with-resources</a> exists to
+          solve, and every stream in this chapter is already built to use it: <code>InputStream</code>,
+          <code>OutputStream</code>, <code>Reader</code>, and <code>Writer</code> all implement
+          <code>Closeable</code>, so any of their concrete subclasses can be declared directly inside a
+          <code>try</code>'s parentheses:</p>
+
+        <pre><code class="language-java">try (FileInputStream in = new FileInputStream("data.txt")) {
+    in.read();
+} // in.close() runs automatically, even if read() throws</code></pre>
+
+        <p>Copying from one file to another needs two streams open at once — one to read, one to write — and both
+          can be declared the same way, separated by a semicolon:</p>
+
+        <pre><code class="language-java">try (FileInputStream in = new FileInputStream("source.jpg");
+     FileOutputStream out = new FileOutputStream("copy.jpg")) {
+    in.transferTo(out);
+} // out.close() runs first, then in.close() — reverse of declaration order</code></pre>
+
+        <p>Nothing about I/O changes how try-with-resources behaves — §14.9 already covers the mechanics in full,
+          including what happens when <code>close()</code> itself throws while unwinding from another exception.
+          What's worth remembering here is narrower: every stream type this chapter has built up is a
+          <code>Closeable</code>, which is exactly what makes it a safe fit for this syntax without any extra work.</p>
+      </section>
+
+      <!-- §25.9 -->
+      <section id="s25-9">
+        <div class="section-head">
+          <span class="sec-num">§25.9</span>
+          <h2>Comparing Files</h2>
+        </div>
+
+        <h3>a. Are They Physically the Same File?</h3>
+
+        <p>A file system location can be written more than one way — a redundant <code>.</code>, a detour through
+          <code>..</code>, a symbolic link — so two <code>Path</code> objects with different text can still point
+          at the exact same file. That means <code>equals()</code> can't be trusted to answer "is this the same
+          file," because <code>equals()</code> never looks at the file system at all — it only compares the path's
+          text, element by element:</p>
+
+        <table class="content-table wrap-first">
+          <tr>
+            <th>Path</th>
+            <th>Value</th>
+          </tr>
+          <tr>
+            <td><code>p1</code></td>
+            <td><code>/users/mk/brics.csv</code></td>
+          </tr>
+          <tr>
+            <td><code>p2</code></td>
+            <td><code>/users/mk/./brics.csv</code></td>
+          </tr>
+          <tr>
+            <td><code>p3</code></td>
+            <td><code>/users/mk/dev/../brics.csv</code></td>
+          </tr>
+        </table>
+
+        <pre><code class="language-java">Path p1 = Path.of("/users/mk/brics.csv");
+Path p2 = Path.of("/users/mk/./brics.csv");
+Path p3 = Path.of("/users/mk/dev/../brics.csv");
+
+System.out.println(p1.equals(p2)); // false
+
+try {
+    System.out.println(Files.isSameFile(p1, p2)); // true
+} catch (IOException e) {
+    e.printStackTrace();
+}</code></pre>
+
+        <p>All three paths above resolve to the exact same location once normalized, but <code>p1.equals(p2)</code>
+          still returns <code>false</code> — <code>equals()</code> sees <code>"/users/mk/brics.csv"</code> and
+          <code>"/users/mk/./brics.csv"</code> as different strings, full stop, regardless of what either one
+          actually points to on disk.</p>
+
+        <p><code>Files.isSameFile(Path, Path)</code> is the method built to answer the question <code>equals()</code>
+          can't: it resolves path symbols, follows symbolic links, and checks the file system itself to determine
+          whether two <code>Path</code> objects name the same location — despite the name, that includes two
+          <code>Path</code>s that both refer to the same directory, not only files.</p>
+
+        <h3>b. Are the Contents of the Files the Same?</h3>
+
+        <p>Identity and content are independent questions — a path can name the right file without telling you
+          what's inside it, and matching content doesn't require it to be the same file at all:</p>
+
+        <table class="content-table wrap-first">
+          <tr>
+            <th>Question</th>
+            <th>Method</th>
+          </tr>
+          <tr>
+            <td>Identity — is this the same file?</td>
+            <td><code>Files.isSameFile(Path, Path)</code></td>
+          </tr>
+          <tr>
+            <td>Content — do they hold the same bytes?</td>
+            <td><code>Files.mismatch(Path, Path)</code></td>
+          </tr>
+        </table>
+
+        <p><code>Files.isSameFile()</code> answers identity, as above — a common real-world use is detecting that
+          two different-looking paths are actually symlinks pointing at the same underlying file.</p>
+
+        <p><code>Files.mismatch(Path, Path)</code>, introduced in Java 12, answers content instead: it compares two
+          files byte by byte and reports the first position where they differ. It returns <code>-1</code> if the
+          files are identical; otherwise the returned index falls somewhere in the inclusive range from
+          <code>0L</code> up to the size, in bytes, of the smaller of the two files.</p>
+      </section>
+
+      <!-- §25.10 -->
+      <section id="s25-10">
+        <div class="section-head">
+          <span class="sec-num">§25.10</span>
+          <h2>Handling Methods That Declare <code>IOException</code></h2>
+        </div>
+
+        <p>Unlike some modern APIs that try to hide checked exceptions, <code>java.nio.file.Files</code> leans
+          heavily into them: it's almost entirely composed of <code>static</code> methods that
+          <code>throw IOException</code>. That design choice reflects a reality §14.4 already named — a checked
+          exception is the compiler's way of forcing acknowledgment of a failure the caller can't ignore — and file
+          system operations are exactly that kind of failure: they depend on hardware, permissions, and network
+          state a program cannot fully control or predict. They are, in a word, brittle.</p>
+
+        <p>The old <code>java.io.File</code> API took the opposite approach. Methods like <code>delete()</code> or
+          <code>renameTo()</code> returned a plain <code>boolean</code> — <code>true</code> or <code>false</code>.
+          That was widely criticized, because a <code>false</code> told you the operation failed and nothing else:
+          not whether the file was missing, locked, or permission-denied, just failure with no explanation. NIO.2's
+          move to <code>IOException</code> fixes exactly that: a thrown exception carries a detailed message and a
+          stack trace explaining what actually went wrong.</p>
+
+        <p>Methods that access or change files and directories — most of what <code>Files</code> offers — declare
+          <code>IOException</code> for this reason. But not every method does. <code>Files.exists()</code> is a
+          telling exception to the rule: it returns a plain <code>boolean</code> and declares nothing. If it threw an
+          exception the moment a file didn't exist, it could never actually return <code>false</code> — the one
+          answer the method exists to give.</p>
+
+        <div class="callout callout-rule">
+          <div class="callout-lbl">A rule of thumb</div>
+          <p>If an NIO.2 method declares <code>IOException</code>, it usually requires the paths it operates on to
+            already exist. A method whose whole job is to answer whether something exists — like
+            <code>Files.exists()</code> — has no business throwing just because the answer is no.</p>
+        </div>
+
+        <p>Common causes of a <code>Files</code> method throwing <code>IOException</code> include:</p>
+
+        <ul>
+          <li>Loss of communication to the underlying file system.</li>
+          <li>A file or directory is required, but does not exist.</li>
+          <li>A file or directory exists, but cannot be accessed or modified.</li>
+          <li>A file exists, but cannot be overwritten.</li>
+        </ul>
+      </section>
+
+      <!-- §25.11 -->
+      <section id="s25-11">
+        <div class="section-head">
+          <span class="sec-num">§25.11</span>
+          <h2>Creating Files and Directories</h2>
+        </div>
+
+        <div class="callout callout-mem">
+          <div class="callout-lbl"><code>Path.of()</code> — no disk access</div>
+          <p>Worth repeating from §25.7: <code>Path.of(...)</code> simply builds a Java object describing a
+            location. Nothing happens on disk when it runs — no file is created, no directory checked. Every method
+            in this section is what actually reaches the file system; <code>Path.of()</code> never does.</p>
+        </div>
+
+        <p>NIO.2 keeps that same split for creation: distinct <code>Files</code> methods for distinct kinds of
+          entries, rather than one method that guesses what you meant.</p>
+
+        <div class="callout callout-conn">
+          <div class="callout-lbl">Why <code>Files.createFile(Path)</code>, not <code>Path.createFile()</code>?</div>
+          <p>It's tempting to expect the method on <code>Path</code> itself — but that would blur exactly the split
+            §25.7 built up. A <code>Path</code> describes a location; <code>Files</code> performs operations on that
+            location. In a call like <code>Files.createFile(path)</code>, the <code>Path</code> isn't the one doing
+            anything — the file system is. <code>Files</code> is only the gateway to it.</p>
+          <p>Think of a city map with an address on it: <em>221B Baker Street</em>. Does the address build the
+            house? No — the address only identifies a location. If a house gets built there, it's the construction
+            company doing the building, not the address. A <code>Path</code> is the address; <code>Files</code> is
+            the service that performs operations at that address.</p>
+        </div>
+
+        <p>That analogy explains the design, but it's worth being honest about the rest of the answer too. If
+          NIO.2 were being designed today, it's entirely possible we'd see something like
+          <code>path.createFile()</code>, <code>path.delete()</code>, <code>path.exists()</code>,
+          <code>path.size()</code> — instance methods, called directly on a <code>Path</code>. There's nothing
+          fundamentally wrong with that design. The reason we don't have it is partly historical, and partly
+          architectural.</p>
+
+        <p>The historical part: NIO.2 shipped in Java 7, in 2011. At that point, an interface couldn't hold a method
+          with a body at all — every method on <code>Path</code> would have had to be pure declaration, with the
+          real logic living somewhere else regardless. <a href="interfaces.html#s13-8">Default and static
+          methods</a>, the feature that would have made <code>path.createFile()</code> possible, didn't arrive until
+          Java 8, a year later — by which point <code>Path</code> and <code>Files</code> were already public API,
+          and splitting them apart was the only option on the table.</p>
+
+        <p>The architectural part is everything §25.7 and the callout above already cover: <code>Path</code> is an
+          immutable value describing a location, and keeping every operation that touches the file system in one
+          separate place keeps that value simple and side-effect-free, regardless of when the interface-methods
+          feature happened to arrive.</p>
+
+        <h3>1. Creating Files</h3>
+
+        <p>To actually create a file on disk, use <code>Files.createFile(Path)</code>:</p>
+
+        <pre><code class="language-java">Files.createFile(Path.of("/home/user/notes.txt"));</code></pre>
+
+        <p>Two failure modes are worth knowing by name: it throws <code>FileAlreadyExistsException</code> if the
+          file already exists, and <code>NoSuchFileException</code> if the parent directory doesn't.</p>
+
+        <h3>2. Creating Directories</h3>
+
+        <p>Directories have two creation methods, and the difference between them is exactly whether the parent
+          folders are expected to already be there.</p>
+
+        <p><strong><code>Files.createDirectory(Path)</code></strong> creates only the last directory in the path —
+          a single step, and it assumes every segment before that last one already exists:</p>
+
+        <pre><code class="language-plaintext">Path.of("/home/user/a/b/c")
+//        ▲     ▲  ▲ ▲   ▲
+//   must already exist  ┇
+//                       ┖ only this gets created</code></pre>
+
+        <pre><code class="language-java">Files.createDirectory(Path.of("/home/user/a/b/c"));
+
+// if /home/user/a/b exists     — creates c
+// if /home/user/a/b is missing — NoSuchFileException</code></pre>
+
+        <p>It throws <code>NoSuchFileException</code> if any parent is missing — <code>createDirectory()</code>
+          assumes everything except the last segment is already there — and <code>FileAlreadyExistsException</code>
+          if the target directory already exists.</p>
+
+        <p><strong><code>Files.createDirectories(Path)</code></strong> (plural) takes the opposite stance: it
+          creates the target directory <em>and</em> every missing parent along the way, similar to <code>mkdir -p</code>
+          on Unix. It's also idempotent — calling it on a path that already exists doesn't fail, it just silently
+          succeeds:</p>
+
+        <pre><code class="language-java">Files.createDirectories(Path.of("/home/user/a/b/c"));
+
+// creates a, b, and c — whichever of them don't already exist
+// succeeds silently even if all three already exist</code></pre>
+
+        <p>The singular/plural naming is a genuine clue to the contract: <code>createDirectory()</code> is a single
+          step that trusts the caller to have the parent ready; <code>createDirectories()</code> is willing to do
+          all the intermediate work itself.</p>
+      </section>
+
+    </article>
+
+    <nav class="page-nav" aria-label="Chapter navigation">
+      <a href="dateandtime.html" class="page-nav-prev">
+        <span class="page-nav-label">← Previous</span>
+        <span class="page-nav-title">§24 — Date and Time</span>
+      </a>
+      <a href="oodesign.html" class="page-nav-next">
+        <span class="page-nav-label">Next →</span>
+        <span class="page-nav-title">§26 — Object-Oriented Design</span>
+      </a>
+    </nav>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      hljs.highlightAll();
+
+      // Flag error-annotation comments in code blocks
+      document.querySelectorAll('.hljs-comment').forEach(el => {
+        if (/\b(compile|compiler|runtime) error\b/i.test(el.textContent)) {
+          el.classList.add('hljs-comment-error');
+        }
+      });
+
+      // Code theme toggle
+      const codeThemeBtn = document.getElementById('code-theme-toggle');
+      const lightTheme = document.getElementById('hljs-light-theme');
+      const darkTheme = document.getElementById('hljs-dark-theme');
+      const themeLabel = codeThemeBtn.querySelector('.code-theme-label');
+      const themeIcon = codeThemeBtn.querySelector('.icon');
+
+      function applyCodeTheme(theme) {
+        const dark = theme === 'dark';
+        lightTheme.disabled = dark;
+        darkTheme.disabled = !dark;
+        document.documentElement.classList.toggle('code-dark', dark);
+        themeLabel.textContent = dark ? 'Light code' : 'Dark code';
+        themeIcon.textContent = dark ? '☀️' : '🌙';
+      }
+
+      applyCodeTheme(localStorage.getItem('code-theme') || 'light');
+
+      codeThemeBtn.addEventListener('click', () => {
+        const next = darkTheme.disabled ? 'dark' : 'light';
+        localStorage.setItem('code-theme', next);
+        applyCodeTheme(next);
+      });
+
+      // Scroll spy for sub-sections
+      const sections = document.querySelectorAll('section[id]');
+      const subLinks = document.querySelectorAll('.sub-nav a[href^="#"]');
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = '#' + entry.target.id;
+            subLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+          }
+        });
+      }, { rootMargin: '-8% 0px -78% 0px', threshold: 0 });
+
+      sections.forEach(s => observer.observe(s));
+
+      const btn = document.getElementById('menu-btn');
+      const side = document.getElementById('sidebar');
+      btn.addEventListener('click', () => side.classList.toggle('open'));
+      document.querySelectorAll('#sidebar a').forEach(a => {
+        a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
+      });
+    });
+  </script>
+</body>
+
+</html>
