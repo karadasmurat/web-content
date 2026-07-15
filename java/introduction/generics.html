@@ -1,558 +1,2757 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>§15 Generics — OO with Java</title>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" id="hljs-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
-<link rel="stylesheet" id="hljs-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
-<script>
-(function () {
-  if ((localStorage.getItem('code-theme') || 'light') === 'dark') {
-    document.getElementById('hljs-light-theme').disabled = true;
-    document.getElementById('hljs-dark-theme').disabled = false;
-    document.documentElement.classList.add('code-dark');
-  }
-})();
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>§15 Generics — OO with Java</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      id="hljs-light-theme"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css"
+    />
+    <link
+      rel="stylesheet"
+      id="hljs-dark-theme"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"
+      disabled
+    />
+    <script>
+      (function () {
+        if ((localStorage.getItem("code-theme") || "light") === "dark") {
+          document.getElementById("hljs-light-theme").disabled = true;
+          document.getElementById("hljs-dark-theme").disabled = false;
+          document.documentElement.classList.add("code-dark");
+        }
+      })();
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+  </head>
+  <body>
+    <button id="menu-btn" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
 
-<button id="menu-btn" aria-label="Toggle navigation">
-  <span></span><span></span><span></span>
-</button>
+    <button
+      id="code-theme-toggle"
+      class="code-theme-toggle"
+      aria-label="Toggle code color scheme"
+    >
+      <span class="icon">🌙</span
+      ><span class="code-theme-label">Dark code</span>
+    </button>
 
-<button id="code-theme-toggle" class="code-theme-toggle" aria-label="Toggle code color scheme">
-  <span class="icon">🌙</span><span class="code-theme-label">Dark code</span>
-</button>
-
-<nav id="sidebar" aria-label="Tutorial navigation">
-  <div class="sidebar-brand">
-    <div class="sidebar-brand-label">Tutorial</div>
-    <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
-  </div>
-  <nav>
-    <ul>
-      <li>
-        <a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a>
-        <ul class="sub-nav">
-          <li><a href="index.html#s0-1"><span class="nav-num">§0.1</span>What Is Java?</a></li>
-          <li><a href="index.html#s0-2"><span class="nav-num">§0.2</span>Where Is Java Used?</a></li>
-          <li><a href="index.html#s0-3"><span class="nav-num">§0.3</span>Why Java?</a></li>
-          <li><a href="index.html#s0-4"><span class="nav-num">§0.4</span>The Java Ecosystem</a></li>
-          <li><a href="index.html#s0-5"><span class="nav-num">§0.5</span>Java Versions</a></li>
-          <li><a href="index.html#s0-6"><span class="nav-num">§0.6</span>Your First Program</a></li>
-          <li><a href="index.html#s0-7"><span class="nav-num">§0.7</span>Key Features</a></li>
-          <li><a href="index.html#s0-8"><span class="nav-num">§0.8</span>Key Takeaways</a></li>
-          <li><a href="index.html#s0-9"><span class="nav-num">§0.9</span>Appendix: Write Once, Run Anywhere</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="variables.html"><span class="nav-num">§1</span>Variables and Values</a>
-        <ul class="sub-nav">
-          <li><a href="variables.html#s1-1"><span class="nav-num">§1.1</span>Values</a></li>
-          <li><a href="variables.html#s1-2"><span class="nav-num">§1.2</span>Variables in Java</a></li>
-          <li><a href="variables.html#s1-3"><span class="nav-num">§1.3</span>Primitive Types</a></li>
-          <li><a href="variables.html#s1-4"><span class="nav-num">§1.4</span>Literals</a></li>
-          <li><a href="variables.html#s1-5"><span class="nav-num">§1.5</span><code>var</code></a></li>
-          <li><a href="variables.html#s1-6"><span class="nav-num">§1.6</span>Common Mistakes</a></li>
-          <li><a href="variables.html#s1-7"><span class="nav-num">§1.7</span>What a Variable Holds</a></li>
-          <li><a href="variables.html#s1-8"><span class="nav-num">§1.8</span>Key Takeaways</a></li>
-          <li><a href="variables.html#s1-9"><span class="nav-num">§1.9</span>Appendix: Number Systems</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="classes.html"><span class="nav-num">§2</span>Classes &amp; Objects</a>
-        <ul class="sub-nav">
-          <li><a href="classes.html#s2-1"><span class="nav-num">§2.1</span>Classes as Blueprints</a></li>
-          <li><a href="classes.html#s2-2"><span class="nav-num">§2.2</span>Instantiation</a></li>
-          <li><a href="classes.html#s2-3"><span class="nav-num">§2.3</span>Reference Variables</a></li>
-          <li><a href="classes.html#s2-4"><span class="nav-num">§2.4</span>Reference Fields</a></li>
-          <li><a href="classes.html#s2-5"><span class="nav-num">§2.5</span>Constructors</a></li>
-          <li><a href="classes.html#s2-6"><span class="nav-num">§2.6</span>Static Fields</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="assignment.html"><span class="nav-num">§3</span>Assignment</a>
-        <ul class="sub-nav">
-          <li><a href="assignment.html#s3-1"><span class="nav-num">§3.1</span>The "Value"</a></li>
-          <li><a href="assignment.html#s3-2"><span class="nav-num">§3.2</span>Primitive Assignment</a></li>
-          <li><a href="assignment.html#s3-3"><span class="nav-num">§3.3</span>Reference Assignment</a></li>
-          <li><a href="assignment.html#s3-4"><span class="nav-num">§3.4</span>Consequence</a></li>
-          <li><a href="assignment.html#s3-5"><span class="nav-num">§3.5</span>Assignment vs. the Dot</a></li>
-          <li><a href="assignment.html#s3-6"><span class="nav-num">§3.6</span>The Rule</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="methods.html"><span class="nav-num">§4</span>Methods</a>
-        <ul class="sub-nav">
-          <li><a href="methods.html#s4-intro"><span class="nav-num">§4.1</span>Why Methods</a></li>
-          <li><a href="methods.html#s4-2"><span class="nav-num">§4.2</span>What Is a Method?</a></li>
-          <li><a href="methods.html#s4-3"><span class="nav-num">§4.3</span>Outputs</a></li>
-          <li><a href="methods.html#s4-4"><span class="nav-num">§4.4</span>Functions to Objects</a></li>
-          <li><a href="methods.html#s4-5"><span class="nav-num">§4.5</span>The "Hidden" Parameter</a></li>
-          <li><a href="methods.html#s4-6"><span class="nav-num">§4.6</span>Key Takeaways</a></li>
-          <li><a href="methods.html#s4-7"><span class="nav-num">§4.7</span>Appendix: The Call Stack</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="operators.html"><span class="nav-num">§5</span>Operators</a>
-        <ul class="sub-nav">
-          <li><a href="operators.html#s5-1"><span class="nav-num">§5.1</span>Arithmetic Operators</a></li>
-          <li><a href="operators.html#s5-2"><span class="nav-num">§5.2</span>Unary Operators</a></li>
-          <li><a href="operators.html#s5-3"><span class="nav-num">§5.3</span>Comparison Operators</a></li>
-          <li><a href="operators.html#s5-4"><span class="nav-num">§5.4</span>Logical Operators</a></li>
-          <li><a href="operators.html#s5-5"><span class="nav-num">§5.5</span>Compound Assignment</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="arrays.html"><span class="nav-num">§6</span>Arrays</a>
-        <ul class="sub-nav">
-          <li><a href="arrays.html#s6-1"><span class="nav-num">§6.1</span>Why Arrays</a></li>
-          <li><a href="arrays.html#s6-2"><span class="nav-num">§6.2</span>One Variable, Many Values</a></li>
-          <li><a href="arrays.html#s6-3"><span class="nav-num">§6.3</span>The Index</a></li>
-          <li><a href="arrays.html#s6-4"><span class="nav-num">§6.4</span>Creating an Array</a></li>
-          <li><a href="arrays.html#s6-5"><span class="nav-num">§6.5</span>Reading and Writing Elements</a></li>
-          <li><a href="arrays.html#s6-6"><span class="nav-num">§6.6</span><code>.length</code></a></li>
-          <li><a href="arrays.html#s6-7"><span class="nav-num">§6.7</span>Filling in the Week</a></li>
-          <li><a href="arrays.html#s6-8"><span class="nav-num">§6.8</span>Assignment Still Copies the Address</a></li>
-          <li><a href="arrays.html#s6-9"><span class="nav-num">§6.9</span>Arrays of Objects</a></li>
-          <li><a href="arrays.html#s6-10"><span class="nav-num">§6.10</span>Pointing a Slot at an Existing Object</a></li>
-          <li><a href="arrays.html#s6-11"><span class="nav-num">§6.11</span>Passing an Array's Address to a Method</a></li>
-          <li><a href="arrays.html#s6-12"><span class="nav-num">§6.12</span>Variable-Arity Parameters</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="controlflow.html"><span class="nav-num">§7</span>Control Flow</a>
-        <ul class="sub-nav">
-          <li><a href="controlflow.html#s7-1"><span class="nav-num">§7.1</span>The Flow of Execution</a></li>
-          <li><a href="controlflow.html#s7-2"><span class="nav-num">§7.2</span>Variable Scope</a></li>
-          <li><a href="controlflow.html#s7-3"><span class="nav-num">§7.3</span>Conditional Branching</a></li>
-          <li><a href="controlflow.html#s7-4"><span class="nav-num">§7.4</span><code>while</code></a></li>
-          <li><a href="controlflow.html#s7-5"><span class="nav-num">§7.5</span><code>for</code></a></li>
-          <li><a href="controlflow.html#s7-6"><span class="nav-num">§7.6</span>for-each</a></li>
-          <li><a href="controlflow.html#s7-7"><span class="nav-num">§7.7</span>Ternary Operator</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="strings.html"><span class="nav-num">§8</span>Strings</a>
-        <ul class="sub-nav">
-          <li><a href="strings.html#s8-1"><span class="nav-num">§8.1</span>Writing Systems &amp; Unicode</a></li>
-          <li><a href="strings.html#s8-2"><span class="nav-num">§8.2</span><code>char</code></a></li>
-          <li><a href="strings.html#s8-3"><span class="nav-num">§8.3</span><code>Character</code></a></li>
-          <li><a href="strings.html#s8-4"><span class="nav-num">§8.4</span>Sequence of Characters</a></li>
-          <li><a href="strings.html#s8-5"><span class="nav-num">§8.5</span>Text Blocks</a></li>
-          <li><a href="strings.html#s8-6"><span class="nav-num">§8.6</span>Immutability</a></li>
-          <li><a href="strings.html#s8-7"><span class="nav-num">§8.7</span><code>==</code> vs <code>.equals()</code></a></li>
-          <li><a href="strings.html#s8-8"><span class="nav-num">§8.8</span>Concatenation</a></li>
-          <li><a href="strings.html#s8-9"><span class="nav-num">§8.9</span>Important String Methods</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="inheritance.html"><span class="nav-num">§9</span>Inheritance</a>
-        <ul class="sub-nav">
-          <li><a href="inheritance.html#s10-1"><span class="nav-num">§9.1</span>Taxonomy</a></li>
-          <li><a href="inheritance.html#s10-2"><span class="nav-num">§9.2</span>The Problem</a></li>
-          <li><a href="inheritance.html#s10-3"><span class="nav-num">§9.3</span><code>extends</code></a></li>
-          <li><a href="inheritance.html#s10-4"><span class="nav-num">§9.4</span><code>super(...)</code></a></li>
-          <li><a href="inheritance.html#s10-5"><span class="nav-num">§9.5</span>Polymorphism</a></li>
-          <li><a href="inheritance.html#s10-6"><span class="nav-num">§9.6</span>Overriding</a></li>
-          <li><a href="inheritance.html#s10-7"><span class="nav-num">§9.7</span><code>toString()</code></a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="accessmodifiers.html"><span class="nav-num">§10</span>Packages &amp; Access Modifiers</a>
-        <ul class="sub-nav">
-          <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§10.1</span>Packages</a></li>
-          <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§10.2</span>Why Restrict Access</a></li>
-          <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§10.3</span><code>private</code></a></li>
-          <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§10.4</span>Encapsulation</a></li>
-          <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§10.5</span><code>public</code></a></li>
-          <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§10.6</span>Package-Private</a></li>
-          <li><a href="accessmodifiers.html#s11-7"><span class="nav-num">§10.7</span><code>protected</code></a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="immutability.html"><span class="nav-num">§11</span>Immutability</a>
-        <ul class="sub-nav">
-          <li><a href="immutability.html#s11-1"><span class="nav-num">§11.1</span>Identity &amp; State</a></li>
-          <li><a href="immutability.html#s11-2"><span class="nav-num">§11.2</span>A Question of Time</a></li>
-          <li><a href="immutability.html#s11-3"><span class="nav-num">§11.3</span>Building an Immutable Class</a></li>
-          <li><a href="immutability.html#s11-4"><span class="nav-num">§11.4</span><code>final</code> Isn't Deep</a></li>
-          <li><a href="immutability.html#s11-5"><span class="nav-num">§11.5</span>Why It Matters</a></li>
-          <li><a href="immutability.html#s11-6"><span class="nav-num">§11.6</span><code>StringBuilder</code></a></li>
-          <li><a href="immutability.html#s11-7"><span class="nav-num">§11.7</span>Core Pillars</a></li>
-          <li><a href="immutability.html#s11-8"><span class="nav-num">§11.8</span>Putting It Together</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="abstractclasses.html"><span class="nav-num">§12</span>Abstract Classes</a>
-        <ul class="sub-nav">
-          <li><a href="abstractclasses.html#s12-1"><span class="nav-num">§12.1</span>The Problem</a></li>
-          <li><a href="abstractclasses.html#s12-2"><span class="nav-num">§12.2</span><code>abstract</code> Classes</a></li>
-          <li><a href="abstractclasses.html#s12-3"><span class="nav-num">§12.3</span><code>abstract</code> Methods</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="interfaces.html"><span class="nav-num">§13</span>Interfaces</a>
-        <ul class="sub-nav">
-          <li><a href="interfaces.html#s13-1"><span class="nav-num">§13.1</span>The Problem</a></li>
-          <li><a href="interfaces.html#s13-2"><span class="nav-num">§13.2</span>Interface vs. Abstract Class</a></li>
-          <li><a href="interfaces.html#s13-3"><span class="nav-num">§13.3</span>Declaring &amp; Implementing</a></li>
-          <li><a href="interfaces.html#s13-4"><span class="nav-num">§13.4</span>Override vs. Overload</a></li>
-          <li><a href="interfaces.html#s13-5"><span class="nav-num">§13.5</span>Multiple Interfaces</a></li>
-          <li><a href="interfaces.html#s13-6"><span class="nav-num">§13.6</span>Interface-Typed Params</a></li>
-          <li><a href="interfaces.html#s13-7"><span class="nav-num">§13.7</span>Anonymous Classes</a></li>
-          <li><a href="interfaces.html#s13-8"><span class="nav-num">§13.8</span>Default Methods</a></li>
-          <li><a href="interfaces.html#s13-9"><span class="nav-num">§13.9</span>Default Method Collisions</a></li>
-          <li><a href="interfaces.html#s13-10"><span class="nav-num">§13.10</span>Static Methods</a></li>
-          <li><a href="interfaces.html#s13-11"><span class="nav-num">§13.11</span>Interface Inheritance</a></li>
-          <li><a href="interfaces.html#s13-12"><span class="nav-num">§13.12</span>Strategy Pattern</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="exceptions.html"><span class="nav-num">§14</span>Exceptions</a>
-        <ul class="sub-nav">
-          <li><a href="exceptions.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
-          <li><a href="exceptions.html#s14-2"><span class="nav-num">§14.2</span>The Exception Lifecycle</a></li>
-          <li><a href="exceptions.html#s14-3"><span class="nav-num">§14.3</span>The Exception Hierarchy</a></li>
-          <li><a href="exceptions.html#s14-4"><span class="nav-num">§14.4</span>Checked vs. Unchecked</a></li>
-          <li><a href="exceptions.html#s14-5"><span class="nav-num">§14.5</span>Handling Exceptions</a></li>
-          <li><a href="exceptions.html#s14-6"><span class="nav-num">§14.6</span><code>throw</code> and <code>throws</code></a></li>
-          <li><a href="exceptions.html#s14-7"><span class="nav-num">§14.7</span>Custom Exceptions</a></li>
-          <li><a href="exceptions.html#s14-8"><span class="nav-num">§14.8</span>Exception Chaining</a></li>
-          <li><a href="exceptions.html#s14-9"><span class="nav-num">§14.9</span>Try-with-Resources</a></li>
-          <li><a href="exceptions.html#s14-10"><span class="nav-num">§14.10</span>Exceptions Are Not Control Flow</a></li>
-          <li><a href="exceptions.html#s14-11"><span class="nav-num">§14.11</span>Best Practices &amp; Anti-Patterns</a></li>
-          <li><a href="exceptions.html#s14-12"><span class="nav-num">§14.12</span>Key Takeaways</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="generics.html" class="active"><span class="nav-num">§15</span>Generics</a>
-        <ul class="sub-nav">
-          <li><a href="#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
-          <li><a href="#s15-2"><span class="nav-num">§15.2</span>Type Parameters</a></li>
-          <li><a href="#s15-3"><span class="nav-num">§15.3</span>Generic Methods</a></li>
-          <li><a href="#s15-4"><span class="nav-num">§15.4</span>Bounded Types</a></li>
-          <li><a href="#s15-5"><span class="nav-num">§15.5</span>Compile Time Only</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="records.html"><span class="nav-num">§16</span>Records</a>
-        <ul class="sub-nav">
-          <li><a href="records.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
-          <li><a href="records.html#s16-2"><span class="nav-num">§16.2</span><code>record</code></a></li>
-          <li><a href="records.html#s16-3"><span class="nav-num">§16.3</span>Implicitly Final</a></li>
-          <li><a href="records.html#s16-4"><span class="nav-num">§16.4</span>Shallow Immutability</a></li>
-          <li><a href="records.html#s16-5"><span class="nav-num">§16.5</span>Compact Constructors</a></li>
-          <li><a href="records.html#s16-6"><span class="nav-num">§16.6</span>Records Can Do More</a></li>
-          <li><a href="records.html#s16-7"><span class="nav-num">§16.7</span>When to Reach for One</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="collections.html"><span class="nav-num">§18</span>Collections Framework</a>
-        <ul class="sub-nav">
-          <li><a href="collections.html#s18-1"><span class="nav-num">§18.1</span>The Problem</a></li>
-          <li><a href="collections.html#s18-2"><span class="nav-num">§18.2</span>The Big Picture</a></li>
-          <li><a href="collections.html#s18-3"><span class="nav-num">§18.3</span><code>List</code></a></li>
-          <li><a href="collections.html#s18-4"><span class="nav-num">§18.4</span><code>Queue</code></a></li>
-          <li><a href="collections.html#s18-5"><span class="nav-num">§18.5</span><code>Set</code></a></li>
-          <li><a href="collections.html#s18-6"><span class="nav-num">§18.6</span><code>Map</code></a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="lambdas.html"><span class="nav-num">§19</span>Functional Programming</a>
-        <ul class="sub-nav">
-          <li><a href="lambdas.html#s19-1"><span class="nav-num">§19.1</span>Functions as First-Class Citizens</a></li>
-          <li><a href="lambdas.html#s19-2"><span class="nav-num">§19.2</span>Why Java "Simulates" First-Class Functions</a></li>
-          <li><a href="lambdas.html#s19-3"><span class="nav-num">§19.3</span>The Problem</a></li>
-          <li><a href="lambdas.html#s19-4"><span class="nav-num">§19.4</span>Another Anonymous Class</a></li>
-          <li><a href="lambdas.html#s19-5"><span class="nav-num">§19.5</span>Functional Interfaces</a></li>
-          <li><a href="lambdas.html#s19-6"><span class="nav-num">§19.6</span>Lambda Expressions</a></li>
-          <li><a href="lambdas.html#s19-7"><span class="nav-num">§19.7</span>Method References</a></li>
-          <li><a href="lambdas.html#s19-8"><span class="nav-num">§19.8</span><code>java.util.function</code></a></li>
-          <li><a href="lambdas.html#s19-9"><span class="nav-num">§19.9</span>Key Takeaways</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="enums.html"><span class="nav-num">§17</span>Enums</a>
-        <ul class="sub-nav">
-          <li><a href="enums.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
-          <li><a href="enums.html#s17-2"><span class="nav-num">§17.2</span>Declaring an Enum</a></li>
-          <li><a href="enums.html#s17-3"><span class="nav-num">§17.3</span>Objects, Not Constants</a></li>
-          <li><a href="enums.html#s17-4"><span class="nav-num">§17.4</span>Comparing Enum Values</a></li>
-          <li><a href="enums.html#s17-5"><span class="nav-num">§17.5</span>Type Characteristics</a></li>
-          <li><a href="enums.html#s17-6"><span class="nav-num">§17.6</span>Fields, Constructors, Methods</a></li>
-          <li><a href="enums.html#s17-7"><span class="nav-num">§17.7</span>Enums vs. Magic Numbers</a></li>
-          <li><a href="enums.html#s17-8"><span class="nav-num">§17.8</span>Closed Sets vs. Evolving Reality</a></li>
-          <li><a href="enums.html#s17-9"><span class="nav-num">§17.9</span>Key Takeaways</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="optionals.html"><span class="nav-num">§20</span>Optional&lt;T&gt;</a>
-        <ul class="sub-nav">
-          <li><a href="optionals.html#s20-1"><span class="nav-num">§20.1</span>The Problem</a></li>
-          <li><a href="optionals.html#s20-2"><span class="nav-num">§20.2</span><code>null</code>: The Absence of a Value</a></li>
-          <li><a href="optionals.html#s20-3"><span class="nav-num">§20.3</span>The Defensive Approach</a></li>
-          <li><a href="optionals.html#s20-4"><span class="nav-num">§20.4</span>The <code>Optional&lt;T&gt;</code> Class</a></li>
-          <li><a href="optionals.html#s20-5"><span class="nav-num">§20.5</span><code>Optional&lt;T&gt;</code> vs <code>null</code></a></li>
-          <li><a href="optionals.html#s20-6"><span class="nav-num">§20.6</span>Specialized Primitive Optionals</a></li>
-          <li><a href="optionals.html#s20-7"><span class="nav-num">§20.7</span>Key Takeaways</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="streams.html"><span class="nav-num">§21</span>Streams</a>
-        <ul class="sub-nav">
-          <li><a href="streams.html#s21-1"><span class="nav-num">§21.1</span>The Problem</a></li>
-          <li><a href="streams.html#s21-2"><span class="nav-num">§21.2</span>What Is a Stream</a></li>
-          <li><a href="streams.html#s21-3"><span class="nav-num">§21.3</span>Creating a Stream</a></li>
-          <li><a href="streams.html#s21-4"><span class="nav-num">§21.4</span>Intermediate Operations</a></li>
-          <li><a href="streams.html#s21-5"><span class="nav-num">§21.5</span>Terminal Operations</a></li>
-          <li><a href="streams.html#s21-6"><span class="nav-num">§21.6</span>Collecting Results</a></li>
-          <li><a href="streams.html#s21-7"><span class="nav-num">§21.7</span>Streams and <code>Optional&lt;T&gt;</code></a></li>
-          <li><a href="streams.html#s21-8"><span class="nav-num">§21.8</span>Laziness and Pipelines</a></li>
-          <li><a href="streams.html#s21-9"><span class="nav-num">§21.9</span>When (Not) to Use Streams</a></li>
-          <li><a href="streams.html#s21-10"><span class="nav-num">§21.10</span>Key Takeaways</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="concurrency.html"><span class="nav-num">§22</span>Concurrent Programming</a>
-        <ul class="sub-nav">
-          <li><a href="concurrency.html#s22-1"><span class="nav-num">§22.1</span>The Problem</a></li>
-          <li><a href="concurrency.html#s22-2"><span class="nav-num">§22.2</span>Process, Thread, and the OS</a></li>
-          <li><a href="concurrency.html#s22-3"><span class="nav-num">§22.3</span>Independent Progress</a></li>
-          <li><a href="concurrency.html#s22-4"><span class="nav-num">§22.4</span>Why Concurrency Matters</a></li>
-          <li><a href="concurrency.html#s22-5"><span class="nav-num">§22.5</span>Where Parallelism Fits In</a></li>
-          <li><a href="concurrency.html#s22-6"><span class="nav-num">§22.6</span>The Main Thread</a></li>
-          <li><a href="concurrency.html#s22-7"><span class="nav-num">§22.7</span>Step 1: Creating a Task</a></li>
-          <li><a href="concurrency.html#s22-8"><span class="nav-num">§22.8</span>Step 2: Handing a Task to an Executor</a></li>
-          <li><a href="concurrency.html#s22-9"><span class="nav-num">§22.9</span>ExecutorService in Practice</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="modules.html"><span class="nav-num">§23</span>Java Modules</a>
-        <ul class="sub-nav">
-          <li><a href="modules.html#s23-1"><span class="nav-num">§23.1</span>The Problem</a></li>
-          <li><a href="modules.html#s23-2"><span class="nav-num">§23.2</span>What Is a Module</a></li>
-          <li><a href="modules.html#s23-3"><span class="nav-num">§23.3</span><code>module-info.java</code></a></li>
-          <li><a href="modules.html#s23-4"><span class="nav-num">§23.4</span><code>exports</code></a></li>
-          <li><a href="modules.html#s23-5"><span class="nav-num">§23.5</span><code>requires</code></a></li>
-          <li><a href="modules.html#s23-6"><span class="nav-num">§23.6</span>Strong Encapsulation</a></li>
-          <li><a href="modules.html#s23-7"><span class="nav-num">§23.7</span>The Module Path</a></li>
-          <li><a href="modules.html#s23-8"><span class="nav-num">§23.8</span><code>requires transitive</code></a></li>
-          <li><a href="modules.html#s23-9"><span class="nav-num">§23.9</span>When (Not) to Use Modules</a></li>
-          <li><a href="modules.html#s23-10"><span class="nav-num">§23.10</span>Key Takeaways</a></li>
-        </ul>
-      </li>
-      <li><a href="dateandtime.html"><span class="nav-num">§24</span>Date and Time</a></li>
-      <li><a href="io.html"><span class="nav-num">§25</span>Input and Output</a></li>
-      <li><a href="oodesign.html"><span class="nav-num">§26</span>Object-Oriented Design</a></li>
-    </ul>
-  </nav>
-</nav>
-
-<main id="content">
-  <header class="page-header">
-    <div class="page-chapter">Chapter 15</div>
-    <h1>Generics</h1>
-    <p class="page-lead">A container built around <code>Object</code> can hold anything — which is exactly the problem. This chapter is about telling the compiler what a container actually holds, so it can catch the mistake you'd otherwise only discover at runtime.</p>
-  </header>
-
-  <article>
-
-    <!-- §15.1 -->
-    <section id="s15-1">
-      <div class="section-head">
-        <span class="sec-num">§15.1</span>
-        <h2>The Problem <em>— a container that forgets what it holds</em></h2>
+    <nav id="sidebar" aria-label="Tutorial navigation">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-label">Tutorial</div>
+        <div class="sidebar-brand-title">
+          Gentle Introduction<br />to OO with Java
+        </div>
       </div>
+      <nav>
+        <ul>
+          <li>
+            <a href="index.html"
+              ><span class="nav-num">§0</span>Java at a Glance</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="index.html#s0-1"
+                  ><span class="nav-num">§0.1</span>What Is Java?</a
+                >
+              </li>
+              <li>
+                <a href="index.html#s0-2"
+                  ><span class="nav-num">§0.2</span>Where Is Java Used?</a
+                >
+              </li>
+              <li>
+                <a href="index.html#s0-3"
+                  ><span class="nav-num">§0.3</span>Why Java?</a
+                >
+              </li>
+              <li>
+                <a href="index.html#s0-4"
+                  ><span class="nav-num">§0.4</span>The Java Ecosystem</a
+                >
+              </li>
+              <li>
+                <a href="index.html#s0-5"
+                  ><span class="nav-num">§0.5</span>Java Versions</a
+                >
+              </li>
+              <li>
+                <a href="index.html#s0-6"
+                  ><span class="nav-num">§0.6</span>Your First Program</a
+                >
+              </li>
+              <li>
+                <a href="index.html#s0-7"
+                  ><span class="nav-num">§0.7</span>Key Features</a
+                >
+              </li>
+              <li>
+                <a href="index.html#s0-8"
+                  ><span class="nav-num">§0.8</span>Key Takeaways</a
+                >
+              </li>
+              <li>
+                <a href="index.html#s0-9"
+                  ><span class="nav-num">§0.9</span>Appendix: Write Once, Run
+                  Anywhere</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="variables.html"
+              ><span class="nav-num">§1</span>Variables and Values</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="variables.html#s1-1"
+                  ><span class="nav-num">§1.1</span>Values</a
+                >
+              </li>
+              <li>
+                <a href="variables.html#s1-2"
+                  ><span class="nav-num">§1.2</span>Variables in Java</a
+                >
+              </li>
+              <li>
+                <a href="variables.html#s1-3"
+                  ><span class="nav-num">§1.3</span>Primitive Types</a
+                >
+              </li>
+              <li>
+                <a href="variables.html#s1-4"
+                  ><span class="nav-num">§1.4</span>Literals</a
+                >
+              </li>
+              <li>
+                <a href="variables.html#s1-5"
+                  ><span class="nav-num">§1.5</span><code>var</code></a
+                >
+              </li>
+              <li>
+                <a href="variables.html#s1-6"
+                  ><span class="nav-num">§1.6</span>Common Mistakes</a
+                >
+              </li>
+              <li>
+                <a href="variables.html#s1-7"
+                  ><span class="nav-num">§1.7</span>What a Variable Holds</a
+                >
+              </li>
+              <li>
+                <a href="variables.html#s1-8"
+                  ><span class="nav-num">§1.8</span>Key Takeaways</a
+                >
+              </li>
+              <li>
+                <a href="variables.html#s1-9"
+                  ><span class="nav-num">§1.9</span>Appendix: Number Systems</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="classes.html"
+              ><span class="nav-num">§2</span>Classes &amp; Objects</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="classes.html#s2-1"
+                  ><span class="nav-num">§2.1</span>Classes as Blueprints</a
+                >
+              </li>
+              <li>
+                <a href="classes.html#s2-2"
+                  ><span class="nav-num">§2.2</span>Instantiation</a
+                >
+              </li>
+              <li>
+                <a href="classes.html#s2-3"
+                  ><span class="nav-num">§2.3</span>Reference Variables</a
+                >
+              </li>
+              <li>
+                <a href="classes.html#s2-4"
+                  ><span class="nav-num">§2.4</span>Reference Fields</a
+                >
+              </li>
+              <li>
+                <a href="classes.html#s2-5"
+                  ><span class="nav-num">§2.5</span>Constructors</a
+                >
+              </li>
+              <li>
+                <a href="classes.html#s2-6"
+                  ><span class="nav-num">§2.6</span>Static Fields</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="assignment.html"
+              ><span class="nav-num">§3</span>Assignment</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="assignment.html#s3-1"
+                  ><span class="nav-num">§3.1</span>The "Value"</a
+                >
+              </li>
+              <li>
+                <a href="assignment.html#s3-2"
+                  ><span class="nav-num">§3.2</span>Primitive Assignment</a
+                >
+              </li>
+              <li>
+                <a href="assignment.html#s3-3"
+                  ><span class="nav-num">§3.3</span>Reference Assignment</a
+                >
+              </li>
+              <li>
+                <a href="assignment.html#s3-4"
+                  ><span class="nav-num">§3.4</span>Consequence</a
+                >
+              </li>
+              <li>
+                <a href="assignment.html#s3-5"
+                  ><span class="nav-num">§3.5</span>Assignment vs. the Dot</a
+                >
+              </li>
+              <li>
+                <a href="assignment.html#s3-6"
+                  ><span class="nav-num">§3.6</span>The Rule</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="methods.html"><span class="nav-num">§4</span>Methods</a>
+            <ul class="sub-nav">
+              <li>
+                <a href="methods.html#s4-intro"
+                  ><span class="nav-num">§4.1</span>Why Methods</a
+                >
+              </li>
+              <li>
+                <a href="methods.html#s4-2"
+                  ><span class="nav-num">§4.2</span>What Is a Method?</a
+                >
+              </li>
+              <li>
+                <a href="methods.html#s4-3"
+                  ><span class="nav-num">§4.3</span>Outputs</a
+                >
+              </li>
+              <li>
+                <a href="methods.html#s4-4"
+                  ><span class="nav-num">§4.4</span>Functions to Objects</a
+                >
+              </li>
+              <li>
+                <a href="methods.html#s4-5"
+                  ><span class="nav-num">§4.5</span>The "Hidden" Parameter</a
+                >
+              </li>
+              <li>
+                <a href="methods.html#s4-6"
+                  ><span class="nav-num">§4.6</span>Key Takeaways</a
+                >
+              </li>
+              <li>
+                <a href="methods.html#s4-7"
+                  ><span class="nav-num">§4.7</span>Appendix: The Call Stack</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="operators.html"
+              ><span class="nav-num">§5</span>Operators</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="operators.html#s5-1"
+                  ><span class="nav-num">§5.1</span>Arithmetic Operators</a
+                >
+              </li>
+              <li>
+                <a href="operators.html#s5-2"
+                  ><span class="nav-num">§5.2</span>Unary Operators</a
+                >
+              </li>
+              <li>
+                <a href="operators.html#s5-3"
+                  ><span class="nav-num">§5.3</span>Comparison Operators</a
+                >
+              </li>
+              <li>
+                <a href="operators.html#s5-4"
+                  ><span class="nav-num">§5.4</span>Logical Operators</a
+                >
+              </li>
+              <li>
+                <a href="operators.html#s5-5"
+                  ><span class="nav-num">§5.5</span>Compound Assignment</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="arrays.html"><span class="nav-num">§6</span>Arrays</a>
+            <ul class="sub-nav">
+              <li>
+                <a href="arrays.html#s6-1"
+                  ><span class="nav-num">§6.1</span>Why Arrays</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-2"
+                  ><span class="nav-num">§6.2</span>One Variable, Many Values</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-3"
+                  ><span class="nav-num">§6.3</span>The Index</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-4"
+                  ><span class="nav-num">§6.4</span>Creating an Array</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-5"
+                  ><span class="nav-num">§6.5</span>Reading and Writing
+                  Elements</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-6"
+                  ><span class="nav-num">§6.6</span><code>.length</code></a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-7"
+                  ><span class="nav-num">§6.7</span>Filling in the Week</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-8"
+                  ><span class="nav-num">§6.8</span>Assignment Still Copies the
+                  Address</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-9"
+                  ><span class="nav-num">§6.9</span>Arrays of Objects</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-10"
+                  ><span class="nav-num">§6.10</span>Pointing a Slot at an
+                  Existing Object</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-11"
+                  ><span class="nav-num">§6.11</span>Passing an Array's Address
+                  to a Method</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-12"
+                  ><span class="nav-num">§6.12</span>Variable-Arity
+                  Parameters</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="controlflow.html"
+              ><span class="nav-num">§7</span>Control Flow</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="controlflow.html#s7-1"
+                  ><span class="nav-num">§7.1</span>The Flow of Execution</a
+                >
+              </li>
+              <li>
+                <a href="controlflow.html#s7-2"
+                  ><span class="nav-num">§7.2</span>Variable Scope</a
+                >
+              </li>
+              <li>
+                <a href="controlflow.html#s7-3"
+                  ><span class="nav-num">§7.3</span>Conditional Branching</a
+                >
+              </li>
+              <li>
+                <a href="controlflow.html#s7-4"
+                  ><span class="nav-num">§7.4</span><code>while</code></a
+                >
+              </li>
+              <li>
+                <a href="controlflow.html#s7-5"
+                  ><span class="nav-num">§7.5</span><code>for</code></a
+                >
+              </li>
+              <li>
+                <a href="controlflow.html#s7-6"
+                  ><span class="nav-num">§7.6</span>for-each</a
+                >
+              </li>
+              <li>
+                <a href="controlflow.html#s7-7"
+                  ><span class="nav-num">§7.7</span>Ternary Operator</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="strings.html"><span class="nav-num">§8</span>Strings</a>
+            <ul class="sub-nav">
+              <li>
+                <a href="strings.html#s8-1"
+                  ><span class="nav-num">§8.1</span>Writing Systems &amp;
+                  Unicode</a
+                >
+              </li>
+              <li>
+                <a href="strings.html#s8-2"
+                  ><span class="nav-num">§8.2</span><code>char</code></a
+                >
+              </li>
+              <li>
+                <a href="strings.html#s8-3"
+                  ><span class="nav-num">§8.3</span><code>Character</code></a
+                >
+              </li>
+              <li>
+                <a href="strings.html#s8-4"
+                  ><span class="nav-num">§8.4</span>Sequence of Characters</a
+                >
+              </li>
+              <li>
+                <a href="strings.html#s8-5"
+                  ><span class="nav-num">§8.5</span>Text Blocks</a
+                >
+              </li>
+              <li>
+                <a href="strings.html#s8-6"
+                  ><span class="nav-num">§8.6</span>Immutability</a
+                >
+              </li>
+              <li>
+                <a href="strings.html#s8-7"
+                  ><span class="nav-num">§8.7</span><code>==</code> vs
+                  <code>.equals()</code></a
+                >
+              </li>
+              <li>
+                <a href="strings.html#s8-8"
+                  ><span class="nav-num">§8.8</span>Concatenation</a
+                >
+              </li>
+              <li>
+                <a href="strings.html#s8-9"
+                  ><span class="nav-num">§8.9</span>Important String Methods</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="inheritance.html"
+              ><span class="nav-num">§9</span>Inheritance</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="inheritance.html#s10-1"
+                  ><span class="nav-num">§9.1</span>Taxonomy</a
+                >
+              </li>
+              <li>
+                <a href="inheritance.html#s10-2"
+                  ><span class="nav-num">§9.2</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="inheritance.html#s10-3"
+                  ><span class="nav-num">§9.3</span><code>extends</code></a
+                >
+              </li>
+              <li>
+                <a href="inheritance.html#s10-4"
+                  ><span class="nav-num">§9.4</span><code>super(...)</code></a
+                >
+              </li>
+              <li>
+                <a href="inheritance.html#s10-5"
+                  ><span class="nav-num">§9.5</span>Polymorphism</a
+                >
+              </li>
+              <li>
+                <a href="inheritance.html#s10-6"
+                  ><span class="nav-num">§9.6</span>Overriding</a
+                >
+              </li>
+              <li>
+                <a href="inheritance.html#s10-7"
+                  ><span class="nav-num">§9.7</span><code>toString()</code></a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="accessmodifiers.html"
+              ><span class="nav-num">§10</span>Packages &amp; Access
+              Modifiers</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="accessmodifiers.html#s11-1"
+                  ><span class="nav-num">§10.1</span>Packages</a
+                >
+              </li>
+              <li>
+                <a href="accessmodifiers.html#s11-2"
+                  ><span class="nav-num">§10.2</span>Why Restrict Access</a
+                >
+              </li>
+              <li>
+                <a href="accessmodifiers.html#s11-3"
+                  ><span class="nav-num">§10.3</span>Getters and Setters</a
+                >
+              </li>
+              <li>
+                <a href="accessmodifiers.html#s11-4"
+                  ><span class="nav-num">§10.4</span><code>public</code></a
+                >
+              </li>
+              <li>
+                <a href="accessmodifiers.html#s11-5"
+                  ><span class="nav-num">§10.5</span>Package-Private</a
+                >
+              </li>
+              <li>
+                <a href="accessmodifiers.html#s11-6"
+                  ><span class="nav-num">§10.6</span><code>protected</code></a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="immutability.html"
+              ><span class="nav-num">§11</span>Immutability</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="immutability.html#s11-1"
+                  ><span class="nav-num">§11.1</span>Two Real-World Analogies</a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-2"
+                  ><span class="nav-num">§11.2</span>Identity &amp; State</a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-3"
+                  ><span class="nav-num">§11.3</span>A Question of Time</a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-4"
+                  ><span class="nav-num">§11.4</span>Building an Immutable
+                  Class</a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-5"
+                  ><span class="nav-num">§11.5</span><code>final</code> Isn't
+                  Deep</a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-6"
+                  ><span class="nav-num">§11.6</span>Why It Matters</a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-7"
+                  ><span class="nav-num">§11.7</span
+                  ><code>StringBuilder</code></a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-8"
+                  ><span class="nav-num">§11.8</span>Putting It Together</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="abstractclasses.html"
+              ><span class="nav-num">§12</span>Abstract Classes</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="abstractclasses.html#s12-1"
+                  ><span class="nav-num">§12.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="abstractclasses.html#s12-2"
+                  ><span class="nav-num">§12.2</span
+                  ><code>abstract</code> Classes</a
+                >
+              </li>
+              <li>
+                <a href="abstractclasses.html#s12-3"
+                  ><span class="nav-num">§12.3</span
+                  ><code>abstract</code> Methods</a
+                >
+              </li>
+              <li>
+                <a href="abstractclasses.html#s12-4"
+                  ><span class="nav-num">§12.4</span>Bringing It Altogether</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="interfaces.html"
+              ><span class="nav-num">§13</span>Interfaces</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="interfaces.html#s13-1"
+                  ><span class="nav-num">§13.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-2"
+                  ><span class="nav-num">§13.2</span>Interface vs. Abstract
+                  Class</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-3"
+                  ><span class="nav-num">§13.3</span>Declaring &amp;
+                  Implementing</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-4"
+                  ><span class="nav-num">§13.4</span>Override vs. Overload</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-5"
+                  ><span class="nav-num">§13.5</span>Multiple Interfaces</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-6"
+                  ><span class="nav-num">§13.6</span>Anonymous Classes</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-7"
+                  ><span class="nav-num">§13.7</span>Default Methods</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-8"
+                  ><span class="nav-num">§13.8</span>Default Method
+                  Collisions</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-9"
+                  ><span class="nav-num">§13.9</span>Static Methods</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-10"
+                  ><span class="nav-num">§13.10</span>Interface Inheritance</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-11"
+                  ><span class="nav-num">§13.11</span>Interface Use Cases</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="exceptions.html"
+              ><span class="nav-num">§14</span>Exceptions</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="exceptions.html#s14-1"
+                  ><span class="nav-num">§14.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-2"
+                  ><span class="nav-num">§14.2</span>The Exception Lifecycle</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-3"
+                  ><span class="nav-num">§14.3</span>Handling Exceptions</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-4"
+                  ><span class="nav-num">§14.4</span>The Exception Hierarchy</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-5"
+                  ><span class="nav-num">§14.5</span>Checked vs. Unchecked</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-6"
+                  ><span class="nav-num">§14.6</span>Custom Exceptions</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-7"
+                  ><span class="nav-num">§14.7</span>Exception Chaining</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-8"
+                  ><span class="nav-num">§14.8</span>Try-with-Resources</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-9"
+                  ><span class="nav-num">§14.9</span>Best Practices &amp;
+                  Anti-Patterns</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-10"
+                  ><span class="nav-num">§14.10</span>Key Takeaways</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="generics.html" class="active"
+              ><span class="nav-num">§15</span>Generics</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="#s15-1"
+                  ><span class="nav-num">§15.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="#s15-2"
+                  ><span class="nav-num">§15.2</span>Type Parameters</a
+                >
+              </li>
+              <li>
+                <a href="#s15-3"
+                  ><span class="nav-num">§15.3</span>Class-Level Generics</a
+                >
+              </li>
+              <li>
+                <a href="#s15-4"
+                  ><span class="nav-num">§15.4</span>Generic Interfaces</a
+                >
+              </li>
+              <li>
+                <a href="#s15-5"
+                  ><span class="nav-num">§15.5</span>Diamond &amp;
+                  <code>var</code></a
+                >
+              </li>
+              <li>
+                <a href="#s15-6"
+                  ><span class="nav-num">§15.6</span>Generic Methods</a
+                >
+              </li>
+              <li>
+                <a href="#s15-7"
+                  ><span class="nav-num">§15.7</span>Bounded Types</a
+                >
+              </li>
+              <li>
+                <a href="#s15-8"
+                  ><span class="nav-num">§15.8</span>Invariance</a
+                >
+              </li>
+              <li>
+                <a href="#s15-9"><span class="nav-num">§15.9</span>Wildcards</a>
+              </li>
+              <li>
+                <a href="#s15-10"
+                  ><span class="nav-num">§15.10</span>Compile Time Only</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="records.html"><span class="nav-num">§16</span>Records</a>
+            <ul class="sub-nav">
+              <li>
+                <a href="records.html#s16-1"
+                  ><span class="nav-num">§16.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="records.html#s16-2"
+                  ><span class="nav-num">§16.2</span><code>record</code></a
+                >
+              </li>
+              <li>
+                <a href="records.html#s16-3"
+                  ><span class="nav-num">§16.3</span>Implicitly Final</a
+                >
+              </li>
+              <li>
+                <a href="records.html#s16-4"
+                  ><span class="nav-num">§16.4</span>Shallow Immutability</a
+                >
+              </li>
+              <li>
+                <a href="records.html#s16-5"
+                  ><span class="nav-num">§16.5</span>Constructors</a
+                >
+              </li>
+              <li>
+                <a href="records.html#s16-6"
+                  ><span class="nav-num">§16.6</span><code>equals()</code></a
+                >
+              </li>
+              <li>
+                <a href="records.html#s16-7"
+                  ><span class="nav-num">§16.7</span>Records Can Do More</a
+                >
+              </li>
+              <li>
+                <a href="records.html#s16-8"
+                  ><span class="nav-num">§16.8</span>Pattern Matching</a
+                >
+              </li>
+              <li>
+                <a href="records.html#s16-9"
+                  ><span class="nav-num">§16.9</span>When to Reach for One</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="collections.html"
+              ><span class="nav-num">§18</span>Collections Framework</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="collections.html#s18-1"
+                  ><span class="nav-num">§18.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="collections.html#s18-2"
+                  ><span class="nav-num">§18.2</span>The Big Picture</a
+                >
+              </li>
+              <li>
+                <a href="collections.html#s18-3"
+                  ><span class="nav-num">§18.3</span
+                  ><code>SequencedCollection</code></a
+                >
+              </li>
+              <li>
+                <a href="collections.html#s18-4"
+                  ><span class="nav-num">§18.4</span><code>List</code></a
+                >
+              </li>
+              <li>
+                <a href="collections.html#s18-5"
+                  ><span class="nav-num">§18.5</span>Defining an Order</a
+                >
+              </li>
+              <li>
+                <a href="collections.html#s18-6"
+                  ><span class="nav-num">§18.6</span><code>Queue</code></a
+                >
+              </li>
+              <li>
+                <a href="collections.html#s18-7"
+                  ><span class="nav-num">§18.7</span><code>Set</code></a
+                >
+              </li>
+              <li>
+                <a href="collections.html#s18-8"
+                  ><span class="nav-num">§18.8</span><code>Map</code></a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="lambdas.html"
+              ><span class="nav-num">§19</span>Functional Programming</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="lambdas.html#s19-1"
+                  ><span class="nav-num">§19.1</span>Functions as First-Class
+                  Citizens</a
+                >
+              </li>
+              <li>
+                <a href="lambdas.html#s19-2"
+                  ><span class="nav-num">§19.2</span>Why Java "Simulates"
+                  First-Class Functions</a
+                >
+              </li>
+              <li>
+                <a href="lambdas.html#s19-3"
+                  ><span class="nav-num">§19.3</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="lambdas.html#s19-4"
+                  ><span class="nav-num">§19.4</span>Another Anonymous Class</a
+                >
+              </li>
+              <li>
+                <a href="lambdas.html#s19-5"
+                  ><span class="nav-num">§19.5</span>Functional Interfaces</a
+                >
+              </li>
+              <li>
+                <a href="lambdas.html#s19-6"
+                  ><span class="nav-num">§19.6</span>Lambda Expressions</a
+                >
+              </li>
+              <li>
+                <a href="lambdas.html#s19-7"
+                  ><span class="nav-num">§19.7</span>Method References</a
+                >
+              </li>
+              <li>
+                <a href="lambdas.html#s19-8"
+                  ><span class="nav-num">§19.8</span
+                  ><code>java.util.function</code></a
+                >
+              </li>
+              <li>
+                <a href="lambdas.html#s19-9"
+                  ><span class="nav-num">§19.9</span>Key Takeaways</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="enums.html"><span class="nav-num">§17</span>Enums</a>
+            <ul class="sub-nav">
+              <li>
+                <a href="enums.html#s17-1"
+                  ><span class="nav-num">§17.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="enums.html#s17-2"
+                  ><span class="nav-num">§17.2</span>Declaring an Enum</a
+                >
+              </li>
+              <li>
+                <a href="enums.html#s17-3"
+                  ><span class="nav-num">§17.3</span>Objects, Not Constants</a
+                >
+              </li>
+              <li>
+                <a href="enums.html#s17-4"
+                  ><span class="nav-num">§17.4</span>Comparing Enum Values</a
+                >
+              </li>
+              <li>
+                <a href="enums.html#s17-5"
+                  ><span class="nav-num">§17.5</span>Type Characteristics</a
+                >
+              </li>
+              <li>
+                <a href="enums.html#s17-6"
+                  ><span class="nav-num">§17.6</span>Fields, Constructors,
+                  Methods</a
+                >
+              </li>
+              <li>
+                <a href="enums.html#s17-7"
+                  ><span class="nav-num">§17.7</span>Enums vs. Magic Numbers</a
+                >
+              </li>
+              <li>
+                <a href="enums.html#s17-8"
+                  ><span class="nav-num">§17.8</span>Closed Sets vs. Evolving
+                  Reality</a
+                >
+              </li>
+              <li>
+                <a href="enums.html#s17-9"
+                  ><span class="nav-num">§17.9</span>Key Takeaways</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="optionals.html"
+              ><span class="nav-num">§20</span>Optional&lt;T&gt;</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="optionals.html#s20-1"
+                  ><span class="nav-num">§20.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="optionals.html#s20-2"
+                  ><span class="nav-num">§20.2</span><code>null</code>: The
+                  Absence of a Value</a
+                >
+              </li>
+              <li>
+                <a href="optionals.html#s20-3"
+                  ><span class="nav-num">§20.3</span>The Defensive Approach</a
+                >
+              </li>
+              <li>
+                <a href="optionals.html#s20-4"
+                  ><span class="nav-num">§20.4</span>The
+                  <code>Optional&lt;T&gt;</code> Class</a
+                >
+              </li>
+              <li>
+                <a href="optionals.html#s20-5"
+                  ><span class="nav-num">§20.5</span
+                  ><code>Optional&lt;T&gt;</code> vs <code>null</code></a
+                >
+              </li>
+              <li>
+                <a href="optionals.html#s20-6"
+                  ><span class="nav-num">§20.6</span>Specialized Primitive
+                  Optionals</a
+                >
+              </li>
+              <li>
+                <a href="optionals.html#s20-7"
+                  ><span class="nav-num">§20.7</span>Key Takeaways</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="streams.html"><span class="nav-num">§21</span>Streams</a>
+            <ul class="sub-nav">
+              <li>
+                <a href="streams.html#s21-1"
+                  ><span class="nav-num">§21.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-2"
+                  ><span class="nav-num">§21.2</span>What Is a Stream</a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-3"
+                  ><span class="nav-num">§21.3</span>Creating a Stream</a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-4"
+                  ><span class="nav-num">§21.4</span>Intermediate Operations</a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-5"
+                  ><span class="nav-num">§21.5</span>Terminal Operations</a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-6"
+                  ><span class="nav-num">§21.6</span>Collecting Results</a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-7"
+                  ><span class="nav-num">§21.7</span>Streams and
+                  <code>Optional&lt;T&gt;</code></a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-8"
+                  ><span class="nav-num">§21.8</span>Laziness and Pipelines</a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-9"
+                  ><span class="nav-num">§21.9</span>When (Not) to Use
+                  Streams</a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-10"
+                  ><span class="nav-num">§21.10</span>Key Takeaways</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="concurrency.html"
+              ><span class="nav-num">§22</span>Concurrent Programming</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="concurrency.html#s22-1"
+                  ><span class="nav-num">§22.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="concurrency.html#s22-2"
+                  ><span class="nav-num">§22.2</span>Process, Thread, and the
+                  OS</a
+                >
+              </li>
+              <li>
+                <a href="concurrency.html#s22-3"
+                  ><span class="nav-num">§22.3</span>Independent Progress</a
+                >
+              </li>
+              <li>
+                <a href="concurrency.html#s22-4"
+                  ><span class="nav-num">§22.4</span>Why Concurrency Matters</a
+                >
+              </li>
+              <li>
+                <a href="concurrency.html#s22-5"
+                  ><span class="nav-num">§22.5</span>Where Parallelism Fits
+                  In</a
+                >
+              </li>
+              <li>
+                <a href="concurrency.html#s22-6"
+                  ><span class="nav-num">§22.6</span>The Main Thread</a
+                >
+              </li>
+              <li>
+                <a href="concurrency.html#s22-7"
+                  ><span class="nav-num">§22.7</span>Step 1: Creating a Task</a
+                >
+              </li>
+              <li>
+                <a href="concurrency.html#s22-8"
+                  ><span class="nav-num">§22.8</span>Step 2: Handing a Task to
+                  an Executor</a
+                >
+              </li>
+              <li>
+                <a href="concurrency.html#s22-9"
+                  ><span class="nav-num">§22.9</span>ExecutorService in
+                  Practice</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="modules.html"
+              ><span class="nav-num">§23</span>Java Modules</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="modules.html#s23-1"
+                  ><span class="nav-num">§23.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-2"
+                  ><span class="nav-num">§23.2</span>What Is a Module</a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-3"
+                  ><span class="nav-num">§23.3</span
+                  ><code>module-info.java</code></a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-4"
+                  ><span class="nav-num">§23.4</span><code>exports</code></a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-5"
+                  ><span class="nav-num">§23.5</span><code>requires</code></a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-6"
+                  ><span class="nav-num">§23.6</span>Strong Encapsulation</a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-7"
+                  ><span class="nav-num">§23.7</span>The Module Path</a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-8"
+                  ><span class="nav-num">§23.8</span
+                  ><code>requires transitive</code></a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-9"
+                  ><span class="nav-num">§23.9</span>When (Not) to Use
+                  Modules</a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-10"
+                  ><span class="nav-num">§23.10</span>Key Takeaways</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="dateandtime.html"
+              ><span class="nav-num">§24</span>Date and Time</a
+            >
+          </li>
+          <li>
+            <a href="io.html"
+              ><span class="nav-num">§25</span>Input and Output</a
+            >
+          </li>
+          <li>
+            <a href="oodesign.html"
+              ><span class="nav-num">§26</span>Object-Oriented Design</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </nav>
 
-    <p>Picture a storage box at home labeled "misc." It holds anything — a screwdriver, a cable, a photo — which is exactly what makes it convenient, right up until you reach in expecting the screwdriver and pull out the photo instead. A box that accepts everything can't promise what comes back out.</p>
+    <main id="content">
+      <header class="page-header">
+        <div class="page-chapter">Chapter 15</div>
+        <h1>Generics</h1>
+        <p class="page-lead">
+          A container built around <code>Object</code> can hold anything — which
+          is exactly the problem. This chapter is about telling the compiler
+          what a container actually holds, so it can catch the mistake you'd
+          otherwise only discover at runtime.
+        </p>
+      </header>
 
-    <p>A class meant to hold "anything" reaches, naturally enough, for the same idea: <code>Object</code> — every type is some kind of <code>Object</code> (§9.3's unwritten <code>extends Object</code>), so a field of that type accepts anything at all:</p>
+      <article>
+        <!-- §15.1 -->
+        <section id="s15-1">
+          <div class="section-head">
+            <span class="sec-num">§15.1</span>
+            <h2>
+              The Problem <em>— a container that forgets what it holds</em>
+            </h2>
+          </div>
 
-    <pre><code class="language-java">class Box {
+          <p>
+            Let's start with code you might have actually written — or would
+            have written — before generics existed.
+          </p>
+
+          <p>
+            Picture a storage box at home labeled "misc." It holds anything — a
+            screwdriver, a cable, a photo — which is exactly what makes it
+            convenient, right up until you reach in expecting the screwdriver
+            and pull out the photo instead. A box that accepts everything can't
+            promise what comes back out.
+          </p>
+
+          <p>
+            A class meant to hold "anything" reaches, naturally enough, for the
+            same idea: every type is some kind of <code>Object</code> (§9.3's
+            unwritten <code>extends Object</code>), so a field of that type
+            accepts anything at all.
+          </p>
+
+          <h3>The Pre-Generics World: Raw Types and Object Casts</h3>
+
+          <p>
+            Before Java 5, the only way to write a reusable container was to
+            hold everything as <code>Object</code>:
+          </p>
+
+          <pre><code class="language-java">class Box {
+    // Since Object is the superclass of all classes, you can put any type into content.
+    // The compiler cannot check whether you're putting in the "right" type.
     private Object content;
 
-    public void set(Object content) { this.content = content; }
-    public Object get()              { return content; }
+    public Box(Object content) {
+        this.content = content;
+    }
+
+    public void setValue(Object content) {
+        this.content = content;
+    }
+
+    // Type safety concern: content can be any type at all.
+    public Object getValue() {
+        return content;
+    }
 }</code></pre>
 
-    <pre><code class="language-java">Box box = new Box();
-box.set("hello");
-String s = (String) box.get(); // must cast — get() only promises an Object</code></pre>
+          <p>Using it looked like this:</p>
 
-    <p><code>get()</code> only ever promises an <code>Object</code> — the compiler has no way to know a <code>String</code> is what's actually inside, so reaching for a <code>String</code> specifically requires an explicit downcast (§9.7), every single time. And nothing stops the mistake this whole class exists to prevent:</p>
+          <pre><code class="language-java">// the box is initialized with a String
+Box strBox = new Box("Hello");
 
-    <pre><code class="language-java">box.set(42);                     // compiles fine — 42 is an Object too
-String oops = (String) box.get(); // compiles fine — throws ClassCastException at runtime</code></pre>
+String s = (String) strBox.getValue(); // cast required — compiler has no idea what's inside</code></pre>
 
-    <p>The cast on the last line is a promise to the compiler that turns out to be false — and like every unchecked downcast (§9.7), the compiler has no way to catch it. The mistake was made the moment <code>box.set(42)</code> ran; it just doesn't announce itself until some much later line tries to use the result as a <code>String</code>.</p>
-    </section>
+          <p>
+            This compiles. It runs. It seems fine. But now consider a slightly
+            larger codebase where the box gets passed around:
+          </p>
 
-    <!-- §15.2 -->
-    <section id="s15-2">
-      <div class="section-head">
-        <span class="sec-num">§15.2</span>
-        <h2>Type Parameters <em>— <code>&lt;T&gt;</code></em></h2>
-      </div>
+          <pre><code class="language-java">// ...200 lines later, a problematic value gets set silently, with no warning —
+// the compiler sees nothing wrong
 
-    <p>The fix is to let <code>Box</code> say up front what it holds, instead of defaulting to "anything" the way the misc. box did. A <span class="term">generic</span> class declares a placeholder for a type, filled in later, at the point it's actually used:</p>
+strBox.setValue(2014); // someone puts an Integer in
 
-    <pre><code class="language-java">class Box&lt;T&gt; {
+String value = (String) strBox.getValue(); // compiles perfectly — throws ClassCastException at runtime</code></pre>
+
+          <p>
+            The compiler had no complaint. The problem only surfaced at runtime
+            — potentially in production, potentially in a code path that's
+            rarely exercised.
+          </p>
+
+          <div class="callout callout-note">
+            <div class="callout-lbl">What this means</div>
+            <p>
+              You don't commit to a specific type upfront, while writing the
+              class — but now everything is <code>Object</code>, and type safety
+              goes with it. The compiler can't help you; every mistake it would
+              normally catch moves to runtime instead.
+            </p>
+          </div>
+
+          <h3>Why Runtime Failures Are Worse Than Compile-Time Errors</h3>
+
+          <p>
+            This is worth sitting with, because it shapes every design decision
+            in generics.
+          </p>
+
+          <p>A compile-time error is:</p>
+          <ul>
+            <li>caught immediately, before any code runs</li>
+            <li>localized — the compiler points at the exact line</li>
+            <li>free — it costs nothing in production</li>
+          </ul>
+
+          <p>A runtime error is:</p>
+          <ul>
+            <li>discovered only when that code path actually executes</li>
+            <li>potentially rare — a bug can live in a codebase for months</li>
+            <li>
+              potentially dangerous — it crashes a running program, possibly
+              losing state
+            </li>
+          </ul>
+
+          <p>
+            The <code>ClassCastException</code> above is particularly insidious
+            because the cast — <code>(String)</code> — looks completely
+            reasonable to anyone reading that line in isolation. The real
+            mistake was made somewhere else, at
+            <code>strBox.setValue(2014)</code> — but there's no error there
+            either. The compiler accepted both lines without a word.
+          </p>
+
+          <div class="callout callout-rule">
+            <div class="callout-lbl">The fundamental failure</div>
+            <p>
+              The type contract is invisible to the compiler. There's nothing in
+              the type of <code>Box</code> that says "this box holds Strings."
+              That knowledge lives only in the programmer's head.
+            </p>
+          </div>
+
+          <h3>The Core Tension: Type Safety vs. Reusability</h3>
+
+          <p>
+            Before generics, there were exactly two ways to write this class,
+            and neither one was enough on its own:
+          </p>
+
+          <table class="content-table">
+            <tr>
+              <th></th>
+              <th>Reusable?</th>
+              <th>Type-safe?</th>
+            </tr>
+            <tr>
+              <td>Use <code>Object</code> (one <code>Box</code>)</td>
+              <td>Yes</td>
+              <td>No — casts everywhere, runtime risk</td>
+            </tr>
+            <tr>
+              <td>Write <code>StringBox</code>, <code>IntegerBox</code>, …</td>
+              <td>No — a new class per type</td>
+              <td>Yes — but only by giving up on reuse</td>
+            </tr>
+          </table>
+
+          <p>
+            The second option removes every cast, at the cost of writing the
+            identical class over and over, once per type:
+          </p>
+
+          <pre><code class="language-java">class StringBox {
+    private String value;
+
+    public StringBox(String value) {
+        this.value = value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
+}
+
+class IntegerBox {
+    private Integer value;
+
+    public IntegerBox(Integer value) {
+        this.value = value;
+    }
+
+    public void setValue(Integer value) {
+        this.value = value;
+    }
+
+    public Integer getValue() {
+        return value;
+    }
+}</code></pre>
+
+          <pre><code class="language-java">StringBox strBox = new StringBox("Hello");
+String s = strBox.getValue(); // no cast — but a whole class was written just for String
+
+IntegerBox intBox = new IntegerBox(100);
+Integer n = intBox.getValue(); // no cast here either — and a second whole class, just for Integer</code></pre>
+
+          <p>
+            <code>StringBox</code> and <code>IntegerBox</code> are word-for-word
+            identical except for one type name, repeated in four places each.
+            Every new kind of box needed at some point means writing, testing,
+            and maintaining an entire new class — for logic that never actually
+            changes.
+          </p>
+
+          <div class="callout callout-insight">
+            <div class="callout-lbl">A cast is a promise</div>
+            <p>
+              A cast is a promise to the compiler that you — not it — are
+              responsible for type correctness. §15.2 picks up exactly here: a
+              way to keep <code>Box</code> as the single, reusable class it was,
+              while handing that promise back to the compiler, where it belongs.
+            </p>
+          </div>
+        </section>
+
+        <!-- §15.2 -->
+        <section id="s15-2">
+          <div class="section-head">
+            <span class="sec-num">§15.2</span>
+            <h2>
+              Type Parameters <em>— <code>&lt;T&gt;</code></em>
+            </h2>
+          </div>
+
+          <p>
+            The fix is to let <code>Box</code> say up front what it holds,
+            instead of defaulting to "anything" the way the misc. box did. A
+            <span class="term">generic</span> class declares a placeholder for a
+            type, filled in later, at the point it's actually used:
+          </p>
+
+          <pre><code class="language-java">class Box&lt;T&gt; {
     private T content;
 
     public void set(T content) { this.content = content; }
     public T get()              { return content; }
 }</code></pre>
 
-    <p><code>T</code> is a <span class="term">type parameter</span> — read <code>Box&lt;T&gt;</code> as "a Box of some type <code>T</code>, decided by whoever creates one." Creating a Box now names that type explicitly:</p>
+          <p>
+            <code>T</code> is a <span class="term">type parameter</span> — read
+            <code>Box&lt;T&gt;</code> as "a Box of some type <code>T</code>,
+            decided by whoever creates one." Creating a Box now names that type
+            explicitly:
+          </p>
 
-    <pre><code class="language-java">Box&lt;String&gt; box = new Box&lt;&gt;();
+          <pre><code class="language-java">Box&lt;String&gt; box = new Box&lt;&gt;();
 box.set("hello");
 String s = box.get(); // no cast — box was declared to hold String, specifically</code></pre>
 
-    <p>Every <code>T</code> in the class body becomes <code>String</code> for this particular <code>box</code> — <code>set</code> only accepts a <code>String</code>, and <code>get</code> returns one directly, no cast required. The mistake from §15.1 is no longer a runtime surprise; it's a compile error, at the exact line that caused it:</p>
+          <p>
+            Every <code>T</code> in the class body becomes
+            <code>String</code> for this particular <code>box</code> —
+            <code>set</code> only accepts a <code>String</code>, and
+            <code>get</code> returns one directly, no cast required. The mistake
+            from §15.1 is no longer a runtime surprise; it's a compile error, at
+            the exact line that caused it:
+          </p>
 
-    <pre><code class="language-java">box.set(42); // compile error — box is a Box&lt;String&gt;, 42 is not a String</code></pre>
+          <pre><code class="language-java">box.set(42); // compile error — box is a Box&lt;String&gt;, 42 is not a String</code></pre>
 
-    <div class="callout callout-rule">
-      <div class="callout-lbl">The empty <code>&lt;&gt;</code> is inference, not omission</div>
-      <p><code>new Box&lt;&gt;()</code> doesn't mean "no type parameter" — the compiler already knows the type from the left side of the assignment, <code>Box&lt;String&gt;</code>, and fills in <code>&lt;String&gt;</code> on the right automatically. This is the <span class="term">diamond operator</span>: shorthand for <code>new Box&lt;String&gt;()</code>, not a different, looser kind of Box.</p>
-    </div>
-    </section>
+          <div class="callout callout-rule">
+            <div class="callout-lbl">
+              The empty <code>&lt;&gt;</code> is inference, not omission
+            </div>
+            <p>
+              <code>new Box&lt;&gt;()</code> doesn't mean "no type parameter" —
+              the compiler already knows the type from the left side of the
+              assignment, <code>Box&lt;String&gt;</code>, and fills in
+              <code>&lt;String&gt;</code> on the right automatically. This is
+              the <span class="term">diamond operator</span>: shorthand for
+              <code>new Box&lt;String&gt;()</code>, not a different, looser kind
+              of Box.
+            </p>
+          </div>
+        </section>
 
-    <!-- §15.3 -->
-    <section id="s15-3">
-      <div class="section-head">
-        <span class="sec-num">§15.3</span>
-        <h2>Generic Methods <em>— a type parameter on a single method</em></h2>
-      </div>
+        <!-- §15.3 -->
+        <section id="s15-3">
+          <div class="section-head">
+            <span class="sec-num">§15.3</span>
+            <h2>
+              Class-Level Generics
+              <em>— one type parameter, shared by the whole class</em>
+            </h2>
+          </div>
 
-    <p>A type parameter doesn't require a generic class around it — a single method can declare its own, scoped only to that method, written just before the return type:</p>
+          <p>
+            §15.2's <code>T</code> was declared on the class itself:
+            <code>class Box&lt;T&gt;</code>. That placement matters — it means
+            every field, constructor, and instance method in the class body
+            shares the exact same <code>T</code>, and that <code>T</code> is
+            fixed the moment a particular <code>Box</code> is created. A generic
+            class, in other words, is a reusable template that adapts to a
+            specific type per instance: <code>Box&lt;String&gt;</code> is a box
+            that only ever holds <code>String</code>s,
+            <code>Box&lt;Integer&gt;</code> only ever holds
+            <code>Integer</code>s — same logic, different types, both fully
+            type-safe.
+          </p>
 
-    <pre><code class="language-java">static &lt;T&gt; T firstNonNull(T a, T b) {
+          <p>
+            Reach for a class-level type parameter whenever the class is a
+            container or a service built around one piece of data, and every
+            field and method needs to agree on what that data's type actually
+            is.
+          </p>
+
+          <h3>Scope: Which Members Can Actually Use <code>T</code></h3>
+
+          <p>
+            A class-level type parameter's scope is the whole class — but "whole
+            class" specifically means:
+          </p>
+
+          <ul>
+            <li>non-static fields</li>
+            <li>constructors</li>
+            <li>instance methods</li>
+          </ul>
+
+          <p>Static members are left out on purpose.</p>
+
+          <h3>Why Static Methods Can't Use Class-Level Generics</h3>
+
+          <p>
+            The confusion here usually stems from thinking that
+            <code>Box&lt;Integer&gt;</code> and
+            <code>Box&lt;String&gt;</code> are two different classes. In
+            reality, they're the same class, producing different instances — and
+            that's exactly why a <code>static</code> member can't get involved.
+          </p>
+
+          <p>
+            A <code>static</code> member belongs to the class itself, not to any
+            one instance — every instance shares the same one. Suppose two
+            <code>Box</code>es exist at once:
+          </p>
+
+          <pre><code class="language-java">Box&lt;Integer&gt; intBox = new Box&lt;&gt;();
+Box&lt;String&gt; strBox = new Box&lt;&gt;();</code></pre>
+
+          <p>
+            If <code>Box</code> had a static field typed <code>T</code>, both of
+            these would be reaching for the exact same field —
+            <code>intBox</code> setting it to hold an <code>Integer</code>,
+            <code>strBox</code> setting it to hold a <code>String</code>. Since
+            there's only one copy of a static field, shared by every instance,
+            it can't be an <code>Integer</code> and a <code>String</code> at the
+            same time. Worse, a static member exists even before any instance
+            does — so there isn't even an instance yet to ask which
+            <code>T</code> it should mean.
+          </p>
+
+          <table class="content-table">
+            <tr>
+              <th>Memory area</th>
+              <th>Content</th>
+            </tr>
+            <tr>
+              <td>Static area</td>
+              <td>Class <code>Box</code> (only one copy exists)</td>
+            </tr>
+            <tr>
+              <td>Heap — instance 1</td>
+              <td>
+                <code>Box</code> object (thinks <code>T</code> is
+                <code>Integer</code>)
+              </td>
+            </tr>
+            <tr>
+              <td>Heap — instance 2</td>
+              <td>
+                <code>Box</code> object (thinks <code>T</code> is
+                <code>String</code>)
+              </td>
+            </tr>
+          </table>
+
+          <p>
+            The static area is a single shelf, shared by the whole class; each
+            instance on the heap is its own separate item, free to disagree with
+            every other instance about what <code>T</code> actually is. A static
+            member has no instance to ask, so the compiler refuses outright to
+            let it reference the class's own <code>T</code>:
+          </p>
+
+          <pre><code class="language-java">public class Box&lt;T&gt; {
+    private T content;
+
+    public static void printContent(T content) { // compile error — cannot make a static reference to the non-static type T
+        System.out.println(content);
+    }
+}</code></pre>
+
+          <p>
+            If a static method genuinely needs to be generic, it declares its
+            own type parameter, entirely independent of the class's — exactly
+            the mechanism §15.6 covers next.
+          </p>
+
+          <h3>Type Parameter vs. Type Argument</h3>
+
+          <p>
+            This distinction is worth being precise about, because the two terms
+            name two different moments:
+          </p>
+
+          <ul>
+            <li>
+              <strong>Type parameter</strong> — the placeholder declared on the
+              class: <code>T</code> in <code>class Box&lt;T&gt;</code>.
+            </li>
+            <li>
+              <strong>Type argument</strong> — the concrete type supplied by the
+              caller: <code>String</code> in <code>Box&lt;String&gt;</code>.
+            </li>
+          </ul>
+
+          <div class="callout callout-insight">
+            <div class="callout-lbl">A contractual placeholder</div>
+            <p>
+              Think of <code>T</code> as a promise the class makes to itself: "I
+              don't know the exact type yet, but whoever creates me will pick
+              one, and every field and method here will honor that choice." The
+              moment a caller writes <code>Box&lt;String&gt;</code>, that
+              promise is filled — <code>T</code> is locked to
+              <code>String</code> for that object, for good.
+            </p>
+          </div>
+
+          <h3>Binding Time: One Template, Many Instances</h3>
+
+          <p>
+            <code>Box&lt;T&gt;</code> itself is never bound to any type — only
+            each <em>instance</em> is, and the binding happens at the moment of
+            construction:
+          </p>
+
+          <pre><code class="language-java">Box&lt;Integer&gt; intBox = new Box&lt;&gt;(); // T is locked to Integer for this object, and this object alone
+intBox.set(2);
+
+Box&lt;String&gt; strBox = new Box&lt;&gt;(); // a completely separate binding — T is String here
+strBox.set("two");</code></pre>
+
+          <p>
+            <code>intBox</code> and <code>strBox</code> are both
+            <code>Box</code>es, but as far as the compiler is concerned they're
+            different species from this point on — nothing that compiles against
+            one says anything about the other. And yet, at runtime, both are
+            secretly running the exact same class:
+          </p>
+
+          <pre><code class="language-java">System.out.println(intBox.getClass().getName()); // Box
+System.out.println(strBox.getClass().getName()); // Box — identical, despite Integer vs. String</code></pre>
+
+          <p>
+            That's <span class="term">type erasure</span> — the compiler checks
+            every use of <code>T</code> against the type argument, then discards
+            <code>T</code> entirely once compilation is done, leaving one
+            ordinary <code>Box</code> class behind. §15.10 covers exactly what
+            that means and doesn't mean; for now, the point is narrower:
+            <code>Box&lt;Integer&gt;</code> and
+            <code>Box&lt;String&gt;</code> are two different contracts enforced
+            by the compiler, on top of one shared class underneath.
+          </p>
+
+          <table class="content-table">
+            <tr>
+              <th></th>
+              <th><code>Object get()</code></th>
+              <th><code>T get()</code></th>
+            </tr>
+            <tr>
+              <td>Flexibility</td>
+              <td>High — can hold anything</td>
+              <td>High — can hold anything, per instance</td>
+            </tr>
+            <tr>
+              <td>Safety</td>
+              <td>Low — cast, and hope</td>
+              <td>High — the compiler guarantees the type</td>
+            </tr>
+            <tr>
+              <td>Responsibility</td>
+              <td>The caller must remember the type</td>
+              <td>The class tracks the type, for every caller</td>
+            </tr>
+          </table>
+
+          <div class="callout callout-conn">
+            <div class="callout-lbl">The soda fountain</div>
+            <p>
+              <code>Box&lt;T&gt;</code> is one machine — one nozzle, one button,
+              one drain — the same way a soda fountain is one machine regardless
+              of what's in the cup. <code>T</code> is the flavor selected. Pick
+              "Cola," and the machine's physical structure never changes — but
+              for that one cup, it behaves strictly as a Cola machine. Nobody
+              needs to taste it to rule out orange juice; the selection already
+              guaranteed it.
+            </p>
+          </div>
+
+          <p>
+            One restriction applies no matter what: a type argument can never be
+            a primitive. There's no <code>Box&lt;int&gt;</code> — reach for the
+            wrapper type instead, <code>Box&lt;Integer&gt;</code>.
+          </p>
+        </section>
+
+        <!-- §15.4 -->
+        <section id="s15-4">
+          <div class="section-head">
+            <span class="sec-num">§15.4</span>
+            <h2>
+              Generic Interfaces
+              <em>— a shared contract, still parameterized by type</em>
+            </h2>
+          </div>
+
+          <p>
+            <code>Box&lt;T&gt;</code> is one class. Suppose the codebase grows a
+            second, genuinely different way of holding a single value — a
+            <code>Crate&lt;T&gt;</code>, say, that logs every time its value
+            changes. Both classes make the same promise: put a value of some
+            type in, get a value of that same type back out. Nothing today says
+            so:
+          </p>
+
+          <pre><code class="language-java">class Box&lt;T&gt; {
+    private T content;
+
+    public void set(T content) { this.content = content; }
+    public T get()              { return content; }
+}
+
+class Crate&lt;T&gt; {
+    private T content;
+
+    public void set(T content) {
+        System.out.println("Storing: " + content);
+        this.content = content;
+    }
+    public T get() { return content; }
+}</code></pre>
+
+          <p>
+            <code>Box&lt;T&gt;</code> and <code>Crate&lt;T&gt;</code> share an
+            identical shape, by coincidence — nothing in either declaration says
+            they're interchangeable. A method that wants to accept "anything
+            that holds a single value of type <code>T</code>" has no type to ask
+            for. Writing it against <code>Box&lt;T&gt;</code> specifically
+            excludes every <code>Crate&lt;T&gt;</code>, and there's no shared
+            supertype linking the two:
+          </p>
+
+          <pre><code class="language-java">static &lt;T&gt; void printContents(Box&lt;T&gt; box) { // locked to Box specifically
+    System.out.println(box.get());
+}
+
+printContents(new Crate&lt;&gt;()); // compile error — Crate is not a Box</code></pre>
+
+          <p>
+            This is the exact shape §13's <code>Renewable</code> problem: a
+            capability shared by unrelated classes, with no lineage connecting
+            them. The fix is the same one — an interface — except this time the
+            capability itself is generic:
+          </p>
+
+          <pre><code class="language-java">interface Container&lt;T&gt; {
+    void set(T value);
+    T get();
+}</code></pre>
+
+          <p>
+            <code>Container&lt;T&gt;</code> declares the same two method
+            signatures <code>Box</code> and <code>Crate</code> already had,
+            parameterized the same way a generic class is — <code>T</code> here
+            is a placeholder filled in by whatever implements the interface,
+            exactly as it's filled in by whatever creates a
+            <code>Box&lt;T&gt;</code>.
+          </p>
+
+          <h3>
+            Choice 1: Implement It Generically, Passing <code>T</code> Straight
+            Through
+          </h3>
+
+          <p>
+            The most common choice: the class stays exactly as generic as the
+            interface, and its own type parameter simply <em>is</em> the
+            interface's:
+          </p>
+
+          <pre><code class="language-java">class Box&lt;T&gt; implements Container&lt;T&gt; {
+    private T content;
+
+    @Override
+    public void set(T content) { this.content = content; }
+
+    @Override
+    public T get() { return content; }
+}
+
+class Crate&lt;T&gt; implements Container&lt;T&gt; {
+    private T content;
+
+    @Override
+    public void set(T content) {
+        System.out.println("Storing: " + content);
+        this.content = content;
+    }
+
+    @Override
+    public T get() { return content; }
+}</code></pre>
+
+          <p>
+            <code>Box&lt;T&gt;</code> and <code>Crate&lt;T&gt;</code> lose
+            nothing — either can still hold any type at all, decided per
+            instance exactly as before (§15.3). What they gain is a shared type
+            to be referred to by:
+          </p>
+
+          <pre><code class="language-java">static &lt;T&gt; void printContents(Container&lt;T&gt; container) { // accepts anything implementing Container
+    System.out.println(container.get());
+}
+
+Container&lt;String&gt; c1 = new Box&lt;&gt;();
+c1.set("hello");
+
+Container&lt;String&gt; c2 = new Crate&lt;&gt;();
+c2.set("world"); // Storing: world
+
+printContents(c1); // hello
+printContents(c2); // world</code></pre>
+
+          <p>
+            <code>c1</code> and <code>c2</code> are a <code>Box</code> and a
+            <code>Crate</code> underneath — unrelated classes, no lineage in
+            common beyond <code>Object</code> — yet both are fully substitutable
+            wherever a <code>Container&lt;String&gt;</code> is expected. That's
+            §13's interface-based polymorphism, with a type parameter riding
+            along on top of it.
+          </p>
+
+          <h3>Choice 2: Implement It for One Fixed Type</h3>
+
+          <p>
+            A class doesn't have to stay generic to implement a generic
+            interface — it can supply a concrete type argument instead, the same
+            way a variable declares one:
+          </p>
+
+          <pre><code class="language-java">class StringContainer implements Container&lt;String&gt; {
+    private String content;
+
+    @Override
+    public void set(String content) { this.content = content; }
+
+    @Override
+    public String get() { return content; }
+}</code></pre>
+
+          <p>
+            <code>StringContainer</code> isn't generic at all — it's an entirely
+            ordinary class, with no <code>&lt;T&gt;</code> of its own. It just
+            happens to satisfy <code>Container&lt;String&gt;</code>,
+            permanently, because it wrote <code>String</code> everywhere the
+            interface wrote <code>T</code>. This is the right choice when a
+            class is only ever going to hold one specific type, and being
+            generic itself would just be unused flexibility:
+          </p>
+
+          <pre><code class="language-java">Container&lt;String&gt; c3 = new StringContainer();
+c3.set("!");
+printContents(c3); // !</code></pre>
+
+          <h3>Choice 3: Implement It Raw <em>— legal, not advisable</em></h3>
+
+          <p>
+            A class can also implement <code>Container</code> with no type
+            argument at all — a <span class="term">raw type</span>:
+          </p>
+
+          <pre><code class="language-java">class RawContainer implements Container { // raw type — no &lt;T&gt; at all
+    private Object content;
+
+    @Override
+    public void set(Object content) { this.content = content; }
+
+    @Override
+    public Object get() { return content; }
+}</code></pre>
+
+          <div class="callout callout-note">
+            <div class="callout-lbl">
+              Why this compiles, and why it's still §15.1's problem
+            </div>
+            <p>
+              Raw types exist purely so pre-generics code (anything written
+              before Java 5) still compiles unmodified. Every occurrence of
+              <code>T</code> is erased to its bound — here, plain
+              <code>Object</code> — and every one of the type-safety guarantees
+              this chapter builds toward is gone: <code>set</code> accepts
+              anything, <code>get</code> returns only <code>Object</code>, and
+              the compiler is back to warning, not enforcing. Reach for a raw
+              type only when working with legacy code that requires it; a new
+              class implementing <code>Container</code> should always supply a
+              type argument, whether its own <code>T</code> (Choice 1) or a
+              concrete type (Choice 2).
+            </p>
+          </div>
+        </section>
+
+        <!-- §15.5 -->
+        <section id="s15-5">
+          <div class="section-head">
+            <span class="sec-num">§15.5</span>
+            <h2>
+              Diamond Operator, Type Inference, and <code>var</code>
+              <em>— when the compiler fills in the type, and when it can't</em>
+            </h2>
+          </div>
+
+          <p>
+            §15.2 introduced the diamond operator, <code>&lt;&gt;</code>, as
+            shorthand — <code>new Box&lt;&gt;()</code> instead of writing
+            <code>new Box&lt;String&gt;()</code> in full. It's worth being
+            precise about exactly where that shorthand gets its answer from,
+            because there's exactly one place it looks — and one common way of
+            writing the line removes that place entirely.
+          </p>
+
+          <h3>What the Diamond Actually Infers From</h3>
+
+          <p>
+            The diamond operator doesn't guess. It copies the type argument from
+            the <span class="term">target type</span> — the declared type
+            standing right there on the left of the assignment:
+          </p>
+
+          <pre><code class="language-java">Box&lt;String&gt; box = new Box&lt;&gt;(); // &lt;&gt; copies String from the declared type on the left</code></pre>
+
+          <p>
+            Read the line right to left: the compiler sees
+            <code>Box&lt;String&gt;</code> being declared, so when it reaches
+            <code>new Box&lt;&gt;()</code>, there's exactly one type that could
+            possibly go in the empty brackets. This is
+            <span class="term">type inference</span> in its simplest form — the
+            compiler isn't inventing information, it's copying information
+            that's already sitting in plain sight, one token to the left.
+          </p>
+
+          <h3>The <code>var</code> Trap</h3>
+
+          <p>
+            <code>var</code> (§1.5) also infers a type — but from the
+            <em>right</em> side of the assignment, working out what type a
+            variable should be from whatever expression is being assigned to it.
+            Combine <code>var</code> with the diamond operator, and each side is
+            left waiting on the other:
+          </p>
+
+          <pre><code class="language-java">var box = new Box&lt;&gt;(); // what is box's type? what does &lt;&gt; mean? neither side says.</code></pre>
+
+          <p>
+            <code>var</code> has no declared type of its own for the diamond to
+            copy — that's the entire point of writing <code>var</code>. And the
+            diamond operator has nothing on its own to offer
+            <code>var</code> either, since <code>Box</code>'s constructor here
+            takes no argument to infer a type from. Left with no information
+            anywhere, the compiler falls back to the one type every reference
+            can hold: <code>Object</code>. The line compiles — but silently,
+            <code>box</code> is a <code>Box&lt;Object&gt;</code>, not the
+            <code>Box&lt;String&gt;</code> it probably looked like:
+          </p>
+
+          <pre><code class="language-java">var box = new Box&lt;&gt;(); // box is actually a Box&lt;Object&gt;
+
+box.set("hello"); // compiles — Object accepts a String
+box.set(42);      // ALSO compiles — box's T silently became Object, not String</code></pre>
+
+          <div class="callout callout-rule">
+            <div class="callout-lbl">
+              Var and the diamond don't infer from each other
+            </div>
+            <p>
+              <code>var</code> and <code>&lt;&gt;</code> each depend on
+              information the other one was supposed to provide, and neither
+              will invent a type out of nothing — the fallback is always
+              <code>Object</code>, quietly reopening §15.1's exact problem.
+              Combining them safely means giving the compiler a real source to
+              infer from: either drop <code>var</code> and declare the type on
+              the left, or drop the diamond and name the type argument
+              explicitly on the right.
+            </p>
+          </div>
+
+          <pre><code class="language-java">Box&lt;String&gt; box = new Box&lt;&gt;(); // declared type on the left — &lt;&gt; has something to copy
+
+var box = new Box&lt;String&gt;();  // type argument named explicitly — var has something to infer</code></pre>
+
+          <p>
+            Either line is fully type-safe; only pairing <code>var</code> with
+            an empty diamond, and nothing else pinning the type down, loses the
+            guarantee this whole chapter is about.
+          </p>
+        </section>
+
+        <!-- §15.6 -->
+        <section id="s15-6">
+          <div class="section-head">
+            <span class="sec-num">§15.6</span>
+            <h2>
+              Generic Methods <em>— a type parameter on a single method</em>
+            </h2>
+          </div>
+
+          <p>
+            A type parameter doesn't require a generic class around it — a
+            single method can declare its own, scoped only to that method,
+            written just before the return type:
+          </p>
+
+          <pre><code class="language-java">static &lt;T&gt; T firstNonNull(T a, T b) {
     return a != null ? a : b;
 }</code></pre>
 
-    <pre><code class="language-java">String name = firstNonNull(null, "default");     // T is inferred as String
+          <pre><code class="language-java">String name = firstNonNull(null, "default");     // T is inferred as String
 Integer count = firstNonNull(null, 5);             // T is inferred as Integer</code></pre>
 
-    <p><code>firstNonNull</code> isn't written for <code>String</code>, or for <code>Integer</code>, or for any one type — <code>T</code> is decided fresh at each call, inferred from whatever arguments actually show up. One method body, used at as many types as callers need, each call fully type-checked on its own terms.</p>
-    </section>
+          <p>
+            <code>firstNonNull</code> isn't written for <code>String</code>, or
+            for <code>Integer</code>, or for any one type — <code>T</code> is
+            decided fresh at each call, inferred from whatever arguments
+            actually show up. One method body, used at as many types as callers
+            need, each call fully type-checked on its own terms.
+          </p>
+        </section>
 
-    <!-- §15.4 -->
-    <section id="s15-4">
-      <div class="section-head">
-        <span class="sec-num">§15.4</span>
-        <h2>Bounded Types <em>— <code>&lt;T extends ...&gt;</code></em></h2>
-      </div>
+        <!-- §15.7 -->
+        <section id="s15-7">
+          <div class="section-head">
+            <span class="sec-num">§15.7</span>
+            <h2>
+              Bounded Types <em>— <code>&lt;T extends ...&gt;</code></em>
+            </h2>
+          </div>
 
-    <p>Plain <code>T</code> promises nothing except "some type" — not even <code>Object</code>'s methods are assumed beyond what every type already has. Calling anything more specific on a value of type <code>T</code> requires telling the compiler what <code>T</code> is guaranteed to be. A <span class="term">bounded type parameter</span> does exactly that:</p>
+          <p>
+            Plain <code>T</code> promises nothing except "some type" — not even
+            <code>Object</code>'s methods are assumed beyond what every type
+            already has. Calling anything more specific on a value of type
+            <code>T</code> requires telling the compiler what <code>T</code> is
+            guaranteed to be. A
+            <span class="term">bounded type parameter</span> does exactly that:
+          </p>
 
-    <pre><code class="language-java">static &lt;T extends Renewable&gt; void renewAll(T[] items) {
+          <pre><code class="language-java">static &lt;T extends Renewable&gt; void renewAll(T[] items) {
     for (T item : items) {
         item.renew();
     }
 }</code></pre>
 
-    <pre><code class="language-java">Subscription[] subs = { new Subscription(), new Subscription() };
+          <pre><code class="language-java">Subscription[] subs = { new Subscription(), new Subscription() };
 renewAll(subs); // fine — Subscription implements Renewable</code></pre>
 
-    <p><code>T extends Renewable</code> restricts what <code>T</code> is allowed to be to types that implement <code>Renewable</code> (§13.2) — despite the keyword, this works identically whether <code>Renewable</code> is a class being extended or, as here, an interface being implemented. That restriction is precisely what makes <code>item.renew()</code> legal inside the method: the compiler knows, for any type that could ever fill in <code>T</code> here, that <code>renew()</code> is guaranteed to exist.</p>
-    </section>
+          <p>
+            <code>T extends Renewable</code> restricts what <code>T</code> is
+            allowed to be to types that implement <code>Renewable</code> (§13.2)
+            — despite the keyword, this works identically whether
+            <code>Renewable</code> is a class being extended or, as here, an
+            interface being implemented. That restriction is precisely what
+            makes <code>item.renew()</code> legal inside the method: the
+            compiler knows, for any type that could ever fill in
+            <code>T</code> here, that <code>renew()</code> is guaranteed to
+            exist.
+          </p>
+        </section>
 
-    <!-- §15.5 -->
-    <section id="s15-5">
-      <div class="section-head">
-        <span class="sec-num">§15.5</span>
-        <h2>Compile Time Only <em>— what generics don't do</em></h2>
-      </div>
+        <!-- §15.8 -->
+        <section id="s15-8">
+          <div class="section-head">
+            <span class="sec-num">§15.8</span>
+            <h2>Invariance <em>— the illusion of subtype polymorphism</em></h2>
+          </div>
 
-    <p>Every guarantee generics make is a <em>compile-time</em> one. Once the code compiles, the type parameter itself is gone — Java's generics work by checking everything up front, then discarding the type information, a design called <span class="term">type erasure</span>. A <code>Box&lt;String&gt;</code> and a <code>Box&lt;Integer&gt;</code> are, underneath, running the exact same class at runtime; nothing about <code>T</code> survives to be inspected later.</p>
+          <p>
+            The most common way to build a
+            <span class="term">heterogeneous</span> collection — one that holds
+            several different concrete types at once — is to declare it in terms
+            of a common supertype or interface, and let it hold instances of
+            anything that <em>is</em> one:
+          </p>
 
-    <p>This is not a loophole to work around — it's the actual scope of what generics promise. They don't add a new runtime check; they move a whole category of mistake (§15.1's <code>ClassCastException</code>) to a place it can be caught immediately, at compile time, instead of a much later, harder-to-trace line where the bad value finally gets used.</p>
+          <pre><code class="language-java">List&lt;Vehicle&gt; vehicles = new ArrayList&lt;&gt;();
 
-    <div class="callout callout-note">
-      <div class="callout-lbl">Scope of this chapter</div>
-      <p>Wildcards (<code>List&lt;? extends T&gt;</code>), multiple bounds, generic interfaces, and the finer rules around type erasure and raw types are all left for later. The core idea carries over unchanged: a type parameter lets a class or method make a promise about what type it's working with, checked once, at compile time, everywhere it's used.</p>
-    </div>
-    </section>
+vehicles.add(new Car()); // ok — a Car is a Vehicle
+vehicles.add(new Bus()); // ok — a Bus is a Vehicle</code></pre>
 
-  </article>
+          <p>
+            This works, but it's really two distinct ideas working together, and
+            it's worth pulling them apart:
+          </p>
+          <ul>
+            <li><span class="term">polymorphism</span>, which is about what a single
+          <code>Vehicle</code>-typed slot — a variable, a field, an element, a
+          method parameter like <code>add(Vehicle)</code>, or a method's
+          declared return type — can actually hold, accept, or hand back, and</li>
+            <li> <span class="term">invariance</span>, which is about
+          whether one whole parameterized type can stand in for another.</li>
+          </ul>
+          
 
-  <nav class="page-nav" aria-label="Chapter navigation">
-    <a href="exceptions.html" class="page-nav-prev">
-      <span class="page-nav-label">← Previous</span>
-      <span class="page-nav-title">§14 — Exceptions</span>
-    </a>
-    <a href="records.html" class="page-nav-next">
-      <span class="page-nav-label">Next →</span>
-      <span class="page-nav-title">§16 — Records</span>
-    </a>
-  </nav>
-</main>
+          <h3>Polymorphism: What a Single Slot Can Hold or Accept</h3>
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  hljs.highlightAll();
+          <p>
+            <code>vehicles</code> holds <code>Vehicle</code> references — and
+            thanks to ordinary subtype polymorphism (§9.5), a
+            <code>Vehicle</code> reference can point at an actual
+            <code>Car</code>, a <code>Bus</code>, or any other subtype, the
+            exact same way a plain variable of type <code>Vehicle</code> could.
+            Every one of those really <em>is</em> a <code>Vehicle</code>:
+          </p>
 
-  // Flag error-annotation comments in code blocks
-  document.querySelectorAll('.hljs-comment').forEach(el => {
-    if (/\b(compile|compiler|runtime) error\b/i.test(el.textContent)) {
-      el.classList.add('hljs-comment-error');
-    }
-  });
+          <pre><code class="language-java">Car car1 = new Car();
+Car car2 = new Car();
 
-  // Code theme toggle
-  const codeThemeBtn = document.getElementById('code-theme-toggle');
-  const lightTheme = document.getElementById('hljs-light-theme');
-  const darkTheme = document.getElementById('hljs-dark-theme');
-  const themeLabel = codeThemeBtn.querySelector('.code-theme-label');
-  const themeIcon = codeThemeBtn.querySelector('.icon');
+List&lt;Car&gt; cars = List.of(car1, car2);
+List&lt;Vehicle&gt; vcars = List.of(car1, car2); // the exact same two objects, viewed as Vehicles</code></pre>
 
-  function applyCodeTheme(theme) {
-    const dark = theme === 'dark';
-    lightTheme.disabled = dark;
-    darkTheme.disabled = !dark;
-    document.documentElement.classList.toggle('code-dark', dark);
-    themeLabel.textContent = dark ? 'Light code' : 'Dark code';
-    themeIcon.textContent = dark ? '☀️' : '🌙';
-  }
+          <p>
+            Both <code>cars</code> and <code>vcars</code> can end up holding
+            addresses of the identical two objects — only the declared element
+            type differs. Adding to a <code>List&lt;Vehicle&gt;</code> follows
+            the same upcasting rule (§9.5) as passing an argument: anything that
+            <em>is</em> a <code>Vehicle</code> is accepted, automatically:
+          </p>
 
-  applyCodeTheme(localStorage.getItem('code-theme') || 'light');
+          <pre><code class="language-java">vehicles.add(new Car()); // upcast: Car → Vehicle, exactly like passing a Car to a Vehicle parameter
+vehicles.add(new Bus()); // upcast: Bus → Vehicle</code></pre>
 
-  codeThemeBtn.addEventListener('click', () => {
-    const next = darkTheme.disabled ? 'dark' : 'light';
-    localStorage.setItem('code-theme', next);
-    applyCodeTheme(next);
-  });
+          <p>
+            Retrieval works in reverse: whatever comes back out of a
+            <code>List&lt;Vehicle&gt;</code> is typed as <code>Vehicle</code>,
+            full stop — the list doesn't remember that a particular element
+            started life as a <code>Car</code>. Reaching for anything more
+            specific than <code>Vehicle</code> needs an explicit
+            <code>instanceof</code> check and a cast, the same as any other
+            downcast (§9.7).
+          </p>
 
-  // Scroll spy for sub-sections
-  const sections = document.querySelectorAll('section[id]');
-  const subLinks = document.querySelectorAll('.sub-nav a[href^="#"]');
+          <h3>How Far Can This Go? <code>List&lt;Object&gt;</code></h3>
 
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = '#' + entry.target.id;
-        subLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
-      }
-    });
-  }, { rootMargin: '-8% 0px -78% 0px', threshold: 0 });
+          <p>
+            Every class in Java extends <code>Object</code> (§9.3), so a
+            <code>List&lt;Object&gt;</code> is the most permissive version of
+            this idea — it accepts anything at all:
+          </p>
 
-  sections.forEach(s => observer.observe(s));
+          <pre><code class="language-java">List&lt;Object&gt; list = new ArrayList&lt;&gt;();
 
-  const btn  = document.getElementById('menu-btn');
-  const side = document.getElementById('sidebar');
-  btn.addEventListener('click', () => side.classList.toggle('open'));
-  document.querySelectorAll('#sidebar a').forEach(a => {
-    a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
-  });
-});
-</script>
-</body>
+list.add("hello");      // String — upcast to Object
+list.add(42);            // Integer — upcast to Object
+list.add(new Vehicle()); // Vehicle — upcast to Object</code></pre>
+
+          <p>
+            Every one of those is valid for the same reason:
+            <code>String</code>, <code>Integer</code>, and
+            <code>Vehicle</code> all <em>are</em> <code>Object</code>s, so they
+            all satisfy at least what <code>Object</code> guarantees
+            (<code>toString()</code>, <code>equals()</code>, and so on). This
+            buys flexibility of storage, not behavior — without a cast, nothing
+            more specific than <code>Object</code>'s own methods is callable on
+            what comes back out.
+          </p>
+
+          <div class="callout callout-rule">
+            <div class="callout-lbl">The real restriction</div>
+            <p>
+              The restriction generics enforce was never about what a list can
+              <em>hold</em> — it's about what reference it can be
+              <em>assigned to</em>:
+            </p>
+            <pre><code class="language-java">List&lt;Object&gt; list = new ArrayList&lt;Object&gt;(); // fine
+
+List&lt;Object&gt; list2 = new ArrayList&lt;String&gt;(); // compile error — incompatible types</code></pre>
+            <p>
+              That fails even though every <code>String</code> genuinely is an
+              <code>Object</code> — the reason why is exactly what the rest of
+              this section is about.
+            </p>
+          </div>
+
+          <h3>
+            Reading Back Out: <code>instanceof</code> and Pattern Matching
+          </h3>
+
+          <pre><code class="language-java">List&lt;Number&gt; numbers = new ArrayList&lt;&gt;(); // holds any subtype of Number
+
+numbers.add(10);   // Integer, upcast automatically
+numbers.add(3.14); // Double
+numbers.add(100L); // Long
+
+var e = numbers.get(0); // declared type: Number
+
+if (e instanceof Integer i) { // pattern-matching instanceof (§9.7)
+    System.out.println("Integer: " + i);
+}</code></pre>
+
+          <p>
+            Storing several subtypes of <code>Number</code> costs nothing — but
+            reading one back out means the specific type is gone unless
+            something checks for it. That's the trade-off a heterogeneous list
+            always makes: type safety on the way out is lower than on the way
+            in, and a cast to the wrong type fails only at runtime, with a
+            <code>ClassCastException</code> (§15.1) — never at compile time.
+          </p>
+
+          <pre><code class="language-java">Vehicle v = vehicles.get(0);      // always safe — every element genuinely is a Vehicle
+Car c = (Car) vehicles.get(0);    // compiles, but risky — fails at runtime if that element isn't actually a Car</code></pre>
+
+          <h3>
+            Invariance: Why <code>List&lt;Car&gt;</code> Isn't a
+            <code>List&lt;Vehicle&gt;</code>
+          </h3>
+
+          <p>
+            Given <code>cars</code> and <code>vcars</code> from earlier — built
+            from the exact same two objects — it's tempting to assume one can
+            substitute for the other, the same way a
+            <code>Car</code> substitutes for a <code>Vehicle</code>. It can't:
+          </p>
+
+          <pre><code class="language-java">vcars = cars; // compile error — incompatible types, List&lt;Car&gt; is not a List&lt;Vehicle&gt;</code></pre>
+
+          <p>
+            This is <span class="term">invariance</span>: even though
+            <code>Car</code> <em>is</em> a <code>Vehicle</code>,
+            <code>List&lt;Car&gt;</code> is not a
+            <code>List&lt;Vehicle&gt;</code> — the subtyping relationship
+            between the element types doesn't carry over to the parameterized
+            types built from them. Two lists can hold identical objects and
+            still be incompatible types, because what each one
+            <em>allows</em> differs.
+          </p>
+
+          <h3>Why Invariance Matters in Practice</h3>
+
+          <p>
+            A method call is an implicit assignment — the compiler checks an
+            argument against a parameter exactly the way it checks the right
+            side of <code>=</code> against the left. So invariance shows up here
+            too, not just at an explicit <code>=</code>:
+          </p>
+
+          <pre><code class="language-java">void process(List&lt;Vehicle&gt; list) {
+    list.add(new Bus());     // fine — the compiler knows list is a List&lt;Vehicle&gt;
+    list.add(new Vehicle());  // fine
+}
+
+ArrayList&lt;Car&gt; cars = new ArrayList&lt;&gt;();
+process(cars); // compile error — List&lt;Car&gt; is not a List&lt;Vehicle&gt;</code></pre>
+
+          <p>
+            This isn't an arbitrary restriction. Inside <code>process</code>,
+            the compiler is certain <code>list</code> is a
+            <code>List&lt;Vehicle&gt;</code> — which means it's certain
+            <code>list.add(new Bus())</code> is legal. If
+            <code>process(cars)</code> were allowed, that same
+            <code>add</code> call would just have slipped a
+            <code>Bus</code> into what the caller still believes is a
+            <code>List&lt;Car&gt;</code>. Invariance is exactly what closes that
+            gap — it exists specifically to protect a list that might be
+            <em>written to</em>.
+          </p>
+
+          <p>
+            Making this flexible again means being explicit about which
+            direction the list is actually used in:
+          </p>
+
+          <pre><code class="language-java">// Only reading: accepts List&lt;Car&gt;, List&lt;Bus&gt;, List&lt;Vehicle&gt;, ... — cannot safely add
+void readVehicles(List&lt;? extends Vehicle&gt; list) { }
+
+// Only adding: accepts List&lt;Vehicle&gt;, List&lt;Object&gt;, ... — cannot safely read as anything specific
+void addVehicles(List&lt;? super Vehicle&gt; list) { }</code></pre>
+
+          <div class="callout callout-insight">
+            <div class="callout-lbl">
+              Producer <code>extends</code>, consumer <code>super</code>
+            </div>
+            <p>
+              A list a method only ever reads from is <em>producing</em> values
+              for it — <code>? extends Vehicle</code> fits, because every
+              element, whatever its exact subtype, can be read as a
+              <code>Vehicle</code>. A list a method only ever adds to is
+              <em>consuming</em> values from it —
+              <code>? super Vehicle</code> fits, because anything that can
+              legally hold a <code>Vehicle</code> can accept one. Trying to add
+              through <code>? extends</code>, or read anything specific out of
+              <code>? super</code>, is exactly the case each wildcard was built
+              to rule out.
+            </p>
+          </div>
+
+          <h3>The Unbounded Wildcard: <code>List&lt;?&gt;</code></h3>
+
+          <p>
+            Sometimes the element type genuinely doesn't matter at all.
+            <code>List&lt;?&gt;</code> — a list of some unknown type — accepts a
+            reference to any <code>List</code>, of any element type, but the
+            price is steep:
+          </p>
+
+          <pre><code class="language-java">List&lt;?&gt; list = List.of(new Car(), new Bus(), new Vehicle()); // ok
+
+list.add(null);         // ok — null belongs to every type
+list.add(new Bus());    // compile error — the compiler has no idea what "?" actually is here
+
+Object element = list.get(0); // safe, but only as Object — the specific type is gone</code></pre>
+
+          <p>
+            Once a list is declared <code>List&lt;?&gt;</code>, nothing can be
+            added to it except <code>null</code> — the compiler has thrown away
+            the one piece of information (what <code>?</code> actually stands
+            for) that would let it check anything else. Reading still works, but
+            only as far as <code>Object</code>.
+            <code>List&lt;? super Vehicle&gt;</code> is the useful middle
+            ground: unknown exactly what supertype of <code>Vehicle</code> it
+            holds, but definitely a supertype, so adding a
+            <code>Vehicle</code> — or any of its subtypes — is still safe:
+          </p>
+
+          <pre><code class="language-java">List&lt;? super Vehicle&gt; list = new ArrayList&lt;&gt;();
+
+list.add(new Car());     // ok
+list.add(new Bus());     // ok
+list.add(new Vehicle());  // ok</code></pre>
+        </section>
+
+        <!-- §15.9 -->
+        <section id="s15-9">
+          <div class="section-head">
+            <span class="sec-num">§15.9</span>
+            <h2>
+              Wildcards
+              <em>— accepting a broader promise than the one asked for</em>
+            </h2>
+          </div>
+
+          <p>
+            A wildcard, <code>?</code>, stands for a type argument that isn't
+            known — or doesn't need to be known — at the point something is
+            declared. It never appears where <code>T</code> would, as a type
+            parameter on a class or method; a wildcard only ever fills in the
+            <code>&lt;&gt;</code> on something already generic, as a type
+            <em>argument</em>. Java has three forms:
+          </p>
+
+          <table class="content-table">
+            <tr>
+              <th>Form</th>
+              <th>Reads as</th>
+              <th>Allows</th>
+            </tr>
+            <tr>
+              <td><code>List&lt;?&gt;</code></td>
+              <td>a list of some unknown type</td>
+              <td>
+                reading elements as <code>Object</code>; writing nothing but
+                <code>null</code>
+              </td>
+            </tr>
+            <tr>
+              <td><code>List&lt;? extends Vehicle&gt;</code></td>
+              <td>a list of some unknown subtype of <code>Vehicle</code></td>
+              <td>
+                reading elements as <code>Vehicle</code>; writing nothing — the
+                exact subtype is unknown
+              </td>
+            </tr>
+            <tr>
+              <td><code>List&lt;? super Vehicle&gt;</code></td>
+              <td>a list of some unknown supertype of <code>Vehicle</code></td>
+              <td>
+                writing a <code>Vehicle</code> or any of its subtypes; reading
+                elements only as <code>Object</code>
+              </td>
+            </tr>
+          </table>
+
+          <p>
+            §15.8 already put each of these three forms to work, one at a time —
+            <code>readVehicles</code>, <code>addVehicles</code>, and the fully
+            unbounded <code>List&lt;?&gt;</code>. What follows is a single
+            worked example, named for what it actually solves, showing why a
+            method from the standard library itself needs exactly this.
+          </p>
+
+          <h3>Use Case: Reusing a Broader Predicate</h3>
+
+          <p>
+            <code>Predicate&lt;Vehicle&gt;</code> represents a function that can
+            test any <code>Vehicle</code> — its
+            <code>test(Vehicle)</code> method takes a
+            <code>Vehicle</code> parameter, and thanks to ordinary polymorphism
+            (§9.5), a <code>Car</code> argument is accepted without complaint:
+          </p>
+
+          <pre><code class="language-java">Predicate&lt;Vehicle&gt; canHandle = vehicle -&gt; vehicle != null; // stands in for some real business rule
+
+Car myCar = new Car();
+canHandle.test(myCar); // fine — test(Vehicle) accepts a Car, same as any Vehicle-typed parameter would</code></pre>
+
+          <p>
+            <code>canHandle</code> genuinely can test a <code>Car</code>. It
+            doesn't know or care that it's being handed a
+            <code>Car</code> specifically — a
+            <code>Predicate&lt;Vehicle&gt;</code> is built to test
+            <em>anything</em> that's a <code>Vehicle</code>, which a
+            <code>Car</code> always is.
+          </p>
+
+          <h3>Where This Breaks: <code>Stream&lt;T&gt;.filter()</code></h3>
+
+          <p>
+            <code>Stream&lt;T&gt;</code> declares a <code>filter</code> method
+            that takes a predicate to decide which elements survive. If it were
+            declared the obvious way —
+            <code>filter(Predicate&lt;T&gt; predicate)</code> — then for a
+            <code>Stream&lt;Car&gt;</code>, that would demand a
+            <code>Predicate&lt;Car&gt;</code>, exactly:
+          </p>
+
+          <pre><code class="language-java">Stream&lt;Car&gt; carStream = cars.stream();
+
+carStream.filter(canHandle); // if filter took Predicate&lt;T&gt; exactly: compile error
+                              // Predicate&lt;Vehicle&gt; is not a Predicate&lt;Car&gt; — invariance (§15.8)</code></pre>
+
+          <p>
+            This is invariance again, showing up one level down — inside a
+            method parameter instead of a variable assignment. And it's
+            rejecting something that obviously ought to work:
+            <code>canHandle</code> can test a <code>Car</code> perfectly well,
+            since every <code>Car</code> is a <code>Vehicle</code>. The
+            restriction isn't protecting anything here —
+            <code>filter</code> only ever <em>calls</em> <code>test</code>,
+            handing it elements; it never asks the predicate to hand anything
+            back that needs to be exactly a <code>Car</code>.
+          </p>
+
+          <h3>The Real Declaration: <code>Predicate&lt;? super T&gt;</code></h3>
+
+          <p>
+            Which is exactly why the actual signature isn't the obvious one:
+          </p>
+
+          <pre><code class="language-java">Stream&lt;T&gt; filter(Predicate&lt;? super T&gt; predicate)</code></pre>
+
+          <p>
+            The wildcard <em>opts in</em> to a kind of polymorphism at the
+            parameter level — the same way a plain
+            <code>Vehicle</code> parameter accepts a <code>Car</code> argument,
+            <code>Predicate&lt;? super T&gt;</code> accepts a predicate built
+            for <code>T</code>, or for anything broader than <code>T</code>:
+          </p>
+
+          <pre><code class="language-java">carStream.filter(canHandle); // compiles — Predicate&lt;Vehicle&gt; satisfies Predicate&lt;? super Car&gt;</code></pre>
+
+          <p>
+            This is <span class="term">contravariance</span>: as the element
+            type narrows from <code>Vehicle</code> to <code>Car</code>, the set
+            of predicates <code>filter</code> will accept actually grows wider,
+            not narrower — every <code>Predicate&lt;Car&gt;</code> still
+            qualifies, and so does every <code>Predicate</code> built for any
+            supertype of <code>Car</code>. That's the same producer/consumer
+            reasoning §15.8 already named: <code>filter</code> only ever
+            <em>consumes</em> elements by handing them to the predicate, so
+            <code>? super</code> is precisely the direction that stays safe.
+          </p>
+        </section>
+
+        <!-- §15.10 -->
+        <section id="s15-10">
+          <div class="section-head">
+            <span class="sec-num">§15.10</span>
+            <h2>Compile Time Only <em>— what generics don't do</em></h2>
+          </div>
+
+          <p>
+            Every guarantee generics make is a <em>compile-time</em> one. Once
+            the code compiles, the type parameter itself is gone — Java's
+            generics work by checking everything up front, then discarding the
+            type information, a design called
+            <span class="term">type erasure</span>. A
+            <code>Box&lt;String&gt;</code> and a
+            <code>Box&lt;Integer&gt;</code> are, underneath, running the exact
+            same class at runtime; nothing about <code>T</code> survives to be
+            inspected later.
+          </p>
+
+          <p>
+            This is not a loophole to work around — it's the actual scope of
+            what generics promise. They don't add a new runtime check; they move
+            a whole category of mistake (§15.1's
+            <code>ClassCastException</code>) to a place it can be caught
+            immediately, at compile time, instead of a much later,
+            harder-to-trace line where the bad value finally gets used.
+          </p>
+
+          <div class="callout callout-note">
+            <div class="callout-lbl">Scope of this chapter</div>
+            <p>
+              Multiple bounds, generic interfaces, and the finer rules around
+              raw types are all left for later. The core idea carries over
+              unchanged: a type parameter lets a class or method make a promise
+              about what type it's working with, checked once, at compile time,
+              everywhere it's used.
+            </p>
+          </div>
+        </section>
+      </article>
+
+      <nav class="page-nav" aria-label="Chapter navigation">
+        <a href="exceptions.html" class="page-nav-prev">
+          <span class="page-nav-label">← Previous</span>
+          <span class="page-nav-title">§14 — Exceptions</span>
+        </a>
+        <a href="records.html" class="page-nav-next">
+          <span class="page-nav-label">Next →</span>
+          <span class="page-nav-title">§16 — Records</span>
+        </a>
+      </nav>
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        hljs.highlightAll();
+
+        // Color method calls the same blue as method declarations — hljs's Java grammar
+        // only tags declarations (e.g. "void fly()"), leaving call sites like
+        // "obj.method()" as plain, unstyled text.
+        (function () {
+          const skipClasses = new Set([
+            "hljs-string",
+            "hljs-comment",
+            "hljs-doctag",
+            "hljs-meta",
+            "hljs-title",
+            "hljs-keyword",
+          ]);
+          const keywords = new Set([
+            "if",
+            "for",
+            "while",
+            "switch",
+            "catch",
+            "synchronized",
+            "do",
+            "else",
+            "return",
+            "new",
+            "throw",
+            "try",
+            "instanceof",
+            "assert",
+          ]);
+          const callPattern = /\b([A-Za-z_$][\w$]*)(\s*)(\()/g;
+
+          document
+            .querySelectorAll("pre code.language-java")
+            .forEach(function (block) {
+              const walker = document.createTreeWalker(
+                block,
+                NodeFilter.SHOW_TEXT,
+              );
+              const textNodes = [];
+              let node;
+              while ((node = walker.nextNode())) {
+                let skip = false;
+                for (
+                  let el = node.parentElement;
+                  el && el !== block;
+                  el = el.parentElement
+                ) {
+                  if ([...el.classList].some((c) => skipClasses.has(c))) {
+                    skip = true;
+                    break;
+                  }
+                }
+                if (!skip) textNodes.push(node);
+              }
+
+              textNodes.forEach(function (textNode) {
+                const text = textNode.nodeValue;
+                callPattern.lastIndex = 0;
+                if (!callPattern.test(text)) return;
+                callPattern.lastIndex = 0;
+
+                const frag = document.createDocumentFragment();
+                let lastIndex = 0;
+                let match;
+                while ((match = callPattern.exec(text))) {
+                  frag.appendChild(
+                    document.createTextNode(text.slice(lastIndex, match.index)),
+                  );
+                  if (keywords.has(match[1])) {
+                    frag.appendChild(document.createTextNode(match[0]));
+                  } else {
+                    const span = document.createElement("span");
+                    span.className = "hljs-title function_";
+                    span.textContent = match[1];
+                    frag.appendChild(span);
+                    frag.appendChild(
+                      document.createTextNode(match[2] + match[3]),
+                    );
+                  }
+                  lastIndex = match.index + match[0].length;
+                }
+                frag.appendChild(
+                  document.createTextNode(text.slice(lastIndex)),
+                );
+                textNode.replaceWith(frag);
+              });
+            });
+        })();
+
+        // Flag error-annotation comments in code blocks
+        document.querySelectorAll(".hljs-comment").forEach((el) => {
+          if (/\b(compile|compiler|runtime) error\b/i.test(el.textContent)) {
+            el.classList.add("hljs-comment-error");
+          }
+        });
+
+        // Code theme toggle
+        const codeThemeBtn = document.getElementById("code-theme-toggle");
+        const lightTheme = document.getElementById("hljs-light-theme");
+        const darkTheme = document.getElementById("hljs-dark-theme");
+        const themeLabel = codeThemeBtn.querySelector(".code-theme-label");
+        const themeIcon = codeThemeBtn.querySelector(".icon");
+
+        function applyCodeTheme(theme) {
+          const dark = theme === "dark";
+          lightTheme.disabled = dark;
+          darkTheme.disabled = !dark;
+          document.documentElement.classList.toggle("code-dark", dark);
+          themeLabel.textContent = dark ? "Light code" : "Dark code";
+          themeIcon.textContent = dark ? "☀️" : "🌙";
+        }
+
+        applyCodeTheme(localStorage.getItem("code-theme") || "light");
+
+        codeThemeBtn.addEventListener("click", () => {
+          const next = darkTheme.disabled ? "dark" : "light";
+          localStorage.setItem("code-theme", next);
+          applyCodeTheme(next);
+        });
+
+        // Scroll spy for sub-sections
+        const sections = document.querySelectorAll("section[id]");
+        const subLinks = document.querySelectorAll('.sub-nav a[href^="#"]');
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const id = "#" + entry.target.id;
+                subLinks.forEach((a) =>
+                  a.classList.toggle("active", a.getAttribute("href") === id),
+                );
+              }
+            });
+          },
+          { rootMargin: "-8% 0px -78% 0px", threshold: 0 },
+        );
+
+        sections.forEach((s) => observer.observe(s));
+
+        const btn = document.getElementById("menu-btn");
+        const side = document.getElementById("sidebar");
+        btn.addEventListener("click", () => side.classList.toggle("open"));
+        document.querySelectorAll("#sidebar a").forEach((a) => {
+          a.addEventListener("click", () => {
+            if (window.innerWidth <= 860) side.classList.remove("open");
+          });
+        });
+      });
+    </script>
+  </body>
 </html>

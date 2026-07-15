@@ -27,6 +27,9 @@
   --exercise-bg: #e6f5f4;
   --exercise-border: #2f9e94;
   --exercise-label: #22796f;
+  --insight-bg: #fdeef2;
+  --insight-border: #c15a7a;
+  --insight-label: #a8456a;
   --error: #c0392b;
 }
 
@@ -243,6 +246,14 @@ pre {
   border: 1px solid #e4dfd5;
   transition: border-color 0.15s;
 }
+/* Shrink-wraps the border to the content's own width instead of stretching full-width — for
+   short plain-text listings (not full code samples) where a full-width box looks unbalanced. */
+pre.pre-fit {
+  display: table;
+  max-width: 100%;
+  padding: 12px 20px;
+  background: var(--code-bg);
+}
 pre code.hljs {
   font-family: 'SFMono-Regular', Menlo, Monaco, Consolas, monospace !important;
   font-size: 13.5px !important;
@@ -281,6 +292,10 @@ html.code-dark pre code.hljs {
   align-items: center;
   gap: 8px;
 }
+.callout-lbl code {
+  text-transform: none;
+  letter-spacing: normal;
+}
 .callout p { font-size: 14.5px; margin: 0; line-height: 1.65; max-width: none; }
 
 .callout-mem  { background: var(--mem-bg);  border-color: var(--mem-border); }
@@ -289,11 +304,32 @@ html.code-dark pre code.hljs {
 .callout-conn .callout-lbl { color: var(--conn-label); }
 .callout-note { background: var(--note-bg); border-color: var(--note-border); }
 .callout-note .callout-lbl { color: var(--note-label); }
+.callout-note .callout-lbl::before {
+  content: 'NOTE';
+  background: var(--note-border);
+  color: #fff;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
 .callout-rule { background: var(--rule-bg); border-color: var(--rule-border); }
 .callout-rule .callout-lbl { color: var(--rule-label); }
 .callout-rule .callout-lbl::before {
   content: 'RULE';
   background: var(--rule-border);
+  color: #fff;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.callout-insight { background: var(--insight-bg); border-color: var(--insight-border); }
+.callout-insight .callout-lbl { color: var(--insight-label); }
+.callout-insight .callout-lbl::before {
+  content: 'INSIGHT';
+  background: var(--insight-border);
   color: #fff;
   font-size: 9px;
   letter-spacing: 0.08em;
@@ -474,6 +510,51 @@ a.backref:hover { background: #e8d4b0; }
   gap: 1px;
 }
 .cf-arrow { font-size: 16px; color: #bbb; line-height: 1; }
+
+/* ── Vertical flow chart (happy path, §14.1) ── */
+.flowchart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 28px 0;
+}
+.flowchart-node {
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  padding: 11px 26px;
+  font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14.5px;
+  color: var(--text);
+  text-align: center;
+  white-space: nowrap;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+.flowchart-node.flowchart-terminator {
+  border-radius: 999px;
+  background: var(--accent-bg);
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+.flowchart-arrow {
+  width: 2px;
+  height: 26px;
+  background: var(--border);
+  position: relative;
+}
+.flowchart-arrow::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 7px solid var(--border);
+}
 
 .compile-fanout {
   display: flex;
@@ -1063,6 +1144,13 @@ a.backref:hover { background: #e8d4b0; }
 .diagram-figure img {
   display: block;
   max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+.diagram-compact svg {
+  display: block;
+  width: 100%;
+  max-width: 480px;
   height: auto;
   margin: 0 auto;
 }
