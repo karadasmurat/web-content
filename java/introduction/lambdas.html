@@ -1,444 +1,1423 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>§19 Functional Programming — OO with Java</title>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" id="hljs-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
-<link rel="stylesheet" id="hljs-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
-<script>
-(function () {
-  if ((localStorage.getItem('code-theme') || 'light') === 'dark') {
-    document.getElementById('hljs-light-theme').disabled = true;
-    document.getElementById('hljs-dark-theme').disabled = false;
-    document.documentElement.classList.add('code-dark');
-  }
-})();
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>§19 Functional Programming — OO with Java</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      id="hljs-light-theme"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css"
+    />
+    <link
+      rel="stylesheet"
+      id="hljs-dark-theme"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"
+      disabled
+    />
+    <script>
+      (function () {
+        if ((localStorage.getItem("code-theme") || "light") === "dark") {
+          document.getElementById("hljs-light-theme").disabled = true;
+          document.getElementById("hljs-dark-theme").disabled = false;
+          document.documentElement.classList.add("code-dark");
+        }
+      })();
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+  </head>
+  <body>
+    <button id="menu-btn" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
 
-<button id="menu-btn" aria-label="Toggle navigation">
-  <span></span><span></span><span></span>
-</button>
+    <button
+      id="code-theme-toggle"
+      class="code-theme-toggle"
+      aria-label="Toggle code color scheme"
+    >
+      <span class="icon">🌙</span
+      ><span class="code-theme-label">Dark code</span>
+    </button>
 
-<button id="code-theme-toggle" class="code-theme-toggle" aria-label="Toggle code color scheme">
-  <span class="icon">🌙</span><span class="code-theme-label">Dark code</span>
-</button>
-
-<nav id="sidebar" aria-label="Tutorial navigation">
-  <div class="sidebar-brand">
-    <div class="sidebar-brand-label">Tutorial</div>
-    <div class="sidebar-brand-title">Gentle Introduction<br>to OO with Java</div>
-  </div>
-  <nav>
-    <ul>
-      <li>
-        <a href="index.html"><span class="nav-num">§0</span>Java at a Glance</a>
-        <ul class="sub-nav">
-          <li><a href="index.html#s0-1"><span class="nav-num">§0.1</span>What Is Java?</a></li>
-          <li><a href="index.html#s0-2"><span class="nav-num">§0.2</span>Where Is Java Used?</a></li>
-          <li><a href="index.html#s0-3"><span class="nav-num">§0.3</span>Why Java?</a></li>
-          <li><a href="index.html#s0-4"><span class="nav-num">§0.4</span>The Java Ecosystem</a></li>
-          <li><a href="index.html#s0-5"><span class="nav-num">§0.5</span>Java Versions</a></li>
-          <li><a href="index.html#s0-6"><span class="nav-num">§0.6</span>Your First Program</a></li>
-          <li><a href="index.html#s0-7"><span class="nav-num">§0.7</span>Key Features</a></li>
-          <li><a href="index.html#s0-8"><span class="nav-num">§0.8</span>Key Takeaways</a></li>
-          <li><a href="index.html#s0-9"><span class="nav-num">§0.9</span>Appendix: Write Once, Run Anywhere</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="variables.html"><span class="nav-num">§1</span>Variables and Values</a>
-        <ul class="sub-nav">
-          <li><a href="variables.html#s1-1"><span class="nav-num">§1.1</span>Values</a></li>
-          <li><a href="variables.html#s1-2"><span class="nav-num">§1.2</span>Variables in Java</a></li>
-          <li><a href="variables.html#s1-3"><span class="nav-num">§1.3</span>Primitive Types</a></li>
-          <li><a href="variables.html#s1-4"><span class="nav-num">§1.4</span>Literals</a></li>
-          <li><a href="variables.html#s1-5"><span class="nav-num">§1.5</span><code>var</code></a></li>
-          <li><a href="variables.html#s1-6"><span class="nav-num">§1.6</span>Common Mistakes</a></li>
-          <li><a href="variables.html#s1-7"><span class="nav-num">§1.7</span>What a Variable Holds</a></li>
-          <li><a href="variables.html#s1-8"><span class="nav-num">§1.8</span>Key Takeaways</a></li>
-          <li><a href="variables.html#s1-9"><span class="nav-num">§1.9</span>Appendix: Number Systems</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="classes.html"><span class="nav-num">§2</span>Classes &amp; Objects</a>
-        <ul class="sub-nav">
-          <li><a href="classes.html#s2-1"><span class="nav-num">§2.1</span>Classes as Blueprints</a></li>
-          <li><a href="classes.html#s2-2"><span class="nav-num">§2.2</span>Instantiation</a></li>
-          <li><a href="classes.html#s2-3"><span class="nav-num">§2.3</span>Reference Variables</a></li>
-          <li><a href="classes.html#s2-4"><span class="nav-num">§2.4</span>Reference Fields</a></li>
-          <li><a href="classes.html#s2-5"><span class="nav-num">§2.5</span>Constructors</a></li>
-          <li><a href="classes.html#s2-6"><span class="nav-num">§2.6</span>Static Fields</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="assignment.html"><span class="nav-num">§3</span>Assignment</a>
-        <ul class="sub-nav">
-          <li><a href="assignment.html#s3-1"><span class="nav-num">§3.1</span>The "Value"</a></li>
-          <li><a href="assignment.html#s3-2"><span class="nav-num">§3.2</span>Primitive Assignment</a></li>
-          <li><a href="assignment.html#s3-3"><span class="nav-num">§3.3</span>Reference Assignment</a></li>
-          <li><a href="assignment.html#s3-4"><span class="nav-num">§3.4</span>Consequence</a></li>
-          <li><a href="assignment.html#s3-5"><span class="nav-num">§3.5</span>Assignment vs. the Dot</a></li>
-          <li><a href="assignment.html#s3-6"><span class="nav-num">§3.6</span>The Rule</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="methods.html"><span class="nav-num">§4</span>Methods</a>
-        <ul class="sub-nav">
-          <li><a href="methods.html#s4-intro"><span class="nav-num">§4.1</span>Why Methods</a></li>
-          <li><a href="methods.html#s4-2"><span class="nav-num">§4.2</span>What Is a Method?</a></li>
-          <li><a href="methods.html#s4-3"><span class="nav-num">§4.3</span>Outputs</a></li>
-          <li><a href="methods.html#s4-4"><span class="nav-num">§4.4</span>Functions to Objects</a></li>
-          <li><a href="methods.html#s4-5"><span class="nav-num">§4.5</span>The "Hidden" Parameter</a></li>
-          <li><a href="methods.html#s4-6"><span class="nav-num">§4.6</span>Key Takeaways</a></li>
-          <li><a href="methods.html#s4-7"><span class="nav-num">§4.7</span>Appendix: The Call Stack</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="operators.html"><span class="nav-num">§5</span>Operators</a>
-        <ul class="sub-nav">
-          <li><a href="operators.html#s5-1"><span class="nav-num">§5.1</span>Arithmetic Operators</a></li>
-          <li><a href="operators.html#s5-2"><span class="nav-num">§5.2</span>Unary Operators</a></li>
-          <li><a href="operators.html#s5-3"><span class="nav-num">§5.3</span>Comparison Operators</a></li>
-          <li><a href="operators.html#s5-4"><span class="nav-num">§5.4</span>Logical Operators</a></li>
-          <li><a href="operators.html#s5-5"><span class="nav-num">§5.5</span>Compound Assignment</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="arrays.html"><span class="nav-num">§6</span>Arrays</a>
-        <ul class="sub-nav">
-          <li><a href="arrays.html#s6-1"><span class="nav-num">§6.1</span>Why Arrays</a></li>
-          <li><a href="arrays.html#s6-2"><span class="nav-num">§6.2</span>One Variable, Many Values</a></li>
-          <li><a href="arrays.html#s6-3"><span class="nav-num">§6.3</span>The Index</a></li>
-          <li><a href="arrays.html#s6-4"><span class="nav-num">§6.4</span>Creating an Array</a></li>
-          <li><a href="arrays.html#s6-5"><span class="nav-num">§6.5</span>Reading and Writing Elements</a></li>
-          <li><a href="arrays.html#s6-6"><span class="nav-num">§6.6</span><code>.length</code></a></li>
-          <li><a href="arrays.html#s6-7"><span class="nav-num">§6.7</span>Filling in the Week</a></li>
-          <li><a href="arrays.html#s6-8"><span class="nav-num">§6.8</span>Assignment Still Copies the Address</a></li>
-          <li><a href="arrays.html#s6-9"><span class="nav-num">§6.9</span>Arrays of Objects</a></li>
-          <li><a href="arrays.html#s6-10"><span class="nav-num">§6.10</span>Pointing a Slot at an Existing Object</a></li>
-          <li><a href="arrays.html#s6-11"><span class="nav-num">§6.11</span>Passing an Array's Address to a Method</a></li>
-          <li><a href="arrays.html#s6-12"><span class="nav-num">§6.12</span>Variable-Arity Parameters</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="controlflow.html"><span class="nav-num">§7</span>Control Flow</a>
-        <ul class="sub-nav">
-          <li><a href="controlflow.html#s7-1"><span class="nav-num">§7.1</span>The Flow of Execution</a></li>
-          <li><a href="controlflow.html#s7-2"><span class="nav-num">§7.2</span>Variable Scope</a></li>
-          <li><a href="controlflow.html#s7-3"><span class="nav-num">§7.3</span>Conditional Branching</a></li>
-          <li><a href="controlflow.html#s7-4"><span class="nav-num">§7.4</span><code>while</code></a></li>
-          <li><a href="controlflow.html#s7-5"><span class="nav-num">§7.5</span><code>for</code></a></li>
-          <li><a href="controlflow.html#s7-6"><span class="nav-num">§7.6</span>for-each</a></li>
-          <li><a href="controlflow.html#s7-7"><span class="nav-num">§7.7</span>Ternary Operator</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="strings.html"><span class="nav-num">§8</span>Strings</a>
-        <ul class="sub-nav">
-          <li><a href="strings.html#s8-1"><span class="nav-num">§8.1</span>Writing Systems &amp; Unicode</a></li>
-          <li><a href="strings.html#s8-2"><span class="nav-num">§8.2</span><code>char</code></a></li>
-          <li><a href="strings.html#s8-3"><span class="nav-num">§8.3</span><code>Character</code></a></li>
-          <li><a href="strings.html#s8-4"><span class="nav-num">§8.4</span>Sequence of Characters</a></li>
-          <li><a href="strings.html#s8-5"><span class="nav-num">§8.5</span>Text Blocks</a></li>
-          <li><a href="strings.html#s8-6"><span class="nav-num">§8.6</span>Immutability</a></li>
-          <li><a href="strings.html#s8-7"><span class="nav-num">§8.7</span><code>==</code> vs <code>.equals()</code></a></li>
-          <li><a href="strings.html#s8-8"><span class="nav-num">§8.8</span>Concatenation</a></li>
-          <li><a href="strings.html#s8-9"><span class="nav-num">§8.9</span>Important String Methods</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="inheritance.html"><span class="nav-num">§9</span>Inheritance</a>
-        <ul class="sub-nav">
-          <li><a href="inheritance.html#s10-1"><span class="nav-num">§9.1</span>Taxonomy</a></li>
-          <li><a href="inheritance.html#s10-2"><span class="nav-num">§9.2</span>The Problem</a></li>
-          <li><a href="inheritance.html#s10-3"><span class="nav-num">§9.3</span><code>extends</code></a></li>
-          <li><a href="inheritance.html#s10-4"><span class="nav-num">§9.4</span><code>super(...)</code></a></li>
-          <li><a href="inheritance.html#s10-5"><span class="nav-num">§9.5</span>Polymorphism</a></li>
-          <li><a href="inheritance.html#s10-6"><span class="nav-num">§9.6</span>Overriding</a></li>
-          <li><a href="inheritance.html#s10-7"><span class="nav-num">§9.7</span><code>toString()</code></a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="accessmodifiers.html"><span class="nav-num">§10</span>Packages &amp; Access Modifiers</a>
-        <ul class="sub-nav">
-          <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§10.1</span>Packages</a></li>
-          <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§10.2</span>Why Restrict Access</a></li>
-          <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§10.3</span>Getters and Setters</a></li>
-          <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§10.4</span><code>public</code></a></li>
-          <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§10.5</span>Package-Private</a></li>
-          <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§10.6</span><code>protected</code></a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="immutability.html"><span class="nav-num">§11</span>Immutability</a>
-        <ul class="sub-nav">
-          <li><a href="immutability.html#s11-1"><span class="nav-num">§11.1</span>Two Real-World Analogies</a></li>
-          <li><a href="immutability.html#s11-2"><span class="nav-num">§11.2</span>Identity &amp; State</a></li>
-          <li><a href="immutability.html#s11-3"><span class="nav-num">§11.3</span>A Question of Time</a></li>
-          <li><a href="immutability.html#s11-4"><span class="nav-num">§11.4</span>Building an Immutable Class</a></li>
-          <li><a href="immutability.html#s11-5"><span class="nav-num">§11.5</span><code>final</code> Isn't Deep</a></li>
-          <li><a href="immutability.html#s11-6"><span class="nav-num">§11.6</span>Why It Matters</a></li>
-          <li><a href="immutability.html#s11-7"><span class="nav-num">§11.7</span><code>StringBuilder</code></a></li>
-          <li><a href="immutability.html#s11-8"><span class="nav-num">§11.8</span>Putting It Together</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="abstractclasses.html"><span class="nav-num">§12</span>Abstract Classes</a>
-        <ul class="sub-nav">
-          <li><a href="abstractclasses.html#s12-1"><span class="nav-num">§12.1</span>The Problem</a></li>
-          <li><a href="abstractclasses.html#s12-2"><span class="nav-num">§12.2</span><code>abstract</code> Classes</a></li>
-          <li><a href="abstractclasses.html#s12-3"><span class="nav-num">§12.3</span><code>abstract</code> Methods</a></li>
-            <li><a href="abstractclasses.html#s12-4"><span class="nav-num">§12.4</span>Bringing It Altogether</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="interfaces.html"><span class="nav-num">§13</span>Interfaces</a>
-        <ul class="sub-nav">
-          <li><a href="interfaces.html#s13-1"><span class="nav-num">§13.1</span>The Problem</a></li>
-          <li><a href="interfaces.html#s13-2"><span class="nav-num">§13.2</span>Interface vs. Abstract Class</a></li>
-          <li><a href="interfaces.html#s13-3"><span class="nav-num">§13.3</span>Declaring &amp; Implementing</a></li>
-          <li><a href="interfaces.html#s13-4"><span class="nav-num">§13.4</span>Override vs. Overload</a></li>
-          <li><a href="interfaces.html#s13-5"><span class="nav-num">§13.5</span>Multiple Interfaces</a></li>
-          <li><a href="interfaces.html#s13-6"><span class="nav-num">§13.6</span>Anonymous Classes</a></li>
-          <li><a href="interfaces.html#s13-7"><span class="nav-num">§13.7</span>Default Methods</a></li>
-          <li><a href="interfaces.html#s13-8"><span class="nav-num">§13.8</span>Default Method Collisions</a></li>
-          <li><a href="interfaces.html#s13-9"><span class="nav-num">§13.9</span>Static Methods</a></li>
-          <li><a href="interfaces.html#s13-10"><span class="nav-num">§13.10</span>Interface Inheritance</a></li>
-          <li><a href="interfaces.html#s13-11"><span class="nav-num">§13.11</span>Interface Use Cases</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="exceptions.html"><span class="nav-num">§14</span>Exceptions</a>
-        <ul class="sub-nav">
-          <li><a href="exceptions.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
-          <li><a href="exceptions.html#s14-2"><span class="nav-num">§14.2</span>The Exception Lifecycle</a></li>
-          <li><a href="exceptions.html#s14-3"><span class="nav-num">§14.3</span>Handling Exceptions</a></li>
-          <li><a href="exceptions.html#s14-4"><span class="nav-num">§14.4</span>The Exception Hierarchy</a></li>
-          <li><a href="exceptions.html#s14-5"><span class="nav-num">§14.5</span>Checked vs. Unchecked</a></li>
-          <li><a href="exceptions.html#s14-6"><span class="nav-num">§14.6</span>Custom Exceptions</a></li>
-          <li><a href="exceptions.html#s14-7"><span class="nav-num">§14.7</span>Exception Chaining</a></li>
-          <li><a href="exceptions.html#s14-8"><span class="nav-num">§14.8</span>Try-with-Resources</a></li>
-          <li><a href="exceptions.html#s14-9"><span class="nav-num">§14.9</span>Best Practices &amp; Anti-Patterns</a></li>
-          <li><a href="exceptions.html#s14-10"><span class="nav-num">§14.10</span>Key Takeaways</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="generics.html"><span class="nav-num">§15</span>Generics</a>
-        <ul class="sub-nav">
-          <li><a href="generics.html#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
-          <li><a href="generics.html#s15-2"><span class="nav-num">§15.2</span>Type Parameters</a></li>
-          <li><a href="generics.html#s15-3"><span class="nav-num">§15.3</span>Class-Level Generics</a></li>
-          <li><a href="generics.html#s15-4"><span class="nav-num">§15.4</span>Generic Interfaces</a></li>
-          <li><a href="generics.html#s15-5"><span class="nav-num">§15.5</span>Diamond &amp; <code>var</code></a></li>
-          <li><a href="generics.html#s15-6"><span class="nav-num">§15.6</span>Generic Methods</a></li>
-          <li><a href="generics.html#s15-7"><span class="nav-num">§15.7</span>Bounded Types</a></li>
-          <li><a href="generics.html#s15-8"><span class="nav-num">§15.8</span>Invariance</a></li>
-          <li><a href="generics.html#s15-9"><span class="nav-num">§15.9</span>Wildcards</a></li>
-          <li><a href="generics.html#s15-10"><span class="nav-num">§15.10</span>Compile Time Only</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="records.html"><span class="nav-num">§16</span>Records</a>
-        <ul class="sub-nav">
-          <li><a href="records.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
-          <li><a href="records.html#s16-2"><span class="nav-num">§16.2</span><code>record</code></a></li>
-          <li><a href="records.html#s16-3"><span class="nav-num">§16.3</span>Implicitly Final</a></li>
-          <li><a href="records.html#s16-4"><span class="nav-num">§16.4</span>Shallow Immutability</a></li>
-          <li><a href="records.html#s16-5"><span class="nav-num">§16.5</span>Constructors</a></li>
-          <li><a href="records.html#s16-6"><span class="nav-num">§16.6</span><code>equals()</code></a></li>
-          <li><a href="records.html#s16-7"><span class="nav-num">§16.7</span>Records Can Do More</a></li>
-          <li><a href="records.html#s16-8"><span class="nav-num">§16.8</span>Pattern Matching</a></li>
-          <li><a href="records.html#s16-9"><span class="nav-num">§16.9</span>When to Reach for One</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="collections.html"><span class="nav-num">§18</span>Collections Framework</a>
-        <ul class="sub-nav">
-          <li><a href="collections.html#s18-1"><span class="nav-num">§18.1</span>The Problem</a></li>
-          <li><a href="collections.html#s18-2"><span class="nav-num">§18.2</span>The Big Picture</a></li>
-          <li><a href="collections.html#s18-3"><span class="nav-num">§18.3</span><code>SequencedCollection</code></a></li>
-          <li><a href="collections.html#s18-4"><span class="nav-num">§18.4</span><code>List</code></a></li>
-          <li><a href="collections.html#s18-5"><span class="nav-num">§18.5</span>Defining an Order</a></li>
-          <li><a href="collections.html#s18-6"><span class="nav-num">§18.6</span><code>Queue</code></a></li>
-          <li><a href="collections.html#s18-7"><span class="nav-num">§18.7</span><code>Set</code></a></li>
-          <li><a href="collections.html#s18-8"><span class="nav-num">§18.8</span><code>Map</code></a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="lambdas.html" class="active"><span class="nav-num">§19</span>Functional Programming</a>
-        <ul class="sub-nav">
-          <li><a href="#s19-1"><span class="nav-num">§19.1</span>Functions as First-Class Citizens</a></li>
-          <li><a href="#s19-2"><span class="nav-num">§19.2</span>Why Java "Simulates" First-Class Functions</a></li>
-          <li><a href="#s19-3"><span class="nav-num">§19.3</span>The Problem</a></li>
-          <li><a href="#s19-4"><span class="nav-num">§19.4</span>Another Anonymous Class</a></li>
-          <li><a href="#s19-5"><span class="nav-num">§19.5</span>Functional Interfaces</a></li>
-          <li><a href="#s19-6"><span class="nav-num">§19.6</span>Lambda Expressions</a></li>
-          <li><a href="#s19-7"><span class="nav-num">§19.7</span>Method References</a></li>
-          <li><a href="#s19-8"><span class="nav-num">§19.8</span><code>java.util.function</code></a></li>
-          <li><a href="#s19-9"><span class="nav-num">§19.9</span>Key Takeaways</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="enums.html"><span class="nav-num">§17</span>Enums</a>
-        <ul class="sub-nav">
-          <li><a href="enums.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
-          <li><a href="enums.html#s17-2"><span class="nav-num">§17.2</span>Declaring an Enum</a></li>
-          <li><a href="enums.html#s17-3"><span class="nav-num">§17.3</span>Objects, Not Constants</a></li>
-          <li><a href="enums.html#s17-4"><span class="nav-num">§17.4</span>Comparing Enum Values</a></li>
-          <li><a href="enums.html#s17-5"><span class="nav-num">§17.5</span>Type Characteristics</a></li>
-          <li><a href="enums.html#s17-6"><span class="nav-num">§17.6</span>Fields, Constructors, Methods</a></li>
-          <li><a href="enums.html#s17-7"><span class="nav-num">§17.7</span>Enums vs. Magic Numbers</a></li>
-          <li><a href="enums.html#s17-8"><span class="nav-num">§17.8</span>Closed Sets vs. Evolving Reality</a></li>
-          <li><a href="enums.html#s17-9"><span class="nav-num">§17.9</span>Key Takeaways</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="optionals.html"><span class="nav-num">§20</span>Optional&lt;T&gt;</a>
-        <ul class="sub-nav">
-          <li><a href="optionals.html#s20-1"><span class="nav-num">§20.1</span>The Problem</a></li>
-          <li><a href="optionals.html#s20-2"><span class="nav-num">§20.2</span><code>null</code>: The Absence of a Value</a></li>
-          <li><a href="optionals.html#s20-3"><span class="nav-num">§20.3</span>The Defensive Approach</a></li>
-          <li><a href="optionals.html#s20-4"><span class="nav-num">§20.4</span>The <code>Optional&lt;T&gt;</code> Class</a></li>
-          <li><a href="optionals.html#s20-5"><span class="nav-num">§20.5</span><code>Optional&lt;T&gt;</code> vs <code>null</code></a></li>
-          <li><a href="optionals.html#s20-6"><span class="nav-num">§20.6</span>Specialized Primitive Optionals</a></li>
-          <li><a href="optionals.html#s20-7"><span class="nav-num">§20.7</span>Key Takeaways</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="streams.html"><span class="nav-num">§21</span>Streams</a>
-        <ul class="sub-nav">
-          <li><a href="streams.html#s21-1"><span class="nav-num">§21.1</span>The Problem</a></li>
-          <li><a href="streams.html#s21-2"><span class="nav-num">§21.2</span>What Is a Stream</a></li>
-          <li><a href="streams.html#s21-3"><span class="nav-num">§21.3</span>Creating a Stream</a></li>
-          <li><a href="streams.html#s21-4"><span class="nav-num">§21.4</span>Intermediate Operations</a></li>
-          <li><a href="streams.html#s21-5"><span class="nav-num">§21.5</span>Terminal Operations</a></li>
-          <li><a href="streams.html#s21-6"><span class="nav-num">§21.6</span>Collecting Results</a></li>
-          <li><a href="streams.html#s21-7"><span class="nav-num">§21.7</span>Streams and <code>Optional&lt;T&gt;</code></a></li>
-          <li><a href="streams.html#s21-8"><span class="nav-num">§21.8</span>Laziness and Pipelines</a></li>
-          <li><a href="streams.html#s21-9"><span class="nav-num">§21.9</span>When (Not) to Use Streams</a></li>
-          <li><a href="streams.html#s21-10"><span class="nav-num">§21.10</span>Key Takeaways</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="concurrency.html"><span class="nav-num">§22</span>Concurrent Programming</a>
-        <ul class="sub-nav">
-          <li><a href="concurrency.html#s22-1"><span class="nav-num">§22.1</span>The Problem</a></li>
-          <li><a href="concurrency.html#s22-2"><span class="nav-num">§22.2</span>Process, Thread, and the OS</a></li>
-          <li><a href="concurrency.html#s22-3"><span class="nav-num">§22.3</span>Independent Progress</a></li>
-          <li><a href="concurrency.html#s22-4"><span class="nav-num">§22.4</span>Why Concurrency Matters</a></li>
-          <li><a href="concurrency.html#s22-5"><span class="nav-num">§22.5</span>Where Parallelism Fits In</a></li>
-          <li><a href="concurrency.html#s22-6"><span class="nav-num">§22.6</span>The Main Thread</a></li>
-          <li><a href="concurrency.html#s22-7"><span class="nav-num">§22.7</span>Step 1: Creating a Task</a></li>
-          <li><a href="concurrency.html#s22-8"><span class="nav-num">§22.8</span>Step 2: Handing a Task to an Executor</a></li>
-          <li><a href="concurrency.html#s22-9"><span class="nav-num">§22.9</span>ExecutorService in Practice</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="modules.html"><span class="nav-num">§23</span>Java Modules</a>
-        <ul class="sub-nav">
-          <li><a href="modules.html#s23-1"><span class="nav-num">§23.1</span>The Problem</a></li>
-          <li><a href="modules.html#s23-2"><span class="nav-num">§23.2</span>What Is a Module</a></li>
-          <li><a href="modules.html#s23-3"><span class="nav-num">§23.3</span><code>module-info.java</code></a></li>
-          <li><a href="modules.html#s23-4"><span class="nav-num">§23.4</span><code>exports</code></a></li>
-          <li><a href="modules.html#s23-5"><span class="nav-num">§23.5</span><code>requires</code></a></li>
-          <li><a href="modules.html#s23-6"><span class="nav-num">§23.6</span>Strong Encapsulation</a></li>
-          <li><a href="modules.html#s23-7"><span class="nav-num">§23.7</span>The Module Path</a></li>
-          <li><a href="modules.html#s23-8"><span class="nav-num">§23.8</span><code>requires transitive</code></a></li>
-          <li><a href="modules.html#s23-9"><span class="nav-num">§23.9</span>When (Not) to Use Modules</a></li>
-          <li><a href="modules.html#s23-10"><span class="nav-num">§23.10</span>Key Takeaways</a></li>
-        </ul>
-      </li>
-      <li><a href="dateandtime.html"><span class="nav-num">§24</span>Date and Time</a></li>
-      <li><a href="io.html"><span class="nav-num">§25</span>Input and Output</a></li>
-      <li><a href="oodesign.html"><span class="nav-num">§26</span>Object-Oriented Design</a></li>
-    </ul>
-  </nav>
-</nav>
-
-<main id="content">
-  <header class="page-header">
-    <div class="page-chapter">Chapter 19</div>
-    <h1>Functional Programming</h1>
-    <p class="page-lead">Some languages let a function travel as casually as a number does — stored, passed, handed back, built on the spot. Java's answer looks different underneath but reaches the same place. This chapter opens with what that capability actually means, then builds Java's version of it from the ground up: §13's Strategy pattern, shrunk twice more, down to a single arrow.</p>
-  </header>
-
-  <article>
-
-    <!-- §19.1 -->
-    <section id="s19-1">
-      <div class="section-head">
-        <span class="sec-num">§19.1</span>
-        <h2>Functions as First-Class Citizens <em>— what it means for behavior to be a value</em></h2>
+    <nav id="sidebar" aria-label="Tutorial navigation">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-label">Tutorial</div>
+        <div class="sidebar-brand-title">
+          Gentle Introduction<br />to OO with Java
+        </div>
       </div>
+      <nav>
+        <ul>
+          <li>
+            <a href="index.html"
+              ><span class="nav-num">§0</span>Java at a Glance</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="index.html#s0-1"
+                  ><span class="nav-num">§0.1</span>What Is Java?</a
+                >
+              </li>
+              <li>
+                <a href="index.html#s0-2"
+                  ><span class="nav-num">§0.2</span>Where Is Java Used?</a
+                >
+              </li>
+              <li>
+                <a href="index.html#s0-3"
+                  ><span class="nav-num">§0.3</span>Why Java?</a
+                >
+              </li>
+              <li>
+                <a href="index.html#s0-4"
+                  ><span class="nav-num">§0.4</span>The Java Ecosystem</a
+                >
+              </li>
+              <li>
+                <a href="index.html#s0-5"
+                  ><span class="nav-num">§0.5</span>Java Versions</a
+                >
+              </li>
+              <li>
+                <a href="index.html#s0-6"
+                  ><span class="nav-num">§0.6</span>Your First Program</a
+                >
+              </li>
+              <li>
+                <a href="index.html#s0-7"
+                  ><span class="nav-num">§0.7</span>Key Features</a
+                >
+              </li>
+              <li>
+                <a href="index.html#s0-8"
+                  ><span class="nav-num">§0.8</span>Appendix: Write Once, Run
+                  Anywhere</a
+                >
+              </li>
+              <li>
+                <a href="index.html#s0-9"
+                  ><span class="nav-num">§0.9</span>Appendix: Setting Up Your
+                  Environment</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="variables.html"
+              ><span class="nav-num">§1</span>Variables and Values</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="variables.html#s1-1"
+                  ><span class="nav-num">§1.1</span>Values</a
+                >
+              </li>
+              <li>
+                <a href="variables.html#s1-2"
+                  ><span class="nav-num">§1.2</span>Variables in Java</a
+                >
+              </li>
+              <li>
+                <a href="variables.html#s1-3"
+                  ><span class="nav-num">§1.3</span>Primitive Types</a
+                >
+              </li>
+              <li>
+                <a href="variables.html#s1-4"
+                  ><span class="nav-num">§1.4</span>Literals</a
+                >
+              </li>
+              <li>
+                <a href="variables.html#s1-5"
+                  ><span class="nav-num">§1.5</span><code>var</code></a
+                >
+              </li>
+              <li>
+                <a href="variables.html#s1-6"
+                  ><span class="nav-num">§1.6</span>Common Mistakes</a
+                >
+              </li>
+              <li>
+                <a href="variables.html#s1-7"
+                  ><span class="nav-num">§1.7</span>What a Variable Holds</a
+                >
+              </li>
+              <li>
+                <a href="variables.html#s1-8"
+                  ><span class="nav-num">§1.8</span>Key Takeaways</a
+                >
+              </li>
+              <li>
+                <a href="variables.html#s1-9"
+                  ><span class="nav-num">§1.9</span>Appendix: Number Systems</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="classes.html"
+              ><span class="nav-num">§2</span>Classes &amp; Objects</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="classes.html#s2-1"
+                  ><span class="nav-num">§2.1</span>Classes as Blueprints</a
+                >
+              </li>
+              <li>
+                <a href="classes.html#s2-2"
+                  ><span class="nav-num">§2.2</span>Instantiation</a
+                >
+              </li>
+              <li>
+                <a href="classes.html#s2-3"
+                  ><span class="nav-num">§2.3</span>Reference Variables</a
+                >
+              </li>
+              <li>
+                <a href="classes.html#s2-4"
+                  ><span class="nav-num">§2.4</span>Reference Fields</a
+                >
+              </li>
+              <li>
+                <a href="classes.html#s2-5"
+                  ><span class="nav-num">§2.5</span>Constructors</a
+                >
+              </li>
+              <li>
+                <a href="classes.html#s2-6"
+                  ><span class="nav-num">§2.6</span>Static Fields</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="assignment.html"
+              ><span class="nav-num">§3</span>Assignment</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="assignment.html#s3-1"
+                  ><span class="nav-num">§3.1</span>The "Value"</a
+                >
+              </li>
+              <li>
+                <a href="assignment.html#s3-2"
+                  ><span class="nav-num">§3.2</span>Primitive Assignment</a
+                >
+              </li>
+              <li>
+                <a href="assignment.html#s3-3"
+                  ><span class="nav-num">§3.3</span>Reference Assignment</a
+                >
+              </li>
+              <li>
+                <a href="assignment.html#s3-4"
+                  ><span class="nav-num">§3.4</span>Consequence</a
+                >
+              </li>
+              <li>
+                <a href="assignment.html#s3-5"
+                  ><span class="nav-num">§3.5</span>Assignment vs. the Dot</a
+                >
+              </li>
+              <li>
+                <a href="assignment.html#s3-6"
+                  ><span class="nav-num">§3.6</span>The Rule</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="methods.html"><span class="nav-num">§4</span>Methods</a>
+            <ul class="sub-nav">
+              <li>
+                <a href="methods.html#s4-intro"
+                  ><span class="nav-num">§4.1</span>Why Methods</a
+                >
+              </li>
+              <li>
+                <a href="methods.html#s4-2"
+                  ><span class="nav-num">§4.2</span>What Is a Method?</a
+                >
+              </li>
+              <li>
+                <a href="methods.html#s4-3"
+                  ><span class="nav-num">§4.3</span>Outputs</a
+                >
+              </li>
+              <li>
+                <a href="methods.html#s4-4"
+                  ><span class="nav-num">§4.4</span>Functions to Objects</a
+                >
+              </li>
+              <li>
+                <a href="methods.html#s4-5"
+                  ><span class="nav-num">§4.5</span>The "Hidden" Parameter</a
+                >
+              </li>
+              <li>
+                <a href="methods.html#s4-6"
+                  ><span class="nav-num">§4.6</span>Key Takeaways</a
+                >
+              </li>
+              <li>
+                <a href="methods.html#s4-7"
+                  ><span class="nav-num">§4.7</span>Appendix: The Call Stack</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="operators.html"
+              ><span class="nav-num">§5</span>Operators</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="operators.html#s5-1"
+                  ><span class="nav-num">§5.1</span>Arithmetic Operators</a
+                >
+              </li>
+              <li>
+                <a href="operators.html#s5-2"
+                  ><span class="nav-num">§5.2</span>Unary Operators</a
+                >
+              </li>
+              <li>
+                <a href="operators.html#s5-3"
+                  ><span class="nav-num">§5.3</span>Comparison Operators</a
+                >
+              </li>
+              <li>
+                <a href="operators.html#s5-4"
+                  ><span class="nav-num">§5.4</span>Logical Operators</a
+                >
+              </li>
+              <li>
+                <a href="operators.html#s5-5"
+                  ><span class="nav-num">§5.5</span>Compound Assignment</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="arrays.html"><span class="nav-num">§6</span>Arrays</a>
+            <ul class="sub-nav">
+              <li>
+                <a href="arrays.html#s6-1"
+                  ><span class="nav-num">§6.1</span>Why Arrays</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-2"
+                  ><span class="nav-num">§6.2</span>One Variable, Many Values</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-3"
+                  ><span class="nav-num">§6.3</span>The Index</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-4"
+                  ><span class="nav-num">§6.4</span>Creating an Array</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-5"
+                  ><span class="nav-num">§6.5</span>Reading and Writing
+                  Elements</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-6"
+                  ><span class="nav-num">§6.6</span><code>.length</code></a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-7"
+                  ><span class="nav-num">§6.7</span>Filling in the Week</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-8"
+                  ><span class="nav-num">§6.8</span>Assignment Still Copies the
+                  Address</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-9"
+                  ><span class="nav-num">§6.9</span>Arrays of Objects</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-10"
+                  ><span class="nav-num">§6.10</span>Pointing a Slot at an
+                  Existing Object</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-11"
+                  ><span class="nav-num">§6.11</span>Passing an Array's Address
+                  to a Method</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-12"
+                  ><span class="nav-num">§6.12</span>Variable-Arity
+                  Parameters</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="controlflow.html"
+              ><span class="nav-num">§7</span>Control Flow</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="controlflow.html#s7-1"
+                  ><span class="nav-num">§7.1</span>The Flow of Execution</a
+                >
+              </li>
+              <li>
+                <a href="controlflow.html#s7-2"
+                  ><span class="nav-num">§7.2</span>Variable Scope</a
+                >
+              </li>
+              <li>
+                <a href="controlflow.html#s7-3"
+                  ><span class="nav-num">§7.3</span>Conditional Branching</a
+                >
+              </li>
+              <li>
+                <a href="controlflow.html#s7-4"
+                  ><span class="nav-num">§7.4</span><code>while</code></a
+                >
+              </li>
+              <li>
+                <a href="controlflow.html#s7-5"
+                  ><span class="nav-num">§7.5</span><code>for</code></a
+                >
+              </li>
+              <li>
+                <a href="controlflow.html#s7-6"
+                  ><span class="nav-num">§7.6</span>for-each</a
+                >
+              </li>
+              <li>
+                <a href="controlflow.html#s7-7"
+                  ><span class="nav-num">§7.7</span>Ternary Operator</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="strings.html"><span class="nav-num">§8</span>Strings</a>
+            <ul class="sub-nav">
+              <li>
+                <a href="strings.html#s8-1"
+                  ><span class="nav-num">§8.1</span>Writing Systems &amp;
+                  Unicode</a
+                >
+              </li>
+              <li>
+                <a href="strings.html#s8-2"
+                  ><span class="nav-num">§8.2</span><code>char</code></a
+                >
+              </li>
+              <li>
+                <a href="strings.html#s8-3"
+                  ><span class="nav-num">§8.3</span><code>Character</code></a
+                >
+              </li>
+              <li>
+                <a href="strings.html#s8-4"
+                  ><span class="nav-num">§8.4</span>Sequence of Characters</a
+                >
+              </li>
+              <li>
+                <a href="strings.html#s8-5"
+                  ><span class="nav-num">§8.5</span>Text Blocks</a
+                >
+              </li>
+              <li>
+                <a href="strings.html#s8-6"
+                  ><span class="nav-num">§8.6</span>Immutability</a
+                >
+              </li>
+              <li>
+                <a href="strings.html#s8-7"
+                  ><span class="nav-num">§8.7</span><code>==</code> vs
+                  <code>.equals()</code></a
+                >
+              </li>
+              <li>
+                <a href="strings.html#s8-8"
+                  ><span class="nav-num">§8.8</span>Concatenation</a
+                >
+              </li>
+              <li>
+                <a href="strings.html#s8-9"
+                  ><span class="nav-num">§8.9</span>Important String Methods</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="inheritance.html"
+              ><span class="nav-num">§9</span>Inheritance</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="inheritance.html#s10-1"
+                  ><span class="nav-num">§9.1</span>Taxonomy</a
+                >
+              </li>
+              <li>
+                <a href="inheritance.html#s10-2"
+                  ><span class="nav-num">§9.2</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="inheritance.html#s10-3"
+                  ><span class="nav-num">§9.3</span><code>extends</code></a
+                >
+              </li>
+              <li>
+                <a href="inheritance.html#s10-4"
+                  ><span class="nav-num">§9.4</span><code>super(...)</code></a
+                >
+              </li>
+              <li>
+                <a href="inheritance.html#s10-5"
+                  ><span class="nav-num">§9.5</span>Polymorphism</a
+                >
+              </li>
+              <li>
+                <a href="inheritance.html#s10-6"
+                  ><span class="nav-num">§9.6</span>Overriding</a
+                >
+              </li>
+              <li>
+                <a href="inheritance.html#s10-7"
+                  ><span class="nav-num">§9.7</span><code>toString()</code></a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="accessmodifiers.html"
+              ><span class="nav-num">§10</span>Packages &amp; Access
+              Modifiers</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="accessmodifiers.html#s11-1"
+                  ><span class="nav-num">§10.1</span>Packages</a
+                >
+              </li>
+              <li>
+                <a href="accessmodifiers.html#s11-2"
+                  ><span class="nav-num">§10.2</span>Why Restrict Access</a
+                >
+              </li>
+              <li>
+                <a href="accessmodifiers.html#s11-3"
+                  ><span class="nav-num">§10.3</span>Getters and Setters</a
+                >
+              </li>
+              <li>
+                <a href="accessmodifiers.html#s11-4"
+                  ><span class="nav-num">§10.4</span><code>public</code></a
+                >
+              </li>
+              <li>
+                <a href="accessmodifiers.html#s11-5"
+                  ><span class="nav-num">§10.5</span>Package-Private</a
+                >
+              </li>
+              <li>
+                <a href="accessmodifiers.html#s11-6"
+                  ><span class="nav-num">§10.6</span><code>protected</code></a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="immutability.html"
+              ><span class="nav-num">§11</span>Immutability</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="immutability.html#s11-1"
+                  ><span class="nav-num">§11.1</span>Two Real-World Analogies</a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-2"
+                  ><span class="nav-num">§11.2</span>Identity &amp; State</a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-3"
+                  ><span class="nav-num">§11.3</span>A Question of Time</a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-4"
+                  ><span class="nav-num">§11.4</span>Building an Immutable
+                  Class</a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-5"
+                  ><span class="nav-num">§11.5</span><code>final</code> Isn't
+                  Deep</a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-6"
+                  ><span class="nav-num">§11.6</span>Why It Matters</a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-7"
+                  ><span class="nav-num">§11.7</span
+                  ><code>StringBuilder</code></a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-8"
+                  ><span class="nav-num">§11.8</span>Putting It Together</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="abstractclasses.html"
+              ><span class="nav-num">§12</span>Abstract Classes</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="abstractclasses.html#s12-1"
+                  ><span class="nav-num">§12.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="abstractclasses.html#s12-2"
+                  ><span class="nav-num">§12.2</span
+                  ><code>abstract</code> Classes</a
+                >
+              </li>
+              <li>
+                <a href="abstractclasses.html#s12-3"
+                  ><span class="nav-num">§12.3</span
+                  ><code>abstract</code> Methods</a
+                >
+              </li>
+              <li>
+                <a href="abstractclasses.html#s12-4"
+                  ><span class="nav-num">§12.4</span>Bringing It Altogether</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="interfaces.html"
+              ><span class="nav-num">§13</span>Interfaces</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="interfaces.html#s13-1"
+                  ><span class="nav-num">§13.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-2"
+                  ><span class="nav-num">§13.2</span>Interface vs. Abstract
+                  Class</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-3"
+                  ><span class="nav-num">§13.3</span>Declaring &amp;
+                  Implementing</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-4"
+                  ><span class="nav-num">§13.4</span>Override vs. Overload</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-5"
+                  ><span class="nav-num">§13.5</span>Multiple Interfaces</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-6"
+                  ><span class="nav-num">§13.6</span>Anonymous Classes</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-7"
+                  ><span class="nav-num">§13.7</span>Default Methods</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-8"
+                  ><span class="nav-num">§13.8</span>Default Method
+                  Collisions</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-9"
+                  ><span class="nav-num">§13.9</span>Static Methods</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-10"
+                  ><span class="nav-num">§13.10</span>Interface Inheritance</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-11"
+                  ><span class="nav-num">§13.11</span>Interface Use Cases</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="exceptions.html"
+              ><span class="nav-num">§14</span>Exceptions</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="exceptions.html#s14-1"
+                  ><span class="nav-num">§14.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-2"
+                  ><span class="nav-num">§14.2</span>The Exception Lifecycle</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-3"
+                  ><span class="nav-num">§14.3</span>Handling Exceptions</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-4"
+                  ><span class="nav-num">§14.4</span>The Exception Hierarchy</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-5"
+                  ><span class="nav-num">§14.5</span>Checked vs. Unchecked</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-6"
+                  ><span class="nav-num">§14.6</span>Custom Exceptions</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-7"
+                  ><span class="nav-num">§14.7</span>Exception Chaining</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-8"
+                  ><span class="nav-num">§14.8</span>Try-with-Resources</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-9"
+                  ><span class="nav-num">§14.9</span>Best Practices &amp;
+                  Anti-Patterns</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-10"
+                  ><span class="nav-num">§14.10</span>Key Takeaways</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="generics.html"><span class="nav-num">§15</span>Generics</a>
+            <ul class="sub-nav">
+              <li>
+                <a href="generics.html#s15-1"
+                  ><span class="nav-num">§15.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="generics.html#s15-2"
+                  ><span class="nav-num">§15.2</span>Type Parameters</a
+                >
+              </li>
+              <li>
+                <a href="generics.html#s15-3"
+                  ><span class="nav-num">§15.3</span>Class-Level Generics</a
+                >
+              </li>
+              <li>
+                <a href="generics.html#s15-4"
+                  ><span class="nav-num">§15.4</span>Generic Interfaces</a
+                >
+              </li>
+              <li>
+                <a href="generics.html#s15-5"
+                  ><span class="nav-num">§15.5</span>Diamond &amp;
+                  <code>var</code></a
+                >
+              </li>
+              <li>
+                <a href="generics.html#s15-6"
+                  ><span class="nav-num">§15.6</span>Generic Methods</a
+                >
+              </li>
+              <li>
+                <a href="generics.html#s15-7"
+                  ><span class="nav-num">§15.7</span>Bounded Types</a
+                >
+              </li>
+              <li>
+                <a href="generics.html#s15-8"
+                  ><span class="nav-num">§15.8</span>Invariance</a
+                >
+              </li>
+              <li>
+                <a href="generics.html#s15-9"
+                  ><span class="nav-num">§15.9</span>Wildcards</a
+                >
+              </li>
+              <li>
+                <a href="generics.html#s15-10"
+                  ><span class="nav-num">§15.10</span>Compile Time Only</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="records.html"><span class="nav-num">§16</span>Records</a>
+            <ul class="sub-nav">
+              <li>
+                <a href="records.html#s16-1"
+                  ><span class="nav-num">§16.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="records.html#s16-2"
+                  ><span class="nav-num">§16.2</span><code>record</code></a
+                >
+              </li>
+              <li>
+                <a href="records.html#s16-3"
+                  ><span class="nav-num">§16.3</span>Implicitly Final</a
+                >
+              </li>
+              <li>
+                <a href="records.html#s16-4"
+                  ><span class="nav-num">§16.4</span>Shallow Immutability</a
+                >
+              </li>
+              <li>
+                <a href="records.html#s16-5"
+                  ><span class="nav-num">§16.5</span>Constructors</a
+                >
+              </li>
+              <li>
+                <a href="records.html#s16-6"
+                  ><span class="nav-num">§16.6</span><code>equals()</code></a
+                >
+              </li>
+              <li>
+                <a href="records.html#s16-7"
+                  ><span class="nav-num">§16.7</span>Records Can Do More</a
+                >
+              </li>
+              <li>
+                <a href="records.html#s16-8"
+                  ><span class="nav-num">§16.8</span>Pattern Matching</a
+                >
+              </li>
+              <li>
+                <a href="records.html#s16-9"
+                  ><span class="nav-num">§16.9</span>When to Reach for One</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="collections.html"
+              ><span class="nav-num">§18</span>Collections Framework</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="collections.html#s18-1"
+                  ><span class="nav-num">§18.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="collections.html#s18-2"
+                  ><span class="nav-num">§18.2</span>The Big Picture</a
+                >
+              </li>
+              <li>
+                <a href="collections.html#s18-3"
+                  ><span class="nav-num">§18.3</span
+                  ><code>SequencedCollection</code></a
+                >
+              </li>
+              <li>
+                <a href="collections.html#s18-4"
+                  ><span class="nav-num">§18.4</span><code>List</code></a
+                >
+              </li>
+              <li>
+                <a href="collections.html#s18-5"
+                  ><span class="nav-num">§18.5</span>Defining an Order</a
+                >
+              </li>
+              <li>
+                <a href="collections.html#s18-6"
+                  ><span class="nav-num">§18.6</span><code>Queue</code></a
+                >
+              </li>
+              <li>
+                <a href="collections.html#s18-7"
+                  ><span class="nav-num">§18.7</span><code>Set</code></a
+                >
+              </li>
+              <li>
+                <a href="collections.html#s18-8"
+                  ><span class="nav-num">§18.8</span><code>Map</code></a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="lambdas.html" class="active"
+              ><span class="nav-num">§19</span>Functional Programming</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="#s19-1"
+                  ><span class="nav-num">§19.1</span>Functions as First-Class
+                  Citizens</a
+                >
+              </li>
+              <li>
+                <a href="#s19-2"
+                  ><span class="nav-num">§19.2</span>Why Java "Simulates"
+                  First-Class Functions</a
+                >
+              </li>
+              <li>
+                <a href="#s19-3"
+                  ><span class="nav-num">§19.3</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="#s19-4"
+                  ><span class="nav-num">§19.4</span>Another Anonymous Class</a
+                >
+              </li>
+              <li>
+                <a href="#s19-5"
+                  ><span class="nav-num">§19.5</span>Functional Interfaces</a
+                >
+              </li>
+              <li>
+                <a href="#s19-6"
+                  ><span class="nav-num">§19.6</span>Lambda Expressions</a
+                >
+              </li>
+              <li>
+                <a href="#s19-7"
+                  ><span class="nav-num">§19.7</span>Method References</a
+                >
+              </li>
+              <li>
+                <a href="#s19-8"
+                  ><span class="nav-num">§19.8</span
+                  ><code>java.util.function</code></a
+                >
+              </li>
+              <li>
+                <a href="#s19-9"
+                  ><span class="nav-num">§19.9</span>Key Takeaways</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="enums.html"><span class="nav-num">§17</span>Enums</a>
+            <ul class="sub-nav">
+              <li>
+                <a href="enums.html#s17-1"
+                  ><span class="nav-num">§17.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="enums.html#s17-2"
+                  ><span class="nav-num">§17.2</span>Declaring an Enum</a
+                >
+              </li>
+              <li>
+                <a href="enums.html#s17-3"
+                  ><span class="nav-num">§17.3</span>Objects, Not Constants</a
+                >
+              </li>
+              <li>
+                <a href="enums.html#s17-4"
+                  ><span class="nav-num">§17.4</span>Comparing Enum Values</a
+                >
+              </li>
+              <li>
+                <a href="enums.html#s17-5"
+                  ><span class="nav-num">§17.5</span>Type Characteristics</a
+                >
+              </li>
+              <li>
+                <a href="enums.html#s17-6"
+                  ><span class="nav-num">§17.6</span>Fields, Constructors,
+                  Methods</a
+                >
+              </li>
+              <li>
+                <a href="enums.html#s17-7"
+                  ><span class="nav-num">§17.7</span>Enums vs. Magic Numbers</a
+                >
+              </li>
+              <li>
+                <a href="enums.html#s17-8"
+                  ><span class="nav-num">§17.8</span>Closed Sets vs. Evolving
+                  Reality</a
+                >
+              </li>
+              <li>
+                <a href="enums.html#s17-9"
+                  ><span class="nav-num">§17.9</span>Key Takeaways</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="optionals.html"
+              ><span class="nav-num">§20</span>Optional&lt;T&gt;</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="optionals.html#s20-1"
+                  ><span class="nav-num">§20.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="optionals.html#s20-2"
+                  ><span class="nav-num">§20.2</span><code>null</code>: The
+                  Absence of a Value</a
+                >
+              </li>
+              <li>
+                <a href="optionals.html#s20-3"
+                  ><span class="nav-num">§20.3</span>The Defensive Approach</a
+                >
+              </li>
+              <li>
+                <a href="optionals.html#s20-4"
+                  ><span class="nav-num">§20.4</span>The
+                  <code>Optional&lt;T&gt;</code> Class</a
+                >
+              </li>
+              <li>
+                <a href="optionals.html#s20-5"
+                  ><span class="nav-num">§20.5</span
+                  ><code>Optional&lt;T&gt;</code> vs <code>null</code></a
+                >
+              </li>
+              <li>
+                <a href="optionals.html#s20-6"
+                  ><span class="nav-num">§20.6</span>Specialized Primitive
+                  Optionals</a
+                >
+              </li>
+              <li>
+                <a href="optionals.html#s20-7"
+                  ><span class="nav-num">§20.7</span>Key Takeaways</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="streams.html"><span class="nav-num">§21</span>Streams</a>
+            <ul class="sub-nav">
+              <li>
+                <a href="streams.html#s21-1"
+                  ><span class="nav-num">§21.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-2"
+                  ><span class="nav-num">§21.2</span>What Is a Stream</a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-3"
+                  ><span class="nav-num">§21.3</span>Creating a Stream</a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-4"
+                  ><span class="nav-num">§21.4</span>Intermediate Operations</a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-5"
+                  ><span class="nav-num">§21.5</span>Terminal Operations</a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-6"
+                  ><span class="nav-num">§21.6</span>Collecting Results</a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-7"
+                  ><span class="nav-num">§21.7</span>Streams and
+                  <code>Optional&lt;T&gt;</code></a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-8"
+                  ><span class="nav-num">§21.8</span>Laziness and Pipelines</a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-9"
+                  ><span class="nav-num">§21.9</span>When (Not) to Use
+                  Streams</a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-10"
+                  ><span class="nav-num">§21.10</span>Key Takeaways</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="concurrency.html"
+              ><span class="nav-num">§22</span>Concurrent Programming</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="concurrency.html#s22-1"
+                  ><span class="nav-num">§22.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="concurrency.html#s22-2"
+                  ><span class="nav-num">§22.2</span>Process, Thread, and the
+                  OS</a
+                >
+              </li>
+              <li>
+                <a href="concurrency.html#s22-3"
+                  ><span class="nav-num">§22.3</span>Independent Progress</a
+                >
+              </li>
+              <li>
+                <a href="concurrency.html#s22-4"
+                  ><span class="nav-num">§22.4</span>Why Concurrency Matters</a
+                >
+              </li>
+              <li>
+                <a href="concurrency.html#s22-5"
+                  ><span class="nav-num">§22.5</span>Where Parallelism Fits
+                  In</a
+                >
+              </li>
+              <li>
+                <a href="concurrency.html#s22-6"
+                  ><span class="nav-num">§22.6</span>The Main Thread</a
+                >
+              </li>
+              <li>
+                <a href="concurrency.html#s22-7"
+                  ><span class="nav-num">§22.7</span>Step 1: Creating a Task</a
+                >
+              </li>
+              <li>
+                <a href="concurrency.html#s22-8"
+                  ><span class="nav-num">§22.8</span>Step 2: Handing a Task to
+                  an Executor</a
+                >
+              </li>
+              <li>
+                <a href="concurrency.html#s22-9"
+                  ><span class="nav-num">§22.9</span>ExecutorService in
+                  Practice</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="modules.html"
+              ><span class="nav-num">§23</span>Java Modules</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="modules.html#s23-1"
+                  ><span class="nav-num">§23.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-2"
+                  ><span class="nav-num">§23.2</span>What Is a Module</a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-3"
+                  ><span class="nav-num">§23.3</span
+                  ><code>module-info.java</code></a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-4"
+                  ><span class="nav-num">§23.4</span><code>exports</code></a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-5"
+                  ><span class="nav-num">§23.5</span><code>requires</code></a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-6"
+                  ><span class="nav-num">§23.6</span>Strong Encapsulation</a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-7"
+                  ><span class="nav-num">§23.7</span>The Module Path</a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-8"
+                  ><span class="nav-num">§23.8</span
+                  ><code>requires transitive</code></a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-9"
+                  ><span class="nav-num">§23.9</span>When (Not) to Use
+                  Modules</a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-10"
+                  ><span class="nav-num">§23.10</span>Key Takeaways</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="dateandtime.html"
+              ><span class="nav-num">§24</span>Date and Time</a
+            >
+          </li>
+          <li>
+            <a href="io.html"
+              ><span class="nav-num">§25</span>Input and Output</a
+            >
+          </li>
+          <li>
+            <a href="oodesign.html"
+              ><span class="nav-num">§26</span>Object-Oriented Design</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </nav>
 
-      <p>Imagine handing a coworker not a finished report, but instructions for producing one — something they can run themselves, whenever they need a fresh copy, on whatever data they have at the time. That's a different kind of thing to hand someone than the report itself: not a result, but a piece of behavior, passed around the same way any other value would be.</p>
+    <main id="content">
+      <header class="page-header">
+        <div class="page-chapter">Chapter 19</div>
+        <h1>Functional Programming</h1>
+        <p class="page-lead">
+          Some languages let a function travel as casually as a number does —
+          stored, passed, handed back, built on the spot. Java's answer looks
+          different underneath but reaches the same place. This chapter opens
+          with what that capability actually means, then builds Java's version
+          of it from the ground up: §13's Strategy pattern, shrunk twice more,
+          down to a single arrow.
+        </p>
+      </header>
 
-      <p>Every value this tutorial has covered so far — an <code>int</code>, a <code>String</code>, a <code>Rectangle</code> — can be stored in a variable, handed to a method as an argument, and returned from one. A language treats a piece of <em>behavior</em> the same generous way — as a <span class="term">first-class citizen</span> — when a function or a chunk of code can do all of that too, instead of only ever being written down as a fixed, named method that has to be called by name wherever it's needed:</p>
+      <article>
+        <!-- §19.1 -->
+        <section id="s19-1">
+          <div class="section-head">
+            <span class="sec-num">§19.1</span>
+            <h2>
+              Functions as First-Class Citizens
+              <em>— what it means for behavior to be a value</em>
+            </h2>
+          </div>
 
-      <table class="content-table">
-        <tr>
-          <th>Capability</th>
-          <th>What it means for behavior specifically</th>
-        </tr>
-        <tr>
-          <td>Stored in a variable</td>
-          <td>A variable can hold a piece of behavior, the way it already holds a number or a reference</td>
-        </tr>
-        <tr>
-          <td>Passed as an argument</td>
-          <td>A method can receive a piece of behavior from its caller, to run later, on the caller's terms</td>
-        </tr>
-        <tr>
-          <td>Returned from a method</td>
-          <td>A method can hand back a piece of behavior as its result, not just an ordinary value</td>
-        </tr>
-        <tr>
-          <td>Created at runtime</td>
-          <td>A new piece of behavior can be built while the program is running, from data only available then — not just fixed in advance as source code</td>
-        </tr>
-      </table>
+          <p>
+            In some programming languages, functions are first-class citizens.
+            This means they are treated like any other value. A function can be
+            assigned to a variable, passed as an argument to a method, returned
+            from another function, or stored in a data structure.
+          </p>
 
-      <div class="callout callout-note">
-        <div class="callout-lbl">Not every language wraps behavior the same way</div>
-        <p>JavaScript and Python hand behavior around with nothing standing in between: <code>const greet = () => console.log("Hi!");</code> stores a raw function value in <code>greet</code>, and <code>[1, 2, 3].map(x => x * 2)</code> passes another raw function value straight into <code>map</code> — no separate type is ever declared for either one. Java's version of these same four capabilities is coming, starting next section, and it looks similar on the surface. It never quite drops an object from underneath, though — and exactly why, and exactly how thin that object actually is, is this chapter's subject from here on.</p>
-      </div>
-    </section>
+          <table class="content-table">
+            <tr>
+              <th>Capability</th>
+              <th>What it means for behavior specifically</th>
+            </tr>
+            <tr>
+              <td>Stored in a variable</td>
+              <td>
+                A variable can hold a piece of behavior, the way it already
+                holds a number or a reference
+              </td>
+            </tr>
+            <tr>
+              <td>Passed as an argument</td>
+              <td>
+                A method can receive a piece of behavior from its caller, to run
+                later, on the caller's terms
+              </td>
+            </tr>
+            <tr>
+              <td>Returned from a method</td>
+              <td>
+                A method can hand back a piece of behavior as its result, not
+                just an ordinary value
+              </td>
+            </tr>
+            <tr>
+              <td>Created at runtime</td>
+              <td>
+                A new piece of behavior can be built while the program is
+                running, from data only available then — not just fixed in
+                advance as source code
+              </td>
+            </tr>
+          </table>
 
-    <!-- §19.2 -->
-    <section id="s19-2">
-      <div class="section-head">
-        <span class="sec-num">§19.2</span>
-        <h2>Why Java "Simulates" First-Class Functions</h2>
-      </div>
+          <div class="callout callout-note">
+            <div class="callout-lbl">
+              Not every language wraps behavior the same way
+            </div>
+            <p>
+              Java takes a different approach. Methods are not values and cannot
+              exist independently of a class or object. You cannot assign a
+              method directly to a variable or pass a method itself as an
+              argument. Instead, Java represents behavior through objects.
+            </p>
+          </div>
+        </section>
 
-      <p>§0.6 already stated Java's one unbending rule: there are no free-standing functions. Every method belongs to a class. So when Java eventually needed to support the four capabilities §19.1 just listed, it couldn't add a raw function value floating outside the object system — that would break the rule the language never bends anywhere else. Instead, it reused what already existed: objects, and the interfaces (§13) that describe what an object can do.</p>
+        <!-- §19.2 -->
+        <section id="s19-2">
+          <div class="section-head">
+            <span class="sec-num">§19.2</span>
+            <h2>Java "Simulating" First-Class Functions</h2>
+          </div>
 
-      <p>The trick is narrow and specific: wrap the behavior in an object whose type is an interface with exactly one method to call. From the caller's side, whatever satisfies that interface simply <em>is</em> the behavior — how it was built (a named class, an anonymous class, or something shorter still) is invisible from outside. §19.5 names this specific kind of interface precisely, and explains why exactly one method is the number that makes it work.</p>
+          <p>
+            From its earliest versions, Java has supported passing behavior to
+            methods. The traditional approach was to implement an interface,
+            create an object, and pass that object to the code that needed the
+            behavior.
+          </p>
+          <p>
+            §0.6 already stated Java's one unbending rule: there are no
+            free-standing functions. Every method belongs to a class. So when
+            Java eventually needed to support the four capabilities §19.1 just
+            listed, it couldn't add a raw function value floating outside the
+            object system — that would break the rule the language never bends
+            anywhere else. Instead, it reused what already existed: objects, and
+            the interfaces (§13) that describe what an object can do.
+          </p>
 
-      <p>It's worth keeping three things separate here, since the syntax is about to make them look like one:</p>
+          <p>
+            The trick is narrow and specific: wrap the behavior in an object
+            whose type is an interface. A functional interface defines a single
+            operation, and a lambda expression provides the implementation of
+            that operation. The resulting object can then be passed, returned,
+            or stored just like any other object.
+          </p>
 
-      <pre><code class="language-java">DiscountStrategy tenPercentOff = price -&gt; (1 - 0.10) * price;</code></pre>
+          <p>
+            It's worth keeping three things separate here, since the syntax is
+            about to make them look like one:
+          </p>
 
-      <p><code>DiscountStrategy</code> is the <em>type</em> — an interface, declared once, back in §13.11. <code>price -> (1 - 0.10) * price</code> is the <em>value</em> — computed fresh, right there, the moment this line runs. And underneath both, once this line executes, there's an actual object on the heap that <code>tenPercentOff</code>'s address points to — the same object model this entire tutorial has been built on since §2.2. The type and the value are visible in the source code; the object is what's actually running.</p>
+          <pre><code class="language-java">DiscountStrategy tenPercentOff = price -&gt; 0.9 * price;</code></pre>
 
-      <p>Put together: Java never added functions to the language. It added a compact syntax for creating single-method objects, plus a type system for describing what those objects can do. Practically, the result covers the same four capabilities §19.1 opened with — store it, pass it, return it, build it on the spot — just always through that one extra layer of an object underneath. Everything from here shows exactly how thin that layer actually is.</p>
-    </section>
+          <p>
+            <code>DiscountStrategy</code> is the <em>type</em> — an interface.
+            There's an actual object on the heap that
+            <code>tenPercentOff</code>'s address points to. The type and the
+            value are visible in the source code; the object is what's actually
+            running.
+          </p>
 
-    <!-- §19.3 -->
-    <section id="s19-3">
-      <div class="section-head">
-        <span class="sec-num">§19.3</span>
-        <h2>The Problem <em>— a rule that doesn't need a name</em></h2>
-      </div>
+          <p>
+            Put together: Java never added functions to the language. It added
+            <strong>a compact syntax for creating single-method objects</strong
+            >. Practically, the result covers the same four capabilities §19.1
+            opened with — store it, pass it, return it, build it on the spot —
+            just always through that one extra layer of an object underneath.
+          </p>
 
-      <p>§13.11 built <code>DiscountStrategy</code>, <code>Order</code>, and two named implementations — <code>PercentageDiscount</code> and <code>FlatDiscount</code> — around the Strategy pattern:</p>
+          <p>
+            Here is a clean explanation which separates the contract (the
+            interface) from the behavior (the implementation), which is exactly
+            how Java's type system works:
+          </p>
+          <ol>
+            <li>
+              Declare a functional interface which describes the contract for a
+              single operation.
+            </li>
+            <li>
+              Provide an implementation of that operation (using a named class,
+              an anonymous class, or a lambda expression).
+            </li>
+            <li>Create an instance implementing the functional interface.</li>
+            <li>
+              Pass the reference to that object wherever the behavior is needed.
+            </li>
+          </ol>
+        </section>
 
-      <pre><code class="language-java">interface DiscountStrategy {
+        <!-- §19.3 -->
+        <section id="s19-3">
+          <div class="section-head">
+            <span class="sec-num">§19.3</span>
+            <h2>The Problem <em>— a rule that doesn't need a name</em></h2>
+          </div>
+
+          <p>
+            §13.11 built <code>DiscountStrategy</code>, <code>Order</code>, and
+            two named implementations — <code>PercentageDiscount</code> and
+            <code>FlatDiscount</code> — around the Strategy pattern:
+          </p>
+
+          <pre><code class="language-java">interface DiscountStrategy {
     double apply(double price); // returns the discounted price, not the discount itself
 }
 
@@ -486,11 +1465,41 @@ class Order {
     }
 }</code></pre>
 
-      <div class="callout callout-rule">
-        <div class="callout-lbl">A problem worth fixing first: <code>finalPrice()</code> isn't a record, it's a live query</div>
-        <p>Look at what <code>finalPrice()</code> actually does: it reads the current <code>discount</code> field and recomputes, <em>every single time it's called</em>. Call it once, call <code>setDiscount(...)</code>, then call it again, and the exact same <code>Order</code> reports two different prices for the exact same sale — with nothing in the object recording which answer was ever actually charged. That's precisely the trap §11.3 warned about: a reference whose meaning depends on <em>when</em> you ask. A real order is a business record — the kind of thing an invoice, a receipt, or an audit needs to point back to later and get one fixed, permanent answer from, the same way a <code>Transaction</code> (§11.4) never needs to represent an updated version of itself. <code>Order</code>, as written in §13.11, can't make that promise.</p>
-        <p>The fix is exactly §11.4's playbook: compute the result once, store it in a <code>final</code> field, and stop offering any way to change it after construction. Wanting a different discount no longer means mutating an existing order — it means constructing a new one, the same way <code>ImmutablePoint.translate(...)</code> (§11.4) returns a new point instead of moving the old one. And the specific fact worth freezing is <code>discountAmount</code>, not <code>finalPrice</code> — a real sales document lists the discount itself as its own line, the same way an invoice shows a subtotal, a discount, and a total as three separate figures:</p>
-        <pre><code class="language-java">class Order {
+          <div class="callout callout-rule">
+            <div class="callout-lbl">
+              A problem worth fixing first: <code>finalPrice()</code> isn't a
+              record, it's a live query
+            </div>
+            <p>
+              Look at what <code>finalPrice()</code> actually does: it reads the
+              current <code>discount</code> field and recomputes,
+              <em>every single time it's called</em>. Call it once, call
+              <code>setDiscount(...)</code>, then call it again, and the exact
+              same <code>Order</code> reports two different prices for the exact
+              same sale — with nothing in the object recording which answer was
+              ever actually charged. That's precisely the trap §11.3 warned
+              about: a reference whose meaning depends on <em>when</em> you ask.
+              A real order is a business record — the kind of thing an invoice,
+              a receipt, or an audit needs to point back to later and get one
+              fixed, permanent answer from, the same way a
+              <code>Transaction</code> (§11.4) never needs to represent an
+              updated version of itself. <code>Order</code>, as written in
+              §13.11, can't make that promise.
+            </p>
+            <p>
+              The fix is exactly §11.4's playbook: compute the result once,
+              store it in a <code>final</code> field, and stop offering any way
+              to change it after construction. Wanting a different discount no
+              longer means mutating an existing order — it means constructing a
+              new one, the same way
+              <code>ImmutablePoint.translate(...)</code> (§11.4) returns a new
+              point instead of moving the old one. And the specific fact worth
+              freezing is <code>discountAmount</code>, not
+              <code>finalPrice</code> — a real sales document lists the discount
+              itself as its own line, the same way an invoice shows a subtotal,
+              a discount, and a total as three separate figures:
+            </p>
+            <pre><code class="language-java">class Order {
     private final double total;
     private final double discountAmount;
 
@@ -503,22 +1512,48 @@ class Order {
         return total - discountAmount;
     }
 }</code></pre>
-        <p>No <code>setDiscount</code>. <code>discountAmount</code> is computed once, from <code>discount.apply(total)</code>, at the exact moment the order is placed — never again afterward. <code>finalPrice()</code> is now a derived value, not a stored one, but that's no longer a problem: it's derived from two <code>final</code> fields that can never change, so it returns the exact same answer no matter how many times it's called, no matter what happens anywhere else in the program afterward. This is the version of <code>Order</code> the rest of this chapter builds on.</p>
-      </div>
+            <p>
+              No <code>setDiscount</code>. <code>discountAmount</code> is
+              computed once, from <code>discount.apply(total)</code>, at the
+              exact moment the order is placed — never again afterward.
+              <code>finalPrice()</code> is now a derived value, not a stored
+              one, but that's no longer a problem: it's derived from two
+              <code>final</code> fields that can never change, so it returns the
+              exact same answer no matter how many times it's called, no matter
+              what happens anywhere else in the program afterward. This is the
+              version of <code>Order</code> the rest of this chapter builds on.
+            </p>
+          </div>
 
-      <p>With <code>Order</code> fixed, <code>PercentageDiscount</code> and <code>FlatDiscount</code> are ready to explore in other syntactic forms — starting with a mechanism already introduced once before, back in §13.6.</p>
-    </section>
+          <p>
+            With <code>Order</code> fixed, <code>PercentageDiscount</code> and
+            <code>FlatDiscount</code> are ready to explore in other syntactic
+            forms — starting with a mechanism already introduced once before,
+            back in §13.6.
+          </p>
+        </section>
 
-    <!-- §19.4 -->
-    <section id="s19-4">
-      <div class="section-head">
-        <span class="sec-num">§19.4</span>
-        <h2>Another Anonymous Class <em>— the same route, a different interface</em></h2>
-      </div>
+        <!-- §19.4 -->
+        <section id="s19-4">
+          <div class="section-head">
+            <span class="sec-num">§19.4</span>
+            <h2>
+              Another Anonymous Class
+              <em>— the same route, a different interface</em>
+            </h2>
+          </div>
 
-      <p>§13.6 introduced the anonymous class for exactly this shape: declare the implementation and create its one instance in the same expression, with no class name at all. Nothing about that mechanism was specific to <code>Renewable</code> — it applies to <code>DiscountStrategy</code> just as directly. Here are both discounts from §13.11 again, written as anonymous classes instead of top-level named ones:</p>
+          <p>
+            §13.6 introduced the anonymous class for exactly this shape: declare
+            the implementation and create its one instance in the same
+            expression, with no class name at all. Nothing about that mechanism
+            was specific to <code>Renewable</code> — it applies to
+            <code>DiscountStrategy</code> just as directly. Here are both
+            discounts from §13.11 again, written as anonymous classes instead of
+            top-level named ones:
+          </p>
 
-      <pre><code class="language-java">DiscountStrategy tenPercentOff = new DiscountStrategy() {
+          <pre><code class="language-java">DiscountStrategy tenPercentOff = new DiscountStrategy() {
     @Override
     public double apply(double price) {
         return (1 - 0.10) * price;
@@ -537,174 +1572,355 @@ Order order2 = new Order(100.0, fifteenOff);
 System.out.println(order1.finalPrice()); // 90.0
 System.out.println(order2.finalPrice()); // 85.0</code></pre>
 
-      <p>Neither <code>PercentageDiscount</code> nor <code>FlatDiscount</code> needed to exist as its own top-level class for either of these to work — Java generates an unnamed class implementing <code>DiscountStrategy</code> right there, at each <code>new DiscountStrategy() { ... }</code> expression, and that single expression both declares the class and creates its one instance. <code>tenPercentOff</code>'s declared type is still <code>DiscountStrategy</code> — everything about substitutability from §13.11 applies exactly as before.</p>
+          <p>
+            Neither <code>PercentageDiscount</code> nor
+            <code>FlatDiscount</code> needed to exist as its own top-level class
+            for either of these to work — Java generates an unnamed class
+            implementing <code>DiscountStrategy</code> right there, at each
+            <code>new DiscountStrategy() { ... }</code> expression, and that
+            single expression both declares the class and creates its one
+            instance. <code>tenPercentOff</code>'s declared type is still
+            <code>DiscountStrategy</code> — everything about substitutability
+            from §13.11 applies exactly as before.
+          </p>
 
-      <p>It's shorter than declaring <code>PercentageDiscount</code> and <code>FlatDiscount</code> as their own top-level classes, but still not short. Writing out <code>new DiscountStrategy() { @Override public double apply(double price) { return (1 - 0.10) * price; } }</code> is a lot of ceremony — a class header, an annotation, a method signature repeated in full, braces upon braces — to say one thing: <em>ninety percent of price</em>. Everything from here shrinks exactly that ceremony, without changing what the code actually does.</p>
-    </section>
+          <p>
+            It's shorter than declaring <code>PercentageDiscount</code> and
+            <code>FlatDiscount</code> as their own top-level classes, but still
+            not short. Writing out
+            <code
+              >new DiscountStrategy() { @Override public double apply(double
+              price) { return (1 - 0.10) * price; } }</code
+            >
+            is a lot of ceremony — a class header, an annotation, a method
+            signature repeated in full, braces upon braces — to say one thing:
+            <em>ninety percent of price</em>. Everything from here shrinks
+            exactly that ceremony, without changing what the code actually does.
+          </p>
+        </section>
 
-    <!-- §19.5 -->
-    <section id="s19-5">
-      <div class="section-head">
-        <span class="sec-num">§19.5</span>
-        <h2>Functional Interfaces <em>— the property that unlocks shrinking</em></h2>
-      </div>
+        <!-- §19.5 -->
+        <section id="s19-5">
+          <div class="section-head">
+            <span class="sec-num">§19.5</span>
+            <h2>
+              Functional Interfaces
+              <em>— the property that unlocks shrinking</em>
+            </h2>
+          </div>
 
-      <p>Look closely at what <code>DiscountStrategy</code> actually declares: exactly one method, <code>apply(double)</code>. Not two, not zero — one. That single fact has a name: an interface declaring exactly one <span class="term">abstract</span> method — one method with no body, the kind that's been the only kind since §13.3 — is a <span class="term">functional interface</span>. Default methods (§13.8) and static methods (§13.10) don't count against that total, because both already carry a body; only the unimplemented signatures do.</p>
+          <p>
+            Look closely at what <code>DiscountStrategy</code> actually
+            declares: exactly one method, <code>apply(double)</code>. Not two,
+            not zero — one. That single fact has a name: an interface declaring
+            exactly one <span class="term">abstract</span> method — one method
+            with no body, the kind that's been the only kind since §13.3 — is a
+            <span class="term">functional interface</span>. Default methods
+            (§13.8) and static methods (§13.10) don't count against that total,
+            because both already carry a body; only the unimplemented signatures
+            do.
+          </p>
 
-      <p><code>Renewable</code> from §13.7 qualifies too — one abstract method, <code>renew()</code> — which is exactly why an anonymous class was enough to implement it in a single expression back there. An interface with two unrelated abstract methods, by contrast, would not qualify; there'd be no single method for a shorthand notation to unambiguously refer to.</p>
+          <p>
+            <code>Renewable</code> from §13.7 qualifies too — one abstract
+            method, <code>renew()</code> — which is exactly why an anonymous
+            class was enough to implement it in a single expression back there.
+            An interface with two unrelated abstract methods, by contrast, would
+            not qualify; there'd be no single method for a shorthand notation to
+            unambiguously refer to.
+          </p>
 
-      <p>Java lets a functional interface declare that fact explicitly, with an annotation:</p>
+          <p>
+            Java lets a functional interface declare that fact explicitly, with
+            an annotation:
+          </p>
 
-      <pre><code class="language-java">@FunctionalInterface
+          <pre><code class="language-java">@FunctionalInterface
 interface DiscountStrategy {
     double apply(double price); // returns the discounted price, not the discount itself
 }</code></pre>
 
-      <p><code>@FunctionalInterface</code> changes nothing about how the interface behaves — <code>DiscountStrategy</code> was already a functional interface the moment it was written back in §13.11, annotation or not. What the annotation buys is a compiler check: if a second abstract method is ever added by mistake, breaking the single-method guarantee, the compiler reports an error right there, at the interface declaration, instead of the mistake surfacing later as a confusing error somewhere a lambda tries and fails to implement it.</p>
+          <p>
+            <code>@FunctionalInterface</code> changes nothing about how the
+            interface behaves — <code>DiscountStrategy</code> was already a
+            functional interface the moment it was written back in §13.11,
+            annotation or not. What the annotation buys is a compiler check: if
+            a second abstract method is ever added by mistake, breaking the
+            single-method guarantee, the compiler reports an error right there,
+            at the interface declaration, instead of the mistake surfacing later
+            as a confusing error somewhere a lambda tries and fails to implement
+            it.
+          </p>
 
-      <div class="callout callout-rule">
-        <div class="callout-lbl">Why the count matters</div>
-        <p>Everything in §19.6 and §19.7 depends entirely on an interface having exactly one abstract method. With exactly one, the compiler always knows which method any shorthand notation is standing in for — there's nothing else it could mean. With two or more, that guarantee disappears, and Java has no way to guess which one you intend. A functional interface isn't a special kind of interface, syntactically — it's an ordinary interface that happens to satisfy a count that makes a shorter notation unambiguous.</p>
-      </div>
-    </section>
+          <div class="callout callout-rule">
+            <div class="callout-lbl">Why the count matters</div>
+            <p>
+              Everything in §19.6 and §19.7 depends entirely on an interface
+              having exactly one abstract method. With exactly one, the compiler
+              always knows which method any shorthand notation is standing in
+              for — there's nothing else it could mean. With two or more, that
+              guarantee disappears, and Java has no way to guess which one you
+              intend. A functional interface isn't a special kind of interface,
+              syntactically — it's an ordinary interface that happens to satisfy
+              a count that makes a shorter notation unambiguous.
+            </p>
+          </div>
+        </section>
 
-    <!-- §19.6 -->
-    <section id="s19-6">
-      <div class="section-head">
-        <span class="sec-num">§19.6</span>
-        <h2>Lambda Expressions <em>— the anonymous class, minus everything inferable</em></h2>
-      </div>
+        <!-- §19.6 -->
+        <section id="s19-6">
+          <div class="section-head">
+            <span class="sec-num">§19.6</span>
+            <h2>
+              Lambda Expressions
+              <em>— the anonymous class, minus everything inferable</em>
+            </h2>
+          </div>
 
-      <p>Because <code>DiscountStrategy</code> is a functional interface, its one abstract method can be implemented with a <span class="term">lambda expression</span> — a parameter list, an arrow, and a body, with the interface itself supplied nowhere at all:</p>
+          <p>
+            Because <code>DiscountStrategy</code> is a functional interface, its
+            one abstract method can be implemented with a
+            <span class="term">lambda expression</span> — a parameter list, an
+            arrow, and a body, with the interface itself supplied nowhere at
+            all:
+          </p>
 
-      <pre><code class="language-java">DiscountStrategy tenPercentOff = price -&gt; (1 - 0.10) * price;</code></pre>
+          <pre><code class="language-java">DiscountStrategy tenPercentOff = price -&gt; (1 - 0.10) * price;</code></pre>
 
-      <p>Compare this, piece by piece, against §19.4's anonymous class version of the exact same rule. Gone: <code>new DiscountStrategy()</code>, the <code>@Override</code>, the method name <code>apply</code>, the declared parameter type <code>double</code>, the return type, the braces, the <code>return</code> keyword. What's left is only what §19.4's version didn't already say some other way: the parameter's name, <code>price</code>, and the one expression computed from it, <code>(1 - 0.10) * price</code>.</p>
+          <p>
+            Compare this, piece by piece, against §19.4's anonymous class
+            version of the exact same rule. Gone:
+            <code>new DiscountStrategy()</code>, the <code>@Override</code>, the
+            method name <code>apply</code>, the declared parameter type
+            <code>double</code>, the return type, the braces, the
+            <code>return</code> keyword. What's left is only what §19.4's
+            version didn't already say some other way: the parameter's name,
+            <code>price</code>, and the one expression computed from it,
+            <code>(1 - 0.10) * price</code>.
+          </p>
 
-      <p>None of what vanished was actually optional information — it's all still there, just inferred instead of written. <code>tenPercentOff</code>'s declared type, <code>DiscountStrategy</code>, tells the compiler exactly which method is being implemented and what its signature is; that's called <span class="term">target typing</span>. Knowing the target, the compiler already knows the method is named <code>apply</code>, takes one <code>double</code>, and returns a <code>double</code> — none of that needs to be repeated by the code that implements it.</p>
+          <p>
+            None of what vanished was actually optional information — it's all
+            still there, just inferred instead of written.
+            <code>tenPercentOff</code>'s declared type,
+            <code>DiscountStrategy</code>, tells the compiler exactly which
+            method is being implemented and what its signature is; that's called
+            <span class="term">target typing</span>. Knowing the target, the
+            compiler already knows the method is named <code>apply</code>, takes
+            one <code>double</code>, and returns a <code>double</code> — none of
+            that needs to be repeated by the code that implements it.
+          </p>
 
-      <p>A lambda body with more than one statement needs braces and an explicit <code>return</code>, exactly like an ordinary method body would:</p>
+          <p>
+            A lambda body with more than one statement needs braces and an
+            explicit <code>return</code>, exactly like an ordinary method body
+            would:
+          </p>
 
-      <pre><code class="language-java">DiscountStrategy loyaltyDiscount = price -&gt; {
+          <pre><code class="language-java">DiscountStrategy loyaltyDiscount = price -&gt; {
     double discounted = price - 25;
     return Math.max(discounted, 0);   // never a negative price
 };</code></pre>
 
-      <p>§13.11's other named implementation shrinks the identical way, and both now work side by side with the one already declared above:</p>
+          <p>
+            §13.11's other named implementation shrinks the identical way, and
+            both now work side by side with the one already declared above:
+          </p>
 
-      <pre><code class="language-java">DiscountStrategy fifteenOff = price -&gt; price - 15;
+          <pre><code class="language-java">DiscountStrategy fifteenOff = price -&gt; price - 15;
 
 Order order1 = new Order(100.0, tenPercentOff);
 Order order2 = new Order(100.0, fifteenOff);
 System.out.println(order1.finalPrice()); // 90.0
 System.out.println(order2.finalPrice()); // 85.0</code></pre>
 
-      <p>Notice what <code>Order</code> itself needed: nothing beyond the fix already made earlier in this section. <code>Order</code> was already written entirely in terms of the <code>DiscountStrategy</code> interface (§13.11), so it has no way to know, or care, whether the object behind that reference came from a named class, an anonymous class, or a lambda — a different <code>Order</code> per discount, frozen at construction, is all either one needs.</p>
+          <p>
+            Notice what <code>Order</code> itself needed: nothing beyond the fix
+            already made earlier in this section. <code>Order</code> was already
+            written entirely in terms of the
+            <code>DiscountStrategy</code> interface (§13.11), so it has no way
+            to know, or care, whether the object behind that reference came from
+            a named class, an anonymous class, or a lambda — a different
+            <code>Order</code> per discount, frozen at construction, is all
+            either one needs.
+          </p>
 
-      <div class="callout callout-conn">
-        <div class="callout-lbl">A lambda is still an object <a href="classes.html#s2-2" class="backref">← §2.2</a></div>
-        <p>A lambda expression is not a free-floating function — Java has no such thing. <code>price -> (1 - 0.10) * price</code> compiles to an instance of some class implementing <code>DiscountStrategy</code>, allocated on the heap exactly like every other object this tutorial has built, with <code>tenPercentOff</code> holding its address exactly like any other reference variable (§2.3). The lambda is Java generating that class and that one instance for you, from less syntax than an anonymous class needs — not a different mechanism, the same one, written more compactly.</p>
-      </div>
-    </section>
+          <div class="callout callout-conn">
+            <div class="callout-lbl">
+              A lambda is still an object
+              <a href="classes.html#s2-2" class="backref">← §2.2</a>
+            </div>
+            <p>
+              A lambda expression is not a free-floating function — Java has no
+              such thing. <code>price -> (1 - 0.10) * price</code> compiles to
+              an instance of some class implementing
+              <code>DiscountStrategy</code>, allocated on the heap exactly like
+              every other object this tutorial has built, with
+              <code>tenPercentOff</code> holding its address exactly like any
+              other reference variable (§2.3). The lambda is Java generating
+              that class and that one instance for you, from less syntax than an
+              anonymous class needs — not a different mechanism, the same one,
+              written more compactly.
+            </p>
+          </div>
+        </section>
 
-    <!-- §19.7 -->
-    <section id="s19-7">
-      <div class="section-head">
-        <span class="sec-num">§19.7</span>
-        <h2>Method References <em>— when the body is just another method's name</em></h2>
-      </div>
+        <!-- §19.7 -->
+        <section id="s19-7">
+          <div class="section-head">
+            <span class="sec-num">§19.7</span>
+            <h2>
+              Method References
+              <em>— when the body is just another method's name</em>
+            </h2>
+          </div>
 
-      <p>Sometimes a lambda's entire body is a call to a method that already exists, unchanged, with matching parameters:</p>
+          <p>
+            Sometimes a lambda's entire body is a call to a method that already
+            exists, unchanged, with matching parameters:
+          </p>
 
-      <pre><code class="language-java">class Discounts {
+          <pre><code class="language-java">class Discounts {
     static double flatFifteen(double price) {
         return price - 15;
     }
 }</code></pre>
 
-      <pre><code class="language-java">DiscountStrategy fifteenOff = price -&gt; Discounts.flatFifteen(price);</code></pre>
+          <pre><code class="language-java">DiscountStrategy fifteenOff = price -&gt; Discounts.flatFifteen(price);</code></pre>
 
-      <p><code>price</code> is accepted, then immediately handed off to <code>flatFifteen</code> with nothing else done to it. Whenever a lambda's job is exactly that — forward every parameter, unchanged, to an existing method — a <span class="term">method reference</span> names the method directly, with <code>::</code> in place of a parameter list and a body:</p>
+          <p>
+            <code>price</code> is accepted, then immediately handed off to
+            <code>flatFifteen</code> with nothing else done to it. Whenever a
+            lambda's job is exactly that — forward every parameter, unchanged,
+            to an existing method — a
+            <span class="term">method reference</span> names the method
+            directly, with <code>::</code> in place of a parameter list and a
+            body:
+          </p>
 
-      <pre><code class="language-java">DiscountStrategy fifteenOff = Discounts::flatFifteen;</code></pre>
+          <pre><code class="language-java">DiscountStrategy fifteenOff = Discounts::flatFifteen;</code></pre>
 
-      <p>Read <code>Discounts::flatFifteen</code> as "use this method as the implementation." The compiler checks that <code>flatFifteen</code>'s own signature — one <code>double</code> parameter, a <code>double</code> return — matches what <code>DiscountStrategy.apply</code> requires, exactly the same target-typing check a lambda goes through, and generates the connecting code automatically.</p>
+          <p>
+            Read <code>Discounts::flatFifteen</code> as "use this method as the
+            implementation." The compiler checks that <code>flatFifteen</code>'s
+            own signature — one <code>double</code> parameter, a
+            <code>double</code> return — matches what
+            <code>DiscountStrategy.apply</code> requires, exactly the same
+            target-typing check a lambda goes through, and generates the
+            connecting code automatically.
+          </p>
 
-      <p>A method reference works the same way whether the method is static or belongs to a specific object:</p>
+          <p>
+            A method reference works the same way whether the method is static
+            or belongs to a specific object:
+          </p>
 
-      <table class="content-table">
-        <tr>
-          <th>Form</th>
-          <th>Example</th>
-        </tr>
-        <tr>
-          <td>Static method</td>
-          <td><code>Discounts::flatFifteen</code></td>
-        </tr>
-        <tr>
-          <td>Instance method, on one particular object</td>
-          <td><code>existingOrder::finalPrice</code></td>
-        </tr>
-        <tr>
-          <td>Instance method, on whichever object is passed in</td>
-          <td><code>String::toUpperCase</code></td>
-        </tr>
-        <tr>
-          <td>Constructor</td>
-          <td><code>ArrayList::new</code></td>
-        </tr>
-      </table>
+          <table class="content-table">
+            <tr>
+              <th>Form</th>
+              <th>Example</th>
+            </tr>
+            <tr>
+              <td>Static method</td>
+              <td><code>Discounts::flatFifteen</code></td>
+            </tr>
+            <tr>
+              <td>Instance method, on one particular object</td>
+              <td><code>existingOrder::finalPrice</code></td>
+            </tr>
+            <tr>
+              <td>Instance method, on whichever object is passed in</td>
+              <td><code>String::toUpperCase</code></td>
+            </tr>
+            <tr>
+              <td>Constructor</td>
+              <td><code>ArrayList::new</code></td>
+            </tr>
+          </table>
 
-      <p>All four forms follow the identical rule: name the method (or constructor), and let the compiler match it against the target functional interface's single abstract method. A method reference is never anything a lambda couldn't already do — it's a lambda whose entire body was already just another method's name, written the short way.</p>
-    </section>
+          <p>
+            All four forms follow the identical rule: name the method (or
+            constructor), and let the compiler match it against the target
+            functional interface's single abstract method. A method reference is
+            never anything a lambda couldn't already do — it's a lambda whose
+            entire body was already just another method's name, written the
+            short way.
+          </p>
+        </section>
 
-    <!-- §19.8 -->
-    <section id="s19-8">
-      <div class="section-head">
-        <span class="sec-num">§19.8</span>
-        <h2><code>java.util.function</code> <em>— functional interfaces Java already wrote</em></h2>
-      </div>
+        <!-- §19.8 -->
+        <section id="s19-8">
+          <div class="section-head">
+            <span class="sec-num">§19.8</span>
+            <h2>
+              <code>java.util.function</code>
+              <em>— functional interfaces Java already wrote</em>
+            </h2>
+          </div>
 
-      <p><code>DiscountStrategy</code> is a functional interface built by hand, for one specific job. Most shapes a lambda needs to fit are common enough that Java ships them already, generic (§15) over whatever types are actually involved, in the <code>java.util.function</code> package:</p>
+          <p>
+            <code>DiscountStrategy</code> is a functional interface built by
+            hand, for one specific job. Most shapes a lambda needs to fit are
+            common enough that Java ships them already, generic (§15) over
+            whatever types are actually involved, in the
+            <code>java.util.function</code> package:
+          </p>
 
-      <table class="content-table">
-        <tr>
-          <th>Interface</th>
-          <th>Method</th>
-          <th>Shape</th>
-        </tr>
-        <tr>
-          <td><code>Function&lt;T, R&gt;</code></td>
-          <td><code>R apply(T t)</code></td>
-          <td>takes a <code>T</code>, returns an <code>R</code></td>
-        </tr>
-        <tr>
-          <td><code>Predicate&lt;T&gt;</code></td>
-          <td><code>boolean test(T t)</code></td>
-          <td>takes a <code>T</code>, returns a yes/no answer</td>
-        </tr>
-        <tr>
-          <td><code>Consumer&lt;T&gt;</code></td>
-          <td><code>void accept(T t)</code></td>
-          <td>takes a <code>T</code>, returns nothing</td>
-        </tr>
-        <tr>
-          <td><code>Supplier&lt;T&gt;</code></td>
-          <td><code>T get()</code></td>
-          <td>takes nothing, produces a <code>T</code></td>
-        </tr>
-      </table>
+          <table class="content-table">
+            <tr>
+              <th>Interface</th>
+              <th>Method</th>
+              <th>Shape</th>
+            </tr>
+            <tr>
+              <td><code>Function&lt;T, R&gt;</code></td>
+              <td><code>R apply(T t)</code></td>
+              <td>takes a <code>T</code>, returns an <code>R</code></td>
+            </tr>
+            <tr>
+              <td><code>Predicate&lt;T&gt;</code></td>
+              <td><code>boolean test(T t)</code></td>
+              <td>takes a <code>T</code>, returns a yes/no answer</td>
+            </tr>
+            <tr>
+              <td><code>Consumer&lt;T&gt;</code></td>
+              <td><code>void accept(T t)</code></td>
+              <td>takes a <code>T</code>, returns nothing</td>
+            </tr>
+            <tr>
+              <td><code>Supplier&lt;T&gt;</code></td>
+              <td><code>T get()</code></td>
+              <td>takes nothing, produces a <code>T</code></td>
+            </tr>
+          </table>
 
-      <p><code>DiscountStrategy</code> is, structurally, nothing more than a <code>Function&lt;Double, Double&gt;</code> wearing its own name:</p>
+          <p>
+            <code>DiscountStrategy</code> is, structurally, nothing more than a
+            <code>Function&lt;Double, Double&gt;</code> wearing its own name:
+          </p>
 
-      <pre><code class="language-java">Function&lt;Double, Double&gt; tenPercentOff = price -&gt; (1 - 0.10) * price;
+          <pre><code class="language-java">Function&lt;Double, Double&gt; tenPercentOff = price -&gt; (1 - 0.10) * price;
 System.out.println(tenPercentOff.apply(100.0)); // 90.0</code></pre>
 
-      <p>Same lambda, same <code>.apply(...)</code> call — the only difference is which interface it's satisfying: a homemade one, or one the standard library already declared. Writing a dedicated interface like <code>DiscountStrategy</code> is still worth it when the name itself carries meaning in the domain; reaching for <code>Function&lt;T, R&gt;</code> instead is usually right when the shape is all that matters and a project-specific name would add nothing.</p>
+          <p>
+            Same lambda, same <code>.apply(...)</code> call — the only
+            difference is which interface it's satisfying: a homemade one, or
+            one the standard library already declared. Writing a dedicated
+            interface like <code>DiscountStrategy</code> is still worth it when
+            the name itself carries meaning in the domain; reaching for
+            <code>Function&lt;T, R&gt;</code> instead is usually right when the
+            shape is all that matters and a project-specific name would add
+            nothing.
+          </p>
 
-      <p>One of these interfaces closes a gap left open all the way back in §18: <code>Comparator&lt;T&gt;</code>, whose single abstract method, <code>compare(T a, T b)</code>, decides ordering between two elements — exactly the piece §18.6 deferred to "later":</p>
+          <p>
+            One of these interfaces closes a gap left open all the way back in
+            §18: <code>Comparator&lt;T&gt;</code>, whose single abstract method,
+            <code>compare(T a, T b)</code>, decides ordering between two
+            elements — exactly the piece §18.6 deferred to "later":
+          </p>
 
-      <pre><code class="language-java">List&lt;String&gt; names = new ArrayList&lt;&gt;(List.of("Priya", "Alice", "Marco"));
+          <pre><code class="language-java">List&lt;String&gt; names = new ArrayList&lt;&gt;(List.of("Priya", "Alice", "Marco"));
 
 names.sort((a, b) -&gt; a.compareTo(b));
 // or, since that lambda is just forwarding to an existing method:
@@ -712,145 +1928,224 @@ names.sort(String::compareTo);
 
 System.out.println(names); // [Alice, Marco, Priya]</code></pre>
 
-      <p>Nothing here is new mechanism — a lambda, then the identical logic shrunk to a method reference, exactly as §19.6 and §19.7 built them, now handed directly to <code>List.sort</code> as the ordering rule.</p>
-    </section>
+          <p>
+            Nothing here is new mechanism — a lambda, then the identical logic
+            shrunk to a method reference, exactly as §19.6 and §19.7 built them,
+            now handed directly to <code>List.sort</code> as the ordering rule.
+          </p>
+        </section>
 
-    <!-- §19.9 -->
-    <section id="s19-9">
-      <div class="section-head">
-        <span class="sec-num">§19.9</span>
-        <h2>Key Takeaways</h2>
-      </div>
+        <!-- §19.9 -->
+        <section id="s19-9">
+          <div class="section-head">
+            <span class="sec-num">§19.9</span>
+            <h2>Key Takeaways</h2>
+          </div>
 
-      <ul>
-        <li>The same shape — one interface, one algorithm needed — can be implemented five ways: a named class, an anonymous class (§13.7), a lambda expression, a method reference, or a standard <code>java.util.function</code> interface instead of a homemade one. All five compile to the same thing: an object implementing the target interface.</li>
-        <li>A <span class="term">functional interface</span> is an interface with exactly one abstract method. That single-method count is what makes lambdas and method references unambiguous — the compiler always knows which method a shorthand expression is implementing.</li>
-        <li>A lambda expression is an anonymous class implementation with everything the compiler can already infer — the interface name, <code>@Override</code>, the method name, parameter types, the return type — left unwritten. It is still, underneath, an ordinary object (§2.2).</li>
-        <li>A method reference (<code>Type::method</code>) is a lambda whose entire body was already just a call to some other existing method, forwarding its parameters unchanged.</li>
-        <li><code>java.util.function</code> ships generic, ready-made functional interfaces — <code>Function</code>, <code>Predicate</code>, <code>Consumer</code>, <code>Supplier</code>, and others like <code>Comparator</code> — for the shapes that come up often enough not to deserve a new interface every time.</li>
-      </ul>
-    </section>
+          <ul>
+            <li>
+              The same shape — one interface, one algorithm needed — can be
+              implemented five ways: a named class, an anonymous class (§13.7),
+              a lambda expression, a method reference, or a standard
+              <code>java.util.function</code> interface instead of a homemade
+              one. All five compile to the same thing: an object implementing
+              the target interface.
+            </li>
+            <li>
+              A <span class="term">functional interface</span> is an interface
+              with exactly one abstract method. That single-method count is what
+              makes lambdas and method references unambiguous — the compiler
+              always knows which method a shorthand expression is implementing.
+            </li>
+            <li>
+              A lambda expression is an anonymous class implementation with
+              everything the compiler can already infer — the interface name,
+              <code>@Override</code>, the method name, parameter types, the
+              return type — left unwritten. It is still, underneath, an ordinary
+              object (§2.2).
+            </li>
+            <li>
+              A method reference (<code>Type::method</code>) is a lambda whose
+              entire body was already just a call to some other existing method,
+              forwarding its parameters unchanged.
+            </li>
+            <li>
+              <code>java.util.function</code> ships generic, ready-made
+              functional interfaces — <code>Function</code>,
+              <code>Predicate</code>, <code>Consumer</code>,
+              <code>Supplier</code>, and others like <code>Comparator</code> —
+              for the shapes that come up often enough not to deserve a new
+              interface every time.
+            </li>
+          </ul>
+        </section>
+      </article>
 
-  </article>
+      <nav class="page-nav" aria-label="Chapter navigation">
+        <a href="collections.html" class="page-nav-prev">
+          <span class="page-nav-label">← Previous</span>
+          <span class="page-nav-title">§18 — Collections Framework</span>
+        </a>
+        <a href="optionals.html" class="page-nav-next">
+          <span class="page-nav-label">Next →</span>
+          <span class="page-nav-title">§20 — Optional&lt;T&gt;</span>
+        </a>
+      </nav>
+    </main>
 
-  <nav class="page-nav" aria-label="Chapter navigation">
-    <a href="collections.html" class="page-nav-prev">
-      <span class="page-nav-label">← Previous</span>
-      <span class="page-nav-title">§18 — Collections Framework</span>
-    </a>
-    <a href="optionals.html" class="page-nav-next">
-      <span class="page-nav-label">Next →</span>
-      <span class="page-nav-title">§20 — Optional&lt;T&gt;</span>
-    </a>
-  </nav>
-</main>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        hljs.highlightAll();
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  hljs.highlightAll();
+        // Color method calls the same blue as method declarations — hljs's Java grammar
+        // only tags declarations (e.g. "void fly()"), leaving call sites like
+        // "obj.method()" as plain, unstyled text.
+        (function () {
+          const skipClasses = new Set([
+            "hljs-string",
+            "hljs-comment",
+            "hljs-doctag",
+            "hljs-meta",
+            "hljs-title",
+            "hljs-keyword",
+          ]);
+          const keywords = new Set([
+            "if",
+            "for",
+            "while",
+            "switch",
+            "catch",
+            "synchronized",
+            "do",
+            "else",
+            "return",
+            "new",
+            "throw",
+            "try",
+            "instanceof",
+            "assert",
+          ]);
+          const callPattern = /\b([A-Za-z_$][\w$]*)(\s*)(\()/g;
 
-      // Color method calls the same blue as method declarations — hljs's Java grammar
-      // only tags declarations (e.g. "void fly()"), leaving call sites like
-      // "obj.method()" as plain, unstyled text.
-      (function () {
-        const skipClasses = new Set(['hljs-string', 'hljs-comment', 'hljs-doctag', 'hljs-meta', 'hljs-title', 'hljs-keyword']);
-        const keywords = new Set(['if', 'for', 'while', 'switch', 'catch', 'synchronized', 'do', 'else', 'return', 'new', 'throw', 'try', 'instanceof', 'assert']);
-        const callPattern = /\b([A-Za-z_$][\w$]*)(\s*)(\()/g;
-
-        document.querySelectorAll('pre code.language-java').forEach(function (block) {
-          const walker = document.createTreeWalker(block, NodeFilter.SHOW_TEXT);
-          const textNodes = [];
-          let node;
-          while ((node = walker.nextNode())) {
-            let skip = false;
-            for (let el = node.parentElement; el && el !== block; el = el.parentElement) {
-              if ([...el.classList].some(c => skipClasses.has(c))) { skip = true; break; }
-            }
-            if (!skip) textNodes.push(node);
-          }
-
-          textNodes.forEach(function (textNode) {
-            const text = textNode.nodeValue;
-            callPattern.lastIndex = 0;
-            if (!callPattern.test(text)) return;
-            callPattern.lastIndex = 0;
-
-            const frag = document.createDocumentFragment();
-            let lastIndex = 0;
-            let match;
-            while ((match = callPattern.exec(text))) {
-              frag.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
-              if (keywords.has(match[1])) {
-                frag.appendChild(document.createTextNode(match[0]));
-              } else {
-                const span = document.createElement('span');
-                span.className = 'hljs-title function_';
-                span.textContent = match[1];
-                frag.appendChild(span);
-                frag.appendChild(document.createTextNode(match[2] + match[3]));
+          document
+            .querySelectorAll("pre code.language-java")
+            .forEach(function (block) {
+              const walker = document.createTreeWalker(
+                block,
+                NodeFilter.SHOW_TEXT,
+              );
+              const textNodes = [];
+              let node;
+              while ((node = walker.nextNode())) {
+                let skip = false;
+                for (
+                  let el = node.parentElement;
+                  el && el !== block;
+                  el = el.parentElement
+                ) {
+                  if ([...el.classList].some((c) => skipClasses.has(c))) {
+                    skip = true;
+                    break;
+                  }
+                }
+                if (!skip) textNodes.push(node);
               }
-              lastIndex = match.index + match[0].length;
-            }
-            frag.appendChild(document.createTextNode(text.slice(lastIndex)));
-            textNode.replaceWith(frag);
+
+              textNodes.forEach(function (textNode) {
+                const text = textNode.nodeValue;
+                callPattern.lastIndex = 0;
+                if (!callPattern.test(text)) return;
+                callPattern.lastIndex = 0;
+
+                const frag = document.createDocumentFragment();
+                let lastIndex = 0;
+                let match;
+                while ((match = callPattern.exec(text))) {
+                  frag.appendChild(
+                    document.createTextNode(text.slice(lastIndex, match.index)),
+                  );
+                  if (keywords.has(match[1])) {
+                    frag.appendChild(document.createTextNode(match[0]));
+                  } else {
+                    const span = document.createElement("span");
+                    span.className = "hljs-title function_";
+                    span.textContent = match[1];
+                    frag.appendChild(span);
+                    frag.appendChild(
+                      document.createTextNode(match[2] + match[3]),
+                    );
+                  }
+                  lastIndex = match.index + match[0].length;
+                }
+                frag.appendChild(
+                  document.createTextNode(text.slice(lastIndex)),
+                );
+                textNode.replaceWith(frag);
+              });
+            });
+        })();
+
+        // Flag error-annotation comments in code blocks
+        document.querySelectorAll(".hljs-comment").forEach((el) => {
+          if (/\b(compile|compiler|runtime) error\b/i.test(el.textContent)) {
+            el.classList.add("hljs-comment-error");
+          }
+        });
+
+        // Code theme toggle
+        const codeThemeBtn = document.getElementById("code-theme-toggle");
+        const lightTheme = document.getElementById("hljs-light-theme");
+        const darkTheme = document.getElementById("hljs-dark-theme");
+        const themeLabel = codeThemeBtn.querySelector(".code-theme-label");
+        const themeIcon = codeThemeBtn.querySelector(".icon");
+
+        function applyCodeTheme(theme) {
+          const dark = theme === "dark";
+          lightTheme.disabled = dark;
+          darkTheme.disabled = !dark;
+          document.documentElement.classList.toggle("code-dark", dark);
+          themeLabel.textContent = dark ? "Light code" : "Dark code";
+          themeIcon.textContent = dark ? "☀️" : "🌙";
+        }
+
+        applyCodeTheme(localStorage.getItem("code-theme") || "light");
+
+        codeThemeBtn.addEventListener("click", () => {
+          const next = darkTheme.disabled ? "dark" : "light";
+          localStorage.setItem("code-theme", next);
+          applyCodeTheme(next);
+        });
+
+        // Scroll spy for sub-sections
+        const sections = document.querySelectorAll("section[id]");
+        const subLinks = document.querySelectorAll('.sub-nav a[href^="#"]');
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const id = "#" + entry.target.id;
+                subLinks.forEach((a) =>
+                  a.classList.toggle("active", a.getAttribute("href") === id),
+                );
+              }
+            });
+          },
+          { rootMargin: "-8% 0px -78% 0px", threshold: 0 },
+        );
+
+        sections.forEach((s) => observer.observe(s));
+
+        // Mobile toggle
+        const btn = document.getElementById("menu-btn");
+        const side = document.getElementById("sidebar");
+        btn.addEventListener("click", () => side.classList.toggle("open"));
+        document.querySelectorAll("#sidebar a").forEach((a) => {
+          a.addEventListener("click", () => {
+            if (window.innerWidth <= 860) side.classList.remove("open");
           });
         });
-      })();
-
-  // Flag error-annotation comments in code blocks
-  document.querySelectorAll('.hljs-comment').forEach(el => {
-    if (/\b(compile|compiler|runtime) error\b/i.test(el.textContent)) {
-      el.classList.add('hljs-comment-error');
-    }
-  });
-
-  // Code theme toggle
-  const codeThemeBtn = document.getElementById('code-theme-toggle');
-  const lightTheme = document.getElementById('hljs-light-theme');
-  const darkTheme = document.getElementById('hljs-dark-theme');
-  const themeLabel = codeThemeBtn.querySelector('.code-theme-label');
-  const themeIcon = codeThemeBtn.querySelector('.icon');
-
-  function applyCodeTheme(theme) {
-    const dark = theme === 'dark';
-    lightTheme.disabled = dark;
-    darkTheme.disabled = !dark;
-    document.documentElement.classList.toggle('code-dark', dark);
-    themeLabel.textContent = dark ? 'Light code' : 'Dark code';
-    themeIcon.textContent = dark ? '☀️' : '🌙';
-  }
-
-  applyCodeTheme(localStorage.getItem('code-theme') || 'light');
-
-  codeThemeBtn.addEventListener('click', () => {
-    const next = darkTheme.disabled ? 'dark' : 'light';
-    localStorage.setItem('code-theme', next);
-    applyCodeTheme(next);
-  });
-
-  // Scroll spy for sub-sections
-  const sections = document.querySelectorAll('section[id]');
-  const subLinks = document.querySelectorAll('.sub-nav a[href^="#"]');
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = '#' + entry.target.id;
-        subLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
-      }
-    });
-  }, { rootMargin: '-8% 0px -78% 0px', threshold: 0 });
-
-  sections.forEach(s => observer.observe(s));
-
-  // Mobile toggle
-  const btn  = document.getElementById('menu-btn');
-  const side = document.getElementById('sidebar');
-  btn.addEventListener('click', () => side.classList.toggle('open'));
-  document.querySelectorAll('#sidebar a').forEach(a => {
-    a.addEventListener('click', () => { if (window.innerWidth <= 860) side.classList.remove('open'); });
-  });
-});
-</script>
-</body>
+      });
+    </script>
+  </body>
 </html>

@@ -297,6 +297,9 @@ html.code-dark pre code.hljs {
   letter-spacing: normal;
 }
 .callout p { font-size: 14.5px; margin: 0; line-height: 1.65; max-width: none; }
+.callout ul, .callout ol { font-size: 14.5px; line-height: 1.65; margin: 8px 0 0 1.4em; }
+.callout li { font-size: inherit; margin-bottom: 4px; }
+.callout p + ul, .callout p + ol { margin-top: 8px; }
 
 .callout-mem  { background: var(--mem-bg);  border-color: var(--mem-border); }
 .callout-mem  .callout-lbl { color: var(--mem-label); }

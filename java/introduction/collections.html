@@ -93,13 +93,14 @@
               </li>
               <li>
                 <a href="index.html#s0-8"
-                  ><span class="nav-num">§0.8</span>Key Takeaways</a
+                  ><span class="nav-num">§0.8</span>Appendix: Write Once, Run
+                  Anywhere</a
                 >
               </li>
               <li>
                 <a href="index.html#s0-9"
-                  ><span class="nav-num">§0.9</span>Appendix: Write Once, Run
-                  Anywhere</a
+                  ><span class="nav-num">§0.9</span>Appendix: Setting Up Your
+                  Environment</a
                 >
               </li>
             </ul>
@@ -3903,28 +3904,126 @@ for (Book b : shelf) {
           </p>
 
           <div class="callout callout-note">
-            <div class="callout-lbl">Preview: the same Comparator, in one line</div>
+            <div class="callout-lbl">Preview: the same comparison, one line</div>
             <p>
               §19 covers lambdas and method references in full, but it's
-              worth seeing what they do to the anonymous class above, once
+              worth seeing what one does to the anonymous class above, once
               they're available. A <span class="term">lambda</span> shrinks
               the whole thing to one expression — the parameter list, then
               the same comparison, with <code>compare()</code>'s name and
               signature inferred rather than spelled out:
             </p>
             <pre><code class="language-java">Comparator&lt;Book&gt; byAuthor = (b1, b2) -&gt; b1.author().compareTo(b2.author());</code></pre>
+          </div>
+
+          <h3>Comparator Static Factory Methods</h3>
+
+          <p>
+            Writing an anonymous class — or even the one-line lambda above —
+            is sometimes necessary, but it's a lot of ceremony for how
+            repetitive most comparisons actually are. The overwhelming
+            majority just compare one property pulled out of each object:
+            the <code>author</code>, a person's last name, an employee's
+            salary. Nothing about that pattern actually needs to be spelled
+            out by hand every time, so the <code>Comparator</code> interface
+            provides several <span class="term">static factory methods</span>
+            that build the whole <code>Comparator</code> for you — instead of
+            implementing one yourself, you ask <code>Comparator</code> to
+            create it:
+          </p>
+
+          <ul>
+            <li>
+              <code>comparing(keyExtractor)</code> — builds a
+              <code>Comparator</code> from any property that's itself
+              <code>Comparable</code>: a <code>String</code>, a
+              <code>Book</code>, anything already covered by this section.
+            </li>
+            <li>
+              <code>comparingInt(keyExtractor)</code> — the same idea,
+              specialized for an <code>int</code> property, avoiding the cost
+              of boxing it to <code>Integer</code> just to compare it.
+            </li>
+            <li>
+              <code>comparingLong(keyExtractor)</code> — the
+              <code>long</code> equivalent of <code>comparingInt</code>.
+            </li>
+            <li>
+              <code>comparingDouble(keyExtractor)</code> — the
+              <code>double</code> equivalent.
+            </li>
+          </ul>
+
+          <p>
+            All four are static methods that create <code>Comparator</code>
+            objects — called on the interface itself, as
+            <code>Comparator.comparing(...)</code>, not on some
+            <code>Comparator</code> instance that already exists. None of
+            them require writing <code>compare()</code> by hand; the
+            <code>keyExtractor</code> argument they take just has to say
+            which property to pull out of each object, which is exactly the
+            job a method reference (§19) does:
+          </p>
+
+          <pre><code class="language-java">Comparator&lt;Book&gt; byAuthor = Comparator.comparing(Book::author);</code></pre>
+
+          <p>
+            <code>Comparator.comparing(...)</code> takes that method
+            reference and builds a full <code>Comparator&lt;Book&gt;</code>
+            around it — compiling down to an object implementing
+            <code>compare()</code>, exactly like the anonymous class earlier,
+            just with the ceremony gone.
+          </p>
+
+          <div class="callout callout-insight">
+            <div class="callout-lbl">
+              Preview: comparison logic living on the class itself
+            </div>
             <p>
-              And since all that lambda does is pull one value out of each
-              object and let <code>Comparable</code> compare it, a
-              <span class="term">method reference</span> shrinks it further
-              still, through a <code>Comparator.comparing(...)</code> factory
-              method built for exactly this pattern:
+              A method reference doesn't have to point at an accessor like
+              <code>Book::author</code>. Once a method reference (§19) can
+              stand anywhere a <code>Comparator</code> is expected, any
+              static method matching <code>compare()</code>'s shape — two
+              parameters of the same type in, an <code>int</code> out —
+              already <em>is</em> a <code>Comparator</code>, no
+              <code>Comparator.comparing(...)</code> needed. That means a
+              class can define its own named orderings as static methods,
+              right alongside the data they compare:
             </p>
-            <pre><code class="language-java">Comparator&lt;Book&gt; byAuthor = Comparator.comparing(Book::author);</code></pre>
+            <pre><code class="language-java">record Book(String title, String author, int year) implements Comparable&lt;Book&gt; {
+    @Override
+    public int compareTo(Book other) {
+        return title.compareTo(other.title);
+    }
+
+    public static int compareByYear(Book b1, Book b2) {
+        return Integer.compare(b1.year(), b2.year()); // Integer.compare(int, int) — year is a primitive, no instance to call compareTo() on
+    }
+
+    public static int compareByAuthor(Book b1, Book b2) {
+        return b1.author().compareTo(b2.author()); // String.compareTo(String) — author is already Comparable, so it compares itself
+    }
+}</code></pre>
             <p>
-              Both compile down to an object implementing
-              <code>compare()</code>, exactly like the anonymous class — just
-              with the ceremony gone.
+              Each one already matches <code>Comparator&lt;Book&gt;</code>'s
+              shape exactly, so a method reference to it can be handed
+              straight to <code>sort()</code>:
+            </p>
+            <pre><code class="language-java">shelf.sort(Book::compareByYear);
+shelf.sort(Book::compareByAuthor);</code></pre>
+            <p>
+              This is a good idea — provided the ordering is intrinsic to
+              the entity itself: the kind of comparison <code>Book</code>'s
+              own author would reasonably want to expose as a documented,
+              reusable option, the same spirit as <code>compareTo()</code>
+              picking <code>title</code> as <code>Book</code>'s one natural
+              order. It's a worse idea for a one-off order that only a single
+              call site ever needs — cluttering the class with a static
+              method nobody else will call just moves the clutter, it
+              doesn't remove it. For that case, a
+              <code>Comparator.comparing(...)</code> or a lambda, built right
+              where it's needed, keeps the one-off logic out of the class
+              entirely.
             </p>
           </div>
 
