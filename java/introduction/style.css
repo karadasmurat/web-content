@@ -152,7 +152,6 @@ article {
 /* ── Page header ── */
 .page-header {
   padding: 80px 0 52px;
-  border-bottom: 2px solid var(--border);
   margin-bottom: 64px;
   max-width: 780px;
 }
@@ -736,7 +735,23 @@ a.backref:hover { background: #e8d4b0; }
   justify-content: center;
   color: #c9c2b3;
 }
-.mem-arrow-cell svg { display: block; }
+.mem-arrow-cell svg { display: block; overflow: visible; }
+
+.mem-static-diagram {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  align-items: stretch;
+  gap: 0 4px;
+  margin: 24px 0;
+  max-width: 720px;
+  width: fit-content;
+}
+.mem-part-span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
 
 .mem-fanout {
   display: flex;
@@ -1210,13 +1225,22 @@ a.backref:hover { background: #e8d4b0; }
 
 /* ── Declaration vs. assignment two-panel comparison ── */
 .decl-assign-compare {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
 }
 .da-panel {
+  width: 100%;
+  max-width: 320px;
   text-align: center;
   padding: 4px 8px;
+}
+.da-step-arrow {
+  font-size: 20px;
+  line-height: 1;
+  color: var(--text-muted);
+  margin: 2px 0 10px;
 }
 .da-title {
   font-size: 14px;
