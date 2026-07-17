@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>§21 Streams — OO with Java</title>
+<title>§22 Streams — OO with Java</title>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" id="hljs-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
 <link rel="stylesheet" id="hljs-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
@@ -95,284 +95,296 @@
           <li><a href="methods.html#s4-4"><span class="nav-num">§4.4</span>Functions to Objects</a></li>
           <li><a href="methods.html#s4-5"><span class="nav-num">§4.5</span>The "Hidden" Parameter</a></li>
           <li><a href="methods.html#s4-6"><span class="nav-num">§4.6</span>Key Takeaways</a></li>
-          <li><a href="methods.html#s4-7"><span class="nav-num">§4.7</span>Appendix: The Call Stack</a></li>
         </ul>
       </li>
       <li>
-        <a href="operators.html"><span class="nav-num">§5</span>Operators</a>
+        <a href="memory.html"><span class="nav-num">§5</span>How Memory Works</a>
         <ul class="sub-nav">
-          <li><a href="operators.html#s5-1"><span class="nav-num">§5.1</span>Arithmetic Operators</a></li>
-          <li><a href="operators.html#s5-2"><span class="nav-num">§5.2</span>Unary Operators</a></li>
-          <li><a href="operators.html#s5-3"><span class="nav-num">§5.3</span>Comparison Operators</a></li>
-          <li><a href="operators.html#s5-4"><span class="nav-num">§5.4</span>Logical Operators</a></li>
-          <li><a href="operators.html#s5-5"><span class="nav-num">§5.5</span>Compound Assignment</a></li>
+          <li><a href="memory.html#s5-1"><span class="nav-num">§5.1</span>The Problem</a></li>
+          <li><a href="memory.html#s5-2"><span class="nav-num">§5.2</span>Stack vs. Heap</a></li>
+          <li><a href="memory.html#s5-3"><span class="nav-num">§5.3</span>The Call Stack</a></li>
+          <li><a href="memory.html#s5-4"><span class="nav-num">§5.4</span>Copying <code>this</code></a></li>
+          <li><a href="memory.html#s5-5"><span class="nav-num">§5.5</span>A Full Trace</a></li>
+          <li><a href="memory.html#s5-6"><span class="nav-num">§5.6</span>Key Takeaways</a></li>
         </ul>
       </li>
       <li>
-        <a href="arrays.html"><span class="nav-num">§6</span>Arrays</a>
+        <a href="operators.html"><span class="nav-num">§6</span>Operators</a>
         <ul class="sub-nav">
-          <li><a href="arrays.html#s6-1"><span class="nav-num">§6.1</span>Why Arrays</a></li>
-          <li><a href="arrays.html#s6-2"><span class="nav-num">§6.2</span>One Variable, Many Values</a></li>
-          <li><a href="arrays.html#s6-3"><span class="nav-num">§6.3</span>The Index</a></li>
-          <li><a href="arrays.html#s6-4"><span class="nav-num">§6.4</span>Creating an Array</a></li>
-          <li><a href="arrays.html#s6-5"><span class="nav-num">§6.5</span>Reading and Writing Elements</a></li>
-          <li><a href="arrays.html#s6-6"><span class="nav-num">§6.6</span><code>.length</code></a></li>
-          <li><a href="arrays.html#s6-7"><span class="nav-num">§6.7</span>Filling in the Week</a></li>
-          <li><a href="arrays.html#s6-8"><span class="nav-num">§6.8</span>Assignment Still Copies the Address</a></li>
-          <li><a href="arrays.html#s6-9"><span class="nav-num">§6.9</span>Arrays of Objects</a></li>
-          <li><a href="arrays.html#s6-10"><span class="nav-num">§6.10</span>Pointing a Slot at an Existing Object</a></li>
-          <li><a href="arrays.html#s6-11"><span class="nav-num">§6.11</span>Passing an Array's Address to a Method</a></li>
-          <li><a href="arrays.html#s6-12"><span class="nav-num">§6.12</span>Variable-Arity Parameters</a></li>
+          <li><a href="operators.html#s5-1"><span class="nav-num">§6.1</span>Arithmetic Operators</a></li>
+          <li><a href="operators.html#s5-2"><span class="nav-num">§6.2</span>Unary Operators</a></li>
+          <li><a href="operators.html#s5-3"><span class="nav-num">§6.3</span>Comparison Operators</a></li>
+          <li><a href="operators.html#s5-4"><span class="nav-num">§6.4</span>Logical Operators</a></li>
+          <li><a href="operators.html#s5-5"><span class="nav-num">§6.5</span>Compound Assignment</a></li>
         </ul>
       </li>
       <li>
-        <a href="controlflow.html"><span class="nav-num">§7</span>Control Flow</a>
+        <a href="arrays.html"><span class="nav-num">§7</span>Arrays</a>
         <ul class="sub-nav">
-          <li><a href="controlflow.html#s7-1"><span class="nav-num">§7.1</span>The Flow of Execution</a></li>
-          <li><a href="controlflow.html#s7-2"><span class="nav-num">§7.2</span>Variable Scope</a></li>
-          <li><a href="controlflow.html#s7-3"><span class="nav-num">§7.3</span>Conditional Branching</a></li>
-          <li><a href="controlflow.html#s7-4"><span class="nav-num">§7.4</span><code>while</code></a></li>
-          <li><a href="controlflow.html#s7-5"><span class="nav-num">§7.5</span><code>for</code></a></li>
-          <li><a href="controlflow.html#s7-6"><span class="nav-num">§7.6</span>for-each</a></li>
-          <li><a href="controlflow.html#s7-7"><span class="nav-num">§7.7</span>Ternary Operator</a></li>
+          <li><a href="arrays.html#s6-1"><span class="nav-num">§7.1</span>Why Arrays</a></li>
+          <li><a href="arrays.html#s6-2"><span class="nav-num">§7.2</span>One Variable, Many Values</a></li>
+          <li><a href="arrays.html#s6-3"><span class="nav-num">§7.3</span>The Index</a></li>
+          <li><a href="arrays.html#s6-4"><span class="nav-num">§7.4</span>Creating an Array</a></li>
+          <li><a href="arrays.html#s6-5"><span class="nav-num">§7.5</span>Reading and Writing Elements</a></li>
+          <li><a href="arrays.html#s6-6"><span class="nav-num">§7.6</span><code>.length</code></a></li>
+          <li><a href="arrays.html#s6-7"><span class="nav-num">§7.7</span>Filling in the Week</a></li>
+          <li><a href="arrays.html#s6-8"><span class="nav-num">§7.8</span>Assignment Still Copies the Address</a></li>
+          <li><a href="arrays.html#s6-9"><span class="nav-num">§7.9</span>Arrays of Objects</a></li>
+          <li><a href="arrays.html#s6-10"><span class="nav-num">§7.10</span>Pointing a Slot at an Existing Object</a></li>
+          <li><a href="arrays.html#s6-11"><span class="nav-num">§7.11</span>Passing an Array's Address to a Method</a></li>
+          <li><a href="arrays.html#s6-12"><span class="nav-num">§7.12</span>Variable-Arity Parameters</a></li>
         </ul>
       </li>
       <li>
-        <a href="strings.html"><span class="nav-num">§8</span>Strings</a>
+        <a href="controlflow.html"><span class="nav-num">§8</span>Control Flow</a>
         <ul class="sub-nav">
-          <li><a href="strings.html#s8-1"><span class="nav-num">§8.1</span>Writing Systems &amp; Unicode</a></li>
-          <li><a href="strings.html#s8-2"><span class="nav-num">§8.2</span><code>char</code></a></li>
-          <li><a href="strings.html#s8-3"><span class="nav-num">§8.3</span><code>Character</code></a></li>
-          <li><a href="strings.html#s8-4"><span class="nav-num">§8.4</span>Sequence of Characters</a></li>
-          <li><a href="strings.html#s8-5"><span class="nav-num">§8.5</span>Text Blocks</a></li>
-          <li><a href="strings.html#s8-6"><span class="nav-num">§8.6</span>Immutability</a></li>
-          <li><a href="strings.html#s8-7"><span class="nav-num">§8.7</span><code>==</code> vs <code>.equals()</code></a></li>
-          <li><a href="strings.html#s8-8"><span class="nav-num">§8.8</span>Concatenation</a></li>
-          <li><a href="strings.html#s8-9"><span class="nav-num">§8.9</span>Important String Methods</a></li>
+          <li><a href="controlflow.html#s7-1"><span class="nav-num">§8.1</span>The Flow of Execution</a></li>
+          <li><a href="controlflow.html#s7-2"><span class="nav-num">§8.2</span>Variable Scope</a></li>
+          <li><a href="controlflow.html#s7-3"><span class="nav-num">§8.3</span>Conditional Branching</a></li>
+          <li><a href="controlflow.html#s7-4"><span class="nav-num">§8.4</span><code>while</code></a></li>
+          <li><a href="controlflow.html#s7-5"><span class="nav-num">§8.5</span><code>for</code></a></li>
+          <li><a href="controlflow.html#s7-6"><span class="nav-num">§8.6</span>for-each</a></li>
+          <li><a href="controlflow.html#s7-7"><span class="nav-num">§8.7</span>Ternary Operator</a></li>
+          <li><a href="controlflow.html#s7-8"><span class="nav-num">§8.8</span><code>break</code> and <code>continue</code></a></li>
+          <li><a href="controlflow.html#s7-9"><span class="nav-num">§8.9</span><code>switch</code></a></li>
         </ul>
       </li>
       <li>
-        <a href="inheritance.html"><span class="nav-num">§9</span>Inheritance</a>
+        <a href="strings.html"><span class="nav-num">§9</span>Strings</a>
         <ul class="sub-nav">
-          <li><a href="inheritance.html#s10-1"><span class="nav-num">§9.1</span>Taxonomy</a></li>
-          <li><a href="inheritance.html#s10-2"><span class="nav-num">§9.2</span>The Problem</a></li>
-          <li><a href="inheritance.html#s10-3"><span class="nav-num">§9.3</span><code>extends</code></a></li>
-          <li><a href="inheritance.html#s10-4"><span class="nav-num">§9.4</span><code>super(...)</code></a></li>
-          <li><a href="inheritance.html#s10-5"><span class="nav-num">§9.5</span>Polymorphism</a></li>
-          <li><a href="inheritance.html#s10-6"><span class="nav-num">§9.6</span>Overriding</a></li>
-          <li><a href="inheritance.html#s10-7"><span class="nav-num">§9.7</span><code>toString()</code></a></li>
+          <li><a href="strings.html#s8-1"><span class="nav-num">§9.1</span>Writing Systems &amp; Unicode</a></li>
+          <li><a href="strings.html#s8-2"><span class="nav-num">§9.2</span><code>char</code></a></li>
+          <li><a href="strings.html#s8-3"><span class="nav-num">§9.3</span><code>Character</code></a></li>
+          <li><a href="strings.html#s8-4"><span class="nav-num">§9.4</span>Sequence of Characters</a></li>
+          <li><a href="strings.html#s8-5"><span class="nav-num">§9.5</span>Text Blocks</a></li>
+          <li><a href="strings.html#s8-6"><span class="nav-num">§9.6</span>Immutability</a></li>
+          <li><a href="strings.html#s8-7"><span class="nav-num">§9.7</span><code>==</code> vs <code>.equals()</code></a></li>
+          <li><a href="strings.html#s8-8"><span class="nav-num">§9.8</span>Concatenation</a></li>
+          <li><a href="strings.html#s8-9"><span class="nav-num">§9.9</span>Important String Methods</a></li>
         </ul>
       </li>
       <li>
-        <a href="accessmodifiers.html"><span class="nav-num">§10</span>Packages &amp; Access Modifiers</a>
+        <a href="inheritance.html"><span class="nav-num">§10</span>Inheritance</a>
         <ul class="sub-nav">
-          <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§10.1</span>Packages</a></li>
-          <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§10.2</span>Why Restrict Access</a></li>
-          <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§10.3</span>Getters and Setters</a></li>
-          <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§10.4</span><code>public</code></a></li>
-          <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§10.5</span>Package-Private</a></li>
-          <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§10.6</span><code>protected</code></a></li>
+          <li><a href="inheritance.html#s10-1"><span class="nav-num">§10.1</span>Taxonomy</a></li>
+          <li><a href="inheritance.html#s10-2"><span class="nav-num">§10.2</span>The Problem</a></li>
+          <li><a href="inheritance.html#s10-3"><span class="nav-num">§10.3</span><code>extends</code></a></li>
+          <li><a href="inheritance.html#s10-4"><span class="nav-num">§10.4</span><code>super(...)</code></a></li>
+          <li><a href="inheritance.html#s10-5"><span class="nav-num">§10.5</span>Polymorphism</a></li>
+          <li><a href="inheritance.html#s10-6"><span class="nav-num">§10.6</span>Overriding</a></li>
+          <li><a href="inheritance.html#s10-7"><span class="nav-num">§10.7</span><code>toString()</code></a></li>
         </ul>
       </li>
       <li>
-        <a href="immutability.html"><span class="nav-num">§11</span>Immutability</a>
+        <a href="accessmodifiers.html"><span class="nav-num">§11</span>Packages &amp; Access Modifiers</a>
         <ul class="sub-nav">
-          <li><a href="immutability.html#s11-1"><span class="nav-num">§11.1</span>Two Real-World Analogies</a></li>
-          <li><a href="immutability.html#s11-2"><span class="nav-num">§11.2</span>Identity &amp; State</a></li>
-          <li><a href="immutability.html#s11-3"><span class="nav-num">§11.3</span>A Question of Time</a></li>
-          <li><a href="immutability.html#s11-4"><span class="nav-num">§11.4</span>Building an Immutable Class</a></li>
-          <li><a href="immutability.html#s11-5"><span class="nav-num">§11.5</span><code>final</code> Isn't Deep</a></li>
-          <li><a href="immutability.html#s11-6"><span class="nav-num">§11.6</span>Why It Matters</a></li>
-          <li><a href="immutability.html#s11-7"><span class="nav-num">§11.7</span><code>StringBuilder</code></a></li>
-          <li><a href="immutability.html#s11-8"><span class="nav-num">§11.8</span>Putting It Together</a></li>
+          <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§11.1</span>Packages</a></li>
+          <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§11.2</span>Why Restrict Access</a></li>
+          <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§11.3</span>Getters and Setters</a></li>
+          <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§11.4</span><code>public</code></a></li>
+          <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§11.5</span>Package-Private</a></li>
+          <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§11.6</span><code>protected</code></a></li>
         </ul>
       </li>
       <li>
-        <a href="abstractclasses.html"><span class="nav-num">§12</span>Abstract Classes</a>
+        <a href="immutability.html"><span class="nav-num">§12</span>Immutability</a>
         <ul class="sub-nav">
-          <li><a href="abstractclasses.html#s12-1"><span class="nav-num">§12.1</span>The Problem</a></li>
-          <li><a href="abstractclasses.html#s12-2"><span class="nav-num">§12.2</span><code>abstract</code> Classes</a></li>
-          <li><a href="abstractclasses.html#s12-3"><span class="nav-num">§12.3</span><code>abstract</code> Methods</a></li>
-            <li><a href="abstractclasses.html#s12-4"><span class="nav-num">§12.4</span>Bringing It Altogether</a></li>
+          <li><a href="immutability.html#s11-1"><span class="nav-num">§12.1</span>Two Real-World Analogies</a></li>
+          <li><a href="immutability.html#s11-2"><span class="nav-num">§12.2</span>Identity &amp; State</a></li>
+          <li><a href="immutability.html#s11-3"><span class="nav-num">§12.3</span>A Question of Time</a></li>
+          <li><a href="immutability.html#s11-4"><span class="nav-num">§12.4</span>Building an Immutable Class</a></li>
+          <li><a href="immutability.html#s11-5"><span class="nav-num">§12.5</span><code>final</code> Isn't Deep</a></li>
+          <li><a href="immutability.html#s11-6"><span class="nav-num">§12.6</span>Why It Matters</a></li>
+          <li><a href="immutability.html#s11-7"><span class="nav-num">§12.7</span><code>StringBuilder</code></a></li>
+          <li><a href="immutability.html#s11-8"><span class="nav-num">§12.8</span>Putting It Together</a></li>
         </ul>
       </li>
       <li>
-        <a href="interfaces.html"><span class="nav-num">§13</span>Interfaces</a>
+        <a href="abstractclasses.html"><span class="nav-num">§13</span>Abstract Classes</a>
         <ul class="sub-nav">
-          <li><a href="interfaces.html#s13-1"><span class="nav-num">§13.1</span>The Problem</a></li>
-          <li><a href="interfaces.html#s13-2"><span class="nav-num">§13.2</span>Interface vs. Abstract Class</a></li>
-          <li><a href="interfaces.html#s13-3"><span class="nav-num">§13.3</span>Declaring &amp; Implementing</a></li>
-          <li><a href="interfaces.html#s13-4"><span class="nav-num">§13.4</span>Override vs. Overload</a></li>
-          <li><a href="interfaces.html#s13-5"><span class="nav-num">§13.5</span>Multiple Interfaces</a></li>
-          <li><a href="interfaces.html#s13-6"><span class="nav-num">§13.6</span>Anonymous Classes</a></li>
-          <li><a href="interfaces.html#s13-7"><span class="nav-num">§13.7</span>Default Methods</a></li>
-          <li><a href="interfaces.html#s13-8"><span class="nav-num">§13.8</span>Default Method Collisions</a></li>
-          <li><a href="interfaces.html#s13-9"><span class="nav-num">§13.9</span>Static Methods</a></li>
-          <li><a href="interfaces.html#s13-10"><span class="nav-num">§13.10</span>Interface Inheritance</a></li>
-          <li><a href="interfaces.html#s13-11"><span class="nav-num">§13.11</span>Interface Use Cases</a></li>
+          <li><a href="abstractclasses.html#s12-1"><span class="nav-num">§13.1</span>The Problem</a></li>
+          <li><a href="abstractclasses.html#s12-2"><span class="nav-num">§13.2</span><code>abstract</code> Classes</a></li>
+          <li><a href="abstractclasses.html#s12-3"><span class="nav-num">§13.3</span><code>abstract</code> Methods</a></li>
+            <li><a href="abstractclasses.html#s12-4"><span class="nav-num">§13.4</span>Bringing It Altogether</a></li>
         </ul>
       </li>
       <li>
-        <a href="exceptions.html"><span class="nav-num">§14</span>Exceptions</a>
+        <a href="interfaces.html"><span class="nav-num">§14</span>Interfaces</a>
         <ul class="sub-nav">
-          <li><a href="exceptions.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
-          <li><a href="exceptions.html#s14-2"><span class="nav-num">§14.2</span>The Exception Lifecycle</a></li>
-          <li><a href="exceptions.html#s14-3"><span class="nav-num">§14.3</span>Handling Exceptions</a></li>
-          <li><a href="exceptions.html#s14-4"><span class="nav-num">§14.4</span>The Exception Hierarchy</a></li>
-          <li><a href="exceptions.html#s14-5"><span class="nav-num">§14.5</span>Checked vs. Unchecked</a></li>
-          <li><a href="exceptions.html#s14-6"><span class="nav-num">§14.6</span>Custom Exceptions</a></li>
-          <li><a href="exceptions.html#s14-7"><span class="nav-num">§14.7</span>Exception Chaining</a></li>
-          <li><a href="exceptions.html#s14-8"><span class="nav-num">§14.8</span>Try-with-Resources</a></li>
-          <li><a href="exceptions.html#s14-9"><span class="nav-num">§14.9</span>Best Practices &amp; Anti-Patterns</a></li>
-          <li><a href="exceptions.html#s14-10"><span class="nav-num">§14.10</span>Key Takeaways</a></li>
+          <li><a href="interfaces.html#s13-1"><span class="nav-num">§14.1</span>The Problem</a></li>
+          <li><a href="interfaces.html#s13-2"><span class="nav-num">§14.2</span>Interface vs. Abstract Class</a></li>
+          <li><a href="interfaces.html#s13-3"><span class="nav-num">§14.3</span>Declaring &amp; Implementing</a></li>
+          <li><a href="interfaces.html#s13-4"><span class="nav-num">§14.4</span>Override vs. Overload</a></li>
+          <li><a href="interfaces.html#s13-5"><span class="nav-num">§14.5</span>Multiple Interfaces</a></li>
+          <li><a href="interfaces.html#s13-6"><span class="nav-num">§14.6</span>Anonymous Classes</a></li>
+          <li><a href="interfaces.html#s13-7"><span class="nav-num">§14.7</span>Default Methods</a></li>
+          <li><a href="interfaces.html#s13-8"><span class="nav-num">§14.8</span>Default Method Collisions</a></li>
+          <li><a href="interfaces.html#s13-9"><span class="nav-num">§14.9</span>Static Methods</a></li>
+          <li><a href="interfaces.html#s13-10"><span class="nav-num">§14.10</span>Interface Inheritance</a></li>
+          <li><a href="interfaces.html#s13-11"><span class="nav-num">§14.11</span>Interface Use Cases</a></li>
         </ul>
       </li>
       <li>
-        <a href="generics.html"><span class="nav-num">§15</span>Generics</a>
+        <a href="exceptions.html"><span class="nav-num">§15</span>Exceptions</a>
         <ul class="sub-nav">
-          <li><a href="generics.html#s15-1"><span class="nav-num">§15.1</span>The Problem</a></li>
-          <li><a href="generics.html#s15-2"><span class="nav-num">§15.2</span>Type Parameters</a></li>
-          <li><a href="generics.html#s15-3"><span class="nav-num">§15.3</span>Class-Level Generics</a></li>
-          <li><a href="generics.html#s15-4"><span class="nav-num">§15.4</span>Generic Interfaces</a></li>
-          <li><a href="generics.html#s15-5"><span class="nav-num">§15.5</span>Diamond &amp; <code>var</code></a></li>
-          <li><a href="generics.html#s15-6"><span class="nav-num">§15.6</span>Generic Methods</a></li>
-          <li><a href="generics.html#s15-7"><span class="nav-num">§15.7</span>Bounded Types</a></li>
-          <li><a href="generics.html#s15-8"><span class="nav-num">§15.8</span>Invariance</a></li>
-          <li><a href="generics.html#s15-9"><span class="nav-num">§15.9</span>Wildcards</a></li>
-          <li><a href="generics.html#s15-10"><span class="nav-num">§15.10</span>Compile Time Only</a></li>
+          <li><a href="exceptions.html#s14-1"><span class="nav-num">§15.1</span>The Problem</a></li>
+          <li><a href="exceptions.html#s14-2"><span class="nav-num">§15.2</span>The Exception Lifecycle</a></li>
+          <li><a href="exceptions.html#s14-3"><span class="nav-num">§15.3</span>Handling Exceptions</a></li>
+          <li><a href="exceptions.html#s14-4"><span class="nav-num">§15.4</span>The Exception Hierarchy</a></li>
+          <li><a href="exceptions.html#s14-5"><span class="nav-num">§15.5</span>Checked vs. Unchecked</a></li>
+          <li><a href="exceptions.html#s14-6"><span class="nav-num">§15.6</span>Custom Exceptions</a></li>
+          <li><a href="exceptions.html#s14-7"><span class="nav-num">§15.7</span>Exception Chaining</a></li>
+          <li><a href="exceptions.html#s14-8"><span class="nav-num">§15.8</span>Try-with-Resources</a></li>
+          <li><a href="exceptions.html#s14-9"><span class="nav-num">§15.9</span>Best Practices &amp; Anti-Patterns</a></li>
+          <li><a href="exceptions.html#s14-10"><span class="nav-num">§15.10</span>Key Takeaways</a></li>
         </ul>
       </li>
       <li>
-        <a href="records.html"><span class="nav-num">§16</span>Records</a>
+        <a href="generics.html"><span class="nav-num">§16</span>Generics</a>
         <ul class="sub-nav">
-          <li><a href="records.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
-          <li><a href="records.html#s16-2"><span class="nav-num">§16.2</span><code>record</code></a></li>
-          <li><a href="records.html#s16-3"><span class="nav-num">§16.3</span>Implicitly Final</a></li>
-          <li><a href="records.html#s16-4"><span class="nav-num">§16.4</span>Shallow Immutability</a></li>
-          <li><a href="records.html#s16-5"><span class="nav-num">§16.5</span>Constructors</a></li>
-          <li><a href="records.html#s16-6"><span class="nav-num">§16.6</span><code>equals()</code></a></li>
-          <li><a href="records.html#s16-7"><span class="nav-num">§16.7</span>Records Can Do More</a></li>
-          <li><a href="records.html#s16-8"><span class="nav-num">§16.8</span>Pattern Matching</a></li>
-          <li><a href="records.html#s16-9"><span class="nav-num">§16.9</span>When to Reach for One</a></li>
+          <li><a href="generics.html#s15-1"><span class="nav-num">§16.1</span>The Problem</a></li>
+          <li><a href="generics.html#s15-2"><span class="nav-num">§16.2</span>Type Parameters</a></li>
+          <li><a href="generics.html#s15-3"><span class="nav-num">§16.3</span>Class-Level Generics</a></li>
+          <li><a href="generics.html#s15-4"><span class="nav-num">§16.4</span>Generic Interfaces</a></li>
+          <li><a href="generics.html#s15-5"><span class="nav-num">§16.5</span>Diamond &amp; <code>var</code></a></li>
+          <li><a href="generics.html#s15-6"><span class="nav-num">§16.6</span>Generic Methods</a></li>
+          <li><a href="generics.html#s15-7"><span class="nav-num">§16.7</span>Bounded Types</a></li>
+          <li><a href="generics.html#s15-8"><span class="nav-num">§16.8</span>Invariance</a></li>
+          <li><a href="generics.html#s15-9"><span class="nav-num">§16.9</span>Wildcards</a></li>
+          <li><a href="generics.html#s15-10"><span class="nav-num">§16.10</span>Compile Time Only</a></li>
         </ul>
       </li>
       <li>
-        <a href="collections.html"><span class="nav-num">§18</span>Collections Framework</a>
+        <a href="records.html"><span class="nav-num">§17</span>Records</a>
         <ul class="sub-nav">
-          <li><a href="collections.html#s18-1"><span class="nav-num">§18.1</span>The Problem</a></li>
-          <li><a href="collections.html#s18-2"><span class="nav-num">§18.2</span>The Big Picture</a></li>
-          <li><a href="collections.html#s18-3"><span class="nav-num">§18.3</span><code>SequencedCollection</code></a></li>
-          <li><a href="collections.html#s18-4"><span class="nav-num">§18.4</span><code>List</code></a></li>
-          <li><a href="collections.html#s18-5"><span class="nav-num">§18.5</span>Defining an Order</a></li>
-          <li><a href="collections.html#s18-6"><span class="nav-num">§18.6</span><code>Queue</code></a></li>
-          <li><a href="collections.html#s18-7"><span class="nav-num">§18.7</span><code>Set</code></a></li>
-          <li><a href="collections.html#s18-8"><span class="nav-num">§18.8</span><code>Map</code></a></li>
+          <li><a href="records.html#s16-1"><span class="nav-num">§17.1</span>The Problem</a></li>
+          <li><a href="records.html#s16-2"><span class="nav-num">§17.2</span><code>record</code></a></li>
+          <li><a href="records.html#s16-3"><span class="nav-num">§17.3</span>Implicitly Final</a></li>
+          <li><a href="records.html#s16-4"><span class="nav-num">§17.4</span>Shallow Immutability</a></li>
+          <li><a href="records.html#s16-5"><span class="nav-num">§17.5</span>Constructors</a></li>
+          <li><a href="records.html#s16-6"><span class="nav-num">§17.6</span><code>equals()</code></a></li>
+          <li><a href="records.html#s16-7"><span class="nav-num">§17.7</span>Records Can Do More</a></li>
+          <li><a href="records.html#s16-8"><span class="nav-num">§17.8</span>Pattern Matching</a></li>
+          <li><a href="records.html#s16-9"><span class="nav-num">§17.9</span>When to Reach for One</a></li>
         </ul>
       </li>
       <li>
-        <a href="lambdas.html"><span class="nav-num">§19</span>Functional Programming</a>
+        <a href="collections.html"><span class="nav-num">§19</span>Collections Framework</a>
         <ul class="sub-nav">
-          <li><a href="lambdas.html#s19-1"><span class="nav-num">§19.1</span>Functions as First-Class Citizens</a></li>
-          <li><a href="lambdas.html#s19-2"><span class="nav-num">§19.2</span>Why Java "Simulates" First-Class Functions</a></li>
-          <li><a href="lambdas.html#s19-3"><span class="nav-num">§19.3</span>The Problem</a></li>
-          <li><a href="lambdas.html#s19-4"><span class="nav-num">§19.4</span>Another Anonymous Class</a></li>
-          <li><a href="lambdas.html#s19-5"><span class="nav-num">§19.5</span>Functional Interfaces</a></li>
-          <li><a href="lambdas.html#s19-6"><span class="nav-num">§19.6</span>Lambda Expressions</a></li>
-          <li><a href="lambdas.html#s19-7"><span class="nav-num">§19.7</span>Method References</a></li>
-          <li><a href="lambdas.html#s19-8"><span class="nav-num">§19.8</span><code>java.util.function</code></a></li>
-          <li><a href="lambdas.html#s19-9"><span class="nav-num">§19.9</span>Key Takeaways</a></li>
+          <li><a href="collections.html#s18-1"><span class="nav-num">§19.1</span>The Problem</a></li>
+          <li><a href="collections.html#s18-2"><span class="nav-num">§19.2</span>The Big Picture</a></li>
+          <li><a href="collections.html#s18-3"><span class="nav-num">§19.3</span><code>SequencedCollection</code></a></li>
+          <li><a href="collections.html#s18-4"><span class="nav-num">§19.4</span><code>List</code></a></li>
+          <li><a href="collections.html#s18-5"><span class="nav-num">§19.5</span>Defining an Order</a></li>
+          <li><a href="collections.html#s18-6"><span class="nav-num">§19.6</span><code>Queue</code></a></li>
+          <li><a href="collections.html#s18-7"><span class="nav-num">§19.7</span><code>Set</code></a></li>
+          <li><a href="collections.html#s18-8"><span class="nav-num">§19.8</span><code>Map</code></a></li>
         </ul>
       </li>
       <li>
-        <a href="enums.html"><span class="nav-num">§17</span>Enums</a>
+        <a href="lambdas.html"><span class="nav-num">§20</span>Functional Programming</a>
         <ul class="sub-nav">
-          <li><a href="enums.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
-          <li><a href="enums.html#s17-2"><span class="nav-num">§17.2</span>Declaring an Enum</a></li>
-          <li><a href="enums.html#s17-3"><span class="nav-num">§17.3</span>Objects, Not Constants</a></li>
-          <li><a href="enums.html#s17-4"><span class="nav-num">§17.4</span>Comparing Enum Values</a></li>
-          <li><a href="enums.html#s17-5"><span class="nav-num">§17.5</span>Type Characteristics</a></li>
-          <li><a href="enums.html#s17-6"><span class="nav-num">§17.6</span>Fields, Constructors, Methods</a></li>
-          <li><a href="enums.html#s17-7"><span class="nav-num">§17.7</span>Enums vs. Magic Numbers</a></li>
-          <li><a href="enums.html#s17-8"><span class="nav-num">§17.8</span>Closed Sets vs. Evolving Reality</a></li>
-          <li><a href="enums.html#s17-9"><span class="nav-num">§17.9</span>Key Takeaways</a></li>
+          <li><a href="lambdas.html#s19-1"><span class="nav-num">§20.1</span>Functions as First-Class Citizens</a></li>
+          <li><a href="lambdas.html#s19-2"><span class="nav-num">§20.2</span>Why Java "Simulates" First-Class Functions</a></li>
+          <li><a href="lambdas.html#s19-3"><span class="nav-num">§20.3</span>The Problem</a></li>
+          <li><a href="lambdas.html#s19-4"><span class="nav-num">§20.4</span>Another Anonymous Class</a></li>
+          <li><a href="lambdas.html#s19-5"><span class="nav-num">§20.5</span>Functional Interfaces</a></li>
+          <li><a href="lambdas.html#s19-6"><span class="nav-num">§20.6</span>Lambda Expressions</a></li>
+          <li><a href="lambdas.html#s19-7"><span class="nav-num">§20.7</span>Method References</a></li>
+          <li><a href="lambdas.html#s19-8"><span class="nav-num">§20.8</span><code>java.util.function</code></a></li>
+          <li><a href="lambdas.html#s19-9"><span class="nav-num">§20.9</span>Key Takeaways</a></li>
         </ul>
       </li>
       <li>
-        <a href="optionals.html"><span class="nav-num">§20</span>Optional&lt;T&gt;</a>
+        <a href="enums.html"><span class="nav-num">§18</span>Enums</a>
         <ul class="sub-nav">
-          <li><a href="optionals.html#s20-1"><span class="nav-num">§20.1</span>The Problem</a></li>
-          <li><a href="optionals.html#s20-2"><span class="nav-num">§20.2</span><code>null</code>: The Absence of a Value</a></li>
-          <li><a href="optionals.html#s20-3"><span class="nav-num">§20.3</span>The Defensive Approach</a></li>
-          <li><a href="optionals.html#s20-4"><span class="nav-num">§20.4</span>The <code>Optional&lt;T&gt;</code> Class</a></li>
-          <li><a href="optionals.html#s20-5"><span class="nav-num">§20.5</span><code>Optional&lt;T&gt;</code> vs <code>null</code></a></li>
-          <li><a href="optionals.html#s20-6"><span class="nav-num">§20.6</span>Specialized Primitive Optionals</a></li>
-          <li><a href="optionals.html#s20-7"><span class="nav-num">§20.7</span>Key Takeaways</a></li>
+          <li><a href="enums.html#s17-1"><span class="nav-num">§18.1</span>The Problem</a></li>
+          <li><a href="enums.html#s17-2"><span class="nav-num">§18.2</span>Declaring an Enum</a></li>
+          <li><a href="enums.html#s17-3"><span class="nav-num">§18.3</span>Objects, Not Constants</a></li>
+          <li><a href="enums.html#s17-4"><span class="nav-num">§18.4</span>Comparing Enum Values</a></li>
+          <li><a href="enums.html#s17-5"><span class="nav-num">§18.5</span>Type Characteristics</a></li>
+          <li><a href="enums.html#s17-6"><span class="nav-num">§18.6</span>Fields, Constructors, Methods</a></li>
+          <li><a href="enums.html#s17-7"><span class="nav-num">§18.7</span>Enums vs. Magic Numbers</a></li>
+          <li><a href="enums.html#s17-8"><span class="nav-num">§18.8</span>Closed Sets vs. Evolving Reality</a></li>
+          <li><a href="enums.html#s17-9"><span class="nav-num">§18.9</span>Key Takeaways</a></li>
         </ul>
       </li>
       <li>
-        <a href="streams.html" class="active"><span class="nav-num">§21</span>Streams</a>
+        <a href="optionals.html"><span class="nav-num">§21</span>Optional&lt;T&gt;</a>
         <ul class="sub-nav">
-          <li><a href="#s21-1"><span class="nav-num">§21.1</span>The Problem</a></li>
-          <li><a href="#s21-2"><span class="nav-num">§21.2</span>What Is a Stream</a></li>
-          <li><a href="#s21-3"><span class="nav-num">§21.3</span>Creating a Stream</a></li>
-          <li><a href="#s21-4"><span class="nav-num">§21.4</span>Intermediate Operations</a></li>
-          <li><a href="#s21-5"><span class="nav-num">§21.5</span>Terminal Operations</a></li>
-          <li><a href="#s21-6"><span class="nav-num">§21.6</span>Collecting Results</a></li>
-          <li><a href="#s21-7"><span class="nav-num">§21.7</span>Streams and <code>Optional&lt;T&gt;</code></a></li>
-          <li><a href="#s21-8"><span class="nav-num">§21.8</span>Laziness and Pipelines</a></li>
-          <li><a href="#s21-9"><span class="nav-num">§21.9</span>When (Not) to Use Streams</a></li>
-          <li><a href="#s21-10"><span class="nav-num">§21.10</span>Key Takeaways</a></li>
+          <li><a href="optionals.html#s20-1"><span class="nav-num">§21.1</span>The Problem</a></li>
+          <li><a href="optionals.html#s20-2"><span class="nav-num">§21.2</span><code>null</code>: The Absence of a Value</a></li>
+          <li><a href="optionals.html#s20-3"><span class="nav-num">§21.3</span>The Defensive Approach</a></li>
+          <li><a href="optionals.html#s20-4"><span class="nav-num">§21.4</span>The <code>Optional&lt;T&gt;</code> Class</a></li>
+          <li><a href="optionals.html#s20-5"><span class="nav-num">§21.5</span><code>Optional&lt;T&gt;</code> vs <code>null</code></a></li>
+          <li><a href="optionals.html#s20-6"><span class="nav-num">§21.6</span>Specialized Primitive Optionals</a></li>
+          <li><a href="optionals.html#s20-7"><span class="nav-num">§21.7</span>Key Takeaways</a></li>
         </ul>
       </li>
       <li>
-        <a href="concurrency.html"><span class="nav-num">§22</span>Concurrent Programming</a>
+        <a href="streams.html" class="active"><span class="nav-num">§22</span>Streams</a>
         <ul class="sub-nav">
-          <li><a href="concurrency.html#s22-1"><span class="nav-num">§22.1</span>The Problem</a></li>
-          <li><a href="concurrency.html#s22-2"><span class="nav-num">§22.2</span>Process, Thread, and the OS</a></li>
-          <li><a href="concurrency.html#s22-3"><span class="nav-num">§22.3</span>Independent Progress</a></li>
-          <li><a href="concurrency.html#s22-4"><span class="nav-num">§22.4</span>Why Concurrency Matters</a></li>
-          <li><a href="concurrency.html#s22-5"><span class="nav-num">§22.5</span>Where Parallelism Fits In</a></li>
-          <li><a href="concurrency.html#s22-6"><span class="nav-num">§22.6</span>The Main Thread</a></li>
-          <li><a href="concurrency.html#s22-7"><span class="nav-num">§22.7</span>Step 1: Creating a Task</a></li>
-          <li><a href="concurrency.html#s22-8"><span class="nav-num">§22.8</span>Step 2: Handing a Task to an Executor</a></li>
-          <li><a href="concurrency.html#s22-9"><span class="nav-num">§22.9</span>ExecutorService in Practice</a></li>
+          <li><a href="#s21-1"><span class="nav-num">§22.1</span>The Problem</a></li>
+          <li><a href="#s21-2"><span class="nav-num">§22.2</span>What Is a Stream</a></li>
+          <li><a href="#s21-3"><span class="nav-num">§22.3</span>Creating a Stream</a></li>
+          <li><a href="#s21-4"><span class="nav-num">§22.4</span>Intermediate Operations</a></li>
+          <li><a href="#s21-5"><span class="nav-num">§22.5</span>Terminal Operations</a></li>
+          <li><a href="#s21-6"><span class="nav-num">§22.6</span>Collecting Results</a></li>
+          <li><a href="#s21-7"><span class="nav-num">§22.7</span>Streams and <code>Optional&lt;T&gt;</code></a></li>
+          <li><a href="#s21-8"><span class="nav-num">§22.8</span>Laziness and Pipelines</a></li>
+          <li><a href="#s21-9"><span class="nav-num">§22.9</span>When (Not) to Use Streams</a></li>
+          <li><a href="#s21-10"><span class="nav-num">§22.10</span>Key Takeaways</a></li>
         </ul>
       </li>
       <li>
-        <a href="modules.html"><span class="nav-num">§23</span>Java Modules</a>
+        <a href="concurrency.html"><span class="nav-num">§23</span>Concurrent Programming</a>
         <ul class="sub-nav">
-          <li><a href="modules.html#s23-1"><span class="nav-num">§23.1</span>The Problem</a></li>
-          <li><a href="modules.html#s23-2"><span class="nav-num">§23.2</span>What Is a Module</a></li>
-          <li><a href="modules.html#s23-3"><span class="nav-num">§23.3</span><code>module-info.java</code></a></li>
-          <li><a href="modules.html#s23-4"><span class="nav-num">§23.4</span><code>exports</code></a></li>
-          <li><a href="modules.html#s23-5"><span class="nav-num">§23.5</span><code>requires</code></a></li>
-          <li><a href="modules.html#s23-6"><span class="nav-num">§23.6</span>Strong Encapsulation</a></li>
-          <li><a href="modules.html#s23-7"><span class="nav-num">§23.7</span>The Module Path</a></li>
-          <li><a href="modules.html#s23-8"><span class="nav-num">§23.8</span><code>requires transitive</code></a></li>
-          <li><a href="modules.html#s23-9"><span class="nav-num">§23.9</span>When (Not) to Use Modules</a></li>
-          <li><a href="modules.html#s23-10"><span class="nav-num">§23.10</span>Key Takeaways</a></li>
+          <li><a href="concurrency.html#s22-1"><span class="nav-num">§23.1</span>The Problem</a></li>
+          <li><a href="concurrency.html#s22-2"><span class="nav-num">§23.2</span>Process, Thread, and the OS</a></li>
+          <li><a href="concurrency.html#s22-3"><span class="nav-num">§23.3</span>Independent Progress</a></li>
+          <li><a href="concurrency.html#s22-4"><span class="nav-num">§23.4</span>Why Concurrency Matters</a></li>
+          <li><a href="concurrency.html#s22-5"><span class="nav-num">§23.5</span>Where Parallelism Fits In</a></li>
+          <li><a href="concurrency.html#s22-6"><span class="nav-num">§23.6</span>The Main Thread</a></li>
+          <li><a href="concurrency.html#s22-7"><span class="nav-num">§23.7</span>Step 1: Creating a Task</a></li>
+          <li><a href="concurrency.html#s22-8"><span class="nav-num">§23.8</span>Step 2: Handing a Task to an Executor</a></li>
+          <li><a href="concurrency.html#s22-9"><span class="nav-num">§23.9</span>ExecutorService in Practice</a></li>
         </ul>
       </li>
-      <li><a href="dateandtime.html"><span class="nav-num">§24</span>Date and Time</a></li>
-      <li><a href="io.html"><span class="nav-num">§25</span>Input and Output</a></li>
-      <li><a href="oodesign.html"><span class="nav-num">§26</span>Object-Oriented Design</a></li>
+      <li>
+        <a href="modules.html"><span class="nav-num">§24</span>Java Modules</a>
+        <ul class="sub-nav">
+          <li><a href="modules.html#s23-1"><span class="nav-num">§24.1</span>The Problem</a></li>
+          <li><a href="modules.html#s23-2"><span class="nav-num">§24.2</span>What Is a Module</a></li>
+          <li><a href="modules.html#s23-3"><span class="nav-num">§24.3</span><code>module-info.java</code></a></li>
+          <li><a href="modules.html#s23-4"><span class="nav-num">§24.4</span><code>exports</code></a></li>
+          <li><a href="modules.html#s23-5"><span class="nav-num">§24.5</span><code>requires</code></a></li>
+          <li><a href="modules.html#s23-6"><span class="nav-num">§24.6</span>Strong Encapsulation</a></li>
+          <li><a href="modules.html#s23-7"><span class="nav-num">§24.7</span>The Module Path</a></li>
+          <li><a href="modules.html#s23-8"><span class="nav-num">§24.8</span><code>requires transitive</code></a></li>
+          <li><a href="modules.html#s23-9"><span class="nav-num">§24.9</span>When (Not) to Use Modules</a></li>
+          <li><a href="modules.html#s23-10"><span class="nav-num">§24.10</span>Key Takeaways</a></li>
+        </ul>
+      </li>
+      <li><a href="dateandtime.html"><span class="nav-num">§25</span>Date and Time</a></li>
+      <li><a href="io.html"><span class="nav-num">§26</span>Input and Output</a></li>
+      <li><a href="oodesign.html"><span class="nav-num">§27</span>Object-Oriented Design</a></li>
     </ul>
   </nav>
 </nav>
 
 <main id="content">
   <header class="page-header">
-    <div class="page-chapter">Chapter 21</div>
+    <div class="page-chapter">Chapter 22</div>
     <h1>Streams</h1>
-    <p class="page-lead">Every collection query so far has meant writing a loop by hand: one to filter, another to transform, a third to total something up — each one restating <em>how</em> to iterate right alongside <em>what</em> to compute. This chapter introduces the <code>Stream</code> API: a way to describe a pipeline of operations over a collection's elements — filter, transform, collect, aggregate — declaratively, using exactly the functional interfaces (§19) already in hand.</p>
+    <p class="page-lead">Every collection query so far has meant writing a loop by hand: one to filter, another to transform, a third to total something up — each one restating <em>how</em> to iterate right alongside <em>what</em> to compute. This chapter introduces the <code>Stream</code> API: a way to describe a pipeline of operations over a collection's elements — filter, transform, collect, aggregate — declaratively, using exactly the functional interfaces (§20) already in hand.</p>
   </header>
 
   <article>
 
-    <!-- §21.1 -->
+    <!-- §22.1 -->
     <section id="s21-1">
       <div class="section-head">
-        <span class="sec-num">§21.1</span>
+        <span class="sec-num">§22.1</span>
         <h2>The Problem <em>— the same iteration, rewritten every time</em></h2>
       </div>
 
@@ -414,19 +426,19 @@ int distinctCustomers = shippedCustomers.size();</code></pre>
         .mapToDouble(Order::amount)
         .sum();</code></pre>
 
-      <p>Nothing here says "start a loop" or "keep a running total in a variable" — it says what's wanted: the shipped ones, their amounts, summed. §21.4 onward builds this syntax up piece by piece, but the shift in mindset matters more than the syntax itself: <em>how</em> the elements actually get walked, and whether that walk can be optimized, is now the Java runtime's responsibility, not something spelled out by hand in every single query written against this list.</p>
+      <p>Nothing here says "start a loop" or "keep a running total in a variable" — it says what's wanted: the shipped ones, their amounts, summed. §22.4 onward builds this syntax up piece by piece, but the shift in mindset matters more than the syntax itself: <em>how</em> the elements actually get walked, and whether that walk can be optimized, is now the Java runtime's responsibility, not something spelled out by hand in every single query written against this list.</p>
     </section>
 
-    <!-- §21.2 -->
+    <!-- §22.2 -->
     <section id="s21-2">
       <div class="section-head">
-        <span class="sec-num">§21.2</span>
+        <span class="sec-num">§22.2</span>
         <h2>What Is a Stream <em>— a pipeline, not a container</em></h2>
       </div>
 
       <p>Picture a warehouse holding every item at once, indefinitely — and a conveyor belt threaded through it once, carrying each item past a sequence of stations before it's gone for good. A <code>List</code> is the warehouse. A <code>Stream</code> is the belt.</p>
 
-      <p>A <code>Stream&lt;T&gt;</code> is not a collection (§18) — it doesn't hold elements the way a <code>List</code> or a <code>Set</code> does, and it has no storage of its own. A <code>Stream</code> describes a sequence of operations to run over a source of elements — a <code>List&lt;Order&gt;</code>, an array, another collection entirely — without itself owning any of the data.</p>
+      <p>A <code>Stream&lt;T&gt;</code> is not a collection (§19) — it doesn't hold elements the way a <code>List</code> or a <code>Set</code> does, and it has no storage of its own. A <code>Stream</code> describes a sequence of operations to run over a source of elements — a <code>List&lt;Order&gt;</code>, an array, another collection entirely — without itself owning any of the data.</p>
 
       <p>Two consequences follow directly from that:</p>
 
@@ -441,19 +453,19 @@ int distinctCustomers = shippedCustomers.size();</code></pre>
 
       <p>A natural question, coming from <code>List</code>: why can't a <code>Stream</code> be indexed directly, the way <code>orders.get(3)</code> reaches straight into a <code>List&lt;Order&gt;</code>? Two reasons, and both trace straight back to what a stream actually is.</p>
 
-      <p>The first is the abstraction §21.1 just built toward: <code>filter</code> and <code>map</code> describe <em>what</em> should happen to the data, not <em>how</em> to walk it — and "index 3" is an inherently <em>how</em>-shaped idea. It only means something if there's a fixed, numbered position for every element to sit in, the way a <code>List</code>'s backing array guarantees. A pipeline offers no such guarantee: after a <code>filter</code> has discarded some orders and a <code>map</code> has reshaped the rest, "the third one" no longer corresponds to anything stable — there's no array underneath a stream for a number to index into.</p>
+      <p>The first is the abstraction §22.1 just built toward: <code>filter</code> and <code>map</code> describe <em>what</em> should happen to the data, not <em>how</em> to walk it — and "index 3" is an inherently <em>how</em>-shaped idea. It only means something if there's a fixed, numbered position for every element to sit in, the way a <code>List</code>'s backing array guarantees. A pipeline offers no such guarantee: after a <code>filter</code> has discarded some orders and a <code>map</code> has reshaped the rest, "the third one" no longer corresponds to anything stable — there's no array underneath a stream for a number to index into.</p>
 
       <p>The second reason is what that same abstraction makes possible: parallelism. Calling <code>parallelStream()</code> instead of <code>stream()</code> lets the same pipeline split its source into chunks and run them across multiple CPU cores at once — the exact "optimize the walk however's fastest" freedom an imperative loop's fixed, line-by-line sequence never allows. But once the source is split across threads, "index 5" stops meaning anything at all — which thread's chunk is it even in? Processing order across threads isn't guaranteed to match the source's original order. Retrofitting indexed access on top of that would mean every thread constantly synchronizing on a shared position counter — exactly the kind of coordination overhead parallelism exists to avoid in the first place. A <code>Stream</code> gives up indexing precisely so it's free to make that trade when it's worth making.</p>
     </section>
 
-    <!-- §21.3 -->
+    <!-- §22.3 -->
     <section id="s21-3">
       <div class="section-head">
-        <span class="sec-num">§21.3</span>
+        <span class="sec-num">§22.3</span>
         <h2>Creating a Stream <em>— starting the pipeline</em></h2>
       </div>
 
-      <p>Every <code>Collection</code> (§18.2) has a <code>stream()</code> method built in — the ordinary way a pipeline begins:</p>
+      <p>Every <code>Collection</code> (§19.2) has a <code>stream()</code> method built in — the ordinary way a pipeline begins:</p>
 
       <pre><code class="language-java">Stream&lt;Order&gt; orderStream = orders.stream();</code></pre>
 
@@ -462,7 +474,7 @@ int distinctCustomers = shippedCustomers.size();</code></pre>
       <pre><code class="language-java">Stream&lt;String&gt; names = Stream.of("Ava", "Noah", "Mia");
 Stream&lt;Order&gt; fromArray = Arrays.stream(orderArray);</code></pre>
 
-      <p>None of these three actually do anything yet — creating a <code>Stream</code> is just naming a source. §21.8 comes back to exactly why nothing runs until much later.</p>
+      <p>None of these three actually do anything yet — creating a <code>Stream</code> is just naming a source. §22.8 comes back to exactly why nothing runs until much later.</p>
 
       <h3>Generating a stream instead of sourcing one</h3>
 
@@ -484,13 +496,13 @@ List&lt;Integer&gt; nextFiveConfirmationNumbers = Stream.iterate(10230, n -&gt; 
         .limit(5)
         .collect(Collectors.toList());</code></pre>
 
-      <p>It's worth pausing on why <code>Stream.iterate(10230, n -&gt; n + 1)</code> is even legal to write, given that it describes a sequence with no end. An <code>int[]</code> of unlimited length would exhaust memory just being built — but this line doesn't build anything yet. Confirmation number <code>10231</code> doesn't exist anywhere until something actually asks for it; the stream isn't a container holding infinitely many numbers, it's a rule for producing the next one, applied only when a later step in the pipeline pulls a value forward. <code>limit(5)</code> is what tells that rule to stop being asked after five pulls — without it, whatever terminal operation comes next just keeps asking, forever. §21.8 covers exactly why a stream can get away with generating elements one at a time, on demand, like this.</p>
+      <p>It's worth pausing on why <code>Stream.iterate(10230, n -&gt; n + 1)</code> is even legal to write, given that it describes a sequence with no end. An <code>int[]</code> of unlimited length would exhaust memory just being built — but this line doesn't build anything yet. Confirmation number <code>10231</code> doesn't exist anywhere until something actually asks for it; the stream isn't a container holding infinitely many numbers, it's a rule for producing the next one, applied only when a later step in the pipeline pulls a value forward. <code>limit(5)</code> is what tells that rule to stop being asked after five pulls — without it, whatever terminal operation comes next just keeps asking, forever. §22.8 covers exactly why a stream can get away with generating elements one at a time, on demand, like this.</p>
     </section>
 
-    <!-- §21.4 -->
+    <!-- §22.4 -->
     <section id="s21-4">
       <div class="section-head">
-        <span class="sec-num">§21.4</span>
+        <span class="sec-num">§22.4</span>
         <h2>Intermediate Operations <em>— describing the pipeline</em></h2>
       </div>
 
@@ -498,7 +510,7 @@ List&lt;Integer&gt; nextFiveConfirmationNumbers = Stream.iterate(10230, n -&gt; 
 
       <h3><code>filter</code>: keeping only what matches</h3>
 
-      <p><code>filter(Predicate)</code> (§19.8's <code>Predicate&lt;T&gt;</code>) keeps only elements matching a condition, discarding the rest:</p>
+      <p><code>filter(Predicate)</code> (§20.8's <code>Predicate&lt;T&gt;</code>) keeps only elements matching a condition, discarding the rest:</p>
 
       <pre><code class="language-java">Stream&lt;Order&gt; shipped = orders.stream()
         .filter(order -&gt; order.status() == OrderStatus.SHIPPED);</code></pre>
@@ -511,7 +523,7 @@ List&lt;Integer&gt; nextFiveConfirmationNumbers = Stream.iterate(10230, n -&gt; 
 
       <pre><code class="language-java">Stream&lt;T&gt; filter(Predicate&lt;? super T&gt; predicate)</code></pre>
 
-      <p>Notice the wildcard: <code>? super T</code>, not a plain <code>Predicate&lt;T&gt;</code> — §15.9 covered exactly this wildcard; here it is doing real work in the standard library.</p>
+      <p>Notice the wildcard: <code>? super T</code>, not a plain <code>Predicate&lt;T&gt;</code> — §16.9 covered exactly this wildcard; here it is doing real work in the standard library.</p>
 
       <p>Suppose the business tracks a property shared across several kinds of records, each implementing one common interface:</p>
 
@@ -532,7 +544,7 @@ record Invoice(String reference, double amount, LocalDate dueDate) implements Pr
         .filter(isHighValue)
         .collect(Collectors.toList());</code></pre>
 
-      <p>The reasoning is the same producer/consumer split §15.9 already named, just running in the opposite direction: <code>filter</code> only ever hands elements <em>to</em> the predicate — it never receives anything back from it except <code>true</code>/<code>false</code> — so any predicate built for a supertype of <code>Order</code> is guaranteed to already know how to handle an actual <code>Order</code>. Requiring an exact <code>Predicate&lt;Order&gt;</code> would reject that perfectly safe, more reusable predicate for no real reason.</p>
+      <p>The reasoning is the same producer/consumer split §16.9 already named, just running in the opposite direction: <code>filter</code> only ever hands elements <em>to</em> the predicate — it never receives anything back from it except <code>true</code>/<code>false</code> — so any predicate built for a supertype of <code>Order</code> is guaranteed to already know how to handle an actual <code>Order</code>. Requiring an exact <code>Predicate&lt;Order&gt;</code> would reject that perfectly safe, more reusable predicate for no real reason.</p>
 
       <h3><code>map</code>: transforming, one-to-one</h3>
 
@@ -542,7 +554,7 @@ record Invoice(String reference, double amount, LocalDate dueDate) implements Pr
         .filter(order -&gt; order.status() == OrderStatus.SHIPPED)
         .map(Order::amount);</code></pre>
 
-      <p><code>Order::amount</code> is a method reference (§19.7) — shorthand for the lambda <code>order -> order.amount()</code>, meaning exactly the same thing with less noise. Because every intermediate operation returns a <code>Stream</code>, calls chain directly, one step flowing into the next: <code>filter</code> narrows down to the orders that matter, then <code>map</code> reshapes each surviving order into just the number this particular question needs.</p>
+      <p><code>Order::amount</code> is a method reference (§20.7) — shorthand for the lambda <code>order -> order.amount()</code>, meaning exactly the same thing with less noise. Because every intermediate operation returns a <code>Stream</code>, calls chain directly, one step flowing into the next: <code>filter</code> narrows down to the orders that matter, then <code>map</code> reshapes each surviving order into just the number this particular question needs.</p>
 
       <p><code>sorted()</code> and <code>distinct()</code> round out the common set — sorting elements and dropping duplicates, respectively — each one just another link added to the same chain.</p>
 
@@ -560,9 +572,9 @@ List&lt;Order&gt; page = orders.stream()
 
       <p><code>skip(20)</code> discards orders 1 through 20, and <code>limit(10)</code> then keeps only the next 10 that follow — orders 21 through 30, exactly the slice page 3 needs. Change <code>pageNumber</code> and the same two lines serve any page, without a single hand-written loop counting positions.</p>
 
-      <p><code>limit</code> is what's called a <span class="term">short-circuiting</span> operation (§21.8): once <code>n</code> elements have made it through, it stops pulling more from upstream entirely, rather than continuing to walk the rest of the stream just to discard them. <code>skip</code> isn't short-circuiting on its own — it still has to walk past the elements it's discarding — but paired with <code>limit</code> downstream, as above, the pipeline as a whole still stops early once it has what it needs.</p>
+      <p><code>limit</code> is what's called a <span class="term">short-circuiting</span> operation (§22.8): once <code>n</code> elements have made it through, it stops pulling more from upstream entirely, rather than continuing to walk the rest of the stream just to discard them. <code>skip</code> isn't short-circuiting on its own — it still has to walk past the elements it's discarding — but paired with <code>limit</code> downstream, as above, the pipeline as a whole still stops early once it has what it needs.</p>
 
-      <p>This is also exactly what makes <code>limit</code> the tool that turns one of §21.3's infinite streams finite. Applying <code>skip</code> and <code>limit</code> together to <code>Stream.iterate(10230, n -&gt; n + 1)</code> reads the same way it did for a bounded list — skip past a few, then take a handful:</p>
+      <p>This is also exactly what makes <code>limit</code> the tool that turns one of §22.3's infinite streams finite. Applying <code>skip</code> and <code>limit</code> together to <code>Stream.iterate(10230, n -&gt; n + 1)</code> reads the same way it did for a bounded list — skip past a few, then take a handful:</p>
 
       <pre><code class="language-java">Stream.iterate(10230, n -&gt; n + 1)
         .skip(3)
@@ -570,10 +582,10 @@ List&lt;Order&gt; page = orders.stream()
         .forEach(System.out::println); // 10233 10234 10235 10236 10237</code></pre>
     </section>
 
-    <!-- §21.5 -->
+    <!-- §22.5 -->
     <section id="s21-5">
       <div class="section-head">
-        <span class="sec-num">§21.5</span>
+        <span class="sec-num">§22.5</span>
         <h2>Terminal Operations <em>— running the pipeline</em></h2>
       </div>
 
@@ -608,7 +620,7 @@ List&lt;Order&gt; page = orders.stream()
         </tr>
       </table>
 
-      <p><code>mapToDouble</code> (alongside <code>mapToInt</code> and <code>mapToLong</code>) is how a <code>Stream&lt;T&gt;</code> converts into one of these mid-pipeline, whenever the next step is a number rather than an object. Beyond skipping the boxing cost, these three types carry numeric-specific terminal operations a plain <code>Stream&lt;T&gt;</code> doesn't have at all — <code>sum()</code>, <code>average()</code>, <code>max()</code>, <code>min()</code> — which is exactly what makes answering §21.1's original question a one-line pipeline:</p>
+      <p><code>mapToDouble</code> (alongside <code>mapToInt</code> and <code>mapToLong</code>) is how a <code>Stream&lt;T&gt;</code> converts into one of these mid-pipeline, whenever the next step is a number rather than an object. Beyond skipping the boxing cost, these three types carry numeric-specific terminal operations a plain <code>Stream&lt;T&gt;</code> doesn't have at all — <code>sum()</code>, <code>average()</code>, <code>max()</code>, <code>min()</code> — which is exactly what makes answering §22.1's original question a one-line pipeline:</p>
 
       <pre><code class="language-java">double shippedValue = orders.stream()
         .filter(order -&gt; order.status() == OrderStatus.SHIPPED)
@@ -617,7 +629,7 @@ List&lt;Order&gt; page = orders.stream()
 
       <h3>Getting several statistics at once</h3>
 
-      <p>A dashboard summarizing shipped orders rarely needs just the total — the count, the average, the smallest, and the largest are usually wanted together. Calling <code>sum()</code>, then <code>average()</code>, then <code>max()</code> on the same pipeline doesn't work: §21.2 already established that a stream is used exactly once, so a second terminal operation on the same source throws an exception rather than quietly re-running the pipeline. <code>summaryStatistics()</code> exists precisely for this — one pass, one terminal operation, every common statistic at once:</p>
+      <p>A dashboard summarizing shipped orders rarely needs just the total — the count, the average, the smallest, and the largest are usually wanted together. Calling <code>sum()</code>, then <code>average()</code>, then <code>max()</code> on the same pipeline doesn't work: §22.2 already established that a stream is used exactly once, so a second terminal operation on the same source throws an exception rather than quietly re-running the pipeline. <code>summaryStatistics()</code> exists precisely for this — one pass, one terminal operation, every common statistic at once:</p>
 
       <pre><code class="language-java">DoubleSummaryStatistics shippedStats = orders.stream()
         .filter(order -&gt; order.status() == OrderStatus.SHIPPED)
@@ -632,7 +644,7 @@ System.out.println(shippedStats.getMax());</code></pre>
 
       <p><code>summaryStatistics()</code> only exists on the primitive streams from the table above — <code>IntSummaryStatistics</code>, <code>LongSummaryStatistics</code>, and <code>DoubleSummaryStatistics</code> are its three matching result types. A plain <code>Stream&lt;T&gt;</code> has no equivalent, for the same reason it has no <code>sum()</code>: without narrowing to a specific numeric primitive first, there's no single well-defined way to add two elements together.</p>
 
-      <p>Compare this to §21.1's hand-written loop: the same two ideas — which orders count, what to total — are still exactly what this code says, but the iteration itself is no longer written out by hand at all. <code>count()</code> answers "how many," <code>forEach(Consumer)</code> (§19.8) runs a side effect per element, and <code>anyMatch</code>/<code>allMatch</code>/<code>noneMatch</code> each take a <code>Predicate</code> and answer a yes-or-no question about the whole stream:</p>
+      <p>Compare this to §22.1's hand-written loop: the same two ideas — which orders count, what to total — are still exactly what this code says, but the iteration itself is no longer written out by hand at all. <code>count()</code> answers "how many," <code>forEach(Consumer)</code> (§20.8) runs a side effect per element, and <code>anyMatch</code>/<code>allMatch</code>/<code>noneMatch</code> each take a <code>Predicate</code> and answer a yes-or-no question about the whole stream:</p>
 
       <pre><code class="language-java">boolean hasCancelledOrders = orders.stream()
         .anyMatch(order -&gt; order.status() == OrderStatus.CANCELLED);</code></pre>
@@ -663,10 +675,10 @@ System.out.println(shippedStats.getMax());</code></pre>
       <p><code>IntStream.rangeClosed(1, 5)</code> is itself a primitive stream of the plain integers 1 through 5 — no <code>Order</code> or business object in sight yet. <code>mapToObj</code> is what turns each one into the actual <code>String</code> the pipeline is after, crossing from <code>IntStream</code> to <code>Stream&lt;String&gt;</code> in the same step that does the formatting.</p>
     </section>
 
-    <!-- §21.6 -->
+    <!-- §22.6 -->
     <section id="s21-6">
       <div class="section-head">
-        <span class="sec-num">§21.6</span>
+        <span class="sec-num">§22.6</span>
         <h2>Collecting Results <em>— <code>collect()</code> and <code>Collectors</code></em></h2>
       </div>
 
@@ -687,7 +699,7 @@ System.out.println(shippedStats.getMax());</code></pre>
         .collect(Collectors.joining(", "));
 // "Ava Patel, Noah Kim, Mia Chen"</code></pre>
 
-      <p><code>Collectors.groupingBy(Function)</code> answers a different shape of question entirely — not "which ones match," but "how are they organized" — splitting a stream into a <code>Map</code> (§18.6) keyed by whatever the given function returns:</p>
+      <p><code>Collectors.groupingBy(Function)</code> answers a different shape of question entirely — not "which ones match," but "how are they organized" — splitting a stream into a <code>Map</code> (§19.6) keyed by whatever the given function returns:</p>
 
       <pre><code class="language-java">Map&lt;OrderStatus, List&lt;Order&gt;&gt; byStatus = orders.stream()
         .collect(Collectors.groupingBy(Order::status));
@@ -697,20 +709,20 @@ List&lt;Order&gt; pendingOrders = byStatus.get(OrderStatus.PENDING);</code></pre
       <p>Every order in <code>orders</code> ends up in exactly one list, keyed by its own <code>status</code> — one pipeline replacing what would otherwise be three separate hand-written loops, one per status value.</p>
     </section>
 
-    <!-- §21.7 -->
+    <!-- §22.7 -->
     <section id="s21-7">
       <div class="section-head">
-        <span class="sec-num">§21.7</span>
+        <span class="sec-num">§22.7</span>
         <h2>Streams and <code>Optional&lt;T&gt;</code> <em>— when a result might not exist</em></h2>
       </div>
 
-      <p>Some questions about a stream don't have a guaranteed answer — the largest order in an empty list, the first shipped order when nothing has shipped yet. §20 already built the type for exactly this shape of problem, and several terminal operations return it directly rather than risking <code>null</code> (§20.2) or throwing:</p>
+      <p>Some questions about a stream don't have a guaranteed answer — the largest order in an empty list, the first shipped order when nothing has shipped yet. §21 already built the type for exactly this shape of problem, and several terminal operations return it directly rather than risking <code>null</code> (§21.2) or throwing:</p>
 
       <pre><code class="language-java">Optional&lt;Order&gt; firstShipped = orders.stream()
         .filter(order -&gt; order.status() == OrderStatus.SHIPPED)
         .findFirst();</code></pre>
 
-      <p><code>findFirst()</code> returns an empty <code>Optional&lt;Order&gt;</code> if no order matches, rather than <code>null</code> or an exception — the caller is compiler-nudged (§20.4) to actually handle the empty case, exactly the same guarantee <code>Optional</code> was built to provide everywhere else. <code>max(Comparator)</code> and <code>min(Comparator)</code> work the same way, each returning an <code>Optional</code> since an empty stream has no largest or smallest element to hand back:</p>
+      <p><code>findFirst()</code> returns an empty <code>Optional&lt;Order&gt;</code> if no order matches, rather than <code>null</code> or an exception — the caller is compiler-nudged (§21.4) to actually handle the empty case, exactly the same guarantee <code>Optional</code> was built to provide everywhere else. <code>max(Comparator)</code> and <code>min(Comparator)</code> work the same way, each returning an <code>Optional</code> since an empty stream has no largest or smallest element to hand back:</p>
 
       <pre><code class="language-java">Optional&lt;Order&gt; largestOrder = orders.stream()
         .max(Comparator.comparingDouble(Order::amount));
@@ -718,13 +730,13 @@ List&lt;Order&gt; pendingOrders = byStatus.get(OrderStatus.PENDING);</code></pre
 largestOrder.ifPresent(order -&gt;
         System.out.println("Largest order: " + order.customer()));</code></pre>
 
-      <p><code>ifPresent(Consumer)</code> (§20.5) runs only if a value actually exists — no explicit <code>if</code>, no risk of dereferencing an order that was never there.</p>
+      <p><code>ifPresent(Consumer)</code> (§21.5) runs only if a value actually exists — no explicit <code>if</code>, no risk of dereferencing an order that was never there.</p>
     </section>
 
-    <!-- §21.8 -->
+    <!-- §22.8 -->
     <section id="s21-8">
       <div class="section-head">
-        <span class="sec-num">§21.8</span>
+        <span class="sec-num">§22.8</span>
         <h2>Laziness and Pipelines <em>— nothing runs until it has to</em></h2>
       </div>
 
@@ -770,13 +782,13 @@ Mapping Mia
 
       <p>Ava is filtered <em>and</em> mapped before Noah is even looked at. Noah fails the filter and never reaches <code>map</code> at all — there's no second pass over "whatever survived filtering," because there was never a batch of survivors sitting around in the first place. Each order runs through the <em>entire</em> pipeline, one step immediately after the next, before the next order starts at the top. This is exactly what makes the laziness above possible: nothing is waiting for a full pass over one stage before the next stage can begin.</p>
 
-      <p>This is also exactly what §21.3's <code>Stream.iterate</code> was leaning on. An infinite stream has no "full pass" to wait for in the first place — there's no batch of confirmation numbers sitting in memory, finished or otherwise. Each number is produced right when the next pipeline step pulls it forward, the same one-at-a-time flow this section just traced through <code>orders</code>, and <code>limit(5)</code> simply stops the pulling after the fifth one. A stream with no end and a stream with a thousand elements are handled by exactly the same mechanism; the only difference is when something finally tells it to stop.</p>
+      <p>This is also exactly what §22.3's <code>Stream.iterate</code> was leaning on. An infinite stream has no "full pass" to wait for in the first place — there's no batch of confirmation numbers sitting in memory, finished or otherwise. Each number is produced right when the next pipeline step pulls it forward, the same one-at-a-time flow this section just traced through <code>orders</code>, and <code>limit(5)</code> simply stops the pulling after the fifth one. A stream with no end and a stream with a thousand elements are handled by exactly the same mechanism; the only difference is when something finally tells it to stop.</p>
     </section>
 
-    <!-- §21.9 -->
+    <!-- §22.9 -->
     <section id="s21-9">
       <div class="section-head">
-        <span class="sec-num">§21.9</span>
+        <span class="sec-num">§22.9</span>
         <h2>When (Not) to Use Streams <em>— readability over reflex</em></h2>
       </div>
 
@@ -790,7 +802,7 @@ for (Order order : orders) {
     System.out.println(order.customer());
 }</code></pre>
 
-      <p>Streams earn their keep specifically when there's a real chain to describe — filter, then transform, then aggregate — collapsing several loops' worth of bookkeeping into one readable pipeline, the way §21.1's shipped-value calculation did. A single unconditional pass isn't that; it's just a loop wearing stream syntax.</p>
+      <p>Streams earn their keep specifically when there's a real chain to describe — filter, then transform, then aggregate — collapsing several loops' worth of bookkeeping into one readable pipeline, the way §22.1's shipped-value calculation did. A single unconditional pass isn't that; it's just a loop wearing stream syntax.</p>
 
       <p>A more serious anti-pattern: using <code>map</code> or <code>forEach</code> to mutate state outside the stream, rather than to compute or act on a value:</p>
 
@@ -801,7 +813,7 @@ orders.stream().map(order -&gt; {
     return order.amount();
 });</code></pre>
 
-      <p><code>map</code>'s entire contract is transforming one value into another — reaching into a variable outside the pipeline to mutate it defeats the laziness §21.8 just described and makes the pipeline's actual behavior depend on side effects a reader has no reason to expect from a method named <code>map</code>. <code>collect(Collectors.toList())</code> exists precisely so building a result list never requires this:</p>
+      <p><code>map</code>'s entire contract is transforming one value into another — reaching into a variable outside the pipeline to mutate it defeats the laziness §22.8 just described and makes the pipeline's actual behavior depend on side effects a reader has no reason to expect from a method named <code>map</code>. <code>collect(Collectors.toList())</code> exists precisely so building a result list never requires this:</p>
 
       <pre><code class="language-java">// Good — the result comes from the pipeline itself, no external mutation
 List&lt;Double&gt; totals = orders.stream()
@@ -809,10 +821,10 @@ List&lt;Double&gt; totals = orders.stream()
         .collect(Collectors.toList());</code></pre>
     </section>
 
-    <!-- §21.10 -->
+    <!-- §22.10 -->
     <section id="s21-10">
       <div class="section-head">
-        <span class="sec-num">§21.10</span>
+        <span class="sec-num">§22.10</span>
         <h2>Key Takeaways</h2>
       </div>
 
@@ -822,7 +834,7 @@ List&lt;Double&gt; totals = orders.stream()
         <li>Intermediate operations (<code>filter</code>, <code>map</code>, <code>sorted</code>, <code>distinct</code>, <code>limit</code>) each return a new <code>Stream</code> and describe one more pipeline step, lazily.</li>
         <li>Terminal operations (<code>forEach</code>, <code>count</code>, <code>sum</code>, <code>reduce</code>, the <code>*Match</code> family, <code>collect</code>) are what actually run the pipeline and produce a real result.</li>
         <li><code>Collectors.toList()</code>, <code>joining()</code>, and <code>groupingBy()</code> are the common ways to gather a stream's results back into an ordinary collection.</li>
-        <li>Operations like <code>findFirst()</code>, <code>max()</code>, and <code>min()</code> return <code>Optional&lt;T&gt;</code> (§20) rather than risking <code>null</code> or an exception on an empty stream.</li>
+        <li>Operations like <code>findFirst()</code>, <code>max()</code>, and <code>min()</code> return <code>Optional&lt;T&gt;</code> (§21) rather than risking <code>null</code> or an exception on an empty stream.</li>
         <li>Nothing in a pipeline runs until a terminal operation triggers it, and short-circuiting operations like <code>findFirst()</code> and <code>anyMatch()</code> can stop processing long before the source is exhausted.</li>
         <li>Reach for a stream when there's a real chain of filtering, transforming, or aggregating to describe — not as a reflexive replacement for every loop, and never for a pipeline step whose real job is mutating something outside it.</li>
       </ul>
@@ -833,11 +845,11 @@ List&lt;Double&gt; totals = orders.stream()
   <nav class="page-nav" aria-label="Chapter navigation">
     <a href="optionals.html" class="page-nav-prev">
       <span class="page-nav-label">← Previous</span>
-      <span class="page-nav-title">§20 — Optional&lt;T&gt;</span>
+      <span class="page-nav-title">§21 — Optional&lt;T&gt;</span>
     </a>
     <a href="concurrency.html" class="page-nav-next">
       <span class="page-nav-label">Next →</span>
-      <span class="page-nav-title">§22 — Concurrent Programming</span>
+      <span class="page-nav-title">§23 — Concurrent Programming</span>
     </a>
   </nav>
 </main>

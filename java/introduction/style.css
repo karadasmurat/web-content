@@ -603,18 +603,32 @@ a.backref:hover { background: #e8d4b0; }
   text-transform: uppercase;
   color: var(--text-muted);
 }
-.mem-frame-label {
-  font-family: 'SFMono-Regular', Menlo, Monaco, Consolas, monospace;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-muted);
-}
 .mem-frame-border {
   display: flex;
   flex-direction: column;
-  gap: 8px;
   border: 1px solid var(--border);
   border-radius: 8px;
+  overflow: hidden;
+}
+.mem-frame-header {
+  background: var(--code-bg);
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: 'SFMono-Regular', Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  font-weight: 600;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  box-sizing: border-box;
+  letter-spacing: 0.01em;
+}
+.mem-frame-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   padding: 10px 14px;
 }
 .mem-col-border {

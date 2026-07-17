@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>§26 Object-Oriented Design — OO with Java</title>
+<title>§27 Object-Oriented Design — OO with Java</title>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" id="hljs-light-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css">
 <link rel="stylesheet" id="hljs-dark-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css" disabled>
@@ -95,306 +95,321 @@
           <li><a href="methods.html#s4-4"><span class="nav-num">§4.4</span>Functions to Objects</a></li>
           <li><a href="methods.html#s4-5"><span class="nav-num">§4.5</span>The "Hidden" Parameter</a></li>
           <li><a href="methods.html#s4-6"><span class="nav-num">§4.6</span>Key Takeaways</a></li>
-          <li><a href="methods.html#s4-7"><span class="nav-num">§4.7</span>Appendix: The Call Stack</a></li>
         </ul>
       </li>
       <li>
-        <a href="operators.html"><span class="nav-num">§5</span>Operators</a>
+        <a href="memory.html"><span class="nav-num">§5</span>How Memory Works</a>
         <ul class="sub-nav">
-          <li><a href="operators.html#s5-1"><span class="nav-num">§5.1</span>Arithmetic Operators</a></li>
-          <li><a href="operators.html#s5-2"><span class="nav-num">§5.2</span>Unary Operators</a></li>
-          <li><a href="operators.html#s5-3"><span class="nav-num">§5.3</span>Comparison Operators</a></li>
-          <li><a href="operators.html#s5-4"><span class="nav-num">§5.4</span>Logical Operators</a></li>
-          <li><a href="operators.html#s5-5"><span class="nav-num">§5.5</span>Compound Assignment</a></li>
+          <li><a href="memory.html#s5-1"><span class="nav-num">§5.1</span>The Problem</a></li>
+          <li><a href="memory.html#s5-2"><span class="nav-num">§5.2</span>Stack vs. Heap</a></li>
+          <li><a href="memory.html#s5-3"><span class="nav-num">§5.3</span>The Call Stack</a></li>
+          <li><a href="memory.html#s5-4"><span class="nav-num">§5.4</span>Copying <code>this</code></a></li>
+          <li><a href="memory.html#s5-5"><span class="nav-num">§5.5</span>A Full Trace</a></li>
+          <li><a href="memory.html#s5-6"><span class="nav-num">§5.6</span>Key Takeaways</a></li>
         </ul>
       </li>
       <li>
-        <a href="arrays.html"><span class="nav-num">§6</span>Arrays</a>
+        <a href="operators.html"><span class="nav-num">§6</span>Operators</a>
         <ul class="sub-nav">
-          <li><a href="arrays.html#s6-1"><span class="nav-num">§6.1</span>Why Arrays</a></li>
-          <li><a href="arrays.html#s6-2"><span class="nav-num">§6.2</span>One Variable, Many Values</a></li>
-          <li><a href="arrays.html#s6-3"><span class="nav-num">§6.3</span>The Index</a></li>
-          <li><a href="arrays.html#s6-4"><span class="nav-num">§6.4</span>Creating an Array</a></li>
-          <li><a href="arrays.html#s6-5"><span class="nav-num">§6.5</span>Reading and Writing Elements</a></li>
-          <li><a href="arrays.html#s6-6"><span class="nav-num">§6.6</span><code>.length</code></a></li>
-          <li><a href="arrays.html#s6-7"><span class="nav-num">§6.7</span>Filling in the Week</a></li>
-          <li><a href="arrays.html#s6-8"><span class="nav-num">§6.8</span>Assignment Still Copies the Address</a></li>
-          <li><a href="arrays.html#s6-9"><span class="nav-num">§6.9</span>Arrays of Objects</a></li>
-          <li><a href="arrays.html#s6-10"><span class="nav-num">§6.10</span>Pointing a Slot at an Existing Object</a></li>
-          <li><a href="arrays.html#s6-11"><span class="nav-num">§6.11</span>Passing an Array's Address to a Method</a></li>
-          <li><a href="arrays.html#s6-12"><span class="nav-num">§6.12</span>Variable-Arity Parameters</a></li>
+          <li><a href="operators.html#s5-1"><span class="nav-num">§6.1</span>Arithmetic Operators</a></li>
+          <li><a href="operators.html#s5-2"><span class="nav-num">§6.2</span>Unary Operators</a></li>
+          <li><a href="operators.html#s5-3"><span class="nav-num">§6.3</span>Comparison Operators</a></li>
+          <li><a href="operators.html#s5-4"><span class="nav-num">§6.4</span>Logical Operators</a></li>
+          <li><a href="operators.html#s5-5"><span class="nav-num">§6.5</span>Compound Assignment</a></li>
         </ul>
       </li>
       <li>
-        <a href="controlflow.html"><span class="nav-num">§7</span>Control Flow</a>
+        <a href="arrays.html"><span class="nav-num">§7</span>Arrays</a>
         <ul class="sub-nav">
-          <li><a href="controlflow.html#s7-1"><span class="nav-num">§7.1</span>The Flow of Execution</a></li>
-          <li><a href="controlflow.html#s7-2"><span class="nav-num">§7.2</span>Variable Scope</a></li>
-          <li><a href="controlflow.html#s7-3"><span class="nav-num">§7.3</span>Conditional Branching</a></li>
-          <li><a href="controlflow.html#s7-4"><span class="nav-num">§7.4</span><code>while</code></a></li>
-          <li><a href="controlflow.html#s7-5"><span class="nav-num">§7.5</span><code>for</code></a></li>
-          <li><a href="controlflow.html#s7-6"><span class="nav-num">§7.6</span>for-each</a></li>
-          <li><a href="controlflow.html#s7-7"><span class="nav-num">§7.7</span>Ternary Operator</a></li>
+          <li><a href="arrays.html#s6-1"><span class="nav-num">§7.1</span>Why Arrays</a></li>
+          <li><a href="arrays.html#s6-2"><span class="nav-num">§7.2</span>One Variable, Many Values</a></li>
+          <li><a href="arrays.html#s6-3"><span class="nav-num">§7.3</span>The Index</a></li>
+          <li><a href="arrays.html#s6-4"><span class="nav-num">§7.4</span>Creating an Array</a></li>
+          <li><a href="arrays.html#s6-5"><span class="nav-num">§7.5</span>Reading and Writing Elements</a></li>
+          <li><a href="arrays.html#s6-6"><span class="nav-num">§7.6</span><code>.length</code></a></li>
+          <li><a href="arrays.html#s6-7"><span class="nav-num">§7.7</span>Filling in the Week</a></li>
+          <li><a href="arrays.html#s6-8"><span class="nav-num">§7.8</span>Assignment Still Copies the Address</a></li>
+          <li><a href="arrays.html#s6-9"><span class="nav-num">§7.9</span>Arrays of Objects</a></li>
+          <li><a href="arrays.html#s6-10"><span class="nav-num">§7.10</span>Pointing a Slot at an Existing Object</a></li>
+          <li><a href="arrays.html#s6-11"><span class="nav-num">§7.11</span>Passing an Array's Address to a Method</a></li>
+          <li><a href="arrays.html#s6-12"><span class="nav-num">§7.12</span>Variable-Arity Parameters</a></li>
         </ul>
       </li>
       <li>
-        <a href="strings.html"><span class="nav-num">§8</span>Strings</a>
+        <a href="controlflow.html"><span class="nav-num">§8</span>Control Flow</a>
         <ul class="sub-nav">
-          <li><a href="strings.html#s8-1"><span class="nav-num">§8.1</span>Writing Systems &amp; Unicode</a></li>
-          <li><a href="strings.html#s8-2"><span class="nav-num">§8.2</span><code>char</code></a></li>
-          <li><a href="strings.html#s8-3"><span class="nav-num">§8.3</span><code>Character</code></a></li>
-          <li><a href="strings.html#s8-4"><span class="nav-num">§8.4</span>Sequence of Characters</a></li>
-          <li><a href="strings.html#s8-5"><span class="nav-num">§8.5</span>Text Blocks</a></li>
-          <li><a href="strings.html#s8-6"><span class="nav-num">§8.6</span>Immutability</a></li>
-          <li><a href="strings.html#s8-7"><span class="nav-num">§8.7</span><code>==</code> vs <code>.equals()</code></a></li>
-          <li><a href="strings.html#s8-8"><span class="nav-num">§8.8</span>Concatenation</a></li>
-          <li><a href="strings.html#s8-9"><span class="nav-num">§8.9</span>Important String Methods</a></li>
+          <li><a href="controlflow.html#s7-1"><span class="nav-num">§8.1</span>The Flow of Execution</a></li>
+          <li><a href="controlflow.html#s7-2"><span class="nav-num">§8.2</span>Variable Scope</a></li>
+          <li><a href="controlflow.html#s7-3"><span class="nav-num">§8.3</span>Conditional Branching</a></li>
+          <li><a href="controlflow.html#s7-4"><span class="nav-num">§8.4</span><code>while</code></a></li>
+          <li><a href="controlflow.html#s7-5"><span class="nav-num">§8.5</span><code>for</code></a></li>
+          <li><a href="controlflow.html#s7-6"><span class="nav-num">§8.6</span>for-each</a></li>
+          <li><a href="controlflow.html#s7-7"><span class="nav-num">§8.7</span>Ternary Operator</a></li>
+          <li><a href="controlflow.html#s7-8"><span class="nav-num">§8.8</span><code>break</code> and <code>continue</code></a></li>
+          <li><a href="controlflow.html#s7-9"><span class="nav-num">§8.9</span><code>switch</code></a></li>
         </ul>
       </li>
       <li>
-        <a href="inheritance.html"><span class="nav-num">§9</span>Inheritance</a>
+        <a href="strings.html"><span class="nav-num">§9</span>Strings</a>
         <ul class="sub-nav">
-          <li><a href="inheritance.html#s10-1"><span class="nav-num">§9.1</span>Taxonomy</a></li>
-          <li><a href="inheritance.html#s10-2"><span class="nav-num">§9.2</span>The Problem</a></li>
-          <li><a href="inheritance.html#s10-3"><span class="nav-num">§9.3</span><code>extends</code></a></li>
-          <li><a href="inheritance.html#s10-4"><span class="nav-num">§9.4</span><code>super(...)</code></a></li>
-          <li><a href="inheritance.html#s10-5"><span class="nav-num">§9.5</span>Polymorphism</a></li>
-          <li><a href="inheritance.html#s10-6"><span class="nav-num">§9.6</span>Overriding</a></li>
-          <li><a href="inheritance.html#s10-7"><span class="nav-num">§9.7</span><code>toString()</code></a></li>
+          <li><a href="strings.html#s8-1"><span class="nav-num">§9.1</span>Writing Systems &amp; Unicode</a></li>
+          <li><a href="strings.html#s8-2"><span class="nav-num">§9.2</span><code>char</code></a></li>
+          <li><a href="strings.html#s8-3"><span class="nav-num">§9.3</span><code>Character</code></a></li>
+          <li><a href="strings.html#s8-4"><span class="nav-num">§9.4</span>Sequence of Characters</a></li>
+          <li><a href="strings.html#s8-5"><span class="nav-num">§9.5</span>Text Blocks</a></li>
+          <li><a href="strings.html#s8-6"><span class="nav-num">§9.6</span>Immutability</a></li>
+          <li><a href="strings.html#s8-7"><span class="nav-num">§9.7</span><code>==</code> vs <code>.equals()</code></a></li>
+          <li><a href="strings.html#s8-8"><span class="nav-num">§9.8</span>Concatenation</a></li>
+          <li><a href="strings.html#s8-9"><span class="nav-num">§9.9</span>Important String Methods</a></li>
         </ul>
       </li>
       <li>
-        <a href="accessmodifiers.html"><span class="nav-num">§10</span>Packages & Access Modifiers</a>
+        <a href="inheritance.html"><span class="nav-num">§10</span>Inheritance</a>
         <ul class="sub-nav">
-          <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§10.1</span>Packages</a></li>
-          <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§10.2</span>Why Restrict Access</a></li>
-          <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§10.3</span>Getters and Setters</a></li>
-          <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§10.4</span><code>public</code></a></li>
-          <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§10.5</span>Package-Private</a></li>
-          <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§10.6</span><code>protected</code></a></li>
+          <li><a href="inheritance.html#s10-1"><span class="nav-num">§10.1</span>Taxonomy</a></li>
+          <li><a href="inheritance.html#s10-2"><span class="nav-num">§10.2</span>The Problem</a></li>
+          <li><a href="inheritance.html#s10-3"><span class="nav-num">§10.3</span><code>extends</code></a></li>
+          <li><a href="inheritance.html#s10-4"><span class="nav-num">§10.4</span><code>super(...)</code></a></li>
+          <li><a href="inheritance.html#s10-5"><span class="nav-num">§10.5</span>Polymorphism</a></li>
+          <li><a href="inheritance.html#s10-6"><span class="nav-num">§10.6</span>Overriding</a></li>
+          <li><a href="inheritance.html#s10-7"><span class="nav-num">§10.7</span><code>toString()</code></a></li>
         </ul>
       </li>
       <li>
-        <a href="immutability.html"><span class="nav-num">§11</span>Immutability</a>
+        <a href="accessmodifiers.html"><span class="nav-num">§11</span>Packages & Access Modifiers</a>
         <ul class="sub-nav">
-          <li><a href="immutability.html#s11-1"><span class="nav-num">§11.1</span>Two Real-World Analogies</a></li>
-          <li><a href="immutability.html#s11-2"><span class="nav-num">§11.2</span>Identity &amp; State</a></li>
-          <li><a href="immutability.html#s11-3"><span class="nav-num">§11.3</span>A Question of Time</a></li>
-          <li><a href="immutability.html#s11-4"><span class="nav-num">§11.4</span>Building an Immutable Class</a></li>
-          <li><a href="immutability.html#s11-5"><span class="nav-num">§11.5</span><code>final</code> Isn't Deep</a></li>
-          <li><a href="immutability.html#s11-6"><span class="nav-num">§11.6</span>Why It Matters</a></li>
-          <li><a href="immutability.html#s11-7"><span class="nav-num">§11.7</span><code>StringBuilder</code></a></li>
-          <li><a href="immutability.html#s11-8"><span class="nav-num">§11.8</span>Putting It Together</a></li>
+          <li><a href="accessmodifiers.html#s11-1"><span class="nav-num">§11.1</span>Packages</a></li>
+          <li><a href="accessmodifiers.html#s11-2"><span class="nav-num">§11.2</span>Why Restrict Access</a></li>
+          <li><a href="accessmodifiers.html#s11-3"><span class="nav-num">§11.3</span>Getters and Setters</a></li>
+          <li><a href="accessmodifiers.html#s11-4"><span class="nav-num">§11.4</span><code>public</code></a></li>
+          <li><a href="accessmodifiers.html#s11-5"><span class="nav-num">§11.5</span>Package-Private</a></li>
+          <li><a href="accessmodifiers.html#s11-6"><span class="nav-num">§11.6</span><code>protected</code></a></li>
         </ul>
       </li>
       <li>
-        <a href="abstractclasses.html"><span class="nav-num">§12</span>Abstract Classes</a>
+        <a href="immutability.html"><span class="nav-num">§12</span>Immutability</a>
         <ul class="sub-nav">
-          <li><a href="abstractclasses.html#s12-1"><span class="nav-num">§12.1</span>The Problem</a></li>
-          <li><a href="abstractclasses.html#s12-2"><span class="nav-num">§12.2</span><code>abstract</code> Classes</a></li>
-          <li><a href="abstractclasses.html#s12-3"><span class="nav-num">§12.3</span><code>abstract</code> Methods</a></li>
-            <li><a href="abstractclasses.html#s12-4"><span class="nav-num">§12.4</span>Bringing It Altogether</a></li>
+          <li><a href="immutability.html#s11-1"><span class="nav-num">§12.1</span>Two Real-World Analogies</a></li>
+          <li><a href="immutability.html#s11-2"><span class="nav-num">§12.2</span>Identity &amp; State</a></li>
+          <li><a href="immutability.html#s11-3"><span class="nav-num">§12.3</span>A Question of Time</a></li>
+          <li><a href="immutability.html#s11-4"><span class="nav-num">§12.4</span>Building an Immutable Class</a></li>
+          <li><a href="immutability.html#s11-5"><span class="nav-num">§12.5</span><code>final</code> Isn't Deep</a></li>
+          <li><a href="immutability.html#s11-6"><span class="nav-num">§12.6</span>Why It Matters</a></li>
+          <li><a href="immutability.html#s11-7"><span class="nav-num">§12.7</span><code>StringBuilder</code></a></li>
+          <li><a href="immutability.html#s11-8"><span class="nav-num">§12.8</span>Putting It Together</a></li>
         </ul>
       </li>
       <li>
-        <a href="interfaces.html"><span class="nav-num">§13</span>Interfaces</a>
+        <a href="abstractclasses.html"><span class="nav-num">§13</span>Abstract Classes</a>
         <ul class="sub-nav">
-          <li><a href="interfaces.html#s13-1"><span class="nav-num">§13.1</span>The Problem</a></li>
-          <li><a href="interfaces.html#s13-2"><span class="nav-num">§13.2</span>Interface vs. Abstract Class</a></li>
-          <li><a href="interfaces.html#s13-3"><span class="nav-num">§13.3</span>Declaring &amp; Implementing</a></li>
-          <li><a href="interfaces.html#s13-4"><span class="nav-num">§13.4</span>Override vs. Overload</a></li>
-          <li><a href="interfaces.html#s13-5"><span class="nav-num">§13.5</span>Multiple Interfaces</a></li>
-          <li><a href="interfaces.html#s13-6"><span class="nav-num">§13.6</span>Anonymous Classes</a></li>
-          <li><a href="interfaces.html#s13-7"><span class="nav-num">§13.7</span>Default Methods</a></li>
-          <li><a href="interfaces.html#s13-8"><span class="nav-num">§13.8</span>Default Method Collisions</a></li>
-          <li><a href="interfaces.html#s13-9"><span class="nav-num">§13.9</span>Static Methods</a></li>
-          <li><a href="interfaces.html#s13-10"><span class="nav-num">§13.10</span>Interface Inheritance</a></li>
-          <li><a href="interfaces.html#s13-11"><span class="nav-num">§13.11</span>Interface Use Cases</a></li>
+          <li><a href="abstractclasses.html#s12-1"><span class="nav-num">§13.1</span>The Problem</a></li>
+          <li><a href="abstractclasses.html#s12-2"><span class="nav-num">§13.2</span><code>abstract</code> Classes</a></li>
+          <li><a href="abstractclasses.html#s12-3"><span class="nav-num">§13.3</span><code>abstract</code> Methods</a></li>
+            <li><a href="abstractclasses.html#s12-4"><span class="nav-num">§13.4</span>Bringing It Altogether</a></li>
         </ul>
       </li>
       <li>
-        <a href="exceptions.html"><span class="nav-num">§14</span>Exceptions</a>
+        <a href="interfaces.html"><span class="nav-num">§14</span>Interfaces</a>
         <ul class="sub-nav">
-          <li><a href="exceptions.html#s14-1"><span class="nav-num">§14.1</span>The Problem</a></li>
-          <li><a href="exceptions.html#s14-2"><span class="nav-num">§14.2</span>The Exception Lifecycle</a></li>
-          <li><a href="exceptions.html#s14-3"><span class="nav-num">§14.3</span>Handling Exceptions</a></li>
-          <li><a href="exceptions.html#s14-4"><span class="nav-num">§14.4</span>The Exception Hierarchy</a></li>
-          <li><a href="exceptions.html#s14-5"><span class="nav-num">§14.5</span>Checked vs. Unchecked</a></li>
-          <li><a href="exceptions.html#s14-6"><span class="nav-num">§14.6</span>Custom Exceptions</a></li>
-          <li><a href="exceptions.html#s14-7"><span class="nav-num">§14.7</span>Exception Chaining</a></li>
-          <li><a href="exceptions.html#s14-8"><span class="nav-num">§14.8</span>Try-with-Resources</a></li>
-          <li><a href="exceptions.html#s14-9"><span class="nav-num">§14.9</span>Best Practices &amp; Anti-Patterns</a></li>
-          <li><a href="exceptions.html#s14-10"><span class="nav-num">§14.10</span>Key Takeaways</a></li>
+          <li><a href="interfaces.html#s13-1"><span class="nav-num">§14.1</span>The Problem</a></li>
+          <li><a href="interfaces.html#s13-2"><span class="nav-num">§14.2</span>Interface vs. Abstract Class</a></li>
+          <li><a href="interfaces.html#s13-3"><span class="nav-num">§14.3</span>Declaring &amp; Implementing</a></li>
+          <li><a href="interfaces.html#s13-4"><span class="nav-num">§14.4</span>Override vs. Overload</a></li>
+          <li><a href="interfaces.html#s13-5"><span class="nav-num">§14.5</span>Multiple Interfaces</a></li>
+          <li><a href="interfaces.html#s13-6"><span class="nav-num">§14.6</span>Anonymous Classes</a></li>
+          <li><a href="interfaces.html#s13-7"><span class="nav-num">§14.7</span>Default Methods</a></li>
+          <li><a href="interfaces.html#s13-8"><span class="nav-num">§14.8</span>Default Method Collisions</a></li>
+          <li><a href="interfaces.html#s13-9"><span class="nav-num">§14.9</span>Static Methods</a></li>
+          <li><a href="interfaces.html#s13-10"><span class="nav-num">§14.10</span>Interface Inheritance</a></li>
+          <li><a href="interfaces.html#s13-11"><span class="nav-num">§14.11</span>Interface Use Cases</a></li>
         </ul>
       </li>
       <li>
-        <a href="generics.html"><span class="nav-num">§15</span>Generics</a>
+        <a href="exceptions.html"><span class="nav-num">§15</span>Exceptions</a>
         <ul class="sub-nav">
-          <li><a href="generics.html#s16-1"><span class="nav-num">§15.1</span>The Problem</a></li>
-          <li><a href="generics.html#s16-2"><span class="nav-num">§15.2</span>Type Parameters</a></li>
-          <li><a href="generics.html#s16-3"><span class="nav-num">§15.3</span>Class-Level Generics</a></li>
-          <li><a href="generics.html#s16-4"><span class="nav-num">§15.4</span>Generic Interfaces</a></li>
-          <li><a href="generics.html#s16-5"><span class="nav-num">§15.5</span>Diamond &amp; <code>var</code></a></li>
-          <li><a href="generics.html#s16-6"><span class="nav-num">§15.6</span>Generic Methods</a></li>
-          <li><a href="generics.html#s16-7"><span class="nav-num">§15.7</span>Bounded Types</a></li>
-          <li><a href="generics.html#s16-8"><span class="nav-num">§15.8</span>Invariance</a></li>
-          <li><a href="generics.html#s16-9"><span class="nav-num">§15.9</span>Wildcards</a></li>
-          <li><a href="generics.html#s16-10"><span class="nav-num">§15.10</span>Compile Time Only</a></li>
+          <li><a href="exceptions.html#s14-1"><span class="nav-num">§15.1</span>The Problem</a></li>
+          <li><a href="exceptions.html#s14-2"><span class="nav-num">§15.2</span>The Exception Lifecycle</a></li>
+          <li><a href="exceptions.html#s14-3"><span class="nav-num">§15.3</span>Handling Exceptions</a></li>
+          <li><a href="exceptions.html#s14-4"><span class="nav-num">§15.4</span>The Exception Hierarchy</a></li>
+          <li><a href="exceptions.html#s14-5"><span class="nav-num">§15.5</span>Checked vs. Unchecked</a></li>
+          <li><a href="exceptions.html#s14-6"><span class="nav-num">§15.6</span>Custom Exceptions</a></li>
+          <li><a href="exceptions.html#s14-7"><span class="nav-num">§15.7</span>Exception Chaining</a></li>
+          <li><a href="exceptions.html#s14-8"><span class="nav-num">§15.8</span>Try-with-Resources</a></li>
+          <li><a href="exceptions.html#s14-9"><span class="nav-num">§15.9</span>Best Practices &amp; Anti-Patterns</a></li>
+          <li><a href="exceptions.html#s14-10"><span class="nav-num">§15.10</span>Key Takeaways</a></li>
         </ul>
       </li>
       <li>
-        <a href="records.html"><span class="nav-num">§16</span>Records</a>
+        <a href="generics.html"><span class="nav-num">§16</span>Generics</a>
         <ul class="sub-nav">
-          <li><a href="records.html#s17-1"><span class="nav-num">§16.1</span>The Problem</a></li>
-          <li><a href="records.html#s17-2"><span class="nav-num">§16.2</span><code>record</code></a></li>
-          <li><a href="records.html#s17-3"><span class="nav-num">§16.3</span>Implicitly Final</a></li>
-          <li><a href="records.html#s17-4"><span class="nav-num">§16.4</span>Shallow Immutability</a></li>
-          <li><a href="records.html#s17-5"><span class="nav-num">§16.5</span>Constructors</a></li>
-          <li><a href="records.html#s17-6"><span class="nav-num">§16.6</span><code>equals()</code></a></li>
-          <li><a href="records.html#s17-7"><span class="nav-num">§16.7</span>Records Can Do More</a></li>
-          <li><a href="records.html#s17-8"><span class="nav-num">§16.8</span>Pattern Matching</a></li>
-          <li><a href="records.html#s17-9"><span class="nav-num">§16.9</span>When to Reach for One</a></li>
+          <li><a href="generics.html#s16-1"><span class="nav-num">§16.1</span>The Problem</a></li>
+          <li><a href="generics.html#s16-2"><span class="nav-num">§16.2</span>Type Parameters</a></li>
+          <li><a href="generics.html#s16-3"><span class="nav-num">§16.3</span>Class-Level Generics</a></li>
+          <li><a href="generics.html#s16-4"><span class="nav-num">§16.4</span>Generic Interfaces</a></li>
+          <li><a href="generics.html#s16-5"><span class="nav-num">§16.5</span>Diamond &amp; <code>var</code></a></li>
+          <li><a href="generics.html#s16-6"><span class="nav-num">§16.6</span>Generic Methods</a></li>
+          <li><a href="generics.html#s16-7"><span class="nav-num">§16.7</span>Bounded Types</a></li>
+          <li><a href="generics.html#s16-8"><span class="nav-num">§16.8</span>Invariance</a></li>
+          <li><a href="generics.html#s16-9"><span class="nav-num">§16.9</span>Wildcards</a></li>
+          <li><a href="generics.html#s16-10"><span class="nav-num">§16.10</span>Compile Time Only</a></li>
         </ul>
       </li>
       <li>
-        <a href="collections.html"><span class="nav-num">§18</span>Collections Framework</a>
+        <a href="records.html"><span class="nav-num">§17</span>Records</a>
         <ul class="sub-nav">
-          <li><a href="collections.html#s18-1"><span class="nav-num">§18.1</span>The Problem</a></li>
-          <li><a href="collections.html#s18-2"><span class="nav-num">§18.2</span>The Big Picture</a></li>
-          <li><a href="collections.html#s18-3"><span class="nav-num">§18.3</span><code>SequencedCollection</code></a></li>
-          <li><a href="collections.html#s18-4"><span class="nav-num">§18.4</span><code>List</code></a></li>
-          <li><a href="collections.html#s18-5"><span class="nav-num">§18.5</span>Defining an Order</a></li>
-          <li><a href="collections.html#s18-6"><span class="nav-num">§18.6</span><code>Queue</code></a></li>
-          <li><a href="collections.html#s18-7"><span class="nav-num">§18.7</span><code>Set</code></a></li>
-          <li><a href="collections.html#s18-8"><span class="nav-num">§18.8</span><code>Map</code></a></li>
+          <li><a href="records.html#s17-1"><span class="nav-num">§17.1</span>The Problem</a></li>
+          <li><a href="records.html#s17-2"><span class="nav-num">§17.2</span><code>record</code></a></li>
+          <li><a href="records.html#s17-3"><span class="nav-num">§17.3</span>Implicitly Final</a></li>
+          <li><a href="records.html#s17-4"><span class="nav-num">§17.4</span>Shallow Immutability</a></li>
+          <li><a href="records.html#s17-5"><span class="nav-num">§17.5</span>Constructors</a></li>
+          <li><a href="records.html#s17-6"><span class="nav-num">§17.6</span><code>equals()</code></a></li>
+          <li><a href="records.html#s17-7"><span class="nav-num">§17.7</span>Records Can Do More</a></li>
+          <li><a href="records.html#s17-8"><span class="nav-num">§17.8</span>Pattern Matching</a></li>
+          <li><a href="records.html#s17-9"><span class="nav-num">§17.9</span>When to Reach for One</a></li>
         </ul>
       </li>
       <li>
-        <a href="lambdas.html"><span class="nav-num">§19</span>Functional Programming</a>
+        <a href="collections.html"><span class="nav-num">§19</span>Collections Framework</a>
         <ul class="sub-nav">
-          <li><a href="lambdas.html#s19-1"><span class="nav-num">§19.1</span>Functions as First-Class Citizens</a></li>
-          <li><a href="lambdas.html#s19-2"><span class="nav-num">§19.2</span>Why Java "Simulates" First-Class Functions</a></li>
-          <li><a href="lambdas.html#s19-3"><span class="nav-num">§19.3</span>The Problem</a></li>
-          <li><a href="lambdas.html#s19-4"><span class="nav-num">§19.4</span>Another Anonymous Class</a></li>
-          <li><a href="lambdas.html#s19-5"><span class="nav-num">§19.5</span>Functional Interfaces</a></li>
-          <li><a href="lambdas.html#s19-6"><span class="nav-num">§19.6</span>Lambda Expressions</a></li>
-          <li><a href="lambdas.html#s19-7"><span class="nav-num">§19.7</span>Method References</a></li>
-          <li><a href="lambdas.html#s19-8"><span class="nav-num">§19.8</span><code>java.util.function</code></a></li>
-          <li><a href="lambdas.html#s19-9"><span class="nav-num">§19.9</span>Key Takeaways</a></li>
+          <li><a href="collections.html#s18-1"><span class="nav-num">§19.1</span>The Problem</a></li>
+          <li><a href="collections.html#s18-2"><span class="nav-num">§19.2</span>The Big Picture</a></li>
+          <li><a href="collections.html#s18-3"><span class="nav-num">§19.3</span><code>SequencedCollection</code></a></li>
+          <li><a href="collections.html#s18-4"><span class="nav-num">§19.4</span><code>List</code></a></li>
+          <li><a href="collections.html#s18-5"><span class="nav-num">§19.5</span>Defining an Order</a></li>
+          <li><a href="collections.html#s18-6"><span class="nav-num">§19.6</span><code>Queue</code></a></li>
+          <li><a href="collections.html#s18-7"><span class="nav-num">§19.7</span><code>Set</code></a></li>
+          <li><a href="collections.html#s18-8"><span class="nav-num">§19.8</span><code>Map</code></a></li>
         </ul>
       </li>
       <li>
-        <a href="enums.html"><span class="nav-num">§17</span>Enums</a>
+        <a href="lambdas.html"><span class="nav-num">§20</span>Functional Programming</a>
         <ul class="sub-nav">
-          <li><a href="enums.html#s20-1"><span class="nav-num">§17.1</span>The Problem</a></li>
-          <li><a href="enums.html#s20-2"><span class="nav-num">§17.2</span>Declaring an Enum</a></li>
-          <li><a href="enums.html#s20-3"><span class="nav-num">§17.3</span>Objects, Not Constants</a></li>
-          <li><a href="enums.html#s20-4"><span class="nav-num">§17.4</span>Comparing Enum Values</a></li>
-          <li><a href="enums.html#s20-5"><span class="nav-num">§17.5</span>Type Characteristics</a></li>
-          <li><a href="enums.html#s20-6"><span class="nav-num">§17.6</span>Fields, Constructors, Methods</a></li>
-          <li><a href="enums.html#s20-7"><span class="nav-num">§17.7</span>Enums vs. Magic Numbers</a></li>
-          <li><a href="enums.html#s20-8"><span class="nav-num">§17.8</span>Closed Sets vs. Evolving Reality</a></li>
-          <li><a href="enums.html#s20-9"><span class="nav-num">§17.9</span>Key Takeaways</a></li>
+          <li><a href="lambdas.html#s19-1"><span class="nav-num">§20.1</span>Functions as First-Class Citizens</a></li>
+          <li><a href="lambdas.html#s19-2"><span class="nav-num">§20.2</span>Why Java "Simulates" First-Class Functions</a></li>
+          <li><a href="lambdas.html#s19-3"><span class="nav-num">§20.3</span>The Problem</a></li>
+          <li><a href="lambdas.html#s19-4"><span class="nav-num">§20.4</span>Another Anonymous Class</a></li>
+          <li><a href="lambdas.html#s19-5"><span class="nav-num">§20.5</span>Functional Interfaces</a></li>
+          <li><a href="lambdas.html#s19-6"><span class="nav-num">§20.6</span>Lambda Expressions</a></li>
+          <li><a href="lambdas.html#s19-7"><span class="nav-num">§20.7</span>Method References</a></li>
+          <li><a href="lambdas.html#s19-8"><span class="nav-num">§20.8</span><code>java.util.function</code></a></li>
+          <li><a href="lambdas.html#s19-9"><span class="nav-num">§20.9</span>Key Takeaways</a></li>
         </ul>
       </li>
       <li>
-        <a href="optionals.html"><span class="nav-num">§20</span>Optional&lt;T&gt;</a>
+        <a href="enums.html"><span class="nav-num">§18</span>Enums</a>
         <ul class="sub-nav">
-          <li><a href="optionals.html#s21-1"><span class="nav-num">§20.1</span>The Problem</a></li>
-          <li><a href="optionals.html#s21-2"><span class="nav-num">§20.2</span><code>null</code>: The Absence of a Value</a></li>
-          <li><a href="optionals.html#s21-3"><span class="nav-num">§20.3</span>The Defensive Approach</a></li>
-          <li><a href="optionals.html#s21-4"><span class="nav-num">§20.4</span>The <code>Optional&lt;T&gt;</code> Class</a></li>
-          <li><a href="optionals.html#s21-5"><span class="nav-num">§20.5</span><code>Optional&lt;T&gt;</code> vs <code>null</code></a></li>
-          <li><a href="optionals.html#s21-6"><span class="nav-num">§20.6</span>Specialized Primitive Optionals</a></li>
-          <li><a href="optionals.html#s21-7"><span class="nav-num">§20.7</span>Key Takeaways</a></li>
+          <li><a href="enums.html#s20-1"><span class="nav-num">§18.1</span>The Problem</a></li>
+          <li><a href="enums.html#s20-2"><span class="nav-num">§18.2</span>Declaring an Enum</a></li>
+          <li><a href="enums.html#s20-3"><span class="nav-num">§18.3</span>Objects, Not Constants</a></li>
+          <li><a href="enums.html#s20-4"><span class="nav-num">§18.4</span>Comparing Enum Values</a></li>
+          <li><a href="enums.html#s20-5"><span class="nav-num">§18.5</span>Type Characteristics</a></li>
+          <li><a href="enums.html#s20-6"><span class="nav-num">§18.6</span>Fields, Constructors, Methods</a></li>
+          <li><a href="enums.html#s20-7"><span class="nav-num">§18.7</span>Enums vs. Magic Numbers</a></li>
+          <li><a href="enums.html#s20-8"><span class="nav-num">§18.8</span>Closed Sets vs. Evolving Reality</a></li>
+          <li><a href="enums.html#s20-9"><span class="nav-num">§18.9</span>Key Takeaways</a></li>
         </ul>
       </li>
       <li>
-        <a href="streams.html"><span class="nav-num">§21</span>Streams</a>
+        <a href="optionals.html"><span class="nav-num">§21</span>Optional&lt;T&gt;</a>
         <ul class="sub-nav">
-          <li><a href="streams.html#s21-1"><span class="nav-num">§21.1</span>The Problem</a></li>
-          <li><a href="streams.html#s21-2"><span class="nav-num">§21.2</span>What Is a Stream</a></li>
-          <li><a href="streams.html#s21-3"><span class="nav-num">§21.3</span>Creating a Stream</a></li>
-          <li><a href="streams.html#s21-4"><span class="nav-num">§21.4</span>Intermediate Operations</a></li>
-          <li><a href="streams.html#s21-5"><span class="nav-num">§21.5</span>Terminal Operations</a></li>
-          <li><a href="streams.html#s21-6"><span class="nav-num">§21.6</span>Collecting Results</a></li>
-          <li><a href="streams.html#s21-7"><span class="nav-num">§21.7</span>Streams and <code>Optional&lt;T&gt;</code></a></li>
-          <li><a href="streams.html#s21-8"><span class="nav-num">§21.8</span>Laziness and Pipelines</a></li>
-          <li><a href="streams.html#s21-9"><span class="nav-num">§21.9</span>When (Not) to Use Streams</a></li>
-          <li><a href="streams.html#s21-10"><span class="nav-num">§21.10</span>Key Takeaways</a></li>
+          <li><a href="optionals.html#s21-1"><span class="nav-num">§21.1</span>The Problem</a></li>
+          <li><a href="optionals.html#s21-2"><span class="nav-num">§21.2</span><code>null</code>: The Absence of a Value</a></li>
+          <li><a href="optionals.html#s21-3"><span class="nav-num">§21.3</span>The Defensive Approach</a></li>
+          <li><a href="optionals.html#s21-4"><span class="nav-num">§21.4</span>The <code>Optional&lt;T&gt;</code> Class</a></li>
+          <li><a href="optionals.html#s21-5"><span class="nav-num">§21.5</span><code>Optional&lt;T&gt;</code> vs <code>null</code></a></li>
+          <li><a href="optionals.html#s21-6"><span class="nav-num">§21.6</span>Specialized Primitive Optionals</a></li>
+          <li><a href="optionals.html#s21-7"><span class="nav-num">§21.7</span>Key Takeaways</a></li>
         </ul>
       </li>
       <li>
-        <a href="concurrency.html"><span class="nav-num">§22</span>Concurrent Programming</a>
+        <a href="streams.html"><span class="nav-num">§22</span>Streams</a>
         <ul class="sub-nav">
-          <li><a href="concurrency.html#s22-1"><span class="nav-num">§22.1</span>The Problem</a></li>
-          <li><a href="concurrency.html#s22-2"><span class="nav-num">§22.2</span>Process, Thread, and the OS</a></li>
-          <li><a href="concurrency.html#s22-3"><span class="nav-num">§22.3</span>Independent Progress</a></li>
-          <li><a href="concurrency.html#s22-4"><span class="nav-num">§22.4</span>Why Concurrency Matters</a></li>
-          <li><a href="concurrency.html#s22-5"><span class="nav-num">§22.5</span>Where Parallelism Fits In</a></li>
-          <li><a href="concurrency.html#s22-6"><span class="nav-num">§22.6</span>The Main Thread</a></li>
-          <li><a href="concurrency.html#s22-7"><span class="nav-num">§22.7</span>Step 1: Creating a Task</a></li>
-          <li><a href="concurrency.html#s22-8"><span class="nav-num">§22.8</span>Step 2: Handing a Task to an Executor</a></li>
-          <li><a href="concurrency.html#s22-9"><span class="nav-num">§22.9</span>ExecutorService in Practice</a></li>
+          <li><a href="streams.html#s21-1"><span class="nav-num">§22.1</span>The Problem</a></li>
+          <li><a href="streams.html#s21-2"><span class="nav-num">§22.2</span>What Is a Stream</a></li>
+          <li><a href="streams.html#s21-3"><span class="nav-num">§22.3</span>Creating a Stream</a></li>
+          <li><a href="streams.html#s21-4"><span class="nav-num">§22.4</span>Intermediate Operations</a></li>
+          <li><a href="streams.html#s21-5"><span class="nav-num">§22.5</span>Terminal Operations</a></li>
+          <li><a href="streams.html#s21-6"><span class="nav-num">§22.6</span>Collecting Results</a></li>
+          <li><a href="streams.html#s21-7"><span class="nav-num">§22.7</span>Streams and <code>Optional&lt;T&gt;</code></a></li>
+          <li><a href="streams.html#s21-8"><span class="nav-num">§22.8</span>Laziness and Pipelines</a></li>
+          <li><a href="streams.html#s21-9"><span class="nav-num">§22.9</span>When (Not) to Use Streams</a></li>
+          <li><a href="streams.html#s21-10"><span class="nav-num">§22.10</span>Key Takeaways</a></li>
         </ul>
       </li>
       <li>
-        <a href="modules.html"><span class="nav-num">§23</span>Java Modules</a>
+        <a href="concurrency.html"><span class="nav-num">§23</span>Concurrent Programming</a>
         <ul class="sub-nav">
-          <li><a href="modules.html#s23-1"><span class="nav-num">§23.1</span>The Problem</a></li>
-          <li><a href="modules.html#s23-2"><span class="nav-num">§23.2</span>What Is a Module</a></li>
-          <li><a href="modules.html#s23-3"><span class="nav-num">§23.3</span><code>module-info.java</code></a></li>
-          <li><a href="modules.html#s23-4"><span class="nav-num">§23.4</span><code>exports</code></a></li>
-          <li><a href="modules.html#s23-5"><span class="nav-num">§23.5</span><code>requires</code></a></li>
-          <li><a href="modules.html#s23-6"><span class="nav-num">§23.6</span>Strong Encapsulation</a></li>
-          <li><a href="modules.html#s23-7"><span class="nav-num">§23.7</span>The Module Path</a></li>
-          <li><a href="modules.html#s23-8"><span class="nav-num">§23.8</span><code>requires transitive</code></a></li>
-          <li><a href="modules.html#s23-9"><span class="nav-num">§23.9</span>When (Not) to Use Modules</a></li>
-          <li><a href="modules.html#s23-10"><span class="nav-num">§23.10</span>Key Takeaways</a></li>
+          <li><a href="concurrency.html#s22-1"><span class="nav-num">§23.1</span>The Problem</a></li>
+          <li><a href="concurrency.html#s22-2"><span class="nav-num">§23.2</span>Process, Thread, and the OS</a></li>
+          <li><a href="concurrency.html#s22-3"><span class="nav-num">§23.3</span>Independent Progress</a></li>
+          <li><a href="concurrency.html#s22-4"><span class="nav-num">§23.4</span>Why Concurrency Matters</a></li>
+          <li><a href="concurrency.html#s22-5"><span class="nav-num">§23.5</span>Where Parallelism Fits In</a></li>
+          <li><a href="concurrency.html#s22-6"><span class="nav-num">§23.6</span>The Main Thread</a></li>
+          <li><a href="concurrency.html#s22-7"><span class="nav-num">§23.7</span>Step 1: Creating a Task</a></li>
+          <li><a href="concurrency.html#s22-8"><span class="nav-num">§23.8</span>Step 2: Handing a Task to an Executor</a></li>
+          <li><a href="concurrency.html#s22-9"><span class="nav-num">§23.9</span>ExecutorService in Practice</a></li>
         </ul>
       </li>
       <li>
-        <a href="dateandtime.html"><span class="nav-num">§24</span>Date and Time</a>
+        <a href="modules.html"><span class="nav-num">§24</span>Java Modules</a>
         <ul class="sub-nav">
-          <li><a href="dateandtime.html#s24-1"><span class="nav-num">§24.1</span>The Problem</a></li>
-          <li><a href="dateandtime.html#s24-2"><span class="nav-num">§24.2</span>Human Time vs. Machine Time</a></li>
-          <li><a href="dateandtime.html#s24-3"><span class="nav-num">§24.3</span>The Core "Local" Types</a></li>
-          <li><a href="dateandtime.html#s24-4"><span class="nav-num">§24.4</span><code>Instant</code></a></li>
-          <li><a href="dateandtime.html#s24-5"><span class="nav-num">§24.5</span>Timezones</a></li>
-          <li><a href="dateandtime.html#s24-6"><span class="nav-num">§24.6</span><code>Duration</code> &amp; <code>Period</code></a></li>
-          <li><a href="dateandtime.html#s24-7"><span class="nav-num">§24.7</span><code>DateTimeFormatter</code></a></li>
-          <li><a href="dateandtime.html#s24-8"><span class="nav-num">§24.8</span>Partial Types</a></li>
-          <li><a href="dateandtime.html#s24-9"><span class="nav-num">§24.9</span>Interop &amp; Migration</a></li>
-          <li><a href="dateandtime.html#s24-10"><span class="nav-num">§24.10</span>Key Takeaways</a></li>
+          <li><a href="modules.html#s23-1"><span class="nav-num">§24.1</span>The Problem</a></li>
+          <li><a href="modules.html#s23-2"><span class="nav-num">§24.2</span>What Is a Module</a></li>
+          <li><a href="modules.html#s23-3"><span class="nav-num">§24.3</span><code>module-info.java</code></a></li>
+          <li><a href="modules.html#s23-4"><span class="nav-num">§24.4</span><code>exports</code></a></li>
+          <li><a href="modules.html#s23-5"><span class="nav-num">§24.5</span><code>requires</code></a></li>
+          <li><a href="modules.html#s23-6"><span class="nav-num">§24.6</span>Strong Encapsulation</a></li>
+          <li><a href="modules.html#s23-7"><span class="nav-num">§24.7</span>The Module Path</a></li>
+          <li><a href="modules.html#s23-8"><span class="nav-num">§24.8</span><code>requires transitive</code></a></li>
+          <li><a href="modules.html#s23-9"><span class="nav-num">§24.9</span>When (Not) to Use Modules</a></li>
+          <li><a href="modules.html#s23-10"><span class="nav-num">§24.10</span>Key Takeaways</a></li>
         </ul>
       </li>
       <li>
-        <a href="io.html"><span class="nav-num">§25</span>Input and Output</a>
+        <a href="dateandtime.html"><span class="nav-num">§25</span>Date and Time</a>
         <ul class="sub-nav">
-          <li><a href="io.html#s25-1"><span class="nav-num">§25.1</span>The Problem</a></li>
-          <li><a href="io.html#s25-2"><span class="nav-num">§25.2</span>Bytes or Characters?</a></li>
-          <li><a href="io.html#s25-3"><span class="nav-num">§25.3</span>Buffering</a></li>
-          <li><a href="io.html#s25-4"><span class="nav-num">§25.4</span>Flushing</a></li>
-          <li><a href="io.html#s25-5"><span class="nav-num">§25.5</span>Sockets</a></li>
-          <li><a href="io.html#s25-6"><span class="nav-num">§25.6</span>What Blocking Actually Means</a></li>
-          <li><a href="io.html#s25-7"><span class="nav-num">§25.7</span>File System Fundamentals</a></li>
-          <li><a href="io.html#s25-8"><span class="nav-num">§25.8</span>Introducing NIO</a></li>
-          <li><a href="io.html#s25-9"><span class="nav-num">§25.9</span>NIO.2</a></li>
-          <li><a href="io.html#s25-10"><span class="nav-num">§25.10</span>Closing Streams Safely</a></li>
-          <li><a href="io.html#s25-11"><span class="nav-num">§25.11</span>Handling <code>IOException</code></a></li>
+          <li><a href="dateandtime.html#s24-1"><span class="nav-num">§25.1</span>The Problem</a></li>
+          <li><a href="dateandtime.html#s24-2"><span class="nav-num">§25.2</span>Human Time vs. Machine Time</a></li>
+          <li><a href="dateandtime.html#s24-3"><span class="nav-num">§25.3</span>The Core "Local" Types</a></li>
+          <li><a href="dateandtime.html#s24-4"><span class="nav-num">§25.4</span><code>Instant</code></a></li>
+          <li><a href="dateandtime.html#s24-5"><span class="nav-num">§25.5</span>Timezones</a></li>
+          <li><a href="dateandtime.html#s24-6"><span class="nav-num">§25.6</span><code>Duration</code> &amp; <code>Period</code></a></li>
+          <li><a href="dateandtime.html#s24-7"><span class="nav-num">§25.7</span><code>DateTimeFormatter</code></a></li>
+          <li><a href="dateandtime.html#s24-8"><span class="nav-num">§25.8</span>Partial Types</a></li>
+          <li><a href="dateandtime.html#s24-9"><span class="nav-num">§25.9</span>Interop &amp; Migration</a></li>
+          <li><a href="dateandtime.html#s24-10"><span class="nav-num">§25.10</span>Key Takeaways</a></li>
         </ul>
       </li>
       <li>
-        <a href="oodesign.html" class="active"><span class="nav-num">§26</span>Object-Oriented Design</a>
+        <a href="io.html"><span class="nav-num">§26</span>Input and Output</a>
         <ul class="sub-nav">
-          <li><a href="#s19-1"><span class="nav-num">§26.1</span>The Problem</a></li>
-          <li><a href="#s19-2"><span class="nav-num">§26.2</span>Cohesion</a></li>
-          <li><a href="#s19-3"><span class="nav-num">§26.3</span>Composition, or "Has-A"</a></li>
-          <li><a href="#s19-4"><span class="nav-num">§26.4</span>Tell, Don't Ask</a></li>
-          <li><a href="#s19-5"><span class="nav-num">§26.5</span>Composition over Inheritance</a></li>
-          <li><a href="#s19-6"><span class="nav-num">§26.6</span>Program to an Interface</a></li>
-          <li><a href="#s19-7"><span class="nav-num">§26.7</span>Putting It Together</a></li>
-          <li><a href="#s19-8"><span class="nav-num">§26.8</span>Key Takeaways</a></li>
+          <li><a href="io.html#s25-1"><span class="nav-num">§26.1</span>The Problem</a></li>
+          <li><a href="io.html#s25-2"><span class="nav-num">§26.2</span>Bytes or Characters?</a></li>
+          <li><a href="io.html#s25-3"><span class="nav-num">§26.3</span>Buffering</a></li>
+          <li><a href="io.html#s25-4"><span class="nav-num">§26.4</span>Flushing</a></li>
+          <li><a href="io.html#s25-5"><span class="nav-num">§26.5</span>Sockets</a></li>
+          <li><a href="io.html#s25-6"><span class="nav-num">§26.6</span>What Blocking Actually Means</a></li>
+          <li><a href="io.html#s25-7"><span class="nav-num">§26.7</span>File System Fundamentals</a></li>
+          <li><a href="io.html#s25-8"><span class="nav-num">§26.8</span>Introducing NIO</a></li>
+          <li><a href="io.html#s25-9"><span class="nav-num">§26.9</span>NIO.2</a></li>
+          <li><a href="io.html#s25-10"><span class="nav-num">§26.10</span>Closing Streams Safely</a></li>
+          <li><a href="io.html#s25-11"><span class="nav-num">§26.11</span>Handling <code>IOException</code></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="oodesign.html" class="active"><span class="nav-num">§27</span>Object-Oriented Design</a>
+        <ul class="sub-nav">
+          <li><a href="#s19-1"><span class="nav-num">§27.1</span>The Problem</a></li>
+          <li><a href="#s19-2"><span class="nav-num">§27.2</span>Cohesion</a></li>
+          <li><a href="#s19-3"><span class="nav-num">§27.3</span>Composition, or "Has-A"</a></li>
+          <li><a href="#s19-4"><span class="nav-num">§27.4</span>Tell, Don't Ask</a></li>
+          <li><a href="#s19-5"><span class="nav-num">§27.5</span>Where a Method Belongs</a></li>
+          <li><a href="#s19-6"><span class="nav-num">§27.6</span>Query vs. Command</a></li>
+          <li><a href="#s19-7"><span class="nav-num">§27.7</span>Composition over Inheritance</a></li>
+          <li><a href="#s19-8"><span class="nav-num">§27.8</span>Program to an Interface</a></li>
+          <li><a href="#s19-9"><span class="nav-num">§27.9</span>SOLID</a></li>
+          <li><a href="#s19-10"><span class="nav-num">§27.10</span>Putting It Together</a></li>
+          <li><a href="#s19-11"><span class="nav-num">§27.11</span>Key Takeaways</a></li>
         </ul>
       </li>
     </ul>
@@ -403,17 +418,17 @@
 
 <main id="content">
   <header class="page-header">
-    <div class="page-chapter">Chapter 26</div>
+    <div class="page-chapter">Chapter 27</div>
     <h1>Object-Oriented Design</h1>
     <p class="page-lead">Every mechanism up to this point — classes, references, inheritance, interfaces, generics, collections — is a tool. This chapter is about judgment: how to decide what a class should be responsible for, how objects should relate to one another, and why some technically-correct designs still turn into a mess six months later. One running example, a small library catalog, carries the whole chapter.</p>
   </header>
 
   <article>
 
-    <!-- §26.1 -->
+    <!-- §27.1 -->
     <section id="s19-1">
       <div class="section-head">
-        <span class="sec-num">§26.1</span>
+        <span class="sec-num">§27.1</span>
         <h2>The Problem <em>— a class that knows too much</em></h2>
       </div>
 
@@ -453,10 +468,10 @@ ebook.format = "E-book";</code></pre>
       </div>
     </section>
 
-    <!-- §26.2 -->
+    <!-- §27.2 -->
     <section id="s19-2">
       <div class="section-head">
-        <span class="sec-num">§26.2</span>
+        <span class="sec-num">§27.2</span>
         <h2>Cohesion <em>— one reason to change</em></h2>
       </div>
 
@@ -482,15 +497,15 @@ ebook.format = "E-book";</code></pre>
       <p><code>Book</code> now has exactly one reason to change: the work's own identity — its title, its author. Nothing about ISBNs, page counts, or formats belongs here at all.</p>
 
       <div class="callout callout-conn">
-        <div class="callout-lbl">Connection <a href="immutability.html#s11-3" class="backref">← §11.3</a></div>
-        <p><code>Book</code> is built the way §11 built <code>Point</code>: <code>private final</code> fields, set once in the constructor, read through accessor methods, no setters. A book's title and author aren't the kind of state that should ever silently change out from under whoever's holding a reference to it — immutability isn't just a nice-to-have here, it's what makes <code>Book</code> safe to share across every edition that refers to it, which is exactly what §26.3 does next.</p>
+        <div class="callout-lbl">Connection <a href="immutability.html#s11-3" class="backref">← §12.3</a></div>
+        <p><code>Book</code> is built the way §12 built <code>Point</code>: <code>private final</code> fields, set once in the constructor, read through accessor methods, no setters. A book's title and author aren't the kind of state that should ever silently change out from under whoever's holding a reference to it — immutability isn't just a nice-to-have here, it's what makes <code>Book</code> safe to share across every edition that refers to it, which is exactly what §27.3 does next.</p>
       </div>
     </section>
 
-    <!-- §26.3 -->
+    <!-- §27.3 -->
     <section id="s19-3">
       <div class="section-head">
-        <span class="sec-num">§26.3</span>
+        <span class="sec-num">§27.3</span>
         <h2>Composition, or "Has-A" <em>— building BookEdition out of Book</em></h2>
       </div>
 
@@ -529,16 +544,16 @@ System.out.println(hardcover.book() == ebook.book()); // true — the very same 
 
       <div class="callout callout-conn">
         <div class="callout-lbl">Connection <a href="classes.html#s2-4" class="backref">← §2.4</a></div>
-        <p>This is nothing more than a reference field, the same mechanism §2.4 introduced with <code>Rectangle</code>'s <code>origin</code> and <code>border</code>. <code>BookEdition</code> doesn't <em>contain</em> a <code>Book</code> — it holds an address pointing at one, on the heap, possibly shared with other objects that hold the same address. Naming that relationship is what's new here: whenever one class holds a reference to another as a field, that's <span class="term">composition</span> — a <em>"has-a"</em> relationship, as opposed to the <em>"is-a"</em> relationship inheritance models (§9). A <code>BookEdition</code> <em>has a</em> <code>Book</code>; it is not, itself, a kind of <code>Book</code>.</p>
+        <p>This is nothing more than a reference field, the same mechanism §2.4 introduced with <code>Rectangle</code>'s <code>origin</code> and <code>border</code>. <code>BookEdition</code> doesn't <em>contain</em> a <code>Book</code> — it holds an address pointing at one, on the heap, possibly shared with other objects that hold the same address. Naming that relationship is what's new here: whenever one class holds a reference to another as a field, that's <span class="term">composition</span> — a <em>"has-a"</em> relationship, as opposed to the <em>"is-a"</em> relationship inheritance models (§10). A <code>BookEdition</code> <em>has a</em> <code>Book</code>; it is not, itself, a kind of <code>Book</code>.</p>
       </div>
 
       <p>Composition is also how coupling gets managed deliberately. <code>BookEdition</code> depends on <code>Book</code> — it has to, to do its job — but the dependency runs in one direction only. <code>Book</code> has no field, no method, no import that mentions <code>BookEdition</code> at all; it has no idea editions exist. That asymmetry matters: <code>Book</code> can be reused, tested, or changed on its own terms, entirely unaware of anything built on top of it.</p>
     </section>
 
-    <!-- §26.4 -->
+    <!-- §27.4 -->
     <section id="s19-4">
       <div class="section-head">
-        <span class="sec-num">§26.4</span>
+        <span class="sec-num">§27.4</span>
         <h2>Tell, Don't Ask <em>— encapsulation, revisited</em></h2>
       </div>
 
@@ -568,19 +583,246 @@ String description = edition.book().title() + " by " + edition.book().author()
       <p>Now there's exactly one place that knows how a description is built, and it's the one class actually holding the data. Every caller just says <em>describe yourself</em> — a single method call, unaffected by whatever <code>BookEdition</code>'s fields look like internally, today or after the next change.</p>
 
       <div class="callout callout-conn">
-        <div class="callout-lbl">Connection <a href="accessmodifiers.html#s11-4" class="backref">← §10.4</a></div>
-        <p>§10 framed encapsulation as hiding a field behind <code>private</code> so its invariants can't be broken from outside. Tell, Don't Ask is the same idea applied one level up: hide not just the <em>data</em>, but the <em>logic that uses it</em>, behind a method that does the whole job. A getter that just hands back a field is sometimes unavoidable — <code>book()</code> still exists above — but reaching for one by default, everywhere, is exactly the reflex this section pushes back on.</p>
+        <div class="callout-lbl">Connection <a href="accessmodifiers.html#s11-4" class="backref">← §11.4</a></div>
+        <p>§11 framed encapsulation as hiding a field behind <code>private</code> so its invariants can't be broken from outside. Tell, Don't Ask is the same idea applied one level up: hide not just the <em>data</em>, but the <em>logic that uses it</em>, behind a method that does the whole job. A getter that just hands back a field is sometimes unavoidable — <code>book()</code> still exists above — but reaching for one by default, everywhere, is exactly the reflex this section pushes back on.</p>
       </div>
     </section>
 
-    <!-- §26.5 -->
+    <!-- §27.5 -->
     <section id="s19-5">
       <div class="section-head">
-        <span class="sec-num">§26.5</span>
+        <span class="sec-num">§27.5</span>
+        <h2>
+          Where a Method "Belongs" <em>— an object's own state vs. the wider system</em>
+        </h2>
+      </div>
+
+      <p>Tell, Don't Ask (§27.4) says to give an object a method that does the whole job, instead of reaching in and doing it from outside. That's good advice — right up until "the whole job" turns out to need things the object was never actually holding. Picture a <code>Notification</code> meant to represent the same content no matter how it eventually reaches someone — shown in an in-app notification list today, emailed as a daily digest tomorrow, pushed to a phone next quarter. Whoever added <code>send()</code> bolted one specific delivery mechanism onto a class that was never supposed to know delivery existed:</p>
+
+      <pre><code class="language-java">class Notification {
+    private final String recipient;
+    private final String subject;
+    private final String body;
+
+    Notification(String recipient, String subject, String body) {
+        this.recipient = recipient;
+        this.subject = subject;
+        this.body = body;
+    }
+
+    void send() {
+        SmtpClient client = new SmtpClient("smtp.mailprovider.com", 587);
+        client.connect();
+        client.authenticate("notifications@example.com", loadPassword());
+        client.sendMessage(recipient, subject, body);
+        client.disconnect();
+    }
+}</code></pre>
+
+      <p>Look at what <code>send()</code>'s body is actually made of. <code>recipient</code>, <code>subject</code>, and <code>body</code> — the three fields <code>Notification</code> actually owns — show up exactly once each, just to be handed off. Everything else in that method is about something <code>Notification</code> doesn't own at all: a hostname, a port, credentials, a network connection. The method is named after the object it sits on, but almost none of its work is about that object's own state. Renaming the class to <code>EmailNotification</code> wouldn't fix this — it would just make the mistake honest. The actual problem isn't the name; it's that the in-app notification list and the eventual push channel now have to drag SMTP along with them, because whatever they read as a <code>Notification</code> comes bundled with a method that only makes sense for one of the three places it's used.</p>
+
+      <div class="callout callout-rule">
+        <div class="callout-lbl">A rule of thumb</div>
+        <p>A method belongs on a class when its body is built mostly out of that class's own fields — reading them, combining them, occasionally calling other methods on things it already holds a reference to. A method whose body is mostly about something else entirely — a network client, a file system, a database connection, another service — is describing a <em>collaboration</em>, not a behavior. The object supplying the data doesn't have to be the object doing the work; nothing says it has to import a networking class just to fulfill a method with its own name on it.</p>
+      </div>
+
+      <p>§27.2 already named this shape: two reasons to change, wearing one class. A notification's <em>content</em> changes for content reasons — a new field, a different greeting, a formatting fix — decided by whoever owns what a notification says. How a notification actually gets <em>delivered</em> changes for entirely different reasons — switching providers, adding retries, adding a push-notification channel alongside email — decided by whoever owns how messages move. Cramming both into <code>send()</code> means a change to either reason edits the same class, for no reason connected to the other.</p>
+
+      <p>Split the object that holds the data from the object that does the delivering, and name the delivery capability as its own contract (§14):</p>
+
+      <pre><code class="language-java">final class Notification {
+    private final String recipient;
+    private final String subject;
+    private final String body;
+
+    Notification(String recipient, String subject, String body) {
+        this.recipient = recipient;
+        this.subject = subject;
+        this.body = body;
+    }
+
+    String recipient() { return recipient; }
+    String subject()   { return subject; }
+    String body()      { return body; }
+}</code></pre>
+
+      <pre><code class="language-java">interface NotificationSender {
+    void send(Notification notification);
+}
+
+class SmtpNotificationSender implements NotificationSender {
+    private final SmtpClient client;
+
+    SmtpNotificationSender(SmtpClient client) {
+        this.client = client;
+    }
+
+    @Override
+    public void send(Notification notification) {
+        client.connect();
+        client.authenticate("notifications@example.com", loadPassword());
+        client.sendMessage(notification.recipient(), notification.subject(), notification.body());
+        client.disconnect();
+    }
+}</code></pre>
+
+      <pre><code class="language-java">Notification reminder = new Notification(
+        "user@example.com", "Reminder", "Your appointment is tomorrow.");
+
+NotificationSender sender = new SmtpNotificationSender(smtpClient);
+sender.send(reminder);</code></pre>
+
+      <p><code>Notification</code> is now a plain, immutable value (§12) — three fields, three getters, nothing that reaches outside itself, and nothing about it changes no matter how the message eventually gets delivered. <code>NotificationSender</code> owns the entire delivery concern, coded to an interface rather than a concrete class (§27.8): swap <code>SmtpNotificationSender</code> for a push-notification sender, or a fake one in a test, and <code>Notification</code> never has to change, because it was never the thing doing the sending in the first place.</p>
+
+      <div class="callout callout-note">
+        <div class="callout-lbl">But couldn't <code>send()</code> just be <code>abstract</code>?</div>
+        <p>An abstract <code>Notification</code> with an abstract <code>send()</code>, overridden by <code>EmailNotification</code>, would compile fine — and it's tempting, since §13 already builds exactly that shape elsewhere. It doesn't actually fix anything here, though: the SMTP details just move from a method on <code>Notification</code> to a method on a <em>subclass</em> of <code>Notification</code>, still one inheritance chain carrying both "what a notification says" and "how it gets delivered." A content fix to the base class can still ripple into every delivery-specific subclass, and an SMTP retry-policy change still lives inside something that <em>is-a</em> <code>Notification</code>.</p>
+        <p>The sharper problem is that content and channel vary <em>independently</em> — the same reminder needs to go out by email <em>and</em>, eventually, by push. With inheritance, one object is one concrete subclass, so reaching two channels means two separate objects duplicating identical content. With <code>NotificationSender</code>, it's the same <code>Notification</code> handed to two different senders — nothing duplicated, because content and delivery were never the same axis of variation to begin with. That's the real test past §27.7's is-a check: when two concerns can be mixed and matched freely, composition lets you cross them; inheritance forces one subclass per combination.</p>
+      </div>
+
+      <div class="callout callout-conn">
+        <div class="callout-lbl">Connection <a href="#s19-4" class="backref">← §27.4</a></div>
+        <p>This isn't a rejection of Tell, Don't Ask — <code>sender.send(reminder)</code> is still telling an object to do a whole job, not reaching in and doing it from outside. The refinement is about which object gets told. Tell-Don't-Ask says don't make the <em>caller</em> assemble the behavior out of parts it reached in and grabbed; it never said the object being called has to be the one whose name is most obviously attached to the job. <code>send()</code> was never <code>Notification</code>'s job to begin with — it belonged to whatever object actually holds the network connection.</p>
+      </div>
+    </section>
+
+    <!-- §27.6 -->
+    <section id="s19-6">
+      <div class="section-head">
+        <span class="sec-num">§27.6</span>
+        <h2>Query vs. Command <em>— what is this method actually doing?</em></h2>
+      </div>
+
+      <p>Two methods on the <code>BankAccount</code> from §12:</p>
+
+      <pre><code class="language-java">double getBalance() { return balance; }
+void deposit(double amount) { balance += amount; }</code></pre>
+
+      <p>Calling <code>getBalance()</code> ten times in a row is harmless — the balance comes back the same every time, no matter how many times it's asked. Calling <code>deposit(100)</code> ten times moves a thousand dollars. Nothing about either body needed reading to know this — the method's own name gave it away, because every instance method falls into exactly one of two roles.</p>
+
+      <div class="callout callout-rule">
+        <div class="callout-lbl">Command-Query Separation (CQS)</div>
+        <p>Bertrand Meyer named this split in his work on the Eiffel language, and it's the one hard boundary in this section — everything else below is descriptive vocabulary layered on top of it:</p>
+        <ul>
+          <li><strong>Query</strong> — reads state, changes nothing. Safe to call any number of times, in any order, interleaved with anything else — a pure function of the object's state and its arguments.</li>
+          <li><strong>Command</strong> — changes state. Every call counts; calling it twice is a different thing from calling it once.</li>
+        </ul>
+      </div>
+
+      <p>The finer labels below name different points on that line, not different categories sitting beside it. Two methods can land in genuinely ambiguous territory between two of them, and that's fine — the labels are vocabulary for a conversation, not a classification to enforce.</p>
+
+      <h3>Queries: one shape, several outputs</h3>
+
+      <p>Every query has the same underlying shape: state and arguments go in, an answer comes out, nothing changes. What differs from one query to the next is only how much work happens along the way, and what shape the answer takes:</p>
+
+      <pre><code class="language-java">double getBalance() {                    // a direct projection of one field
+    return balance;
+}
+
+boolean isOverdrawn() {                   // same shape — output happens to be boolean
+    return balance < 0;
+}
+
+double calculateInterest(double rate) {   // same shape — real computation this time
+    return balance * rate;
+}</code></pre>
+
+      <p>All three are pure functions of state, and the differences between them are differences of degree, not of kind. Informally: a <strong>reader</strong> for a trivial field projection like <code>getBalance()</code>; a <strong>predicate</strong> for a boolean-returning query like <code>isOverdrawn()</code> (the <code>is</code>/<code>has</code>/<code>can</code> naming convention usually gives this one away before the return type does); and simply a query that does real work, like <code>calculateInterest()</code>. Where exactly <code>getBalance()</code> ends and <code>calculateInterest()</code> begins on that spectrum doesn't have a principled answer, and it doesn't need one — all three are queries either way, and that fact is what actually constrains how they're allowed to be called.</p>
+
+      <h3>Commands: mutators, and one deliberate exception</h3>
+
+      <p>A command changes state. Under strict CQS it returns <code>void</code> — its entire purpose is the side effect, nothing else:</p>
+
+      <pre><code class="language-java">void deposit(double amount) {
+    balance += amount;
+}</code></pre>
+
+      <p>A method that both mutates state <em>and</em> hands back a computed value is doing two jobs in one call. That's often a warning sign — a method that reads like a query but quietly mutates underneath is the single most common source of surprising bugs in this territory. But one shape breaks CQS on purpose, by design: a <strong>builder</strong> mutates state and returns <code>this</code>, purely to enable chaining. The returned value is never new information — it's always just the object itself:</p>
+
+      <pre><code class="language-java">Order addItem(Item item) {
+    items.add(item);
+    return this;
+}
+
+// order.addItem(a).addItem(b).addItem(c);</code></pre>
+
+      <h3>Roles that cut across the line</h3>
+
+      <p>A few roles aren't defined by <em>whether</em> a method mutates — they can land on either side, depending on what they're built around:</p>
+
+      <ul>
+        <li><strong>Delegator</strong> — does little itself, just forwards to another object's method. Whether it's a query or a command depends entirely on what it delegates to.</li>
+        <li><strong>Lifecycle / contract method</strong> — behavior is fixed by a contract with the JVM, a collection, or a framework, not by domain logic. <code>equals()</code> and <code>hashCode()</code> are queries by contract; <code>close()</code> (§15.8) is a command by contract. These aren't designed freely — they satisfy a spec.</li>
+        <li><strong>Orchestrator</strong> — coordinates several queries and commands in sequence to perform one multi-step operation, often the method a caller actually calls, with everything else underneath it as private support. Its own status is just whatever the sum of its parts adds up to: if it mutates anything along the way, it's a command, full stop, even if it also returns something at the end.</li>
+      </ul>
+
+      <table class="content-table">
+        <tr>
+          <th>Role</th>
+          <th>Query or command</th>
+          <th>What distinguishes it</th>
+        </tr>
+        <tr>
+          <td>Reader</td>
+          <td>Query</td>
+          <td>Trivial projection of one field</td>
+        </tr>
+        <tr>
+          <td>Predicate</td>
+          <td>Query</td>
+          <td>Output is <code>boolean</code></td>
+        </tr>
+        <tr>
+          <td>Computed query</td>
+          <td>Query</td>
+          <td>Real computation before returning</td>
+        </tr>
+        <tr>
+          <td>Mutator</td>
+          <td>Command</td>
+          <td>Pure side effect, returns <code>void</code></td>
+        </tr>
+        <tr>
+          <td>Builder</td>
+          <td>Command</td>
+          <td>Mutates, returns <code>this</code> for chaining</td>
+        </tr>
+        <tr>
+          <td>Delegator</td>
+          <td>Either</td>
+          <td>Forwards to another object's method</td>
+        </tr>
+        <tr>
+          <td>Lifecycle / contract</td>
+          <td>Either</td>
+          <td>Behavior fixed by a spec, not domain logic</td>
+        </tr>
+        <tr>
+          <td>Orchestrator</td>
+          <td>Either</td>
+          <td>Sum of whatever it coordinates</td>
+        </tr>
+      </table>
+
+      <div class="callout callout-conn">
+        <div class="callout-lbl">Connection <a href="#s19-4" class="backref">← §27.4</a></div>
+        <p>Tell, Don't Ask pushed back on reaching for a getter and doing the caller's own work outside the object. Query vs. Command names the fact underneath that habit: a getter is a query by definition, and every extra query a class exposes is one more piece of internal shape callers can come to depend on. Preferring a command like <code>describe()</code> over a chain of readers isn't only about hiding structure — it's about keeping the query surface small enough that "is this safe to call twice?" stays an easy question to answer.</p>
+      </div>
+
+      <div class="callout callout-conn">
+        <div class="callout-lbl">Connection <a href="immutability.html#s11-4" class="backref">← §12.4</a></div>
+        <p><code>Transaction</code>, the immutable class §12.4 built, has exactly two methods — <code>getType()</code> and <code>getAmount()</code> — and both are queries. That's not a coincidence: an immutable object has no state left to mutate, so past its own constructor it can never expose a command at all. Every method call on an immutable object is automatically safe to repeat, interleave, or share across threads (§12.6) — the entire category of "is this safe to call twice?" questions this section has been raising simply doesn't arise.</p>
+      </div>
+    </section>
+
+    <!-- §27.7 -->
+    <section id="s19-7">
+      <div class="section-head">
+        <span class="sec-num">§27.7</span>
         <h2>Composition over Inheritance <em>— why BookEdition doesn't extend Book</em></h2>
       </div>
 
-      <p>Inheritance (§9) was the tutorial's first tool for reusing another class's fields and methods, so it's worth confronting directly: why not simply write <code>class BookEdition extends Book</code>, and inherit <code>title</code> and <code>author</code> for free?</p>
+      <p>Inheritance (§10) was the tutorial's first tool for reusing another class's fields and methods, so it's worth confronting directly: why not simply write <code>class BookEdition extends Book</code>, and inherit <code>title</code> and <code>author</code> for free?</p>
 
       <pre><code class="language-java">// tempting, but wrong here
 class BookEdition extends Book {
@@ -598,24 +840,24 @@ class BookEdition extends Book {
 
       <p>Two problems, and neither is about syntax:</p>
 
-      <p><strong>The "is-a" test fails.</strong> §9.1 grounded inheritance in a taxonomy — <code>extends</code> should read as "a more specific kind of." A hardcover <em>is</em> a kind of physical object, sure, but is it a more specific kind of <em>Book</em>, the way a <code>Dog</code> is a more specific kind of <code>Animal</code>? Not really — a hardcover isn't a specialized book, it's a printing <em>of</em> a book. The relationship is "belongs to," not "is a kind of," and §26.3 already gave that relationship its correct name: composition.</p>
+      <p><strong>The "is-a" test fails.</strong> §10.1 grounded inheritance in a taxonomy — <code>extends</code> should read as "a more specific kind of." A hardcover <em>is</em> a kind of physical object, sure, but is it a more specific kind of <em>Book</em>, the way a <code>Dog</code> is a more specific kind of <code>Animal</code>? Not really — a hardcover isn't a specialized book, it's a printing <em>of</em> a book. The relationship is "belongs to," not "is a kind of," and §27.3 already gave that relationship its correct name: composition.</p>
 
-      <p><strong>The original problem comes right back.</strong> Each <code>BookEdition</code> subclass instance still carries its <em>own</em> inherited copy of <code>title</code> and <code>author</code> — inheritance doesn't create sharing, it copies the parent's field layout into every subclass object. Constructing a hardcover and an e-book "edition" of the same work still means passing <code>"Clean Code"</code> and <code>"Robert C. Martin"</code> into two separate constructor calls, with no single shared <code>Book</code> object underneath either one. Exactly the duplication §26.1 identified — inheritance just hides it behind <code>extends</code> instead of fixing it.</p>
+      <p><strong>The original problem comes right back.</strong> Each <code>BookEdition</code> subclass instance still carries its <em>own</em> inherited copy of <code>title</code> and <code>author</code> — inheritance doesn't create sharing, it copies the parent's field layout into every subclass object. Constructing a hardcover and an e-book "edition" of the same work still means passing <code>"Clean Code"</code> and <code>"Robert C. Martin"</code> into two separate constructor calls, with no single shared <code>Book</code> object underneath either one. Exactly the duplication §27.1 identified — inheritance just hides it behind <code>extends</code> instead of fixing it.</p>
 
       <div class="callout callout-rule">
         <div class="callout-lbl">A rule of thumb</div>
-        <p>When one object needs the data or behavior of another, composition — a reference field — should be the default choice. Reach for inheritance only when the relationship genuinely is "is-a-more-specific-kind-of," <em>and</em> the two classes are meant to share one common notion of identity, substitutable for each other wherever the parent type is expected (§9.5's polymorphism). "I want to reuse some fields" is not, by itself, a reason to inherit — composition reuses the exact same fields without committing to a taxonomy that doesn't actually hold.</p>
+        <p>When one object needs the data or behavior of another, composition — a reference field — should be the default choice. Reach for inheritance only when the relationship genuinely is "is-a-more-specific-kind-of," <em>and</em> the two classes are meant to share one common notion of identity, substitutable for each other wherever the parent type is expected (§10.5's polymorphism). "I want to reuse some fields" is not, by itself, a reason to inherit — composition reuses the exact same fields without committing to a taxonomy that doesn't actually hold.</p>
       </div>
     </section>
 
-    <!-- §26.6 -->
-    <section id="s19-6">
+    <!-- §27.8 -->
+    <section id="s19-8">
       <div class="section-head">
-        <span class="sec-num">§26.6</span>
+        <span class="sec-num">§27.8</span>
         <h2>Program to an Interface, Not an Implementation</h2>
       </div>
 
-      <p>The library catalog will eventually hold more than books — perhaps magazines, or audiobooks, later. Every one of those needs to be described, the same way a <code>BookEdition</code> does. Rather than writing catalog code that only understands <code>BookEdition</code> specifically, name the capability itself as an interface (§13):</p>
+      <p>The library catalog will eventually hold more than books — perhaps magazines, or audiobooks, later. Every one of those needs to be described, the same way a <code>BookEdition</code> does. Rather than writing catalog code that only understands <code>BookEdition</code> specifically, name the capability itself as an interface (§14):</p>
 
       <pre><code class="language-java">interface Describable {
     String describe();
@@ -634,15 +876,176 @@ class BookEdition implements Describable {
       <p>Nothing about <code>describe()</code>'s body changed — only its declaration now carries <code>@Override</code>, satisfying a contract named <code>Describable</code> instead of just happening to have a method with that name.</p>
 
       <div class="callout callout-conn">
-        <div class="callout-lbl">Connection <a href="interfaces.html#s13-11" class="backref">← §13.11</a>, <a href="collections.html#s18-3" class="backref">← §18.3</a></div>
-        <p>This is interface-typed programming exactly as §13.11 described it, now paired with the collections framework from §18: a variable, parameter, or — as below — a <code>List</code>, declared in terms of what an object <em>can do</em> (<code>Describable</code>) rather than what it concretely <em>is</em> (<code>BookEdition</code>). The catalog that follows never needs to change when a new kind of describable item shows up; it only ever asks for <code>describe()</code>.</p>
+        <div class="callout-lbl">Connection <a href="interfaces.html#s13-11" class="backref">← §14.11</a>, <a href="collections.html#s18-3" class="backref">← §19.3</a></div>
+        <p>This is interface-typed programming exactly as §14.11 described it, now paired with the collections framework from §19: a variable, parameter, or — as below — a <code>List</code>, declared in terms of what an object <em>can do</em> (<code>Describable</code>) rather than what it concretely <em>is</em> (<code>BookEdition</code>). The catalog that follows never needs to change when a new kind of describable item shows up; it only ever asks for <code>describe()</code>.</p>
       </div>
     </section>
 
-    <!-- §26.7 -->
-    <section id="s19-7">
+    <!-- §27.9 -->
+    <section id="s19-9">
       <div class="section-head">
-        <span class="sec-num">§26.7</span>
+        <span class="sec-num">§27.9</span>
+        <h2>SOLID <em>— the same five ideas, with names</em></h2>
+      </div>
+
+      <p>Five heuristics from this chapter have a well-known industry shorthand: <span class="term">SOLID</span>. Three of the five letters are ideas this chapter already built, under different names — worth knowing, since the vocabulary shows up everywhere outside this book. The other two are new, and small enough to cover here directly.</p>
+
+      <table class="content-table wrap-first">
+        <tr>
+          <th>Letter</th>
+          <th>Principle</th>
+          <th>Where it already happened</th>
+        </tr>
+        <tr>
+          <td><strong>S</strong></td>
+          <td>Single Responsibility</td>
+          <td>Named <span class="term">cohesion</span> — §27.2's "one reason to change," reinforced in §27.5.</td>
+        </tr>
+        <tr>
+          <td><strong>O</strong></td>
+          <td>Open/Closed</td>
+          <td>Below.</td>
+        </tr>
+        <tr>
+          <td><strong>L</strong></td>
+          <td>Liskov Substitution</td>
+          <td>§27.7's rule of thumb — a subtype should be "substitutable... wherever the parent type is expected."</td>
+        </tr>
+        <tr>
+          <td><strong>I</strong></td>
+          <td>Interface Segregation</td>
+          <td>Below.</td>
+        </tr>
+        <tr>
+          <td><strong>D</strong></td>
+          <td>Dependency Inversion</td>
+          <td>Below.</td>
+        </tr>
+      </table>
+
+      <h3>O — Open for Extension, Closed for Modification</h3>
+
+      <p>A well-designed class should be extendable without editing its own source. §27.8 already delivered this without naming it: <code>Library</code> depends only on <code>Describable</code>, so the day a <code>MagazineIssue</code> starts implementing it, <code>Library</code> gains a new capability without a single line of <code>Library</code> itself changing. It's <em>open</em> to that extension, and <em>closed</em> — untouched — against the modification that used to be required to support it.</p>
+
+      <h3>I — Interface Segregation</h3>
+
+      <p>A class shouldn't be forced to implement a method it has no honest answer for. Suppose <code>Describable</code> had grown a second method along the way:</p>
+
+      <pre><code class="language-java">interface Describable {
+    String describe();
+    String isbn();
+}</code></pre>
+
+      <p>Fine for <code>BookEdition</code> — every book has one. The moment a <code>MagazineIssue</code> tries to implement <code>Describable</code> too, <code>isbn()</code> has nothing truthful to return: magazines aren't sold by ISBN. Returning <code>null</code>, or throwing, both just relocate the problem to whoever calls <code>isbn()</code> next. The fix isn't a bigger interface — it's a narrower one, split along the line where "every describable thing" stops and "every book" begins:</p>
+
+      <pre><code class="language-java">interface Describable {
+    String describe();
+}
+
+interface Identifiable {
+    String isbn();
+}
+
+class BookEdition implements Describable, Identifiable { /* ... */ }
+class MagazineIssue implements Describable { /* no isbn() to fake */ }</code></pre>
+
+      <p><code>Library</code> still only asks for <code>Describable</code>, so nothing about §27.8 changes. What changes is that <code>MagazineIssue</code> is never forced to answer a question that was never its to answer in the first place.</p>
+
+      <h3>D — Dependency Inversion</h3>
+
+      <p>"Program to an interface" (§27.8) says how to <em>use</em> a dependency. Dependency Inversion says something stronger, about who gets to <em>define</em> the interface in the first place. Picture a high-level scheduling policy that decides when reminders (§27.5) go out, built the direct way:</p>
+
+      <pre><code class="language-java">class ReminderScheduler {
+    private final SmtpNotificationSender sender = new SmtpNotificationSender(smtpClient);
+
+    void sendDueReminders(List&lt;Notification&gt; due) {
+        for (Notification reminder : due) {
+            sender.send(reminder);
+        }
+    }
+}</code></pre>
+
+      <p><code>ReminderScheduler</code> is high-level policy — it decides <em>when</em>, not <em>how</em>. But as written, it depends directly on <code>SmtpNotificationSender</code>, a low-level detail (§27.5) that knows about hostnames and connections. Every low-level decision down there — switching providers, adding retries — now has a direct line back up into the class that's only supposed to be deciding schedules.</p>
+
+      <p><code>NotificationSender</code> already exists as an abstraction (§27.5). Dependency Inversion says <code>ReminderScheduler</code> should depend on <em>that</em>, not on any concrete sender:</p>
+
+      <pre><code class="language-java">class ReminderScheduler {
+    private final NotificationSender sender;
+
+    ReminderScheduler(NotificationSender sender) {
+        this.sender = sender;
+    }
+
+    void sendDueReminders(List&lt;Notification&gt; due) {
+        for (Notification reminder : due) {
+            sender.send(reminder);
+        }
+    }
+}</code></pre>
+
+      <p>and — this is the part "program to an interface" alone doesn't say — <code>NotificationSender</code> belongs conceptually to the high-level side. It's shaped around what a <em>scheduler</em> needs ("send this notification"), not around what SMTP happens to offer. <code>SmtpNotificationSender</code> depends on <em>it</em>, supplying an implementation that fits a contract someone else defined. Before, the dependency arrow ran from high-level policy straight down into a low-level detail; now both the policy and the detail point <em>at</em> the abstraction between them. That flip — the interface belonging to the consumer, not the implementer — is the "inversion" in the name.</p>
+
+      <p>"Belongs to the high-level side" is easy to assert and easy to miss in practice, because an interface still has to be written by <em>someone</em>, and it's tempting to let whoever writes the low-level code shape it around what they already have. Imagine <code>NotificationSender</code> had been designed that way instead — grown out of <code>SmtpClient</code>'s own steps rather than out of what a scheduler actually needs:</p>
+
+      <pre><code class="language-java">// shaped around SMTP, not around "send a notification"
+interface NotificationSender {
+    void connect(String host, int port);
+    void authenticate(String username, String password);
+    void deliver(String to, String subject, String body);
+    void disconnect();
+}</code></pre>
+
+      <p>This still satisfies "program to an interface" — <code>ReminderScheduler</code> could still depend on it instead of a concrete class. But look at what it forces on anything <em>else</em> that wants to implement it. A push-notification service has no host, no port, and nothing resembling a login step; a <code>PushNotificationSender</code> would have to fake <code>connect()</code> and <code>disconnect()</code> as empty methods just to satisfy a shape that only ever made sense for SMTP. The interface didn't remove the coupling to SMTP — it just spread SMTP's vocabulary onto every future implementation, forever, because the low-level detail got to define the contract.</p>
+
+      <p><code>NotificationSender</code> as actually written — <code>void send(Notification notification)</code> — has no such residue, because it was never derived from any one implementation's steps. It was derived from the one sentence <code>ReminderScheduler</code> would use to describe the job on its own terms: <em>send this notification</em>. Every implementation, present or future, adapts to that sentence instead of the other way around — which is the entire test for whether an interface was actually inverted, or just extracted.</p>
+
+      <p><code>ReminderScheduler</code> decides the <em>shape</em> of what it depends on — but notice it never decides <em>which</em> sender actually shows up. Nowhere in its own code does it write <code>new SmtpNotificationSender(...)</code>; that would just reintroduce the exact coupling the interface was built to remove. Somebody still has to construct a real <code>SmtpNotificationSender</code> and hand it to a real <code>ReminderScheduler</code> — just not either of those two classes themselves:</p>
+
+      <pre><code class="language-java">public static void main(String[] args) {
+    NotificationSender sender = new SmtpNotificationSender(smtpClient);
+    ReminderScheduler scheduler = new ReminderScheduler(sender);
+
+    scheduler.sendDueReminders(dueReminders);
+}</code></pre>
+
+      <p><code>main()</code> here is doing a job neither collaborator is allowed to do itself: choosing concrete classes and wiring them together. That one spot — often <code>main()</code>, sometimes a small dedicated setup routine in a larger program — is usually called the <span class="term">composition root</span>: the single place a program is allowed to write <code>new SmtpNotificationSender(...)</code> and <code>new ReminderScheduler(...)</code> in the same breath. Every other class in the program, on both sides of the abstraction, only ever sees <code>NotificationSender</code> — never the concrete type actually behind it.</p>
+
+      <h3>Two Different Reasons to Reach for an Interface</h3>
+
+      <p><code>NotificationSender</code> and <code>DiscountStrategy</code> (§27.10) are built out of the exact same shape — an interface, a consumer holding a reference to it, one or more implementations supplied from outside. Lining them up side by side is what actually separates <span class="term">Dependency Inversion</span> from the <span class="term">Strategy</span> pattern it so often gets confused with:</p>
+
+      <table class="content-table wrap-first">
+        <tr>
+          <th></th>
+          <th><code>DiscountStrategy</code></th>
+          <th><code>NotificationSender</code></th>
+        </tr>
+        <tr>
+          <td>What varies</td>
+          <td>Interchangeable <strong>business logic</strong> — several ways to compute the same kind of answer from the same kind of input.</td>
+          <td>Interchangeable <strong>infrastructure</strong> — several ways to reach an external system that isn't part of the domain at all.</td>
+        </tr>
+        <tr>
+          <td>Who chooses which implementation</td>
+          <td>A business rule — which promotion is active right now.</td>
+          <td>Deployment or configuration — which provider this environment happens to use.</td>
+        </tr>
+        <tr>
+          <td>Usual name for the move</td>
+          <td><span class="term">Strategy</span> pattern.</td>
+          <td>"Abstracting the dependency" — Dependency Inversion, without necessarily reaching for a named pattern at all.</td>
+        </tr>
+      </table>
+
+      <p><code>PercentageDiscount</code> and a flat-amount discount both answer the exact same question — <em>given this price, what's the discounted price?</em> — just with different arithmetic. That's what makes it Strategy: the interface exists to let business rules pick between several interchangeable pieces of logic. <code>SmtpNotificationSender</code> isn't answering a question with alternate math; it's the only piece of this program that knows how to talk to a mail server at all. The interface exists so that <code>ReminderScheduler</code> — a policy about <em>when</em>, not <em>how</em> — never has to know that mail servers exist.</p>
+
+      <p>Both are Dependency Inversion: a high-level piece of code depending on an abstraction it owns, rather than a low-level detail. Strategy is simply the name people reach for when the thing being swapped is business logic. When it's infrastructure instead, the same move usually just gets called what it is — abstracting the dependency — without needing a pattern name attached at all.</p>
+    </section>
+
+    <!-- §27.10 -->
+    <section id="s19-10">
+      <div class="section-head">
+        <span class="sec-num">§27.10</span>
         <h2>Putting It Together <em>— a small Library</em></h2>
       </div>
 
@@ -693,12 +1096,12 @@ library.printCatalog();
 }</code></pre>
 
       <p>It compiles, and for a single product with no promotions running, it even works. The trouble is the same
-        shape problem §26.1 opened with: <code>name</code> answers "what is this product?" — it changes when the
+        shape problem §27.1 opened with: <code>name</code> answers "what is this product?" — it changes when the
         catalog is corrected, rarely, by whoever manages product data. <code>price</code> and <code>discount</code>
         answer a completely different question, "what does this cost right now?" — and that changes constantly, on
         its own schedule, driven by a pricing or marketing team who has no reason to ever touch <code>name</code>.
         Two unrelated reasons to change, sitting in one class — the same failure of <span class="term">cohesion</span>
-        §26.2 named, just wearing a different domain's clothes.</p>
+        §27.2 named, just wearing a different domain's clothes.</p>
 
       <p>There's a second problem <code>Book</code>'s version didn't have to face quite this directly: nothing
         anywhere actually knows how to turn <code>price</code> and <code>discount</code> into what a customer
@@ -707,7 +1110,7 @@ library.printCatalog();
 
       <pre><code class="language-java">double finalPrice = product.price - (product.price * product.discount / 100); // written out, again, wherever it's needed</code></pre>
 
-      <p>That's <span class="term">Tell, Don't Ask</span> (§26.4) failing before the object even had a chance:
+      <p>That's <span class="term">Tell, Don't Ask</span> (§27.4) failing before the object even had a chance:
         outside code is <em>asking</em> for two raw numbers and doing the business's own math itself, instead of
         <em>telling</em> something "give me the price," and letting the answer come back already computed.</p>
 
@@ -722,7 +1125,7 @@ library.printCatalog();
       <p>Both a <code>Price</code> and a <code>Promotion</code> need the exact same thing: a start, an end, and a
         way to ask "does this moment fall inside?" That's a fourth class in its own right,
         <code>ValidityPeriod</code>, rather than two copies of the same three lines. It's built on
-        <code>Instant</code> (§24.4), Java's type for a single, time-zone-independent point on the timeline —
+        <code>Instant</code> (§25.4), Java's type for a single, time-zone-independent point on the timeline —
         exactly what a validity window needs when the business rule behind it is global, the way this online store's
         promotions are:</p>
 
@@ -778,7 +1181,7 @@ library.printCatalog();
 }</code></pre>
 
       <p>A <code>Promotion</code> knows nothing about amounts at all — it pairs a <code>ValidityPeriod</code> of its
-        own with a <code>DiscountStrategy</code>, the exact interface §13.11 already built for "one of several
+        own with a <code>DiscountStrategy</code>, the exact interface §14.11 already built for "one of several
         interchangeable ways to discount a price":</p>
 
       <pre><code class="language-java">class Promotion {
@@ -855,17 +1258,17 @@ laptop.addPromotion(new Promotion(new PercentageDiscount(0.10), blackFriday));
 System.out.println(laptop.priceAt(Instant.parse("2024-06-15T00:00:00Z"))); // 1200.0 — no promotion active then
 System.out.println(laptop.priceAt(Instant.parse("2024-11-27T12:00:00Z"))); // 1080.0 — Black Friday promotion active</code></pre>
 
-      <p><code>Product</code> now has-a list of <code>Price</code>s and a list of <code>Promotion</code>s (§26.3),
+      <p><code>Product</code> now has-a list of <code>Price</code>s and a list of <code>Promotion</code>s (§27.3),
         not one of each — because "what did this cost historically" and "what promotions have run" are both things a
         real catalog needs to answer, not just "what does it cost right now." Every caller still just tells
         <code>laptop</code> a moment and asks for the price; nothing outside <code>Product</code> ever touches
         <code>priceHistory</code> or <code>promotions</code> directly, and nothing outside <code>Promotion</code>
         ever needs to know whether it's a percentage or a flat amount off — that question stayed exactly where
-        §13.11 already put it.</p>
+        §14.11 already put it.</p>
 
       <div class="callout callout-conn">
-        <div class="callout-lbl">The same lesson, from the other direction <a href="abstractclasses.html#s12-1" class="backref">← §12</a></div>
-        <p>§12's <code>MotorVehicle</code> deliberately kept rental pricing off the vehicle hierarchy entirely, for
+        <div class="callout-lbl">The same lesson, from the other direction <a href="abstractclasses.html#s12-1" class="backref">← §13</a></div>
+        <p>§13's <code>MotorVehicle</code> deliberately kept rental pricing off the vehicle hierarchy entirely, for
           this exact reason: pricing is a business rule, not a fact about what a vehicle <em>is</em>, so it has no
           business living on the class that represents the vehicle itself. <code>Product</code> and <code>Price</code>
           is what that same instinct looks like followed all the way through, on the other side of the same problem —
@@ -874,10 +1277,10 @@ System.out.println(laptop.priceAt(Instant.parse("2024-11-27T12:00:00Z"))); // 10
       </div>
     </section>
 
-    <!-- §26.8 -->
-    <section id="s19-8">
+    <!-- §27.11 -->
+    <section id="s19-11">
       <div class="section-head">
-        <span class="sec-num">§26.8</span>
+        <span class="sec-num">§27.11</span>
         <h2>Key Takeaways</h2>
       </div>
 
@@ -885,6 +1288,8 @@ System.out.println(laptop.priceAt(Instant.parse("2024-11-27T12:00:00Z"))); // 10
         <li>A class should have one reason to change (<span class="term">cohesion</span>). If a class's fields split naturally into unrelated groups, that's usually two classes wearing one name.</li>
         <li><span class="term">Composition</span> — one class holding a reference to another — models "has-a" relationships without duplicating state, and keeps the dependency running in one direction only.</li>
         <li><span class="term">Tell, Don't Ask</span>: give an object a method that does the whole job, instead of pulling its parts out and doing the job yourself from the outside.</li>
+        <li>A method belongs on the class whose own state it's actually built out of. A method whose body is mostly about something the class doesn't own — a network client, a file system, another service — is a collaboration wearing one object's name; give that job to whichever object actually holds what it needs.</li>
+        <li>Every method is a <span class="term">Query</span> (reads, never mutates) or a <span class="term">Command</span> (mutates) — never comfortably both. A method whose name promises one but does the other is a recurring source of surprising bugs.</li>
         <li>Prefer composition to inheritance by default. Reach for <code>extends</code> only when the relationship is genuinely "is-a-more-specific-kind-of" and the subtype should be usable anywhere the supertype is expected.</li>
         <li>Program to an interface, not a concrete class, wherever code needs to work with a capability rather than one specific implementation of it — it's what let <code>Library</code> stay unchanged as new describable types show up.</li>
         <li>None of this is Java-specific. Every idea in this chapter — cohesion, composition, encapsulation, favoring composition over inheritance, coding to an interface — applies in any object-oriented language; Java's classes, interfaces, and references are simply the vocabulary this tutorial used to build them.</li>
@@ -896,7 +1301,7 @@ System.out.println(laptop.priceAt(Instant.parse("2024-11-27T12:00:00Z"))); // 10
   <nav class="page-nav" aria-label="Chapter navigation">
     <a href="io.html" class="page-nav-prev">
       <span class="page-nav-label">← Previous</span>
-      <span class="page-nav-title">§25 — Input and Output</span>
+      <span class="page-nav-title">§26 — Input and Output</span>
     </a>
     <div class="page-nav-spacer"></div>
   </nav>

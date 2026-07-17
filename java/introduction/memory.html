@@ -1,0 +1,3142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>§5 How Memory Works — OO with Java</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      id="hljs-light-theme"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.min.css"
+    />
+    <link
+      rel="stylesheet"
+      id="hljs-dark-theme"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"
+      disabled
+    />
+    <script>
+      (function () {
+        if ((localStorage.getItem("code-theme") || "light") === "dark") {
+          document.getElementById("hljs-light-theme").disabled = true;
+          document.getElementById("hljs-dark-theme").disabled = false;
+          document.documentElement.classList.add("code-dark");
+        }
+      })();
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+  </head>
+
+  <body>
+    <button id="menu-btn" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+
+    <button
+      id="code-theme-toggle"
+      class="code-theme-toggle"
+      aria-label="Toggle code color scheme"
+    >
+      <span class="icon">🌙</span
+      ><span class="code-theme-label">Dark code</span>
+    </button>
+
+    <nav id="sidebar" aria-label="Tutorial navigation">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-label">Tutorial</div>
+        <div class="sidebar-brand-title">
+          Gentle Introduction<br />to OO with Java
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <a href="index.html"
+              ><span class="nav-num">§0</span>Java at a Glance</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="index.html#s0-1"
+                  ><span class="nav-num">§0.1</span>What Is Java?</a
+                >
+              </li>
+              <li>
+                <a href="index.html#s0-2"
+                  ><span class="nav-num">§0.2</span>Where Is Java Used?</a
+                >
+              </li>
+              <li>
+                <a href="index.html#s0-3"
+                  ><span class="nav-num">§0.3</span>Why Java?</a
+                >
+              </li>
+              <li>
+                <a href="index.html#s0-4"
+                  ><span class="nav-num">§0.4</span>The Java Ecosystem</a
+                >
+              </li>
+              <li>
+                <a href="index.html#s0-5"
+                  ><span class="nav-num">§0.5</span>Java Versions</a
+                >
+              </li>
+              <li>
+                <a href="index.html#s0-6"
+                  ><span class="nav-num">§0.6</span>Your First Program</a
+                >
+              </li>
+              <li>
+                <a href="index.html#s0-7"
+                  ><span class="nav-num">§0.7</span>Key Features</a
+                >
+              </li>
+              <li>
+                <a href="index.html#s0-8"
+                  ><span class="nav-num">§0.8</span>Appendix: Write Once, Run
+                  Anywhere</a
+                >
+              </li>
+              <li>
+                <a href="index.html#s0-9"
+                  ><span class="nav-num">§0.9</span>Appendix: Setting Up Your
+                  Environment</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="variables.html"
+              ><span class="nav-num">§1</span>Variables and Values</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="variables.html#s1-1"
+                  ><span class="nav-num">§1.1</span>Values</a
+                >
+              </li>
+              <li>
+                <a href="variables.html#s1-2"
+                  ><span class="nav-num">§1.2</span>Variables in Java</a
+                >
+              </li>
+              <li>
+                <a href="variables.html#s1-3"
+                  ><span class="nav-num">§1.3</span>Primitive Types</a
+                >
+              </li>
+              <li>
+                <a href="variables.html#s1-4"
+                  ><span class="nav-num">§1.4</span>Literals</a
+                >
+              </li>
+              <li>
+                <a href="variables.html#s1-5"
+                  ><span class="nav-num">§1.5</span><code>var</code></a
+                >
+              </li>
+              <li>
+                <a href="variables.html#s1-6"
+                  ><span class="nav-num">§1.6</span>Common Mistakes</a
+                >
+              </li>
+              <li>
+                <a href="variables.html#s1-7"
+                  ><span class="nav-num">§1.7</span>What a Variable Holds</a
+                >
+              </li>
+              <li>
+                <a href="variables.html#s1-8"
+                  ><span class="nav-num">§1.8</span>Key Takeaways</a
+                >
+              </li>
+              <li>
+                <a href="variables.html#s1-9"
+                  ><span class="nav-num">§1.9</span>Appendix: Number Systems</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="classes.html"
+              ><span class="nav-num">§2</span>Classes &amp; Objects</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="classes.html#s2-1"
+                  ><span class="nav-num">§2.1</span>Classes as Blueprints</a
+                >
+              </li>
+              <li>
+                <a href="classes.html#s2-2"
+                  ><span class="nav-num">§2.2</span>Instantiation</a
+                >
+              </li>
+              <li>
+                <a href="classes.html#s2-3"
+                  ><span class="nav-num">§2.3</span>Reference Variables</a
+                >
+              </li>
+              <li>
+                <a href="classes.html#s2-4"
+                  ><span class="nav-num">§2.4</span>Reference Fields</a
+                >
+              </li>
+              <li>
+                <a href="classes.html#s2-5"
+                  ><span class="nav-num">§2.5</span>Constructors</a
+                >
+              </li>
+              <li>
+                <a href="classes.html#s2-6"
+                  ><span class="nav-num">§2.6</span>Static Fields</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="assignment.html"
+              ><span class="nav-num">§3</span>Assignment</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="assignment.html#s3-1"
+                  ><span class="nav-num">§3.1</span>The "Value"</a
+                >
+              </li>
+              <li>
+                <a href="assignment.html#s3-2"
+                  ><span class="nav-num">§3.2</span>Primitive Assignment</a
+                >
+              </li>
+              <li>
+                <a href="assignment.html#s3-3"
+                  ><span class="nav-num">§3.3</span>Reference Assignment</a
+                >
+              </li>
+              <li>
+                <a href="assignment.html#s3-4"
+                  ><span class="nav-num">§3.4</span>Consequence</a
+                >
+              </li>
+              <li>
+                <a href="assignment.html#s3-5"
+                  ><span class="nav-num">§3.5</span>Assignment vs. the Dot</a
+                >
+              </li>
+              <li>
+                <a href="assignment.html#s3-6"
+                  ><span class="nav-num">§3.6</span>The Rule</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="methods.html"
+              ><span class="nav-num">§4</span>Methods</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="methods.html#s4-intro"
+                  ><span class="nav-num">§4.1</span>Why Methods</a
+                >
+              </li>
+              <li>
+                <a href="methods.html#s4-2"
+                  ><span class="nav-num">§4.2</span>What Is a Method?</a
+                >
+              </li>
+              <li>
+                <a href="methods.html#s4-3"
+                  ><span class="nav-num">§4.3</span>Outputs</a
+                >
+              </li>
+              <li>
+                <a href="methods.html#s4-4"
+                  ><span class="nav-num">§4.4</span>Functions to Objects</a
+                >
+              </li>
+              <li>
+                <a href="methods.html#s4-5"
+                  ><span class="nav-num">§4.5</span>The "Hidden" Parameter</a
+                >
+              </li>
+              <li>
+                <a href="methods.html#s4-6"
+                  ><span class="nav-num">§4.6</span>Key Takeaways</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="memory.html" class="active"
+              ><span class="nav-num">§5</span>How Memory Works</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="#s5-1"
+                  ><span class="nav-num">§5.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="#s5-2"
+                  ><span class="nav-num">§5.2</span>Stack vs. Heap</a
+                >
+              </li>
+              <li>
+                <a href="#s5-3"
+                  ><span class="nav-num">§5.3</span>The Call Stack</a
+                >
+              </li>
+              <li>
+                <a href="#s5-4"
+                  ><span class="nav-num">§5.4</span>Copying <code>this</code></a
+                >
+              </li>
+              <li>
+                <a href="#s5-5"
+                  ><span class="nav-num">§5.5</span>A Full Trace</a
+                >
+              </li>
+              <li>
+                <a href="#s5-6"
+                  ><span class="nav-num">§5.6</span>Key Takeaways</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="operators.html"
+              ><span class="nav-num">§6</span>Operators</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="operators.html#s5-1"
+                  ><span class="nav-num">§6.1</span>Arithmetic Operators</a
+                >
+              </li>
+              <li>
+                <a href="operators.html#s5-2"
+                  ><span class="nav-num">§6.2</span>Unary Operators</a
+                >
+              </li>
+              <li>
+                <a href="operators.html#s5-3"
+                  ><span class="nav-num">§6.3</span>Comparison Operators</a
+                >
+              </li>
+              <li>
+                <a href="operators.html#s5-4"
+                  ><span class="nav-num">§6.4</span>Logical Operators</a
+                >
+              </li>
+              <li>
+                <a href="operators.html#s5-5"
+                  ><span class="nav-num">§6.5</span>Compound Assignment</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="arrays.html"><span class="nav-num">§7</span>Arrays</a>
+            <ul class="sub-nav">
+              <li>
+                <a href="arrays.html#s6-1"
+                  ><span class="nav-num">§7.1</span>Why Arrays</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-2"
+                  ><span class="nav-num">§7.2</span>One Variable, Many Values</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-3"
+                  ><span class="nav-num">§7.3</span>The Index</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-4"
+                  ><span class="nav-num">§7.4</span>Creating an Array</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-5"
+                  ><span class="nav-num">§7.5</span>Reading and Writing
+                  Elements</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-6"
+                  ><span class="nav-num">§7.6</span><code>.length</code></a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-7"
+                  ><span class="nav-num">§7.7</span>Filling in the Week</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-8"
+                  ><span class="nav-num">§7.8</span>Assignment Still Copies the
+                  Address</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-9"
+                  ><span class="nav-num">§7.9</span>Arrays of Objects</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-10"
+                  ><span class="nav-num">§7.10</span>Pointing a Slot at an
+                  Existing Object</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-11"
+                  ><span class="nav-num">§7.11</span>Passing an Array's Address
+                  to a Method</a
+                >
+              </li>
+              <li>
+                <a href="arrays.html#s6-12"
+                  ><span class="nav-num">§7.12</span>Variable-Arity
+                  Parameters</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="controlflow.html"
+              ><span class="nav-num">§8</span>Control Flow</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="controlflow.html#s7-1"
+                  ><span class="nav-num">§8.1</span>The Flow of Execution</a
+                >
+              </li>
+              <li>
+                <a href="controlflow.html#s7-2"
+                  ><span class="nav-num">§8.2</span>Variable Scope</a
+                >
+              </li>
+              <li>
+                <a href="controlflow.html#s7-3"
+                  ><span class="nav-num">§8.3</span>Conditional Branching</a
+                >
+              </li>
+              <li>
+                <a href="controlflow.html#s7-4"
+                  ><span class="nav-num">§8.4</span><code>while</code></a
+                >
+              </li>
+              <li>
+                <a href="controlflow.html#s7-5"
+                  ><span class="nav-num">§8.5</span><code>for</code></a
+                >
+              </li>
+              <li>
+                <a href="controlflow.html#s7-6"
+                  ><span class="nav-num">§8.6</span>for-each</a
+                >
+              </li>
+              <li>
+                <a href="controlflow.html#s7-7"
+                  ><span class="nav-num">§8.7</span>Ternary Operator</a
+                >
+              </li>
+              <li>
+                <a href="controlflow.html#s7-8"
+                  ><span class="nav-num">§8.8</span
+                  ><code>break</code> and <code>continue</code></a
+                >
+              </li>
+              <li>
+                <a href="controlflow.html#s7-9"
+                  ><span class="nav-num">§8.9</span><code>switch</code></a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="strings.html"><span class="nav-num">§9</span>Strings</a>
+            <ul class="sub-nav">
+              <li>
+                <a href="strings.html#s8-1"
+                  ><span class="nav-num">§9.1</span>Writing Systems &amp;
+                  Unicode</a
+                >
+              </li>
+              <li>
+                <a href="strings.html#s8-2"
+                  ><span class="nav-num">§9.2</span><code>char</code></a
+                >
+              </li>
+              <li>
+                <a href="strings.html#s8-3"
+                  ><span class="nav-num">§9.3</span><code>Character</code></a
+                >
+              </li>
+              <li>
+                <a href="strings.html#s8-4"
+                  ><span class="nav-num">§9.4</span>Sequence of Characters</a
+                >
+              </li>
+              <li>
+                <a href="strings.html#s8-5"
+                  ><span class="nav-num">§9.5</span>Text Blocks</a
+                >
+              </li>
+              <li>
+                <a href="strings.html#s8-6"
+                  ><span class="nav-num">§9.6</span>Immutability</a
+                >
+              </li>
+              <li>
+                <a href="strings.html#s8-7"
+                  ><span class="nav-num">§9.7</span><code>==</code> vs
+                  <code>.equals()</code></a
+                >
+              </li>
+              <li>
+                <a href="strings.html#s8-8"
+                  ><span class="nav-num">§9.8</span>Concatenation</a
+                >
+              </li>
+              <li>
+                <a href="strings.html#s8-9"
+                  ><span class="nav-num">§9.9</span>Important String Methods</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="inheritance.html"
+              ><span class="nav-num">§10</span>Inheritance</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="inheritance.html#s10-1"
+                  ><span class="nav-num">§10.1</span>Taxonomy</a
+                >
+              </li>
+              <li>
+                <a href="inheritance.html#s10-2"
+                  ><span class="nav-num">§10.2</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="inheritance.html#s10-3"
+                  ><span class="nav-num">§10.3</span><code>extends</code></a
+                >
+              </li>
+              <li>
+                <a href="inheritance.html#s10-4"
+                  ><span class="nav-num">§10.4</span><code>super(...)</code></a
+                >
+              </li>
+              <li>
+                <a href="inheritance.html#s10-5"
+                  ><span class="nav-num">§10.5</span>Polymorphism</a
+                >
+              </li>
+              <li>
+                <a href="inheritance.html#s10-6"
+                  ><span class="nav-num">§10.6</span>Overriding</a
+                >
+              </li>
+              <li>
+                <a href="inheritance.html#s10-7"
+                  ><span class="nav-num">§10.7</span><code>toString()</code></a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="accessmodifiers.html"
+              ><span class="nav-num">§11</span>Packages & Access Modifiers</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="accessmodifiers.html#s11-1"
+                  ><span class="nav-num">§11.1</span>Packages</a
+                >
+              </li>
+              <li>
+                <a href="accessmodifiers.html#s11-2"
+                  ><span class="nav-num">§11.2</span>Why Restrict Access</a
+                >
+              </li>
+              <li>
+                <a href="accessmodifiers.html#s11-3"
+                  ><span class="nav-num">§11.3</span>Getters and Setters</a
+                >
+              </li>
+              <li>
+                <a href="accessmodifiers.html#s11-4"
+                  ><span class="nav-num">§11.4</span><code>public</code></a
+                >
+              </li>
+              <li>
+                <a href="accessmodifiers.html#s11-5"
+                  ><span class="nav-num">§11.5</span>Package-Private</a
+                >
+              </li>
+              <li>
+                <a href="accessmodifiers.html#s11-6"
+                  ><span class="nav-num">§11.6</span><code>protected</code></a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="immutability.html"
+              ><span class="nav-num">§12</span>Immutability</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="immutability.html#s11-1"
+                  ><span class="nav-num">§12.1</span>Two Real-World Analogies</a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-2"
+                  ><span class="nav-num">§12.2</span>Identity &amp; State</a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-3"
+                  ><span class="nav-num">§12.3</span>A Question of Time</a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-4"
+                  ><span class="nav-num">§12.4</span>Building an Immutable
+                  Class</a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-5"
+                  ><span class="nav-num">§12.5</span><code>final</code> Isn't
+                  Deep</a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-6"
+                  ><span class="nav-num">§12.6</span>Why It Matters</a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-7"
+                  ><span class="nav-num">§12.7</span
+                  ><code>StringBuilder</code></a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-8"
+                  ><span class="nav-num">§12.8</span>Putting It Together</a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-4"
+                  ><span class="nav-num">§12.4</span><code>final</code> Isn't
+                  Deep</a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-5"
+                  ><span class="nav-num">§12.5</span>Why It Matters</a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-6"
+                  ><span class="nav-num">§12.6</span
+                  ><code>StringBuilder</code></a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-7"
+                  ><span class="nav-num">§12.7</span>Core Pillars</a
+                >
+              </li>
+              <li>
+                <a href="immutability.html#s11-8"
+                  ><span class="nav-num">§12.8</span>Putting It Together</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="abstractclasses.html"
+              ><span class="nav-num">§13</span>Abstract Classes</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="abstractclasses.html#s12-1"
+                  ><span class="nav-num">§13.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="abstractclasses.html#s12-2"
+                  ><span class="nav-num">§13.2</span
+                  ><code>abstract</code> Classes</a
+                >
+              </li>
+              <li>
+                <a href="abstractclasses.html#s12-3"
+                  ><span class="nav-num">§13.3</span
+                  ><code>abstract</code> Methods</a
+                >
+              </li>
+              <li>
+                <a href="abstractclasses.html#s12-4"
+                  ><span class="nav-num">§13.4</span>Bringing It Altogether</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="interfaces.html"
+              ><span class="nav-num">§14</span>Interfaces</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="interfaces.html#s13-1"
+                  ><span class="nav-num">§14.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-2"
+                  ><span class="nav-num">§14.2</span>Interface vs. Abstract
+                  Class</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-3"
+                  ><span class="nav-num">§14.3</span>Declaring &amp;
+                  Implementing</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-4"
+                  ><span class="nav-num">§14.4</span>Override vs. Overload</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-5"
+                  ><span class="nav-num">§14.5</span>Multiple Interfaces</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-6"
+                  ><span class="nav-num">§14.6</span>Anonymous Classes</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-7"
+                  ><span class="nav-num">§14.7</span>Default Methods</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-8"
+                  ><span class="nav-num">§14.8</span>Default Method
+                  Collisions</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-9"
+                  ><span class="nav-num">§14.9</span>Static Methods</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-10"
+                  ><span class="nav-num">§14.10</span>Interface Inheritance</a
+                >
+              </li>
+              <li>
+                <a href="interfaces.html#s13-11"
+                  ><span class="nav-num">§14.11</span>Interface Use Cases</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="exceptions.html"
+              ><span class="nav-num">§15</span>Exceptions</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="exceptions.html#s14-1"
+                  ><span class="nav-num">§15.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-2"
+                  ><span class="nav-num">§15.2</span>The Exception Lifecycle</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-3"
+                  ><span class="nav-num">§15.3</span>Handling Exceptions</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-4"
+                  ><span class="nav-num">§15.4</span>The Exception Hierarchy</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-5"
+                  ><span class="nav-num">§15.5</span>Checked vs. Unchecked</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-6"
+                  ><span class="nav-num">§15.6</span>Custom Exceptions</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-7"
+                  ><span class="nav-num">§15.7</span>Exception Chaining</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-8"
+                  ><span class="nav-num">§15.8</span>Try-with-Resources</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-9"
+                  ><span class="nav-num">§15.9</span>Best Practices &amp;
+                  Anti-Patterns</a
+                >
+              </li>
+              <li>
+                <a href="exceptions.html#s14-10"
+                  ><span class="nav-num">§15.10</span>Key Takeaways</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="generics.html"><span class="nav-num">§16</span>Generics</a>
+            <ul class="sub-nav">
+              <li>
+                <a href="generics.html#s15-1"
+                  ><span class="nav-num">§16.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="generics.html#s15-2"
+                  ><span class="nav-num">§16.2</span>Type Parameters</a
+                >
+              </li>
+              <li>
+                <a href="generics.html#s15-3"
+                  ><span class="nav-num">§16.3</span>Class-Level Generics</a
+                >
+              </li>
+              <li>
+                <a href="generics.html#s15-4"
+                  ><span class="nav-num">§16.4</span>Generic Interfaces</a
+                >
+              </li>
+              <li>
+                <a href="generics.html#s15-5"
+                  ><span class="nav-num">§16.5</span>Diamond &amp;
+                  <code>var</code></a
+                >
+              </li>
+              <li>
+                <a href="generics.html#s15-6"
+                  ><span class="nav-num">§16.6</span>Generic Methods</a
+                >
+              </li>
+              <li>
+                <a href="generics.html#s15-7"
+                  ><span class="nav-num">§16.7</span>Bounded Types</a
+                >
+              </li>
+              <li>
+                <a href="generics.html#s15-8"
+                  ><span class="nav-num">§16.8</span>Invariance</a
+                >
+              </li>
+              <li>
+                <a href="generics.html#s15-9"
+                  ><span class="nav-num">§16.9</span>Wildcards</a
+                >
+              </li>
+              <li>
+                <a href="generics.html#s15-10"
+                  ><span class="nav-num">§16.10</span>Compile Time Only</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="records.html"><span class="nav-num">§17</span>Records</a>
+            <ul class="sub-nav">
+              <li>
+                <a href="records.html#s16-1"
+                  ><span class="nav-num">§17.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="records.html#s16-2"
+                  ><span class="nav-num">§17.2</span><code>record</code></a
+                >
+              </li>
+              <li>
+                <a href="records.html#s16-3"
+                  ><span class="nav-num">§17.3</span>Implicitly Final</a
+                >
+              </li>
+              <li>
+                <a href="records.html#s16-4"
+                  ><span class="nav-num">§17.4</span>Shallow Immutability</a
+                >
+              </li>
+              <li>
+                <a href="records.html#s16-5"
+                  ><span class="nav-num">§17.5</span>Constructors</a
+                >
+              </li>
+              <li>
+                <a href="records.html#s16-6"
+                  ><span class="nav-num">§17.6</span><code>equals()</code></a
+                >
+              </li>
+              <li>
+                <a href="records.html#s16-7"
+                  ><span class="nav-num">§17.7</span>Records Can Do More</a
+                >
+              </li>
+              <li>
+                <a href="records.html#s16-8"
+                  ><span class="nav-num">§17.8</span>Pattern Matching</a
+                >
+              </li>
+              <li>
+                <a href="records.html#s16-9"
+                  ><span class="nav-num">§17.9</span>When to Reach for One</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="collections.html"
+              ><span class="nav-num">§19</span>Collections Framework</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="collections.html#s18-1"
+                  ><span class="nav-num">§19.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="collections.html#s18-2"
+                  ><span class="nav-num">§19.2</span>The Big Picture</a
+                >
+              </li>
+              <li>
+                <a href="collections.html#s18-3"
+                  ><span class="nav-num">§19.3</span
+                  ><code>SequencedCollection</code></a
+                >
+              </li>
+              <li>
+                <a href="collections.html#s18-4"
+                  ><span class="nav-num">§19.4</span><code>List</code></a
+                >
+              </li>
+              <li>
+                <a href="collections.html#s18-5"
+                  ><span class="nav-num">§19.5</span>Defining an Order</a
+                >
+              </li>
+              <li>
+                <a href="collections.html#s18-6"
+                  ><span class="nav-num">§19.6</span><code>Queue</code></a
+                >
+              </li>
+              <li>
+                <a href="collections.html#s18-7"
+                  ><span class="nav-num">§19.7</span><code>Set</code></a
+                >
+              </li>
+              <li>
+                <a href="collections.html#s18-8"
+                  ><span class="nav-num">§19.8</span><code>Map</code></a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="lambdas.html"
+              ><span class="nav-num">§20</span>Functional Programming</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="lambdas.html#s19-1"
+                  ><span class="nav-num">§20.1</span>Functions as First-Class
+                  Citizens</a
+                >
+              </li>
+              <li>
+                <a href="lambdas.html#s19-2"
+                  ><span class="nav-num">§20.2</span>Why Java "Simulates"
+                  First-Class Functions</a
+                >
+              </li>
+              <li>
+                <a href="lambdas.html#s19-3"
+                  ><span class="nav-num">§20.3</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="lambdas.html#s19-4"
+                  ><span class="nav-num">§20.4</span>Another Anonymous Class</a
+                >
+              </li>
+              <li>
+                <a href="lambdas.html#s19-5"
+                  ><span class="nav-num">§20.5</span>Functional Interfaces</a
+                >
+              </li>
+              <li>
+                <a href="lambdas.html#s19-6"
+                  ><span class="nav-num">§20.6</span>Lambda Expressions</a
+                >
+              </li>
+              <li>
+                <a href="lambdas.html#s19-7"
+                  ><span class="nav-num">§20.7</span>Method References</a
+                >
+              </li>
+              <li>
+                <a href="lambdas.html#s19-8"
+                  ><span class="nav-num">§20.8</span
+                  ><code>java.util.function</code></a
+                >
+              </li>
+              <li>
+                <a href="lambdas.html#s19-9"
+                  ><span class="nav-num">§20.9</span>Key Takeaways</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="enums.html"><span class="nav-num">§18</span>Enums</a>
+            <ul class="sub-nav">
+              <li>
+                <a href="enums.html#s17-1"
+                  ><span class="nav-num">§18.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="enums.html#s17-2"
+                  ><span class="nav-num">§18.2</span>Declaring an Enum</a
+                >
+              </li>
+              <li>
+                <a href="enums.html#s17-3"
+                  ><span class="nav-num">§18.3</span>Objects, Not Constants</a
+                >
+              </li>
+              <li>
+                <a href="enums.html#s17-4"
+                  ><span class="nav-num">§18.4</span>Comparing Enum Values</a
+                >
+              </li>
+              <li>
+                <a href="enums.html#s17-5"
+                  ><span class="nav-num">§18.5</span>Type Characteristics</a
+                >
+              </li>
+              <li>
+                <a href="enums.html#s17-6"
+                  ><span class="nav-num">§18.6</span>Fields, Constructors,
+                  Methods</a
+                >
+              </li>
+              <li>
+                <a href="enums.html#s17-7"
+                  ><span class="nav-num">§18.7</span>Enums vs. Magic Numbers</a
+                >
+              </li>
+              <li>
+                <a href="enums.html#s17-8"
+                  ><span class="nav-num">§18.8</span>Closed Sets vs. Evolving
+                  Reality</a
+                >
+              </li>
+              <li>
+                <a href="enums.html#s17-9"
+                  ><span class="nav-num">§18.9</span>Key Takeaways</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="optionals.html"
+              ><span class="nav-num">§21</span>Optional&lt;T&gt;</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="optionals.html#s20-1"
+                  ><span class="nav-num">§21.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="optionals.html#s20-2"
+                  ><span class="nav-num">§21.2</span><code>null</code>: The
+                  Absence of a Value</a
+                >
+              </li>
+              <li>
+                <a href="optionals.html#s20-3"
+                  ><span class="nav-num">§21.3</span>The Defensive Approach</a
+                >
+              </li>
+              <li>
+                <a href="optionals.html#s20-4"
+                  ><span class="nav-num">§21.4</span>The
+                  <code>Optional&lt;T&gt;</code> Class</a
+                >
+              </li>
+              <li>
+                <a href="optionals.html#s20-5"
+                  ><span class="nav-num">§21.5</span
+                  ><code>Optional&lt;T&gt;</code> vs <code>null</code></a
+                >
+              </li>
+              <li>
+                <a href="optionals.html#s20-6"
+                  ><span class="nav-num">§21.6</span>Specialized Primitive
+                  Optionals</a
+                >
+              </li>
+              <li>
+                <a href="optionals.html#s20-7"
+                  ><span class="nav-num">§21.7</span>Key Takeaways</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="streams.html"><span class="nav-num">§22</span>Streams</a>
+            <ul class="sub-nav">
+              <li>
+                <a href="streams.html#s21-1"
+                  ><span class="nav-num">§22.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-2"
+                  ><span class="nav-num">§22.2</span>What Is a Stream</a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-3"
+                  ><span class="nav-num">§22.3</span>Creating a Stream</a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-4"
+                  ><span class="nav-num">§22.4</span>Intermediate Operations</a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-5"
+                  ><span class="nav-num">§22.5</span>Terminal Operations</a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-6"
+                  ><span class="nav-num">§22.6</span>Collecting Results</a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-7"
+                  ><span class="nav-num">§22.7</span>Streams and
+                  <code>Optional&lt;T&gt;</code></a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-8"
+                  ><span class="nav-num">§22.8</span>Laziness and Pipelines</a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-9"
+                  ><span class="nav-num">§22.9</span>When (Not) to Use
+                  Streams</a
+                >
+              </li>
+              <li>
+                <a href="streams.html#s21-10"
+                  ><span class="nav-num">§22.10</span>Key Takeaways</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="concurrency.html"
+              ><span class="nav-num">§23</span>Concurrent Programming</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="concurrency.html#s22-1"
+                  ><span class="nav-num">§23.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="concurrency.html#s22-2"
+                  ><span class="nav-num">§23.2</span>Process, Thread, and the
+                  OS</a
+                >
+              </li>
+              <li>
+                <a href="concurrency.html#s22-3"
+                  ><span class="nav-num">§23.3</span>Independent Progress</a
+                >
+              </li>
+              <li>
+                <a href="concurrency.html#s22-4"
+                  ><span class="nav-num">§23.4</span>Why Concurrency Matters</a
+                >
+              </li>
+              <li>
+                <a href="concurrency.html#s22-5"
+                  ><span class="nav-num">§23.5</span>Where Parallelism Fits
+                  In</a
+                >
+              </li>
+              <li>
+                <a href="concurrency.html#s22-6"
+                  ><span class="nav-num">§23.6</span>The Main Thread</a
+                >
+              </li>
+              <li>
+                <a href="concurrency.html#s22-7"
+                  ><span class="nav-num">§23.7</span>Step 1: Creating a Task</a
+                >
+              </li>
+              <li>
+                <a href="concurrency.html#s22-8"
+                  ><span class="nav-num">§23.8</span>Step 2: Handing a Task to
+                  an Executor</a
+                >
+              </li>
+              <li>
+                <a href="concurrency.html#s22-9"
+                  ><span class="nav-num">§23.9</span>ExecutorService in
+                  Practice</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="modules.html"
+              ><span class="nav-num">§24</span>Java Modules</a
+            >
+            <ul class="sub-nav">
+              <li>
+                <a href="modules.html#s23-1"
+                  ><span class="nav-num">§24.1</span>The Problem</a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-2"
+                  ><span class="nav-num">§24.2</span>What Is a Module</a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-3"
+                  ><span class="nav-num">§24.3</span
+                  ><code>module-info.java</code></a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-4"
+                  ><span class="nav-num">§24.4</span><code>exports</code></a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-5"
+                  ><span class="nav-num">§24.5</span><code>requires</code></a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-6"
+                  ><span class="nav-num">§24.6</span>Strong Encapsulation</a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-7"
+                  ><span class="nav-num">§24.7</span>The Module Path</a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-8"
+                  ><span class="nav-num">§24.8</span
+                  ><code>requires transitive</code></a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-9"
+                  ><span class="nav-num">§24.9</span>When (Not) to Use
+                  Modules</a
+                >
+              </li>
+              <li>
+                <a href="modules.html#s23-10"
+                  ><span class="nav-num">§24.10</span>Key Takeaways</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="dateandtime.html"
+              ><span class="nav-num">§25</span>Date and Time</a
+            >
+          </li>
+          <li>
+            <a href="io.html"
+              ><span class="nav-num">§26</span>Input and Output</a
+            >
+          </li>
+          <li>
+            <a href="oodesign.html"
+              ><span class="nav-num">§27</span>Object-Oriented Design</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </nav>
+
+    <main id="content">
+      <header class="page-header">
+        <div class="page-chapter">Chapter 5</div>
+        <h1>How Memory Works</h1>
+        <p class="page-lead">
+          Every diagram since §2 has quietly relied on two regions of memory
+          working differently from each other — a slot that holds a value
+          directly, and a slot that holds an address pointing somewhere else.
+          This chapter makes that model explicit: what the stack and the heap
+          actually are, what a method call does to them, and what a
+          <code>return</code> leaves behind.
+        </p>
+      </header>
+
+      <article>
+        <!-- §5.1 -->
+        <section id="s5-1">
+          <div class="section-head">
+            <span class="sec-num">§5.1</span>
+            <h2>The Problem <em>— two kinds of slot, never named</em></h2>
+          </div>
+
+          <p>
+            Every memory diagram since §2 has drawn two separate boxes side by
+            side, labeled "Stack" and "Heap," without ever stopping to say
+            what those words mean or why the split exists. A reference
+            variable's diagram always shows an arrow leaving the left box and
+            landing in the right one — never the other way around, never an
+            arrow between two boxes on the same side. That's not an
+            accident of how the diagrams happened to get drawn. It's a real
+            fact about how the Java Virtual Machine organizes memory, and
+            it's the reason a handful of behaviors that otherwise look
+            arbitrary — why a local variable disappears the instant its
+            method returns, why passing an object to a method lets that
+            method change it, why passing an <code>int</code> never does —
+            all follow from the exact same underlying model.
+          </p>
+
+          <p>
+            This chapter makes that model explicit. §5.2 names the two
+            regions and what each one is for. §5.3 follows a chain of nested
+            method calls to see the stack grow and shrink in real time. §5.4
+            puts both regions to work together in one full trace, watching an
+            object get created, mutated, and handed back across a method
+            boundary — the exact mechanics that every reference-type diagram
+            in this book has been quietly assuming all along.
+          </p>
+        </section>
+
+        <!-- §5.2 -->
+        <section id="s5-2">
+          <div class="section-head">
+            <span class="sec-num">§5.2</span>
+            <h2>Stack vs. Heap <em>— two regions, two jobs</em></h2>
+          </div>
+
+          <p>
+            A running Java program keeps its memory in two separate regions,
+            and every value the program ever touches lives in exactly one of
+            them.
+          </p>
+
+          <h3>The Stack</h3>
+
+          <p>
+            Every thread (§23) gets its own <span class="term">stack</span> —
+            organized so that only the most recently started method call's
+            variables are ever active at once, and every one of them
+            disappears, automatically, the moment that call finishes. §5.3
+            opens that structure up call by call to see exactly how; what
+            matters for now is simpler: every local variable, primitive or
+            reference, lives in a slot that belongs to one specific method
+            call, and that slot exists for exactly as long as that call is
+            running — no longer.
+          </p>
+
+          <h3>The Heap</h3>
+
+          <p>
+            Every object ever created with <code>new</code> — regardless of
+            which method created it — lives on the
+            <span class="term">heap</span>, one single region shared by every
+            thread in the program. Unlike a local variable's slot, a heap
+            object's lifetime has no fixed relationship to any particular
+            method call: an object can be created inside a method and still
+            be alive long after that method has returned, as long as
+            something, somewhere, still holds its address. Nothing removes a
+            heap object on a schedule the way a finished call's variables
+            disappear. Java's <span class="term">garbage collector</span>
+            reclaims a heap object only once it becomes
+            <em>unreachable</em> — no reference to it left anywhere in the
+            program (§9.6 already showed this exact moment happening to a
+            discarded <code>String</code>).
+          </p>
+
+          <h3>Where a Value Actually Lives</h3>
+
+          <p>
+            §2.3 already drew the distinction that matters most: a primitive
+            variable holds its value directly, in whichever slot declares it;
+            a reference variable holds an <em>address</em>, pointing to an
+            object that lives somewhere else. What §2.3 left unsaid is
+            <em>where</em> that "somewhere else" is, and where the variable's
+            own slot lives in the first place — and the answer to both is now
+            available. A local variable's slot — primitive or reference — is
+            always a slot belonging to whichever method call is currently
+            running (§5.3 shows exactly what that slot is part of). What a
+            reference slot points <em>at</em> is always an object on the
+            heap:
+          </p>
+
+          <div class="mem-fanout">
+            <div class="mem-region">
+              <div class="mem-col-label">Stack</div>
+              <div class="mem-rect-wrap" style="margin-right: 0">
+                <div
+                  class="mem-slot"
+                  style="
+                    height: 44px;
+                    box-sizing: border-box;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  "
+                >
+                  <div class="mem-slot-code">discountPercent = 20</div>
+                </div>
+              </div>
+              <div class="mem-rect-wrap" style="margin-right: 0">
+                <div
+                  class="mem-slot"
+                  style="
+                    height: 44px;
+                    box-sizing: border-box;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  "
+                >
+                  <div class="mem-slot-code">
+                    order = <span class="mem-addr">0x9000</span>
+                  </div>
+                </div>
+                <svg
+                  class="mem-precise-arrow"
+                  width="130"
+                  height="50"
+                  style="top: 20px"
+                  viewBox="0 0 130 50"
+                  fill="none"
+                >
+                  <line
+                    x1="0"
+                    y1="2"
+                    x2="94"
+                    y2="-16"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  />
+                  <g transform="translate(94,-16) rotate(-11)">
+                    <path
+                      d="M -7 -5 L 0 0 L -7 5"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </g>
+                </svg>
+              </div>
+            </div>
+
+            <div
+              class="mem-region"
+              style="margin-left: 24px; align-items: flex-start"
+            >
+              <div class="mem-col-label">Heap</div>
+              <div class="mem-object">
+                <div class="mem-object-header">
+                  Order @ <span class="mem-addr">0x9000</span>
+                </div>
+                <div class="mem-object-body">
+                  <div class="mem-object-field">
+                    <span class="fname">id</span><span class="fval">1042</span>
+                  </div>
+                  <div class="mem-object-field">
+                    <span class="fname">total</span
+                    ><span class="fval">250.0</span>
+                  </div>
+                  <div class="mem-object-field">
+                    <span class="fname">discounted</span
+                    ><span class="fval">false</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p>
+            <code>discountPercent</code> holds its value, <code>20</code>,
+            directly — there's nothing to follow, nowhere else to look.
+            <code>order</code> holds an address, <code>0x9000</code>, and the
+            actual <code>Order</code> — its <code>id</code>, its
+            <code>total</code>, its <code>discounted</code> flag — sits on the
+            heap, reachable only by following that address. Both slots are on
+            the stack; only one of them holds something that lives there too.
+          </p>
+        </section>
+
+        <!-- §5.3 -->
+        <section id="s5-3">
+          <div class="section-head">
+            <span class="sec-num">§5.3</span>
+            <h2>
+              The Call Stack
+              <em>— how nested method calls actually happen in memory</em>
+            </h2>
+          </div>
+
+          <p>
+            §4.5 opened a single stack frame to see where <code>this</code> and
+            a method's parameters actually live. Real programs are rarely one
+            call deep — a method calls another method, which calls another, and
+            so on. This section follows one such chain from the moment
+            <code>main</code> starts to the moment it ends, watching the stack
+            grow with every call and shrink again, on its own, as each one
+            finishes.
+          </p>
+
+          <h3>A Tower of Crates</h3>
+
+          <p>
+            Picture the loading dock behind a bookstore's stockroom. Orders
+            arrive one at a time, and each one gets its own crate, set down on
+            top of whatever's already stacked there — never underneath, never
+            wedged into the middle. Whoever is working the dock can only ever
+            reach the crate sitting on top; that's the one being handled right
+            now. Everything below it is still open, still mid-task, still
+            waiting — but it has to wait its turn until the crate above it is
+            finished and lifted away. Once a crate is done, it comes off the
+            top, and whatever was directly underneath is exposed again, exactly
+            as it was left. The stack only ever changes at the top.
+          </p>
+
+          <p>
+            A running program keeps a stack exactly like that one, per thread — the
+            diagrams below label it "Main Thread," since every Java program
+            starts running on one, before any others (§23) ever exist. Every
+            method call sets down a
+            new crate — a <span class="term">stack frame</span> — holding that
+            call's own parameters and local variables. Every method return lifts
+            the topmost crate off, and whatever called it picks up exactly where
+            it left off.
+          </p>
+
+          <h3>Three Calls Deep</h3>
+
+          <p>
+            A payroll run turns a timesheet into a paycheck through three
+            methods, each calling the next — and each asking for only what it
+            actually needs, not everything the call before it had:
+          </p>
+
+          <pre><code class="language-java">public class Payroll {
+
+    public static void main(String[] args) {
+        double takeHomePay = calculatePaycheck(38, 24.00);
+        System.out.println("Take-home pay: $" + takeHomePay);
+    }
+
+    static double calculatePaycheck(int hoursWorked, double hourlyRate) {
+        double grossPay = hoursWorked * hourlyRate;
+        double netPay = withholdTax(grossPay);
+        return netPay;
+    }
+
+    static double withholdTax(double grossPay) {
+        double taxableAtLowRate = Math.min(grossPay, 600.00);
+        double taxableAtHighRate = grossPay - taxableAtLowRate;
+        double tax = taxableAtLowRate * 0.10 + taxableAtHighRate * 0.25;
+        return grossPay - tax - 25.00;
+    }
+}</code></pre>
+
+          <p>
+            <code>main</code> calls <code>calculatePaycheck</code>, which calls
+            <code>withholdTax</code> — three crates deep at its peak.
+            <code>hoursWorked</code> and <code>hourlyRate</code> play genuinely
+            different roles — a count and a rate, multiplied to produce an
+            amount — but <code>withholdTax</code> doesn't need either one
+            individually; by the time the call reaches it, they've already done
+            their job and collapsed into a single dollar figure. Follow the
+            stack through the whole call, one crate at a time.
+          </p>
+
+          <p>
+            <strong>Step 1</strong> — <code>main</code> starts running. One
+            frame, and it's still empty: <code>takeHomePay</code> isn't declared
+            until the next line executes.
+          </p>
+
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+              margin: 20px 0;
+            "
+          >
+            <div class="mem-col-label">Stack — Main Thread</div>
+            <div class="mem-col-border" style="max-width: 320px">
+              <div class="mem-frame-border">
+                <div class="mem-frame-header">main(String[]) frame</div>
+                <div class="mem-frame-body">
+                  <div
+                    class="mem-slot"
+                    style="
+                      height: 44px;
+                      box-sizing: border-box;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    <div
+                      class="mem-slot-code"
+                      style="color: var(--text-muted); font-style: italic"
+                    >
+                      — nothing declared yet —
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p>
+            <strong>Step 2</strong> — <code>main</code> calls
+            <code>calculatePaycheck(38, 24.00)</code>. A new crate goes on top;
+            its parameters are filled in immediately, as part of the call
+            itself:
+          </p>
+
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+              margin: 20px 0;
+            "
+          >
+            <div class="mem-col-label">Stack — Main Thread</div>
+            <div class="mem-col-border" style="max-width: 320px">
+              <div class="mem-frame-border">
+                <div class="mem-frame-header">calculatePaycheck(int, double) frame</div>
+                <div class="mem-frame-body">
+                  <div
+                    class="mem-slot"
+                    style="
+                      height: 44px;
+                      box-sizing: border-box;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    <div class="mem-slot-code">hoursWorked = 38</div>
+                  </div>
+                  <div
+                    class="mem-slot"
+                    style="
+                      height: 44px;
+                      box-sizing: border-box;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    <div class="mem-slot-code">hourlyRate = 24.0</div>
+                  </div>
+                </div>
+              </div>
+              <div class="mem-frame-border">
+                <div class="mem-frame-header">main(String[]) frame</div>
+                <div class="mem-frame-body">
+                  <div
+                    class="mem-slot"
+                    style="
+                      height: 44px;
+                      box-sizing: border-box;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    <div
+                      class="mem-slot-code"
+                      style="color: var(--text-muted); font-style: italic"
+                    >
+                      — nothing declared yet —
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p>
+            <strong>Step 3</strong> — <code>calculatePaycheck</code> multiplies
+            its two parameters into <code>grossPay</code>, then calls
+            <code>withholdTax(grossPay)</code>. A third crate lands on top,
+            holding just one number — not <code>hoursWorked</code> and
+            <code>hourlyRate</code>, which <code>withholdTax</code> was never
+            given and doesn't need. Its parameter happens to share the name
+            <code>grossPay</code> with the local variable one crate down, but
+            that's just a coincidence of naming, not a connection:
+          </p>
+
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+              margin: 20px 0;
+            "
+          >
+            <div class="mem-col-label">Stack — Main Thread</div>
+            <div class="mem-col-border" style="max-width: 320px">
+              <div class="mem-frame-border">
+                <div class="mem-frame-header">withholdTax(double) frame</div>
+                <div class="mem-frame-body">
+                  <div
+                    class="mem-slot"
+                    style="
+                      height: 44px;
+                      box-sizing: border-box;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    <div class="mem-slot-code">grossPay = 912.0</div>
+                  </div>
+                </div>
+              </div>
+              <div class="mem-frame-border">
+                <div class="mem-frame-header">calculatePaycheck(int, double) frame</div>
+                <div class="mem-frame-body">
+                  <div
+                    class="mem-slot"
+                    style="
+                      height: 44px;
+                      box-sizing: border-box;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    <div class="mem-slot-code">hoursWorked = 38</div>
+                  </div>
+                  <div
+                    class="mem-slot"
+                    style="
+                      height: 44px;
+                      box-sizing: border-box;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    <div class="mem-slot-code">hourlyRate = 24.0</div>
+                  </div>
+                  <div
+                    class="mem-slot"
+                    style="
+                      height: 44px;
+                      box-sizing: border-box;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    <div class="mem-slot-code">grossPay = 912.0</div>
+                  </div>
+                </div>
+              </div>
+              <div class="mem-frame-border">
+                <div class="mem-frame-header">main(String[]) frame</div>
+                <div class="mem-frame-body">
+                  <div
+                    class="mem-slot"
+                    style="
+                      height: 44px;
+                      box-sizing: border-box;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    <div
+                      class="mem-slot-code"
+                      style="color: var(--text-muted); font-style: italic"
+                    >
+                      — nothing declared yet —
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout callout-note">
+            <div class="callout-lbl">Same name, different crates</div>
+            <p>
+              <code>calculatePaycheck</code>'s <code>grossPay</code> and
+              <code>withholdTax</code>'s <code>grossPay</code> share a name and,
+              right now, a value — but they are not the same slot. Copying
+              <code>912.0</code> into the new frame (§4.2's parameter-passing
+              rule) is exactly as independent as copying it into any other local
+              variable. If <code>withholdTax</code> reassigned its own
+              <code>grossPay</code>, <code>calculatePaycheck</code>'s copy, one
+              crate down, wouldn't notice.
+            </p>
+          </div>
+
+          <p>
+            <strong>Step 4</strong> — <code>withholdTax</code> works through a
+            small ladder of rates: the first <code>$600</code> of
+            <code>grossPay</code> is taxed at <code>10%</code>, everything above
+            that at <code>25%</code>, and a flat <code>$25.00</code> insurance
+            premium comes off on top. Along the way it declares locals of its
+            own — <code>taxableAtLowRate</code>, <code>taxableAtHighRate</code>,
+            <code>tax</code> — right there in its own crate. None of that
+            matters to what happens next: once <code>withholdTax</code> returns,
+            its entire crate — <code>grossPay</code> and every local it built up
+            — is lifted off the top and discarded in one motion. The value it
+            hands back, <code>749.0</code>, lands in
+            <code>calculatePaycheck</code>'s frame as <code>netPay</code>:
+          </p>
+
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+              margin: 20px 0;
+            "
+          >
+            <div class="mem-col-label">Stack — Main Thread</div>
+            <div class="mem-col-border" style="max-width: 320px">
+              <div class="mem-frame-border">
+                <div class="mem-frame-header">calculatePaycheck(int, double) frame</div>
+                <div class="mem-frame-body">
+                  <div
+                    class="mem-slot"
+                    style="
+                      height: 44px;
+                      box-sizing: border-box;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    <div class="mem-slot-code">hoursWorked = 38</div>
+                  </div>
+                  <div
+                    class="mem-slot"
+                    style="
+                      height: 44px;
+                      box-sizing: border-box;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    <div class="mem-slot-code">hourlyRate = 24.0</div>
+                  </div>
+                  <div
+                    class="mem-slot"
+                    style="
+                      height: 44px;
+                      box-sizing: border-box;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    <div class="mem-slot-code">grossPay = 912.0</div>
+                  </div>
+                  <div
+                    class="mem-slot"
+                    style="
+                      height: 44px;
+                      box-sizing: border-box;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    <div class="mem-slot-code">netPay = 749.0</div>
+                  </div>
+                </div>
+              </div>
+              <div class="mem-frame-border">
+                <div class="mem-frame-header">main(String[]) frame</div>
+                <div class="mem-frame-body">
+                  <div
+                    class="mem-slot"
+                    style="
+                      height: 44px;
+                      box-sizing: border-box;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    <div
+                      class="mem-slot-code"
+                      style="color: var(--text-muted); font-style: italic"
+                    >
+                      — nothing declared yet —
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p>
+            <strong>Step 5</strong> — <code>calculatePaycheck</code> hits
+            <code>return netPay;</code>. Same thing happens one level up: its
+            whole crate — <code>hoursWorked</code>, <code>hourlyRate</code>,
+            <code>grossPay</code>, <code>netPay</code> — is lifted off.
+            <code>749.0</code> lands in <code>main</code> as
+            <code>takeHomePay</code>:
+          </p>
+
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+              margin: 20px 0;
+            "
+          >
+            <div class="mem-col-label">Stack — Main Thread</div>
+            <div class="mem-col-border" style="max-width: 320px">
+              <div class="mem-frame-border">
+                <div class="mem-frame-header">main(String[]) frame</div>
+                <div class="mem-frame-body">
+                  <div
+                    class="mem-slot"
+                    style="
+                      height: 44px;
+                      box-sizing: border-box;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    "
+                  >
+                    <div class="mem-slot-code">takeHomePay = 749.0</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p>
+            <strong>Step 6</strong> — <code>main</code> prints the total and
+            reaches the end of its own body. Its crate is lifted off too — the
+            last one. The tower is gone:
+          </p>
+
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+              margin: 20px 0;
+            "
+          >
+            <div class="mem-col-label">Stack — Main Thread</div>
+            <div
+              class="mem-col-border"
+              style="max-width: 320px; align-items: center"
+            >
+              <div
+                class="mem-slot"
+                style="
+                  height: 44px;
+                  box-sizing: border-box;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  width: 100%;
+                "
+              >
+                <div
+                  class="mem-slot-code"
+                  style="color: var(--text-muted); font-style: italic"
+                >
+                  — empty —
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p>
+            Nobody had to clean anything up. No crate was ever reached into from
+            the middle, and none was ever left behind — each one simply came off
+            the top the moment its own method returned, in exactly the reverse
+            order the calls went in: <code>withholdTax</code> first, then
+            <code>calculatePaycheck</code>, then <code>main</code> last.
+          </p>
+
+          <div class="callout callout-rule">
+            <div class="callout-lbl">The one rule underneath it all</div>
+            <p>
+              A stack only ever changes at the top. Calling a method pushes a
+              new frame on top of whichever frame is currently running.
+              Returning from a method pops that same frame — always the topmost
+              one, never one further down. That single discipline is what lets
+              <code>withholdTax</code>, <code>calculatePaycheck</code>, and
+              <code>main</code> share one stack safely, no matter how deep the
+              chain of calls goes.
+            </p>
+          </div>
+        </section>
+        <!-- §5.4 -->
+        <section id="s5-4">
+          <div class="section-head">
+            <span class="sec-num">§5.4</span>
+            <h2>
+              Copying <code>this</code> <em>— one call, one new object</em>
+            </h2>
+          </div>
+
+          <p>
+            §5.3 traced a chain of calls built entirely from primitives —
+            no object ever entered the picture, so the heap never needed to
+            appear in a single diagram. Before combining stack and heap in
+            full (§5.5), it's worth watching the smallest possible case on
+            its own: one object, one method call with no arguments at all,
+            one brand new object handed back. Every idea in the larger trace
+            that follows is already present here, just without anything else
+            going on around it.
+          </p>
+
+          <pre><code class="language-java">class TicketDispenser {
+    private int ticketsIssued;
+
+    Ticket takeNext() {
+        ticketsIssued++;
+        Ticket ticket = new Ticket(ticketsIssued);
+        return ticket;
+    }
+}</code></pre>
+
+          <pre><code class="language-java">class Ticket {
+    private final int number;
+
+    Ticket(int number) {
+        this.number = number;
+    }
+
+    int number() {
+        return number;
+    }
+}</code></pre>
+
+          <pre><code class="language-java">class DeliCounter {
+    public static void main(String[] args) {
+        TicketDispenser dispenser = new TicketDispenser();
+        Ticket ticket = dispenser.takeNext();
+
+        System.out.println("Now serving: " + ticket.number());
+    }
+}</code></pre>
+
+          <p>
+            <code>dispenser.takeNext()</code> takes no arguments — the only
+            thing that crosses into the new frame at all is the implicit
+            <code>this</code>, a copy of the address <code>dispenser</code>
+            already holds. Mid-call, both frames exist at once, and exactly
+            one heap object exists so far:
+          </p>
+
+          <div style="display: flex; gap: 28px; align-items: flex-start; margin: 20px 0; flex-wrap: wrap">
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div class="mem-col-label">Stack — Main Thread</div>
+              <div class="mem-col-border" style="max-width: 300px">
+                <div class="mem-frame-border">
+                  <div class="mem-frame-header">takeNext() frame</div>
+                  <div class="mem-frame-body">
+                    <div class="mem-rect-wrap" style="margin-right: 0">
+                      <div
+                        class="mem-slot"
+                        style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center"
+                      >
+                        <div class="mem-slot-code">
+                          this = <span class="mem-addr">0xA000</span>
+                        </div>
+                      </div>
+                      <svg
+                        class="mem-precise-arrow"
+                        width="115"
+                        height="150"
+                        style="top: 20px"
+                        viewBox="0 0 115 150"
+                        fill="none"
+                      >
+                        <line x1="0" y1="2" x2="85" y2="-37" stroke="currentColor" stroke-width="1.5" />
+                        <g transform="translate(85,-37) rotate(-25)">
+                          <path d="M -7 -5 L 0 0 L -7 5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="mem-frame-border">
+                  <div class="mem-frame-header">main(String[]) frame — paused</div>
+                  <div class="mem-frame-body">
+                    <div class="mem-rect-wrap" style="margin-right: 0">
+                      <div
+                        class="mem-slot"
+                        style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center"
+                      >
+                        <div class="mem-slot-code">
+                          dispenser = <span class="mem-addr">0xA000</span>
+                        </div>
+                      </div>
+                      <svg
+                        class="mem-precise-arrow"
+                        width="115"
+                        height="190"
+                        style="top: 20px"
+                        viewBox="0 0 115 190"
+                        fill="none"
+                      >
+                        <line x1="0" y1="2" x2="85" y2="-160" stroke="currentColor" stroke-width="1.5" />
+                        <g transform="translate(85,-160) rotate(-62)">
+                          <path d="M -7 -5 L 0 0 L -7 5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div class="mem-col-label">Heap</div>
+              <div class="mem-col-border" style="gap: 16px">
+                <div class="mem-object">
+                  <div class="mem-object-header">
+                    TicketDispenser @ <span class="mem-addr">0xA000</span>
+                  </div>
+                  <div class="mem-object-body">
+                    <div class="mem-object-field"><span class="fname">ticketsIssued</span><span class="fval">0</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p>
+            <code>this</code> and <code>dispenser</code> are two separate
+            slots, in two separate frames, holding the identical copied
+            address — the exact same fact §5.5's <code>Order</code> example
+            leans on, here with nothing else around it to explain first.
+            Inside the call, <code>ticketsIssued++</code> mutates the object
+            both slots point to, then <code>new Ticket(ticketsIssued)</code>
+            puts a second object on the heap, reachable right now only
+            through this frame's own local <code>ticket</code>:
+          </p>
+
+          <div style="display: flex; gap: 28px; align-items: flex-start; margin: 20px 0; flex-wrap: wrap">
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div class="mem-col-label">Stack — Main Thread</div>
+              <div class="mem-col-border" style="max-width: 300px">
+                <div class="mem-frame-border">
+                  <div class="mem-frame-header">takeNext() frame</div>
+                  <div class="mem-frame-body">
+                    <div class="mem-rect-wrap" style="margin-right: 0">
+                      <div
+                        class="mem-slot"
+                        style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center"
+                      >
+                        <div class="mem-slot-code">
+                          this = <span class="mem-addr">0xA000</span>
+                        </div>
+                      </div>
+                      <svg
+                        class="mem-precise-arrow"
+                        width="115"
+                        height="150"
+                        style="top: 20px"
+                        viewBox="0 0 115 150"
+                        fill="none"
+                      >
+                        <line x1="0" y1="2" x2="85" y2="-37" stroke="currentColor" stroke-width="1.5" />
+                        <g transform="translate(85,-37) rotate(-25)">
+                          <path d="M -7 -5 L 0 0 L -7 5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                      </svg>
+                    </div>
+                    <div class="mem-rect-wrap" style="margin-right: 0">
+                      <div
+                        class="mem-slot"
+                        style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center"
+                      >
+                        <div class="mem-slot-code">
+                          ticket = <span class="mem-addr">0xA050</span>
+                        </div>
+                      </div>
+                      <svg
+                        class="mem-precise-arrow"
+                        width="115"
+                        height="150"
+                        style="top: 20px"
+                        viewBox="0 0 115 150"
+                        fill="none"
+                      >
+                        <line x1="0" y1="2" x2="85" y2="-5" stroke="currentColor" stroke-width="1.5" />
+                        <g transform="translate(85,-5) rotate(-5)">
+                          <path d="M -7 -5 L 0 0 L -7 5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="mem-frame-border">
+                  <div class="mem-frame-header">main(String[]) frame — paused</div>
+                  <div class="mem-frame-body">
+                    <div class="mem-rect-wrap" style="margin-right: 0">
+                      <div
+                        class="mem-slot"
+                        style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center"
+                      >
+                        <div class="mem-slot-code">dispenser = 0xA000</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div class="mem-col-label">Heap</div>
+              <div class="mem-col-border" style="gap: 16px">
+              <div class="mem-object">
+                <div class="mem-object-header">
+                  TicketDispenser @ <span class="mem-addr">0xA000</span>
+                </div>
+                <div class="mem-object-body">
+                  <div class="mem-object-field"><span class="fname">ticketsIssued</span><span class="fval">1</span></div>
+                </div>
+              </div>
+              <div class="mem-object">
+                <div class="mem-object-header">
+                  Ticket @ <span class="mem-addr">0xA050</span>
+                </div>
+                <div class="mem-object-body">
+                  <div class="mem-object-field"><span class="fname">number</span><span class="fval">1</span></div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <p>
+            <code>return ticket;</code> pops the frame. The address it held —
+            <code>0xA050</code> — is copied out one instant before that frame
+            disappears, into a brand new slot back in <code>main</code>. Two
+            frames become one; two heap objects stay exactly two, both now
+            reachable from the single frame left standing:
+          </p>
+
+          <div style="display: flex; gap: 28px; align-items: flex-start; margin: 20px 0; flex-wrap: wrap">
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div class="mem-col-label">Stack — Main Thread</div>
+              <div class="mem-col-border" style="max-width: 300px">
+                <div class="mem-frame-border">
+                  <div class="mem-frame-header">main(String[]) frame — resumed</div>
+                  <div class="mem-frame-body">
+                    <div class="mem-rect-wrap" style="margin-right: 0">
+                      <div
+                        class="mem-slot"
+                        style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center"
+                      >
+                        <div class="mem-slot-code">
+                          dispenser = <span class="mem-addr">0xA000</span>
+                        </div>
+                      </div>
+                      <svg
+                        class="mem-precise-arrow"
+                        width="115"
+                        height="150"
+                        style="top: 20px"
+                        viewBox="0 0 115 150"
+                        fill="none"
+                      >
+                        <line x1="0" y1="2" x2="85" y2="-66" stroke="currentColor" stroke-width="1.5" />
+                        <g transform="translate(85,-66) rotate(-39)">
+                          <path d="M -7 -5 L 0 0 L -7 5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                      </svg>
+                    </div>
+                    <div class="mem-rect-wrap" style="margin-right: 0">
+                      <div
+                        class="mem-slot"
+                        style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center"
+                      >
+                        <div class="mem-slot-code">
+                          ticket = <span class="mem-addr">0xA050</span>
+                        </div>
+                      </div>
+                      <svg
+                        class="mem-precise-arrow"
+                        width="115"
+                        height="150"
+                        style="top: 20px"
+                        viewBox="0 0 115 150"
+                        fill="none"
+                      >
+                        <line x1="0" y1="2" x2="85" y2="-34" stroke="currentColor" stroke-width="1.5" />
+                        <g transform="translate(85,-34) rotate(-23)">
+                          <path d="M -7 -5 L 0 0 L -7 5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div class="mem-col-label">Heap</div>
+              <div class="mem-col-border" style="gap: 16px">
+              <div class="mem-object">
+                <div class="mem-object-header">
+                  TicketDispenser @ <span class="mem-addr">0xA000</span>
+                </div>
+                <div class="mem-object-body">
+                  <div class="mem-object-field"><span class="fname">ticketsIssued</span><span class="fval">1</span></div>
+                </div>
+              </div>
+              <div class="mem-object">
+                <div class="mem-object-header">
+                  Ticket @ <span class="mem-addr">0xA050</span>
+                </div>
+                <div class="mem-object-body">
+                  <div class="mem-object-field"><span class="fname">number</span><span class="fval">1</span></div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <p>
+            Four variables took part in this call, across its whole
+            lifetime, never more than three visible in memory at once:
+            <code>dispenser</code> and <code>ticket</code> in <code>main</code>,
+            <code>this</code> and the local <code>ticket</code> inside
+            <code>takeNext()</code>. Only two of them ever coexisted with an
+            object the other didn't already know about — and even then, both
+            were copies of an address, never a second object. Two calls,
+            zero arguments beyond <code>this</code>, and the entire mechanism
+            §5.5 relies on is already fully in view.
+          </p>
+        </section>
+
+        <!-- §5.5 -->
+        <section id="s5-5">
+          <div class="section-head">
+            <span class="sec-num">§5.5</span>
+            <h2>
+              A Full Trace <em>— stack and heap, together</em>
+            </h2>
+          </div>
+
+          <p>
+            §5.4 kept things minimal — one call, no arguments, one new object
+            handed back. Real programs usually do more per call: mutate the
+            object on the other end of a reference <em>and</em> create a
+            brand new object before returning, both in the same method. This
+            section traces exactly that, one line at a time, watching both
+            regions move together.
+          </p>
+
+          <p>An order gets a percentage discount applied to it:</p>
+
+          <pre><code class="language-java">class Order {
+    private final int id;
+    private double total;
+    private boolean discounted;
+
+    Order(int id, double total) {
+        this.id = id;
+        this.total = total;
+    }
+
+    Receipt applyDiscount(int discountPercent) {
+        double discountAmount = total * discountPercent / 100.0;
+        total -= discountAmount;
+        discounted = true;
+
+        Receipt receipt = new Receipt(id, discountAmount);
+        return receipt;
+    }
+
+    double total() {
+        return total;
+    }
+}</code></pre>
+
+          <pre><code class="language-java">class Receipt {
+    private final int orderId;
+    private final double amountSaved;
+
+    Receipt(int orderId, double amountSaved) {
+        this.orderId = orderId;
+        this.amountSaved = amountSaved;
+    }
+
+    double amountSaved() {
+        return amountSaved;
+    }
+}</code></pre>
+
+          <pre><code class="language-java">class Checkout {
+    public static void main(String[] args) {
+        int discountPercent = 20;
+        Order order = new Order(1042, 250.00);
+
+        Receipt receipt = order.applyDiscount(discountPercent);
+
+        System.out.println(order.total());          // 200.0
+        System.out.println(receipt.amountSaved());  // 50.0
+    }
+}</code></pre>
+
+          <h3>Step 1 — <code>main</code> declares</h3>
+
+          <p>
+            <code>main</code> starts running: one frame, pushed onto the call
+            stack, program counter sitting at the top of it. Its first two
+            lines declare a primitive and a reference. <code>discountPercent</code>
+            stores its value, <code>20</code>, directly in its own slot.
+            <code>order</code> stores an address; the <code>Order</code>
+            object itself — freshly built by <code>new</code> — lands on the
+            heap, entirely separate from the frame that created it:
+          </p>
+
+          <div style="display: flex; gap: 28px; align-items: flex-start; margin: 20px 0; flex-wrap: wrap">
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div class="mem-col-label">Stack — Main Thread</div>
+              <div class="mem-col-border" style="max-width: 320px">
+                <div class="mem-frame-border">
+                  <div class="mem-frame-header">main(String[]) frame</div>
+                  <div class="mem-frame-body">
+                    <div
+                      class="mem-slot"
+                      style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center"
+                    >
+                      <div class="mem-slot-code">discountPercent = 20</div>
+                    </div>
+                    <div class="mem-rect-wrap" style="margin-right: 0">
+                      <div
+                        class="mem-slot"
+                        style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center"
+                      >
+                        <div class="mem-slot-code">
+                          order = <span class="mem-addr">0x9000</span>
+                        </div>
+                      </div>
+                      <svg
+                        class="mem-precise-arrow"
+                        width="115"
+                        height="150"
+                        style="top: 20px"
+                        viewBox="0 0 115 150"
+                        fill="none"
+                      >
+                        <line x1="0" y1="2" x2="85" y2="-51" stroke="currentColor" stroke-width="1.5" />
+                        <g transform="translate(85,-51) rotate(-32)">
+                          <path d="M -7 -5 L 0 0 L -7 5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div class="mem-col-label">Heap</div>
+              <div class="mem-col-border" style="gap: 16px">
+              <div class="mem-object">
+                <div class="mem-object-header">
+                  Order @ <span class="mem-addr">0x9000</span>
+                </div>
+                <div class="mem-object-body">
+                  <div class="mem-object-field"><span class="fname">id</span><span class="fval">1042</span></div>
+                  <div class="mem-object-field"><span class="fname">total</span><span class="fval">250.0</span></div>
+                  <div class="mem-object-field"><span class="fname">discounted</span><span class="fval">false</span></div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <h3>Step 2 — the call pushes a frame</h3>
+
+          <p>
+            <code>order.applyDiscount(discountPercent)</code> runs. A new
+            frame goes on top, and two things are copied into it, exactly the
+            way §4.2's parameter-passing rule always works: the address
+            <code>order</code> holds is copied into the implicit
+            <code>this</code>, and the value <code>discountPercent</code>
+            holds is copied into the parameter of the same name. Nothing
+            about <code>main</code>'s own slots changes — <code>this</code>
+            is a brand new slot, in a brand new frame, that happens to start
+            out holding the same address <code>order</code> already had.
+            Alongside the copied values, the frame also remembers a
+            <span class="term">return address</span> — the exact point back
+            in <code>main</code> where execution resumes once this call is
+            done:
+          </p>
+
+          <div style="display: flex; gap: 28px; align-items: flex-start; margin: 20px 0; flex-wrap: wrap">
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div class="mem-col-label">Stack — Main Thread</div>
+              <div class="mem-col-border" style="max-width: 320px">
+                <div class="mem-frame-border">
+                  <div class="mem-frame-header">applyDiscount(int) frame</div>
+                  <div class="mem-frame-body">
+                    <div
+                      class="mem-slot"
+                      style="height: 40px; box-sizing: border-box; display: flex; align-items: center; justify-content: center"
+                    >
+                      <div class="mem-slot-code" style="color: var(--text-muted); font-style: italic; font-size: 12px">
+                        ↩ return to main, after this call
+                      </div>
+                    </div>
+                    <div class="mem-rect-wrap" style="margin-right: 0">
+                      <div
+                        class="mem-slot"
+                        style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center"
+                      >
+                        <div class="mem-slot-code">
+                          this = <span class="mem-addr">0x9000</span>
+                        </div>
+                      </div>
+                      <svg
+                        class="mem-precise-arrow"
+                        width="115"
+                        height="150"
+                        style="top: 20px"
+                        viewBox="0 0 115 150"
+                        fill="none"
+                      >
+                        <line x1="0" y1="2" x2="85" y2="-47" stroke="currentColor" stroke-width="1.5" />
+                        <g transform="translate(85,-47) rotate(-30)">
+                          <path d="M -7 -5 L 0 0 L -7 5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                      </svg>
+                    </div>
+                    <div
+                      class="mem-slot"
+                      style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center"
+                    >
+                      <div class="mem-slot-code">discountPercent = 20</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mem-frame-border">
+                  <div class="mem-frame-header">main(String[]) frame — paused</div>
+                  <div class="mem-frame-body">
+                    <div
+                      class="mem-slot"
+                      style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center"
+                    >
+                      <div class="mem-slot-code">discountPercent = 20</div>
+                    </div>
+                    <div class="mem-rect-wrap" style="margin-right: 0">
+                      <div
+                        class="mem-slot"
+                        style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center"
+                      >
+                        <div class="mem-slot-code">
+                          order = <span class="mem-addr">0x9000</span>
+                        </div>
+                      </div>
+                      <svg
+                        class="mem-precise-arrow"
+                        width="115"
+                        height="288"
+                        style="top: 20px"
+                        viewBox="0 0 115 288"
+                        fill="none"
+                      >
+                        <line x1="0" y1="2" x2="85" y2="-258" stroke="currentColor" stroke-width="1.5" />
+                        <g transform="translate(85,-258) rotate(-72)">
+                          <path d="M -7 -5 L 0 0 L -7 5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div class="mem-col-label">Heap</div>
+              <div class="mem-col-border" style="gap: 16px">
+              <div class="mem-object">
+                <div class="mem-object-header">
+                  Order @ <span class="mem-addr">0x9000</span>
+                </div>
+                <div class="mem-object-body">
+                  <div class="mem-object-field"><span class="fname">id</span><span class="fval">1042</span></div>
+                  <div class="mem-object-field"><span class="fname">total</span><span class="fval">250.0</span></div>
+                  <div class="mem-object-field"><span class="fname">discounted</span><span class="fval">false</span></div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <p>
+            Both arrows land on the exact same box. <code>this</code> and
+            <code>order</code> are two different slots, in two different
+            frames, that happen to hold the identical address — no different
+            from <code>member1</code> and <code>member2</code> aliasing the
+            same <code>String</code> back in §9. <code>main</code>'s frame
+            sits directly underneath, completely untouched, holding its own
+            <code>discountPercent</code> and <code>order</code> exactly as it
+            left them — paused, not destroyed, waiting for the crate above it
+            to come off.
+          </p>
+
+          <h3>Step 3 — the method body runs</h3>
+
+          <p>
+            <code>applyDiscount</code> computes <code>discountAmount</code> —
+            a local primitive, alive only in this frame — then does two very
+            different things with it. First, it reaches through
+            <code>this</code> and changes a field on the object at the other
+            end: <code>total -= discountAmount</code>. Second, it builds a
+            brand new <code>Receipt</code> with <code>new</code>, and stores
+            its address in a local reference, <code>receipt</code>:
+          </p>
+
+          <div style="display: flex; gap: 28px; align-items: flex-start; margin: 20px 0; flex-wrap: wrap">
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div class="mem-col-label">Stack — Main Thread</div>
+              <div class="mem-col-border" style="max-width: 320px">
+                <div class="mem-frame-border">
+                  <div class="mem-frame-header">applyDiscount(int) frame</div>
+                  <div class="mem-frame-body">
+                    <div
+                      class="mem-slot"
+                      style="height: 40px; box-sizing: border-box; display: flex; align-items: center; justify-content: center"
+                    >
+                      <div class="mem-slot-code" style="color: var(--text-muted); font-style: italic; font-size: 12px">
+                        ↩ return to main, after this call
+                      </div>
+                    </div>
+                    <div class="mem-rect-wrap" style="margin-right: 0">
+                      <div
+                        class="mem-slot"
+                        style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center"
+                      >
+                        <div class="mem-slot-code">
+                          this = <span class="mem-addr">0x9000</span>
+                        </div>
+                      </div>
+                      <svg
+                        class="mem-precise-arrow"
+                        width="115"
+                        height="150"
+                        style="top: 20px"
+                        viewBox="0 0 115 150"
+                        fill="none"
+                      >
+                        <line x1="0" y1="2" x2="85" y2="-47" stroke="currentColor" stroke-width="1.5" />
+                        <g transform="translate(85,-47) rotate(-30)">
+                          <path d="M -7 -5 L 0 0 L -7 5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                      </svg>
+                    </div>
+                    <div
+                      class="mem-slot"
+                      style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center"
+                    >
+                      <div class="mem-slot-code">discountPercent = 20</div>
+                    </div>
+                    <div
+                      class="mem-slot"
+                      style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center"
+                    >
+                      <div class="mem-slot-code">discountAmount = 50.0</div>
+                    </div>
+                    <div class="mem-rect-wrap" style="margin-right: 0">
+                      <div
+                        class="mem-slot"
+                        style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center"
+                      >
+                        <div class="mem-slot-code">
+                          receipt = <span class="mem-addr">0x9050</span>
+                        </div>
+                      </div>
+                      <svg
+                        class="mem-precise-arrow"
+                        width="115"
+                        height="150"
+                        style="top: 20px"
+                        viewBox="0 0 115 150"
+                        fill="none"
+                      >
+                        <line x1="0" y1="2" x2="85" y2="-58" stroke="currentColor" stroke-width="1.5" />
+                        <g transform="translate(85,-58) rotate(-35)">
+                          <path d="M -7 -5 L 0 0 L -7 5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="mem-frame-border">
+                  <div class="mem-frame-header">main(String[]) frame — paused</div>
+                  <div class="mem-frame-body">
+                    <div
+                      class="mem-slot"
+                      style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center"
+                    >
+                      <div class="mem-slot-code">discountPercent = 20</div>
+                    </div>
+                    <div
+                      class="mem-slot"
+                      style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center"
+                    >
+                      <div class="mem-slot-code">order = 0x9000</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div class="mem-col-label">Heap</div>
+              <div class="mem-col-border" style="gap: 16px">
+              <div class="mem-object">
+                <div class="mem-object-header">
+                  Order @ <span class="mem-addr">0x9000</span>
+                </div>
+                <div class="mem-object-body">
+                  <div class="mem-object-field"><span class="fname">id</span><span class="fval">1042</span></div>
+                  <div class="mem-object-field"><span class="fname">total</span><span class="fval">200.0</span></div>
+                  <div class="mem-object-field"><span class="fname">discounted</span><span class="fval">true</span></div>
+                </div>
+              </div>
+              <div class="mem-object">
+                <div class="mem-object-header">
+                  Receipt @ <span class="mem-addr">0x9050</span>
+                </div>
+                <div class="mem-object-body">
+                  <div class="mem-object-field"><span class="fname">orderId</span><span class="fval">1042</span></div>
+                  <div class="mem-object-field"><span class="fname">amountSaved</span><span class="fval">50.0</span></div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <p>
+            <code>total</code> changed from <code>250.0</code> to
+            <code>200.0</code> — not because <code>this</code> changed, but
+            because the field on the object <code>this</code> points to
+            changed. That object is the exact same one <code>main</code>'s
+            <code>order</code> points to, so the moment execution eventually
+            gets back there, <code>order.total()</code> will already reflect
+            it — nothing needs to be handed back for that to be true. A
+            second, brand new object appeared on the heap too:
+            <code>Receipt @ 0x9050</code>, reachable right now only through
+            this frame's own <code>receipt</code> slot.
+          </p>
+
+          <div class="callout callout-note">
+            <div class="callout-lbl">What mutating doesn't include</div>
+            <p>
+              If this method instead reassigned its own parameter —
+              <code>discountPercent = 0;</code> — that would change nothing
+              about <code>main</code>'s copy, for the exact reason §5.3's
+              "Same name, different crates" callout gave: <code>this</code>
+              frame's <code>discountPercent</code> and <code>main</code>'s
+              <code>discountPercent</code> are two separate slots that merely
+              started out holding the same value. Mutating the object
+              <code>this</code> points to is visible outside this frame,
+              because there's only one <code>Order</code>; reassigning a copied
+              value never is, because there were two slots all along.
+            </p>
+          </div>
+
+          <h3>Step 4 — the method returns</h3>
+
+          <p>
+            <code>return receipt;</code> runs. The topmost frame is popped —
+            gone, all at once. <code>discountAmount</code>, a plain
+            <code>double</code> that only ever existed in that frame's own
+            slot, is destroyed along with it; nothing else in the program
+            ever held it. But the frame doesn't take the heap down with it:
+            <code>Order @ 0x9000</code> is still alive, because <code>main</code>'s
+            own <code>order</code> still points to it. And the value
+            <code>receipt</code> held — the address <code>0x9050</code> — was
+            copied out one instant before the frame disappeared, into a brand
+            new slot back in <code>main</code>:
+          </p>
+
+          <div style="display: flex; gap: 28px; align-items: flex-start; margin: 20px 0; flex-wrap: wrap">
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div class="mem-col-label">Stack — Main Thread</div>
+              <div class="mem-col-border" style="max-width: 320px">
+                <div class="mem-frame-border">
+                  <div class="mem-frame-header">main(String[]) frame — resumed</div>
+                  <div class="mem-frame-body">
+                    <div
+                      class="mem-slot"
+                      style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center"
+                    >
+                      <div class="mem-slot-code">discountPercent = 20</div>
+                    </div>
+                    <div class="mem-rect-wrap" style="margin-right: 0">
+                      <div
+                        class="mem-slot"
+                        style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center"
+                      >
+                        <div class="mem-slot-code">
+                          order = <span class="mem-addr">0x9000</span>
+                        </div>
+                      </div>
+                      <svg
+                        class="mem-precise-arrow"
+                        width="115"
+                        height="150"
+                        style="top: 20px"
+                        viewBox="0 0 115 150"
+                        fill="none"
+                      >
+                        <line x1="0" y1="2" x2="85" y2="-51" stroke="currentColor" stroke-width="1.5" />
+                        <g transform="translate(85,-51) rotate(-32)">
+                          <path d="M -7 -5 L 0 0 L -7 5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                      </svg>
+                    </div>
+                    <div class="mem-rect-wrap" style="margin-right: 0">
+                      <div
+                        class="mem-slot"
+                        style="height: 44px; box-sizing: border-box; display: flex; align-items: center; justify-content: center"
+                      >
+                        <div class="mem-slot-code">
+                          receipt = <span class="mem-addr">0x9050</span>
+                        </div>
+                      </div>
+                      <svg
+                        class="mem-precise-arrow"
+                        width="115"
+                        height="150"
+                        style="top: 20px"
+                        viewBox="0 0 115 150"
+                        fill="none"
+                      >
+                        <line x1="0" y1="2" x2="85" y2="26" stroke="currentColor" stroke-width="1.5" />
+                        <g transform="translate(85,26) rotate(16)">
+                          <path d="M -7 -5 L 0 0 L -7 5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div class="mem-col-label">Heap</div>
+              <div class="mem-col-border" style="gap: 16px">
+              <div class="mem-object">
+                <div class="mem-object-header">
+                  Order @ <span class="mem-addr">0x9000</span>
+                </div>
+                <div class="mem-object-body">
+                  <div class="mem-object-field"><span class="fname">id</span><span class="fval">1042</span></div>
+                  <div class="mem-object-field"><span class="fname">total</span><span class="fval">200.0</span></div>
+                  <div class="mem-object-field"><span class="fname">discounted</span><span class="fval">true</span></div>
+                </div>
+              </div>
+              <div class="mem-object">
+                <div class="mem-object-header">
+                  Receipt @ <span class="mem-addr">0x9050</span>
+                </div>
+                <div class="mem-object-body">
+                  <div class="mem-object-field"><span class="fname">orderId</span><span class="fval">1042</span></div>
+                  <div class="mem-object-field"><span class="fname">amountSaved</span><span class="fval">50.0</span></div>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <p>
+            Back to one frame, exactly as Step 1 started — except this one
+            carries a new slot Step 1 never had. <code>discountPercent</code>
+            and <code>order</code> are precisely as <code>main</code> left
+            them before the call; <code>order</code>'s object shows the
+            discount already applied, because it was always the same object,
+            never a copy. <code>System.out.println(order.total())</code> and
+            <code>println(receipt.amountSaved())</code> now run against this
+            exact picture: <code>200.0</code> and <code>50.0</code>.
+          </p>
+
+          <div class="callout callout-rule">
+            <div class="callout-lbl">What survives a frame, and what doesn't</div>
+            <p>
+              <code>discountAmount</code> never had a chance of outliving
+              <code>applyDiscount</code>'s frame — nothing outside that frame
+              ever held it, primitive or not, so it simply ceased to exist the
+              instant the frame popped. <code>Receipt @ 0x9050</code> survived
+              for a completely different reason: not because return values are
+              special, but because its address got copied out — into
+              <code>main</code>'s new <code>receipt</code> slot — in the same
+              instant the frame died, the same copy-on-return mechanics that
+              handed <code>749.0</code> up the chain in §5.3. If
+              <code>applyDiscount</code> had computed a <code>Receipt</code>
+              and never returned it, that object would still exist for one
+              instant after the frame popped — then become unreachable,
+              exactly like the discarded <code>String</code> in §9.6, sitting
+              on the heap with nothing left anywhere to point at it, waiting
+              for the garbage collector to notice.
+            </p>
+          </div>
+        </section>
+
+        <!-- §5.6 -->
+        <section id="s5-6">
+          <div class="section-head">
+            <span class="sec-num">§5.6</span>
+            <h2>Key Takeaways</h2>
+          </div>
+
+          <ul>
+            <li>Memory splits into two regions: the <span class="term">stack</span>, one per thread, holding each method call's own frame; and the <span class="term">heap</span>, one per program, holding every object ever created with <code>new</code>.</li>
+            <li>A stack frame is pushed the instant a method is called and popped the instant it returns — always the topmost one, never one further down. Everything the frame held, primitive or reference, disappears with it.</li>
+            <li>A primitive variable's slot holds its value directly, wherever that slot happens to live. A reference variable's slot holds an address, and the object it points to always lives on the heap, regardless of which frame's reference points at it.</li>
+            <li>Calling a method copies values into the new frame — the address in <code>this</code>, every argument — the same pass-by-value rule from §4.2, applied uniformly whether the value being copied is a primitive or an address.</li>
+            <li>Mutating a field through a copied reference is visible everywhere that shares the same address, because there's only ever one object. Reassigning a copied value — primitive or reference — is never visible anywhere else, because there were always two separate slots.</li>
+            <li>A heap object outlives the frame that created it only if its address escapes that frame before the frame is popped — returned, stored in a field, assigned to a variable further down the stack. Otherwise it becomes unreachable the instant the frame dies, left for the garbage collector to reclaim later.</li>
+          </ul>
+        </section>
+      </article>
+
+      <nav class="page-nav" aria-label="Chapter navigation">
+        <a href="methods.html" class="page-nav-prev">
+          <span class="page-nav-label">← Previous</span>
+          <span class="page-nav-title">§4 — Methods</span>
+        </a>
+        <a href="operators.html" class="page-nav-next">
+          <span class="page-nav-label">Next →</span>
+          <span class="page-nav-title">§6 — Operators</span>
+        </a>
+      </nav>
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        hljs.highlightAll();
+
+        // Color method calls the same blue as method declarations — hljs's Java grammar
+        // only tags declarations (e.g. "void fly()"), leaving call sites like
+        // "obj.method()" as plain, unstyled text.
+        (function () {
+          const skipClasses = new Set([
+            "hljs-string",
+            "hljs-comment",
+            "hljs-doctag",
+            "hljs-meta",
+            "hljs-title",
+            "hljs-keyword",
+          ]);
+          const keywords = new Set([
+            "if",
+            "for",
+            "while",
+            "switch",
+            "catch",
+            "synchronized",
+            "do",
+            "else",
+            "return",
+            "new",
+            "throw",
+            "try",
+            "instanceof",
+            "assert",
+          ]);
+          const callPattern = /\b([A-Za-z_$][\w$]*)(\s*)(\()/g;
+
+          document
+            .querySelectorAll("pre code.language-java")
+            .forEach(function (block) {
+              const walker = document.createTreeWalker(
+                block,
+                NodeFilter.SHOW_TEXT,
+              );
+              const textNodes = [];
+              let node;
+              while ((node = walker.nextNode())) {
+                let skip = false;
+                for (
+                  let el = node.parentElement;
+                  el && el !== block;
+                  el = el.parentElement
+                ) {
+                  if ([...el.classList].some((c) => skipClasses.has(c))) {
+                    skip = true;
+                    break;
+                  }
+                }
+                if (!skip) textNodes.push(node);
+              }
+
+              textNodes.forEach(function (textNode) {
+                const text = textNode.nodeValue;
+                callPattern.lastIndex = 0;
+                if (!callPattern.test(text)) return;
+                callPattern.lastIndex = 0;
+
+                const frag = document.createDocumentFragment();
+                let lastIndex = 0;
+                let match;
+                while ((match = callPattern.exec(text))) {
+                  frag.appendChild(
+                    document.createTextNode(text.slice(lastIndex, match.index)),
+                  );
+                  if (keywords.has(match[1])) {
+                    frag.appendChild(document.createTextNode(match[0]));
+                  } else {
+                    const span = document.createElement("span");
+                    span.className = "hljs-title function_";
+                    span.textContent = match[1];
+                    frag.appendChild(span);
+                    frag.appendChild(
+                      document.createTextNode(match[2] + match[3]),
+                    );
+                  }
+                  lastIndex = match.index + match[0].length;
+                }
+                frag.appendChild(
+                  document.createTextNode(text.slice(lastIndex)),
+                );
+                textNode.replaceWith(frag);
+              });
+            });
+        })();
+
+        // Flag error-annotation comments in code blocks
+        document.querySelectorAll(".hljs-comment").forEach((el) => {
+          if (/\b(compile|compiler|runtime) error\b/i.test(el.textContent)) {
+            el.classList.add("hljs-comment-error");
+          }
+        });
+
+        // Code theme toggle
+        const codeThemeBtn = document.getElementById("code-theme-toggle");
+        const lightTheme = document.getElementById("hljs-light-theme");
+        const darkTheme = document.getElementById("hljs-dark-theme");
+        const themeLabel = codeThemeBtn.querySelector(".code-theme-label");
+        const themeIcon = codeThemeBtn.querySelector(".icon");
+
+        function applyCodeTheme(theme) {
+          const dark = theme === "dark";
+          lightTheme.disabled = dark;
+          darkTheme.disabled = !dark;
+          document.documentElement.classList.toggle("code-dark", dark);
+          themeLabel.textContent = dark ? "Light code" : "Dark code";
+          themeIcon.textContent = dark ? "☀️" : "🌙";
+        }
+
+        applyCodeTheme(localStorage.getItem("code-theme") || "light");
+
+        codeThemeBtn.addEventListener("click", () => {
+          const next = darkTheme.disabled ? "dark" : "light";
+          localStorage.setItem("code-theme", next);
+          applyCodeTheme(next);
+        });
+
+        const sections = document.querySelectorAll("section[id]");
+        const subLinks = document.querySelectorAll('.sub-nav a[href^="#"]');
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const id = "#" + entry.target.id;
+                subLinks.forEach((a) =>
+                  a.classList.toggle("active", a.getAttribute("href") === id),
+                );
+              }
+            });
+          },
+          { rootMargin: "-8% 0px -78% 0px", threshold: 0 },
+        );
+
+        sections.forEach((s) => observer.observe(s));
+
+        const btn = document.getElementById("menu-btn");
+        const side = document.getElementById("sidebar");
+        btn.addEventListener("click", () => side.classList.toggle("open"));
+        document.querySelectorAll("#sidebar a").forEach((a) => {
+          a.addEventListener("click", () => {
+            if (window.innerWidth <= 860) side.classList.remove("open");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
